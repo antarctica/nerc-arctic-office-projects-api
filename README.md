@@ -147,6 +147,22 @@ $ git clone https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api.gi
 $ cd arctic-office-projects-api
 ```
 
+### Terraform remote state
+
+For environments using Terraform, state information is stored remotely as part of 
+[BAS Terraform Remote State](https://gitlab.data.bas.ac.uk/WSF/terraform-remote-state) project.
+
+Remote state storage will be automatically initialised when running `terraform init`, with any changes automatically 
+saved to the remote (AWS S3) backend, there is no need to push or pull changes.
+
+#### Remote state authentication
+
+Permission to read and/or write remote state information for this project is restricted to authorised users. Contact
+the [BAS Web & Applications Team](mailto:servicedesk@bas.ac.uk) to request access.
+
+See the [BAS Terraform Remote State](https://gitlab.data.bas.ac.uk/WSF/terraform-remote-state) project for how these
+permissions to remote state are enforced.
+
 ### Local development
 
 Docker and Docker Compose are required to setup a local development environment of this API.
