@@ -35,7 +35,7 @@ resource "heroku_app" "bas-arctic-office-projects-api-stage" {
 # resource "heroku_app" "bas-arctic-office-projects-api-prod" {
 #   name   = "bas-arctic-projects-api-prod"
 #   region = "eu"
- #
+#
 #   config_vars {
 #     REVERSE_PROXY_PATH = "/arctic-office-projects/testing"
 #   }
@@ -96,3 +96,4 @@ resource "heroku_pipeline_coupling" "bas-arctic-office-projects-api-stage" {
 #   pipeline = "${heroku_pipeline.bas-arctic-office-projects-api.id}"
 #   stage    = "production"
 # }
+
