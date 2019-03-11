@@ -144,7 +144,7 @@ deploy-heroku-stage:
     - master
   environment:
     name: Staging
-    url: https://api.bas.ac.uk/arctic-office-projects-api/testing/
+    url: https://api.bas.ac.uk/arctic-office-projects/testing/
 
 deploy-heroku-prod:
   stage: deploy
@@ -157,7 +157,7 @@ deploy-heroku-prod:
     - tags
   environment:
     name: Production
-    url: https://api.bas.ac.uk/arctic-office-projects-api/v1/
+    url: https://api.bas.ac.uk/arctic-office-projects/v1/
 
 deploy-docs-stage:
   stage: deploy
