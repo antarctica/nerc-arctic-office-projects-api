@@ -1,0 +1,18 @@
+FROM docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api:latest
+
+LABEL maintainer = "Felix Fennell <felnne@bas.ac.uk>"
+
+# Setup project
+ARG APP_RELEASE
+ARG APP_ENV
+ENV APP_RELEASE $APP_RELEASE
+ENV FLASK_ENV $APP_ENV
+
+# Add application - more complicated because COPY only copies the contents of a directory for some insane reason
+COPY migrations/ /usr/src/app/migrations/
+COPY arctic_office_projects_api/ /usr/src/app/arctic_office_projects_api/
+COPY config.py manage.py /usr/src/app/
+
+# Setup runtime
+ENTRYPOINT []
+CMD waitress-serve --port=$PORT manage:app

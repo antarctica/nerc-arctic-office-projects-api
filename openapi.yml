@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  version: testing
+  title: NERC Arctic Office Projects API
+  description: API for the NERC Arctic Office projects database
+  license:
+    name: Open Government Licence 3.0
+    url: http://www.nationalarchives.gov.uk/doc/open-government-licence
+  contact:
+    name: API Support
+    email: servicedesk@bas.ac.uk
+servers:
+  - url: https://api.bas.ac.uk/arctic-office-projects/testing
+    description: For general/production use
+  - url: https://testing.api.bas.ac.uk/arctic-office-projects/testing
+    description: Reserved for testing underlying infrastructure changes
+tags:
+  - name: projects
+    description: Projects
+  - name: standalone
+    description: Standalone methods
+paths:
+  /projects:
+    summary: Projects list
+    description: List of all Project resources
+    get:
+      tags:
+        - projects
+      summary: Returns details for all Project resources
+      operationId: get-projects-list
+      security:
+        - azure-oauth:
+            - Projects.Read.All
+      parameters:
+        -
+          name: page
+          in: query
+          description: Selected pagination page
+          required: false
+          schema:
+            type: integer
+          example:
+            value: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Project
+                      description: Represents information about a research project
+                      required:
+                        - id
+                        - type
+                        - attributes
+                        - links
+                      properties:
+                        id:
+                          readOnly: true
+                          type: string
+                          title: ID
+                          description: Resource identifier
+                        type:
+                          readOnly: true
+                          type: string
+                          title: Type
+                          description: Type of resource
+                        attributes:
+                          type: object
+                          title: Attributes
+                          description: Additional attributes for this resource type
+                          required:
+                            - title
+                          properties:
+                            title:
+                              readOnly: true
+                              type: string
+                              title: Title
+                              description: Project title
+                        links:
+                          type: object
+                          title: Links
+                          description: Links to additional information or actions
+                          required:
+                            - self
+                          properties:
+                            self:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Self
+                              description: URL to resource
+                      example:
+                        id: 01D5M0CFQV4M7JASW7F87SRDYB
+                        type: project
+                        attributes:
+                          title: xxx
+                        links:
+                          self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                      - first
+                      - last
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Current page
+                        description: URL to current page of resources
+                      first:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: First page
+                        description: URL to first page of resources
+                      last:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Last page
+                        description: URL to last page of resources
+                      prev:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Previous page
+                        description: URL to previous page of resources (if applicable)
+                      next:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Next page
+                        description: URL to next page of resources (if applicable)
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/projects?page=2
+                      first: https://api.bas.ac.uk/arctic-office-projects/testing/projects?page=1
+                      last: https://api.bas.ac.uk/arctic-office-projects/testing/projects?page=4
+                      prev: https://api.bas.ac.uk/arctic-office-projects/testing/projects?page=1
+                      next: https://api.bas.ac.uk/arctic-office-projects/testing/projects?page=3
+  '/projects/{id}':
+    summary: Project details
+    description: Details for a specific Project resource
+    get:
+      tags:
+        - projects
+      summary: Returns details for a single Project resource, specified by its ID
+      operationId: get-projects-detail
+      security:
+        - azure-oauth:
+          - Projects.Read.All
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Project resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5M0CFQV4M7JASW7F87SRDYB
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: object
+                    title: Project
+                    description: Represents information about a research project
+                    required:
+                      - id
+                      - type
+                      - attributes
+                      - links
+                    properties:
+                      id:
+                        readOnly: true
+                        type: string
+                        title: ID
+                        description: Resource identifier
+                      type:
+                        readOnly: true
+                        type: string
+                        title: Type
+                        description: Type of resource
+                      attributes:
+                        type: object
+                        title: Attributes
+                        description: Additional attributes for this resource type
+                        required:
+                          - title
+                        properties:
+                          title:
+                            readOnly: true
+                            type: string
+                            title: Title
+                            description: Title of project
+                      links:
+                        type: object
+                        title: Links
+                        description: Links to additional information or actions
+                        required:
+                          - self
+                        properties:
+                          self:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Self
+                            description: URL to full resource
+                    example:
+                      id: 01D5M0CFQV4M7JASW7F87SRDYB
+                      type: project
+                      attributes:
+                        title: xxx
+                      links:
+                        self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to current resource
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB
+  /:
+    summary: API Index
+    description: Root of this API
+    get:
+      tags:
+        - standalone
+      summary: Returns a high level summary of this API
+      operationId: get-index
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - meta
+                properties:
+                  meta:
+                    type: object
+                    title: API Index
+                    description: Summary information for a API
+                    required:
+                      - summary
+                    properties:
+                      summary:
+                        type: string
+                        title: Summary
+                        description: Summary of API
+                    example:
+                      summary: xxx

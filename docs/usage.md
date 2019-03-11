@@ -1,0 +1,156 @@
+---
+title: NERC Arctic Office Projects API - Usage
+---
+
+## General information
+
+### Support
+
+Limited, best effort, support is offered for using this API to integrate NERC Arctic Office Project information
+into the Arctic Office website ([www.arctic.ac.uk](https://www.arctic.ac.uk)) as part of it's redevelopment.
+
+Contact the [BAS Service Desk](mailto:servicedesk@bas.ac.uk) for support.
+
+### Information handling
+
+Reasonable policies and technical measures are in place to ensure information in this API is held and transferred 
+securely. Where third parties are used to operate this API, we ensure they are used for a necessary task, with
+measures in place to ensure they are used appropriately and securely.
+
+Applicable services used by this API are:
+
+* [Heroku](https://heroku.com) - for storing data and hosting the API
+* [Sentry](https://sentry.io/) - for reporting API errors, which may include API responses
+
+This API is provided by the [British Antarctic Survey](https://www.bas.ac.uk) on behalf of the 
+Natural Environment Research Council [Arctic Office](https://www.arctic.ac.uk). Both BAS and NERC are part of 
+[UK Research and Innovation](https://www.ukri.org).
+
+If you have any questions about how information is used by this API please contact the 
+[BAS Service Desk](mailto:servicedesk@bas.ac.uk) in the first instance. If you do not receive a reply within a few days
+please contact the [BAS Freedom of Information Officer](foi@bas.ac.uk).
+
+### Security disclosures
+
+Please contact the [BAS Service Desk](mailto:servicedesk@bas.ac.uk) to disclose any security concerns with this API.
+
+Contact us for instructions if you need to report any sensitive information.
+
+### Versioning policy
+
+This API is versioned. An API version must be specified as a URL prefix (e.g. `/v1/foo`).
+
+Changes between versions are documented in the [Change log](../changelog).
+
+Only the latest, stable, API version is [Supported](#support). When a new version is released, all previous versions 
+are deprecated for a period of time to allow clients time to move to supported version before being retired and removed.
+
+#### Testing version
+
+For testing new features and changes, a non-stable, testing version (`/testing`)is available. This version should only 
+be used for testing and may change any time. Separate credentials are required to use the testing version.
+
+### Deprecation policy
+
+Features may be deprecated in this API as it evolves. This may include changes to options, methods, resources and API
+versions. Usually an alternative feature will be available but in some cases a feature may be removed without one.
+
+As with API versions, deprecated features will be supported for a period of time for clients to move to an alternative,
+before being retired/removed.
+
+Deprecated features will be referenced in this documentation and the [Change log](../changelog).
+
+## Technical information
+
+### Standards support
+
+This API follows the [JSON API](http://jsonapi.org/format/1.0/) standard, unless stated otherwise.
+
+### Authentication and authorisation
+
+Clients must be allowed access to information held by this API using OAuth tokens.
+
+Clients must first be registered by contacting [Support](#support) to be granted suitable permissions and issued with a
+client ID and secret.
+
+### Content Types
+
+This API supports the `application/json` content type only, unless stated otherwise.
+
+This API supports `UTF-8` character encoding only, unless stated otherwise.
+
+### Request IDs
+
+All requests will include a `X-Request-ID` header to aid in debugging requests through different components.
+
+If desired, a custom request ID can be specified by the client which will be used instead of, or in addition to a API
+generated value.
+
+**Note:** In some cases a client specified value will be ignored, ensure you do not rely on this value being returned.
+
+**Note:** This header may include multiple values (multiple Request IDs) separated by a `,` with possible whitespace. 
+
+### Data Types
+
+#### String (data type)
+
+String values are encoded as UTF-8.
+
+Examples:
+
+* `normal`
+* `åccented`
+* `emoji ❄️`
+
+#### Date (data type)
+
+Date values are encoded as [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) [strings](#string) (i.e. `YYYY-MM-DD`).
+
+Examples:
+
+* `1875-05-20`
+
+### Pagination
+
+API methods that return large numbers of items will use pagination to split items into a number of pages based on the
+[JSON API specification](https://jsonapi.org/format/#fetching-pagination).
+
+Pages are a fixed size of **10** items per page, with the `page` query parameter selecting a page. Responses will
+include links to navigate between pages. Where a link isn't applicable (e.g. previous on the first page, its value will 
+be `null`).
+
+Pages start from `1`, where a page isn't specified, the first page will be assumed. Where a page doesn't exist, a 
+*404 Not Found* error will be returned (e.g. if 4 pages exist but page 8 is requested, a 404 error will be returned).
+
+For example:
+
+```json
+{
+  "data": [],
+  "links": {
+    "first": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=1",
+    "last": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=4",
+    "next": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=2",
+    "prev": null,
+    "self": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=1"
+  }
+}
+```
+
+## Errors
+
+Errors reported by this API follow the [JSON API](http://jsonapi.org/format/1.0/#errors) standard.
+
+The `id` property will vary with each error using a UUID (version 4).
+
+**Note:** Some API errors are automatically captured by an error tracking service.
+
+## Resources
+
+### Projects
+
+...
+
+### Fake data limitations
+
+...

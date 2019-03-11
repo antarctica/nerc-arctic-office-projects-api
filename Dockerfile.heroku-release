@@ -1,0 +1,12 @@
+FROM registry.heroku.com/bas-arctic-projects-api-stage/web
+
+LABEL maintainer = "Felix Fennell <felnne@bas.ac.uk>"
+
+# Add Curl for Heroku streaming logs
+RUN apk add --no-cache curl
+
+COPY docker/heroku-release.sh ./
+
+# Setup runtime
+ENTRYPOINT []
+CMD ash ./heroku-release.sh

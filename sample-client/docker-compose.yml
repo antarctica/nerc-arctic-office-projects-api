@@ -1,0 +1,10 @@
+---
+version: "2"
+
+services:
+  app:
+    build: ""
+    image: docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api/sample-client:latest
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
