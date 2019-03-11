@@ -29,3 +29,4 @@ def upgrade():
 
 def downgrade():
     op.drop_table('people_projects')
+    sa.Enum(name='investigativerole').drop(op.get_bind(), checkfirst=False)
