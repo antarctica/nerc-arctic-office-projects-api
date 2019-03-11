@@ -67,16 +67,16 @@ class MainBlueprintTestCase(unittest.TestCase):
         )
 
     def test_projects_list(self):
-        expected_payload_data_item = {
-            'attributes': {
-                'title': 'xxx'
-            },
-            'id': '01D5M0CFQV4M7JASW7F87SRDYB',
-            'links': {
-                'self': 'http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB'
-            },
-            'type': 'project'
-        }
+        # expected_payload_data_item = {
+        #     'attributes': {
+        #         'title': 'xxx'
+        #     },
+        #     'id': '01D5M0CFQV4M7JASW7F87SRDYB',
+        #     'links': {
+        #         'self': 'http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB'
+        #     },
+        #     'type': 'project'
+        # }
         expected_payload_links = {
             'first': 'http://localhost:9000/projects?page=1',
             'prev': None,
@@ -101,21 +101,21 @@ class MainBlueprintTestCase(unittest.TestCase):
         self.assertDictEqual(json_response['links'], expected_payload_links)
 
     def test_people_sensitive_detail(self):
-        expected_payload = {
-            'data': {
-                'attributes': {
-                    'title': 'xxx'
-                },
-                'id': '01D5M0CFQV4M7JASW7F87SRDYB',
-                'links': {
-                    'self': 'http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB'
-                },
-                'type': 'project'
-            },
-            'links': {
-                'self': 'http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB'
-            }
-        }
+        # expected_payload = {
+        #     'data': {
+        #         'attributes': {
+        #             'title': 'xxx'
+        #         },
+        #         'id': '01D5M0CFQV4M7JASW7F87SRDYB',
+        #         'links': {
+        #             'self': 'http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB'
+        #         },
+        #         'type': 'project'
+        #     },
+        #     'links': {
+        #         'self': 'http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB'
+        #     }
+        # }
 
         response = self.client.get(
             '/projects/01D5M0CFQV4M7JASW7F87SRDYB',
