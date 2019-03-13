@@ -172,10 +172,10 @@ class ProjectSchema(AppSchema):
         self_url_kwargs={'project_id': '<id>'},
         related_url='/projects/{project_id}/people',
         related_url_kwargs={'project_id': '<id>'},
-        id_field='person.neutral_id',
+        id_field='neutral_id',
         many=True,
         include_resource_linkage=True,
-        type_='person'
+        type_='participants',
     )
 
     @post_dump
