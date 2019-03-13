@@ -1,5 +1,7 @@
 # noinspection PyPackageRequirements
-from werkzeug.exceptions import NotFound
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+# noinspection PyPackageRequirements
+from werkzeug.exceptions import NotFound, Conflict
 from flask import Blueprint, jsonify, request, current_app as app
 
 from arctic_office_projects_api.schemas import ProjectSchema, PersonSchema
@@ -48,10 +50,14 @@ def projects_detail(project_id: str):
     :type project_id: str
     :param project_id: Neutral ID of a Project resource
     """
-    project = Project.query.filter_by(neutral_id=project_id).first()
-    if project is None:
+    try:
+        project = Project.query.filter_by(neutral_id=project_id).one()
+        return jsonify(payload.data)
+    except NoResultFound:
         raise NotFound()
     payload = ProjectSchema().dump(project)
+    except MultipleResultsFound:
+        raise Conflict()
 
     return jsonify(payload.data)
 

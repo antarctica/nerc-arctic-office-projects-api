@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask import Response
 # noinspection PyPackageRequirements
-from werkzeug.exceptions import BadRequest, NotFound, InternalServerError
+from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, Conflict
 
 from arctic_office_projects_api.errors import ApiException
 
@@ -32,6 +32,15 @@ class ApiNotFoundError(ApiException):
     status = HTTPStatus.NOT_FOUND
     title = 'Not Found'
     detail = 'The requested URL was not found, check the address and try again'
+
+
+class ApiConflictError(ApiException):
+    """
+    Represents a generic conflict error
+    """
+    status = HTTPStatus.CONFLICT
+    title = 'Conflict'
+    detail = 'The requested URL could not be resolved to a single entity, check the address and try again'
 
 
 # noinspection PyUnusedLocal
@@ -64,13 +73,17 @@ def error_handler_generic_not_found(e: NotFound) -> Response:
 
 # noinspection PyUnusedLocal
 def error_handler_generic_internal_server_error(e: InternalServerError) -> Response:
+def error_handler_generic_conflict(e: Conflict) -> Response:
     """
     Flask error handler for '500 Internal Server Error' errors
+    Flask error handler for '409 Conflict' errors
 
     :type e: InternalServerError
+    :type e: Conflict
     :param e: Exception
 
     :return: Flask response
     """
     error = APiInternalServerError()
+    error = ApiConflictError()
     return error.response()
