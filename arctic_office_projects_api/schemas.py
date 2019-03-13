@@ -2,6 +2,7 @@
 from marshmallow import MarshalResult, post_dump
 from marshmallow_jsonapi import fields
 from marshmallow_jsonapi.flask import Schema
+from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
 from flask_sqlalchemy import Pagination
 from typing import Union
 
@@ -161,21 +162,48 @@ class AppSchema(Schema):
 
 
 class ProjectSchema(AppSchema):
+class Relationship(_Relationship):
+    """
+    Custom base marshmallow_jsonapi schema relationship class, based on the default 'flask' class
+
+    All schema relationships in this application should inherit from this class.
+    """
+
+    def get_url(self, obj, view_name, view_kwargs):
+        """
+        Overloaded implementation of the 'get_url' method in the marshmallow_jsonapi default 'flask' class
+
+        Differences include:
+        - '_external' parameter past to flask url_for method to generate absolute rather than relative URLs
+
+        :param obj: relationship object
+        :type view_name: str
+        :param view_name: name of flask view/route
+        :param view_kwargs: arguments and other flask.url_for options
+
+        :rtype str
+        :return: generated URL
+        """
+        view_kwargs['_external'] = True
+        return super().get_url(obj, view_name, view_kwargs)
+
+
     """
     Represents information about a research project
     """
     id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
     title = fields.Str(dump_only=True, required=True)
 
-    people = fields.Relationship(
-        self_url='main.projects_people_relationship',
-        self_url_kwargs={'project_id': '<id>'},
-        related_url='/projects/{project_id}/people',
-        related_url_kwargs={'project_id': '<id>'},
+    participants = Relationship(
+        self_view='main.projects_relationship_participants',
+        self_view_kwargs={'project_id': '<neutral_id>'},
+        related_view='main.projects_participants',
+        related_view_kwargs={'project_id': '<neutral_id>'},
         id_field='neutral_id',
         many=True,
         include_resource_linkage=True,
         type_='participants',
+        schema='ParticipantSchema'
     )
 
     @post_dump
