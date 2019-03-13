@@ -208,16 +208,58 @@ class ProjectSchema(Schema):
         self_view_many = 'main.projects_list'
 
 
-class PersonSchema(AppSchema):
-    """
-    Represents information about an individual
-    """
+class ParticipantSchema(Schema):
+    id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
+    investigative_role = fields.Str(dump_only=True, required=True)
+
+    project = Relationship(
+        self_view='main.participants_relationship_projects',
+        self_view_kwargs={'participant_id': '<neutral_id>'},
+        related_view='main.participants_projects',
+        related_view_kwargs={'participant_id': '<neutral_id>'},
+        id_field='project.neutral_id',
+        include_resource_linkage=True,
+        type_='projects',
+        schema='ProjectSchema'
+    )
+
+    person = Relationship(
+        self_view='main.participants_relationship_people',
+        self_view_kwargs={'participant_id': '<neutral_id>'},
+        related_view='main.participants_people',
+        related_view_kwargs={'participant_id': '<neutral_id>'},
+        id_field='person.neutral_id',
+        include_resource_linkage=True,
+        type_='people',
+        schema='PersonSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'participants'
+        self_view = 'main.participants_detail'
+        self_view_kwargs = {'participant_id': '<id>'}
+        self_view_many = 'main.participants_list'
+
+
+class PersonSchema(Schema):
     id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
     first_name = fields.Str(dump_only=True, required=True)
     last_name = fields.Str(dump_only=True, required=True)
 
-    class Meta(AppSchema.Meta):
-        type_ = 'project'
+    participation = Relationship(
+        self_view='main.people_relationship_participants',
+        self_view_kwargs={'person_id': '<neutral_id>'},
+        related_view='main.people_participants',
+        related_view_kwargs={'person_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='participants',
+        schema='ParticipantSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'people'
         self_view = 'main.people_detail'
         self_view_kwargs = {'person_id': '<id>'}
         self_view_many = 'main.people_list'
