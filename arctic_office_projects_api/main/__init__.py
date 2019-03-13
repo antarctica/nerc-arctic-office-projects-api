@@ -28,7 +28,7 @@ def index():
 @main.route('/projects')
 def projects_list():
     """
-    Returns details for all Project resources
+    Returns all Project resources
 
     The response is paginated.
     """
@@ -45,7 +45,7 @@ def projects_list():
 @main.route('/projects/<project_id>')
 def projects_detail(project_id: str):
     """
-    Returns details for a specific Project resource, specified by its Neutral ID
+    Returns a specific Project resource, specified by its Neutral ID
 
     :type project_id: str
     :param project_id: Neutral ID of a Project resource
@@ -75,7 +75,7 @@ def projects_people(project_id: str):
 @main.route('/people')
 def people_list():
     """
-    Returns details for all People resources
+    Returns all People resources
 
     The response is paginated.
     """
@@ -92,7 +92,7 @@ def people_list():
 @main.route('/people/<person_id>')
 def people_detail(person_id: str):
     """
-    Returns details for a specific Person resource, specified by its Neutral ID
+    Returns a specific Person resource, specified by its Neutral ID
 
     :type person_id: str
     :param person_id: Neutral ID of a Person resource

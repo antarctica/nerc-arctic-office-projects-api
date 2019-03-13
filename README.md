@@ -44,8 +44,8 @@ in `arctic_office_projects_api/models.py`.
 Examples of representation transformations include, hiding the database primary key and renaming unintuitive database 
 field names to more useful attribute names.
 
-Schemas in this application should inherit from `arctic_office_projects_api.schemas.AppSchema` with a meta property 
-inherited from `arctic_office_projects_api.schemas.AppSchema.Meta`. These classes define custom functionality and 
+Schemas in this application should inherit from `arctic_office_projects_api.schemas.Schema` with a meta property 
+inherited from `arctic_office_projects_api.schemas.Schema.Meta`. These classes define custom functionality and 
 defaults suitable for generating more complete JSON API responses.
 
 #### Neutral IDs
@@ -603,8 +603,9 @@ Typically, models do not expose fields specific to how data is stored for exampl
 
 #### Pagination support
 
-Where a schema will return a large number of items, pagination is recommended. The `AppSchema` supports a limited form 
-of pagination whilst it is added to Marshmallow JsonAPI more completely. 
+Where a schema will return a large number of items, pagination is recommended. The 
+`arctic_office_projects_api.schemas.Schema` class supports a limited form of pagination whilst it is added to 
+Marshmallow JsonAPI more completely. 
 
 Limitations include:
 

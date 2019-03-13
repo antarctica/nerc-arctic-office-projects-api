@@ -1,20 +1,16 @@
 # noinspection PyPackageRequirements
-from marshmallow import MarshalResult, post_dump
+from marshmallow import MarshalResult
 from marshmallow_jsonapi import fields
-from marshmallow_jsonapi.flask import Schema
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
 from flask_sqlalchemy import Pagination
 from typing import Union
 
 
-class AppSchema(Schema):
+class Schema(_Schema):
     """
     Custom base Marshmallow schema class, based on marshmallow_jsonapi default 'flask' class
 
     All schemas in this application should inherit from this class.
-
-    This class acts as a container for custom functionality and defaults related to returning JSON API formatted
-    responses.
     """
 
     def __init__(self, *args, **kwargs):
@@ -88,7 +84,6 @@ class AppSchema(Schema):
 
         :type view_name: str
         :param view_name: name of flask view/route
-
         :param kwargs: arguments and other flask.url_for options
 
         :rtype str
@@ -161,7 +156,6 @@ class AppSchema(Schema):
         inflect = _inflection
 
 
-class ProjectSchema(AppSchema):
 class Relationship(_Relationship):
     """
     Custom base marshmallow_jsonapi schema relationship class, based on the default 'flask' class
@@ -188,6 +182,7 @@ class Relationship(_Relationship):
         return super().get_url(obj, view_name, view_kwargs)
 
 
+class ProjectSchema(Schema):
     """
     Represents information about a research project
     """
@@ -206,12 +201,8 @@ class Relationship(_Relationship):
         schema='ParticipantSchema'
     )
 
-    @post_dump
-    def transform(self, data: dict) -> dict:
-        return data
-
-    class Meta(AppSchema.Meta):
-        type_ = 'project'
+    class Meta(Schema.Meta):
+        type_ = 'projects'
         self_view = 'main.projects_detail'
         self_view_kwargs = {'project_id': '<id>'}
         self_view_many = 'main.projects_list'

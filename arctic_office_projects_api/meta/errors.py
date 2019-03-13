@@ -27,7 +27,7 @@ class APiInternalServerError(ApiException):
 
 class ApiNotFoundError(ApiException):
     """
-    Represents a generic 404 error
+    Represents a generic not found error
     """
     status = HTTPStatus.NOT_FOUND
     title = 'Not Found'
@@ -58,6 +58,20 @@ def error_handler_generic_bad_request(e: BadRequest) -> Response:
 
 
 # noinspection PyUnusedLocal
+def error_handler_generic_internal_server_error(e: InternalServerError) -> Response:
+    """
+    Flask error handler for '500 Internal Server Error' errors
+
+    :type e: InternalServerError
+    :param e: Exception
+
+    :return: Flask response
+    """
+    error = APiInternalServerError()
+    return error.response()
+
+
+# noinspection PyUnusedLocal
 def error_handler_generic_not_found(e: NotFound) -> Response:
     """
     Flask error handler for '404 Not Found' errors
@@ -72,18 +86,14 @@ def error_handler_generic_not_found(e: NotFound) -> Response:
 
 
 # noinspection PyUnusedLocal
-def error_handler_generic_internal_server_error(e: InternalServerError) -> Response:
 def error_handler_generic_conflict(e: Conflict) -> Response:
     """
-    Flask error handler for '500 Internal Server Error' errors
     Flask error handler for '409 Conflict' errors
 
-    :type e: InternalServerError
     :type e: Conflict
     :param e: Exception
 
     :return: Flask response
     """
-    error = APiInternalServerError()
     error = ApiConflictError()
     return error.response()

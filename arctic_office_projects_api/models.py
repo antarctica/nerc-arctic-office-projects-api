@@ -37,12 +37,13 @@ class Project(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        project = Project(
-            neutral_id='01D5M0CFQV4M7JASW7F87SRDYB',
-            title='xxx'
-        )
+        project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
 
-        if not db.session.query(exists().where(Project.neutral_id == project.neutral_id)).scalar():
+        if not db.session.query(exists().where(Project.neutral_id == project_nid)).scalar():
+            project = Project(
+                neutral_id=project_nid,
+                title='xxx'
+            )
             db.session.add(project)
 
         if quantity > 1:
@@ -87,13 +88,14 @@ class Person(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        person = Person(
-            neutral_id='01D5MHQN3ZPH47YVSVQEVB0DAE',
-            first_name='Constance',
-            last_name='Watson'
-        )
+        person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
 
-        if not db.session.query(exists().where(Person.neutral_id == person.neutral_id)).scalar():
+        if not db.session.query(exists().where(Person.neutral_id == person_nid)).scalar():
+            person = Person(
+                neutral_id=person_nid,
+                first_name='Constance',
+                last_name='Watson'
+            )
             db.session.add(person)
 
         if quantity > 1:

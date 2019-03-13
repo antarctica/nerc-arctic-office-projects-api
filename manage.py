@@ -36,7 +36,7 @@ def seed(count):
         print("Seeding OK")
     except Exception as e:
         db.session.rollback()
-        # reset non-committed objects added using .add()
+        # reset added, but non-committed, entities
         db.session.flush()
         raise e
 
