@@ -1,4 +1,5 @@
 # noinspection PyPackageRequirements
+import marshmallow
 from marshmallow import MarshalResult
 from marshmallow_jsonapi import fields
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
@@ -19,6 +20,7 @@ class Schema(_Schema):
 
         Differences include:
         - pagination support implemented as a schema option
+        - TODO
 
         """
         self.paginate = False
@@ -28,9 +30,23 @@ class Schema(_Schema):
         self.next_page = None
         self.previous_page = None
 
+        self.resource_linkage = None
+        self.related_resource = None
+        self.many_related = False
+
         if 'paginate' in kwargs:
             self.paginate = kwargs['paginate']
             del kwargs['paginate']
+
+        if 'resource_linkage' in kwargs:
+            self.resource_linkage = kwargs['resource_linkage']
+            del kwargs['resource_linkage']
+        if 'related_resource' in kwargs:
+            self.related_resource = kwargs['related_resource']
+            del kwargs['related_resource']
+        if 'many_related' in kwargs:
+            self.many_related = kwargs['many_related']
+            del kwargs['many_related']
 
         super().__init__(*args, **kwargs)
 
@@ -129,6 +145,56 @@ class Schema(_Schema):
             return super().dump(obj.items, many=many, update_fields=update_fields, **kwargs)
 
         return super().dump(obj, many=many, update_fields=update_fields, **kwargs)
+
+    @marshmallow.post_dump(pass_many=True)
+    def format_json_api_response(self, data: dict, many: bool) -> dict:
+        """
+        TODO
+
+        :type data: dict
+        :param data: resource or resources to return
+        :type many: bool
+        :param many: whether a single or multiple resources are being returned
+
+        :rtype dict
+        :return: top-level response
+        """
+        response = super().format_json_api_response(data, many)
+
+        if self.resource_linkage is not None:
+            if many:
+                raise RuntimeError('A resource linkage can\'t be returned for multiple resources')
+
+            if self.resource_linkage in response['data']['relationships']:
+                return response['data']['relationships'][self.resource_linkage]
+
+            raise KeyError(f"No relationship found for '{ self.resource_linkage }'")
+
+        if self.related_resource is not None:
+            if many:
+                raise RuntimeError('A related resource response can\'t be returned for multiple resources')
+
+            if self.related_resource in response['data']['relationships']:
+                if 'links' in response['data']['relationships'][self.related_resource]:
+                    if 'related' in response['data']['relationships'][self.related_resource]['links']:
+                        if 'included' in response:
+                            response = {
+                                'data': response['included'],
+                                'links': {
+                                    'self': response['data']['relationships'][self.related_resource]['links']['self']
+                                }
+                            }
+                            if not self.many_related:
+                                response['data'] = response['data'][0]
+
+                            return response
+
+                        raise KeyError(f"No related resources are defined for '{ self.related_resource }'")
+                    raise KeyError(f"No related resource link found for '{ self.related_resource }' relationship")
+                raise KeyError(f"No links found for '{self.related_resource}' relationship")
+            raise KeyError(f"No relationship found for '{self.related_resource}'")
+
+        return response
 
     class Meta:
         """

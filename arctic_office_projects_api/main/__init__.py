@@ -66,24 +66,42 @@ def projects_detail(project_id: str):
 
 @main.route('/projects/<project_id>/relationships/participants')
 def projects_relationship_participants(project_id: str):
-    payload = {
-        'meta': {
-            'project_id': project_id
-        }
-    }
+    """
+    Returns Participant resource linkages associated with a specific Project resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type project_id: str
+    :param project_id: Neutral ID of a Project resource
+    """
+    try:
+        project = Project.query.filter_by(neutral_id=project_id).one()
+        payload = ProjectSchema(resource_linkage='participants').dump(project)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
 
 
 @main.route('/projects/<project_id>/participants')
 def projects_participants(project_id: str):
-    payload = {
-        'meta': {
-            'project_id': project_id
-        }
-    }
+    """
+    Returns Participant resources associated with a specific Project resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type project_id: str
+    :param project_id: Neutral ID of a Project resource
+    """
+    try:
+        project = Project.query.filter_by(neutral_id=project_id).one()
+        payload = ProjectSchema(
+            related_resource='participants',
+            many_related=False,
+            include_data=('participants',)
+        ).dump(project)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
 
 
 @main.route('/participants')
@@ -127,46 +145,82 @@ def participants_detail(participant_id: str):
 
 @main.route('/participants/<participant_id>/relationships/projects')
 def participants_relationship_projects(participant_id: str):
-    payload = {
-        'meta': {
-            'participant_id': participant_id
-        }
-    }
+    """
+    Returns Project resource linkages associated with a specific Participant resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type participant_id: str
+    :param participant_id: Neutral ID of a Participant resource
+    """
+    try:
+        participant = Participant.query.filter_by(neutral_id=participant_id).one()
+        payload = ParticipantSchema(resource_linkage='project').dump(participant)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
 
 
 @main.route('/participants/<participant_id>/relationships/people')
 def participants_relationship_people(participant_id: str):
-    payload = {
-        'meta': {
-            'participant_id': participant_id
-        }
-    }
+    """
+    Returns People resource linkages associated with a specific Participant resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type participant_id: str
+    :param participant_id: Neutral ID of a Participant resource
+    """
+    try:
+        participant = Participant.query.filter_by(neutral_id=participant_id).one()
+        payload = ParticipantSchema(resource_linkage='person').dump(participant)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
 
 
 @main.route('/participants/<participant_id>/projects')
 def participants_projects(participant_id: str):
-    payload = {
-        'meta': {
-            'participant_id': participant_id
-        }
-    }
+    """
+    Returns the Project resource associated with a specific Participant resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type participant_id: str
+    :param participant_id: Neutral ID of a Participant resource
+    """
+    try:
+        participant = Participant.query.filter_by(neutral_id=participant_id).one()
+        payload = ParticipantSchema(
+            related_resource='project',
+            many_related=False,
+            include_data=('project',)
+        ).dump(participant)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
 
 
 @main.route('/participants/<participant_id>/people')
 def participants_people(participant_id: str):
-    payload = {
-        'meta': {
-            'participant_id': participant_id
-        }
-    }
+    """
+    Returns the People resource associated with a specific Participant resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type participant_id: str
+    :param participant_id: Neutral ID of a Participant resource
+    """
+    try:
+        participant = Participant.query.filter_by(neutral_id=participant_id).one()
+        payload = ParticipantSchema(
+            related_resource='person',
+            many_related=False,
+            include_data=('person',)
+        ).dump(participant)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
 
 
 @main.route('/people')
@@ -210,21 +264,39 @@ def people_detail(person_id: str):
 
 @main.route('/people/<person_id>/relationships/participants')
 def people_relationship_participants(person_id: str):
-    payload = {
-        'meta': {
-            'person_id': person_id
-        }
-    }
+    """
+    Returns Participant resource linkages associated with a specific Person resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type person_id: str
+    :param person_id: Neutral ID of a Person resource
+    """
+    try:
+        person = Person.query.filter_by(neutral_id=person_id).one()
+        payload = PersonSchema(resource_linkage='participation').dump(person)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
 
 
 @main.route('/people/<person_id>/participants')
 def people_participants(person_id: str):
-    payload = {
-        'meta': {
-            'person_id': person_id
-        }
-    }
+    """
+    Returns Participant resources associated with a specific Person resource, specified by its Neutral ID
 
-    return jsonify(payload)
+    :type person_id: str
+    :param person_id: Neutral ID of a Person resource
+    """
+    try:
+        person = Person.query.filter_by(neutral_id=person_id).one()
+        payload = PersonSchema(
+            related_resource='participation',
+            many_related=True,
+            include_data=('participation',)
+        ).dump(person)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise Conflict()
