@@ -184,7 +184,7 @@ def people_list():
     payload = PersonSchema(
         many=True,
         paginate=True,
-        include_data=('participation', 'participants.project')
+        include_data=('participation', 'participation.project')
     ).dump(people)
 
     return jsonify(payload.data)
@@ -200,7 +200,7 @@ def people_detail(person_id: str):
     """
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
-        payload = PersonSchema(include_data=('participation', 'participants.person')).dump(person)
+        payload = PersonSchema(include_data=('participation', 'participation.project')).dump(person)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
