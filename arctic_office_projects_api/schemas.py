@@ -20,8 +20,8 @@ class Schema(_Schema):
 
         Differences include:
         - pagination support implemented as a schema option
-        - TODO
-
+        - resource linkage support, implemented as a schema option
+        - related resource support, implemented as a schema option
         """
         self.paginate = False
         self.current_page = None
@@ -150,7 +150,13 @@ class Schema(_Schema):
     @marshmallow.post_dump(pass_many=True)
     def format_json_api_response(self, data: dict, many: bool) -> dict:
         """
-        TODO
+        Overloaded implementation of the 'format_json_api_response' method in the marshmallow_jsonapi default schema
+        class
+
+        Differences include:
+        - resource linkage support, modifies a standard schema response to return a JSON API resource linkage
+        - related resource support, modifies a standard schema response to return the contents of a JSON API related
+          resource link
 
         :type data: dict
         :param data: resource or resources to return
