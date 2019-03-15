@@ -621,7 +621,7 @@ When enabled this support will:
 
 To use pagination:
 
-* set the `many` and `paginate` options to true on a schema
+* set the `many` and `paginate` schema options to true
 * pass a Flask SQL Alchemy Pagination object to the `dump()` method
 
 For example:

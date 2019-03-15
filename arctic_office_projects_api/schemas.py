@@ -43,6 +43,7 @@ class Schema(_Schema):
             del kwargs['resource_linkage']
         if 'related_resource' in kwargs:
             self.related_resource = kwargs['related_resource']
+            kwargs['include_data'] = (self.related_resource,)
             del kwargs['related_resource']
         if 'many_related' in kwargs:
             self.many_related = kwargs['many_related']

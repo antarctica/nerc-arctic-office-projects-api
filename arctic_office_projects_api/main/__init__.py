@@ -92,11 +92,7 @@ def projects_participants(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(
-            related_resource='participants',
-            many_related=False,
-            include_data=('participants',)
-        ).dump(project)
+        payload = ProjectSchema(related_resource='participants', many_related=True).dump(project)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -189,11 +185,7 @@ def participants_projects(participant_id: str):
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
-        payload = ParticipantSchema(
-            related_resource='project',
-            many_related=False,
-            include_data=('project',)
-        ).dump(participant)
+        payload = ParticipantSchema(related_resource='project', many_related=False).dump(participant)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -211,11 +203,7 @@ def participants_people(participant_id: str):
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
-        payload = ParticipantSchema(
-            related_resource='person',
-            many_related=False,
-            include_data=('person',)
-        ).dump(participant)
+        payload = ParticipantSchema(related_resource='person', many_related=False).dump(participant)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -290,11 +278,7 @@ def people_participants(person_id: str):
     """
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
-        payload = PersonSchema(
-            related_resource='participation',
-            many_related=True,
-            include_data=('participation',)
-        ).dump(person)
+        payload = PersonSchema(related_resource='participation', many_related=True).dump(person)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
