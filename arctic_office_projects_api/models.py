@@ -166,7 +166,7 @@ class Participant(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        person_project_nid ='01D5T4N25RV2062NVVQKZ9NBYX'
+        person_project_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
 
         if not db.session.query(exists().where(Participant.neutral_id == person_project_nid)).scalar():
             person_project = Participant(

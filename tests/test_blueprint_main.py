@@ -81,8 +81,8 @@ class MainBlueprintTestCase(unittest.TestCase):
                 "participants": {
                     "data": [
                         {
-                          "id": "01D5T4N25RV2062NVVQKZ9NBYX",
-                          "type": "participants"
+                            "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+                            "type": "participants"
                         }
                     ],
                     "links": {
@@ -102,7 +102,8 @@ class MainBlueprintTestCase(unittest.TestCase):
         }
 
         expected_payload_included_items = list()
-        expected_payload_included_items.append({
+        expected_payload_included_items.append(
+            {
                 "attributes": {
                     "investigative-role": "InvestigativeRole.principal_investigator"
                 },
@@ -133,32 +134,35 @@ class MainBlueprintTestCase(unittest.TestCase):
                     }
                 },
                 "type": "participants"
-            })
-        expected_payload_included_items.append({
-            "attributes": {
-              "first-name": "Constance",
-              "last-name": "Watson"
-            },
-            "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
-            "links": {
-              "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE"
-            },
-            "relationships": {
-              "participation": {
-                "data": [
-                  {
-                    "id": "01D5T4N25RV2062NVVQKZ9NBYX",
-                    "type": "participants"
-                  }
-                ],
+            }
+        )
+        expected_payload_included_items.append(
+            {
+                "attributes": {
+                    "first-name": "Constance",
+                    "last-name": "Watson"
+                },
+                "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
                 "links": {
-                  "related": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants",
-                  "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
-                }
-              }
-            },
-            "type": "people"
-            })
+                    "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE"
+                },
+                "relationships": {
+                    "participation": {
+                        "data": [
+                            {
+                                "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+                                "type": "participants"
+                            }
+                        ],
+                        "links": {
+                            "related": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants",
+                            "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
+                        }
+                    }
+                },
+                "type": "people"
+            }
+        )
 
         response = self.client.get(
             '/projects',
@@ -295,8 +299,8 @@ class MainBlueprintTestCase(unittest.TestCase):
         expected_payload = {
             "data": [
                 {
-                  "id": "01D5T4N25RV2062NVVQKZ9NBYX",
-                  "type": "participants"
+                    "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+                    "type": "participants"
                 }
             ],
             "links": {
@@ -733,7 +737,8 @@ class MainBlueprintTestCase(unittest.TestCase):
         }
 
         expected_payload_included_items = list()
-        expected_payload_included_items.append({
+        expected_payload_included_items.append(
+            {
                 "attributes": {
                     "investigative-role": "InvestigativeRole.principal_investigator"
                 },
@@ -764,31 +769,34 @@ class MainBlueprintTestCase(unittest.TestCase):
                     }
                 },
                 "type": "participants"
-            })
-        expected_payload_included_items.append({
-            "attributes": {
-                "title": "xxx"
-            },
-            "id": "01D5M0CFQV4M7JASW7F87SRDYB",
-            "links": {
-                "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB"
-            },
-            "relationships": {
-                "participants": {
-                    "data": [
-                        {
-                            "id": "01D5T4N25RV2062NVVQKZ9NBYX",
-                            "type": "participants"
+            }
+        )
+        expected_payload_included_items.append(
+            {
+                "attributes": {
+                    "title": "xxx"
+                },
+                "id": "01D5M0CFQV4M7JASW7F87SRDYB",
+                "links": {
+                    "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB"
+                },
+                "relationships": {
+                    "participants": {
+                        "data": [
+                            {
+                                "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+                                "type": "participants"
+                            }
+                        ],
+                        "links": {
+                            "related": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants",
+                            "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants"
                         }
-                    ],
-                    "links": {
-                        "related": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants",
-                        "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants"
                     }
-                }
-            },
-            "type": "projects"
-        })
+                },
+                "type": "projects"
+            }
+        )
 
         response = self.client.get(
             '/people',
