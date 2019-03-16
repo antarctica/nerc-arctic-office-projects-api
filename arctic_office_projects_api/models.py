@@ -138,7 +138,7 @@ class Participant(db.Model):
     """
     Represents the relationship between an individual and a research project (i.e. their role)
     """
-    __tablename__ = 'people_projects'
+    __tablename__ = 'participants'
     id = db.Column(db.Integer, primary_key=True)
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
@@ -166,11 +166,11 @@ class Participant(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        person_project_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
+        participant_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
 
-        if not db.session.query(exists().where(Participant.neutral_id == person_project_nid)).scalar():
+        if not db.session.query(exists().where(Participant.neutral_id == participant_nid)).scalar():
             person_project = Participant(
-                neutral_id=person_project_nid,
+                neutral_id=participant_nid,
                 project=Project.query.filter_by(neutral_id='01D5M0CFQV4M7JASW7F87SRDYB').one(),
                 person=Person.query.filter_by(neutral_id='01D5MHQN3ZPH47YVSVQEVB0DAE').one(),
                 investigative_role=InvestigativeRole.principal_investigator

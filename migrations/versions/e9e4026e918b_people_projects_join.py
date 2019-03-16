@@ -17,7 +17,7 @@ depends_on = None
 
 
 def upgrade():
-    op.create_table('people_projects',
+    op.create_table('participants',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('neutral_id', sa.String(length=32), nullable=False),
         sa.Column('project_id', sa.Integer(), nullable=False),
@@ -27,10 +27,10 @@ def upgrade():
         sa.ForeignKeyConstraint(['project_id'], ['projects.id'], ),
         sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_people_projects_neutral_id'), 'people_projects', ['neutral_id'], unique=True)
+    op.create_index(op.f('ix_participants_neutral_id'), 'participants', ['neutral_id'], unique=True)
 
 
 def downgrade():
-    op.drop_index(op.f('ix_people_projects_neutral_id'), table_name='people_projects')
-    op.drop_table('people_projects')
     sa.Enum(name='investigative_role').drop(op.get_bind(), checkfirst=False)
+    op.drop_index(op.f('ix_participants_neutral_id'), table_name='participants')
+    op.drop_table('participants')
