@@ -1,5 +1,7 @@
 # noinspection PyPackageRequirements
 import marshmallow
+
+# noinspection PyPackageRequirements
 from marshmallow import MarshalResult
 from marshmallow_jsonapi import fields
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
