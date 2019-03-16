@@ -1,19 +1,19 @@
 # noinspection PyPackageRequirements
-from marshmallow import MarshalResult, post_dump
+import marshmallow
+
+# noinspection PyPackageRequirements
+from marshmallow import MarshalResult
 from marshmallow_jsonapi import fields
-from marshmallow_jsonapi.flask import Schema
+from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
 from flask_sqlalchemy import Pagination
 from typing import Union
 
 
-class AppSchema(Schema):
+class Schema(_Schema):
     """
     Custom base Marshmallow schema class, based on marshmallow_jsonapi default 'flask' class
 
     All schemas in this application should inherit from this class.
-
-    This class acts as a container for custom functionality and defaults related to returning JSON API formatted
-    responses.
     """
 
     def __init__(self, *args, **kwargs):
@@ -22,7 +22,8 @@ class AppSchema(Schema):
 
         Differences include:
         - pagination support implemented as a schema option
-
+        - resource linkage support, implemented as a schema option
+        - related resource support, implemented as a schema option
         """
         self.paginate = False
         self.current_page = None
@@ -31,9 +32,24 @@ class AppSchema(Schema):
         self.next_page = None
         self.previous_page = None
 
+        self.resource_linkage = None
+        self.related_resource = None
+        self.many_related = False
+
         if 'paginate' in kwargs:
             self.paginate = kwargs['paginate']
             del kwargs['paginate']
+
+        if 'resource_linkage' in kwargs:
+            self.resource_linkage = kwargs['resource_linkage']
+            del kwargs['resource_linkage']
+        if 'related_resource' in kwargs:
+            self.related_resource = kwargs['related_resource']
+            kwargs['include_data'] = (self.related_resource,)
+            del kwargs['related_resource']
+        if 'many_related' in kwargs:
+            self.many_related = kwargs['many_related']
+            del kwargs['many_related']
 
         super().__init__(*args, **kwargs)
 
@@ -87,7 +103,6 @@ class AppSchema(Schema):
 
         :type view_name: str
         :param view_name: name of flask view/route
-
         :param kwargs: arguments and other flask.url_for options
 
         :rtype str
@@ -134,6 +149,62 @@ class AppSchema(Schema):
 
         return super().dump(obj, many=many, update_fields=update_fields, **kwargs)
 
+    @marshmallow.post_dump(pass_many=True)
+    def format_json_api_response(self, data: dict, many: bool) -> dict:
+        """
+        Overloaded implementation of the 'format_json_api_response' method in the marshmallow_jsonapi default schema
+        class
+
+        Differences include:
+        - resource linkage support, modifies a standard schema response to return a JSON API resource linkage
+        - related resource support, modifies a standard schema response to return the contents of a JSON API related
+          resource link
+
+        :type data: dict
+        :param data: resource or resources to return
+        :type many: bool
+        :param many: whether a single or multiple resources are being returned
+
+        :rtype dict
+        :return: top-level response
+        """
+        response = super().format_json_api_response(data, many)
+
+        if self.resource_linkage is not None:
+            if many:
+                raise RuntimeError('A resource linkage can\'t be returned for multiple resources')
+
+            if self.resource_linkage in response['data']['relationships']:
+                return response['data']['relationships'][self.resource_linkage]
+
+            raise KeyError(f"No relationship found for '{ self.resource_linkage }'")
+
+        if self.related_resource is not None:
+            if many:
+                raise RuntimeError('A related resource response can\'t be returned for multiple resources')
+
+            if self.related_resource in response['data']['relationships']:
+                if 'links' in response['data']['relationships'][self.related_resource]:
+                    if 'related' in response['data']['relationships'][self.related_resource]['links']:
+                        if 'included' in response:
+                            response = {
+                                'data': response['included'],
+                                'links': {
+                                    'self': response['data']['relationships'][self.related_resource]['links']['self']
+                                }
+                            }
+                            if not self.many_related:
+                                response['data'] = response['data'][0]
+
+                            return response
+
+                        raise KeyError(f"No related resources are defined for '{ self.related_resource }'")
+                    raise KeyError(f"No related resource link found for '{ self.related_resource }' relationship")
+                raise KeyError(f"No links found for '{self.related_resource}' relationship")
+            raise KeyError(f"No relationship found for '{self.related_resource}'")
+
+        return response
+
     class Meta:
         """
         Custom base Marshmallow schema metadata class
@@ -160,45 +231,110 @@ class AppSchema(Schema):
         inflect = _inflection
 
 
-class ProjectSchema(AppSchema):
+class Relationship(_Relationship):
+    """
+    Custom base marshmallow_jsonapi schema relationship class, based on the default 'flask' class
+
+    All schema relationships in this application should inherit from this class.
+    """
+
+    def get_url(self, obj, view_name, view_kwargs):
+        """
+        Overloaded implementation of the 'get_url' method in the marshmallow_jsonapi default 'flask' class
+
+        Differences include:
+        - '_external' parameter past to flask url_for method to generate absolute rather than relative URLs
+
+        :param obj: relationship object
+        :type view_name: str
+        :param view_name: name of flask view/route
+        :param view_kwargs: arguments and other flask.url_for options
+
+        :rtype str
+        :return: generated URL
+        """
+        view_kwargs['_external'] = True
+        return super().get_url(obj, view_name, view_kwargs)
+
+
+class ProjectSchema(Schema):
     """
     Represents information about a research project
     """
     id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
     title = fields.Str(dump_only=True, required=True)
 
-    people = fields.Relationship(
-        self_url='main.projects_people_relationship',
-        self_url_kwargs={'project_id': '<id>'},
-        related_url='/projects/{project_id}/people',
-        related_url_kwargs={'project_id': '<id>'},
-        id_field='person.neutral_id',
+    participants = Relationship(
+        self_view='main.projects_relationship_participants',
+        self_view_kwargs={'project_id': '<neutral_id>'},
+        related_view='main.projects_participants',
+        related_view_kwargs={'project_id': '<neutral_id>'},
+        id_field='neutral_id',
         many=True,
         include_resource_linkage=True,
-        type_='person'
+        type_='participants',
+        schema='ParticipantSchema'
     )
 
-    @post_dump
-    def transform(self, data: dict) -> dict:
-        return data
-
-    class Meta(AppSchema.Meta):
-        type_ = 'project'
+    class Meta(Schema.Meta):
+        type_ = 'projects'
         self_view = 'main.projects_detail'
         self_view_kwargs = {'project_id': '<id>'}
         self_view_many = 'main.projects_list'
 
 
-class PersonSchema(AppSchema):
-    """
-    Represents information about an individual
-    """
+class ParticipantSchema(Schema):
+    id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
+    investigative_role = fields.Str(dump_only=True, required=True)
+
+    project = Relationship(
+        self_view='main.participants_relationship_projects',
+        self_view_kwargs={'participant_id': '<neutral_id>'},
+        related_view='main.participants_projects',
+        related_view_kwargs={'participant_id': '<neutral_id>'},
+        id_field='project.neutral_id',
+        include_resource_linkage=True,
+        type_='projects',
+        schema='ProjectSchema'
+    )
+
+    person = Relationship(
+        self_view='main.participants_relationship_people',
+        self_view_kwargs={'participant_id': '<neutral_id>'},
+        related_view='main.participants_people',
+        related_view_kwargs={'participant_id': '<neutral_id>'},
+        id_field='person.neutral_id',
+        include_resource_linkage=True,
+        type_='people',
+        schema='PersonSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'participants'
+        self_view = 'main.participants_detail'
+        self_view_kwargs = {'participant_id': '<id>'}
+        self_view_many = 'main.participants_list'
+
+
+class PersonSchema(Schema):
     id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
     first_name = fields.Str(dump_only=True, required=True)
     last_name = fields.Str(dump_only=True, required=True)
 
-    class Meta(AppSchema.Meta):
-        type_ = 'project'
+    participation = Relationship(
+        self_view='main.people_relationship_participants',
+        self_view_kwargs={'person_id': '<neutral_id>'},
+        related_view='main.people_participants',
+        related_view_kwargs={'person_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='participants',
+        schema='ParticipantSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'people'
         self_view = 'main.people_detail'
         self_view_kwargs = {'person_id': '<id>'}
         self_view_many = 'main.people_list'

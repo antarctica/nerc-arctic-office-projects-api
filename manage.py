@@ -6,7 +6,7 @@ from click import option, IntRange
 from flask_migrate import Migrate
 
 from arctic_office_projects_api import create_app, db
-from arctic_office_projects_api.models import Project, Person, PersonProjectRole
+from arctic_office_projects_api.models import Project, Person, Participant
 
 app = create_app(os.getenv('FLASK_ENV') or 'default')
 migrate = Migrate(app, db)
@@ -31,12 +31,12 @@ def seed(count):
     try:
         Project.seed(quantity=count)
         Person.seed(quantity=count)
-        PersonProjectRole.seed(quantity=count)
+        Participant.seed(quantity=count)
         db.session.commit()
         print("Seeding OK")
     except Exception as e:
         db.session.rollback()
-        # reset non-committed objects added using .add()
+        # reset added, but non-committed, entities
         db.session.flush()
         raise e
 

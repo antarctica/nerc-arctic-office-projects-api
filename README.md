@@ -44,8 +44,8 @@ in `arctic_office_projects_api/models.py`.
 Examples of representation transformations include, hiding the database primary key and renaming unintuitive database 
 field names to more useful attribute names.
 
-Schemas in this application should inherit from `arctic_office_projects_api.schemas.AppSchema` with a meta property 
-inherited from `arctic_office_projects_api.schemas.AppSchema.Meta`. These classes define custom functionality and 
+Schemas in this application should inherit from `arctic_office_projects_api.schemas.Schema` with a meta property 
+inherited from `arctic_office_projects_api.schemas.Schema.Meta`. These classes define custom functionality and 
 defaults suitable for generating more complete JSON API responses.
 
 #### Neutral IDs
@@ -603,8 +603,9 @@ Typically, models do not expose fields specific to how data is stored for exampl
 
 #### Pagination support
 
-Where a schema will return a large number of items, pagination is recommended. The `AppSchema` supports a limited form 
-of pagination whilst it is added to Marshmallow JsonAPI more completely. 
+Where a schema will return a large number of items, pagination is recommended. The 
+`arctic_office_projects_api.schemas.Schema` class supports a limited form of pagination whilst it is added to 
+Marshmallow JsonAPI more completely. 
 
 Limitations include:
 
@@ -620,7 +621,7 @@ When enabled this support will:
 
 To use pagination:
 
-* set the `many` and `paginate` options to true on a schema
+* set the `many` and `paginate` schema options to true
 * pass a Flask SQL Alchemy Pagination object to the `dump()` method
 
 For example:
@@ -640,6 +641,118 @@ def foo_list():
     payload = FooSummarySchema(many=True, paginate=True).dump(foo)
 
     return jsonify(payload.data)
+```
+
+#### Related resources support
+
+Relationships between schemas can be expressed using the `arctic_office_projects_api.schemas.Relationship` class. This
+is a custom version of the [Marshmallow JSON API](https://marshmallow-jsonapi.readthedocs.io/en/latest/).
+
+Additions made to the `arctic_office_projects_api.schemas.Schema` class allow *relationship* and *related resource* 
+responses to be returned.
+
+Limitations include:
+
+* document and data level meta elements are not currently supported
+
+##### Relationship responses 
+
+A [relationship response](https://jsonapi.org/format/#fetching-relationships) returns the resource linkage between a 
+resource and one or more other resource type.
+
+For example, a Person resource may be related to one or more Participant resources:
+
+```json
+{
+  "data": [
+    {
+      "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+      "type": "participants"
+    }
+  ],
+  "links": {
+    "related": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants",
+    "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
+  }
+}
+```
+
+To return a relationship response:
+
+* set the `resource_linkage` schema option to the related resource type
+
+For example:
+
+```python
+@main.route('/foo/<foo_id>/relationships/bar')
+def foo_list(foo_id: str):
+    try:
+        foo = Foo.query.filter_by(id=foo_id).one()
+        payload = FooSchema(resource_linkage='bar').dump(foo)
+        return jsonify(payload.data)
+    except NoResultFound:
+        return 'Not found error'
+    except MultipleResultsFound:
+        return 'Multiple resource conflict error'
+```
+
+##### Related resource responses
+
+A [related resources response](https://jsonapi.org/format/#document-resource-object-related-resource-links) returns the
+resources of a particular type related to a resource.
+
+For example, a Person resource may be related to one or more Participant resources:
+
+```json
+{
+  "data": [
+    {
+      "attributes": {
+        "foo": "bar"
+      },
+      "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+      "links": {
+        "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX"
+      },
+      "relationships": {
+        "person": {
+          "data": {
+            "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
+            "type": "people"
+           },
+           "links": {
+             "related": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/people",
+             "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people"
+          }
+        }
+      },
+      "type": "participants"
+    }
+  ],
+    "links": {
+      "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
+  }
+}
+```
+
+To return a related resource response:
+
+* set the `related_resource` schema option to the related resource type
+* set the `many_related` schema option to true where there may be multiple related resources (of a given type)
+
+For example:
+
+```python
+@main.route('/foo/<foo_id>/bar')
+def foo_list(foo_id: str):
+    try:
+        foo = Foo.query.filter_by(id=foo_id).one()
+        payload = FooSchema(related_resource='bar').dump(foo)
+        return jsonify(payload.data)
+    except NoResultFound:
+        return 'Not found error'
+    except MultipleResultsFound:
+        return 'Multiple resource conflict error'
 ```
 
 ## Testing

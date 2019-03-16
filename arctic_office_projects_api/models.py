@@ -17,7 +17,7 @@ class Project(db.Model):
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
     title = db.Column(db.Text(), nullable=False)
 
-    people = db.relationship("PersonProjectRole", back_populates="project")
+    participants = db.relationship("Participant", back_populates="project")
 
     def __repr__(self):
         return f"<Project { self.neutral_id }>"
@@ -37,12 +37,13 @@ class Project(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        project = Project(
-            neutral_id='01D5M0CFQV4M7JASW7F87SRDYB',
-            title='xxx'
-        )
+        project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
 
-        if not db.session.query(exists().where(Project.neutral_id == project.neutral_id)).scalar():
+        if not db.session.query(exists().where(Project.neutral_id == project_nid)).scalar():
+            project = Project(
+                neutral_id=project_nid,
+                title='xxx'
+            )
             db.session.add(project)
 
         if quantity > 1:
@@ -67,7 +68,7 @@ class Person(db.Model):
     first_name = db.Column(db.Text(), nullable=False)
     last_name = db.Column(db.Text(), nullable=False)
 
-    projects = db.relationship("PersonProjectRole", back_populates="person")
+    participation = db.relationship("Participant", back_populates="person")
 
     def __repr__(self):
         return f"<Person { self.neutral_id } ({ self.last_name }, { self.first_name })>"
@@ -87,13 +88,14 @@ class Person(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        person = Person(
-            neutral_id='01D5MHQN3ZPH47YVSVQEVB0DAE',
-            first_name='Constance',
-            last_name='Watson'
-        )
+        person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
 
-        if not db.session.query(exists().where(Person.neutral_id == person.neutral_id)).scalar():
+        if not db.session.query(exists().where(Person.neutral_id == person_nid)).scalar():
+            person = Person(
+                neutral_id=person_nid,
+                first_name='Constance',
+                last_name='Watson'
+            )
             db.session.add(person)
 
         if quantity > 1:
@@ -132,20 +134,22 @@ class InvestigativeRole(Enum):
     technician = 'Technician'
 
 
-class PersonProjectRole(db.Model):
+class Participant(db.Model):
     """
     Represents the relationship between an individual and a research project (i.e. their role)
     """
     __tablename__ = 'people_projects'
-    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), primary_key=True)
-    person_id = db.Column(db.Integer, db.ForeignKey('people.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+    person_id = db.Column(db.Integer, db.ForeignKey('people.id'), nullable=False)
     investigative_role = db.Column(db.Enum(InvestigativeRole), nullable=True)
 
-    project = db.relationship("Project", back_populates="people")
-    person = db.relationship("Person", back_populates="projects")
+    project = db.relationship("Project", back_populates="participants")
+    person = db.relationship("Person", back_populates="participation")
 
     def __repr__(self):
-        return f"<Person:Project { self.person.neutral_id }:{ self.project.neutral_id }>"
+        return f"<Person:Project { self.neutral_id } ({ self.person.neutral_id }:{ self.project.neutral_id })>"
 
     @staticmethod
     def seed(*, quantity: int = 1):
@@ -162,16 +166,13 @@ class PersonProjectRole(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
-        person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
+        person_project_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
 
-        if db.session.query(PersonProjectRole).filter(
-            Project.neutral_id == project_nid,
-            Person.neutral_id == person_nid
-        ).first() is None:
-            person_project = PersonProjectRole(
-                project=Project.query.filter_by(neutral_id=project_nid).one(),
-                person=Person.query.filter_by(neutral_id=person_nid).one(),
+        if not db.session.query(exists().where(Participant.neutral_id == person_project_nid)).scalar():
+            person_project = Participant(
+                neutral_id=person_project_nid,
+                project=Project.query.filter_by(neutral_id='01D5M0CFQV4M7JASW7F87SRDYB').one(),
+                person=Person.query.filter_by(neutral_id='01D5MHQN3ZPH47YVSVQEVB0DAE').one(),
                 investigative_role=InvestigativeRole.principal_investigator
             )
             db.session.add(person_project)
