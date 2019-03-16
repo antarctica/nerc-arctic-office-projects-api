@@ -17,6 +17,10 @@ servers:
 tags:
   - name: projects
     description: Projects
+  - name: participants
+    description: Participants
+  - name: people
+    description: People
   - name: standalone
     description: Standalone methods
 paths:
@@ -28,9 +32,6 @@ paths:
         - projects
       summary: Returns details for all Project resources
       operationId: get-projects-list
-      security:
-        - azure-oauth:
-            - Projects.Read.All
       parameters:
         -
           name: page
@@ -61,7 +62,6 @@ paths:
                       required:
                         - id
                         - type
-                        - attributes
                         - links
                       properties:
                         id:
@@ -74,6 +74,8 @@ paths:
                           type: string
                           title: Type
                           description: Type of resource
+                          enum:
+                            - projects
                         attributes:
                           type: object
                           title: Attributes
@@ -86,6 +88,62 @@ paths:
                               type: string
                               title: Title
                               description: Project title
+                        relationships:
+                          type: object
+                          title: Relationships
+                          description: Related resources
+                          properties:
+                            participants:
+                              type: object
+                              title: Participants
+                              description: Related participants
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: array
+                                  title: Participant resource linkages
+                                  description: Related participant resource identifers
+                                  items:
+                                    type: object
+                                    title: Participant resource linkage
+                                    description: Related participant resource identifier
+                                    required:
+                                      - type
+                                      - id
+                                    properties:
+                                      type:
+                                        readOnly: true
+                                        type: string
+                                        title: Type
+                                        description: Type of resource
+                                        enum:
+                                          - participants
+                                      id:
+                                        readOnly: true
+                                        type: string
+                                        title: ID
+                                        description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resources
                         links:
                           type: object
                           title: Links
@@ -101,11 +159,26 @@ paths:
                               description: URL to resource
                       example:
                         id: 01D5M0CFQV4M7JASW7F87SRDYB
-                        type: project
+                        type: projects
                         attributes:
                           title: xxx
+                        relationships:
+                          participants:
+                            data:
+                              -
+                                id: 01D5T4N25RV2062NVVQKZ9NBYX
+                                type: participants
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants
                         links:
                           self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB
+                  included:
+                    type: array
+                    title: Included
+                    description: Resources related to resource
+                    items:
+                      type: object
                   links:
                     type: object
                     title: Links
@@ -159,9 +232,6 @@ paths:
         - projects
       summary: Returns details for a single Project resource, specified by its ID
       operationId: get-projects-detail
-      security:
-        - azure-oauth:
-          - Projects.Read.All
       parameters:
         - in: path
           name: id
@@ -190,6 +260,7 @@ paths:
                       - id
                       - type
                       - attributes
+                      - relationships
                       - links
                     properties:
                       id:
@@ -202,6 +273,8 @@ paths:
                         type: string
                         title: Type
                         description: Type of resource
+                        enum:
+                          - projects
                       attributes:
                         type: object
                         title: Attributes
@@ -214,6 +287,62 @@ paths:
                             type: string
                             title: Title
                             description: Title of project
+                      relationships:
+                        type: object
+                        title: Relationships
+                        description: Related resources
+                        properties:
+                          participants:
+                            type: object
+                            title: Participants
+                            description: Related participants
+                            required:
+                              - data
+                              - links
+                            properties:
+                              data:
+                                type: array
+                                title: Participant resource linkages
+                                description: Related participant resource identifers
+                                items:
+                                  type: object
+                                  title: Participant resource linkage
+                                  description: Related participant resource identifier
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - participants
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                              links:
+                                type: object
+                                title: Links
+                                description: Links to additional information or actions
+                                required:
+                                  - self
+                                properties:
+                                  self:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Self
+                                    description: URL to relationship
+                                  related:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Related
+                                    description: URL to related resources
                       links:
                         type: object
                         title: Links
@@ -229,9 +358,17 @@ paths:
                             description: URL to full resource
                     example:
                       id: 01D5M0CFQV4M7JASW7F87SRDYB
-                      type: project
+                      type: projects
                       attributes:
                         title: xxx
+                      relationships:
+                        participants:
+                          data:
+                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                              type: participants
+                          links:
+                            self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants
+                            related: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants
                       links:
                         self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB
                   links:
@@ -248,7 +385,1930 @@ paths:
                         title: Self
                         description: URL to current resource
                     example:
-                      self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDY
+  /projects/{id}/relationships/participants:
+    summary: Project participants relationship
+    description: Relationship between a Project and its Participants
+    get:
+      tags:
+        - projects
+      summary: Returns details of how a Project resource is related to one or more Participant resources
+      operationId: get-projects-participants-relationship
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Project resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5M0CFQV4M7JASW7F87SRDYB
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: array
+                    title: Participant resource linkages
+                    description: Related participant resource identifers
+                    items:
+                      type: object
+                      title: Participant resource linkage
+                      description: Related participant resource identifier
+                      required:
+                        - type
+                        - id
+                      properties:
+                        type:
+                          readOnly: true
+                          type: string
+                          title: Type
+                          description: Type of resource
+                          enum:
+                            - participants
+                        id:
+                          readOnly: true
+                          type: string
+                          title: ID
+                          description: Resource identifier
+                    example:
+                      - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                        type: participants
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                      - related
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to relationship
+                      related:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resources
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants
+                      related: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants
+  /projects/{id}/participants:
+    summary: Project participants
+    description: List of Participants related to a Project
+    get:
+      tags:
+        - projects
+      summary: Returns details for all Participant resources related to a Project resource
+      operationId: get-projects-participants
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Project resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5M0CFQV4M7JASW7F87SRDYB
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Participants
+                      description: Represents information about an individuals involvement in a research project
+                      required:
+                        - id
+                        - type
+                        - links
+                      properties:
+                        id:
+                          readOnly: true
+                          type: string
+                          title: ID
+                          description: Resource identifier
+                        type:
+                          readOnly: true
+                          type: string
+                          title: Type
+                          description: Type of resource
+                          enum:
+                            - participants
+                        attributes:
+                          type: object
+                          title: Attributes
+                          description: Additional attributes for this resource type
+                          required:
+                            - role
+                          properties:
+                            role:
+                              readOnly: true
+                              type: string
+                              title: Role
+                              description: The role a person plays or assumes in a project
+                        relationships:
+                          type: object
+                          title: Relationships
+                          description: Related resources
+                          required:
+                            - project
+                            - people
+                          properties:
+                            project:
+                              type: object
+                              title: Project
+                              description: Related project
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: object
+                                  title: Project resource linkage
+                                  description: Related person resource identifer
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - project
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resource
+                            person:
+                              type: object
+                              title: Person
+                              description: Related person
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: object
+                                  title: Person resource linkage
+                                  description: Related person resource identifer
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - person
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resource
+                        links:
+                          type: object
+                          title: Links
+                          description: Links to additional information or actions
+                          required:
+                            - self
+                          properties:
+                            self:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Self
+                              description: URL to resource
+                      example:
+                        id: 01D5T4N25RV2062NVVQKZ9NBYX
+                        type: participants
+                        attributes:
+                          role: principal_investigator
+                        relationships:
+                          project:
+                            data:
+                              - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                                type: projects
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
+                          people:
+                            data:
+                              - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                                type: people
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/peopl
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/people
+                        links:
+                          self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX
+                  included:
+                    type: array
+                    title: Included
+                    description: Resources related to related resources
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resources
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants
+  /participants:
+    summary: Participants list
+    description: List of all Participant resources
+    get:
+      tags:
+        - participants
+      summary: Returns details for all Participant resources
+      operationId: get-participants-list
+      parameters:
+        -
+          name: page
+          in: query
+          description: Selected pagination page
+          required: false
+          schema:
+            type: integer
+          example:
+            value: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Participant
+                      description: Represents information about an individuals involvement in a research project
+                      required:
+                        - id
+                        - type
+                        - links
+                      properties:
+                        id:
+                          readOnly: true
+                          type: string
+                          title: ID
+                          description: Resource identifier
+                        type:
+                          readOnly: true
+                          type: string
+                          title: Type
+                          description: Type of resource
+                          enum:
+                            - participants
+                        attributes:
+                          type: object
+                          title: Attributes
+                          description: Additional attributes for this resource type
+                          required:
+                            - role
+                          properties:
+                            role:
+                              readOnly: true
+                              type: string
+                              title: Role
+                              description: The role a person plays or assumes in a project
+                        relationships:
+                          type: object
+                          title: Relationships
+                          description: Related resources
+                          required:
+                            - project
+                            - people
+                          properties:
+                            project:
+                              type: object
+                              title: Project
+                              description: Related project
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: object
+                                  title: Project resource linkage
+                                  description: Related person resource identifer
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - project
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resource
+                            person:
+                              type: object
+                              title: Person
+                              description: Related person
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: object
+                                  title: Person resource linkage
+                                  description: Related person resource identifer
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - person
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resource
+                        links:
+                          type: object
+                          title: Links
+                          description: Links to additional information or actions
+                          required:
+                            - self
+                          properties:
+                            self:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Self
+                              description: URL to resource
+                      example:
+                        id: 01D5T4N25RV2062NVVQKZ9NBYX
+                        type: participants
+                        attributes:
+                          role: principal_investigator
+                        relationships:
+                          project:
+                            data:
+                              -
+                                id: 01D5M0CFQV4M7JASW7F87SRDYB
+                                type: projects
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
+                          people:
+                            data:
+                              - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                                type: people
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/peopl
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/people
+                        links:
+                          self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX
+                  included:
+                    type: array
+                    title: Included
+                    description: Resources related to resource
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                      - first
+                      - last
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Current page
+                        description: URL to current page of resources
+                      first:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: First page
+                        description: URL to first page of resources
+                      last:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Last page
+                        description: URL to last page of resources
+                      prev:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Previous page
+                        description: URL to previous page of resources (if applicable)
+                      next:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Next page
+                        description: URL to next page of resources (if applicable)
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/participants?page=2
+                      first: https://api.bas.ac.uk/arctic-office-projects/testing/participants?page=1
+                      last: https://api.bas.ac.uk/arctic-office-projects/testing/participants?page=4
+                      prev: https://api.bas.ac.uk/arctic-office-projects/testing/participants?page=1
+                      next: https://api.bas.ac.uk/arctic-office-projects/testing/participants?page=3
+  '/participants/{id}':
+    summary: Participant details
+    description: Details for a specific Participant resource
+    get:
+      tags:
+        - participants
+      summary: Returns details for a single Participant resource, specified by its ID
+      operationId: get-participants-detail
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Participants resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5T4N25RV2062NVVQKZ9NBYX
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: object
+                    title: Participant
+                    description: Represents information about an individuals involvement in a research project
+                    required:
+                      - id
+                      - type
+                      - links
+                    properties:
+                      id:
+                        readOnly: true
+                        type: string
+                        title: ID
+                        description: Resource identifier
+                      type:
+                        readOnly: true
+                        type: string
+                        title: Type
+                        description: Type of resource
+                        enum:
+                          - participants
+                      attributes:
+                        type: object
+                        title: Attributes
+                        description: Additional attributes for this resource type
+                        required:
+                          - role
+                        properties:
+                          role:
+                            readOnly: true
+                            type: string
+                            title: Role
+                            description: The role a person plays or assumes in a project
+                      relationships:
+                        type: object
+                        title: Relationships
+                        description: Related resources
+                        required:
+                          - project
+                          - people
+                        properties:
+                          project:
+                            type: object
+                            title: Project
+                            description: Related project
+                            required:
+                              - data
+                              - links
+                            properties:
+                              data:
+                                type: object
+                                title: Project resource linkage
+                                description: Related person resource identifer
+                                required:
+                                  - type
+                                  - id
+                                properties:
+                                  type:
+                                    readOnly: true
+                                    type: string
+                                    title: Type
+                                    description: Type of resource
+                                    enum:
+                                      - project
+                                  id:
+                                    readOnly: true
+                                    type: string
+                                    title: ID
+                                    description: Resource identifier
+                              links:
+                                type: object
+                                title: Links
+                                description: Links to additional information or actions
+                                required:
+                                  - self
+                                properties:
+                                  self:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Self
+                                    description: URL to relationship
+                                  related:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Related
+                                    description: URL to related resource
+                          person:
+                            type: object
+                            title: Person
+                            description: Related person
+                            required:
+                              - data
+                              - links
+                            properties:
+                              data:
+                                type: object
+                                title: Person resource linkage
+                                description: Related person resource identifer
+                                required:
+                                  - type
+                                  - id
+                                properties:
+                                  type:
+                                    readOnly: true
+                                    type: string
+                                    title: Type
+                                    description: Type of resource
+                                    enum:
+                                      - person
+                                  id:
+                                    readOnly: true
+                                    type: string
+                                    title: ID
+                                    description: Resource identifier
+                              links:
+                                type: object
+                                title: Links
+                                description: Links to additional information or actions
+                                required:
+                                  - self
+                                properties:
+                                  self:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Self
+                                    description: URL to relationship
+                                  related:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Related
+                                    description: URL to related resource
+                      links:
+                        type: object
+                        title: Links
+                        description: Links to additional information or actions
+                        required:
+                          - self
+                        properties:
+                          self:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Self
+                            description: URL to resource
+                    example:
+                      id: 01D5T4N25RV2062NVVQKZ9NBYX
+                      type: participants
+                      attributes:
+                        role: principal_investigator
+                      relationships:
+                        project:
+                          data:
+                            - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                              type: projects
+                          links:
+                            self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
+                            related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
+                        people:
+                          data:
+                            - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                              type: people
+                          links:
+                            self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/peopl
+                            related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/people
+                      links:
+                        self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to current resource
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX
+  /participants/{id}/relationships/projects:
+    summary: Participation project relationship
+    description: Relationship between a Participantion and a Project
+    get:
+      tags:
+        - participants
+      summary: Returns details of how a Participant resource is related to a Project resource
+      operationId: get-participants-projects-relationship
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Participant resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5T4N25RV2062NVVQKZ9NBYX
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: object
+                    title: Project resource linkage
+                    description: Related project resource identifier
+                    required:
+                      - type
+                      - id
+                    properties:
+                      type:
+                        readOnly: true
+                        type: string
+                        title: Type
+                        description: Type of resource
+                        enum:
+                          - projects
+                      id:
+                        readOnly: true
+                        type: string
+                        title: ID
+                        description: Resource identifier
+                    example:
+                      id: 01D5M0CFQV4M7JASW7F87SRDYB
+                      type: projects
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                      - related
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to relationship
+                      related:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resources
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
+                      related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
+  /participants/{id}/relationships/people:
+    summary: Participation person relationship
+    description: Relationship between a Participantion and a Person
+    get:
+      tags:
+        - participants
+      summary: Returns details of how a Participant resource is related to a Person resource
+      operationId: get-participants-people-relationship
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Participant resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5T4N25RV2062NVVQKZ9NBYX
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: object
+                    title: Person resource linkage
+                    description: Related person resource identifier
+                    required:
+                      - type
+                      - id
+                    properties:
+                      type:
+                        readOnly: true
+                        type: string
+                        title: Type
+                        description: Type of resource
+                        enum:
+                          - people
+                      id:
+                        readOnly: true
+                        type: string
+                        title: ID
+                        description: Resource identifier
+                    example:
+                      id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                      type: people
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                      - related
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to relationship
+                      related:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resources
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people
+                      related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/people
+  /participants/{id}/projects:
+    summary: Participant project
+    description: Details of the Project related to a Participant
+    get:
+      tags:
+        - participants
+      summary: Returns details for the Project resource related to a Participant resource
+      operationId: get-participants-projects
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Participant resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5T4N25RV2062NVVQKZ9NBYX
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: object
+                    title: Project
+                    description: Represents information about a research project
+                    required:
+                      - id
+                      - type
+                      - attributes
+                      - relationships
+                      - links
+                    properties:
+                      id:
+                        readOnly: true
+                        type: string
+                        title: ID
+                        description: Resource identifier
+                      type:
+                        readOnly: true
+                        type: string
+                        title: Type
+                        description: Type of resource
+                        enum:
+                          - projects
+                      attributes:
+                        type: object
+                        title: Attributes
+                        description: Additional attributes for this resource type
+                        required:
+                          - title
+                        properties:
+                          title:
+                            readOnly: true
+                            type: string
+                            title: Title
+                            description: Title of project
+                      relationships:
+                        type: object
+                        title: Relationships
+                        description: Related resources
+                        properties:
+                          participants:
+                            type: object
+                            title: Participants
+                            description: Related participants
+                            required:
+                              - data
+                              - links
+                            properties:
+                              data:
+                                type: array
+                                title: Participant resource linkages
+                                description: Related participant resource identifers
+                                items:
+                                  type: object
+                                  title: Participant resource linkage
+                                  description: Related participant resource identifier
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - participants
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                              links:
+                                type: object
+                                title: Links
+                                description: Links to additional information or actions
+                                required:
+                                  - self
+                                properties:
+                                  self:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Self
+                                    description: URL to relationship
+                                  related:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Related
+                                    description: URL to related resources
+                      links:
+                        type: object
+                        title: Links
+                        description: Links to additional information or actions
+                        required:
+                          - self
+                        properties:
+                          self:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Self
+                            description: URL to full resource
+                    example:
+                      id: 01D5M0CFQV4M7JASW7F87SRDYB
+                      type: projects
+                      attributes:
+                        title: xxx
+                      relationships:
+                        participants:
+                          data:
+                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                              type: participants
+                          links:
+                            self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants
+                            related: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants
+                      links:
+                        self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB
+                  included:
+                    type: array
+                    title: Included
+                    description: Resources related to related resources
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resource
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
+  /participants/{id}/people:
+    summary: Participant person
+    description: Details of the Person related to a Participant
+    get:
+      tags:
+        - participants
+      summary: Returns details for the Person resource related to a Participant resource
+      operationId: get-participants-people
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Participant resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5T4N25RV2062NVVQKZ9NBYX
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: object
+                    title: Person
+                    description: Represents information about an individual
+                    required:
+                      - id
+                      - type
+                      - links
+                    properties:
+                      id:
+                        readOnly: true
+                        type: string
+                        title: ID
+                        description: Resource identifier
+                      type:
+                        readOnly: true
+                        type: string
+                        title: Type
+                        description: Type of resource
+                        enum:
+                          - people
+                      attributes:
+                        type: object
+                        title: Attributes
+                        description: Additional attributes for this resource type
+                        required:
+                          - 'first-name'
+                          - 'last-name'
+                        properties:
+                          first-name:
+                            readOnly: true
+                            type: string
+                            title: First name
+                            description: An individuals given name
+                          last-name:
+                            readOnly: true
+                            type: string
+                            title: Last name
+                            description: An individuals family name
+                      relationships:
+                        type: object
+                        title: Relationships
+                        description: Related resources
+                        properties:
+                          participants:
+                            type: object
+                            title: Participation
+                            description: Related participation
+                            required:
+                              - data
+                              - links
+                            properties:
+                              data:
+                                type: array
+                                title: Participant resource linkages
+                                description: Related participant resource identifers
+                                items:
+                                  type: object
+                                  title: Participant resource linkage
+                                  description: Related participant resource identifier
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - participants
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                              links:
+                                type: object
+                                title: Links
+                                description: Links to additional information or actions
+                                required:
+                                  - self
+                                properties:
+                                  self:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Self
+                                    description: URL to relationship
+                                  related:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Related
+                                    description: URL to related resources
+                      links:
+                        type: object
+                        title: Links
+                        description: Links to additional information or actions
+                        required:
+                          - self
+                        properties:
+                          self:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Self
+                            description: URL to full resource
+                    example:
+                      id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                      type: people
+                      attributes:
+                        first-name: Constance
+                        last-name: Watson
+                      relationships:
+                        participants:
+                          data:
+                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                              type: participants
+                          links:
+                            self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
+                            related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants
+                  included:
+                    type: array
+                    title: Included
+                    description: Resources related to related resources
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resource
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/people
+  /people:
+    summary: People list
+    description: List of all Person resources
+    get:
+      tags:
+        - people
+      summary: Returns details for all Person resources
+      operationId: get-people-list
+      parameters:
+        - name: page
+          in: query
+          description: Selected pagination page
+          required: false
+          schema:
+            type: integer
+          example:
+            value: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Project
+                      description: Represents information about an individual
+                      required:
+                        - id
+                        - type
+                        - links
+                      properties:
+                        id:
+                          readOnly: true
+                          type: string
+                          title: ID
+                          description: Resource identifier
+                        type:
+                          readOnly: true
+                          type: string
+                          title: Type
+                          description: Type of resource
+                          enum:
+                            - people
+                        attributes:
+                          type: object
+                          title: Attributes
+                          description: Additional attributes for this resource type
+                          required:
+                            - 'first-name'
+                            - 'last-name'
+                          properties:
+                            first-name:
+                              readOnly: true
+                              type: string
+                              title: First name
+                              description: An individuals given name
+                            last-name:
+                              readOnly: true
+                              type: string
+                              title: Last name
+                              description: An individuals family name
+                        relationships:
+                          type: object
+                          title: Relationships
+                          description: Related resources
+                          properties:
+                            participation:
+                              type: object
+                              title: Participation
+                              description: Related participation
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: array
+                                  title: Participant resource linkages
+                                  description: Related participant resource identifers
+                                  items:
+                                    type: object
+                                    title: Participant resource linkage
+                                    description: Related participant resource identifier
+                                    required:
+                                      - type
+                                      - id
+                                    properties:
+                                      type:
+                                        readOnly: true
+                                        type: string
+                                        title: Type
+                                        description: Type of resource
+                                        enum:
+                                          - participants
+                                      id:
+                                        readOnly: true
+                                        type: string
+                                        title: ID
+                                        description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resources
+                        links:
+                          type: object
+                          title: Links
+                          description: Links to additional information or actions
+                          required:
+                            - self
+                          properties:
+                            self:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Self
+                              description: URL to resource
+                      example:
+                        id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                        type: people
+                        attributes:
+                          first-name: Constance
+                          last-name: Watson
+                        relationships:
+                          participation:
+                            data:
+                              - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                                type: participants
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants
+                        links:
+                          self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE
+                  included:
+                    type: array
+                    title: Included
+                    description: Resources related to resource
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                      - first
+                      - last
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Current page
+                        description: URL to current page of resources
+                      first:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: First page
+                        description: URL to first page of resources
+                      last:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Last page
+                        description: URL to last page of resources
+                      prev:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Previous page
+                        description: URL to previous page of resources (if applicable)
+                      next:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Next page
+                        description: URL to next page of resources (if applicable)
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/people?page=2
+                      first: https://api.bas.ac.uk/arctic-office-projects/testing/people?page=1
+                      last: https://api.bas.ac.uk/arctic-office-projects/testing/people?page=4
+                      prev: https://api.bas.ac.uk/arctic-office-projects/testing/people?page=1
+                      next: https://api.bas.ac.uk/arctic-office-projects/testing/people?page=3
+  '/people/{id}':
+    summary: People details
+    description: Details for a specific Person resource
+    get:
+      tags:
+        - people
+      summary: Returns details for a single Person resource, specified by its ID
+      operationId: get-people-detail
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Person resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5MHQN3ZPH47YVSVQEVB0DAE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: object
+                    title: Person
+                    description: Represents information about an individual
+                    required:
+                      - id
+                      - type
+                      - links
+                    properties:
+                      id:
+                        readOnly: true
+                        type: string
+                        title: ID
+                        description: Resource identifier
+                      type:
+                        readOnly: true
+                        type: string
+                        title: Type
+                        description: Type of resource
+                        enum:
+                          - people
+                      attributes:
+                        type: object
+                        title: Attributes
+                        description: Additional attributes for this resource type
+                        required:
+                          - 'first-name'
+                          - 'last-name'
+                        properties:
+                          first-name:
+                            readOnly: true
+                            type: string
+                            title: First name
+                            description: An individuals given name
+                          last-name:
+                            readOnly: true
+                            type: string
+                            title: Last name
+                            description: An individuals family name
+                      relationships:
+                        type: object
+                        title: Relationships
+                        description: Related resources
+                        properties:
+                          participants:
+                            type: object
+                            title: Participation
+                            description: Related participation
+                            required:
+                              - data
+                              - links
+                            properties:
+                              data:
+                                type: array
+                                title: Participant resource linkages
+                                description: Related participant resource identifers
+                                items:
+                                  type: object
+                                  title: Participant resource linkage
+                                  description: Related participant resource identifier
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - participants
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                              links:
+                                type: object
+                                title: Links
+                                description: Links to additional information or actions
+                                required:
+                                  - self
+                                properties:
+                                  self:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Self
+                                    description: URL to relationship
+                                  related:
+                                    readOnly: true
+                                    type: string
+                                    format: uri
+                                    title: Related
+                                    description: URL to related resources
+                      links:
+                        type: object
+                        title: Links
+                        description: Links to additional information or actions
+                        required:
+                          - self
+                        properties:
+                          self:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Self
+                            description: URL to full resource
+                    example:
+                      id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                      type: people
+                      attributes:
+                        first-name: Constance
+                        last-name: Watson
+                      relationships:
+                        participants:
+                          data:
+                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                              type: participants
+                          links:
+                            self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
+                            related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants
+                      links:
+                        self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to current resource
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE
+  /people/{id}/relationships/participants:
+    summary: Person participation relationship
+    description: Relationship between a Person and their Participantion
+    get:
+      tags:
+        - people
+      summary: Returns details of how a Person resource is related to one or more Participant resources
+      operationId: get-people-participants-relationship
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Person resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5MHQN3ZPH47YVSVQEVB0DAE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: array
+                    title: Participant resource linkages
+                    description: Related participant resource identifers
+                    items:
+                      type: object
+                      title: Participant resource linkage
+                      description: Related participant resource identifier
+                      required:
+                        - type
+                        - id
+                      properties:
+                        type:
+                          readOnly: true
+                          type: string
+                          title: Type
+                          description: Type of resource
+                          enum:
+                            - participants
+                        id:
+                          readOnly: true
+                          type: string
+                          title: ID
+                          description: Resource identifier
+                    example:
+                      - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                        type: participants
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                      - related
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to relationship
+                      related:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resources
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
+                      related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants
+  /people/{id}/participants:
+    summary: Person participation
+    description: List of Participants related to a Person
+    get:
+      tags:
+        - people
+      summary: Returns details for all Participant resources related to a Person resource
+      operationId: get-people-participants
+      parameters:
+        - in: path
+          name: id
+          description: ID of a Person resource
+          required: true
+          schema:
+            type: string
+          example:
+            value: 01D5MHQN3ZPH47YVSVQEVB0DAE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      title: Participants
+                      description: Represents information about an individuals involvement in a research project
+                      required:
+                        - id
+                        - type
+                        - links
+                      properties:
+                        id:
+                          readOnly: true
+                          type: string
+                          title: ID
+                          description: Resource identifier
+                        type:
+                          readOnly: true
+                          type: string
+                          title: Type
+                          description: Type of resource
+                          enum:
+                            - participants
+                        attributes:
+                          type: object
+                          title: Attributes
+                          description: Additional attributes for this resource type
+                          required:
+                            - role
+                          properties:
+                            role:
+                              readOnly: true
+                              type: string
+                              title: Role
+                              description: The role a person plays or assumes in a project
+                        relationships:
+                          type: object
+                          title: Relationships
+                          description: Related resources
+                          required:
+                            - project
+                            - people
+                          properties:
+                            project:
+                              type: object
+                              title: Project
+                              description: Related project
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: object
+                                  title: Project resource linkage
+                                  description: Related person resource identifer
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - project
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resource
+                            person:
+                              type: object
+                              title: Person
+                              description: Related person
+                              required:
+                                - data
+                                - links
+                              properties:
+                                data:
+                                  type: object
+                                  title: Person resource linkage
+                                  description: Related person resource identifer
+                                  required:
+                                    - type
+                                    - id
+                                  properties:
+                                    type:
+                                      readOnly: true
+                                      type: string
+                                      title: Type
+                                      description: Type of resource
+                                      enum:
+                                        - person
+                                    id:
+                                      readOnly: true
+                                      type: string
+                                      title: ID
+                                      description: Resource identifier
+                                links:
+                                  type: object
+                                  title: Links
+                                  description: Links to additional information or actions
+                                  required:
+                                    - self
+                                  properties:
+                                    self:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Self
+                                      description: URL to relationship
+                                    related:
+                                      readOnly: true
+                                      type: string
+                                      format: uri
+                                      title: Related
+                                      description: URL to related resource
+                        links:
+                          type: object
+                          title: Links
+                          description: Links to additional information or actions
+                          required:
+                            - self
+                          properties:
+                            self:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Self
+                              description: URL to resource
+                      example:
+                        id: 01D5T4N25RV2062NVVQKZ9NBYX
+                        type: participants
+                        attributes:
+                          role: principal_investigator
+                        relationships:
+                          project:
+                            data:
+                              - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                                type: projects
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
+                          people:
+                            data:
+                              - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                                type: people
+                            links:
+                              self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/peopl
+                              related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/people
+                        links:
+                          self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX
+                  included:
+                    type: array
+                    title: Included
+                    description: Resources related to related resources
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    title: Links
+                    description: Links to additional information or actions
+                    required:
+                      - self
+                    properties:
+                      self:
+                        readOnly: true
+                        type: string
+                        format: uri
+                        title: Self
+                        description: URL to related resources
+                    example:
+                      self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants
   /:
     summary: API Index
     description: Root of this API
