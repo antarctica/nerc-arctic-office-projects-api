@@ -105,7 +105,12 @@ class MainBlueprintTestCase(unittest.TestCase):
         expected_payload_included_items.append(
             {
                 "attributes": {
-                    "investigative-role": "InvestigativeRole.principal_investigator"
+                    "role": {
+                        "class": "http://purl.org/spar/scoro/InvestigationRole",
+                        "description": "The principle investigator of the research project.",
+                        "member": "http://purl.org/spar/scoro/principle-investigator",
+                        "title": "principle investigator"
+                    }
                 },
                 "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                 "links": {
@@ -211,7 +216,12 @@ class MainBlueprintTestCase(unittest.TestCase):
             "included": [
                 {
                     "attributes": {
-                        "investigative-role": "InvestigativeRole.principal_investigator"
+                        "role": {
+                            "class": "http://purl.org/spar/scoro/InvestigationRole",
+                            "description": "The principle investigator of the research project.",
+                            "member": "http://purl.org/spar/scoro/principle-investigator",
+                            "title": "principle investigator"
+                        }
                     },
                     "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                     "links": {
@@ -322,7 +332,12 @@ class MainBlueprintTestCase(unittest.TestCase):
             "data": [
                 {
                     "attributes": {
-                        "investigative-role": "InvestigativeRole.principal_investigator"
+                        "role": {
+                            "class": "http://purl.org/spar/scoro/InvestigationRole",
+                            "description": "The principle investigator of the research project.",
+                            "member": "http://purl.org/spar/scoro/principle-investigator",
+                            "title": "principle investigator"
+                        }
                     },
                     "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                     "links": {
@@ -371,7 +386,12 @@ class MainBlueprintTestCase(unittest.TestCase):
             "data": [
                 {
                     "attributes": {
-                        "investigative-role": "InvestigativeRole.principal_investigator"
+                        "role": {
+                            "class": "http://purl.org/spar/scoro/InvestigationRole",
+                            "description": "The principle investigator of the research project.",
+                            "member": "http://purl.org/spar/scoro/principle-investigator",
+                            "title": "principle investigator"
+                        }
                     },
                     "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                     "links": {
@@ -474,7 +494,12 @@ class MainBlueprintTestCase(unittest.TestCase):
         expected_payload = {
             "data": {
                 "attributes": {
-                    "investigative-role": "InvestigativeRole.principal_investigator"
+                    "role": {
+                        "class": "http://purl.org/spar/scoro/InvestigationRole",
+                        "description": "The principle investigator of the research project.",
+                        "member": "http://purl.org/spar/scoro/principle-investigator",
+                        "title": "principle investigator"
+                    }
                 },
                 "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                 "links": {
@@ -740,7 +765,12 @@ class MainBlueprintTestCase(unittest.TestCase):
         expected_payload_included_items.append(
             {
                 "attributes": {
-                    "investigative-role": "InvestigativeRole.principal_investigator"
+                    "role": {
+                        "class": "http://purl.org/spar/scoro/InvestigationRole",
+                        "description": "The principle investigator of the research project.",
+                        "member": "http://purl.org/spar/scoro/principle-investigator",
+                        "title": "principle investigator"
+                    }
                 },
                 "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                 "links": {
@@ -843,7 +873,12 @@ class MainBlueprintTestCase(unittest.TestCase):
             "included": [
                 {
                     "attributes": {
-                        "investigative-role": "InvestigativeRole.principal_investigator"
+                        "role": {
+                            "class": "http://purl.org/spar/scoro/InvestigationRole",
+                            "description": "The principle investigator of the research project.",
+                            "member": "http://purl.org/spar/scoro/principle-investigator",
+                            "title": "principle investigator"
+                        }
                     },
                     "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                     "links": {
@@ -953,7 +988,12 @@ class MainBlueprintTestCase(unittest.TestCase):
             "data": [
                 {
                     "attributes": {
-                        "investigative-role": "InvestigativeRole.principal_investigator"
+                        "role": {
+                            "class": "http://purl.org/spar/scoro/InvestigationRole",
+                            "description": "The principle investigator of the research project.",
+                            "member": "http://purl.org/spar/scoro/principle-investigator",
+                            "title": "principle investigator"
+                        }
                     },
                     "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                     "links": {
