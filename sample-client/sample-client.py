@@ -4,6 +4,7 @@ import requests
 
 api_base_url = 'https://api.bas.ac.uk/arctic-office-projects/testing'
 
+
 def process_included_resources(included: list) -> dict:
     included_by_type_id = {}
     for _included in included:
@@ -12,6 +13,7 @@ def process_included_resources(included: list) -> dict:
         included_by_type_id[_included['type']][_included['id']] = _included
 
     return included_by_type_id
+
 
 try:
     # Make API request for a single resource
@@ -33,7 +35,7 @@ try:
     print("Participants:")
     for participant in content['data']['relationships']['participants']['data']:
         participant = content['included'][participant['type']][participant['id']]
-        person = content['included'][participant['relationships']['person']['data']['type']][participant['relationships']['person']['data']['id']]    
+        person = content['included'][participant['relationships']['person']['data']['type']][participant['relationships']['person']['data']['id']]
         print(f"  * { person['attributes']['first-name'] } { person['attributes']['last-name'] } ({ participant['attributes']['investigative-role'] })")
 
 except requests.exceptions.RequestException as e:
