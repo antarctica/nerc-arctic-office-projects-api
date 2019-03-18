@@ -367,7 +367,7 @@ The Docker Container used for this is defined in `Dockerfile.heroku-release`.
 2. enter `flask seed --count 3` as the command
 
 To connect to the staging environment database, expand the *Database Credentials* section of the 
-[Heroku database settings](xxx).
+[Heroku database settings](https://data.heroku.com/datastores/8d6bd297-680a-453a-8c2b-efd7b077bd3a#administration).
 
 **WARNING!:** Heroku databases require SSL connections using a self-signed certificate. Currently SSL validation is 
 disabled to allow connections. This is not ideal and should be used with caution.
@@ -923,7 +923,7 @@ See the [Local development](#local-development) sub-section in the [Setup](#setu
 
 The staging environment is deployed on [Heroku](https://heroku.com) as an 
 [application](https://dashboard.heroku.com/apps/bas-arctic-projects-api-stage) within a 
-[pipeline](https://dashboard.heroku.com/pipelines/xxx) in the `webapps@bas.ac.uk` 
+[pipeline](https://dashboard.heroku.com/pipelines/30f0864a-16e9-41c8-862d-866dd460ba20) in the `webapps@bas.ac.uk` 
 shared account.
 
 This Heroku application uses their 
