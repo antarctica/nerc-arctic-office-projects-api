@@ -6,6 +6,12 @@ from faker import Faker
 
 from arctic_office_projects_api import db
 from arctic_office_projects_api.main.utils import generate_neutral_id
+from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
+from arctic_office_projects_api.main.faker.providers.profile import Provider as ProfileProvider
+
+faker = Faker('en_GB')
+faker.add_provider(PersonProvider)
+faker.add_provider(ProfileProvider)
 
 
 class Project(db.Model):
@@ -47,8 +53,6 @@ class Project(db.Model):
             db.session.add(project)
 
         if quantity > 1:
-            faker = Faker('en_GB')
-
             for i in range(1, quantity):
                 resource = Project(
                     neutral_id=generate_neutral_id(),
@@ -65,8 +69,10 @@ class Person(db.Model):
     __tablename__ = 'people'
     id = db.Column(db.Integer, primary_key=True)
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
-    first_name = db.Column(db.Text(), nullable=False)
-    last_name = db.Column(db.Text(), nullable=False)
+    first_name = db.Column(db.Text(), nullable=True)
+    last_name = db.Column(db.Text(), nullable=True)
+    orcid_id = db.Column(db.String(64), unique=True, nullable=True)
+    logo_url = db.Column(db.Text(), nullable=True)
 
     participation = db.relationship("Participant", back_populates="person")
 
@@ -94,19 +100,27 @@ class Person(db.Model):
             person = Person(
                 neutral_id=person_nid,
                 first_name='Constance',
-                last_name='Watson'
+                last_name='Watson',
+                orcid_id='https://sandbox.orcid.org/0000-0001-8373-6934',
+                logo_url='https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg'
             )
             db.session.add(person)
 
         if quantity > 1:
-            faker = Faker('en_GB')
-
             for i in range(1, quantity):
-                resource = Person(
-                    neutral_id=generate_neutral_id(),
-                    first_name=faker.first_name(),
-                    last_name=faker.last_name()
-                )
+                resource = Person(neutral_id=generate_neutral_id())
+                if faker.has_orcid_id():
+                    resource.orcid_id = faker.orcid_id()
+                if faker.male_or_female() == 'male':
+                    resource.first_name = faker.first_name_male(),
+                    resource.last_name = faker.last_name_male()
+                    if faker.has_avatar():
+                        resource.logo_url = faker.avatar_male()
+                else:
+                    resource.first_name = faker.first_name_female(),
+                    resource.last_name = faker.last_name_female()
+                    if faker.has_avatar():
+                        resource.logo_url = faker.avatar_female()
 
                 db.session.add(resource)
 

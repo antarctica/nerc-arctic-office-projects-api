@@ -153,4 +153,10 @@ The `id` property will vary with each error using a UUID (version 4).
 
 ### Fake data limitations
 
+### People
+
 ...
+
+### Fake data limitations
+
+* Orcid IDs are fake and can't be used to lookup additional information on a person

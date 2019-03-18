@@ -2,10 +2,9 @@
 import marshmallow
 
 # noinspection PyPackageRequirements
-from marshmallow import MarshalResult
+from marshmallow import MarshalResult, fields
 # noinspection PyPackageRequirements
 from marshmallow.fields import Field
-from marshmallow_jsonapi import fields
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
 from flask_sqlalchemy import Pagination
 from typing import Union
@@ -265,8 +264,8 @@ class ProjectSchema(Schema):
     """
     Represents information about a research project
     """
-    id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
-    title = fields.Str(dump_only=True, required=True)
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    title = fields.String(dump_only=True, required=True)
 
     participants = Relationship(
         self_view='main.projects_relationship_participants',
@@ -309,6 +308,7 @@ class ParticipantRoleField(Field):
         """
         return value.value
 
+    # noinspection PyMethodOverriding
     def deserialize(self, value: dict, attr: str, data: dict) -> ParticipantRole:
         """
         When serialising it's expected that a ParticipantRole enumerator item is specified by an 'member' value key.
@@ -333,7 +333,7 @@ class ParticipantRoleField(Field):
 
 
 class ParticipantSchema(Schema):
-    id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
     role = ParticipantRoleField(dump_only=True, required=True)
 
     project = Relationship(
@@ -366,9 +366,11 @@ class ParticipantSchema(Schema):
 
 
 class PersonSchema(Schema):
-    id = fields.Str(attribute="neutral_id", dump_only=True, required=True)
-    first_name = fields.Str(dump_only=True, required=True)
-    last_name = fields.Str(dump_only=True, required=True)
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    first_name = fields.String(dump_only=True)
+    last_name = fields.String(dump_only=True)
+    orcid_id = fields.String(dump_only=True)
+    avatar_url = fields.String(attribute='logo_url', dump_only=True)
 
     participation = Relationship(
         self_view='main.people_relationship_participants',

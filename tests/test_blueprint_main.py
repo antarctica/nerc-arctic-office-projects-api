@@ -122,8 +122,10 @@ class MainBlueprintTestCase(BaseTestCase):
         expected_payload_included_items.append(
             {
                 "attributes": {
+                    "avatar-url": "https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg",
                     "first-name": "Constance",
-                    "last-name": "Watson"
+                    "last-name": "Watson",
+                    "orcid-id": "https://sandbox.orcid.org/0000-0001-8373-6934"
                 },
                 "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
                 "links": {
@@ -233,8 +235,10 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
+                        "avatar-url": "https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg",
                         "first-name": "Constance",
-                        "last-name": "Watson"
+                        "last-name": "Watson",
+                        "orcid-id": "https://sandbox.orcid.org/0000-0001-8373-6934"
                     },
                     "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
                     "links": {
@@ -413,8 +417,10 @@ class MainBlueprintTestCase(BaseTestCase):
             "included": [
                 {
                     "attributes": {
+                        "avatar-url": "https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg",
                         "first-name": "Constance",
-                        "last-name": "Watson"
+                        "last-name": "Watson",
+                        "orcid-id": "https://sandbox.orcid.org/0000-0001-8373-6934"
                     },
                     "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
                     "links": {
@@ -522,8 +528,10 @@ class MainBlueprintTestCase(BaseTestCase):
             "included": [
                 {
                     "attributes": {
+                        "avatar-url": "https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg",
                         "first-name": "Constance",
-                        "last-name": "Watson"
+                        "last-name": "Watson",
+                        "orcid-id": "https://sandbox.orcid.org/0000-0001-8373-6934"
                     },
                     "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
                     "links": {
@@ -691,8 +699,10 @@ class MainBlueprintTestCase(BaseTestCase):
         expected_payload = {
             "data": {
                 "attributes": {
+                    "avatar-url": "https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg",
                     "first-name": "Constance",
-                    "last-name": "Watson"
+                    "last-name": "Watson",
+                    "orcid-id": "https://sandbox.orcid.org/0000-0001-8373-6934"
                 },
                 "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
                 "links": {
@@ -732,8 +742,10 @@ class MainBlueprintTestCase(BaseTestCase):
     def test_people_list(self):
         expected_payload_data_item = {
             "attributes": {
+                "avatar-url": "https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg",
                 "first-name": "Constance",
-                "last-name": "Watson"
+                "last-name": "Watson",
+                "orcid-id": "https://sandbox.orcid.org/0000-0001-8373-6934"
             },
             "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
             "links": {
@@ -851,8 +863,10 @@ class MainBlueprintTestCase(BaseTestCase):
         expected_payload = {
             "data": {
                 "attributes": {
+                    "avatar-url": "https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg",
                     "first-name": "Constance",
-                    "last-name": "Watson"
+                    "last-name": "Watson",
+                    "orcid-id": "https://sandbox.orcid.org/0000-0001-8373-6934"
                 },
                 "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
                 "links": {

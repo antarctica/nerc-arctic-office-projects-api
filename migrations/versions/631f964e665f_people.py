@@ -20,9 +20,12 @@ def upgrade():
     op.create_table('people',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('neutral_id', sa.String(length=32), nullable=False),
-        sa.Column('first_name', sa.Text(), nullable=False),
-        sa.Column('last_name', sa.Text(), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.Column('first_name', sa.Text(), nullable=True),
+        sa.Column('last_name', sa.Text(), nullable=True),
+        sa.Column('orcid_id', sa.String(length=64), nullable=True),
+        sa.Column('logo_url', sa.Text(), nullable=True),
+        sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('orcid_id')
     )
     op.create_index(op.f('ix_people_neutral_id'), 'people', ['neutral_id'], unique=True)
 
