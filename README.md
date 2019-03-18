@@ -380,6 +380,11 @@ If connecting from PyCharm, under the *advanced* tab for the data source, set th
 To upload and publish documentation, follow the relevant setup instructions in the 
 [BAS API Documentation project](https://gitlab.data.bas.ac.uk/WSF/api-docs/#adding-a-new-service-service-version).
 
+#### Staging - auth
+
+Use the same *BAS NERC Arctic Office Projects API Testing* application registered in the 
+[Auth sub-section in the local development section](#local-development-auth).
+
 ### Production
 
 Docker, Docker Compose and Terraform are required to setup the production environment of this API.
