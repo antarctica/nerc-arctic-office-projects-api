@@ -110,6 +110,27 @@ Examples:
 
 * `1875-05-20`
 
+#### Date range (data type)
+
+Date range values are encoded as an object containing:
+ 
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date interval [string](#string) which covers the entire range 
+  (i.e. `YYYY-MM-DD/YYYY-MM-DD`)
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string) which marks the beginning of the
+  range (i.e. `YYYY-MM-DD`)
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string) which marks the end of the range 
+  (i.e. `YYYY-MM-DD`)
+
+Examples:
+
+```json
+{
+  "interval": "1875-05-20/2002-04-14",
+  "start_instance": "1875-05-20",
+  "end_instance": "2002-04-14"
+}
+```
+
 ### Pagination
 
 API methods that return large numbers of items will use pagination to split items into a number of pages based on the
@@ -152,6 +173,28 @@ The `id` property will vary with each error using a UUID (version 4).
 ...
 
 ### Fake data limitations
+
+* project acronym's don't relate to a projects title
+* project abstracts are always between 2500 - 7500 characters long
+* where publications are in a project, 3 are always returned
+* where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
+* where impact statements are in a project, 3 are always returned
+* where impact statements are in a project, each is 10 sentences
+* where notes are in a project, 3 are always returned
+* where notes are in a project, each is 3 sentences
+* project durations are always within the last 10 years
+* project durations are always completed
+* project durations are always exactly 3 years
+* access durations are always from the start of the main duration, until the end of the main duration plus 2 years 
+  exactly
+
+### Participants
+
+...
+
+### Fake data limitations
+
+...
 
 ### People
 

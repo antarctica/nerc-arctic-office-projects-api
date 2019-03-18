@@ -31,7 +31,8 @@ def test():
 def seed(count):
     """Seed database with mock data."""
     try:
-        Project.seed(quantity=count)
+        project = Project()
+        project.seed(quantity=count)
         Person.seed(quantity=count)
         Participant.seed(quantity=count)
         db.session.commit()

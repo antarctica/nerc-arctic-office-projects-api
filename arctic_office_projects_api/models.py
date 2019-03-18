@@ -1,15 +1,22 @@
+from datetime import date
 from enum import Enum
 
 # noinspection PyPackageRequirements
+from psycopg2.extras import DateRange
+# noinspection PyPackageRequirements
 from sqlalchemy import exists
 from faker import Faker
+# noinspection PyPackageRequirements
+from sqlalchemy.dialects import postgresql
 
 from arctic_office_projects_api import db
 from arctic_office_projects_api.main.utils import generate_neutral_id
+from arctic_office_projects_api.main.faker.providers.project import Provider as ProjectProvider
 from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
 from arctic_office_projects_api.main.faker.providers.profile import Provider as ProfileProvider
 
 faker = Faker('en_GB')
+faker.add_provider(ProjectProvider)
 faker.add_provider(PersonProvider)
 faker.add_provider(ProfileProvider)
 
@@ -22,6 +29,14 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
     title = db.Column(db.Text(), nullable=False)
+    acronym = db.Column(db.Text(), nullable=True)
+    abstract = db.Column(db.Text(), nullable=True)
+    website = db.Column(db.Text(), nullable=True)
+    publications = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    impact_statements = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    notes = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    access_duration = db.Column(postgresql.DATERANGE(), nullable=False)
+    project_duration = db.Column(postgresql.DATERANGE(), nullable=True)
 
     participants = db.relationship("Participant", back_populates="project")
 
@@ -29,7 +44,22 @@ class Project(db.Model):
         return f"<Project { self.neutral_id }>"
 
     @staticmethod
-    def seed(*, quantity: int = 1):
+    def calculate_access_duration(project_duration: DateRange) -> DateRange:
+        """
+        Calculates a project's 'access' duration based on its main duration
+
+        The access duration states how long the project should be visible in project listings. It effectively extends
+        the length of a project so that it is still considered 'current' if it has recently ended.
+
+        :type project_duration: DateRange
+        :param project_duration: the project's main duration
+
+        :rtype: DateRange
+        :return: the access duration of a project
+        """
+        return DateRange(project_duration.lower, project_duration.upper.replace(project_duration.upper.year + 2))
+
+    def seed(self, *, quantity: int = 1):
         """
         Populate database with mock/fake data
 
@@ -44,20 +74,95 @@ class Project(db.Model):
         :param quantity: target number of Person Sensitive resources to create
         """
         project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
+        project_duration = DateRange(date(2013, 3, 1), date(2016, 10, 1))
 
         if not db.session.query(exists().where(Project.neutral_id == project_nid)).scalar():
             project = Project(
                 neutral_id=project_nid,
-                title='xxx'
+                title='Aerosol-Cloud Coupling And Climate Interactions in the Arctic',
+                acronym='ACCACIA',
+                abstract="The Arctic climate is changing twice as fast as the global average and these dramatic "
+                         "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                         "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                         "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                         "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                         "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                         "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                         "However, in the Arctic this albedo effect is not as important because the surface, often "
+                         "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                         "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                         "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                         "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                         "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                         "research project comes in. \n A large portion of clouds, including those found in the Arctic "
+                         "region, are categorized as mixed phase clouds. This means they contain both supercooled "
+                         "water droplets and ice crystals (for a demonstration of supercooled water see: "
+                         "http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                         "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                         "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                         "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                         "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made up "
+                         "of desert dusts, soot or even bacteria. But the composition and source of ice nuclei in the "
+                         "Arctic environment remains a mystery. \n A likely source of ice nuclei in the Arctic is the "
+                         "ocean. Particles emitted at the sea surface, through the action of waves breaking and bubble "
+                         "bursting, may serve as ice nuclei when they are lofted into the atmosphere and are "
+                         "incorporated in cloud droplets. This source of ice nuclei has not yet been quantified. We "
+                         "will be the first to make measurements of ice nuclei in the central Arctic region. We will "
+                         "make measurements of ice nuclei in the surface layers of the sea from a research ship as "
+                         "well as measuring airborne ice nuclei from the BAe-146 research aircraft. \n The sea's "
+                         "surface contains a wide range of bacteria, viruses, plankton and other materials which are "
+                         "ejected into the atmosphere and may cause ice to form. We will use state-of-the-art "
+                         "equipment developed at Leeds to measure how well sea-derived particles and particles sampled "
+                         "in the atmosphere nucleate ice. We will piggy back on a NERC funded project called ACACCIA, "
+                         "which not only represents excellent value for money (since the ship and aircraft are already "
+                         "paid for under ACCACIA), but is a unique opportunity to access this remote region. \n "
+                         "Results from the proposed study will build upon previous work performed in the Murray "
+                         "laboratory and generate quantitative results that can be directly used to improve "
+                         "computer-based cloud, aerosol and climate models. Our results will further our "
+                         "understanding of these mysterious and important mixed phase clouds and, in turn, the global "
+                         "climate.",
+                website='http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/',
+                publications=[
+                    'https://doi.org/10.5194/acp-2018-283',
+                    'https://doi.org/10.5194/acp-15-3719-2015',
+                    'https://doi.org/10.5194/acp-15-5599-2015',
+                    'https://doi.org/10.5194/acp-16-4063-2016'
+                ],
+                impact_statements=[
+                    'We discovered that there is a source of atmospheric ice nucleating particles in the oceans '
+                    'associated with organic material produced by plankton. This was published in a high impact study '
+                    'in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a '
+                    'modelling study of the global distribution of ice nucleating particles which was published in '
+                    'March 2017 (https://doi.org/10.5194/acp-17-3637-2017).',
+                ],
+                notes=[
+                    'You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_.'
+                ],
+                access_duration=self.calculate_access_duration(project_duration),
+                project_duration=project_duration
             )
             db.session.add(project)
 
         if quantity > 1:
             for i in range(1, quantity):
+                project_duration = faker.project_duration()
                 resource = Project(
                     neutral_id=generate_neutral_id(),
-                    title=faker.sentence()
+                    title=faker.sentence(),
+                    abstract=faker.abstract(),
+                    access_duration=self.calculate_access_duration(project_duration),
+                    project_duration=project_duration
                 )
+                if faker.has_acronym():
+                    resource.acronym = faker.word()
+                if faker.has_website():
+                    resource.website = faker.uri()
+                if faker.has_publications:
+                    resource.publications = faker.publications_list()
+                if faker.has_impact_statements:
+                    resource.has_impact_statements = faker.has_impact_statements()
+                if faker.has_notes:
+                    resource.has_notes = faker.has_notes()
 
                 db.session.add(resource)
 

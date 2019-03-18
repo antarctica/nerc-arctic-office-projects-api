@@ -49,7 +49,75 @@ class MainBlueprintTestCase(BaseTestCase):
     def test_projects_list(self):
         expected_payload_data_item = {
             "attributes": {
-                "title": "xxx"
+                "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                            "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                            "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                            "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                            "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                            "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                            "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                            "However, in the Arctic this albedo effect is not as important because the surface, often "
+                            "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                            "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                            "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                            "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                            "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                            "research project comes in. \n A large portion of clouds, including those found in the "
+                            "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                            "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                            "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                            "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                            "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                            "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                            "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                            "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                            "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                            "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                            "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                            "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                            "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                            "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                            "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                            "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                            "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                            "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                            "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                            "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                            "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                            "opportunity to access this remote region. \n Results from the proposed study will build "
+                            "upon previous work performed in the Murray laboratory and generate quantitative results "
+                            "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                            "Our results will further our understanding of these mysterious and important mixed phase "
+                            "clouds and, in turn, the global climate.",
+                "access-duration": {
+                    "end_instant": "2018-10-01",
+                    "interval": "2013-03-01/2018-10-01",
+                    "start_instant": "2013-03-01"
+                },
+                "acronym": "ACCACIA",
+                "impact-statements": [
+                    "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
+                    "associated with organic material produced by plankton. This was published in a high impact study "
+                    "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
+                    "modelling study of the global distribution of ice nucleating particles which was published in "
+                    "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
+                ],
+                "notes": [
+                    "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
+                ],
+                "project-duration": {
+                    "end_instant": "2016-10-01",
+                    "interval": "2013-03-01/2016-10-01",
+                    "start_instant": "2013-03-01"
+                },
+                "publications": [
+                    "https://doi.org/10.5194/acp-2018-283",
+                    "https://doi.org/10.5194/acp-15-3719-2015",
+                    "https://doi.org/10.5194/acp-15-5599-2015",
+                    "https://doi.org/10.5194/acp-16-4063-2016"
+                ],
+                "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
             },
             "id": "01D5M0CFQV4M7JASW7F87SRDYB",
             "links": {
@@ -173,7 +241,75 @@ class MainBlueprintTestCase(BaseTestCase):
         expected_payload = {
             "data": {
                 "attributes": {
-                    "title": "xxx"
+                    "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                                "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                                "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                                "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                                "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                                "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                                "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                                "However, in the Arctic this albedo effect is not as important because the surface, often "
+                                "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                                "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                                "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                                "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                                "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                                "research project comes in. \n A large portion of clouds, including those found in the "
+                                "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                                "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                                "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                                "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                                "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                                "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                                "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                                "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                                "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                                "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                                "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                                "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                                "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                                "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                                "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                                "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                                "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                                "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                                "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                                "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                                "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                                "opportunity to access this remote region. \n Results from the proposed study will build "
+                                "upon previous work performed in the Murray laboratory and generate quantitative results "
+                                "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                                "Our results will further our understanding of these mysterious and important mixed phase "
+                                "clouds and, in turn, the global climate.",
+                    "access-duration": {
+                        "end_instant": "2018-10-01",
+                        "interval": "2013-03-01/2018-10-01",
+                        "start_instant": "2013-03-01"
+                    },
+                    "acronym": "ACCACIA",
+                    "impact-statements": [
+                        "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
+                        "associated with organic material produced by plankton. This was published in a high impact study "
+                        "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
+                        "modelling study of the global distribution of ice nucleating particles which was published in "
+                        "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
+                    ],
+                    "notes": [
+                        "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
+                    ],
+                    "project-duration": {
+                        "end_instant": "2016-10-01",
+                        "interval": "2013-03-01/2016-10-01",
+                        "start_instant": "2013-03-01"
+                    },
+                    "publications": [
+                        "https://doi.org/10.5194/acp-2018-283",
+                        "https://doi.org/10.5194/acp-15-3719-2015",
+                        "https://doi.org/10.5194/acp-15-5599-2015",
+                        "https://doi.org/10.5194/acp-16-4063-2016"
+                    ],
+                    "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                    "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
                 },
                 "id": "01D5M0CFQV4M7JASW7F87SRDYB",
                 "links": {
@@ -444,7 +580,75 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "title": "xxx"
+                        "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                                    "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                                    "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                                    "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                                    "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                                    "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                                    "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                                    "However, in the Arctic this albedo effect is not as important because the surface, often "
+                                    "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                                    "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                                    "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                                    "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                                    "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                                    "research project comes in. \n A large portion of clouds, including those found in the "
+                                    "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                                    "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                                    "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                                    "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                                    "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                                    "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                                    "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                                    "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                                    "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                                    "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                                    "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                                    "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                                    "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                                    "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                                    "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                                    "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                                    "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                                    "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                                    "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                                    "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                                    "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                                    "opportunity to access this remote region. \n Results from the proposed study will build "
+                                    "upon previous work performed in the Murray laboratory and generate quantitative results "
+                                    "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                                    "Our results will further our understanding of these mysterious and important mixed phase "
+                                    "clouds and, in turn, the global climate.",
+                        "access-duration": {
+                            "end_instant": "2018-10-01",
+                            "interval": "2013-03-01/2018-10-01",
+                            "start_instant": "2013-03-01"
+                        },
+                        "acronym": "ACCACIA",
+                        "impact-statements": [
+                            "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
+                            "associated with organic material produced by plankton. This was published in a high impact study "
+                            "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
+                            "modelling study of the global distribution of ice nucleating particles which was published in "
+                            "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
+                        ],
+                        "notes": [
+                            "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
+                        ],
+                        "project-duration": {
+                            "end_instant": "2016-10-01",
+                            "interval": "2013-03-01/2016-10-01",
+                            "start_instant": "2013-03-01"
+                        },
+                        "publications": [
+                            "https://doi.org/10.5194/acp-2018-283",
+                            "https://doi.org/10.5194/acp-15-3719-2015",
+                            "https://doi.org/10.5194/acp-15-5599-2015",
+                            "https://doi.org/10.5194/acp-16-4063-2016"
+                        ],
+                        "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                        "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
                     },
                     "id": "01D5M0CFQV4M7JASW7F87SRDYB",
                     "links": {
@@ -555,7 +759,75 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "title": "xxx"
+                        "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                                    "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                                    "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                                    "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                                    "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                                    "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                                    "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                                    "However, in the Arctic this albedo effect is not as important because the surface, often "
+                                    "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                                    "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                                    "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                                    "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                                    "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                                    "research project comes in. \n A large portion of clouds, including those found in the "
+                                    "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                                    "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                                    "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                                    "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                                    "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                                    "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                                    "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                                    "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                                    "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                                    "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                                    "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                                    "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                                    "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                                    "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                                    "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                                    "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                                    "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                                    "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                                    "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                                    "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                                    "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                                    "opportunity to access this remote region. \n Results from the proposed study will build "
+                                    "upon previous work performed in the Murray laboratory and generate quantitative results "
+                                    "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                                    "Our results will further our understanding of these mysterious and important mixed phase "
+                                    "clouds and, in turn, the global climate.",
+                        "access-duration": {
+                            "end_instant": "2018-10-01",
+                            "interval": "2013-03-01/2018-10-01",
+                            "start_instant": "2013-03-01"
+                        },
+                        "acronym": "ACCACIA",
+                        "impact-statements": [
+                            "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
+                            "associated with organic material produced by plankton. This was published in a high impact study "
+                            "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
+                            "modelling study of the global distribution of ice nucleating particles which was published in "
+                            "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
+                        ],
+                        "notes": [
+                            "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
+                        ],
+                        "project-duration": {
+                            "end_instant": "2016-10-01",
+                            "interval": "2013-03-01/2016-10-01",
+                            "start_instant": "2013-03-01"
+                        },
+                        "publications": [
+                            "https://doi.org/10.5194/acp-2018-283",
+                            "https://doi.org/10.5194/acp-15-3719-2015",
+                            "https://doi.org/10.5194/acp-15-5599-2015",
+                            "https://doi.org/10.5194/acp-16-4063-2016"
+                        ],
+                        "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                        "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
                     },
                     "id": "01D5M0CFQV4M7JASW7F87SRDYB",
                     "links": {
@@ -658,7 +930,75 @@ class MainBlueprintTestCase(BaseTestCase):
         expected_payload = {
             "data": {
                 "attributes": {
-                    "title": "xxx"
+                    "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                                "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                                "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                                "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                                "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                                "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                                "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                                "However, in the Arctic this albedo effect is not as important because the surface, often "
+                                "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                                "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                                "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                                "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                                "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                                "research project comes in. \n A large portion of clouds, including those found in the "
+                                "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                                "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                                "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                                "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                                "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                                "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                                "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                                "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                                "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                                "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                                "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                                "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                                "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                                "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                                "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                                "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                                "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                                "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                                "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                                "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                                "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                                "opportunity to access this remote region. \n Results from the proposed study will build "
+                                "upon previous work performed in the Murray laboratory and generate quantitative results "
+                                "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                                "Our results will further our understanding of these mysterious and important mixed phase "
+                                "clouds and, in turn, the global climate.",
+                    "access-duration": {
+                        "end_instant": "2018-10-01",
+                        "interval": "2013-03-01/2018-10-01",
+                        "start_instant": "2013-03-01"
+                    },
+                    "acronym": "ACCACIA",
+                    "impact-statements": [
+                        "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
+                        "associated with organic material produced by plankton. This was published in a high impact study "
+                        "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
+                        "modelling study of the global distribution of ice nucleating particles which was published in "
+                        "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
+                    ],
+                    "notes": [
+                        "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
+                    ],
+                    "project-duration": {
+                        "end_instant": "2016-10-01",
+                        "interval": "2013-03-01/2016-10-01",
+                        "start_instant": "2013-03-01"
+                    },
+                    "publications": [
+                        "https://doi.org/10.5194/acp-2018-283",
+                        "https://doi.org/10.5194/acp-15-3719-2015",
+                        "https://doi.org/10.5194/acp-15-5599-2015",
+                        "https://doi.org/10.5194/acp-16-4063-2016"
+                    ],
+                    "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                    "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
                 },
                 "id": "01D5M0CFQV4M7JASW7F87SRDYB",
                 "links": {
@@ -818,7 +1158,75 @@ class MainBlueprintTestCase(BaseTestCase):
         expected_payload_included_items.append(
             {
                 "attributes": {
-                    "title": "xxx"
+                    "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                                "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                                "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                                "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                                "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                                "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                                "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                                "However, in the Arctic this albedo effect is not as important because the surface, often "
+                                "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                                "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                                "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                                "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                                "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                                "research project comes in. \n A large portion of clouds, including those found in the "
+                                "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                                "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                                "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                                "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                                "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                                "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                                "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                                "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                                "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                                "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                                "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                                "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                                "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                                "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                                "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                                "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                                "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                                "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                                "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                                "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                                "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                                "opportunity to access this remote region. \n Results from the proposed study will build "
+                                "upon previous work performed in the Murray laboratory and generate quantitative results "
+                                "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                                "Our results will further our understanding of these mysterious and important mixed phase "
+                                "clouds and, in turn, the global climate.",
+                    "access-duration": {
+                        "end_instant": "2018-10-01",
+                        "interval": "2013-03-01/2018-10-01",
+                        "start_instant": "2013-03-01"
+                    },
+                    "acronym": "ACCACIA",
+                    "impact-statements": [
+                        "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
+                        "associated with organic material produced by plankton. This was published in a high impact study "
+                        "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
+                        "modelling study of the global distribution of ice nucleating particles which was published in "
+                        "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
+                    ],
+                    "notes": [
+                        "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
+                    ],
+                    "project-duration": {
+                        "end_instant": "2016-10-01",
+                        "interval": "2013-03-01/2016-10-01",
+                        "start_instant": "2013-03-01"
+                    },
+                    "publications": [
+                        "https://doi.org/10.5194/acp-2018-283",
+                        "https://doi.org/10.5194/acp-15-3719-2015",
+                        "https://doi.org/10.5194/acp-15-5599-2015",
+                        "https://doi.org/10.5194/acp-16-4063-2016"
+                    ],
+                    "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                    "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
                 },
                 "id": "01D5M0CFQV4M7JASW7F87SRDYB",
                 "links": {
@@ -928,7 +1336,75 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "title": "xxx"
+                        "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                                    "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                                    "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                                    "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                                    "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                                    "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                                    "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                                    "However, in the Arctic this albedo effect is not as important because the surface, often "
+                                    "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                                    "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                                    "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                                    "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                                    "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                                    "research project comes in. \n A large portion of clouds, including those found in the "
+                                    "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                                    "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                                    "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                                    "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                                    "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                                    "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                                    "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                                    "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                                    "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                                    "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                                    "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                                    "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                                    "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                                    "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                                    "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                                    "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                                    "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                                    "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                                    "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                                    "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                                    "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                                    "opportunity to access this remote region. \n Results from the proposed study will build "
+                                    "upon previous work performed in the Murray laboratory and generate quantitative results "
+                                    "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                                    "Our results will further our understanding of these mysterious and important mixed phase "
+                                    "clouds and, in turn, the global climate.",
+                        "access-duration": {
+                            "end_instant": "2018-10-01",
+                            "interval": "2013-03-01/2018-10-01",
+                            "start_instant": "2013-03-01"
+                        },
+                        "acronym": "ACCACIA",
+                        "impact-statements": [
+                            "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
+                            "associated with organic material produced by plankton. This was published in a high impact study "
+                            "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
+                            "modelling study of the global distribution of ice nucleating particles which was published in "
+                            "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
+                        ],
+                        "notes": [
+                            "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
+                        ],
+                        "project-duration": {
+                            "end_instant": "2016-10-01",
+                            "interval": "2013-03-01/2016-10-01",
+                            "start_instant": "2013-03-01"
+                        },
+                        "publications": [
+                            "https://doi.org/10.5194/acp-2018-283",
+                            "https://doi.org/10.5194/acp-15-3719-2015",
+                            "https://doi.org/10.5194/acp-15-5599-2015",
+                            "https://doi.org/10.5194/acp-16-4063-2016"
+                        ],
+                        "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                        "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
                     },
                     "id": "01D5M0CFQV4M7JASW7F87SRDYB",
                     "links": {

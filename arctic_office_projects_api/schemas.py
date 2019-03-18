@@ -1,3 +1,5 @@
+from datetime import datetime
+
 # noinspection PyPackageRequirements
 import marshmallow
 
@@ -7,6 +9,8 @@ from marshmallow import MarshalResult, fields
 from marshmallow.fields import Field
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
 from flask_sqlalchemy import Pagination
+# noinspection PyPackageRequirements
+from psycopg2.extras import DateRange
 from typing import Union
 
 from arctic_office_projects_api.models import Participant, ParticipantRole
@@ -260,12 +264,75 @@ class Relationship(_Relationship):
         return super().get_url(obj, view_name, view_kwargs)
 
 
+class DateRangeField(Field):
+    """
+    Custom Marshmallow field for the PostgreSQL DateRange class
+    """
+    def _serialize(self, value: DateRange, attr: str, obj) -> dict:
+        """
+        When serialising, the DateRange is converted into a dict containing a ISO 8601 date interval, covering the date
+        range, and two Date instants, indicating the beginning and end of the date range.
+
+        :type value: DateRange
+        :param value: a DateRange instance
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :param obj: the object 'value' was taken from
+
+        :rtype: dict
+        :return: ISO 8601 date duration and dates for the beginning and end of the date range
+        """
+        return {
+            'interval': f"{ value.lower.isoformat() }/{ value.upper.isoformat() }",
+            'start_instant': value.lower.isoformat(),
+            'end_instant': value.upper.isoformat()
+        }
+
+    # noinspection PyMethodOverriding
+    def deserialize(self, value: dict, attr: str, data: dict) -> DateRange:
+        """
+        When serialising it's expected that a ParticipantRole enumerator item is specified by an 'interval' value key,
+        which is a ISO 8601 date interval consisting of two ISO 8601 dates that cover the date range.
+
+        :type value: dict
+        :param value: dictionary containing at least an 'interval' field which corresponds to a ISO 8601 date interval
+        :param attr: name of the field within the schema being loaded
+        :param data: the object 'value' was taken from, in this case the data to be loaded
+
+        :rtype: DateRange
+        :return: a DateRange instance
+        """
+        if 'interval' not in value.keys():
+            raise KeyError(f"No 'interval' property in { attr } to cover date range")
+
+        interval = value['interval'].split('/')
+        if len(interval != 2):
+            raise ValueError(f"Interval '{ value['interval'] }' is not in the form [start date]/[end date]")
+
+        try:
+            interval = DateRange(datetime.strptime(interval[0], "%Y-%m-%d"), datetime.strptime(interval[1], "%Y-%m-%d"))
+            return interval
+        except ValueError:
+            raise ValueError(f"Invalid '{ value['interval'] }' is not in the form [YYYY-MM-DD]/[YYYY-MM-DD]")
+
+
 class ProjectSchema(Schema):
     """
     Represents information about a research project
     """
     id = fields.String(attribute="neutral_id", dump_only=True, required=True)
     title = fields.String(dump_only=True, required=True)
+    acronym = fields.String(dump_only=True)
+    abstract = fields.String(dump_only=True)
+    website = fields.String(dump_only=True)
+    # noinspection PyTypeChecker
+    publications = fields.List(fields.String, dump_only=True)
+    # noinspection PyTypeChecker
+    impact_statements = fields.List(fields.String, dump_only=True)
+    # noinspection PyTypeChecker
+    notes = fields.List(fields.String, dump_only=True)
+    access_duration = DateRangeField(dump_only=True, required=True)
+    project_duration = DateRangeField(dump_only=True, required=True)
 
     participants = Relationship(
         self_view='main.projects_relationship_participants',
