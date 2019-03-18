@@ -14,6 +14,15 @@ servers:
     description: For general/production use
   - url: https://testing.api.bas.ac.uk/arctic-office-projects/testing
     description: Reserved for testing underlying infrastructure changes
+components:
+  securitySchemes:
+    azure-oauth:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/d14c529b-5558-4a80-93b6-7655681e55d6/oauth2/v2.0/token
+          scopes: {}
 tags:
   - name: projects
     description: Projects
@@ -32,6 +41,8 @@ paths:
         - projects
       summary: Returns details for all Project resources
       operationId: get-projects-list
+      security:
+        - azure-oauth: []
       parameters:
         -
           name: page
@@ -232,6 +243,8 @@ paths:
         - projects
       summary: Returns details for a single Project resource, specified by its ID
       operationId: get-projects-detail
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -394,6 +407,8 @@ paths:
         - projects
       summary: Returns details of how a Project resource is related to one or more Participant resources
       operationId: get-projects-participants-relationship
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -472,6 +487,8 @@ paths:
         - projects
       summary: Returns details for all Participant resources related to a Project resource
       operationId: get-projects-participants
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -722,6 +739,8 @@ paths:
         - participants
       summary: Returns details for all Participant resources
       operationId: get-participants-list
+      security:
+        - azure-oauth: []
       parameters:
         -
           name: page
@@ -1004,6 +1023,8 @@ paths:
         - participants
       summary: Returns details for a single Participant resource, specified by its ID
       operationId: get-participants-detail
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -1246,6 +1267,8 @@ paths:
         - participants
       summary: Returns details of how a Participant resource is related to a Project resource
       operationId: get-participants-projects-relationship
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -1320,6 +1343,8 @@ paths:
         - participants
       summary: Returns details of how a Participant resource is related to a Person resource
       operationId: get-participants-people-relationship
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -1394,6 +1419,8 @@ paths:
         - participants
       summary: Returns details for the Project resource related to a Participant resource
       operationId: get-participants-projects
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -1562,6 +1589,8 @@ paths:
         - participants
       summary: Returns details for the Person resource related to a Participant resource
       operationId: get-participants-people
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -1733,6 +1762,8 @@ paths:
         - people
       summary: Returns details for all Person resources
       operationId: get-people-list
+      security:
+        - azure-oauth: []
       parameters:
         - name: page
           in: query
@@ -1938,6 +1969,8 @@ paths:
         - people
       summary: Returns details for a single Person resource, specified by its ID
       operationId: get-people-detail
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -2105,6 +2138,8 @@ paths:
         - people
       summary: Returns details of how a Person resource is related to one or more Participant resources
       operationId: get-people-participants-relationship
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -2183,6 +2218,8 @@ paths:
         - people
       summary: Returns details for all Participant resources related to a Person resource
       operationId: get-people-participants
+      security:
+        - azure-oauth: []
       parameters:
         - in: path
           name: id
@@ -2433,6 +2470,8 @@ paths:
         - standalone
       summary: Returns a high level summary of this API
       operationId: get-index
+      security:
+        - azure-oauth: []
       responses:
         '200':
           description: OK

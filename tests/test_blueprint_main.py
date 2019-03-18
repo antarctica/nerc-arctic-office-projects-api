@@ -1,21 +1,16 @@
-import unittest
-
 from http import HTTPStatus
 
 from flask_migrate import Config, upgrade, downgrade, Migrate
-from arctic_office_projects_api.errors import ApiException
 
 from arctic_office_projects_api.meta.errors import ApiNotFoundError
-from arctic_office_projects_api import create_app, db
+from arctic_office_projects_api import db
 from arctic_office_projects_api.models import Project, Person, Participant
+from tests.base_test import BaseTestCase
 
 
-class MainBlueprintTestCase(unittest.TestCase):
+class MainBlueprintTestCase(BaseTestCase):
     def setUp(self):
-        self.app = create_app('testing')
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-        self.client = self.app.test_client()
+        super().setUp()
 
         with self.app.app_context():
             # Migrate and seed database
@@ -23,36 +18,19 @@ class MainBlueprintTestCase(unittest.TestCase):
             config.set_main_option("script_location", "migrations")
             Migrate(self.app, db)
             upgrade()
-            Project.seed(quantity=5)
+            project = Project()
+            project.seed(quantity=5)
             Person.seed(quantity=5)
             Participant.seed(quantity=1)
             db.session.commit()
 
-        self.maxDiff = None
-
     def tearDown(self):
         db.session.remove()
-        self.app_context.pop()
-
         with self.app.app_context():
             # Rollback all DB migrations
             downgrade(revision='base')
 
-    @staticmethod
-    def _prepare_expected_error_payload(error: ApiException):
-        error = error.dict()
-        # Overwrite dynamic error ID with static value to allow comparision
-        error['id'] = 'a611b89f-f1bb-43c5-8efa-913c83c9109e'
-
-        return {'errors': [error]}
-
-    @staticmethod
-    def _prepare_error_response(json_response: dict) -> dict:
-        # Overwrite dynamic error ID with static value to allow comparision
-        if 'id' in json_response['errors'][0].keys():
-            json_response['errors'][0]['id'] = 'a611b89f-f1bb-43c5-8efa-913c83c9109e'
-
-        return json_response
+        super().tearDown()
 
     def test_index(self):
         response = self.client.get(
@@ -169,9 +147,11 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         )
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/projects',
             base_url='http://localhost:9000',
+            headers={'authorization': f"bearer {token}"},
             query_string={
                 'page': 1
             }
@@ -282,8 +262,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/projects/01D5M0CFQV4M7JASW7F87SRDYB',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -292,16 +274,18 @@ class MainBlueprintTestCase(unittest.TestCase):
 
     def test_projects_single_missing_unknown_id(self):
         error = ApiNotFoundError()
-        expected_payload = self._prepare_expected_error_payload(error)
+        expected_payload = self.util_prepare_expected_error_payload(error)
 
         for project_id in ['', 'unknown']:
             with self.subTest(project_id=project_id):
+                token = self.util_create_auth_token()
                 response = self.client.get(
                     f"/projects/{ project_id }",
+                    headers={'authorization': f"bearer { token }"},
                     base_url='http://localhost:9000'
                 )
                 json_response = response.get_json()
-                json_response = self._prepare_error_response(json_response)
+                json_response = self.util_prepare_error_response(json_response)
                 self.assertEqual(HTTPStatus.NOT_FOUND, response.status_code)
                 self.assertDictEqual(json_response, expected_payload)
 
@@ -319,8 +303,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -373,8 +359,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -482,8 +470,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/participants',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -585,8 +575,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/participants/01D5T4N25RV2062NVVQKZ9NBYX',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -595,16 +587,18 @@ class MainBlueprintTestCase(unittest.TestCase):
 
     def test_participants_single_missing_unknown_id(self):
         error = ApiNotFoundError()
-        expected_payload = self._prepare_expected_error_payload(error)
+        expected_payload = self.util_prepare_expected_error_payload(error)
 
         for participant_id in ['', 'unknown']:
             with self.subTest(participant_id=participant_id):
+                token = self.util_create_auth_token()
                 response = self.client.get(
                     f"/participants/{ participant_id }",
+                    headers={'authorization': f"bearer { token }"},
                     base_url='http://localhost:9000'
                 )
                 json_response = response.get_json()
-                json_response = self._prepare_error_response(json_response)
+                json_response = self.util_prepare_error_response(json_response)
                 self.assertEqual(HTTPStatus.NOT_FOUND, response.status_code)
                 self.assertDictEqual(json_response, expected_payload)
 
@@ -620,8 +614,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -640,8 +636,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -679,8 +677,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -719,8 +719,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/participants/01D5T4N25RV2062NVVQKZ9NBYX/people',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -828,9 +830,11 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         )
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/people',
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9000',
+            headers={'authorization': f"bearer { token }"},
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
@@ -938,8 +942,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/people/01D5MHQN3ZPH47YVSVQEVB0DAE',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -948,16 +954,18 @@ class MainBlueprintTestCase(unittest.TestCase):
 
     def test_people_single_missing_unknown_id(self):
         error = ApiNotFoundError()
-        expected_payload = self._prepare_expected_error_payload(error)
+        expected_payload = self.util_prepare_expected_error_payload(error)
 
         for person_id in ['', 'unknown']:
             with self.subTest(person_id=person_id):
+                token = self.util_create_auth_token()
                 response = self.client.get(
                     f"/people/{ person_id }",
-                    base_url='http://localhost:9000'
+                    base_url='http://localhost:9000',
+                    headers={'authorization': f"bearer { token }"},
                 )
                 json_response = response.get_json()
-                json_response = self._prepare_error_response(json_response)
+                json_response = self.util_prepare_error_response(json_response)
                 self.assertEqual(HTTPStatus.NOT_FOUND, response.status_code)
                 self.assertDictEqual(json_response, expected_payload)
 
@@ -975,8 +983,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants',
+            headers={'authorization': f"bearer { token }"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
@@ -1029,8 +1039,10 @@ class MainBlueprintTestCase(unittest.TestCase):
             }
         }
 
+        token = self.util_create_auth_token()
         response = self.client.get(
             '/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants',
+            headers={'authorization': f"bearer {token}"},
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()

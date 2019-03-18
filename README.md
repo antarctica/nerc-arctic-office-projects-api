@@ -13,7 +13,8 @@ See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-offic
 ## Implementation
 
 This API is implemented as a Python Flask application following the [JSON API](https://jsonapi.org) specification. 
-A PostgreSQL database is used for storing information.
+A PostgreSQL database is used for storing information. OAuth is used for controlling access to this information, 
+managed using Microsoft Azure.
 
 ### Configuration
 
@@ -140,6 +141,58 @@ context using [configuration options](#configuration) and HTTP headers.
 | Host        | HTTP Header          | `X-Forwarded-Host`     | Reverse Proxy middleware | `api.bas.ac.uk` |
 | Path prefix | Configuration Option | `SERVICE_PREFIX`       | Reverse Proxy middleware | `/foo/v1`       | 
 
+### Authentication and authorisation
+
+This service is protected by 
+[Microsoft Azure's Active Directory OAuth endpoints](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) 
+using the [Flask Azure AD OAuth Provider](https://gitlab.data.bas.ac.uk/web-apps/flask-extensions/flask-azure-oauth) 
+for authentication and authorisation.
+
+This API (as a service), and it's clients are registered as applications within Azure Active Directory. The app 
+representing this service, defines *application* (rather than *delegated*) permissions that can be assigned to relevant
+client applications.
+
+Clients request access tokens from Azure, rather than this API, using the *Client Credentials* code flow.
+
+Access tokens are structured as JSON Web Tokens (JWTs) and should be specified as a bearer token in the `authorization` 
+header by clients.
+
+Suitable permissions in either the 'NERC BAS WebApps' or 'NERC' Azure tenancy will be required to register applications
+and assign permissions.
+
+| Environment       | Azure Tenancy    |
+| ----------------- | ---------------- |
+| Local Development | NERC BAS WebApps |
+| Staging           | NERC BAS WebApps |
+| Production        | NERC             |
+
+#### Available scopes
+
+| Scope  | Type | Name | Description  |
+| ------ | ---- | ---- | -------------| 
+| -      | -    | -    | -            |
+
+#### Registering API clients
+
+See 
+[these instructions](https://gitlab.data.bas.ac.uk/web-apps/flask-extensions/flask-azure-oauth#registering-an-application-in-azure)
+for how to register client applications. 
+
+**Note:** It is not yet possible to register clients programmatically due to limitations with the Azure CLI and Azure
+provider for Terraform.
+
+**Note:** These instructions describe how to register a *client* of this API, see the [Setup](#setup) section for how 
+to register this API itself as a *service*.
+
+#### Assigning scopes to clients
+
+See
+[these instructions](https://gitlab.data.bas.ac.uk/web-apps/flask-extensions/flask-azure-oauth#assigning-permissions-for-one-application-to-use-another)
+for how to assign permissions defined by this API to client applications.
+
+**Note:** It is not yet possible to assign permissions programmatically due to limitations with the Azure CLI and Azure
+provider for Terraform.
+
 ## Setup
 
 ```shell
@@ -222,6 +275,48 @@ To connect to the database in a local development environment:
 | Username  | `app`       |
 | Password  | `password`  |
 | Schema    | `public`    |
+
+#### Local development - auth
+
+See 
+[these instructions](https://gitlab.data.bas.ac.uk/web-apps/flask-extensions/flask-azure-oauth#registering-an-application-in-azure)
+for how to register the application as a service.
+
+* use `BAS NERC Arctic Office Projects API Testing` as the application name
+* choose *Accounts in this organizational directory only* as the supported account type
+* do not enter a redirect URL
+* from the *API permissions* section of the registered application's permissions page:
+    * remove the default 'User.Read' permission
+* from the manifest page of the registered application:
+    * change the `accessTokenAcceptedVersion` property from `null` to `2`
+    * add an item, `api://[appId]`, to the `identifierUris` array, where `[appId]` is the value of the `appId` property
+    * add these items to the `appRoles` property [1]
+
+**Note:** It is not yet possible to register clients programmatically due to limitations with the Azure CLI and Azure
+provider for Terraform.
+
+**Note:** This describes how to register this API itself as a *service*, see the 
+[Registering API clients](#registering-api-clients) section for how to register a *client* of this API.
+
+Set the `AZURE_OAUTH_TENANCY`, `AZURE_OAUTH_APPLICATION_ID` and `AZURE_OAUTH_CLIENT_APPLICATION_IDS` options in the 
+local `.env` file.
+
+For testing the API locally, register and assign all permissions to a testing client:
+    * see the [Registering API clients](#registering-api-clients) section to register a local testing API client
+        * named `BAS NERC Arctic Office Projects API Client Testing`, using accounts in the home tenancy only, with no 
+          redirect URL
+    * see the [Assigning scopes to clients ](#assigning-scopes-to-clients) section to assign all permissions to this 
+      client
+
+[1] Application roles for the BAS NERC Arctic Office Projects API:
+
+**Note:** Replace `[uuid]` with a UUID.
+
+```json
+{
+  "appRoles": []
+}
+```
 
 ### Staging
 
@@ -326,6 +421,14 @@ If connecting from PyCharm, under the *advanced* tab for the data source, set th
 
 To upload and publish documentation, follow the relevant setup instructions in the 
 [BAS API Documentation project](https://gitlab.data.bas.ac.uk/WSF/api-docs/#adding-a-new-service-service-version).
+
+#### Production - auth
+
+Using the [Auth sub-section in the local development section](#local-development-auth), register an additional Azure
+application with these differences:
+
+* tenancy: *NERC*
+* name: *BAS NERC Arctic Office Projects API*
 
 ## Development
 
@@ -793,6 +896,10 @@ In *Configuration* tab:
 Where the application database is needed, a separate test database (`app_test`) will be used to prevent touching 
 development data. [Database migrations](#database-migrations) and [Database seeding](#database-seeding) will be ran on
 each test to setup, populate and tear down the database for each test.
+
+#### Integration testing - auth
+
+Where methods require authentication/authorisation locally issued tokens are used, using a temporary signing key.
 
 ### Continuous Integration
 

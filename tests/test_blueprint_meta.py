@@ -1,23 +1,12 @@
-import unittest
-
 from http import HTTPStatus
 
 # noinspection PyPackageRequirements
 from sqlalchemy.exc import OperationalError
 
-from arctic_office_projects_api import create_app
+from tests.base_test import BaseTestCase
 
 
-class MetaBlueprintTestCase(unittest.TestCase):
-    def setUp(self):
-        self.app = create_app('testing')
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-        self.client = self.app.test_client()
-
-    def tearDown(self):
-        self.app_context.pop()
-
+class MetaBlueprintTestCase(BaseTestCase):
     def test_meta_healthcheck_canary_success(self):
         for method in ['get', 'options']:
             with self.subTest(method=method):
