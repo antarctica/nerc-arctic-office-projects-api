@@ -1,4 +1,5 @@
 import os
+import sys
 import unittest
 
 # noinspection PyPackageRequirements
@@ -21,7 +22,8 @@ def make_shell_context():
 def test():
     """Run integration tests."""
     tests = unittest.TestLoader().discover(os.path.join(os.path.dirname(__file__), 'tests'))
-    unittest.TextTestRunner(verbosity=2).run(tests)
+    tests_runner = unittest.TextTestRunner(verbosity=2)
+    return sys.exit(not tests_runner.run(tests).wasSuccessful())
 
 
 @app.cli.command()

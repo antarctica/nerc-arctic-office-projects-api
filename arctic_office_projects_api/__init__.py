@@ -11,7 +11,7 @@ from flask_request_id_header.middleware import RequestID
 from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, Conflict
 
 from config import config
-from arctic_office_projects_api.extensions import db
+from arctic_office_projects_api.extensions import db, auth
 from arctic_office_projects_api.meta.errors import error_handler_generic_bad_request, error_handler_generic_not_found, \
     error_handler_generic_internal_server_error, error_handler_generic_conflict
 from arctic_office_projects_api.meta import meta as meta_blueprint
@@ -27,6 +27,7 @@ def create_app(config_name):
 
     # Extensions
     db.init_app(app)
+    auth.init_app(app=app)
 
     # Middleware / Wrappers
     if app.config['APP_ENABLE_PROXY_FIX']:

@@ -4,6 +4,7 @@ from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from werkzeug.exceptions import NotFound, Conflict
 from flask import Blueprint, jsonify, request, current_app as app
 
+from arctic_office_projects_api import auth
 from arctic_office_projects_api.schemas import ProjectSchema, PersonSchema, ParticipantSchema
 from arctic_office_projects_api.models import Project, Participant, Person
 
@@ -26,6 +27,7 @@ def index():
 
 
 @main.route('/projects')
+@auth()
 def projects_list():
     """
     Returns all Project resources
@@ -47,6 +49,7 @@ def projects_list():
 
 
 @main.route('/projects/<project_id>')
+@auth()
 def projects_detail(project_id: str):
     """
     Returns a specific Project resource, specified by its Neutral ID
@@ -65,6 +68,7 @@ def projects_detail(project_id: str):
 
 
 @main.route('/projects/<project_id>/relationships/participants')
+@auth()
 def projects_relationship_participants(project_id: str):
     """
     Returns Participant resource linkages associated with a specific Project resource, specified by its Neutral ID
@@ -83,6 +87,7 @@ def projects_relationship_participants(project_id: str):
 
 
 @main.route('/projects/<project_id>/participants')
+@auth()
 def projects_participants(project_id: str):
     """
     Returns Participant resources associated with a specific Project resource, specified by its Neutral ID
@@ -101,6 +106,7 @@ def projects_participants(project_id: str):
 
 
 @main.route('/participants')
+@auth()
 def participants_list():
     """
     Returns all Participant resources (People, Project association)
@@ -122,6 +128,7 @@ def participants_list():
 
 
 @main.route('/participants/<participant_id>')
+@auth()
 def participants_detail(participant_id: str):
     """
     Returns a specific Participant resource, specified by its Neutral ID
@@ -140,6 +147,7 @@ def participants_detail(participant_id: str):
 
 
 @main.route('/participants/<participant_id>/relationships/projects')
+@auth()
 def participants_relationship_projects(participant_id: str):
     """
     Returns Project resource linkages associated with a specific Participant resource, specified by its Neutral ID
@@ -158,6 +166,7 @@ def participants_relationship_projects(participant_id: str):
 
 
 @main.route('/participants/<participant_id>/relationships/people')
+@auth()
 def participants_relationship_people(participant_id: str):
     """
     Returns People resource linkages associated with a specific Participant resource, specified by its Neutral ID
@@ -176,6 +185,7 @@ def participants_relationship_people(participant_id: str):
 
 
 @main.route('/participants/<participant_id>/projects')
+@auth()
 def participants_projects(participant_id: str):
     """
     Returns the Project resource associated with a specific Participant resource, specified by its Neutral ID
@@ -194,6 +204,7 @@ def participants_projects(participant_id: str):
 
 
 @main.route('/participants/<participant_id>/people')
+@auth()
 def participants_people(participant_id: str):
     """
     Returns the People resource associated with a specific Participant resource, specified by its Neutral ID
@@ -212,6 +223,7 @@ def participants_people(participant_id: str):
 
 
 @main.route('/people')
+@auth()
 def people_list():
     """
     Returns all People resources
@@ -233,6 +245,7 @@ def people_list():
 
 
 @main.route('/people/<person_id>')
+@auth()
 def people_detail(person_id: str):
     """
     Returns a specific Person resource, specified by its Neutral ID
@@ -251,6 +264,7 @@ def people_detail(person_id: str):
 
 
 @main.route('/people/<person_id>/relationships/participants')
+@auth()
 def people_relationship_participants(person_id: str):
     """
     Returns Participant resource linkages associated with a specific Person resource, specified by its Neutral ID
@@ -269,6 +283,7 @@ def people_relationship_participants(person_id: str):
 
 
 @main.route('/people/<person_id>/participants')
+@auth()
 def people_participants(person_id: str):
     """
     Returns Participant resources associated with a specific Person resource, specified by its Neutral ID
