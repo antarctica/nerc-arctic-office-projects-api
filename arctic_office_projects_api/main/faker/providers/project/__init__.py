@@ -1,4 +1,3 @@
-from datetime import timedelta
 from typing import List
 
 from faker import Faker
