@@ -33,8 +33,6 @@ class Project(db.Model):
     abstract = db.Column(db.Text(), nullable=True)
     website = db.Column(db.Text(), nullable=True)
     publications = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
-    impact_statements = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
-    notes = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
     access_duration = db.Column(postgresql.DATERANGE(), nullable=False)
     project_duration = db.Column(postgresql.DATERANGE(), nullable=True)
 
@@ -128,16 +126,6 @@ class Project(db.Model):
                     'https://doi.org/10.5194/acp-15-5599-2015',
                     'https://doi.org/10.5194/acp-16-4063-2016'
                 ],
-                impact_statements=[
-                    'We discovered that there is a source of atmospheric ice nucleating particles in the oceans '
-                    'associated with organic material produced by plankton. This was published in a high impact study '
-                    'in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a '
-                    'modelling study of the global distribution of ice nucleating particles which was published in '
-                    'March 2017 (https://doi.org/10.5194/acp-17-3637-2017).',
-                ],
-                notes=[
-                    'You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_.'
-                ],
                 access_duration=self.calculate_access_duration(project_duration),
                 project_duration=project_duration
             )
@@ -159,10 +147,6 @@ class Project(db.Model):
                     resource.website = faker.uri()
                 if faker.has_publications:
                     resource.publications = faker.publications_list()
-                if faker.has_impact_statements:
-                    resource.has_impact_statements = faker.has_impact_statements()
-                if faker.has_notes:
-                    resource.has_notes = faker.has_notes()
 
                 db.session.add(resource)
 

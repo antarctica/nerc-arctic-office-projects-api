@@ -95,16 +95,6 @@ class MainBlueprintTestCase(BaseTestCase):
                     "start_instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
-                "impact-statements": [
-                    "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
-                    "associated with organic material produced by plankton. This was published in a high impact study "
-                    "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
-                    "modelling study of the global distribution of ice nucleating particles which was published in "
-                    "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
-                ],
-                "notes": [
-                    "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
-                ],
                 "project-duration": {
                     "end_instant": "2016-10-01",
                     "interval": "2013-03-01/2016-10-01",
@@ -287,16 +277,6 @@ class MainBlueprintTestCase(BaseTestCase):
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
-                    "impact-statements": [
-                        "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
-                        "associated with organic material produced by plankton. This was published in a high impact study "
-                        "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
-                        "modelling study of the global distribution of ice nucleating particles which was published in "
-                        "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
-                    ],
-                    "notes": [
-                        "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
-                    ],
                     "project-duration": {
                         "end_instant": "2016-10-01",
                         "interval": "2013-03-01/2016-10-01",
@@ -626,16 +606,6 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
-                        "impact-statements": [
-                            "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
-                            "associated with organic material produced by plankton. This was published in a high impact study "
-                            "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
-                            "modelling study of the global distribution of ice nucleating particles which was published in "
-                            "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
-                        ],
-                        "notes": [
-                            "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
-                        ],
                         "project-duration": {
                             "end_instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",
@@ -810,16 +780,6 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
-                        "impact-statements": [
-                            "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
-                            "associated with organic material produced by plankton. This was published in a high impact study "
-                            "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
-                            "modelling study of the global distribution of ice nucleating particles which was published in "
-                            "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
-                        ],
-                        "notes": [
-                            "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
-                        ],
                         "project-duration": {
                             "end_instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",
@@ -986,16 +946,6 @@ class MainBlueprintTestCase(BaseTestCase):
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
-                    "impact-statements": [
-                        "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
-                        "associated with organic material produced by plankton. This was published in a high impact study "
-                        "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
-                        "modelling study of the global distribution of ice nucleating particles which was published in "
-                        "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
-                    ],
-                    "notes": [
-                        "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
-                    ],
                     "project-duration": {
                         "end_instant": "2016-10-01",
                         "interval": "2013-03-01/2016-10-01",
@@ -1214,16 +1164,6 @@ class MainBlueprintTestCase(BaseTestCase):
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
-                    "impact-statements": [
-                        "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
-                        "associated with organic material produced by plankton. This was published in a high impact study "
-                        "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
-                        "modelling study of the global distribution of ice nucleating particles which was published in "
-                        "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
-                    ],
-                    "notes": [
-                        "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
-                    ],
                     "project-duration": {
                         "end_instant": "2016-10-01",
                         "interval": "2013-03-01/2016-10-01",
@@ -1392,16 +1332,6 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
-                        "impact-statements": [
-                            "We discovered that there is a source of atmospheric ice nucleating particles in the oceans "
-                            "associated with organic material produced by plankton. This was published in a high impact study "
-                            "in Nature in 2015 (https://doi.org/10.1038/nature14986). We have now also used this data in a "
-                            "modelling study of the global distribution of ice nucleating particles which was published in "
-                            "March 2017 (https://doi.org/10.5194/acp-17-3637-2017)."
-                        ],
-                        "notes": [
-                            "You can follow the ACCACIA project via their blog as well as on Twitter under @_ACCACIA_."
-                        ],
                         "project-duration": {
                             "end_instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",

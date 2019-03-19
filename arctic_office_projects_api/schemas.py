@@ -327,10 +327,6 @@ class ProjectSchema(Schema):
     website = fields.String(dump_only=True)
     # noinspection PyTypeChecker
     publications = fields.List(fields.String, dump_only=True)
-    # noinspection PyTypeChecker
-    impact_statements = fields.List(fields.String, dump_only=True)
-    # noinspection PyTypeChecker
-    notes = fields.List(fields.String, dump_only=True)
     access_duration = DateRangeField(dump_only=True, required=True)
     project_duration = DateRangeField(dump_only=True, required=True)
 

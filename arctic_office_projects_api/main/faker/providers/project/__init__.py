@@ -85,77 +85,8 @@ class Provider(BaseProvider):
 
         return publications
 
-    def has_impact_statements(self) -> bool:
         """
-        Determines whether a project has any impact statements or not
 
-        Currently assumes 10% of projects will have some.
-
-        :example: True
-        :rtype: bool
-        :return: whether a project has any impact statements
-        """
-        return self.random_element({True: 0.1, False: 0.9})
-
-    def impact_statement(self) -> str:
-        """
-        Generates a fake impact statement
-
-        :example: 'xxx ...'
-        :rtype: str
-        :return: a fake impact statement
-        """
-        return self.faker.paragraph(3)
-
-    def impact_statements(self) -> List[str]:
-        """
-        Generates a list of fake impact statements
-
-        :example: ['xxx ...', 'xxx ...']
-        :rtype: list
-        :return: a list of fake impact statements
-        """
-        impact_statements = []
-        for i in range(3):
-            impact_statements.append(self.impact_statement())
-
-        return impact_statements
-
-    def has_notes(self) -> bool:
-        """
-        Determines whether a project has any notes or not
-
-        Currently assumes 10% of projects will have some.
-
-        :example: True
-        :rtype: bool
-        :return: whether a project has any notes
-        """
-        return self.random_element({True: 0.1, False: 0.9})
-
-    def note(self) -> str:
-        """
-        Generates a fake note
-
-        :example: 'xxx ...'
-        :rtype: str
-        :return: a fake note
-        """
-        return self.faker.paragraph(3)
-
-    def notes(self) -> List[str]:
-        """
-        Generates a list of fake notes
-
-        :example: ['xxx ...', 'xxx ...']
-        :rtype: list
-        :return: a list of fake notes
-        """
-        notes = []
-        for i in range(3):
-            notes.append(self.note())
-
-        return notes
 
     def project_duration(self) -> DateRange:
         """
