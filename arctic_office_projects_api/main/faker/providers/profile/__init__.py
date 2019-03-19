@@ -8,14 +8,14 @@ class Provider(BaseProvider):
         """
         Determines whether an individual has an Orcid ID
 
-        Currently assumes 45% of people will have one, as the popularity of Orcid changes this weighting should be
+        Currently assumes 80% of people will have one, as the popularity of Orcid changes this weighting should be
         changed.
 
         :example: True
         :rtype: bool
         :return: whether an individual has an Orcid ID
         """
-        return self.random_element({True: 0.45, False: 0.55})
+        return self.random_element({True: 0.8, False: 0.2})
 
     def orcid_id(self) -> str:
         """

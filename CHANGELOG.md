@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Whitelisting application id for test Arctic Office website integration
 
+### Changed
+
+* Improved project seeding to be more realistic at representing average and edge-case examples
+
 ### Fixed
 
 * Working around inconsistent ordering for included items in tests

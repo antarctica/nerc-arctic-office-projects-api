@@ -41,22 +41,6 @@ class Project(db.Model):
     def __repr__(self):
         return f"<Project { self.neutral_id }>"
 
-    @staticmethod
-    def calculate_access_duration(project_duration: DateRange) -> DateRange:
-        """
-        Calculates a project's 'access' duration based on its main duration
-
-        The access duration states how long the project should be visible in project listings. It effectively extends
-        the length of a project so that it is still considered 'current' if it has recently ended.
-
-        :type project_duration: DateRange
-        :param project_duration: the project's main duration
-
-        :rtype: DateRange
-        :return: the access duration of a project
-        """
-        return DateRange(project_duration.lower, project_duration.upper.replace(project_duration.upper.year + 2))
-
     def seed(self, *, quantity: int = 1):
         """
         Populate database with mock/fake data
@@ -126,24 +110,25 @@ class Project(db.Model):
                     'https://doi.org/10.5194/acp-15-5599-2015',
                     'https://doi.org/10.5194/acp-16-4063-2016'
                 ],
-                access_duration=self.calculate_access_duration(project_duration),
+                access_duration=DateRange(project_duration.lower, None),
                 project_duration=project_duration
             )
             db.session.add(project)
 
         if quantity > 1:
             for i in range(1, quantity):
-                project_duration = faker.project_duration()
+                project_type = faker.project_type()
+                project_duration = faker.project_duration(project_type)
                 resource = Project(
                     neutral_id=generate_neutral_id(),
-                    title=faker.sentence(),
+                    title=faker.title(),
                     abstract=faker.abstract(),
-                    access_duration=self.calculate_access_duration(project_duration),
+                    access_duration=DateRange(project_duration.lower, None),
                     project_duration=project_duration
                 )
-                if faker.has_acronym():
-                    resource.acronym = faker.word()
-                if faker.has_website():
+                if faker.has_acronym(project_type):
+                    resource.acronym = faker.acronym()
+                if faker.has_website(project_type):
                     resource.website = faker.uri()
                 if faker.has_publications:
                     resource.publications = faker.publications_list()
