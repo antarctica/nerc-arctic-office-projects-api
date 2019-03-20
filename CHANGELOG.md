@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Person Orcid ID property
 * Person avatar property
 * Whitelisting application id for test Arctic Office website integration
+* Guidance on fake data in usage documentation
 
 ### Changed
 

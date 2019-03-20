@@ -90,8 +90,8 @@ class MainBlueprintTestCase(BaseTestCase):
                             "Our results will further our understanding of these mysterious and important mixed phase "
                             "clouds and, in turn, the global climate.",
                 "access-duration": {
-                    "end_instant": "2018-10-01",
-                    "interval": "2013-03-01/2018-10-01",
+                    "end_instant": None,
+                    "interval": "2013-03-01/",
                     "start_instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
@@ -272,8 +272,8 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "Our results will further our understanding of these mysterious and important mixed phase "
                                 "clouds and, in turn, the global climate.",
                     "access-duration": {
-                        "end_instant": "2018-10-01",
-                        "interval": "2013-03-01/2018-10-01",
+                        "end_instant": None,
+                        "interval": "2013-03-01/",
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
@@ -601,8 +601,8 @@ class MainBlueprintTestCase(BaseTestCase):
                                     "Our results will further our understanding of these mysterious and important mixed phase "
                                     "clouds and, in turn, the global climate.",
                         "access-duration": {
-                            "end_instant": "2018-10-01",
-                            "interval": "2013-03-01/2018-10-01",
+                            "end_instant": None,
+                            "interval": "2013-03-01/",
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
@@ -775,8 +775,8 @@ class MainBlueprintTestCase(BaseTestCase):
                                     "Our results will further our understanding of these mysterious and important mixed phase "
                                     "clouds and, in turn, the global climate.",
                         "access-duration": {
-                            "end_instant": "2018-10-01",
-                            "interval": "2013-03-01/2018-10-01",
+                            "end_instant": None,
+                            "interval": "2013-03-01/",
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
@@ -941,8 +941,8 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "Our results will further our understanding of these mysterious and important mixed phase "
                                 "clouds and, in turn, the global climate.",
                     "access-duration": {
-                        "end_instant": "2018-10-01",
-                        "interval": "2013-03-01/2018-10-01",
+                        "end_instant": None,
+                        "interval": "2013-03-01/",
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
@@ -1159,8 +1159,8 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "Our results will further our understanding of these mysterious and important mixed phase "
                                 "clouds and, in turn, the global climate.",
                     "access-duration": {
-                        "end_instant": "2018-10-01",
-                        "interval": "2013-03-01/2018-10-01",
+                        "end_instant": None,
+                        "interval": "2013-03-01/",
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
@@ -1327,8 +1327,8 @@ class MainBlueprintTestCase(BaseTestCase):
                                     "Our results will further our understanding of these mysterious and important mixed phase "
                                     "clouds and, in turn, the global climate.",
                         "access-duration": {
-                            "end_instant": "2018-10-01",
-                            "interval": "2013-03-01/2018-10-01",
+                            "end_instant": None,
+                            "interval": "2013-03-01/",
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",

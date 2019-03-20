@@ -273,6 +273,10 @@ class DateRangeField(Field):
         When serialising, the DateRange is converted into a dict containing a ISO 8601 date interval, covering the date
         range, and two Date instants, indicating the beginning and end of the date range.
 
+        Where a date range is unbound at one end, the interval will omit the unbound end and the relevant date instant
+        will be None/null. E.g. For an unbound end the interval will be '2012-10-30/', whereas an unbound start will be
+        '/2040-10-12'.
+
         :type value: DateRange
         :param value: a DateRange instance
         :type attr: str
@@ -282,11 +286,19 @@ class DateRangeField(Field):
         :rtype: dict
         :return: ISO 8601 date duration and dates for the beginning and end of the date range
         """
-        return {
-            'interval': f"{ value.lower.isoformat() }/{ value.upper.isoformat() }",
-            'start_instant': value.lower.isoformat(),
-            'end_instant': value.upper.isoformat()
+        date_range = {
+            'interval': '/',
+            'start_instant': None,
+            'end_instant': None
         }
+        if value.lower is not None:
+            date_range['start_instant'] = value.lower.isoformat()
+            date_range['interval'] = date_range['start_instant'] + date_range['interval']
+        if value.upper is not None:
+            date_range['end_instant'] = value.upper.isoformat()
+            date_range['interval'] = date_range['interval'] + date_range['end_instant']
+
+        return date_range
 
     # noinspection PyMethodOverriding
     def deserialize(self, value: dict, attr: str, data: dict) -> DateRange:

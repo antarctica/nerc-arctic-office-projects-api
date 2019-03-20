@@ -120,6 +120,9 @@ Date range values are encoded as an object containing:
   range (i.e. `YYYY-MM-DD`)
 * a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string) which marks the end of the range 
   (i.e. `YYYY-MM-DD`)
+  
+Date ranges can be unbounded, on either or both sides, to indicate where a range has no end date for example. When 
+unbounded, the relevant date instant will be `null` and the relevant part of date interval will be omitted.
 
 Examples:
 
@@ -128,6 +131,22 @@ Examples:
   "interval": "1875-05-20/2002-04-14",
   "start_instance": "1875-05-20",
   "end_instance": "2002-04-14"
+}
+```
+
+```json
+{
+  "interval": "/2002-04-14",
+  "start_instance": null,
+  "end_instance": "2002-04-14"
+}
+```
+
+```json
+{
+  "interval": "1875-05-20/",
+  "start_instance": "1875-05-20",
+  "end_instance": null
 }
 ```
 
