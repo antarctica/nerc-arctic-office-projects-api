@@ -60,6 +60,32 @@ before being retired/removed.
 
 Deprecated features will be referenced in this documentation and the [Change log](../changelog).
 
+### Information available
+
+During initial development, all versions of this API use fake data, intended to be realistic but meaningless. This 
+ensures any potentially sensitive information contained in real data is not exposed to unreliable and untested 
+integrations.
+
+In the future, stable versions of the API will have access to real data. The [Testing version](#testing-version) will 
+always use fake data.
+
+#### Fake data
+
+Fake data is generated randomly using the [Faker](https://faker.readthedocs.io/en/master/) library, with custom methods 
+added for resources in this API. Various ratios and weightings are used to generate mostly 'average' data as well as 
+known extremes to allow for testing edge cases.
+
+##### Fake data limitations
+
+There are a number of general differences/limitations between fake and real data:
+
+1. the number of fake date items is arbitrary and are created or removed in bulk, whereas the number of real data items 
+   is variable, based on the current number of relevant projects
+2. all fake data items may be removed and replaced with new items when changes are made to resource properties, whereas
+   real data items will be added or removed gradually, with most remaining the same
+
+See each resource for additional limitations.
+
 ## Technical information
 
 ### Standards support
