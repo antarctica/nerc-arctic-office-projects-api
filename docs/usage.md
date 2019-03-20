@@ -170,35 +170,24 @@ The `id` property will vary with each error using a UUID (version 4).
 
 ### Projects
 
-...
+Represents information about a research project.
 
 ### Fake data limitations
 
 * project acronym's don't relate to a projects title
-* project abstracts are always between 2500 - 7500 characters long
-* where publications are in a project, 3 are always returned
 * where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
-* where impact statements are in a project, 3 are always returned
-* where impact statements are in a project, each is 10 sentences
-* where notes are in a project, 3 are always returned
-* where notes are in a project, each is 3 sentences
-* project durations are always within the last 10 years
-* project durations are always completed
-* project durations are always exactly 3 years
-* access durations are always from the start of the main duration, until the end of the main duration plus 2 years 
-  exactly
 
 ### Participants
 
-...
+Represents information about an individuals involvement in a research project.
 
 ### Fake data limitations
 
-...
+None.
 
 ### People
 
-...
+Represents information about an individual.
 
 ### Fake data limitations
 

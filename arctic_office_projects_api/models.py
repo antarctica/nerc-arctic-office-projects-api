@@ -34,7 +34,7 @@ class Project(db.Model):
     website = db.Column(db.Text(), nullable=True)
     publications = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
     access_duration = db.Column(postgresql.DATERANGE(), nullable=False)
-    project_duration = db.Column(postgresql.DATERANGE(), nullable=True)
+    project_duration = db.Column(postgresql.DATERANGE(), nullable=False)
 
     participants = db.relationship("Participant", back_populates="project")
 
