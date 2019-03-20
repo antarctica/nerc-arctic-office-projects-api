@@ -93,12 +93,92 @@ paths:
                           description: Additional attributes for this resource type
                           required:
                             - title
+                            - project-duration
+                            - access-duration
                           properties:
+                            acronym:
+                              readOnly: true
+                              type: string
+                              title: Acronym
+                              description: Project acronym
                             title:
                               readOnly: true
                               type: string
                               title: Title
                               description: Project title
+                            abstract:
+                              readOnly: true
+                              type: string
+                              title: Abstract
+                              description: Project abstract
+                            project-duration:
+                              type: object
+                              title: Project duration
+                              description: Period of time a project was active or funded for
+                              required:
+                                - interval
+                                - start-instant
+                                - end-instant
+                              properties:
+                                interval:
+                                  readOnly: true
+                                  type: string
+                                  title: Project duration interval
+                                  description: Date interval covering the project duration
+                                start-instant:
+                                  readOnly: true
+                                  type: string
+                                  format: date
+                                  title: Project duration start instant
+                                  description: date marking the start of the project duration
+                                end-instant:
+                                  readOnly: true
+                                  type: string
+                                  format: date
+                                  title: Project duration end instant
+                                  description: date marking the end of the project duration
+                            access-duration:
+                              type: object
+                              title: Access duration
+                              description: Period of time information about a project is available for
+                              required:
+                                - interval
+                                - start-instant
+                                - end-instant
+                              properties:
+                                interval:
+                                  readOnly: true
+                                  type: string
+                                  title: Project access interval
+                                  description: Date interval covering the access duration
+                                start-instant:
+                                  readOnly: true
+                                  type: string
+                                  format: date
+                                  title: Access duration start instant
+                                  description: date marking the start of the access duration
+                                end-instant:
+                                  readOnly: true
+                                  type: string
+                                  format: date
+                                  title: Access duration end instant
+                                  description: date marking the end of the access duration
+                            website:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Website
+                              description: Project website
+                            publications:
+                              type: array
+                              title: Publications
+                              description: Project publications
+                              items:
+                                readOnly: true
+                                type: string
+                                format: uri
+                                title: Publication
+                                description: DOI to a project publication
                         relationships:
                           type: object
                           title: Relationships
@@ -172,7 +252,23 @@ paths:
                         id: 01D5M0CFQV4M7JASW7F87SRDYB
                         type: projects
                         attributes:
-                          title: xxx
+                          acronym: ACCACIA
+                          title: Aerosol-Cloud Coupling And Climate Interactions in the Arctic
+                          abstract: The Arctic climate is changing twice as fast as the global average and these dramatic changes are evident in the decreases in sea ice extent over the last few decades. The lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover this year may be even lower. Clouds play a major role in the Arctic climate and therefore influence the extent of sea ice, but our understanding of these clouds is very poor. Low level, visually thick, clouds in much of the world tend to have a cooling effect, because they reflect sunlight back into space that would otherwise be absorbed at the surface. However, in the Arctic this albedo effect is not as important because the surface, often being covered in snow and ice, is already highly reflective and Arctic clouds therefore tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's energy, thus amplifying the original warming. Hence, small changes in cloud properties or coverage can lead to dramatic changes in the Arctic climate; this is where the proposed research project comes in.
+                          project_duration:
+                            interval: 2013-03-01/2016-10-01
+                            start_interval: 2013-03-01
+                            end_interval: 2016-10-01
+                          access_duration:
+                            interval: 2013-03-01/
+                            start_interval: 2013-03-01
+                            end_interval: null
+                          website: http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/
+                          publications:
+                            - https://doi.org/10.5194/acp-2018-283
+                            - https://doi.org/10.5194/acp-15-3719-2015
+                            - https://doi.org/10.5194/acp-15-5599-2015
+                            - https://doi.org/10.5194/acp-16-4063-2016
                         relationships:
                           participants:
                             data:
@@ -294,12 +390,92 @@ paths:
                         description: Additional attributes for this resource type
                         required:
                           - title
+                          - project-duration
+                          - access-duration
                         properties:
+                          acronym:
+                            readOnly: true
+                            type: string
+                            title: Acronym
+                            description: Project acronym
                           title:
                             readOnly: true
                             type: string
                             title: Title
-                            description: Title of project
+                            description: Project title
+                          abstract:
+                            readOnly: true
+                            type: string
+                            title: Abstract
+                            description: Project abstract
+                          project-duration:
+                            type: object
+                            title: Project duration
+                            description: Period of time a project was active or funded for
+                            required:
+                              - interval
+                              - start-instant
+                              - end-instant
+                            properties:
+                              interval:
+                                readOnly: true
+                                type: string
+                                title: Project duration interval
+                                description: Date interval covering the project duration
+                              start-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Project duration start instant
+                                description: date marking the start of the project duration
+                              end-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Project duration end instant
+                                description: date marking the end of the project duration
+                          access-duration:
+                            type: object
+                            title: Access duration
+                            description: Period of time information about a project is available for
+                            required:
+                              - interval
+                              - start-instant
+                              - end-instant
+                            properties:
+                              interval:
+                                readOnly: true
+                                type: string
+                                title: Project access interval
+                                description: Date interval covering the access duration
+                              start-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Access duration start instant
+                                description: date marking the start of the access duration
+                              end-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Access duration end instant
+                                description: date marking the end of the access duration
+                          website:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Website
+                            description: Project website
+                          publications:
+                            type: array
+                            title: Publications
+                            description: Project publications
+                            items:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Publication
+                              description: DOI to a project publication
                       relationships:
                         type: object
                         title: Relationships
@@ -373,7 +549,23 @@ paths:
                       id: 01D5M0CFQV4M7JASW7F87SRDYB
                       type: projects
                       attributes:
-                        title: xxx
+                        acronym: ACCACIA
+                        title: Aerosol-Cloud Coupling And Climate Interactions in the Arctic
+                        abstract: The Arctic climate is changing twice as fast as the global average and these dramatic changes are evident in the decreases in sea ice extent over the last few decades. The lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover this year may be even lower. Clouds play a major role in the Arctic climate and therefore influence the extent of sea ice, but our understanding of these clouds is very poor. Low level, visually thick, clouds in much of the world tend to have a cooling effect, because they reflect sunlight back into space that would otherwise be absorbed at the surface. However, in the Arctic this albedo effect is not as important because the surface, often being covered in snow and ice, is already highly reflective and Arctic clouds therefore tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's energy, thus amplifying the original warming. Hence, small changes in cloud properties or coverage can lead to dramatic changes in the Arctic climate; this is where the proposed research project comes in.
+                        project_duration:
+                          interval: 2013-03-01/2016-10-01
+                          start_interval: 2013-03-01
+                          end_interval: 2016-10-01
+                        access_duration:
+                          interval: 2013-03-01/
+                          start_interval: 2013-03-01
+                          end_interval: null
+                        website: http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/
+                        publications:
+                          - https://doi.org/10.5194/acp-2018-283
+                          - https://doi.org/10.5194/acp-15-3719-2015
+                          - https://doi.org/10.5194/acp-15-5599-2015
+                          - https://doi.org/10.5194/acp-16-4063-2016
                       relationships:
                         participants:
                           data:
@@ -1470,12 +1662,92 @@ paths:
                         description: Additional attributes for this resource type
                         required:
                           - title
+                          - project-duration
+                          - access-duration
                         properties:
+                          acronym:
+                            readOnly: true
+                            type: string
+                            title: Acronym
+                            description: Project acronym
                           title:
                             readOnly: true
                             type: string
                             title: Title
-                            description: Title of project
+                            description: Project title
+                          abstract:
+                            readOnly: true
+                            type: string
+                            title: Abstract
+                            description: Project abstract
+                          project-duration:
+                            type: object
+                            title: Project duration
+                            description: Period of time a project was active or funded for
+                            required:
+                              - interval
+                              - start-instant
+                              - end-instant
+                            properties:
+                              interval:
+                                readOnly: true
+                                type: string
+                                title: Project duration interval
+                                description: Date interval covering the project duration
+                              start-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Project duration start instant
+                                description: date marking the start of the project duration
+                              end-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Project duration end instant
+                                description: date marking the end of the project duration
+                          access-duration:
+                            type: object
+                            title: Access duration
+                            description: Period of time information about a project is available for
+                            required:
+                              - interval
+                              - start-instant
+                              - end-instant
+                            properties:
+                              interval:
+                                readOnly: true
+                                type: string
+                                title: Project access interval
+                                description: Date interval covering the access duration
+                              start-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Access duration start instant
+                                description: date marking the start of the access duration
+                              end-instant:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Access duration end instant
+                                description: date marking the end of the access duration
+                          website:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Website
+                            description: Project website
+                          publications:
+                            type: array
+                            title: Publications
+                            description: Project publications
+                            items:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Publication
+                              description: DOI to a project publication
                       relationships:
                         type: object
                         title: Relationships
@@ -1549,7 +1821,23 @@ paths:
                       id: 01D5M0CFQV4M7JASW7F87SRDYB
                       type: projects
                       attributes:
-                        title: xxx
+                        acronym: ACCACIA
+                        title: Aerosol-Cloud Coupling And Climate Interactions in the Arctic
+                        abstract: The Arctic climate is changing twice as fast as the global average and these dramatic changes are evident in the decreases in sea ice extent over the last few decades. The lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover this year may be even lower. Clouds play a major role in the Arctic climate and therefore influence the extent of sea ice, but our understanding of these clouds is very poor. Low level, visually thick, clouds in much of the world tend to have a cooling effect, because they reflect sunlight back into space that would otherwise be absorbed at the surface. However, in the Arctic this albedo effect is not as important because the surface, often being covered in snow and ice, is already highly reflective and Arctic clouds therefore tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's energy, thus amplifying the original warming. Hence, small changes in cloud properties or coverage can lead to dramatic changes in the Arctic climate; this is where the proposed research project comes in.
+                        project_duration:
+                          interval: 2013-03-01/2016-10-01
+                          start_interval: 2013-03-01
+                          end_interval: 2016-10-01
+                        access_duration:
+                          interval: 2013-03-01/
+                          start_interval: 2013-03-01
+                          end_interval: null
+                        website: http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/
+                        publications:
+                          - https://doi.org/10.5194/acp-2018-283
+                          - https://doi.org/10.5194/acp-15-3719-2015
+                          - https://doi.org/10.5194/acp-15-5599-2015
+                          - https://doi.org/10.5194/acp-16-4063-2016
                       relationships:
                         participants:
                           data:
@@ -1650,6 +1938,18 @@ paths:
                             type: string
                             title: Last name
                             description: An individuals family name
+                          orcid-id:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: ORCID iD
+                            description: An individuals ORCID iD
+                          avatar-url:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Avatar URL
+                            description: A URL to an image representing an individual
                       relationships:
                         type: object
                         title: Relationships
@@ -1725,6 +2025,8 @@ paths:
                       attributes:
                         first-name: Constance
                         last-name: Watson
+                        orcid-id: https://sandbox.orcid.org/0000-0001-8373-6934
+                        avatar-url: https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg
                       relationships:
                         participants:
                           data:
@@ -1825,6 +2127,18 @@ paths:
                               type: string
                               title: Last name
                               description: An individuals family name
+                            orcid-id:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: ORCID iD
+                              description: An individuals ORCID iD
+                            avatar-url:
+                              readOnly: true
+                              type: string
+                              format: uri
+                              title: Avatar URL
+                              description: A URL to an image representing an individual
                         relationships:
                           type: object
                           title: Relationships
@@ -1900,6 +2214,8 @@ paths:
                         attributes:
                           first-name: Constance
                           last-name: Watson
+                          orcid-id: https://sandbox.orcid.org/0000-0001-8373-6934
+                          avatar-url: https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg
                         relationships:
                           participation:
                             data:
@@ -2030,6 +2346,18 @@ paths:
                             type: string
                             title: Last name
                             description: An individuals family name
+                          orcid-id:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: ORCID iD
+                            description: An individuals ORCID iD
+                          avatar-url:
+                            readOnly: true
+                            type: string
+                            format: uri
+                            title: Avatar URL
+                            description: A URL to an image representing an individual
                       relationships:
                         type: object
                         title: Relationships
@@ -2105,6 +2433,8 @@ paths:
                       attributes:
                         first-name: Constance
                         last-name: Watson
+                        orcid-id: https://sandbox.orcid.org/0000-0001-8373-6934
+                        avatar-url: https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg
                       relationships:
                         participants:
                           data:

@@ -60,6 +60,32 @@ before being retired/removed.
 
 Deprecated features will be referenced in this documentation and the [Change log](../changelog).
 
+### Information available
+
+During initial development, all versions of this API use fake data, intended to be realistic but meaningless. This 
+ensures any potentially sensitive information contained in real data is not exposed to unreliable and untested 
+integrations.
+
+In the future, stable versions of the API will have access to real data. The [Testing version](#testing-version) will 
+always use fake data.
+
+#### Fake data
+
+Fake data is generated randomly using the [Faker](https://faker.readthedocs.io/en/master/) library, with custom methods 
+added for resources in this API. Various ratios and weightings are used to generate mostly 'average' data as well as 
+known extremes to allow for testing edge cases.
+
+##### Fake data limitations
+
+There are a number of general differences/limitations between fake and real data:
+
+1. the number of fake date items is arbitrary and are created or removed in bulk, whereas the number of real data items 
+   is variable, based on the current number of relevant projects
+2. all fake data items may be removed and replaced with new items when changes are made to resource properties, whereas
+   real data items will be added or removed gradually, with most remaining the same
+
+See each resource for additional limitations.
+
 ## Technical information
 
 ### Standards support
@@ -110,6 +136,46 @@ Examples:
 
 * `1875-05-20`
 
+#### Date range (data type)
+
+Date range values are encoded as an object containing:
+ 
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date interval [string](#string) which covers the entire range 
+  (i.e. `YYYY-MM-DD/YYYY-MM-DD`)
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string) which marks the beginning of the
+  range (i.e. `YYYY-MM-DD`)
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string) which marks the end of the range 
+  (i.e. `YYYY-MM-DD`)
+  
+Date ranges can be unbounded, on either or both sides, to indicate where a range has no end date for example. When 
+unbounded, the relevant date instant will be `null` and the relevant part of date interval will be omitted.
+
+Examples:
+
+```json
+{
+  "interval": "1875-05-20/2002-04-14",
+  "start_instance": "1875-05-20",
+  "end_instance": "2002-04-14"
+}
+```
+
+```json
+{
+  "interval": "/2002-04-14",
+  "start_instance": null,
+  "end_instance": "2002-04-14"
+}
+```
+
+```json
+{
+  "interval": "1875-05-20/",
+  "start_instance": "1875-05-20",
+  "end_instance": null
+}
+```
+
 ### Pagination
 
 API methods that return large numbers of items will use pagination to split items into a number of pages based on the
@@ -149,8 +215,25 @@ The `id` property will vary with each error using a UUID (version 4).
 
 ### Projects
 
-...
+Represents information about a research project.
 
 ### Fake data limitations
 
-...
+* project acronym's don't relate to a projects title
+* where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
+
+### Participants
+
+Represents information about an individuals involvement in a research project.
+
+### Fake data limitations
+
+None.
+
+### People
+
+Represents information about an individual.
+
+### Fake data limitations
+
+* Orcid IDs are fake and can't be used to lookup additional information on a person
