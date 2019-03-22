@@ -763,10 +763,17 @@ class Participant(db.Model):
             for project in projects_without_participants:
                 # All projects must have a PI, chosen at random, excluding for the static, person to ensure its
                 # relationships are predictable
+                #
+                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
+                # cryptographic purposes)
+                #
+                # Bandit interprets picking a random person as something related to security, which it isn't.
                 principle_investigator = Participant(
                     neutral_id=generate_neutral_id(),
                     project=project,
-                    person=random.choice(Person.query.filter(Person.neutral_id.notin_([static_person_nid])).all()),
+                    person=random.choice(Person.query.filter(Person.neutral_id.notin_(  # nosec
+                        [static_person_nid]
+                    )).all()),
                     role=ParticipantRole.InvestigationRole_PrincipleInvestigator
                 )
 
