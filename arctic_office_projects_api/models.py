@@ -1,3 +1,4 @@
+import random
 from datetime import date
 from enum import Enum
 
@@ -19,6 +20,11 @@ faker = Faker('en_GB')
 faker.add_provider(ProjectProvider)
 faker.add_provider(PersonProvider)
 faker.add_provider(ProfileProvider)
+
+static_project_duration = DateRange(date(2013, 3, 1), date(2016, 10, 1))
+static_project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
+static_participant_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
+static_person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
 
 
 class Project(db.Model):
@@ -55,12 +61,9 @@ class Project(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
-        project_duration = DateRange(date(2013, 3, 1), date(2016, 10, 1))
-
-        if not db.session.query(exists().where(Project.neutral_id == project_nid)).scalar():
-            project = Project(
-                neutral_id=project_nid,
+        if not db.session.query(exists().where(Project.neutral_id == static_project_nid)).scalar():
+            static_project = Project(
+                neutral_id=static_project_nid,
                 title='Aerosol-Cloud Coupling And Climate Interactions in the Arctic',
                 acronym='ACCACIA',
                 abstract="The Arctic climate is changing twice as fast as the global average and these dramatic "
@@ -110,10 +113,10 @@ class Project(db.Model):
                     'https://doi.org/10.5194/acp-15-5599-2015',
                     'https://doi.org/10.5194/acp-16-4063-2016'
                 ],
-                access_duration=DateRange(project_duration.lower, None),
-                project_duration=project_duration
+                access_duration=DateRange(static_project_duration.lower, None),
+                project_duration=static_project_duration
             )
-            db.session.add(project)
+            db.session.add(static_project)
 
         if quantity > 1:
             for i in range(1, quantity):
@@ -168,17 +171,15 @@ class Person(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
-
-        if not db.session.query(exists().where(Person.neutral_id == person_nid)).scalar():
-            person = Person(
-                neutral_id=person_nid,
+        if not db.session.query(exists().where(Person.neutral_id == static_person_nid)).scalar():
+            static_person = Person(
+                neutral_id=static_person_nid,
                 first_name='Constance',
                 last_name='Watson',
                 orcid_id='https://sandbox.orcid.org/0000-0001-8373-6934',
                 logo_url='https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg'
             )
-            db.session.add(person)
+            db.session.add(static_person)
 
         if quantity > 1:
             for i in range(1, quantity):
@@ -747,16 +748,53 @@ class Participant(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        participant_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
-
-        if not db.session.query(exists().where(Participant.neutral_id == participant_nid)).scalar():
-            person_project = Participant(
-                neutral_id=participant_nid,
-                project=Project.query.filter_by(neutral_id='01D5M0CFQV4M7JASW7F87SRDYB').one(),
-                person=Person.query.filter_by(neutral_id='01D5MHQN3ZPH47YVSVQEVB0DAE').one(),
+        if not db.session.query(exists().where(Participant.neutral_id == static_participant_nid)).scalar():
+            static_participant = Participant(
+                neutral_id=static_participant_nid,
+                project=Project.query.filter_by(neutral_id=static_project_nid).one(),
+                person=Person.query.filter_by(neutral_id=static_person_nid).one(),
                 role=ParticipantRole.InvestigationRole_PrincipleInvestigator
             )
-            db.session.add(person_project)
+            db.session.add(static_participant)
 
         if quantity > 1:
-            pass
+            projects_without_participants = Project.query.outerjoin(Project.participants)\
+                .filter(Participant.project_id.is_(None)).all()
+            for project in projects_without_participants:
+                # All projects must have a PI, chosen at random, excluding for the static, person to ensure its
+                # relationships are predictable
+                #
+                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
+                # cryptographic purposes)
+                #
+                # Bandit interprets picking a random person as something related to security, which it isn't.
+                principle_investigator = Participant(
+                    neutral_id=generate_neutral_id(),
+                    project=project,
+                    person=random.choice(Person.query.filter(Person.neutral_id.notin_(  # nosec
+                        [static_person_nid]
+                    )).all()),
+                    role=ParticipantRole.InvestigationRole_PrincipleInvestigator
+                )
+
+                db.session.add(principle_investigator)
+
+                if faker.has_co_investigators():
+                    # Select a random set of people to act as Co-Investigators, excluding the PI and the static, person
+                    # to ensure its relationships are predictable
+                    co_investigators = random.choices(
+                        Person.query.filter(Person.neutral_id.notin_(
+                            [principle_investigator.person.neutral_id, static_person_nid]
+                        )).all(),
+                        k=faker.co_investigator_count()
+                    )
+
+                    for person in co_investigators:
+                        co_investigator = Participant(
+                            neutral_id=generate_neutral_id(),
+                            project=project,
+                            person=person,
+                            role=ParticipantRole.InvestigationRole_CoInvestigator
+                        )
+
+                        db.session.add(co_investigator)
