@@ -240,3 +240,39 @@ class Provider(BaseProvider):
             start_date = self.faker.date_this_year(before_today=True, after_today=True)
 
         return DateRange(start_date, start_date.replace(start_date.year + durations[grant_type.name]))
+
+    def has_co_investigators(self) -> bool:
+        """
+        Determines whether a project has any Co-Investigators or not
+
+        Currently assumes 50% of projects will have some.
+
+        :example: True
+        :rtype: bool
+        :return: whether a project has any Co-Investigators
+        """
+        return self.random_element({True: 0.5, False: 0.5})
+
+    def co_investigator_count(self) -> int:
+        """
+        Generates the number of Co-Investigators in a project
+
+        Currently assumes:
+         * 85% of projects have between 1 and 3 Co-Investigators
+         * 10% of projects have between 4 and 6 Co-Investigators
+         * 5% of projects have between 7 and 25 Co-Investigators
+
+        :example: 2
+        :rtype: int
+        :return: the number of Co-Investigators in a project
+        """
+        co_investigator_ranges = {
+            '1-3': (1, 3),
+            '4-6': (4, 6),
+            '7-25': (7, 25)
+        }
+        co_investigator_range = self.random_element({'1-3': 0.85, '4-6': 0.1, '7-25': 0.05})
+        return self.generator.random_int(
+            min=co_investigator_ranges[co_investigator_range][0],
+            max=co_investigator_ranges[co_investigator_range][1]
+        )

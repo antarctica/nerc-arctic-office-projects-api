@@ -20,6 +20,8 @@ faker.add_provider(ProjectProvider)
 faker.add_provider(PersonProvider)
 faker.add_provider(ProfileProvider)
 
+static_person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
+
 
 class Project(db.Model):
     """
@@ -168,11 +170,11 @@ class Person(db.Model):
         :type quantity: int
         :param quantity: target number of Person Sensitive resources to create
         """
-        person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
-
         if not db.session.query(exists().where(Person.neutral_id == person_nid)).scalar():
             person = Person(
                 neutral_id=person_nid,
+        if not db.session.query(exists().where(Person.neutral_id == static_person_nid)).scalar():
+                neutral_id=static_person_nid,
                 first_name='Constance',
                 last_name='Watson',
                 orcid_id='https://sandbox.orcid.org/0000-0001-8373-6934',
@@ -754,9 +756,43 @@ class Participant(db.Model):
                 neutral_id=participant_nid,
                 project=Project.query.filter_by(neutral_id='01D5M0CFQV4M7JASW7F87SRDYB').one(),
                 person=Person.query.filter_by(neutral_id='01D5MHQN3ZPH47YVSVQEVB0DAE').one(),
+                person=Person.query.filter_by(neutral_id=static_person_nid).one(),
                 role=ParticipantRole.InvestigationRole_PrincipleInvestigator
             )
             db.session.add(person_project)
 
         if quantity > 1:
             pass
+            projects_without_participants = Project.query.outerjoin(Project.participants)\
+                .filter(Participant.project_id.is_(None)).all()
+            for project in projects_without_participants:
+                # All projects must have a PI, chosen at random, excluding for the static, person to ensure its
+                # relationships are predictable
+                principle_investigator = Participant(
+                    neutral_id=generate_neutral_id(),
+                    project=project,
+                    person=random.choice(Person.query.filter(Person.neutral_id.notin_([static_person_nid])).all()),
+                    role=ParticipantRole.InvestigationRole_PrincipleInvestigator
+                )
+
+                db.session.add(principle_investigator)
+
+                if faker.has_co_investigators():
+                    # Select a random set of people to act as Co-Investigators, excluding the PI and the static, person
+                    # to ensure its relationships are predictable
+                    co_investigators = random.choices(
+                        Person.query.filter(Person.neutral_id.notin_(
+                            [principle_investigator.person.neutral_id, static_person_nid]
+                        )).all(),
+                        k=faker.co_investigator_count()
+                    )
+
+                    for person in co_investigators:
+                        co_investigator = Participant(
+                            neutral_id=generate_neutral_id(),
+                            project=project,
+                            person=person,
+                            role=ParticipantRole.InvestigationRole_CoInvestigator
+                        )
+
+                        db.session.add(co_investigator)
