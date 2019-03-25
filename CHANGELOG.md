@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* Grant entity, representing a research grant
+* Allocation entity, representing the relationship between a research project and a research grant
 * Basic seeding for Participants, linking Projects to random People
 * Project acronym property
 * Project abstract property

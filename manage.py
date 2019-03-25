@@ -7,7 +7,7 @@ from click import option, IntRange
 from flask_migrate import Migrate
 
 from arctic_office_projects_api import create_app, db
-from arctic_office_projects_api.models import Project, Person, Participant
+from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation
 
 app = create_app(os.getenv('FLASK_ENV') or 'default')
 migrate = Migrate(app, db)
@@ -35,6 +35,8 @@ def seed(count):
         project.seed(quantity=count)
         Person.seed(quantity=count)
         Participant.seed(quantity=count)
+        Grant.seed(quantity=count)
+        Allocation.seed(quantity=count)
         db.session.commit()
         print("Seeding OK")
     except Exception as e:

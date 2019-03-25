@@ -4,7 +4,7 @@ from flask_migrate import Config, upgrade, downgrade, Migrate
 
 from arctic_office_projects_api.meta.errors import ApiNotFoundError
 from arctic_office_projects_api import db
-from arctic_office_projects_api.models import Project, Person, Participant
+from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation
 from tests.base_test import BaseTestCase
 
 
@@ -22,6 +22,8 @@ class MainBlueprintTestCase(BaseTestCase):
             project.seed(quantity=5)
             Person.seed(quantity=5)
             Participant.seed(quantity=1)
+            Grant.seed(quantity=1)
+            Allocation.seed(quantity=1)
             db.session.commit()
 
     def tearDown(self):

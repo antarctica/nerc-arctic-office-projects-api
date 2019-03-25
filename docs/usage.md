@@ -239,3 +239,20 @@ Represents information about an individual.
 #### Fake data limitations
 
 * Orcid IDs are fake and can't be used to lookup additional information on a person
+
+### Grants
+
+Represents information a research grant.
+
+#### Fake data limitations
+
+* Currently only fake value is returned
+
+
+### Allocations
+
+Represents information about how a research project is funded by grants.
+
+#### Fake data limitations
+
+* Currently only fake value is returned
