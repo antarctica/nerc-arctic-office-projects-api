@@ -22,6 +22,7 @@ faker.add_provider(PersonProvider)
 faker.add_provider(ProfileProvider)
 
 static_project_duration = DateRange(date(2013, 3, 1), date(2016, 10, 1))
+
 static_project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
 static_participant_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
 static_person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
@@ -59,7 +60,7 @@ class Project(db.Model):
         fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
 
         :type quantity: int
-        :param quantity: target number of Person Sensitive resources to create
+        :param quantity: target number of Project resources to create
         """
         if not db.session.query(exists().where(Project.neutral_id == static_project_nid)).scalar():
             static_project = Project(
@@ -169,7 +170,7 @@ class Person(db.Model):
         fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
 
         :type quantity: int
-        :param quantity: target number of Person Sensitive resources to create
+        :param quantity: target number of Person resources to create
         """
         if not db.session.query(exists().where(Person.neutral_id == static_person_nid)).scalar():
             static_person = Person(
@@ -731,7 +732,7 @@ class Participant(db.Model):
     person = db.relationship("Person", back_populates="participation")
 
     def __repr__(self):
-        return f"<Person:Project { self.neutral_id } ({ self.person.neutral_id }:{ self.project.neutral_id })>"
+        return f"<Participant { self.neutral_id } ({ self.person.neutral_id }:{ self.project.neutral_id })>"
 
     @staticmethod
     def seed(*, quantity: int = 1):
@@ -741,12 +742,11 @@ class Participant(db.Model):
         By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
         Additional instances are created randomly using Faker.
 
-        The quantity parameter is treated as a target number of resources to add, as Faker is unaware of unique
-        constraints, and may use the same values twice. Resources with duplicate values are discarded resulting in
-        fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
+        The quantity parameter is treated as a trigger to randomly assign a PI and possibly a number of CoIs to each
+        project - the actual number for this parameter does not matter, providing it is greater than 1.
 
         :type quantity: int
-        :param quantity: target number of Person Sensitive resources to create
+        :param quantity: target number of Participant resources to create
         """
         if not db.session.query(exists().where(Participant.neutral_id == static_participant_nid)).scalar():
             static_participant = Participant(

@@ -217,7 +217,7 @@ The `id` property will vary with each error using a UUID (version 4).
 
 Represents information about a research project.
 
-### Fake data limitations
+#### Fake data limitations
 
 * project acronym's don't relate to a projects title
 * where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
@@ -226,14 +226,16 @@ Represents information about a research project.
 
 Represents information about an individuals involvement in a research project.
 
-### Fake data limitations
+#### Fake data limitations
 
-None.
+* projects will only use a subset of available participant roles (Principle Investigator and Co-Investigator)
+* a random person will be chosen as the PI of a project
+* a random number of CoIs (that are not the PI) may be chosen as Co-Is
 
 ### People
 
 Represents information about an individual.
 
-### Fake data limitations
+#### Fake data limitations
 
 * Orcid IDs are fake and can't be used to lookup additional information on a person

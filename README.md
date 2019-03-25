@@ -674,6 +674,9 @@ Where `--count` can be any value greater than 1, or omitted where only a single 
 constraints, and may use the same values twice. Resources with duplicate values are discarded resulting in fewer 
 resources being added. For example, if 250 resources are requested, only 246 may be unique.
 
+**Note:** For resources which depend on other resource types (i.e. resources representing a relation between resources)
+the count value is not used directly, but any version above one will trigger seeding between other resources.
+
 #### Faker
 
 [Faker](https://github.com/joke2k/faker) is a library for generating fake data. It includes a range of providers for 
