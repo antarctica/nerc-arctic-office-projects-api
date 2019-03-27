@@ -220,6 +220,8 @@ Represents information about a research project.
 #### Fake data limitations
 
 * project acronym's don't relate to a projects title
+* titles, abstracts, publications and other properties shared with corresponding grants are not the same
+* projects are assigned to grants at random
 * where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
 
 ### Participants
@@ -238,7 +240,7 @@ Represents information about an individual.
 
 #### Fake data limitations
 
-* Orcid IDs are fake and can't be used to lookup additional information on a person
+* ORCiD IDs are fake and can't be used to lookup additional information on a person
 
 ### Grants
 
@@ -246,8 +248,13 @@ Represents information a research grant.
 
 #### Fake data limitations
 
-* Currently only fake value is returned
-
+* grant references do not correspond to the format of each grant type
+* all grants will use a status of either 'active' or 'closed'
+* where publications are in a grant, all are fake using the prefix 10.5555 and an 8 digit random suffix
+* titles, abstracts, publications and other properties shared with corresponding projects are not the same
+* all grants total funds will be random within a range based on the grant type (i.e. not in multiples of 10, 100, etc.) 
+* all grants have a 50% chance of having indirect funds
+* all grants with indirect funds will be assigned 12% of the grants total funds
 
 ### Allocations
 
@@ -255,4 +262,4 @@ Represents information about how a research project is funded by grants.
 
 #### Fake data limitations
 
-* Currently only fake value is returned
+* grants are related to projects at random

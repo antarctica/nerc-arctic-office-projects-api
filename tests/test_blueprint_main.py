@@ -18,11 +18,11 @@ class MainBlueprintTestCase(BaseTestCase):
             config.set_main_option("script_location", "migrations")
             Migrate(self.app, db)
             upgrade()
+            Grant.seed(quantity=5)
             project = Project()
             project.seed(quantity=5)
             Person.seed(quantity=5)
             Participant.seed(quantity=1)
-            Grant.seed(quantity=1)
             Allocation.seed(quantity=1)
             db.session.commit()
 

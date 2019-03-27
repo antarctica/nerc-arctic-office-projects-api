@@ -767,8 +767,8 @@ class Participant(db.Model):
             projects_without_participants = Project.query.outerjoin(Project.participants)\
                 .filter(Participant.project_id.is_(None)).all()
             for project in projects_without_participants:
-                # All projects must have a PI, chosen at random, excluding for the static, person to ensure its
-                # relationships are predictable
+                # All projects must have a PI, chosen at random, excluding the static person, to ensure its
+                # relationships remain predictable
                 #
                 # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
                 # cryptographic purposes)

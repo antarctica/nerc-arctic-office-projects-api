@@ -12,6 +12,6 @@ def generate_neutral_id() -> str:
     Example Neutral ID: '01D5M0CFQV4M7JASW7F87SRDYB'
 
     :rtype str
-    :return: Unique neutral ID
+    :return: unique neutral ID
     """
     return ulid.new().str

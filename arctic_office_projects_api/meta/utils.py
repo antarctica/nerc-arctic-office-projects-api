@@ -1,3 +1,4 @@
+# noinspection PyProtectedMember
 from psycopg2._psycopg import Error
 # noinspection PyPackageRequirements
 from sqlalchemy.exc import OperationalError

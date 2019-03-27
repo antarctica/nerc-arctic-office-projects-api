@@ -55,7 +55,7 @@ def projects_detail(project_id: str):
     Returns a specific Project resource, specified by its Neutral ID
 
     :type project_id: str
-    :param project_id: Neutral ID of a Project resource
+    :param project_id: neutral ID of a Project resource
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
@@ -74,7 +74,7 @@ def projects_relationship_participants(project_id: str):
     Returns Participant resource linkages associated with a specific Project resource, specified by its Neutral ID
 
     :type project_id: str
-    :param project_id: Neutral ID of a Project resource
+    :param project_id: neutral ID of a Project resource
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
@@ -93,7 +93,7 @@ def projects_participants(project_id: str):
     Returns Participant resources associated with a specific Project resource, specified by its Neutral ID
 
     :type project_id: str
-    :param project_id: Neutral ID of a Project resource
+    :param project_id: neutral ID of a Project resource
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
@@ -134,7 +134,7 @@ def participants_detail(participant_id: str):
     Returns a specific Participant resource, specified by its Neutral ID
 
     :type participant_id: str
-    :param participant_id: Neutral ID of a Participant resource
+    :param participant_id: neutral ID of a Participant resource
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
@@ -153,7 +153,7 @@ def participants_relationship_projects(participant_id: str):
     Returns Project resource linkages associated with a specific Participant resource, specified by its Neutral ID
 
     :type participant_id: str
-    :param participant_id: Neutral ID of a Participant resource
+    :param participant_id: neutral ID of a Participant resource
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
@@ -172,7 +172,7 @@ def participants_relationship_people(participant_id: str):
     Returns People resource linkages associated with a specific Participant resource, specified by its Neutral ID
 
     :type participant_id: str
-    :param participant_id: Neutral ID of a Participant resource
+    :param participant_id: neutral ID of a Participant resource
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
@@ -191,7 +191,7 @@ def participants_projects(participant_id: str):
     Returns the Project resource associated with a specific Participant resource, specified by its Neutral ID
 
     :type participant_id: str
-    :param participant_id: Neutral ID of a Participant resource
+    :param participant_id: neutral ID of a Participant resource
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
@@ -210,7 +210,7 @@ def participants_people(participant_id: str):
     Returns the People resource associated with a specific Participant resource, specified by its Neutral ID
 
     :type participant_id: str
-    :param participant_id: Neutral ID of a Participant resource
+    :param participant_id: neutral ID of a Participant resource
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
@@ -251,7 +251,7 @@ def people_detail(person_id: str):
     Returns a specific Person resource, specified by its Neutral ID
 
     :type person_id: str
-    :param person_id: Neutral ID of a Person resource
+    :param person_id: neutral ID of a Person resource
     """
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
@@ -270,7 +270,7 @@ def people_relationship_participants(person_id: str):
     Returns Participant resource linkages associated with a specific Person resource, specified by its Neutral ID
 
     :type person_id: str
-    :param person_id: Neutral ID of a Person resource
+    :param person_id: neutral ID of a Person resource
     """
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
@@ -289,7 +289,7 @@ def people_participants(person_id: str):
     Returns Participant resources associated with a specific Person resource, specified by its Neutral ID
 
     :type person_id: str
-    :param person_id: Neutral ID of a Person resource
+    :param person_id: neutral ID of a Person resource
     """
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()

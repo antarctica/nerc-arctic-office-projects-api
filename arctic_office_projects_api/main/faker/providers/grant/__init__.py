@@ -70,11 +70,11 @@ class Provider(BaseProvider):
           * 10% of Other grants are awarded in US Dollars
 
         :type grant_type: GrantType
-        :param grant_type: Member of the GrantType enumerated class
+        :param grant_type: member of the GrantType enumerated class
 
         :example: GrantCurrency.GBP
         :rtype: GrantCurrency
-        :return: Member of the GrantCurrency enumerated class, representing the currency of the funds for a grant
+        :return: member of the GrantCurrency enumerated class, representing the currency of the funds for a grant
         """
         if grant_type == GrantType.UKRI_LARGE_GRANT or grant_type == GrantType.UKRI_STANDARD_GRANT:
             return GrantCurrency.GBP
@@ -94,7 +94,7 @@ class Provider(BaseProvider):
         Currently assumes all grant references are a 20 character random string
 
         :type grant_type: GrantType
-        :param grant_type: Member of the GrantType enumerated class
+        :param grant_type: member of the GrantType enumerated class
 
         :example: 'ZmCRCKzQymLfZdNyXoJp'
         :rtype: str
@@ -119,11 +119,11 @@ class Provider(BaseProvider):
           * Other grants are awarded between 100 and 25,000
 
         :type grant_type: GrantType
-        :param grant_type: Member of the GrantType enumerated class
+        :param grant_type: member of the GrantType enumerated class
 
         :example: 12,345
         :rtype: int
-        :return: Total amount of money awarded through a grant
+        :return: total amount of money awarded through a grant
         """
         grants_ranges = {
             'UKRI_STANDARD_GRANT': (1000, 50000),
@@ -142,11 +142,11 @@ class Provider(BaseProvider):
         Determines the status of a grant based on its duration
 
         :type grant_duration: DateRange
-        :param grant_duration: The duration of a project
+        :param grant_duration: duration of a project
 
         :example: GrantStatus.Active
         :rtype: GrantStatus
-        :return: Member of the GrantStatus enumerated class indicating the status of a project
+        :return: member of the GrantStatus enumerated class indicating the status of a project
         """
         if grant_duration.upper_inf:
             return GrantStatus.Active
@@ -177,13 +177,13 @@ class Provider(BaseProvider):
         Currently assumes 12% of a grant's total amount will be allocated to indirect costs
 
         :type grant_type: GrantType
-        :param grant_type: Member of the GrantType enumerated class
+        :param grant_type: member of the GrantType enumerated class
         :type grant_total_funds: int
-        :param grant_total_funds: Total amount of money awarded through a grant
+        :param grant_total_funds: total amount of money awarded through a grant
 
         :example: 1481.4
         :rtype: int
-        :return: Amount of money in a grant allocated to indirect costs
+        :return: amount of money in a grant allocated to indirect costs
         """
         indirect_funds = {
             'UKRI_STANDARD_GRANT': 0.12,
