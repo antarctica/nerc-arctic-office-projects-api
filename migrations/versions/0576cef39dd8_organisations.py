@@ -34,23 +34,23 @@ def upgrade():
     # Grants
     #
     op.add_column('grants', sa.Column('organisation_id', sa.Integer(), nullable=False))
-    op.create_foreign_key(None, 'grants', 'organisations', ['organisation_id'], ['id'])
+    op.create_foreign_key('grants_organisation_id_fkey', 'grants', 'organisations', ['organisation_id'], ['id'])
 
     # People
     #
     op.add_column('people', sa.Column('organisation_id', sa.Integer(), nullable=False))
-    op.create_foreign_key(None, 'people', 'organisations', ['organisation_id'], ['id'])
+    op.create_foreign_key('people_organisation_id_fkey', 'people', 'organisations', ['organisation_id'], ['id'])
 
 
 def downgrade():
     # People
     #
-    op.drop_constraint(None, 'people', type_='foreignkey')
+    op.drop_constraint('people_organisation_id_fkey', 'people', type_='foreignkey')
     op.drop_column('people', 'organisation_id')
 
     # Grants
     #
-    op.drop_constraint(None, 'grants', type_='foreignkey')
+    op.drop_constraint('grants_organisation_id_fkey', 'grants', type_='foreignkey')
     op.drop_column('grants', 'organisation_id')
 
     # Organisation
