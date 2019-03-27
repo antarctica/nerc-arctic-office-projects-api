@@ -16,12 +16,14 @@ from arctic_office_projects_api.main.faker.providers.project import Provider as 
 from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
 from arctic_office_projects_api.main.faker.providers.profile import Provider as ProfileProvider
 from arctic_office_projects_api.main.faker.providers.grant import Provider as GrantProvider
+from arctic_office_projects_api.main.faker.providers.organisation import Provider as OrganisationProvider
 
 faker = Faker('en_GB')
 faker.add_provider(ProjectProvider)
 faker.add_provider(PersonProvider)
 faker.add_provider(ProfileProvider)
 faker.add_provider(GrantProvider)
+faker.add_provider(OrganisationProvider)
 
 static_grant_duration = DateRange(date(2013, 3, 1), date(2016, 10, 1))
 static_project_duration = static_grant_duration
@@ -31,6 +33,7 @@ static_participant_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
 static_person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
 static_grant_nid = '01D6T4HYAVK5SJFD7NWJRMBZ4Z'
 static_allocation_nid = '01D6T4QQNDBJTSEVXESNXD3AN0'
+static_organisation_nid = '01D6Z0SQZPDTVBMYE9GNHH8QK7'
 
 
 class Project(db.Model):
@@ -152,12 +155,14 @@ class Person(db.Model):
     """
     __tablename__ = 'people'
     id = db.Column(db.Integer, primary_key=True)
+    organisation_id = db.Column(db.Integer, db.ForeignKey('organisations.id'), nullable=False)
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
     first_name = db.Column(db.Text(), nullable=True)
     last_name = db.Column(db.Text(), nullable=True)
     orcid_id = db.Column(db.String(64), unique=True, nullable=True)
     logo_url = db.Column(db.Text(), nullable=True)
 
+    organisation = db.relationship('Organisation', back_populates='people')
     participation = db.relationship("Participant", back_populates="person")
 
     def __repr__(self):
@@ -184,13 +189,26 @@ class Person(db.Model):
                 first_name='Constance',
                 last_name='Watson',
                 orcid_id='https://sandbox.orcid.org/0000-0001-8373-6934',
-                logo_url='https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg'
+                logo_url='https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg',
+                organisation=Organisation.query.filter_by(neutral_id=static_organisation_nid).one()
             )
             db.session.add(static_person)
 
         if quantity > 1:
             for i in range(1, quantity):
-                resource = Person(neutral_id=generate_neutral_id())
+                # All people must have a organisation, chosen at random, excluding the static organisation, to ensure
+                # its relationships remain predictable
+                #
+                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
+                # cryptographic purposes)
+                #
+                # Bandit interprets picking a random person as something related to security, which it isn't.
+                resource = Person(
+                    neutral_id=generate_neutral_id(),
+                    organisation=random.choice(Organisation.query.filter(Organisation.neutral_id.notin_(  # nosec
+                        [static_organisation_nid]
+                    )).all())
+                )
                 if faker.has_orcid_id():
                     resource.orcid_id = faker.orcid_id()
                 if faker.male_or_female() == 'male':
@@ -851,6 +869,7 @@ class Grant(db.Model):
     """
     __tablename__ = 'grants'
     id = db.Column(db.Integer, primary_key=True)
+    organisation_id = db.Column(db.Integer, db.ForeignKey('organisations.id'), nullable=False)
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
     reference = db.Column(db.Text(), unique=True, nullable=False)
     title = db.Column(db.Text(), nullable=False)
@@ -864,6 +883,7 @@ class Grant(db.Model):
     indirect_funds = db.Column(db.Numeric(24, 2), nullable=True)
     indirect_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
 
+    funder = db.relationship('Organisation', back_populates='grants')
     allocations = db.relationship("Allocation", back_populates="grant")
 
     def __repr__(self):
@@ -938,7 +958,8 @@ class Grant(db.Model):
                 ],
                 duration=static_grant_duration,
                 status=GrantStatus.Closed,
-                total_funds=324282
+                total_funds=324282,
+                funder=Organisation.query.filter_by(neutral_id=static_organisation_nid).one()
             )
             db.session.add(static_grant)
 
@@ -949,6 +970,13 @@ class Grant(db.Model):
                 grant_currency = faker.grant_currency(grant_type).name
                 grant_total_funds = faker.total_funds(grant_type)
 
+                # All people must have a organisation, chosen at random, excluding the static organisation, to ensure
+                # its relationships remain predictable
+                #
+                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
+                # cryptographic purposes)
+                #
+                # Bandit interprets picking a random person as something related to security, which it isn't.
                 resource = Grant(
                     neutral_id=generate_neutral_id(),
                     reference=faker.grant_reference(grant_type),
@@ -957,7 +985,10 @@ class Grant(db.Model):
                     duration=grant_duration,
                     status=faker.status(grant_duration).name,
                     total_funds=grant_total_funds,
-                    total_funds_currency=grant_currency
+                    total_funds_currency=grant_currency,
+                    funder=random.choice(Organisation.query.filter(Organisation.neutral_id.notin_(  # nosec
+                        [static_organisation_nid]
+                    )).all())
                 )
                 if faker.has_acronym(grant_type):
                     resource.acronym = faker.acronym()
@@ -1030,3 +1061,58 @@ class Allocation(db.Model):
                 )
 
                 db.session.add(allocation)
+
+
+class Organisation(db.Model):
+    """
+    Represents an organisation, either as an agent (e.g. a funder) or an entity (e.g. that an individual belongs to)
+    """
+    __tablename__ = 'organisations'
+    id = db.Column(db.Integer, primary_key=True)
+    neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
+    grid_identifier = db.Column(db.Text(), nullable=True)
+    name = db.Column(db.Text(), nullable=False)
+    acronym = db.Column(db.Text(), nullable=True)
+    website = db.Column(db.Text(), nullable=True)
+    logo_url = db.Column(db.Text(), nullable=True)
+
+    grants = db.relationship('Grant', back_populates="funder")
+    people = db.relationship('Person', back_populates="organisation")
+
+    @staticmethod
+    def seed(*, quantity: int = 1):
+        """
+        Populate database with mock/fake data
+
+        By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
+        Additional instances are created randomly using Faker.
+
+        The quantity parameter is treated as a target number of resources to add, as Faker is unaware of unique
+        constraints, and may use the same values twice. Resources with duplicate values are discarded resulting in
+        fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
+
+        :type quantity: int
+        :param quantity: target number of Organisation resources to create
+        """
+        if not db.session.query(exists().where(Organisation.neutral_id == static_organisation_nid)).scalar():
+            static_organisation = Organisation(
+                neutral_id=static_organisation_nid,
+                grid_identifier='XI-GRID-grid.8682.4',
+                name='Natural Environment Research Council',
+                acronym='NERC',
+                website='https://nerc.ukri.org',
+                logo_url='https://nerc.ukri.org/nerc/assets/images/logos/nerc/nerc-logo-large.jpg'
+            )
+            db.session.add(static_organisation)
+
+        if quantity > 1:
+            for i in range(1, quantity):
+                resource = Organisation(
+                    neutral_id=generate_neutral_id(),
+                    grid_identifier=faker.grid_id(),
+                    name=faker.company(),
+                    acronym=faker.acronym(),
+                    website=faker.uri(),
+                    logo_url='https://placeimg.com/256/256/arch'
+                )
+                db.session.add(resource)

@@ -7,7 +7,7 @@ from click import option, IntRange
 from flask_migrate import Migrate
 
 from arctic_office_projects_api import create_app, db
-from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation
+from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation, Organisation
 
 app = create_app(os.getenv('FLASK_ENV') or 'default')
 migrate = Migrate(app, db)
@@ -31,6 +31,7 @@ def test():
 def seed(count):
     """Seed database with mock data."""
     try:
+        Organisation.seed(quantity=count)
         Grant.seed(quantity=count)
         project = Project()
         project.seed(quantity=count)

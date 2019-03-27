@@ -241,6 +241,7 @@ Represents information about an individual.
 #### Fake data limitations
 
 * ORCiD IDs are fake and can't be used to lookup additional information on a person
+* Organisation allocations are made at random
 
 ### Grants
 
@@ -249,6 +250,7 @@ Represents information a research grant.
 #### Fake data limitations
 
 * grant references do not correspond to the format of each grant type
+* grant funder's (organisations) are chosen at random
 * all grants will use a status of either 'active' or 'closed'
 * where publications are in a grant, all are fake using the prefix 10.5555 and an 8 digit random suffix
 * titles, abstracts, publications and other properties shared with corresponding projects are not the same
@@ -263,3 +265,13 @@ Represents information about how a research project is funded by grants.
 #### Fake data limitations
 
 * grants are related to projects at random
+
+### Organisations
+
+Represents information about an organisation, acting either as an agent (e.g. a funder) or an entity (e.g. that an 
+individual belongs to).
+
+#### Fake data limitations
+
+* organisation acronym's don't relate to a organisation's name
+* Grid IDs are fake and can't be used to lookup additional information on an organisation

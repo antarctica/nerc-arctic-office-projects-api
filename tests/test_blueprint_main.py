@@ -4,7 +4,7 @@ from flask_migrate import Config, upgrade, downgrade, Migrate
 
 from arctic_office_projects_api.meta.errors import ApiNotFoundError
 from arctic_office_projects_api import db
-from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation
+from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation, Organisation
 from tests.base_test import BaseTestCase
 
 
@@ -18,6 +18,7 @@ class MainBlueprintTestCase(BaseTestCase):
             config.set_main_option("script_location", "migrations")
             Migrate(self.app, db)
             upgrade()
+            Organisation.seed(quantity=5)
             Grant.seed(quantity=5)
             project = Project()
             project.seed(quantity=5)
