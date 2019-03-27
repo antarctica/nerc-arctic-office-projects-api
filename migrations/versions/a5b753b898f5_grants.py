@@ -32,11 +32,13 @@ def upgrade():
             'Accepted', 'Active', 'Approved', 'Authorised', 'Closed', name='grant_status'),
             nullable=True
         ),
+        sa.Column('total_funds', sa.Numeric(24, 2), nullable=False),
         sa.Column('total_funds_currency', postgresql.ENUM(
             'GBP', 'EUR', 'USD', name='grant_currency'),
             nullable=True
         ),
-        sa.Column('in_direct_funds_currency', postgresql.ENUM(
+        sa.Column('indirect_funds', sa.Numeric(24, 2), nullable=True),
+        sa.Column('indirect_funds_currency', postgresql.ENUM(
             'GBP', 'EUR', 'USD', name='grant_currency', create_type=False),
             nullable=True
         ),

@@ -859,10 +859,10 @@ class Grant(db.Model):
     publications = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
     duration = db.Column(postgresql.DATERANGE(), nullable=False)
     status = db.Column(db.Enum(GrantStatus), nullable=True)
-    total_funds = db.Numeric(24, 2)
+    total_funds = db.Column(db.Numeric(24, 2), nullable=False)
     total_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
-    in_direct_funds = db.Numeric(24, 2)
-    in_direct_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
+    indirect_funds = db.Column(db.Numeric(24, 2), nullable=True)
+    indirect_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
 
     allocations = db.relationship("Allocation", back_populates="grant")
 
