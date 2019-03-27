@@ -15,11 +15,13 @@ from arctic_office_projects_api.main.utils import generate_neutral_id
 from arctic_office_projects_api.main.faker.providers.project import Provider as ProjectProvider
 from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
 from arctic_office_projects_api.main.faker.providers.profile import Provider as ProfileProvider
+from arctic_office_projects_api.main.faker.providers.grant import Provider as GrantProvider
 
 faker = Faker('en_GB')
 faker.add_provider(ProjectProvider)
 faker.add_provider(PersonProvider)
 faker.add_provider(ProfileProvider)
+faker.add_provider(GrantProvider)
 
 static_grant_duration = DateRange(date(2013, 3, 1), date(2016, 10, 1))
 static_project_duration = static_grant_duration
@@ -941,7 +943,33 @@ class Grant(db.Model):
             db.session.add(static_grant)
 
         if quantity > 1:
-            pass
+            for i in range(1, quantity):
+                grant_type = faker.project_type()
+                grant_duration = faker.project_duration(grant_type)
+                grant_currency = faker.grant_currency(grant_type).name
+                grant_total_funds = faker.total_funds(grant_type)
+
+                resource = Grant(
+                    neutral_id=generate_neutral_id(),
+                    reference=faker.grant_reference(grant_type),
+                    title=faker.title(),
+                    abstract=faker.abstract(),
+                    duration=grant_duration,
+                    status=faker.status(grant_duration).name,
+                    total_funds=grant_total_funds,
+                    total_funds_currency=grant_currency
+                )
+                if faker.has_acronym(grant_type):
+                    resource.acronym = faker.acronym()
+                if faker.has_website(grant_type):
+                    resource.website = faker.uri()
+                if faker.has_publications:
+                    resource.publications = faker.publications_list()
+                if faker.has_indirect_funds():
+                    resource.indirect_funds = faker.indirect_funds(grant_type, grant_total_funds)
+                    resource.indirect_funds_currency = grant_currency
+
+                db.session.add(resource)
 
 
 class Allocation(db.Model):
@@ -983,4 +1011,22 @@ class Allocation(db.Model):
             db.session.add(static_allocation)
 
         if quantity > 1:
-            pass
+            projects_without_grants = Project.query.outerjoin(Project.allocations) \
+                .filter(Allocation.project_id.is_(None)).all()
+            for project in projects_without_grants:
+                # All projects must have a grant, chosen at random, excluding the static grant, to ensure its
+                # relationships remain predictable
+                #
+                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
+                # cryptographic purposes)
+                #
+                # Bandit interprets picking a random person as something related to security, which it isn't.
+                allocation = Allocation(
+                    neutral_id=generate_neutral_id(),
+                    project=project,
+                    grant=random.choice(Grant.query.filter(Grant.neutral_id.notin_(  # nosec
+                        [static_grant_nid]
+                    )).all())
+                )
+
+                db.session.add(allocation)
