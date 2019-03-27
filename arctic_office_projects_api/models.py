@@ -838,7 +838,7 @@ class GrantStatus(Enum):
         'title': 'approved'
     }
     Authorised = {
-        'title': 'active'
+        'title': 'authorised'
     }
     Closed = {
         'title': 'closed'
