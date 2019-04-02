@@ -351,6 +351,31 @@ class EnumField(Field):
         return value.value
 
 
+class EnumStrField(EnumField):
+    """
+    Custom Marshmallow field for string values from an enumerator class
+
+    E.g.
+        class Foo(Enum):
+            Foo = 'bar'
+    """
+    def _serialize(self, value: Enum, attr: str, obj: Model) -> str:
+        """
+        When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
+
+        :type value: Enum
+        :param value: an item within the enumerator
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+
+        :rtype: str
+        :return: the enumerator item's value
+        """
+        return super()._serialize(value, attr, obj)
+
+
 class EnumDictField(EnumField):
     """
     Custom Marshmallow field for dictionary values from an enumerator class
@@ -374,6 +399,59 @@ class EnumDictField(EnumField):
         :return: the enumerator item's value
         """
         return super()._serialize(value, attr, obj)
+
+
+class CurrencyField(Field):
+    """
+    Custom Marshmallow field for a currency value
+
+    This field requires a metadata argument with a field in the schema object containing a currency value from an
+    enumeration of currency information.
+
+    Field use example:
+
+        class FooSchema(Schema):
+            cost = CurrencyField(currency='cost_currency')
+
+    Where 'cost_currency' is a property containing an item form an enumeration, which is structured as a dictionary:
+
+        class GrantCurrency(Enum):
+            GBP = {
+                'iso_4217_code': 'GBP',
+                'major_symbol': '£'
+            }
+    """
+    def _serialize(self, value: float, attr: str, obj: Model) -> dict:
+        """
+        When serialising, a numeric value is combined with currency information defined by a metadata argument
+
+        See the class definition for how to specify the currency metadata argument.
+
+        :type value: float
+        :param value: numeric value which will be combined with a currency
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object containing the numeric value and currency information, in this case a SQLAlchemy model
+
+        :rtype: dict
+        :return: a numeric value is combined with currency information
+        """
+        if 'currency' not in self.metadata:
+            raise KeyError('Missing currency information in field metadata')
+        currency = getattr(obj, self.metadata['currency'])
+
+        if not isinstance(currency, Enum):
+            raise TypeError('The currency information value is expected to be from an enumeration')
+        if type(currency.value) != dict:
+            raise TypeError('The currency information enumeration value is expected to be a dictionary')
+
+        return {
+            'value': value,
+            'currency': currency.value
+        }
+
+
 class ProjectSchema(Schema):
     """
     Represents information about a research project
@@ -398,6 +476,18 @@ class ProjectSchema(Schema):
         include_resource_linkage=True,
         type_='participants',
         schema='ParticipantSchema'
+    )
+
+    allocations = Relationship(
+        self_view='main.projects_relationship_allocations',
+        self_view_kwargs={'project_id': '<neutral_id>'},
+        related_view='main.projects_allocations',
+        related_view_kwargs={'project_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='allocations',
+        schema='AllocationSchema'
     )
 
     class Meta(Schema.Meta):
@@ -447,6 +537,17 @@ class PersonSchema(Schema):
     orcid_id = fields.String(dump_only=True)
     avatar_url = fields.String(attribute='logo_url', dump_only=True)
 
+    organisation = Relationship(
+        self_view='main.people_relationship_organisations',
+        self_view_kwargs={'person_id': '<neutral_id>'},
+        related_view='main.people_organisations',
+        related_view_kwargs={'person_id': '<neutral_id>'},
+        id_field='neutral_id',
+        include_resource_linkage=True,
+        type_='organisations',
+        schema='OrganisationSchema'
+    )
+
     participation = Relationship(
         self_view='main.people_relationship_participants',
         self_view_kwargs={'person_id': '<neutral_id>'},
@@ -464,3 +565,116 @@ class PersonSchema(Schema):
         self_view = 'main.people_detail'
         self_view_kwargs = {'person_id': '<id>'}
         self_view_many = 'main.people_list'
+
+
+class GrantSchema(Schema):
+    id = fields.String(attribute='neutral_id', dump_only=True, required=True)
+    reference = fields.String(dump_only=True, required=True)
+    title = fields.String(dump_only=True, required=True)
+    abstract = fields.String(dump_only=True)
+    website = fields.String(dump_only=True)
+    # noinspection PyTypeChecker
+    publications = fields.List(fields.String, dump_only=True)
+    duration = DateRangeField(dump_only=True, required=True)
+    status = EnumStrField(dump_only=True, required=True)
+    total_funds = CurrencyField(dump_only=True, currency='total_funds_currency')
+
+    funder = Relationship(
+        self_view='main.grants_relationship_organisations',
+        self_view_kwargs={'grant_id': '<neutral_id>'},
+        related_view='main.grants_organisations',
+        related_view_kwargs={'grant_id': '<neutral_id>'},
+        id_field='neutral_id',
+        include_resource_linkage=True,
+        type_='organisations',
+        schema='OrganisationSchema'
+    )
+
+    allocations = Relationship(
+        self_view='main.grants_relationship_allocations',
+        self_view_kwargs={'grant_id': '<neutral_id>'},
+        related_view='main.grants_allocations',
+        related_view_kwargs={'grant_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='allocations',
+        schema='AllocationSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'grants'
+        self_view = 'main.grants_detail'
+        self_view_kwargs = {'grant_id': '<id>'}
+        self_view_many = 'main.grants_list'
+
+
+class AllocationSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+
+    grant = Relationship(
+        self_view='main.allocations_relationship_grants',
+        self_view_kwargs={'allocation_id': '<neutral_id>'},
+        related_view='main.allocations_grants',
+        related_view_kwargs={'allocation_id': '<neutral_id>'},
+        id_field='grant.neutral_id',
+        include_resource_linkage=True,
+        type_='grants',
+        schema='GrantSchema'
+    )
+
+    project = Relationship(
+        self_view='main.allocations_relationship_projects',
+        self_view_kwargs={'allocation_id': '<neutral_id>'},
+        related_view='main.allocations_projects',
+        related_view_kwargs={'allocation_id': '<neutral_id>'},
+        id_field='project.neutral_id',
+        include_resource_linkage=True,
+        type_='projects',
+        schema='ProjectSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'allocations'
+        self_view = 'main.allocations_detail'
+        self_view_kwargs = {'allocation_id': '<id>'}
+        self_view_many = 'main.allocations_list'
+
+
+class OrganisationSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    grid_identifier = fields.String(dump_only=True)
+    name = fields.String(dump_only=True, required=True)
+    acronym = fields.String(dump_only=True)
+    website = fields.String(dump_only=True)
+    logo_url = fields.String(dump_only=True)
+
+    people = Relationship(
+        self_view='main.organisations_relationship_people',
+        self_view_kwargs={'organisation_id': '<neutral_id>'},
+        related_view='main.organisations_people',
+        related_view_kwargs={'organisation_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='people',
+        schema='PersonSchema'
+    )
+
+    grants = Relationship(
+        self_view='main.organisations_relationship_grants',
+        self_view_kwargs={'organisation_id': '<neutral_id>'},
+        related_view='main.organisations_grants',
+        related_view_kwargs={'organisation_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='grants',
+        schema='GrantSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'organisations'
+        self_view = 'main.organisations_detail'
+        self_view_kwargs = {'organisation_id': '<id>'}
+        self_view_many = 'main.organisations_list'
