@@ -273,9 +273,8 @@ class DateRangeField(Field):
         When serialising, the DateRange is converted into a dict containing a ISO 8601 date interval, covering the date
         range, and two Date instants, indicating the beginning and end of the date range.
 
-        Where a date range is unbound at one end, the interval will omit the unbound end and the relevant date instant
-        will be None/null. E.g. For an unbound end the interval will be '2012-10-30/', whereas an unbound start will be
-        '/2040-10-12'.
+        Where either side of a date range is unbound, '..' will be substituted and the relevant date instant set to
+        None/null. E.g. An unbound end will use '2012-10-30/..' and an unbound start will use '../2040-10-12'.
 
         :type value: DateRange
         :param value: a DateRange instance
@@ -286,19 +285,23 @@ class DateRangeField(Field):
         :rtype: dict
         :return: ISO 8601 date duration and dates for the beginning and end of the date range
         """
-        date_range = {
-            'interval': '/',
-            'start_instant': None,
-            'end_instant': None
-        }
-        if value.lower is not None:
-            date_range['start_instant'] = value.lower.isoformat()
-            date_range['interval'] = date_range['start_instant'] + date_range['interval']
-        if value.upper is not None:
-            date_range['end_instant'] = value.upper.isoformat()
-            date_range['interval'] = date_range['interval'] + date_range['end_instant']
+        instant_start = None
+        instant_end = None
+        interval_start = '..'
+        interval_end = '..'
 
-        return date_range
+        if value.lower is not None:
+            instant_start = value.lower.isoformat()
+            interval_start = instant_start
+        if value.upper is not None:
+            instant_end = value.upper.isoformat()
+            interval_end = instant_end
+
+        return {
+            'interval': f"{ interval_start }/{ interval_end }",
+            'start_instant': instant_start,
+            'end_instant': instant_end
+        }
 
     # noinspection PyMethodOverriding
     def deserialize(self, value: dict, attr: str, data: dict) -> DateRange:

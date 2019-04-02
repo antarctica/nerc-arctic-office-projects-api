@@ -94,7 +94,7 @@ class MainBlueprintTestCase(BaseTestCase):
                             "clouds and, in turn, the global climate.",
                 "access-duration": {
                     "end_instant": None,
-                    "interval": "2013-03-01/",
+                    "interval": "2013-03-01/..",
                     "start_instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
@@ -276,7 +276,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "clouds and, in turn, the global climate.",
                     "access-duration": {
                         "end_instant": None,
-                        "interval": "2013-03-01/",
+                        "interval": "2013-03-01/..",
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
@@ -670,6 +670,7 @@ class MainBlueprintTestCase(BaseTestCase):
 
     def test_participants_detail(self):
         expected_payload = {
+                    "interval": "2013-03-01/..",
             "data": {
                 "attributes": {
                     "role": {
@@ -779,7 +780,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                     "clouds and, in turn, the global climate.",
                         "access-duration": {
                             "end_instant": None,
-                            "interval": "2013-03-01/",
+                            "interval": "2013-03-01/..",
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
@@ -945,7 +946,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "clouds and, in turn, the global climate.",
                     "access-duration": {
                         "end_instant": None,
-                        "interval": "2013-03-01/",
+                        "interval": "2013-03-01/..",
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
@@ -1163,7 +1164,6 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "clouds and, in turn, the global climate.",
                     "access-duration": {
                         "end_instant": None,
-                        "interval": "2013-03-01/",
                         "start_instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
@@ -1171,6 +1171,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "end_instant": "2016-10-01",
                         "interval": "2013-03-01/2016-10-01",
                         "start_instant": "2013-03-01"
+                            "interval": "2013-03-01/..",
                     },
                     "publications": [
                         "https://doi.org/10.5194/acp-2018-283",
@@ -1331,7 +1332,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                     "clouds and, in turn, the global climate.",
                         "access-duration": {
                             "end_instant": None,
-                            "interval": "2013-03-01/",
+                            "interval": "2013-03-01/..",
                             "start_instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",

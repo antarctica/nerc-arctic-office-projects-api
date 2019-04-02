@@ -260,7 +260,7 @@ paths:
                             start_interval: 2013-03-01
                             end_interval: 2016-10-01
                           access_duration:
-                            interval: 2013-03-01/
+                            interval: 2013-03-01/..
                             start_interval: 2013-03-01
                             end_interval: null
                           website: http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/
@@ -557,7 +557,7 @@ paths:
                           start_interval: 2013-03-01
                           end_interval: 2016-10-01
                         access_duration:
-                          interval: 2013-03-01/
+                          interval: 2013-03-01/..
                           start_interval: 2013-03-01
                           end_interval: null
                         website: http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/
