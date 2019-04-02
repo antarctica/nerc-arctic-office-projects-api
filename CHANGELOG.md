@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Improved project seeding to be more realistic at representing average and edge-case examples
 * Refactored Person and Participant migrations into one
+* Error for methods returning a single resource but find multiple changed from 409 Conflict to 422 Unprocessable Entity
 
 ### Fixed
 

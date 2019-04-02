@@ -1,7 +1,7 @@
 # noinspection PyPackageRequirements
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 # noinspection PyPackageRequirements
-from werkzeug.exceptions import NotFound, Conflict
+from werkzeug.exceptions import NotFound, UnprocessableEntity
 from flask import Blueprint, jsonify, request, current_app as app
 
 from arctic_office_projects_api import auth
@@ -64,7 +64,7 @@ def projects_detail(project_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/projects/<project_id>/relationships/participants')
@@ -83,7 +83,7 @@ def projects_relationship_participants(project_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/projects/<project_id>/participants')
@@ -102,7 +102,7 @@ def projects_participants(project_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/participants')
@@ -143,7 +143,7 @@ def participants_detail(participant_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/participants/<participant_id>/relationships/projects')
@@ -162,7 +162,7 @@ def participants_relationship_projects(participant_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/participants/<participant_id>/relationships/people')
@@ -181,7 +181,7 @@ def participants_relationship_people(participant_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/participants/<participant_id>/projects')
@@ -200,7 +200,7 @@ def participants_projects(participant_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/participants/<participant_id>/people')
@@ -219,7 +219,7 @@ def participants_people(participant_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/people')
@@ -260,7 +260,7 @@ def people_detail(person_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/people/<person_id>/relationships/participants')
@@ -279,7 +279,7 @@ def people_relationship_participants(person_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
 
 
 @main.route('/people/<person_id>/participants')
@@ -298,4 +298,4 @@ def people_participants(person_id: str):
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
-        raise Conflict()
+        raise UnprocessableEntity()
