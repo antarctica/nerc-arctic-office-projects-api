@@ -39,11 +39,10 @@ def projects_list():
         page = 1
 
     projects = Project.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
-    payload = ProjectSchema(
-        many=True,
-        paginate=True,
-        include_data=('participants', 'participants.person')
-    ).dump(projects)
+    payload = ProjectSchema(many=True, paginate=True, include_data=(
+        'participants',
+        'participants.person',
+    )).dump(projects)
 
     return jsonify(payload.data)
 
@@ -59,7 +58,10 @@ def projects_detail(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(include_data=('participants', 'participants.person')).dump(project)
+        payload = ProjectSchema(include_data=(
+            'participants',
+            'participants.person',
+        )).dump(project)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -118,11 +120,10 @@ def participants_list():
         page = 1
 
     participants = Participant.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
-    payload = ParticipantSchema(
-        many=True,
-        paginate=True,
-        include_data=('project', 'person')
-    ).dump(participants)
+    payload = ParticipantSchema(many=True, paginate=True, include_data=(
+        'project',
+        'person'
+    )).dump(participants)
 
     return jsonify(payload.data)
 
@@ -138,7 +139,10 @@ def participants_detail(participant_id: str):
     """
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
-        payload = ParticipantSchema(include_data=('project', 'person')).dump(participant)
+        payload = ParticipantSchema(include_data=(
+            'project',
+            'person'
+        )).dump(participant)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -235,11 +239,11 @@ def people_list():
         page = 1
 
     people = Person.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
-    payload = PersonSchema(
-        many=True,
-        paginate=True,
-        include_data=('participation', 'participation.project')
-    ).dump(people)
+    payload = PersonSchema(many=True, paginate=True, include_data=(
+        'organisation',
+        'participation',
+        'participation.project'
+    )).dump(people)
 
     return jsonify(payload.data)
 
@@ -255,7 +259,10 @@ def people_detail(person_id: str):
     """
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
-        payload = PersonSchema(include_data=('participation', 'participation.project')).dump(person)
+        payload = PersonSchema(include_data=(
+            'participation',
+            'participation.project'
+        )).dump(person)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()

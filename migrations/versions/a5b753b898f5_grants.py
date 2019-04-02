@@ -30,9 +30,9 @@ def upgrade():
         sa.Column('duration', postgresql.DATERANGE(), nullable=False),
         sa.Column('status', sa.Enum(
             'Accepted', 'Active', 'Approved', 'Authorised', 'Closed', name='grant_status'),
-            nullable=True
+            nullable=False
         ),
-        sa.Column('total_funds', sa.Numeric(24, 2), nullable=False),
+        sa.Column('total_funds', sa.Numeric(24, 2), nullable=True),
         sa.Column('total_funds_currency', postgresql.ENUM(
             'GBP', 'EUR', 'USD', name='grant_currency'),
             nullable=True

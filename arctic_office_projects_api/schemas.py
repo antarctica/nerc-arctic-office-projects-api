@@ -1,10 +1,7 @@
 from datetime import datetime
 
 # noinspection PyPackageRequirements
-import marshmallow
-
-# noinspection PyPackageRequirements
-from marshmallow import MarshalResult, fields
+from marshmallow import MarshalResult, fields, post_dump
 # noinspection PyPackageRequirements
 from marshmallow.fields import Field
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
@@ -156,7 +153,7 @@ class Schema(_Schema):
 
         return super().dump(obj, many=many, update_fields=update_fields, **kwargs)
 
-    @marshmallow.post_dump(pass_many=True)
+    @post_dump(pass_many=True)
     def format_json_api_response(self, data: dict, many: bool) -> dict:
         """
         Overloaded implementation of the 'format_json_api_response' method in the marshmallow_jsonapi default schema
@@ -271,7 +268,7 @@ class DateRangeField(Field):
     def _serialize(self, value: DateRange, attr: str, obj) -> dict:
         """
         When serialising, the DateRange is converted into a dict containing a ISO 8601 date interval, covering the date
-        range, and two Date instants, indicating the beginning and end of the date range.
+        range, and two date instants, indicating the beginning and end of the date range.
 
         Where either side of a date range is unbound, '..' will be substituted and the relevant date instant set to
         None/null. E.g. An unbound end will use '2012-10-30/..' and an unbound start will use '../2040-10-12'.
@@ -283,7 +280,7 @@ class DateRangeField(Field):
         :param obj: the object 'value' was taken from
 
         :rtype: dict
-        :return: ISO 8601 date duration and dates for the beginning and end of the date range
+        :return: ISO 8601 date interval and date instants for the beginning and end of a date range
         """
         instant_start = None
         instant_end = None
@@ -335,7 +332,7 @@ class ProjectSchema(Schema):
     """
     Represents information about a research project
     """
-    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    id = fields.String(attribute='neutral_id', dump_only=True, required=True)
     title = fields.String(dump_only=True, required=True)
     acronym = fields.String(dump_only=True)
     abstract = fields.String(dump_only=True)
@@ -411,8 +408,8 @@ class ParticipantRoleField(Field):
 
 
 class ParticipantSchema(Schema):
-    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
     role = ParticipantRoleField(dump_only=True, required=True)
+    id = fields.String(attribute='neutral_id', dump_only=True, required=True)
 
     project = Relationship(
         self_view='main.participants_relationship_projects',

@@ -828,21 +828,11 @@ class GrantStatus(Enum):
     """
     Represents the various states of a research grant
     """
-    Accepted = {
-        'title': 'accepted'
-    }
-    Active = {
-        'title': 'active'
-    }
-    Approved = {
-        'title': 'approved'
-    }
-    Authorised = {
-        'title': 'authorised'
-    }
-    Closed = {
-        'title': 'closed'
-    }
+    Accepted = 'accepted'
+    Active = 'active'
+    Approved = 'approved'
+    Authorised = 'authorised'
+    Closed = 'closed'
 
 
 class GrantCurrency(Enum):
@@ -877,8 +867,8 @@ class Grant(db.Model):
     website = db.Column(db.Text(), nullable=True)
     publications = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
     duration = db.Column(postgresql.DATERANGE(), nullable=False)
-    status = db.Column(db.Enum(GrantStatus), nullable=True)
-    total_funds = db.Column(db.Numeric(24, 2), nullable=False)
+    status = db.Column(db.Enum(GrantStatus), nullable=False)
+    total_funds = db.Column(db.Numeric(24, 2), nullable=True)
     total_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
 
     funder = db.relationship('Organisation', back_populates='grants')
