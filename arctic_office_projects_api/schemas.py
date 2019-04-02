@@ -194,7 +194,7 @@ class Schema(_Schema):
                             response = {
                                 'data': response['included'],
                                 'links': {
-                                    'self': response['data']['relationships'][self.related_resource]['links']['self']
+                                    'self': response['data']['relationships'][self.related_resource]['links']['related']
                                 }
                             }
                             if not self.many_related:
