@@ -1,16 +1,15 @@
 from datetime import datetime
+from enum import Enum
 
 # noinspection PyPackageRequirements
 from marshmallow import MarshalResult, fields, post_dump
 # noinspection PyPackageRequirements
 from marshmallow.fields import Field
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
-from flask_sqlalchemy import Pagination
+from flask_sqlalchemy import Pagination, Model
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
 from typing import Union
-
-from arctic_office_projects_api.models import Participant, ParticipantRole
 
 
 class Schema(_Schema):
@@ -328,6 +327,53 @@ class DateRangeField(Field):
             raise ValueError(f"Invalid '{ value['interval'] }' is not in the form [YYYY-MM-DD]/[YYYY-MM-DD]")
 
 
+class EnumField(Field):
+    """
+    Base custom Marshmallow field for values from an enumerator class
+
+    E.g.
+        class Foo(Enum):
+            Foo = 'bar'
+    """
+    def _serialize(self, value: Enum, attr: str, obj: Model):
+        """
+        When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
+
+        :type value: Enum
+        :param value: an item within the enumerator
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+
+        :return: the enumerator item's value
+        """
+        return value.value
+
+
+class EnumDictField(EnumField):
+    """
+    Custom Marshmallow field for dictionary values from an enumerator class
+
+    E.g.
+        class Foo(Enum):
+            Foo = {'bar': 'baz'}
+    """
+    def _serialize(self, value: Enum, attr: str, obj: Model) -> dict:
+        """
+        When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
+
+        :type value: Enum
+        :param value: an item within the enumerator
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+
+        :rtype: dict
+        :return: the enumerator item's value
+        """
+        return super()._serialize(value, attr, obj)
 class ProjectSchema(Schema):
     """
     Represents information about a research project
@@ -361,55 +407,9 @@ class ProjectSchema(Schema):
         self_view_many = 'main.projects_list'
 
 
-class ParticipantRoleField(Field):
-    """
-    Custom Marshmallow field for the ParticipantRole enumerator class
-    """
-    def _serialize(self, value: ParticipantRole, attr: str, obj: Participant) -> dict:
-        """
-        When serialising, the value of the ParticipantRole item corresponding to 'value' is returned.
-
-        The name is included to aid if the item needs to be determined later when deserialising.
-
-        :type value: ParticipantRole
-        :param value: an item within the ParticipantRole enumerator
-        :type attr: str
-        :param attr: name of the field within the schema being dumped
-        :type obj: Participant
-        :param obj: the object 'value' was taken from, in this case a Participant model instance
-
-        :rtype: dict
-        :return: the ParticipantRole item's value
-        """
-        return value.value
-
-    # noinspection PyMethodOverriding
-    def deserialize(self, value: dict, attr: str, data: dict) -> ParticipantRole:
-        """
-        When serialising it's expected that a ParticipantRole enumerator item is specified by an 'member' value key.
-
-        :type value: dict
-        :param value: dictionary containing at least an 'member' field which corresponds to a ParticipantRole item's
-        member key in its value
-        :param attr: name of the field within the schema being loaded
-        :param data: the object 'value' was taken from, in this case the data to be loaded
-
-        :rtype: ParticipantRole
-        :return: an item within the ParticipantRole enumerator
-        """
-        if 'member' not in value.keys():
-            raise KeyError(f"No 'member' property in { attr } to identify participant role")
-
-        for role in ParticipantRole:
-            if role.value['member'] == value['member']:
-                return role
-
-        raise KeyError(f"No ParticipantRole found for member: { value['member'] }")
-
-
 class ParticipantSchema(Schema):
-    role = ParticipantRoleField(dump_only=True, required=True)
     id = fields.String(attribute='neutral_id', dump_only=True, required=True)
+    role = EnumDictField(dump_only=True, required=True)
 
     project = Relationship(
         self_view='main.participants_relationship_projects',
