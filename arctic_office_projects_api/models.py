@@ -880,8 +880,6 @@ class Grant(db.Model):
     status = db.Column(db.Enum(GrantStatus), nullable=True)
     total_funds = db.Column(db.Numeric(24, 2), nullable=False)
     total_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
-    indirect_funds = db.Column(db.Numeric(24, 2), nullable=True)
-    indirect_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
 
     funder = db.relationship('Organisation', back_populates='grants')
     allocations = db.relationship("Allocation", back_populates="grant")
@@ -959,6 +957,7 @@ class Grant(db.Model):
                 duration=static_grant_duration,
                 status=GrantStatus.Closed,
                 total_funds=324282,
+                total_funds_currency=GrantCurrency.GBP,
                 funder=Organisation.query.filter_by(neutral_id=static_organisation_nid).one()
             )
             db.session.add(static_grant)
@@ -967,8 +966,6 @@ class Grant(db.Model):
             for i in range(1, quantity):
                 grant_type = faker.project_type()
                 grant_duration = faker.project_duration(grant_type)
-                grant_currency = faker.grant_currency(grant_type).name
-                grant_total_funds = faker.total_funds(grant_type)
 
                 # All people must have a organisation, chosen at random, excluding the static organisation, to ensure
                 # its relationships remain predictable
@@ -984,8 +981,8 @@ class Grant(db.Model):
                     abstract=faker.abstract(),
                     duration=grant_duration,
                     status=faker.status(grant_duration).name,
-                    total_funds=grant_total_funds,
-                    total_funds_currency=grant_currency,
+                    total_funds=faker.total_funds(grant_type),
+                    total_funds_currency=faker.grant_currency(grant_type).name,
                     funder=random.choice(Organisation.query.filter(Organisation.neutral_id.notin_(  # nosec
                         [static_organisation_nid]
                     )).all())
@@ -996,9 +993,6 @@ class Grant(db.Model):
                     resource.website = faker.uri()
                 if faker.has_publications:
                     resource.publications = faker.publications_list()
-                if faker.has_indirect_funds():
-                    resource.indirect_funds = faker.indirect_funds(grant_type, grant_total_funds)
-                    resource.indirect_funds_currency = grant_currency
 
                 db.session.add(resource)
 

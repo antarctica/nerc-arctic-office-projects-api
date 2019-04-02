@@ -37,11 +37,6 @@ def upgrade():
             'GBP', 'EUR', 'USD', name='grant_currency'),
             nullable=True
         ),
-        sa.Column('indirect_funds', sa.Numeric(24, 2), nullable=True),
-        sa.Column('indirect_funds_currency', postgresql.ENUM(
-            'GBP', 'EUR', 'USD', name='grant_currency', create_type=False),
-            nullable=True
-        ),
         sa.PrimaryKeyConstraint('id'),
         sa.UniqueConstraint('reference')
     )
