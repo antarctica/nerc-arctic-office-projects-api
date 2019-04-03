@@ -448,7 +448,10 @@ class CurrencyField(Field):
 
         return {
             'value': value,
-            'currency': currency.value
+            'currency': {
+                'iso-4217-code': currency.value['iso_4217_code'],
+                'major-symbol': currency.value['major_symbol']
+            }
         }
 
 

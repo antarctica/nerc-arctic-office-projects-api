@@ -240,8 +240,8 @@ class MainBlueprintTestCase(BaseTestCase):
                 "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                 "total-funds": {
                     "currency": {
-                        "iso_4217_code": "GBP",
-                        "major_symbol": "\u00a3"
+                        "iso-4217-code": "GBP",
+                        "major-symbol": "\u00a3"
                     },
                     "value": 324282.00
                 },
@@ -557,8 +557,8 @@ class MainBlueprintTestCase(BaseTestCase):
                         "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                         "total-funds": {
                             "currency": {
-                                "iso_4217_code": "GBP",
-                                "major_symbol": "\u00a3"
+                                "iso-4217-code": "GBP",
+                                "major-symbol": "\u00a3"
                             },
                             "value": 324282.00
                         },
@@ -2164,8 +2164,8 @@ class MainBlueprintTestCase(BaseTestCase):
                 "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                 "total-funds": {
                     "currency": {
-                        "iso_4217_code": "GBP",
-                        "major_symbol": "\u00a3"
+                        "iso-4217-code": "GBP",
+                        "major-symbol": "\u00a3"
                     },
                     "value": 324282.00
                 },
@@ -2375,8 +2375,8 @@ class MainBlueprintTestCase(BaseTestCase):
                     "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                     "total-funds": {
                         "currency": {
-                            "iso_4217_code": "GBP",
-                            "major_symbol": "\u00a3"
+                            "iso-4217-code": "GBP",
+                            "major-symbol": "\u00a3"
                         },
                         "value": 324282.00
                     },
@@ -2836,8 +2836,8 @@ class MainBlueprintTestCase(BaseTestCase):
                 "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                 "total-funds": {
                     "currency": {
-                        "iso_4217_code": "GBP",
-                        "major_symbol": "\u00a3"
+                        "iso-4217-code": "GBP",
+                        "major-symbol": "\u00a3"
                     },
                     "value": 324282.00
                 },
@@ -2999,8 +2999,8 @@ class MainBlueprintTestCase(BaseTestCase):
                         "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                         "total-funds": {
                             "currency": {
-                                "iso_4217_code": "GBP",
-                                "major_symbol": "\u00a3"
+                                "iso-4217-code": "GBP",
+                                "major-symbol": "\u00a3"
                             },
                             "value": 324282.00
                         },
@@ -3137,8 +3137,8 @@ class MainBlueprintTestCase(BaseTestCase):
                     "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                     "total-funds": {
                         "currency": {
-                            "iso_4217_code": "GBP",
-                            "major_symbol": "\u00a3"
+                            "iso-4217-code": "GBP",
+                            "major-symbol": "\u00a3"
                         },
                         "value": 324282.00
                     },
@@ -3368,8 +3368,8 @@ class MainBlueprintTestCase(BaseTestCase):
                 "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                 "total-funds": {
                     "currency": {
-                        "iso_4217_code": "GBP",
-                        "major_symbol": "\u00a3"
+                        "iso-4217-code": "GBP",
+                        "major-symbol": "\u00a3"
                     },
                     "value": 324282.00
                 },
@@ -3646,8 +3646,8 @@ class MainBlueprintTestCase(BaseTestCase):
                         "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                         "total-funds": {
                             "currency": {
-                                "iso_4217_code": "GBP",
-                                "major_symbol": "\u00a3"
+                                "iso-4217-code": "GBP",
+                                "major-symbol": "\u00a3"
                             },
                             "value": 324282.00
                         },
@@ -3947,8 +3947,8 @@ class MainBlueprintTestCase(BaseTestCase):
                         "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
                         "total-funds": {
                             "currency": {
-                                "iso_4217_code": "GBP",
-                                "major_symbol": "\u00a3"
+                                "iso-4217-code": "GBP",
+                                "major-symbol": "\u00a3"
                             },
                             "value": 324282.00
                         },
