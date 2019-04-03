@@ -128,6 +128,16 @@ Examples:
 * `åccented`
 * `emoji ❄️`
 
+#### Decimal (data type)
+
+Decimal values are encoded with a given precision (e.g. 2 decimal places).
+
+Examples:
+
+* `0.00`
+* `-10.02`
+* `100000000.20`
+
 #### Date (data type)
 
 Date values are encoded as [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) [strings](#string) (i.e. `YYYY-MM-DD`).
@@ -140,15 +150,15 @@ Examples:
 
 Date range values are encoded as an object containing:
  
-* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date interval [string](#string) which covers the entire range 
-  (i.e. `YYYY-MM-DD/YYYY-MM-DD`)
-* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string) which marks the beginning of the
-  range (i.e. `YYYY-MM-DD`)
-* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string) which marks the end of the range 
-  (i.e. `YYYY-MM-DD`)
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date interval [string](#string-data-type) which covers the
+  entire range (i.e. `YYYY-MM-DD/YYYY-MM-DD`)
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string-data-type) which marks the 
+  beginning of the range (i.e. `YYYY-MM-DD`)
+* a [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date instant [string](#string-data-type) which marks the 
+  end of the range (i.e. `YYYY-MM-DD`)
   
 Date ranges can be unbounded, on either or both sides, to indicate where a range has no end date for example. When 
-unbounded, the relevant date instant will be `null` and the relevant part of date interval will be omitted.
+unbounded, the relevant date instant will be `null` and the relevant part of date interval will be replaced with `..`.
 
 Examples:
 
@@ -162,7 +172,7 @@ Examples:
 
 ```json
 {
-  "interval": "/2002-04-14",
+  "interval": "../2002-04-14",
   "start_instance": null,
   "end_instance": "2002-04-14"
 }
@@ -170,9 +180,30 @@ Examples:
 
 ```json
 {
-  "interval": "1875-05-20/",
+  "interval": "1875-05-20/..",
   "start_instance": "1875-05-20",
   "end_instance": null
+}
+```
+
+#### Currency (data type)
+
+Currency values are encoded as an object containing:
+
+* a [decimal](#decimal-data-type) value with fixed precision of two decimal places (e.g. `12.70`)
+* a currency object containing:
+    * a [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code [string](#string-data-type) (e.g. `GBP`)
+    * the major currency unit symbol unicode escaped [string](#string-data-type) (e.g. `\u00a3` (`£`))
+
+Examples:
+
+```json
+{
+  "currency": {
+    "iso-4217-code": "GBP",
+    "major-symbol": "\u00a3"
+  },
+  "value": "123.40"
 }
 ```
 
@@ -217,23 +248,58 @@ The `id` property will vary with each error using a UUID (version 4).
 
 Represents information about a research project.
 
-### Fake data limitations
+#### Fake data limitations
 
 * project acronym's don't relate to a projects title
+* titles, abstracts, publications and other properties shared with corresponding grants are not the same
+* projects are assigned to grants at random
 * where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
 
 ### Participants
 
 Represents information about an individuals involvement in a research project.
 
-### Fake data limitations
+#### Fake data limitations
 
-None.
+* projects will only use a subset of available participant roles (Principle Investigator and Co-Investigator)
+* a random person will be chosen as the PI of a project
+* a random number of CoIs (that are not the PI) may be chosen as Co-Is
 
 ### People
 
 Represents information about an individual.
 
-### Fake data limitations
+#### Fake data limitations
 
-* Orcid IDs are fake and can't be used to lookup additional information on a person
+* ORCiD IDs are fake and can't be used to lookup additional information on a person
+* Organisation allocations are made at random
+
+### Grants
+
+Represents information about a research grant.
+
+#### Fake data limitations
+
+* grant references do not correspond to the format of each grant type
+* grant funder's (organisations) are chosen at random
+* where publications are in a grant, all are fake using the prefix 10.5555 and an 8 digit random suffix
+* titles, abstracts, publications and other properties shared with corresponding projects are not the same
+* all grants total funds will be random within a range based on the grant type (i.e. not in multiples of 10, 100, etc.) 
+
+### Allocations
+
+Represents information about how research projects are funded by grants.
+
+#### Fake data limitations
+
+* grants are related to projects at random
+
+### Organisations
+
+Represents information about an organisation, acting either as an agent (e.g. a funder) or an entity (e.g. that an 
+individual belongs to).
+
+#### Fake data limitations
+
+* organisation acronym's don't relate to a organisation's name
+* Grid IDs are fake and can't be used to lookup additional information on an organisation

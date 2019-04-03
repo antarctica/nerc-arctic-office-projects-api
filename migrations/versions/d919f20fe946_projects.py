@@ -1,4 +1,4 @@
-"""Adding projects entity
+"""Adding Project entity
 
 Revision ID: d919f20fe946
 Revises: None

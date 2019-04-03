@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* Grant entity, representing a research grant
+* Allocation entity, representing the relationship between a research project and a research grant
 * Basic seeding for Participants, linking Projects to random People
 * Project acronym property
 * Project abstract property
@@ -24,10 +26,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 * Improved project seeding to be more realistic at representing average and edge-case examples
+* Refactored enum schema field to support any enumeration
+* Refactored Person and Participant migrations into one
+* Error for methods returning a single resource but find multiple changed from 409 Conflict to 422 Unprocessable Entity
 
 ### Fixed
 
 * Working around inconsistent ordering for included items in tests
+* Fixing links for JSON API resource relations
 
 ## [0.1.0] 2019-03-18
 

@@ -19,7 +19,7 @@ def meta_healthcheck_canary():
     If healthy a 204 No Content response is returned, if unhealthy a 503 Service Unavailable response is returned. This
     healthcheck is binary and does not return any details to reduce payload size and prevent leaking sensitive data.
 
-    Other healthchecks should be used where more details are required. This healthcheck is intended for use with load
+    Other healthcheck's should be used where more details are required. This healthcheck is intended for use with load
     balancers to give early indication of a service not being available.
     """
     dependencies = {

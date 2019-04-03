@@ -30,7 +30,7 @@ class Provider(BaseProvider):
 
         :example: GrantType.UKRI_STANDARD_GRANT
         :rtype: GrantType
-        :return: Member of the GrantType enumerated class, representing the type of grant a project is created from
+        :return: member of the GrantType enumerated class, representing the type of grant a project is created from
         """
         return GrantType(self.random_element({
             'ukri-standard-grant': 0.665,
@@ -73,7 +73,7 @@ class Provider(BaseProvider):
           * 50% of Other grant based projects have an acronym
 
         :type grant_type: GrantType
-        :param grant_type: Member of the GrantType enumerated class
+        :param grant_type: member of the GrantType enumerated class
 
         :example: True
         :rtype: bool
@@ -139,7 +139,7 @@ class Provider(BaseProvider):
           * 75% of Other grant based projects have a website
 
         :type grant_type: GrantType
-        :param grant_type: Member of the GrantType enumerated class
+        :param grant_type: member of the GrantType enumerated class
 
         :example: True
         :rtype: bool
@@ -222,7 +222,7 @@ class Provider(BaseProvider):
           * Other grant based projects have a duration of 1 year
 
         :type grant_type: GrantType
-        :param grant_type: Member of the GrantType enumerated class
+        :param grant_type: member of the GrantType enumerated class
 
         :example: DateRange(2012-01-01, 2016-01-31)
         :rtype: DateRange

@@ -1,19 +1,15 @@
 from datetime import datetime
+from enum import Enum
 
 # noinspection PyPackageRequirements
-import marshmallow
-
-# noinspection PyPackageRequirements
-from marshmallow import MarshalResult, fields
+from marshmallow import MarshalResult, fields, post_dump
 # noinspection PyPackageRequirements
 from marshmallow.fields import Field
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
-from flask_sqlalchemy import Pagination
+from flask_sqlalchemy import Pagination, Model
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
 from typing import Union
-
-from arctic_office_projects_api.models import Participant, ParticipantRole
 
 
 class Schema(_Schema):
@@ -156,7 +152,7 @@ class Schema(_Schema):
 
         return super().dump(obj, many=many, update_fields=update_fields, **kwargs)
 
-    @marshmallow.post_dump(pass_many=True)
+    @post_dump(pass_many=True)
     def format_json_api_response(self, data: dict, many: bool) -> dict:
         """
         Overloaded implementation of the 'format_json_api_response' method in the marshmallow_jsonapi default schema
@@ -197,7 +193,7 @@ class Schema(_Schema):
                             response = {
                                 'data': response['included'],
                                 'links': {
-                                    'self': response['data']['relationships'][self.related_resource]['links']['self']
+                                    'self': response['data']['relationships'][self.related_resource]['links']['related']
                                 }
                             }
                             if not self.many_related:
@@ -271,11 +267,10 @@ class DateRangeField(Field):
     def _serialize(self, value: DateRange, attr: str, obj) -> dict:
         """
         When serialising, the DateRange is converted into a dict containing a ISO 8601 date interval, covering the date
-        range, and two Date instants, indicating the beginning and end of the date range.
+        range, and two date instants, indicating the beginning and end of the date range.
 
-        Where a date range is unbound at one end, the interval will omit the unbound end and the relevant date instant
-        will be None/null. E.g. For an unbound end the interval will be '2012-10-30/', whereas an unbound start will be
-        '/2040-10-12'.
+        Where either side of a date range is unbound, '..' will be substituted and the relevant date instant set to
+        None/null. E.g. An unbound end will use '2012-10-30/..' and an unbound start will use '../2040-10-12'.
 
         :type value: DateRange
         :param value: a DateRange instance
@@ -284,21 +279,25 @@ class DateRangeField(Field):
         :param obj: the object 'value' was taken from
 
         :rtype: dict
-        :return: ISO 8601 date duration and dates for the beginning and end of the date range
+        :return: ISO 8601 date interval and date instants for the beginning and end of a date range
         """
-        date_range = {
-            'interval': '/',
-            'start_instant': None,
-            'end_instant': None
-        }
-        if value.lower is not None:
-            date_range['start_instant'] = value.lower.isoformat()
-            date_range['interval'] = date_range['start_instant'] + date_range['interval']
-        if value.upper is not None:
-            date_range['end_instant'] = value.upper.isoformat()
-            date_range['interval'] = date_range['interval'] + date_range['end_instant']
+        instant_start = None
+        instant_end = None
+        interval_start = '..'
+        interval_end = '..'
 
-        return date_range
+        if value.lower is not None:
+            instant_start = value.lower.isoformat()
+            interval_start = instant_start
+        if value.upper is not None:
+            instant_end = value.upper.isoformat()
+            interval_end = instant_end
+
+        return {
+            'interval': f"{ interval_start }/{ interval_end }",
+            'start_instant': instant_start,
+            'end_instant': instant_end
+        }
 
     # noinspection PyMethodOverriding
     def deserialize(self, value: dict, attr: str, data: dict) -> DateRange:
@@ -328,11 +327,139 @@ class DateRangeField(Field):
             raise ValueError(f"Invalid '{ value['interval'] }' is not in the form [YYYY-MM-DD]/[YYYY-MM-DD]")
 
 
+class EnumField(Field):
+    """
+    Base custom Marshmallow field for values from an enumerator class
+
+    E.g.
+        class Foo(Enum):
+            Foo = 'bar'
+    """
+    def _serialize(self, value: Enum, attr: str, obj: Model):
+        """
+        When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
+
+        :type value: Enum
+        :param value: an item within the enumerator
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+
+        :return: the enumerator item's value
+        """
+        return value.value
+
+
+class EnumStrField(EnumField):
+    """
+    Custom Marshmallow field for string values from an enumerator class
+
+    E.g.
+        class Foo(Enum):
+            Foo = 'bar'
+    """
+    def _serialize(self, value: Enum, attr: str, obj: Model) -> str:
+        """
+        When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
+
+        :type value: Enum
+        :param value: an item within the enumerator
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+
+        :rtype: str
+        :return: the enumerator item's value
+        """
+        return super()._serialize(value, attr, obj)
+
+
+class EnumDictField(EnumField):
+    """
+    Custom Marshmallow field for dictionary values from an enumerator class
+
+    E.g.
+        class Foo(Enum):
+            Foo = {'bar': 'baz'}
+    """
+    def _serialize(self, value: Enum, attr: str, obj: Model) -> dict:
+        """
+        When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
+
+        :type value: Enum
+        :param value: an item within the enumerator
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+
+        :rtype: dict
+        :return: the enumerator item's value
+        """
+        return super()._serialize(value, attr, obj)
+
+
+class CurrencyField(Field):
+    """
+    Custom Marshmallow field for a currency value
+
+    This field requires a metadata argument with a field in the schema object containing a currency value from an
+    enumeration of currency information.
+
+    Field use example:
+
+        class FooSchema(Schema):
+            cost = CurrencyField(currency='cost_currency')
+
+    Where 'cost_currency' is a property containing an item form an enumeration, which is structured as a dictionary:
+
+        class GrantCurrency(Enum):
+            GBP = {
+                'iso_4217_code': 'GBP',
+                'major_symbol': '£'
+            }
+    """
+    def _serialize(self, value: float, attr: str, obj: Model) -> dict:
+        """
+        When serialising, a numeric value is combined with currency information defined by a metadata argument
+
+        See the class definition for how to specify the currency metadata argument.
+
+        :type value: float
+        :param value: numeric value which will be combined with a currency
+        :type attr: str
+        :param attr: name of the field within the schema being dumped
+        :type obj: Model
+        :param obj: the object containing the numeric value and currency information, in this case a SQLAlchemy model
+
+        :rtype: dict
+        :return: a numeric value is combined with currency information
+        """
+        if 'currency' not in self.metadata:
+            raise KeyError('Missing currency information in field metadata')
+        currency = getattr(obj, self.metadata['currency'])
+
+        if not isinstance(currency, Enum):
+            raise TypeError('The currency information value is expected to be from an enumeration')
+        if type(currency.value) != dict:
+            raise TypeError('The currency information enumeration value is expected to be a dictionary')
+
+        return {
+            'value': value,
+            'currency': {
+                'iso-4217-code': currency.value['iso_4217_code'],
+                'major-symbol': currency.value['major_symbol']
+            }
+        }
+
+
 class ProjectSchema(Schema):
     """
     Represents information about a research project
     """
-    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    id = fields.String(attribute='neutral_id', dump_only=True, required=True)
     title = fields.String(dump_only=True, required=True)
     acronym = fields.String(dump_only=True)
     abstract = fields.String(dump_only=True)
@@ -354,6 +481,18 @@ class ProjectSchema(Schema):
         schema='ParticipantSchema'
     )
 
+    allocations = Relationship(
+        self_view='main.projects_relationship_allocations',
+        self_view_kwargs={'project_id': '<neutral_id>'},
+        related_view='main.projects_allocations',
+        related_view_kwargs={'project_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='allocations',
+        schema='AllocationSchema'
+    )
+
     class Meta(Schema.Meta):
         type_ = 'projects'
         self_view = 'main.projects_detail'
@@ -361,55 +500,9 @@ class ProjectSchema(Schema):
         self_view_many = 'main.projects_list'
 
 
-class ParticipantRoleField(Field):
-    """
-    Custom Marshmallow field for the ParticipantRole enumerator class
-    """
-    def _serialize(self, value: ParticipantRole, attr: str, obj: Participant) -> dict:
-        """
-        When serialising, the value of the ParticipantRole item corresponding to 'value' is returned.
-
-        The name is included to aid if the item needs to be determined later when deserialising.
-
-        :type value: ParticipantRole
-        :param value: an item within the ParticipantRole enumerator
-        :type attr: str
-        :param attr: name of the field within the schema being dumped
-        :type obj: Participant
-        :param obj: the object 'value' was taken from, in this case a Participant model instance
-
-        :rtype: dict
-        :return: the ParticipantRole item's value
-        """
-        return value.value
-
-    # noinspection PyMethodOverriding
-    def deserialize(self, value: dict, attr: str, data: dict) -> ParticipantRole:
-        """
-        When serialising it's expected that a ParticipantRole enumerator item is specified by an 'member' value key.
-
-        :type value: dict
-        :param value: dictionary containing at least an 'member' field which corresponds to a ParticipantRole item's
-        member key in its value
-        :param attr: name of the field within the schema being loaded
-        :param data: the object 'value' was taken from, in this case the data to be loaded
-
-        :rtype: ParticipantRole
-        :return: an item within the ParticipantRole enumerator
-        """
-        if 'member' not in value.keys():
-            raise KeyError(f"No 'member' property in { attr } to identify participant role")
-
-        for role in ParticipantRole:
-            if role.value['member'] == value['member']:
-                return role
-
-        raise KeyError(f"No ParticipantRole found for member: { value['member'] }")
-
-
 class ParticipantSchema(Schema):
-    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
-    role = ParticipantRoleField(dump_only=True, required=True)
+    id = fields.String(attribute='neutral_id', dump_only=True, required=True)
+    role = EnumDictField(dump_only=True, required=True)
 
     project = Relationship(
         self_view='main.participants_relationship_projects',
@@ -447,6 +540,17 @@ class PersonSchema(Schema):
     orcid_id = fields.String(dump_only=True)
     avatar_url = fields.String(attribute='logo_url', dump_only=True)
 
+    organisation = Relationship(
+        self_view='main.people_relationship_organisations',
+        self_view_kwargs={'person_id': '<neutral_id>'},
+        related_view='main.people_organisations',
+        related_view_kwargs={'person_id': '<neutral_id>'},
+        id_field='neutral_id',
+        include_resource_linkage=True,
+        type_='organisations',
+        schema='OrganisationSchema'
+    )
+
     participation = Relationship(
         self_view='main.people_relationship_participants',
         self_view_kwargs={'person_id': '<neutral_id>'},
@@ -464,3 +568,116 @@ class PersonSchema(Schema):
         self_view = 'main.people_detail'
         self_view_kwargs = {'person_id': '<id>'}
         self_view_many = 'main.people_list'
+
+
+class GrantSchema(Schema):
+    id = fields.String(attribute='neutral_id', dump_only=True, required=True)
+    reference = fields.String(dump_only=True, required=True)
+    title = fields.String(dump_only=True, required=True)
+    abstract = fields.String(dump_only=True)
+    website = fields.String(dump_only=True)
+    # noinspection PyTypeChecker
+    publications = fields.List(fields.String, dump_only=True)
+    duration = DateRangeField(dump_only=True, required=True)
+    status = EnumStrField(dump_only=True, required=True)
+    total_funds = CurrencyField(dump_only=True, currency='total_funds_currency')
+
+    funder = Relationship(
+        self_view='main.grants_relationship_organisations',
+        self_view_kwargs={'grant_id': '<neutral_id>'},
+        related_view='main.grants_organisations',
+        related_view_kwargs={'grant_id': '<neutral_id>'},
+        id_field='neutral_id',
+        include_resource_linkage=True,
+        type_='organisations',
+        schema='OrganisationSchema'
+    )
+
+    allocations = Relationship(
+        self_view='main.grants_relationship_allocations',
+        self_view_kwargs={'grant_id': '<neutral_id>'},
+        related_view='main.grants_allocations',
+        related_view_kwargs={'grant_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='allocations',
+        schema='AllocationSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'grants'
+        self_view = 'main.grants_detail'
+        self_view_kwargs = {'grant_id': '<id>'}
+        self_view_many = 'main.grants_list'
+
+
+class AllocationSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+
+    grant = Relationship(
+        self_view='main.allocations_relationship_grants',
+        self_view_kwargs={'allocation_id': '<neutral_id>'},
+        related_view='main.allocations_grants',
+        related_view_kwargs={'allocation_id': '<neutral_id>'},
+        id_field='grant.neutral_id',
+        include_resource_linkage=True,
+        type_='grants',
+        schema='GrantSchema'
+    )
+
+    project = Relationship(
+        self_view='main.allocations_relationship_projects',
+        self_view_kwargs={'allocation_id': '<neutral_id>'},
+        related_view='main.allocations_projects',
+        related_view_kwargs={'allocation_id': '<neutral_id>'},
+        id_field='project.neutral_id',
+        include_resource_linkage=True,
+        type_='projects',
+        schema='ProjectSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'allocations'
+        self_view = 'main.allocations_detail'
+        self_view_kwargs = {'allocation_id': '<id>'}
+        self_view_many = 'main.allocations_list'
+
+
+class OrganisationSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    grid_identifier = fields.String(dump_only=True)
+    name = fields.String(dump_only=True, required=True)
+    acronym = fields.String(dump_only=True)
+    website = fields.String(dump_only=True)
+    logo_url = fields.String(dump_only=True)
+
+    people = Relationship(
+        self_view='main.organisations_relationship_people',
+        self_view_kwargs={'organisation_id': '<neutral_id>'},
+        related_view='main.organisations_people',
+        related_view_kwargs={'organisation_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='people',
+        schema='PersonSchema'
+    )
+
+    grants = Relationship(
+        self_view='main.organisations_relationship_grants',
+        self_view_kwargs={'organisation_id': '<neutral_id>'},
+        related_view='main.organisations_grants',
+        related_view_kwargs={'organisation_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='grants',
+        schema='GrantSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'organisations'
+        self_view = 'main.organisations_detail'
+        self_view_kwargs = {'organisation_id': '<id>'}
+        self_view_many = 'main.organisations_list'

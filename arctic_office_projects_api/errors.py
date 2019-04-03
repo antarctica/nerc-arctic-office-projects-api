@@ -37,7 +37,7 @@ class ApiException(Exception):
         :type status: HTTPStatus
         :param status: HTTP Status, as specified by members of the http.HTTPStatus enum
         :type code: str
-        :param code: Application specific identifier for the error that SHOULD NOT change between instances
+        :param code: application specific identifier for the error that SHOULD NOT change between instances
         :type title: str
         :param title: short, human-readable summary of the error that SHOULD NOT change between instances
         :type detail: str
@@ -68,7 +68,7 @@ class ApiException(Exception):
         Formats the error as a dictionary
 
         :rtype dict
-        :return: Error as dict
+        :return: error as dict
         """
         error = {
             'id': str(self.id),

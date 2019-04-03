@@ -8,12 +8,12 @@ from flask.logging import default_handler
 from flask_reverse_proxy_fix.middleware import ReverseProxyPrefixFix
 from flask_request_id_header.middleware import RequestID
 # noinspection PyPackageRequirements
-from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, Conflict
+from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, UnprocessableEntity
 
 from config import config
 from arctic_office_projects_api.extensions import db, auth
 from arctic_office_projects_api.meta.errors import error_handler_generic_bad_request, error_handler_generic_not_found, \
-    error_handler_generic_internal_server_error, error_handler_generic_conflict
+    error_handler_generic_internal_server_error, error_handler_generic_unprocessable_entity
 from arctic_office_projects_api.meta import meta as meta_blueprint
 from arctic_office_projects_api.main import main as main_blueprint
 
@@ -58,7 +58,7 @@ def create_app(config_name):
     # Error handlers
     app.register_error_handler(BadRequest, error_handler_generic_bad_request)
     app.register_error_handler(NotFound, error_handler_generic_not_found)
-    app.register_error_handler(Conflict, error_handler_generic_conflict)
+    app.register_error_handler(UnprocessableEntity, error_handler_generic_unprocessable_entity)
     app.register_error_handler(InternalServerError, error_handler_generic_internal_server_error)
 
     # App

@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask import Response
 # noinspection PyPackageRequirements
-from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, Conflict
+from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, UnprocessableEntity
 
 from arctic_office_projects_api.errors import ApiException
 
@@ -34,13 +34,13 @@ class ApiNotFoundError(ApiException):
     detail = 'The requested URL was not found, check the address and try again'
 
 
-class ApiConflictError(ApiException):
+class ApiUnprocessableEntityError(ApiException):
     """
-    Represents a generic conflict error
+    Represents a generic unprocessable entity error
     """
-    status = HTTPStatus.CONFLICT
-    title = 'Conflict'
-    detail = 'The requested URL could not be resolved to a single entity, check the address and try again'
+    status = HTTPStatus.UNPROCESSABLE_ENTITY
+    title = 'Unprocessable Entity'
+    detail = 'Your request could not be processed, check your request or seek support'
 
 
 # noinspection PyUnusedLocal
@@ -86,14 +86,14 @@ def error_handler_generic_not_found(e: NotFound) -> Response:
 
 
 # noinspection PyUnusedLocal
-def error_handler_generic_conflict(e: Conflict) -> Response:
+def error_handler_generic_unprocessable_entity(e: UnprocessableEntity) -> Response:
     """
-    Flask error handler for '409 Conflict' errors
+    Flask error handler for '422 Unprocessable Entity' errors
 
-    :type e: Conflict
+    :type e: UnprocessableEntity
     :param e: Exception
 
     :return: Flask response
     """
-    error = ApiConflictError()
+    error = ApiUnprocessableEntityError()
     return error.response()
