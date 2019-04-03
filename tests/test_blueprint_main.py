@@ -1550,176 +1550,176 @@ class MainBlueprintTestCase(BaseTestCase):
 
         expected_payload_included_items = list()
         expected_payload_included_items.append({
-                    "attributes": {
-                        "acronym": "NERC",
-                        "grid-identifier": "XI-GRID-grid.8682.4",
-                        "logo-url": "https://nerc.ukri.org/nerc/assets/images/logos/nerc/nerc-logo-large.jpg",
-                        "name": "Natural Environment Research Council",
-                        "website": "https://nerc.ukri.org"
-                    },
-                    "id": "01D6Z0SQZPDTVBMYE9GNHH8QK7",
-                    "links": {
-                        "self": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7"
-                    },
-                    "relationships": {
-                        "grants": {
-                            "data": [
-                                {
-                                    "id": "01D6T4HYAVK5SJFD7NWJRMBZ4Z",
-                                    "type": "grants"
-                                }
-                            ],
-                            "links": {
-                                "related": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/grants",
-                                "self": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/grants"
-                            }
-                        },
-                        "people": {
-                            "data": [
-                                {
-                                    "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
-                                    "type": "people"
-                                }
-                            ],
-                            "links": {
-                                "related": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/people",
-                                "self": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/people"
-                            }
+            "attributes": {
+                "acronym": "NERC",
+                "grid-identifier": "XI-GRID-grid.8682.4",
+                "logo-url": "https://nerc.ukri.org/nerc/assets/images/logos/nerc/nerc-logo-large.jpg",
+                "name": "Natural Environment Research Council",
+                "website": "https://nerc.ukri.org"
+            },
+            "id": "01D6Z0SQZPDTVBMYE9GNHH8QK7",
+            "links": {
+                "self": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7"
+            },
+            "relationships": {
+                "grants": {
+                    "data": [
+                        {
+                            "id": "01D6T4HYAVK5SJFD7NWJRMBZ4Z",
+                            "type": "grants"
                         }
-                    },
-                    "type": "organisations"
-                })
+                    ],
+                    "links": {
+                        "related": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/grants",
+                        "self": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/grants"
+                    }
+                },
+                "people": {
+                    "data": [
+                        {
+                            "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
+                            "type": "people"
+                        }
+                    ],
+                    "links": {
+                        "related": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/people",
+                        "self": "http://localhost:9000/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/people"
+                    }
+                }
+            },
+            "type": "organisations"
+        })
         expected_payload_included_items.append({
-                    "attributes": {
-                        "role": {
-                            "class": "http://purl.org/spar/scoro/InvestigationRole",
-                            "description": "The principle investigator of the research project.",
-                            "member": "http://purl.org/spar/scoro/principle-investigator",
-                            "title": "principle investigator"
-                        }
+            "attributes": {
+                "role": {
+                    "class": "http://purl.org/spar/scoro/InvestigationRole",
+                    "description": "The principle investigator of the research project.",
+                    "member": "http://purl.org/spar/scoro/principle-investigator",
+                    "title": "principle investigator"
+                }
+            },
+            "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+            "links": {
+                "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX"
+            },
+            "relationships": {
+                "person": {
+                    "data": {
+                        "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
+                        "type": "people"
                     },
-                    "id": "01D5T4N25RV2062NVVQKZ9NBYX",
                     "links": {
-                        "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX"
+                        "related": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/people",
+                        "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people"
+                    }
+                },
+                "project": {
+                    "data": {
+                        "id": "01D5M0CFQV4M7JASW7F87SRDYB",
+                        "type": "projects"
                     },
-                    "relationships": {
-                        "person": {
-                            "data": {
-                                "id": "01D5MHQN3ZPH47YVSVQEVB0DAE",
-                                "type": "people"
-                            },
-                            "links": {
-                                "related": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/people",
-                                "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people"
-                            }
-                        },
-                        "project": {
-                            "data": {
-                                "id": "01D5M0CFQV4M7JASW7F87SRDYB",
-                                "type": "projects"
-                            },
-                            "links": {
-                                "related": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects",
-                                "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects"
-                            }
-                        }
-                    },
-                    "type": "participants"
-                })
+                    "links": {
+                        "related": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects",
+                        "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects"
+                    }
+                }
+            },
+            "type": "participants"
+        })
         expected_payload_included_items.append({
-                    "attributes": {
-                        "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
-                                    "changes are evident in the decreases in sea ice extent over the last few decades. The "
-                                    "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
-                                    "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
-                                    "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
-                                    "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
-                                    "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
-                                    "However, in the Arctic this albedo effect is not as important because the surface, often "
-                                    "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
-                                    "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
-                                    "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
-                                    "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
-                                    "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
-                                    "research project comes in. \n A large portion of clouds, including those found in the "
-                                    "Arctic region, are categorized as mixed phase clouds. This means they contain both "
-                                    "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
-                                    "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
-                                    "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
-                                    "however, be observed if the droplets contain a particle known as an ice nucleus that can "
-                                    "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
-                                    "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
-                                    "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
-                                    "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
-                                    "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
-                                    "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
-                                    "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
-                                    "been quantified. We will be the first to make measurements of ice nuclei in the central "
-                                    "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
-                                    "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
-                                    "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
-                                    "other materials which are ejected into the atmosphere and may cause ice to form. We will "
-                                    "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
-                                    "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
-                                    "NERC funded project called ACACCIA, which not only represents excellent value for money "
-                                    "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
-                                    "opportunity to access this remote region. \n Results from the proposed study will build "
-                                    "upon previous work performed in the Murray laboratory and generate quantitative results "
-                                    "that can be directly used to improve computer-based cloud, aerosol and climate models. "
-                                    "Our results will further our understanding of these mysterious and important mixed phase "
-                                    "clouds and, in turn, the global climate.",
-                        "access-duration": {
-                            "end_instant": None,
-                            "interval": "2013-03-01/..",
-                            "start_instant": "2013-03-01"
-                        },
-                        "acronym": "ACCACIA",
-                        "project-duration": {
-                            "end_instant": "2016-10-01",
-                            "interval": "2013-03-01/2016-10-01",
-                            "start_instant": "2013-03-01"
-                        },
-                        "publications": [
-                            "https://doi.org/10.5194/acp-2018-283",
-                            "https://doi.org/10.5194/acp-15-3719-2015",
-                            "https://doi.org/10.5194/acp-15-5599-2015",
-                            "https://doi.org/10.5194/acp-16-4063-2016"
-                        ],
-                        "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
-                        "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
-                    },
-                    "id": "01D5M0CFQV4M7JASW7F87SRDYB",
-                    "links": {
-                        "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB"
-                    },
-                    "relationships": {
-                        "allocations": {
-                            "data": [
-                                {
-                                    "id": "01D6T4QQNDBJTSEVXESNXD3AN0",
-                                    "type": "allocations"
-                                }
-                            ],
-                            "links": {
-                                "related": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/allocations",
-                                "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/allocations"
-                            }
-                        },
-                        "participants": {
-                            "data": [
-                                {
-                                    "id": "01D5T4N25RV2062NVVQKZ9NBYX",
-                                    "type": "participants"
-                                }
-                            ],
-                            "links": {
-                                "related": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants",
-                                "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants"
-                            }
+            "attributes": {
+                "abstract": "The Arctic climate is changing twice as fast as the global average and these dramatic "
+                            "changes are evident in the decreases in sea ice extent over the last few decades. The "
+                            "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
+                            "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
+                            "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
+                            "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
+                            "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
+                            "However, in the Arctic this albedo effect is not as important because the surface, often "
+                            "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
+                            "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
+                            "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
+                            "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
+                            "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
+                            "research project comes in. \n A large portion of clouds, including those found in the "
+                            "Arctic region, are categorized as mixed phase clouds. This means they contain both "
+                            "supercooled water droplets and ice crystals (for a demonstration of supercooled water "
+                            "see: http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
+                            "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
+                            "however, be observed if the droplets contain a particle known as an ice nucleus that can "
+                            "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
+                            "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made "
+                            "up of desert dusts, soot or even bacteria. But the composition and source of ice nuclei "
+                            "in the Arctic environment remains a mystery. \n A likely source of ice nuclei in the "
+                            "Arctic is the ocean. Particles emitted at the sea surface, through the action of waves "
+                            "breaking and bubble bursting, may serve as ice nuclei when they are lofted into the "
+                            "atmosphere and are incorporated in cloud droplets. This source of ice nuclei has not yet "
+                            "been quantified. We will be the first to make measurements of ice nuclei in the central "
+                            "Arctic region. We will make measurements of ice nuclei in the surface layers of the sea "
+                            "from a research ship as well as measuring airborne ice nuclei from the BAe-146 research "
+                            "aircraft. \n The sea's surface contains a wide range of bacteria, viruses, plankton and "
+                            "other materials which are ejected into the atmosphere and may cause ice to form. We will "
+                            "use state-of-the-art equipment developed at Leeds to measure how well sea-derived "
+                            "particles and particles sampled in the atmosphere nucleate ice. We will piggy back on a "
+                            "NERC funded project called ACACCIA, which not only represents excellent value for money "
+                            "(since the ship and aircraft are already paid for under ACCACIA), but is a unique "
+                            "opportunity to access this remote region. \n Results from the proposed study will build "
+                            "upon previous work performed in the Murray laboratory and generate quantitative results "
+                            "that can be directly used to improve computer-based cloud, aerosol and climate models. "
+                            "Our results will further our understanding of these mysterious and important mixed phase "
+                            "clouds and, in turn, the global climate.",
+                "access-duration": {
+                    "end_instant": None,
+                    "interval": "2013-03-01/..",
+                    "start_instant": "2013-03-01"
+                },
+                "acronym": "ACCACIA",
+                "project-duration": {
+                    "end_instant": "2016-10-01",
+                    "interval": "2013-03-01/2016-10-01",
+                    "start_instant": "2013-03-01"
+                },
+                "publications": [
+                    "https://doi.org/10.5194/acp-2018-283",
+                    "https://doi.org/10.5194/acp-15-3719-2015",
+                    "https://doi.org/10.5194/acp-15-5599-2015",
+                    "https://doi.org/10.5194/acp-16-4063-2016"
+                ],
+                "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
+                "website": "http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/"
+            },
+            "id": "01D5M0CFQV4M7JASW7F87SRDYB",
+            "links": {
+                "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB"
+            },
+            "relationships": {
+                "allocations": {
+                    "data": [
+                        {
+                            "id": "01D6T4QQNDBJTSEVXESNXD3AN0",
+                            "type": "allocations"
                         }
-                    },
-                    "type": "projects"
-                })
+                    ],
+                    "links": {
+                        "related": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/allocations",
+                        "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/allocations"
+                    }
+                },
+                "participants": {
+                    "data": [
+                        {
+                            "id": "01D5T4N25RV2062NVVQKZ9NBYX",
+                            "type": "participants"
+                        }
+                    ],
+                    "links": {
+                        "related": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/participants",
+                        "self": "http://localhost:9000/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants"
+                    }
+                }
+            },
+            "type": "projects"
+        })
 
         token = self.util_create_auth_token()
         response = self.client.get(
