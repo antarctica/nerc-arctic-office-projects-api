@@ -295,8 +295,8 @@ class DateRangeField(Field):
 
         return {
             'interval': f"{ interval_start }/{ interval_end }",
-            'start_instant': instant_start,
-            'end_instant': instant_end
+            'start-instant': instant_start,
+            'end-instant': instant_end
         }
 
     # noinspection PyMethodOverriding
@@ -348,7 +348,29 @@ class EnumField(Field):
 
         :return: the enumerator item's value
         """
+        if isinstance(value.value, dict):
+            return self._inflection(value.value)
+
         return value.value
+
+    def _inflection(self, dictionary: dict) -> dict:
+        """
+        Recursively replaces dictionary keys containing a '_' with '-'
+
+        E.g. "{'foo_bar: {'foo_bar: 'baz'}}" would become "{'foo-bar: {'foo-bar: 'baz'}}"
+
+        :type dictionary: dict
+        :param dictionary: dictionary to inflect
+
+        :rtype: dict
+        :return: inflected dictionary
+        """
+        converted_dict = {}
+        for k, v in dictionary.items():
+            if isinstance(v, dict):
+                v = self._inflection(v)
+            converted_dict[k.replace('_', '-')] = v
+        return converted_dict
 
 
 class EnumStrField(EnumField):
