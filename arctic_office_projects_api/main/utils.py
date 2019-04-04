@@ -1,4 +1,9 @@
+# noinspection PyPackageRequirements
 import ulid
+
+from enum import Enum
+
+from iso3166 import countries as iso_countries
 
 
 def generate_neutral_id() -> str:
@@ -15,3 +20,12 @@ def generate_neutral_id() -> str:
     :return: unique neutral ID
     """
     return ulid.new().str
+
+
+def generate_countries_enum(*, name: str = 'Countries') -> Enum:
+    countries = []
+    for country in iso_countries:
+        countries.append((country.alpha3, {'name': country.name, 'iso_3166_alpha3-code': country.alpha3}))
+
+    # noinspection PyArgumentList
+    return Enum(name, countries)

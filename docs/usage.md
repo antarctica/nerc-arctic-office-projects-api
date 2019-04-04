@@ -254,6 +254,7 @@ Represents information about a research project.
 * titles, abstracts, publications and other properties shared with corresponding grants are not the same
 * projects are assigned to grants at random
 * where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
+* the project country is always `SJM` (Svalbard and Jan Mayen)
 
 ### Participants
 
