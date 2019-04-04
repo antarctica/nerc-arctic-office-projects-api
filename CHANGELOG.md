@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] 2019-04-04
+
 ### Added
 
 * Grant entity, representing a research grant
 * Allocation entity, representing the relationship between a research project and a research grant
+* Organisation entity, representing the relationship between a Grant and its funder, and an individual and their 
+  organisation
 * Basic seeding for Participants, linking Projects to random People
 * Project acronym property
 * Project abstract property
@@ -18,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Project website property
 * Project duration property
 * Project access duration property
+* Project country property
 * Person Orcid ID property
 * Person avatar property
 * Whitelisting application id for test Arctic Office website integration
