@@ -11,7 +11,7 @@ from faker import Faker
 from sqlalchemy.dialects import postgresql
 
 from arctic_office_projects_api import db
-from arctic_office_projects_api.main.utils import generate_neutral_id
+from arctic_office_projects_api.main.utils import generate_neutral_id, generate_countries_enum
 from arctic_office_projects_api.main.faker.providers.project import Provider as ProjectProvider
 from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
 from arctic_office_projects_api.main.faker.providers.profile import Provider as ProfileProvider
@@ -25,6 +25,7 @@ faker.add_provider(ProfileProvider)
 faker.add_provider(GrantProvider)
 faker.add_provider(OrganisationProvider)
 
+ProjectCountry = generate_countries_enum(name='ProjectCountries')
 
 
 class ParticipantRole(Enum):
@@ -597,6 +598,7 @@ class Project(db.Model):
     publications = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
     access_duration = db.Column(postgresql.DATERANGE(), nullable=False)
     project_duration = db.Column(postgresql.DATERANGE(), nullable=False)
+    country = db.Column(db.Enum(ProjectCountry), nullable=True)
 
     participants = db.relationship("Participant", back_populates="project")
     allocations = db.relationship("Allocation", back_populates="project")
@@ -671,7 +673,8 @@ class Project(db.Model):
                     'https://doi.org/10.5194/acp-16-4063-2016'
                 ],
                 access_duration=DateRange(static_project_duration.lower, None),
-                project_duration=static_project_duration
+                project_duration=static_project_duration,
+                country=ProjectCountry.SJM
             )
             db.session.add(static_project)
 
@@ -684,7 +687,8 @@ class Project(db.Model):
                     title=faker.title(),
                     abstract=faker.abstract(),
                     access_duration=DateRange(project_duration.lower, None),
-                    project_duration=project_duration
+                    project_duration=project_duration,
+                    country=ProjectCountry.SJM
                 )
                 if faker.has_acronym(project_type):
                     resource.acronym = faker.acronym()

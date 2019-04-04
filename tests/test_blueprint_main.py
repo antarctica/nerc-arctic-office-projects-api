@@ -98,6 +98,10 @@ class MainBlueprintTestCase(BaseTestCase):
                     "start-instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
+                "country": {
+                    "iso-3166-alpha3-code": "SJM",
+                    "name": "Svalbard and Jan Mayen"
+                },
                 "project-duration": {
                     "end-instant": "2016-10-01",
                     "interval": "2013-03-01/2016-10-01",
@@ -462,6 +466,10 @@ class MainBlueprintTestCase(BaseTestCase):
                         "start-instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
+                    "country": {
+                        "iso-3166-alpha3-code": "SJM",
+                        "name": "Svalbard and Jan Mayen"
+                    },
                     "project-duration": {
                         "end-instant": "2016-10-01",
                         "interval": "2013-03-01/2016-10-01",
@@ -1027,6 +1035,10 @@ class MainBlueprintTestCase(BaseTestCase):
                     "start-instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
+                "country": {
+                    "iso-3166-alpha3-code": "SJM",
+                    "name": "Svalbard and Jan Mayen"
+                },
                 "project-duration": {
                     "end-instant": "2016-10-01",
                     "interval": "2013-03-01/2016-10-01",
@@ -1213,6 +1225,10 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start-instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
+                        "country": {
+                            "iso-3166-alpha3-code": "SJM",
+                            "name": "Svalbard and Jan Mayen"
+                        },
                         "project-duration": {
                             "end-instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",
@@ -1387,6 +1403,10 @@ class MainBlueprintTestCase(BaseTestCase):
                         "start-instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
+                    "country": {
+                        "iso-3166-alpha3-code": "SJM",
+                        "name": "Svalbard and Jan Mayen"
+                    },
                     "project-duration": {
                         "end-instant": "2016-10-01",
                         "interval": "2013-03-01/2016-10-01",
@@ -1674,6 +1694,10 @@ class MainBlueprintTestCase(BaseTestCase):
                     "start-instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
+                "country": {
+                    "iso-3166-alpha3-code": "SJM",
+                    "name": "Svalbard and Jan Mayen"
+                },
                 "project-duration": {
                     "end-instant": "2016-10-01",
                     "interval": "2013-03-01/2016-10-01",
@@ -1903,6 +1927,10 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start-instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
+                        "country": {
+                            "iso-3166-alpha3-code": "SJM",
+                            "name": "Svalbard and Jan Mayen"
+                        },
                         "project-duration": {
                             "end-instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",
@@ -2287,6 +2315,10 @@ class MainBlueprintTestCase(BaseTestCase):
                     "start-instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
+                "country": {
+                    "iso-3166-alpha3-code": "SJM",
+                    "name": "Svalbard and Jan Mayen"
+                },
                 "project-duration": {
                     "end-instant": "2016-10-01",
                     "interval": "2013-03-01/2016-10-01",
@@ -2491,6 +2523,10 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start-instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
+                        "country": {
+                            "iso-3166-alpha3-code": "SJM",
+                            "name": "Svalbard and Jan Mayen"
+                        },
                         "project-duration": {
                             "end-instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",
@@ -2771,6 +2807,10 @@ class MainBlueprintTestCase(BaseTestCase):
                     "start-instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
+                "country": {
+                    "iso-3166-alpha3-code": "SJM",
+                    "name": "Svalbard and Jan Mayen"
+                },
                 "project-duration": {
                     "end-instant": "2016-10-01",
                     "interval": "2013-03-01/2016-10-01",
@@ -2934,6 +2974,10 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start-instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
+                        "country": {
+                            "iso-3166-alpha3-code": "SJM",
+                            "name": "Svalbard and Jan Mayen"
+                        },
                         "project-duration": {
                             "end-instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",
@@ -3239,6 +3283,10 @@ class MainBlueprintTestCase(BaseTestCase):
                         "start-instant": "2013-03-01"
                     },
                     "acronym": "ACCACIA",
+                    "country": {
+                        "iso-3166-alpha3-code": "SJM",
+                        "name": "Svalbard and Jan Mayen"
+                    },
                     "project-duration": {
                         "end-instant": "2016-10-01",
                         "interval": "2013-03-01/2016-10-01",
@@ -3443,6 +3491,10 @@ class MainBlueprintTestCase(BaseTestCase):
                     "start-instant": "2013-03-01"
                 },
                 "acronym": "ACCACIA",
+                "country": {
+                    "iso-3166-alpha3-code": "SJM",
+                    "name": "Svalbard and Jan Mayen"
+                },
                 "project-duration": {
                     "end-instant": "2016-10-01",
                     "interval": "2013-03-01/2016-10-01",
@@ -3721,6 +3773,10 @@ class MainBlueprintTestCase(BaseTestCase):
                             "start-instant": "2013-03-01"
                         },
                         "acronym": "ACCACIA",
+                        "country": {
+                            "iso-3166-alpha3-code": "SJM",
+                            "name": "Svalbard and Jan Mayen"
+                        },
                         "project-duration": {
                             "end-instant": "2016-10-01",
                             "interval": "2013-03-01/2016-10-01",

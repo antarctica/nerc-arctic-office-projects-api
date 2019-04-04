@@ -117,6 +117,25 @@ paths:
                               type: string
                               title: Abstract
                               description: Project abstract
+                            country:
+                              type: object
+                              title: Country
+                              description: Country in which the project took place
+                              required:
+                                - iso-3166-alpha3-code
+                                - name
+                              properties:
+                                iso-3166-alpha3-code:
+                                  readOnly: true
+                                  type: string
+                                  title: ISO 3166 Alpha 3 code
+                                  description: ISO 3166 three letter alphabetic country code
+                                name:
+                                  readOnly: true
+                                  type: string
+                                  format: date
+                                  title: Name
+                                  description: country name
                             project-duration:
                               type: object
                               title: Project duration
@@ -312,6 +331,9 @@ paths:
                           acronym: ACCACIA
                           title: Aerosol-Cloud Coupling And Climate Interactions in the Arctic
                           abstract: The Arctic climate is changing twice as fast as the global average and these dramatic changes are evident in the decreases in sea ice extent over the last few decades. The lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover this year may be even lower. Clouds play a major role in the Arctic climate and therefore influence the extent of sea ice, but our understanding of these clouds is very poor. Low level, visually thick, clouds in much of the world tend to have a cooling effect, because they reflect sunlight back into space that would otherwise be absorbed at the surface. However, in the Arctic this albedo effect is not as important because the surface, often being covered in snow and ice, is already highly reflective and Arctic clouds therefore tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's energy, thus amplifying the original warming. Hence, small changes in cloud properties or coverage can lead to dramatic changes in the Arctic climate; this is where the proposed research project comes in.
+                          country:
+                            iso-3166-alpha3: SJM
+                            name: Svalbard and Jan Mayen
                           project_duration:
                             interval: 2013-03-01/2016-10-01
                             start_interval: 2013-03-01
@@ -472,6 +494,25 @@ paths:
                             type: string
                             title: Abstract
                             description: Project abstract
+                          country:
+                            type: object
+                            title: Country
+                            description: Country in which the project took place
+                            required:
+                              - iso-3166-alpha3-code
+                              - name
+                            properties:
+                              iso-3166-alpha3-code:
+                                readOnly: true
+                                type: string
+                                title: ISO 3166 Alpha 3 code
+                                description: ISO 3166 three letter alphabetic country code
+                              name:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Name
+                                description: country name
                           project-duration:
                             type: object
                             title: Project duration
@@ -667,6 +708,9 @@ paths:
                         acronym: ACCACIA
                         title: Aerosol-Cloud Coupling And Climate Interactions in the Arctic
                         abstract: The Arctic climate is changing twice as fast as the global average and these dramatic changes are evident in the decreases in sea ice extent over the last few decades. The lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover this year may be even lower. Clouds play a major role in the Arctic climate and therefore influence the extent of sea ice, but our understanding of these clouds is very poor. Low level, visually thick, clouds in much of the world tend to have a cooling effect, because they reflect sunlight back into space that would otherwise be absorbed at the surface. However, in the Arctic this albedo effect is not as important because the surface, often being covered in snow and ice, is already highly reflective and Arctic clouds therefore tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's energy, thus amplifying the original warming. Hence, small changes in cloud properties or coverage can lead to dramatic changes in the Arctic climate; this is where the proposed research project comes in.
+                        country:
+                          iso-3166-alpha3: SJM
+                          name: Svalbard and Jan Mayen
                         project_duration:
                           interval: 2013-03-01/2016-10-01
                           start_interval: 2013-03-01
@@ -2092,6 +2136,25 @@ paths:
                             type: string
                             title: Abstract
                             description: Project abstract
+                          country:
+                            type: object
+                            title: Country
+                            description: Country in which the project took place
+                            required:
+                              - iso-3166-alpha3-code
+                              - name
+                            properties:
+                              iso-3166-alpha3-code:
+                                readOnly: true
+                                type: string
+                                title: ISO 3166 Alpha 3 code
+                                description: ISO 3166 three letter alphabetic country code
+                              name:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Name
+                                description: country name
                           project-duration:
                             type: object
                             title: Project duration
@@ -2287,6 +2350,9 @@ paths:
                         acronym: ACCACIA
                         title: Aerosol-Cloud Coupling And Climate Interactions in the Arctic
                         abstract: The Arctic climate is changing twice as fast as the global average and these dramatic changes are evident in the decreases in sea ice extent over the last few decades. The lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover this year may be even lower. Clouds play a major role in the Arctic climate and therefore influence the extent of sea ice, but our understanding of these clouds is very poor. Low level, visually thick, clouds in much of the world tend to have a cooling effect, because they reflect sunlight back into space that would otherwise be absorbed at the surface. However, in the Arctic this albedo effect is not as important because the surface, often being covered in snow and ice, is already highly reflective and Arctic clouds therefore tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's energy, thus amplifying the original warming. Hence, small changes in cloud properties or coverage can lead to dramatic changes in the Arctic climate; this is where the proposed research project comes in.
+                        country:
+                          iso-3166-alpha3: SJM
+                          name: Svalbard and Jan Mayen
                         project_duration:
                           interval: 2013-03-01/2016-10-01
                           start_interval: 2013-03-01
@@ -6069,6 +6135,25 @@ paths:
                             type: string
                             title: Abstract
                             description: Project abstract
+                          country:
+                            type: object
+                            title: Country
+                            description: Country in which the project took place
+                            required:
+                              - iso-3166-alpha3-code
+                              - name
+                            properties:
+                              iso-3166-alpha3-code:
+                                readOnly: true
+                                type: string
+                                title: ISO 3166 Alpha 3 code
+                                description: ISO 3166 three letter alphabetic country code
+                              name:
+                                readOnly: true
+                                type: string
+                                format: date
+                                title: Name
+                                description: country name
                           project-duration:
                             type: object
                             title: Project duration
@@ -6264,6 +6349,9 @@ paths:
                         acronym: ACCACIA
                         title: Aerosol-Cloud Coupling And Climate Interactions in the Arctic
                         abstract: The Arctic climate is changing twice as fast as the global average and these dramatic changes are evident in the decreases in sea ice extent over the last few decades. The lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover this year may be even lower. Clouds play a major role in the Arctic climate and therefore influence the extent of sea ice, but our understanding of these clouds is very poor. Low level, visually thick, clouds in much of the world tend to have a cooling effect, because they reflect sunlight back into space that would otherwise be absorbed at the surface. However, in the Arctic this albedo effect is not as important because the surface, often being covered in snow and ice, is already highly reflective and Arctic clouds therefore tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's energy, thus amplifying the original warming. Hence, small changes in cloud properties or coverage can lead to dramatic changes in the Arctic climate; this is where the proposed research project comes in.
+                        country:
+                          iso-3166-alpha3: SJM
+                          name: Svalbard and Jan Mayen
                         project_duration:
                           interval: 2013-03-01/2016-10-01
                           start_interval: 2013-03-01

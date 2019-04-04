@@ -490,6 +490,7 @@ class ProjectSchema(Schema):
     publications = fields.List(fields.String, dump_only=True)
     access_duration = DateRangeField(dump_only=True, required=True)
     project_duration = DateRangeField(dump_only=True, required=True)
+    country = EnumDictField(dump_only=True)
 
     participants = Relationship(
         self_view='main.projects_relationship_participants',
