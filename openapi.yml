@@ -11,9 +11,9 @@ info:
     email: servicedesk@bas.ac.uk
 servers:
   - url: https://api.bas.ac.uk/arctic-office-projects/testing
-    description: For general/production use
+    description: For normal use
   - url: https://testing.api.bas.ac.uk/arctic-office-projects/testing
-    description: Reserved for testing underlying infrastructure changes
+    description: When asked to test changes to how APIs are delivered
 components:
   securitySchemes:
     azure-oauth:
@@ -59,6 +59,7 @@ paths:
             type: integer
           example:
             value: 2
+          default: 1
       responses:
         '200':
           description: OK
@@ -352,7 +353,8 @@ paths:
                         relationships:
                           allocations:
                               data:
-                                - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                                -
+                                  id: 01D6T4QQNDBJTSEVXESNXD3AN0
                                   type: allocations
                               links:
                                 self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/allocations
@@ -729,14 +731,16 @@ paths:
                       relationships:
                         allocations:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: allocations
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/allocations
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/allocations
                         participants:
                           data:
-                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                            -
+                              id: 01D5T4N25RV2062NVVQKZ9NBYX
                               type: participants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants
@@ -813,7 +817,8 @@ paths:
                           title: ID
                           description: Resource identifier
                     example:
-                      - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                      -
+                        id: 01D6T4QQNDBJTSEVXESNXD3AN0
                         type: allocations
                   links:
                     type: object
@@ -893,7 +898,8 @@ paths:
                           title: ID
                           description: Resource identifier
                     example:
-                      - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                      -
+                        id: 01D5T4N25RV2062NVVQKZ9NBYX
                         type: participants
                   links:
                     type: object
@@ -1093,14 +1099,16 @@ paths:
                         relationships:
                           grant:
                             data:
-                              - id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
+                              -
+                                id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
                                 type: grant
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/grants
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/grants
                           project:
                             data:
-                              - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                              -
+                                id: 01D5M0CFQV4M7JASW7F87SRDYB
                                 type: projects
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/projects
@@ -1346,14 +1354,16 @@ paths:
                         relationships:
                           project:
                             data:
-                              - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                              -
+                                id: 01D5M0CFQV4M7JASW7F87SRDYB
                                 type: projects
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
                           people:
                             data:
-                              - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                              -
+                                id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                                 type: people
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people
@@ -1402,6 +1412,7 @@ paths:
             type: integer
           example:
             value: 2
+          default: 1
       responses:
         '200':
           description: OK
@@ -1609,7 +1620,8 @@ paths:
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
                           people:
                             data:
-                              - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                              -
+                                id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                                 type: people
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people
@@ -1882,14 +1894,16 @@ paths:
                       relationships:
                         project:
                           data:
-                            - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                            -
+                              id: 01D5M0CFQV4M7JASW7F87SRDYB
                               type: projects
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
                         people:
                           data:
-                            - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                            -
+                              id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                               type: people
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people
@@ -2374,14 +2388,16 @@ paths:
                       relationships:
                         allocations:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: allocations
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/allocations
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/allocations
                         participants:
                           data:
-                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                            -
+                              id: 01D5T4N25RV2062NVVQKZ9NBYX
                               type: participants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants
@@ -2619,14 +2635,16 @@ paths:
                       relationships:
                         organisation:
                             data:
-                              - id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
+                              -
+                                id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
                                 type: organisations
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/organisations
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/organisations
                         participants:
                           data:
-                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                            -
+                              id: 01D5T4N25RV2062NVVQKZ9NBYX
                               type: participants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
@@ -2672,6 +2690,7 @@ paths:
             type: integer
           example:
             value: 2
+          default: 1
       responses:
         '200':
           description: OK
@@ -2866,14 +2885,16 @@ paths:
                         relationships:
                           organisation:
                             data:
-                              - id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
+                              -
+                                id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
                                 type: organisations
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/organisations
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/organisations
                           participation:
                             data:
-                              - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                              -
+                                id: 01D5T4N25RV2062NVVQKZ9NBYX
                                 type: participants
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
@@ -3142,14 +3163,16 @@ paths:
                       relationships:
                         organisation:
                           data:
-                            - id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
+                            -
+                              id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
                               type: organisations
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/organisations
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/organisations
                         participants:
                           data:
-                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                            -
+                              id: 01D5T4N25RV2062NVVQKZ9NBYX
                               type: participants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
@@ -3222,8 +3245,8 @@ paths:
                         title: ID
                         description: Resource identifier
                     example:
-                      - id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
-                        type: organisations
+                      id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
+                      type: organisations
                   links:
                     type: object
                     title: Links
@@ -3302,7 +3325,8 @@ paths:
                           title: ID
                           description: Resource identifier
                     example:
-                      - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                      -
+                        id: 01D5T4N25RV2062NVVQKZ9NBYX
                         type: participants
                   links:
                     type: object
@@ -3545,14 +3569,16 @@ paths:
                       relationships:
                         grants:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: grants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/grants
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/grants
                         people:
                           data:
-                            - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                            -
+                              id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                               type: people
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/people
@@ -3798,14 +3824,16 @@ paths:
                         relationships:
                           project:
                             data:
-                              - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                              -
+                                id: 01D5M0CFQV4M7JASW7F87SRDYB
                                 type: projects
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/projects
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/projects
                           people:
                             data:
-                              - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                              -
+                                id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                                 type: people
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people
@@ -3853,6 +3881,7 @@ paths:
             type: integer
           example:
             value: 2
+          default: 1
       responses:
         '200':
           description: OK
@@ -4131,7 +4160,8 @@ paths:
                         relationships:
                           allocations:
                             data:
-                              - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                              -
+                                id: 01D6T4QQNDBJTSEVXESNXD3AN0
                                 type: allocations
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/grants/01D6T4HYAVK5SJFD7NWJRMBZ4Z/relationships/allocations
@@ -4490,7 +4520,8 @@ paths:
                       relationships:
                         allocations:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: allocations
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/grants/01D6T4HYAVK5SJFD7NWJRMBZ4Z/relationships/allocations
@@ -4580,7 +4611,8 @@ paths:
                           title: ID
                           description: Resource identifier
                     example:
-                      - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                      -
+                        id: 01D6T4QQNDBJTSEVXESNXD3AN0
                         type: allocations
                   links:
                     type: object
@@ -4656,8 +4688,8 @@ paths:
                         title: ID
                         description: Resource identifier
                     example:
-                      - id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
-                        type: organisations
+                      id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
+                      type: organisations
                   links:
                     type: object
                     title: Links
@@ -4856,14 +4888,16 @@ paths:
                         relationships:
                           grant:
                             data:
-                              - id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
+                              -
+                                id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
                                 type: grant
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/grants
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/grants
                           project:
                             data:
-                              - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                              -
+                                id: 01D5M0CFQV4M7JASW7F87SRDYB
                                 type: projects
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/projects
@@ -5109,14 +5143,16 @@ paths:
                       relationships:
                         grants:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: grants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/grants
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/grants
                         people:
                           data:
-                            - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                            -
+                              id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                               type: people
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/people
@@ -5164,6 +5200,7 @@ paths:
             type: integer
           example:
             value: 2
+          default: 1
       responses:
         '200':
           description: OK
@@ -5320,14 +5357,16 @@ paths:
                         relationships:
                           grant:
                             data:
-                              - id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
+                              -
+                                id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
                                 type: grants
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/grants
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/grants
                           project:
                             data:
-                              - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                              -
+                                id: 01D5M0CFQV4M7JASW7F87SRDYB
                                 type: projects
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/projects
@@ -5557,14 +5596,16 @@ paths:
                       relationships:
                         grant:
                           data:
-                            - id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
+                            -
+                              id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
                               type: grants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/grants
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/grants
                         project:
                           data:
-                            - id: 01D5M0CFQV4M7JASW7F87SRDYB
+                            -
+                              id: 01D5M0CFQV4M7JASW7F87SRDYB
                               type: projects
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/allocations/01D6T4QQNDBJTSEVXESNXD3AN0/relationships/projects
@@ -6032,7 +6073,8 @@ paths:
                       relationships:
                         allocations:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: allocations
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/grants/01D6T4HYAVK5SJFD7NWJRMBZ4Z/relationships/allocations
@@ -6378,14 +6420,16 @@ paths:
                       relationships:
                         allocations:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: allocations
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/allocations
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/allocations
                         participants:
                           data:
-                            - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                            -
+                              id: 01D5T4N25RV2062NVVQKZ9NBYX
                               type: participants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/projects/01D5M0CFQV4M7JASW7F87SRDYB/relationships/participants
@@ -6433,6 +6477,7 @@ paths:
             type: integer
           example:
             value: 2
+          default: 1
       responses:
         '200':
           description: OK
@@ -6635,14 +6680,16 @@ paths:
                         relationships:
                           grants:
                             data:
-                              - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                              -
+                                id: 01D6T4QQNDBJTSEVXESNXD3AN0
                                 type: grants
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/grants
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/grants
                           people:
                             data:
-                              - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                              -
+                                id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                                 type: people
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/people
@@ -6918,14 +6965,16 @@ paths:
                       relationships:
                         grants:
                           data:
-                            - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                            -
+                              id: 01D6T4QQNDBJTSEVXESNXD3AN0
                               type: grants
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/grants
                             related: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/grants
                         people:
                           data:
-                            - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                            -
+                              id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                               type: people
                           links:
                             self: https://api.bas.ac.uk/arctic-office-projects/testing/organisations/01D6Z0SQZPDTVBMYE9GNHH8QK7/relationships/people
@@ -7008,7 +7057,8 @@ paths:
                           title: ID
                           description: Resource identifier
                     example:
-                      - id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
+                      -
+                        id: 01D6T4HYAVK5SJFD7NWJRMBZ4Z
                         type: grants
                   links:
                     type: object
@@ -7088,7 +7138,8 @@ paths:
                           title: ID
                           description: Resource identifier
                     example:
-                      - id: 01D5MHQN3ZPH47YVSVQEVB0DAE
+                      -
+                        id: 01D5MHQN3ZPH47YVSVQEVB0DAE
                         type: people
                   links:
                     type: object
@@ -7409,7 +7460,8 @@ paths:
                         relationships:
                           allocations:
                             data:
-                              - id: 01D6T4QQNDBJTSEVXESNXD3AN0
+                              -
+                                id: 01D6T4QQNDBJTSEVXESNXD3AN0
                                 type: allocations
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/grants/01D6T4HYAVK5SJFD7NWJRMBZ4Z/relationships/allocations
@@ -7657,14 +7709,16 @@ paths:
                         relationships:
                           organisation:
                             data:
-                              - id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
+                              -
+                                id: 01D6Z0SQZPDTVBMYE9GNHH8QK7
                                 type: organisations
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/organisations
                               related: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/organisations
                           participants:
                             data:
-                              - id: 01D5T4N25RV2062NVVQKZ9NBYX
+                              -
+                                id: 01D5T4N25RV2062NVVQKZ9NBYX
                                 type: participants
                             links:
                               self: https://api.bas.ac.uk/arctic-office-projects/testing/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants
