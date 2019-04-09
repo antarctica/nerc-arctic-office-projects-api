@@ -9,9 +9,13 @@ info:
   contact:
     name: API Support
     email: servicedesk@bas.ac.uk
+  x-standards:
+    json-api:
+      version: 1.0
 servers:
   - url: https://api.bas.ac.uk/arctic-office-projects/testing
     description: For normal use
+    x-type: preferred
   - url: https://testing.api.bas.ac.uk/arctic-office-projects/testing
     description: When asked to test changes to how APIs are delivered
 components:
