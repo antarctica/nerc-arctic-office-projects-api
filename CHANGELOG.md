@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* White listing Arctic Office Projects Manager staging application to use staging instance
 * BAS API Docs OpenAPI extensions
 
 ### Fixed
