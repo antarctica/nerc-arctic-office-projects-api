@@ -11,7 +11,7 @@ resource "heroku_pipeline" "bas-arctic-office-projects-api" {
   name = "bas-arctic-office-projects-api"
 }
 
-# Staging stage
+# Staging app
 #
 # This resource relies on the Heroku Terraform provider being previously configured.
 #
@@ -25,11 +25,19 @@ resource "heroku_app" "bas-arctic-office-projects-api-stage" {
     REVERSE_PROXY_PATH                 = "/arctic-office-projects/testing"
     AZURE_OAUTH_TENANCY                = "d14c529b-5558-4a80-93b6-7655681e55d6"
     AZURE_OAUTH_APPLICATION_ID         = "2b3f5c55-1a7d-4e26-a9a7-5b56b0f612f1"
-    AZURE_OAUTH_CLIENT_APPLICATION_IDS = "76ee9805-1ec6-47c8-a57d-df002c54e498,8646223c-46aa-4bc3-a825-562cbea4911d"
+    AZURE_OAUTH_CLIENT_APPLICATION_IDS = "${join(",", var.azure-oauth-client-application-ids-stage)}"
   }
 }
 
-# # Production stage
+variable "azure-oauth-client-application-ids-stage" {
+  default = [
+    "76ee9805-1ec6-47c8-a57d-df002c54e498",
+    "8646223c-46aa-4bc3-a825-562cbea4911d",
+    "9657cd94-0a8d-4e8b-b134-3d695e2bdc5f"
+  ]
+}
+
+# # Production app
 # #
 # # This resource relies on the Heroku Terraform provider being previously configured.
 # #
@@ -72,7 +80,7 @@ resource "heroku_formation" "bas-arctic-office-projects-api-stage" {
 #   size     = "hobby"
 # }
 
-# Staging pipeline stage
+# Staging pipeline app
 #
 # This resource implicitly depends on the 'heroku_pipeline.bas-arctic-office-projects-api' resource.
 # This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-stage' resource.
@@ -86,7 +94,7 @@ resource "heroku_pipeline_coupling" "bas-arctic-office-projects-api-stage" {
   stage    = "staging"
 }
 
-# # Production pipeline stage
+# # Production pipeline app
 # #
 # # This resource implicitly depends on the 'heroku_pipeline.bas-arctic-office-projects-api' resource.
 # # This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-prod' resource.

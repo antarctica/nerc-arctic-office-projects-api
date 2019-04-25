@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* White listing Arctic Office Projects Manager staging application to use staging instance
 * BAS API Docs OpenAPI extensions
 
 ### Fixed
 
+* Pinning `urllib3` dependency to later version to mitigate https://app.snyk.io/vuln/SNYK-PYTHON-URLLIB3-174464 
 * Correcting OpenAPI specification
 
 ### Changed
