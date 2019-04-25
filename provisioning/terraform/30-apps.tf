@@ -11,7 +11,7 @@ resource "heroku_pipeline" "bas-arctic-office-projects-api" {
   name = "bas-arctic-office-projects-api"
 }
 
-# Staging stage
+# Staging app
 #
 # This resource relies on the Heroku Terraform provider being previously configured.
 #
@@ -29,7 +29,7 @@ resource "heroku_app" "bas-arctic-office-projects-api-stage" {
   }
 }
 
-# # Production stage
+# # Production app
 # #
 # # This resource relies on the Heroku Terraform provider being previously configured.
 # #
@@ -72,7 +72,7 @@ resource "heroku_formation" "bas-arctic-office-projects-api-stage" {
 #   size     = "hobby"
 # }
 
-# Staging pipeline stage
+# Staging pipeline app
 #
 # This resource implicitly depends on the 'heroku_pipeline.bas-arctic-office-projects-api' resource.
 # This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-stage' resource.
@@ -86,7 +86,7 @@ resource "heroku_pipeline_coupling" "bas-arctic-office-projects-api-stage" {
   stage    = "staging"
 }
 
-# # Production pipeline stage
+# # Production pipeline app
 # #
 # # This resource implicitly depends on the 'heroku_pipeline.bas-arctic-office-projects-api' resource.
 # # This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-prod' resource.
