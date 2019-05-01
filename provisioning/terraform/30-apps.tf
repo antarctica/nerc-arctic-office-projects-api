@@ -33,6 +33,7 @@ variable "azure-oauth-client-application-ids-stage" {
   default = [
     "76ee9805-1ec6-47c8-a57d-df002c54e498",
     "8646223c-46aa-4bc3-a825-562cbea4911d",
+    "e52f2b95-2cff-4a97-97c1-f154c79b5292",
     "9657cd94-0a8d-4e8b-b134-3d695e2bdc5f"
   ]
 }
