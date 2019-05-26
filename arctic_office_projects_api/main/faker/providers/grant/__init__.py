@@ -9,6 +9,40 @@ from psycopg2.extras import DateRange
 localized = False
 
 
+class UKRICouncil(Enum):
+    """
+    Represents the research councils within UK Research and Innovation (UKRI)
+    """
+    AHRC = {
+        'acronym': 'AHRC',
+        'prefix': 'AH'
+    }
+    BBSRC = {
+        'acronym': 'BBSRC',
+        'prefix': 'BB'
+    }
+    EPSRC = {
+        'acronym': 'EPSRC',
+        'prefix': 'EP'
+    }
+    ESRC = {
+        'acronym': 'ESRC',
+        'prefix': 'ES'
+    }
+    MRC = {
+        'acronym': 'MRC',
+        'prefix': 'G'
+    }
+    NERC = {
+        'acronym': 'NERC',
+        'prefix': 'NE'
+    }
+    STFC = {
+        'acronym': 'STFC',
+        'prefix': 'ST'
+    }
+
+
 class GrantCurrency(Enum):
     """
     Represents the various currencies of a research grant

@@ -1,29 +1,10 @@
-import random
-from datetime import date
 from enum import Enum
 
-# noinspection PyPackageRequirements
-from psycopg2.extras import DateRange
-# noinspection PyPackageRequirements
-from sqlalchemy import exists
-from faker import Faker
 # noinspection PyPackageRequirements
 from sqlalchemy.dialects import postgresql
 
 from arctic_office_projects_api import db
-from arctic_office_projects_api.main.utils import generate_neutral_id, generate_countries_enum
-from arctic_office_projects_api.main.faker.providers.project import Provider as ProjectProvider
-from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
-from arctic_office_projects_api.main.faker.providers.profile import Provider as ProfileProvider
-from arctic_office_projects_api.main.faker.providers.grant import Provider as GrantProvider
-from arctic_office_projects_api.main.faker.providers.organisation import Provider as OrganisationProvider
-
-faker = Faker('en_GB')
-faker.add_provider(ProjectProvider)
-faker.add_provider(PersonProvider)
-faker.add_provider(ProfileProvider)
-faker.add_provider(GrantProvider)
-faker.add_provider(OrganisationProvider)
+from arctic_office_projects_api.main.utils import generate_countries_enum
 
 ProjectCountry = generate_countries_enum(name='ProjectCountries')
 
@@ -567,21 +548,14 @@ class GrantCurrency(Enum):
         'iso_4217_code': 'EUR',
         'major_symbol': '€'
     }
-    USD = {
-        'iso_4217_code': 'USD',
+    NOK = {
+        'iso_4217_code': 'NOK',
+        'major_symbol': 'kr'
+    }
+    CAD = {
+        'iso_4217_code': 'CAD',
         'major_symbol': '$'
     }
-
-
-static_grant_duration = DateRange(date(2013, 3, 1), date(2016, 10, 1))
-static_project_duration = static_grant_duration
-
-static_project_nid = '01D5M0CFQV4M7JASW7F87SRDYB'
-static_participant_nid = '01D5T4N25RV2062NVVQKZ9NBYX'
-static_person_nid = '01D5MHQN3ZPH47YVSVQEVB0DAE'
-static_grant_nid = '01D6T4HYAVK5SJFD7NWJRMBZ4Z'
-static_allocation_nid = '01D6T4QQNDBJTSEVXESNXD3AN0'
-static_organisation_nid = '01D6Z0SQZPDTVBMYE9GNHH8QK7'
 
 
 class Project(db.Model):
@@ -606,99 +580,6 @@ class Project(db.Model):
     def __repr__(self):
         return f"<Project { self.neutral_id }>"
 
-    def seed(self, *, quantity: int = 1):
-        """
-        Populate database with mock/fake data
-
-        By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
-        Additional instances are created randomly using Faker.
-
-        The quantity parameter is treated as a target number of resources to add, as Faker is unaware of unique
-        constraints, and may use the same values twice. Resources with duplicate values are discarded resulting in
-        fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
-
-        :type quantity: int
-        :param quantity: target number of Project resources to create
-        """
-        if not db.session.query(exists().where(Project.neutral_id == static_project_nid)).scalar():
-            static_project = Project(
-                neutral_id=static_project_nid,
-                title='Aerosol-Cloud Coupling And Climate Interactions in the Arctic',
-                acronym='ACCACIA',
-                abstract="The Arctic climate is changing twice as fast as the global average and these dramatic "
-                         "changes are evident in the decreases in sea ice extent over the last few decades. The "
-                         "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
-                         "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
-                         "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
-                         "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
-                         "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
-                         "However, in the Arctic this albedo effect is not as important because the surface, often "
-                         "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
-                         "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
-                         "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
-                         "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
-                         "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
-                         "research project comes in. \n A large portion of clouds, including those found in the Arctic "
-                         "region, are categorized as mixed phase clouds. This means they contain both supercooled "
-                         "water droplets and ice crystals (for a demonstration of supercooled water see: "
-                         "http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
-                         "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
-                         "however, be observed if the droplets contain a particle known as an ice nucleus that can "
-                         "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
-                         "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made up "
-                         "of desert dusts, soot or even bacteria. But the composition and source of ice nuclei in the "
-                         "Arctic environment remains a mystery. \n A likely source of ice nuclei in the Arctic is the "
-                         "ocean. Particles emitted at the sea surface, through the action of waves breaking and bubble "
-                         "bursting, may serve as ice nuclei when they are lofted into the atmosphere and are "
-                         "incorporated in cloud droplets. This source of ice nuclei has not yet been quantified. We "
-                         "will be the first to make measurements of ice nuclei in the central Arctic region. We will "
-                         "make measurements of ice nuclei in the surface layers of the sea from a research ship as "
-                         "well as measuring airborne ice nuclei from the BAe-146 research aircraft. \n The sea's "
-                         "surface contains a wide range of bacteria, viruses, plankton and other materials which are "
-                         "ejected into the atmosphere and may cause ice to form. We will use state-of-the-art "
-                         "equipment developed at Leeds to measure how well sea-derived particles and particles sampled "
-                         "in the atmosphere nucleate ice. We will piggy back on a NERC funded project called ACACCIA, "
-                         "which not only represents excellent value for money (since the ship and aircraft are already "
-                         "paid for under ACCACIA), but is a unique opportunity to access this remote region. \n "
-                         "Results from the proposed study will build upon previous work performed in the Murray "
-                         "laboratory and generate quantitative results that can be directly used to improve "
-                         "computer-based cloud, aerosol and climate models. Our results will further our "
-                         "understanding of these mysterious and important mixed phase clouds and, in turn, the global "
-                         "climate.",
-                website='http://arp.arctic.ac.uk/projects/aerosol-cloud-coupling-and-climate-interactions-ar/',
-                publications=[
-                    'https://doi.org/10.5194/acp-2018-283',
-                    'https://doi.org/10.5194/acp-15-3719-2015',
-                    'https://doi.org/10.5194/acp-15-5599-2015',
-                    'https://doi.org/10.5194/acp-16-4063-2016'
-                ],
-                access_duration=DateRange(static_project_duration.lower, None),
-                project_duration=static_project_duration,
-                country=ProjectCountry.SJM
-            )
-            db.session.add(static_project)
-
-        if quantity > 1:
-            for i in range(1, quantity):
-                project_type = faker.project_type()
-                project_duration = faker.project_duration(project_type)
-                resource = Project(
-                    neutral_id=generate_neutral_id(),
-                    title=faker.title(),
-                    abstract=faker.abstract(),
-                    access_duration=DateRange(project_duration.lower, None),
-                    project_duration=project_duration,
-                    country=ProjectCountry.SJM
-                )
-                if faker.has_acronym(project_type):
-                    resource.acronym = faker.acronym()
-                if faker.has_website(project_type):
-                    resource.website = faker.uri()
-                if faker.has_publications:
-                    resource.publications = faker.publications_list()
-
-                db.session.add(resource)
-
 
 class Person(db.Model):
     """
@@ -719,62 +600,6 @@ class Person(db.Model):
     def __repr__(self):
         return f"<Person { self.neutral_id } ({ self.last_name }, { self.first_name })>"
 
-    @staticmethod
-    def seed(*, quantity: int = 1):
-        """
-        Populate database with mock/fake data
-
-        By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
-        Additional instances are created randomly using Faker.
-
-        The quantity parameter is treated as a target number of resources to add, as Faker is unaware of unique
-        constraints, and may use the same values twice. Resources with duplicate values are discarded resulting in
-        fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
-
-        :type quantity: int
-        :param quantity: target number of Person resources to create
-        """
-        if not db.session.query(exists().where(Person.neutral_id == static_person_nid)).scalar():
-            static_person = Person(
-                neutral_id=static_person_nid,
-                first_name='Constance',
-                last_name='Watson',
-                orcid_id='https://sandbox.orcid.org/0000-0001-8373-6934',
-                logo_url='https://cdn.web.bas.ac.uk/bas-registers-service/v1/sample-avatars/conwat/conwat-256.jpg',
-                organisation=Organisation.query.filter_by(neutral_id=static_organisation_nid).one()
-            )
-            db.session.add(static_person)
-
-        if quantity > 1:
-            for i in range(1, quantity):
-                # All people must have a organisation, chosen at random, excluding the static organisation, to ensure
-                # its relationships remain predictable
-                #
-                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
-                # cryptographic purposes)
-                #
-                # Bandit interprets picking a random person as something related to security, which it isn't.
-                resource = Person(
-                    neutral_id=generate_neutral_id(),
-                    organisation=random.choice(Organisation.query.filter(Organisation.neutral_id.notin_(  # nosec
-                        [static_organisation_nid]
-                    )).all())
-                )
-                if faker.has_orcid_id():
-                    resource.orcid_id = faker.orcid_id()
-                if faker.male_or_female() == 'male':
-                    resource.first_name = faker.first_name_male(),
-                    resource.last_name = faker.last_name_male()
-                    if faker.has_avatar():
-                        resource.logo_url = faker.avatar_male()
-                else:
-                    resource.first_name = faker.first_name_female(),
-                    resource.last_name = faker.last_name_female()
-                    if faker.has_avatar():
-                        resource.logo_url = faker.avatar_female()
-
-                db.session.add(resource)
-
 
 class Participant(db.Model):
     """
@@ -792,71 +617,6 @@ class Participant(db.Model):
 
     def __repr__(self):
         return f"<Participant { self.neutral_id } ({ self.person.neutral_id }:{ self.project.neutral_id })>"
-
-    @staticmethod
-    def seed(*, quantity: int = 1):
-        """
-        Populate database with mock/fake data
-
-        By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
-        Additional instances are created randomly using Faker.
-
-        The quantity parameter is treated as a trigger to randomly assign a PI and possibly a number of CoIs to each
-        project - the actual number for this parameter does not matter, providing it is greater than 1.
-
-        :type quantity: int
-        :param quantity: target number of Participant resources to create
-        """
-        if not db.session.query(exists().where(Participant.neutral_id == static_participant_nid)).scalar():
-            static_participant = Participant(
-                neutral_id=static_participant_nid,
-                project=Project.query.filter_by(neutral_id=static_project_nid).one(),
-                person=Person.query.filter_by(neutral_id=static_person_nid).one(),
-                role=ParticipantRole.InvestigationRole_PrincipleInvestigator
-            )
-            db.session.add(static_participant)
-
-        if quantity > 1:
-            projects_without_participants = Project.query.outerjoin(Project.participants)\
-                .filter(Participant.project_id.is_(None)).all()
-            for project in projects_without_participants:
-                # All projects must have a PI, chosen at random, excluding the static person, to ensure its
-                # relationships remain predictable
-                #
-                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
-                # cryptographic purposes)
-                #
-                # Bandit interprets picking a random person as something related to security, which it isn't.
-                principle_investigator = Participant(
-                    neutral_id=generate_neutral_id(),
-                    project=project,
-                    person=random.choice(Person.query.filter(Person.neutral_id.notin_(  # nosec
-                        [static_person_nid]
-                    )).all()),
-                    role=ParticipantRole.InvestigationRole_PrincipleInvestigator
-                )
-
-                db.session.add(principle_investigator)
-
-                if faker.has_co_investigators():
-                    # Select a random set of people to act as Co-Investigators, excluding the PI and the static, person
-                    # to ensure its relationships are predictable
-                    co_investigators = random.choices(
-                        Person.query.filter(Person.neutral_id.notin_(
-                            [principle_investigator.person.neutral_id, static_person_nid]
-                        )).all(),
-                        k=faker.co_investigator_count()
-                    )
-
-                    for person in co_investigators:
-                        co_investigator = Participant(
-                            neutral_id=generate_neutral_id(),
-                            project=project,
-                            person=person,
-                            role=ParticipantRole.InvestigationRole_CoInvestigator
-                        )
-
-                        db.session.add(co_investigator)
 
 
 class Grant(db.Model):
@@ -883,115 +643,6 @@ class Grant(db.Model):
     def __repr__(self):
         return f"<Grant { self.neutral_id } ({ self.reference })>"
 
-    @staticmethod
-    def seed(*, quantity: int = 1):
-        """
-        Populate database with mock/fake data
-
-        By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
-        Additional instances are created randomly using Faker.
-
-        The quantity parameter is treated as a target number of resources to add, as Faker is unaware of unique
-        constraints, and may use the same values twice. Resources with duplicate values are discarded resulting in
-        fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
-
-        :type quantity: int
-        :param quantity: target number of Grant resources to create
-        """
-        if not db.session.query(exists().where(Grant.neutral_id == static_grant_nid)).scalar():
-            static_grant = Grant(
-                neutral_id=static_grant_nid,
-                reference='NE/I028769/1',
-                title='Aerosol-Cloud Coupling And Climate Interactions in the Arctic',
-                abstract="The Arctic climate is changing twice as fast as the global average and these dramatic "
-                         "changes are evident in the decreases in sea ice extent over the last few decades. The "
-                         "lowest sea ice cover to date was recorded in 2007 and recent data suggests sea ice cover "
-                         "this year may be even lower. Clouds play a major role in the Arctic climate and therefore "
-                         "influence the extent of sea ice, but our understanding of these clouds is very poor. Low "
-                         "level, visually thick, clouds in much of the world tend to have a cooling effect, because "
-                         "they reflect sunlight back into space that would otherwise be absorbed at the surface. "
-                         "However, in the Arctic this albedo effect is not as important because the surface, often "
-                         "being covered in snow and ice, is already highly reflective and Arctic clouds therefore "
-                         "tend to warm instead of cooling. Warming in the Arctic can, in turn, lead to sea ice "
-                         "break-up which exposes dark underlying sea water. The sea water absorbs more of the sun's "
-                         "energy, thus amplifying the original warming. Hence, small changes in cloud properties or "
-                         "coverage can lead to dramatic changes in the Arctic climate; this is where the proposed "
-                         "research project comes in. \n A large portion of clouds, including those found in the Arctic "
-                         "region, are categorized as mixed phase clouds. This means they contain both supercooled "
-                         "water droplets and ice crystals (for a demonstration of supercooled water see: "
-                         "http://www.youtube.com/watch?v=0JtBZGXd5zo). Liquid cloud droplets can exist in a "
-                         "supercooled state well below zero degrees centigrade without freezing. Freezing will, "
-                         "however, be observed if the droplets contain a particle known as an ice nucleus that can "
-                         "catalyze ice formation and growth. Ice formation dramatically alters a cloud's properties "
-                         "and therefore its influence on climate. At lower latitudes, ice nuclei are typically made up "
-                         "of desert dusts, soot or even bacteria. But the composition and source of ice nuclei in the "
-                         "Arctic environment remains a mystery. \n A likely source of ice nuclei in the Arctic is the "
-                         "ocean. Particles emitted at the sea surface, through the action of waves breaking and bubble "
-                         "bursting, may serve as ice nuclei when they are lofted into the atmosphere and are "
-                         "incorporated in cloud droplets. This source of ice nuclei has not yet been quantified. We "
-                         "will be the first to make measurements of ice nuclei in the central Arctic region. We will "
-                         "make measurements of ice nuclei in the surface layers of the sea from a research ship as "
-                         "well as measuring airborne ice nuclei from the BAe-146 research aircraft. \n The sea's "
-                         "surface contains a wide range of bacteria, viruses, plankton and other materials which are "
-                         "ejected into the atmosphere and may cause ice to form. We will use state-of-the-art "
-                         "equipment developed at Leeds to measure how well sea-derived particles and particles sampled "
-                         "in the atmosphere nucleate ice. We will piggy back on a NERC funded project called ACACCIA, "
-                         "which not only represents excellent value for money (since the ship and aircraft are already "
-                         "paid for under ACCACIA), but is a unique opportunity to access this remote region. \n "
-                         "Results from the proposed study will build upon previous work performed in the Murray "
-                         "laboratory and generate quantitative results that can be directly used to improve "
-                         "computer-based cloud, aerosol and climate models. Our results will further our "
-                         "understanding of these mysterious and important mixed phase clouds and, in turn, the global "
-                         "climate.",
-                website='https://gtr.ukri.org/projects?ref=NE%2FI028769%2F1',
-                publications=[
-                    'https://doi.org/10.5194/acp-2018-283',
-                    'https://doi.org/10.5194/acp-15-3719-2015',
-                    'https://doi.org/10.5194/acp-15-5599-2015',
-                    'https://doi.org/10.5194/acp-16-4063-2016'
-                ],
-                duration=static_grant_duration,
-                status=GrantStatus.Closed,
-                total_funds=324282,
-                total_funds_currency=GrantCurrency.GBP,
-                funder=Organisation.query.filter_by(neutral_id=static_organisation_nid).one()
-            )
-            db.session.add(static_grant)
-
-        if quantity > 1:
-            for i in range(1, quantity):
-                grant_type = faker.project_type()
-                grant_duration = faker.project_duration(grant_type)
-
-                # All people must have a organisation, chosen at random, excluding the static organisation, to ensure
-                # its relationships remain predictable
-                #
-                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
-                # cryptographic purposes)
-                #
-                # Bandit interprets picking a random person as something related to security, which it isn't.
-                resource = Grant(
-                    neutral_id=generate_neutral_id(),
-                    reference=faker.grant_reference(grant_type),
-                    title=faker.title(),
-                    abstract=faker.abstract(),
-                    duration=grant_duration,
-                    status=faker.status(grant_duration).name,
-                    total_funds=faker.total_funds(grant_type),
-                    total_funds_currency=faker.grant_currency(grant_type).name,
-                    funder=random.choice(Organisation.query.filter(Organisation.neutral_id.notin_(  # nosec
-                        [static_organisation_nid]
-                    )).all())
-                )
-                if faker.has_acronym(grant_type):
-                    resource.acronym = faker.acronym()
-                if faker.has_website(grant_type):
-                    resource.website = faker.uri()
-                if faker.has_publications:
-                    resource.publications = faker.publications_list()
-
-                db.session.add(resource)
-
 
 class Allocation(db.Model):
     """
@@ -1009,49 +660,6 @@ class Allocation(db.Model):
     def __repr__(self):
         return f"<Allocation { self.neutral_id } ({ self.grant.neutral_id }:{ self.project.neutral_id })>"
 
-    @staticmethod
-    def seed(*, quantity: int = 1):
-        """
-        Populate database with mock/fake data
-
-        By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
-        Additional instances are created randomly using Faker.
-
-        The quantity parameter is treated as a trigger to randomly assign a grant to each project - the actual number
-        for this parameter does not matter, providing it is greater than 1.
-
-        :type quantity: int
-        :param quantity: target number of Allocation resources to create
-        """
-        if not db.session.query(exists().where(Allocation.neutral_id == static_allocation_nid)).scalar():
-            static_allocation = Allocation(
-                neutral_id=static_allocation_nid,
-                project=Project.query.filter_by(neutral_id=static_project_nid).one(),
-                grant=Grant.query.filter_by(neutral_id=static_grant_nid).one()
-            )
-            db.session.add(static_allocation)
-
-        if quantity > 1:
-            projects_without_grants = Project.query.outerjoin(Project.allocations) \
-                .filter(Allocation.project_id.is_(None)).all()
-            for project in projects_without_grants:
-                # All projects must have a grant, chosen at random, excluding the static grant, to ensure its
-                # relationships remain predictable
-                #
-                # Exempting Bandit security issue (standard pseudo-random generators are not suitable for security or
-                # cryptographic purposes)
-                #
-                # Bandit interprets picking a random person as something related to security, which it isn't.
-                allocation = Allocation(
-                    neutral_id=generate_neutral_id(),
-                    project=project,
-                    grant=random.choice(Grant.query.filter(Grant.neutral_id.notin_(  # nosec
-                        [static_grant_nid]
-                    )).all())
-                )
-
-                db.session.add(allocation)
-
 
 class Organisation(db.Model):
     """
@@ -1068,41 +676,3 @@ class Organisation(db.Model):
 
     grants = db.relationship('Grant', back_populates="funder")
     people = db.relationship('Person', back_populates="organisation")
-
-    @staticmethod
-    def seed(*, quantity: int = 1):
-        """
-        Populate database with mock/fake data
-
-        By default, a single, static, resource will be added to allow testing against a predictable/stable instance.
-        Additional instances are created randomly using Faker.
-
-        The quantity parameter is treated as a target number of resources to add, as Faker is unaware of unique
-        constraints, and may use the same values twice. Resources with duplicate values are discarded resulting in
-        fewer resources being added. For example, if 250 resources are requested, only 246 may be unique.
-
-        :type quantity: int
-        :param quantity: target number of Organisation resources to create
-        """
-        if not db.session.query(exists().where(Organisation.neutral_id == static_organisation_nid)).scalar():
-            static_organisation = Organisation(
-                neutral_id=static_organisation_nid,
-                grid_identifier='XI-GRID-grid.8682.4',
-                name='Natural Environment Research Council',
-                acronym='NERC',
-                website='https://nerc.ukri.org',
-                logo_url='https://nerc.ukri.org/nerc/assets/images/logos/nerc/nerc-logo-large.jpg'
-            )
-            db.session.add(static_organisation)
-
-        if quantity > 1:
-            for i in range(1, quantity):
-                resource = Organisation(
-                    neutral_id=generate_neutral_id(),
-                    grid_identifier=faker.grid_id(),
-                    name=faker.company(),
-                    acronym=faker.acronym(),
-                    website=faker.uri(),
-                    logo_url='https://placeimg.com/256/256/arch'
-                )
-                db.session.add(resource)
