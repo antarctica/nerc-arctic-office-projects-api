@@ -445,7 +445,7 @@ class CurrencyField(Field):
     """
     def _serialize(self, value: float, attr: str, obj: Model) -> dict:
         """
-        When serialising, a numeric value is combined with currency information defined by a metadata argument
+        When serialising, a numeric value is combined with currency unit defined by a metadata argument
 
         See the class definition for how to specify the currency metadata argument.
 
@@ -454,19 +454,19 @@ class CurrencyField(Field):
         :type attr: str
         :param attr: name of the field within the schema being dumped
         :type obj: Model
-        :param obj: the object containing the numeric value and currency information, in this case a SQLAlchemy model
+        :param obj: the object containing the numeric value and currency unit, in this case a SQLAlchemy model
 
         :rtype: dict
-        :return: a numeric value is combined with currency information
+        :return: a numeric value is combined with currency unit
         """
         if 'currency' not in self.metadata:
-            raise KeyError('Missing currency information in field metadata')
+            raise KeyError('Missing currency unit in field metadata')
         currency = getattr(obj, self.metadata['currency'])
 
         if not isinstance(currency, Enum):
-            raise TypeError('The currency information value is expected to be from an enumeration')
+            raise TypeError('The currency unit value is expected to be from an enumeration')
         if type(currency.value) != dict:
-            raise TypeError('The currency information enumeration value is expected to be a dictionary')
+            raise TypeError('The currency unit enumeration value is expected to be a dictionary')
 
         return {
             'value': value,

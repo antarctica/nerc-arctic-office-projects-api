@@ -15,7 +15,15 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, Project=Project, Person=Person)
+    return dict(
+        db=db,
+        Project=Project,
+        Person=Person,
+        Participant=Participant,
+        Grant=Grant,
+        Allocation=Allocation,
+        Organisation=Organisation
+    )
 
 
 @app.cli.command()

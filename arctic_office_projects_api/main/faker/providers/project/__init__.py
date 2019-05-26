@@ -6,14 +6,13 @@ from faker.providers import BaseProvider
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
 
-localized = False
-
 
 class GrantType(Enum):
     UKRI_STANDARD_GRANT = 'ukri-standard-grant'
     UKRI_LARGE_GRANT = 'ukri-large-grant'
     EU_STANDARD_GRANT = 'eu-standard-grant'
     OTHER = 'other-grant'
+localized = False
 
 
 class Provider(BaseProvider):
