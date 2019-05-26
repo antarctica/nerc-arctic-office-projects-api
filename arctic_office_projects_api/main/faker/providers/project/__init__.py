@@ -224,17 +224,20 @@ class Provider(BaseProvider):
         :return: the duration of a project
         """
         durations = {
-            'UKRI_STANDARD_GRANT': 3,
-            'UKRI_LARGE_GRANT': 4,
-            'EU_STANDARD_GRANT': 5,
-            'OTHER': 1
+            'UKRI_STANDARD_GRANT': 365 * 3,
+            'UKRI_LARGE_GRANT': 365 * 4,
+            'EU_STANDARD_GRANT': 365 * 5,
+            'OTHER': 365 * 1
         }
 
         start_date = self.faker.past_date(start_date='-5y')
         if self.random_element({True: 0.1666, False: 0.8334}):
             start_date = self.faker.date_this_year(before_today=True, after_today=True)
 
-        return DateRange(start_date, start_date.replace(start_date.year + durations[grant_type.name]))
+        end_date = start_date + timedelta(days=durations[grant_type.name])
+
+        return DateRange(start_date, end_date)
+
 
     def has_co_investigators(self) -> bool:
         """

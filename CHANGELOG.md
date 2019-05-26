@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * Pinning `urllib3` dependency to later version to mitigate https://app.snyk.io/vuln/SNYK-PYTHON-URLLIB3-174464 
 * Correcting OpenAPI specification
+* Correcting project duration method in Projects Faker provider to generate end dates correctly
 
 ### Changed
 
