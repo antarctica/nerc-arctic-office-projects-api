@@ -471,6 +471,8 @@ class CurrencyField(Field):
             raise KeyError('Missing currency unit in field metadata')
         currency = getattr(obj, self.metadata['currency'])
 
+        if currency is None:
+            raise ValueError('The currency unit cannot be None')
         if not isinstance(currency, Enum):
             raise TypeError('The currency unit value is expected to be from an enumeration')
         if type(currency.value) != dict:
