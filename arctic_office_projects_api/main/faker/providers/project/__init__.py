@@ -238,6 +238,30 @@ class Provider(BaseProvider):
 
         return DateRange(start_date, end_date)
 
+    def has_existing_principle_investigator(self) -> bool:
+        """
+        Determines whether a project's Principle Investigator has lead other projects and should not result a new PI
+
+        Currently assumes 70% of projects will be lead by an existing PI
+
+        :example: True
+        :rtype: bool
+        :return: whether a project has an existing Principle Investigator
+        """
+        return self.random_element({True: 0.7, False: 0.3})
+
+    def has_existing_principle_investigator_organisation(self) -> bool:
+        """
+        Determines whether a project with a new Principle Investigator is from an existing organisation and should
+        result in a new organisation for the PI
+
+        Currently assumes 75% of PIs will be from an existing organisation
+
+        :example: True
+        :rtype: bool
+        :return: whether a project with a new Principle Investigator is from an existing organisation
+        """
+        return self.random_element({True: 0.75, False: 0.25})
 
     def has_co_investigators(self) -> bool:
         """
@@ -274,3 +298,28 @@ class Provider(BaseProvider):
             min=co_investigator_ranges[co_investigator_range][0],
             max=co_investigator_ranges[co_investigator_range][1]
         )
+
+    def has_existing_co_investigator(self) -> bool:
+        """
+        Determines whether a project's Co-Investigator has been in other projects and should not result a new Co-I
+
+        Currently assumes 70% of Co-Investigators will have been in other projects
+
+        :example: True
+        :rtype: bool
+        :return: whether a project has an existing Co-Investigator
+        """
+        return self.random_element({True: 0.7, False: 0.3})
+
+    def has_existing_co_investigator_organisation(self) -> bool:
+        """
+        Determines whether a project with a new Co-Investigator is from an existing organisation and should
+        result in a new organisation for the Co-I
+
+        Currently assumes 80% of Co-Is will be from an existing organisation
+
+        :example: True
+        :rtype: bool
+        :return: whether a project with a new Co-Investigator is from an existing organisation
+        """
+        return self.random_element({True: 0.8, False: 0.2})

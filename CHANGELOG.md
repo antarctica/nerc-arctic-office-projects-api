@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Updating Flask Azure OAuth provider (0.3.0)
 * White listing Arctic Office Projects Manager staging application to use staging instance
 * BAS API Docs OpenAPI extensions
+* Methods in Projects Faker provider for whether a PI or CoI has worked on other projects before
 
 ### Fixed
 
