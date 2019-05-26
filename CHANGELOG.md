@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 * Improving OpenAPI specification
+* Importing Grant (Project) type enum from Grant provider, rather than duplicating in Project provider
+
 
 ## [0.2.0] 2019-04-04
 
