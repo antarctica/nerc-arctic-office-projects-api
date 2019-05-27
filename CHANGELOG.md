@@ -12,15 +12,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Updating Flask Azure OAuth provider (0.3.0)
 * White listing Arctic Office Projects Manager staging application to use staging instance
 * BAS API Docs OpenAPI extensions
+* Methods in Projects Faker provider for whether a PI or CoI has worked on other projects before
 
 ### Fixed
 
 * Pinning `urllib3` dependency to later version to mitigate https://app.snyk.io/vuln/SNYK-PYTHON-URLLIB3-174464 
 * Correcting OpenAPI specification
+* Correcting project duration method in Projects Faker provider to generate end dates correctly
+* Allowing related resources to have no items in Marshmallow schemas
 
 ### Changed
 
 * Improving OpenAPI specification
+* Reimplementing database seeding using standalone class and expanded, generic, predictable resources 
+* Importing Grant (Project) type enum from Grant provider, rather than duplicating in Project provider
+* Faker Grant references are now dependent on the type of grant
 
 ## [0.2.0] 2019-04-04
 

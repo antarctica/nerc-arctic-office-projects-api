@@ -2,12 +2,12 @@ import os
 import sys
 import unittest
 
-# noinspection PyPackageRequirements
-from click import option, IntRange
+from flask.cli import AppGroup
 from flask_migrate import Migrate
 
 from arctic_office_projects_api import create_app, db
 from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation, Organisation
+from arctic_office_projects_api.seeding import seed_predictable_test_resources, seed_random_test_resources
 
 app = create_app(os.getenv('FLASK_ENV') or 'default')
 migrate = Migrate(app, db)
@@ -15,7 +15,15 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, Project=Project, Person=Person)
+    return dict(
+        db=db,
+        Project=Project,
+        Person=Person,
+        Participant=Participant,
+        Grant=Grant,
+        Allocation=Allocation,
+        Organisation=Organisation
+    )
 
 
 @app.cli.command()
@@ -26,26 +34,22 @@ def test():
     return sys.exit(not tests_runner.run(tests).wasSuccessful())
 
 
-@app.cli.command()
-@option('--count', type=IntRange(1, 10000), default=1, help='Target number of fake Project resources to add')
-def seed(count):
-    """Seed database with mock data."""
-    try:
-        Organisation.seed(quantity=count)
-        Grant.seed(quantity=count)
-        project = Project()
-        project.seed(quantity=count)
-        Person.seed(quantity=count)
-        Participant.seed(quantity=count)
-        Allocation.seed(quantity=count)
+seeding_cli_group = AppGroup('seed', help='Perform database seeding')
+app.cli.add_command(seeding_cli_group)
 
-        db.session.commit()
-        print("Seeding OK")
-    except Exception as e:
-        db.session.rollback()
-        # reset added, but non-committed, entities
-        db.session.flush()
-        raise e
+
+@seeding_cli_group.command('predictable-mocks')
+def seed_predictable_mock_projects():
+    """Seed database with predictable mock projects."""
+    seed_predictable_test_resources()
+    print("Seeded predictable mock resources")
+
+
+@seeding_cli_group.command('random-mocks')
+def seed_random_mock_projects():
+    """Seed database with 100 random mock projects."""
+    seed_random_test_resources()
+    print("Seeded 100 random mock resources")
 
 
 if 'PYCHARM_HOSTED' in os.environ:

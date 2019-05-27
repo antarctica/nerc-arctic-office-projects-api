@@ -1,4 +1,4 @@
-from enum import Enum
+from datetime import timedelta
 from typing import List
 
 from faker import Faker
@@ -6,14 +6,9 @@ from faker.providers import BaseProvider
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
 
+from arctic_office_projects_api.main.faker.providers.grant import GrantType
+
 localized = False
-
-
-class GrantType(Enum):
-    UKRI_STANDARD_GRANT = 'ukri-standard-grant'
-    UKRI_LARGE_GRANT = 'ukri-large-grant'
-    EU_STANDARD_GRANT = 'eu-standard-grant'
-    OTHER = 'other-grant'
 
 
 class Provider(BaseProvider):
@@ -229,17 +224,44 @@ class Provider(BaseProvider):
         :return: the duration of a project
         """
         durations = {
-            'UKRI_STANDARD_GRANT': 3,
-            'UKRI_LARGE_GRANT': 4,
-            'EU_STANDARD_GRANT': 5,
-            'OTHER': 1
+            'UKRI_STANDARD_GRANT': 365 * 3,
+            'UKRI_LARGE_GRANT': 365 * 4,
+            'EU_STANDARD_GRANT': 365 * 5,
+            'OTHER': 365 * 1
         }
 
         start_date = self.faker.past_date(start_date='-5y')
         if self.random_element({True: 0.1666, False: 0.8334}):
             start_date = self.faker.date_this_year(before_today=True, after_today=True)
 
-        return DateRange(start_date, start_date.replace(start_date.year + durations[grant_type.name]))
+        end_date = start_date + timedelta(days=durations[grant_type.name])
+
+        return DateRange(start_date, end_date)
+
+    def has_existing_principle_investigator(self) -> bool:
+        """
+        Determines whether a project's Principle Investigator has lead other projects and should not result a new PI
+
+        Currently assumes 70% of projects will be lead by an existing PI
+
+        :example: True
+        :rtype: bool
+        :return: whether a project has an existing Principle Investigator
+        """
+        return self.random_element({True: 0.7, False: 0.3})
+
+    def has_existing_principle_investigator_organisation(self) -> bool:
+        """
+        Determines whether a project with a new Principle Investigator is from an existing organisation and should
+        result in a new organisation for the PI
+
+        Currently assumes 75% of PIs will be from an existing organisation
+
+        :example: True
+        :rtype: bool
+        :return: whether a project with a new Principle Investigator is from an existing organisation
+        """
+        return self.random_element({True: 0.75, False: 0.25})
 
     def has_co_investigators(self) -> bool:
         """
@@ -276,3 +298,28 @@ class Provider(BaseProvider):
             min=co_investigator_ranges[co_investigator_range][0],
             max=co_investigator_ranges[co_investigator_range][1]
         )
+
+    def has_existing_co_investigator(self) -> bool:
+        """
+        Determines whether a project's Co-Investigator has been in other projects and should not result a new Co-I
+
+        Currently assumes 70% of Co-Investigators will have been in other projects
+
+        :example: True
+        :rtype: bool
+        :return: whether a project has an existing Co-Investigator
+        """
+        return self.random_element({True: 0.7, False: 0.3})
+
+    def has_existing_co_investigator_organisation(self) -> bool:
+        """
+        Determines whether a project with a new Co-Investigator is from an existing organisation and should
+        result in a new organisation for the Co-I
+
+        Currently assumes 80% of Co-Is will be from an existing organisation
+
+        :example: True
+        :rtype: bool
+        :return: whether a project with a new Co-Investigator is from an existing organisation
+        """
+        return self.random_element({True: 0.8, False: 0.2})

@@ -9,7 +9,7 @@ from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relati
 from flask_sqlalchemy import Pagination, Model
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
-from typing import Union
+from typing import Union, Optional
 
 
 class Schema(_Schema):
@@ -189,19 +189,21 @@ class Schema(_Schema):
             if self.related_resource in response['data']['relationships']:
                 if 'links' in response['data']['relationships'][self.related_resource]:
                     if 'related' in response['data']['relationships'][self.related_resource]['links']:
-                        if 'included' in response:
-                            response = {
-                                'data': response['included'],
-                                'links': {
-                                    'self': response['data']['relationships'][self.related_resource]['links']['related']
-                                }
+                        _response = {
+                            'data': [],
+                            'links': {
+                                'self': response['data']['relationships'][self.related_resource]['links']['related']
                             }
+                        }
+                        if not self.many_related:
+                            _response['data'] = None
+
+                        if 'included' in response:
+                            _response['data'] = response['included']
                             if not self.many_related:
-                                response['data'] = response['data'][0]
+                                _response['data'] = _response['data'][0]
 
-                            return response
-
-                        raise KeyError(f"No related resources are defined for '{ self.related_resource }'")
+                        return _response
                     raise KeyError(f"No related resource link found for '{ self.related_resource }' relationship")
                 raise KeyError(f"No links found for '{self.related_resource}' relationship")
             raise KeyError(f"No relationship found for '{self.related_resource}'")
@@ -348,6 +350,9 @@ class EnumField(Field):
 
         :return: the enumerator item's value
         """
+        if value is None:
+            return None
+
         if isinstance(value.value, dict):
             return self._inflection(value.value)
 
@@ -443,9 +448,9 @@ class CurrencyField(Field):
                 'major_symbol': '£'
             }
     """
-    def _serialize(self, value: float, attr: str, obj: Model) -> dict:
+    def _serialize(self, value: float, attr: str, obj: Model) -> Optional[dict]:
         """
-        When serialising, a numeric value is combined with currency information defined by a metadata argument
+        When serialising, a numeric value is combined with currency unit defined by a metadata argument
 
         See the class definition for how to specify the currency metadata argument.
 
@@ -454,19 +459,24 @@ class CurrencyField(Field):
         :type attr: str
         :param attr: name of the field within the schema being dumped
         :type obj: Model
-        :param obj: the object containing the numeric value and currency information, in this case a SQLAlchemy model
+        :param obj: the object containing the numeric value and currency unit, in this case a SQLAlchemy model
 
         :rtype: dict
-        :return: a numeric value is combined with currency information
+        :return: a numeric value is combined with currency unit
         """
+        if value is None:
+            return None
+
         if 'currency' not in self.metadata:
-            raise KeyError('Missing currency information in field metadata')
+            raise KeyError('Missing currency unit in field metadata')
         currency = getattr(obj, self.metadata['currency'])
 
+        if currency is None:
+            raise ValueError('The currency unit cannot be None')
         if not isinstance(currency, Enum):
-            raise TypeError('The currency information value is expected to be from an enumeration')
+            raise TypeError('The currency unit value is expected to be from an enumeration')
         if type(currency.value) != dict:
-            raise TypeError('The currency information enumeration value is expected to be a dictionary')
+            raise TypeError('The currency unit enumeration value is expected to be a dictionary')
 
         return {
             'value': value,
