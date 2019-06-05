@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Correcting OpenAPI specification
 * Correcting project duration method in Projects Faker provider to generate end dates correctly
 * Allowing related resources to have no items in Marshmallow schemas
+* Marshmallow JSON API resource linkages where the related resource uses multiple words (e.g `foo-bar`)
 
 ### Changed
 

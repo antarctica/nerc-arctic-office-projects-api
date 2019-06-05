@@ -185,16 +185,19 @@ class Schema(_Schema):
             raise KeyError(f"No relationship found for '{ self.resource_linkage }'")
 
         if self.related_resource is not None:
+            # Inflect related resource so it can be found in pre-generated output
+            related_resource = self.related_resource.replace('_', '-')
+
             if many:
                 raise RuntimeError('A related resource response can\'t be returned for multiple resources')
 
-            if self.related_resource in response['data']['relationships']:
-                if 'links' in response['data']['relationships'][self.related_resource]:
-                    if 'related' in response['data']['relationships'][self.related_resource]['links']:
+            if related_resource in response['data']['relationships']:
+                if 'links' in response['data']['relationships'][related_resource]:
+                    if 'related' in response['data']['relationships'][related_resource]['links']:
                         _response = {
                             'data': [],
                             'links': {
-                                'self': response['data']['relationships'][self.related_resource]['links']['related']
+                                'self': response['data']['relationships'][related_resource]['links']['related']
                             }
                         }
                         if not self.many_related:
@@ -206,9 +209,9 @@ class Schema(_Schema):
                                 _response['data'] = _response['data'][0]
 
                         return _response
-                    raise KeyError(f"No related resource link found for '{ self.related_resource }' relationship")
-                raise KeyError(f"No links found for '{self.related_resource}' relationship")
-            raise KeyError(f"No relationship found for '{self.related_resource}'")
+                    raise KeyError(f"No related resource link found for '{related_resource}' relationship")
+                raise KeyError(f"No links found for '{related_resource}' relationship")
+            raise KeyError(f"No relationship found for '{related_resource}'")
 
         return response
 
