@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * BAS API Docs OpenAPI extensions
 * Methods in Projects Faker provider to decide whether a PI or CoI has worked on other projects before
 * Updated Pip dependencies
+* Instructions to access a `psql` prompt in development environments
 
 ### Fixed
 

@@ -275,6 +275,19 @@ To connect to the database in a local development environment:
 | Password  | `password`  |
 | Schema    | `public`    |
 
+To connect to the database using `psql` in a local development environment:
+
+```shell
+$ docker-compose exec app-db ash
+$ psql -U app
+= SELECT current_database();
+> current_database 
+> ------------------
+> app
+= \q
+$ exit
+```
+
 #### Local development - auth
 
 See 
