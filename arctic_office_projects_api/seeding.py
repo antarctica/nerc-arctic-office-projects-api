@@ -34,12 +34,12 @@ static_resources = {
             'title': 'Example project 1',
             'acronym': 'EXPRO1',
             'abstract': 'This project is used as an example, for demonstration or testing purposes. '
-                        'The contents of this project, and resources it relates to, will not change. \n'
+                        'The contents of this project, and resources it relates to, will not change. \n '
                         'This example project (1) is a project with a single PI and single CoI belonging to the same '
                         'organisation. It is also associated with a single grant and funder. The people, grants and '
                         'organisations related to this project will not be related to another project. This project '
-                        'has an acronym, abstract, website and country property. The project duration is in the past.'
-                        '\n The remainder of this abstract is padding text to give a realistic abstract length.\n'
+                        'has an acronym, abstract, website and country property. The project duration is in the past. '
+                        '\n The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -51,7 +51,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '
@@ -76,14 +76,14 @@ static_resources = {
                 'https://doi.org/10.5555/79026270'
             ],
             'duration': DateRange(date(2012, 3, 1), date(2015, 10, 1)),
-            'country': ProjectCountry.SJM,
+            'country': ProjectCountry.SJM
         },
         '01DB2ECBP2DXX8VN7S7AYJBGBT': {
             'id': '01DB2ECBP2DXX8VN7S7AYJBGBT',
             'title': 'Example project 2',
             'acronym': None,
-            'abstract': 'This project is used as an example, for demonstration or testing purposes.'
-                        'The contents of this project, and resources it relates to, will not change.'
+            'abstract': 'This project is used as an example, for demonstration or testing purposes. '
+                        'The contents of this project, and resources it relates to, will not change. '
                         'This example project (2) has a single PI, organisation, grant and funder. The resources '
                         'related to this project will also relate to other projects. This project does not have an '
                         'acronym, website, publication or country property. The project duration is in the present. \n '
@@ -97,13 +97,13 @@ static_resources = {
             'id': '01DB2ECBP2MB2Z9K1BSK5BND0V',
             'title': 'Example project 3',
             'acronym': 'EXPRO3',
-            'abstract': 'This project is used as an example, for demonstration or testing purposes.'
-                        'The contents of this project, and resources it relates to, will not change.'
+            'abstract': 'This project is used as an example, for demonstration or testing purposes. '
+                        'The contents of this project, and resources it relates to, will not change. '
                         'This example project (3) has a single PI and multiple CoIs belonging to different '
                         'organisations. It is also associated with a single grant and funder. The resources related to '
                         'this project will also relate to other projects. This project has an acronym and country '
                         'properties, it does not have a website or publications. The project duration is in the future'
-                        '. \n The remainder of this abstract is padding text to give a realistic abstract length. \n'
+                        '. \n The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -115,7 +115,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '
@@ -245,11 +245,11 @@ static_resources = {
             'reference': 'EX-GRANT-0001',
             'title': 'Example grant 1',
             'abstract': 'This grant is used as an example, for demonstration or testing purposes. '
-                        'The contents of this grant, and resources it relates to, will not change. \n'
+                        'The contents of this grant, and resources it relates to, will not change. \n '
                         'This example grant (1) is a grant with a single project and funder. The project and '
                         'organisations related to this grant will not be related to another grant. This grant has an '
-                        'abstract, website and publications. The grant is closed and occurs in the past. \n'
-                        'The remainder of this abstract is padding text to give a realistic abstract length.\n'
+                        'abstract, website and publications. The grant is closed and occurs in the past. \n '
+                        'The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -261,7 +261,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '
@@ -296,12 +296,11 @@ static_resources = {
             'reference': 'EX-GRANT-0002',
             'title': 'Example grant 2',
             'abstract': 'This grant is used as an example, for demonstration or testing purposes. '
-                        'The contents of this grant, and resources it relates to, will not change. \n'
+                        'The contents of this grant, and resources it relates to, will not change. \n '
                         'This example grant (2) is a grant with a single project and funder. The project and '
                         'organisations related to this grant will also relate to other grants. This grant does not '
                         'have a website, publications or total funding amount. The grant is active and occurs in the '
-                        'present. \n'
-                        'No padding text is added to this abstract.',
+                        'present. \n No padding text is added to this abstract.',
             'website': None,
             'publications': [],
             'duration': DateRange(date(2012, 3, 1), date(2055, 10, 1)),
@@ -315,12 +314,12 @@ static_resources = {
             'reference': 'EX-GRANT-0003',
             'title': 'Example grant 3',
             'abstract': 'This grant is used as an example, for demonstration or testing purposes. '
-                        'The contents of this grant, and resources it relates to, will not change. \n'
+                        'The contents of this grant, and resources it relates to, will not change. \n '
                         'This example grant (3) is a grant with a single project and funder. The project and '
                         'organisations related to this grant will also relate to other grants. This grant has an '
                         'abstract and total funding amount, it does not have a website or publications. The grant is '
-                        'approved and occurs in the future. \n'
-                        'The remainder of this abstract is padding text to give a realistic abstract length.\n'
+                        'approved and occurs in the future. \n '
+                        'The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -332,7 +331,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '

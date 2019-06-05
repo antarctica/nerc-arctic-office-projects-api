@@ -679,6 +679,9 @@ class Organisation(db.Model):
     grants = db.relationship('Grant', back_populates="funder")
     people = db.relationship('Person', back_populates="organisation")
 
+    def __repr__(self):
+        return f"<Organisation { self.neutral_id } ({ self.name })>"
+
 
 class CategoryScheme(db.Model):
     """

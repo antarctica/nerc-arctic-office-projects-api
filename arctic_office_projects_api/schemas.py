@@ -557,6 +557,7 @@ class ParticipantSchema(Schema):
         related_view='main.participants_projects',
         related_view_kwargs={'participant_id': '<neutral_id>'},
         id_field='project.neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='projects',
         schema='ProjectSchema'
@@ -568,6 +569,7 @@ class ParticipantSchema(Schema):
         related_view='main.participants_people',
         related_view_kwargs={'participant_id': '<neutral_id>'},
         id_field='person.neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='people',
         schema='PersonSchema'
@@ -593,6 +595,7 @@ class PersonSchema(Schema):
         related_view='main.people_organisations',
         related_view_kwargs={'person_id': '<neutral_id>'},
         id_field='neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='organisations',
         schema='OrganisationSchema'
@@ -635,6 +638,7 @@ class GrantSchema(Schema):
         related_view='main.grants_organisations',
         related_view_kwargs={'grant_id': '<neutral_id>'},
         id_field='neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='organisations',
         schema='OrganisationSchema'
@@ -662,26 +666,28 @@ class GrantSchema(Schema):
 class AllocationSchema(Schema):
     id = fields.String(attribute="neutral_id", dump_only=True, required=True)
 
-    grant = Relationship(
-        self_view='main.allocations_relationship_grants',
-        self_view_kwargs={'allocation_id': '<neutral_id>'},
-        related_view='main.allocations_grants',
-        related_view_kwargs={'allocation_id': '<neutral_id>'},
-        id_field='grant.neutral_id',
-        include_resource_linkage=True,
-        type_='grants',
-        schema='GrantSchema'
-    )
-
     project = Relationship(
         self_view='main.allocations_relationship_projects',
         self_view_kwargs={'allocation_id': '<neutral_id>'},
         related_view='main.allocations_projects',
         related_view_kwargs={'allocation_id': '<neutral_id>'},
         id_field='project.neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='projects',
         schema='ProjectSchema'
+    )
+
+    grant = Relationship(
+        self_view='main.allocations_relationship_grants',
+        self_view_kwargs={'allocation_id': '<neutral_id>'},
+        related_view='main.allocations_grants',
+        related_view_kwargs={'allocation_id': '<neutral_id>'},
+        id_field='grant.neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='grants',
+        schema='GrantSchema'
     )
 
     class Meta(Schema.Meta):

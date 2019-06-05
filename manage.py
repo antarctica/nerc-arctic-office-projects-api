@@ -42,14 +42,14 @@ seeding_cli_group = AppGroup('seed', help='Perform database seeding')
 app.cli.add_command(seeding_cli_group)
 
 
-@seeding_cli_group.command('predictable-mocks')
+@seeding_cli_group.command('predictable')
 def seed_predictable_mock_projects():
     """Seed database with predictable mock projects."""
     seed_predictable_test_resources()
     print("Seeded predictable mock resources")
 
 
-@seeding_cli_group.command('random-mocks')
+@seeding_cli_group.command('random')
 def seed_random_mock_projects():
     """Seed database with 100 random mock projects."""
     seed_random_test_resources()

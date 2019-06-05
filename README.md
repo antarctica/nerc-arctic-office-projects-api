@@ -1,6 +1,6 @@
 # NERC Arctic Office Projects API
 
-API for NERC Arctic Office projects database
+API for NERC Arctic Office projects database.
 
 ## Purpose
 
@@ -659,7 +659,7 @@ Database seeding is used to populate the application database with either:
 A `seed` Flask CLI command is defined in `manage.py` to call methods in `arctic_office_projects_api/seeding.py`.
 
 ```shell
-$ docker-compose run app flask seed --count 3
+$ docker-compose run app flask seed --help
 ```
 
 #### Faker

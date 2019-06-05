@@ -857,7 +857,7 @@ paths:
                     description: Related allocation resource identifers
                     items:
                       type: object
-                      title: Participant resource linkage
+                      title: Allocation resource linkage
                       description: Related allocation resource identifier
                       required:
                         - type
@@ -4263,7 +4263,7 @@ paths:
       tags:
         - grants
       summary: Returns details for all Grant resources
-      operationId:  get-grants-list
+      operationId: get-grants-list
       security:
         - azure-oauth: []
       parameters:
@@ -4641,7 +4641,7 @@ paths:
       tags:
         - grants
       summary: Returns details for a single Grant resource, specified by its ID
-      operationId:  get-grants-detail
+      operationId: get-grants-detail
       security:
         - azure-oauth: []
       parameters:
@@ -6205,7 +6205,7 @@ paths:
       tags:
         - allocations
       summary: Returns details for the Grant resource related to an Allocation resource
-      operationId: get-allocations-people
+      operationId: get-allocations-grants
       security:
         - azure-oauth: []
       parameters:
@@ -6467,6 +6467,7 @@ paths:
                             title: Self
                             description: URL to resource
                     example:
+                      id: 01DB2ECBP3XQ4B8Z5DW7W963YD
                       type: grants
                       attributes:
                         reference: 'EX-GRANT-0001'
@@ -6548,7 +6549,7 @@ paths:
       tags:
         - allocations
       summary: Returns details for the Project resource related to an Allocation resource
-      operationId: get-projects-people
+      operationId: get-allocations-projects
       security:
         - azure-oauth: []
       parameters:
@@ -6918,7 +6919,7 @@ paths:
       tags:
         - organisations
       summary: Returns details for all Organisation resources
-      operationId:  get-organisations-list
+      operationId: get-organisations-list
       security:
         - azure-oauth: []
       parameters:
@@ -7203,7 +7204,7 @@ paths:
       tags:
         - organisations
       summary: Returns details for a single Organisation resource, specified by its ID
-      operationId:  get-organisations-detail
+      operationId: get-organisations-detail
       security:
         - azure-oauth: []
       parameters:
