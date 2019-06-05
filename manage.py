@@ -6,7 +6,8 @@ from flask.cli import AppGroup
 from flask_migrate import Migrate
 
 from arctic_office_projects_api import create_app, db
-from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation, Organisation
+from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation, Organisation, \
+    CategoryScheme, CategoryTerm, Categorisation
 from arctic_office_projects_api.seeding import seed_predictable_test_resources, seed_random_test_resources
 
 app = create_app(os.getenv('FLASK_ENV') or 'default')
@@ -22,7 +23,10 @@ def make_shell_context():
         Participant=Participant,
         Grant=Grant,
         Allocation=Allocation,
-        Organisation=Organisation
+        Organisation=Organisation,
+        CategoryScheme=CategoryScheme,
+        CategoryTerm=CategoryTerm,
+        Categorisation=Categorisation
     )
 
 

@@ -6,8 +6,9 @@ from flask import Blueprint, jsonify, request, current_app as app
 
 from arctic_office_projects_api import auth
 from arctic_office_projects_api.schemas import ProjectSchema, PersonSchema, ParticipantSchema, GrantSchema, \
-    AllocationSchema, OrganisationSchema
-from arctic_office_projects_api.models import Project, Participant, Person, Grant, Allocation, Organisation
+    AllocationSchema, OrganisationSchema, CategoryTermSchema, CategorySchemeSchema, CategorisationSchema
+from arctic_office_projects_api.models import Project, Participant, Person, Grant, Allocation, Organisation, \
+    CategoryTerm, CategoryScheme, Categorisation
 
 main = Blueprint('main', __name__)
 
@@ -46,7 +47,10 @@ def projects_list():
         'participants.person.organisation',
         'allocations',
         'allocations.grant',
-        'allocations.grant.funder'
+        'allocations.grant.funder',
+        'categorisations',
+        'categorisations.category_term',
+        'categorisations.category_term.category_scheme'
     )).dump(projects)
 
     return jsonify(payload.data)
@@ -69,7 +73,10 @@ def projects_detail(project_id: str):
             'participants.person.organisation',
             'allocations',
             'allocations.grant',
-            'allocations.grant.funder'
+            'allocations.grant.funder',
+            'categorisations',
+            'categorisations.category_term',
+            'categorisations.category_term.category_scheme'
         )).dump(project)
         return jsonify(payload.data)
     except NoResultFound:
@@ -147,6 +154,44 @@ def projects_allocations(project_id: str):
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
         payload = ProjectSchema(related_resource='allocations', many_related=True).dump(project)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/projects/<project_id>/relationships/categorisations')
+@auth()
+def projects_relationship_categorisations(project_id: str):
+    """
+    Returns Categorisation resource linkages associated with a specific Project resource, specified by its Neutral ID
+
+    :type project_id: str
+    :param project_id: neutral ID of a Project resource
+    """
+    try:
+        project = Project.query.filter_by(neutral_id=project_id).one()
+        payload = ProjectSchema(resource_linkage='categorisations').dump(project)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/projects/<project_id>/categorisations')
+@auth()
+def projects_categorisations(project_id: str):
+    """
+    Returns Categorisation resources associated with a specific Project resource, specified by its Neutral ID
+
+    :type project_id: str
+    :param project_id: neutral ID of a Project resource
+    """
+    try:
+        project = Project.query.filter_by(neutral_id=project_id).one()
+        payload = ProjectSchema(related_resource='categorisations', many_related=True).dump(project)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -754,6 +799,330 @@ def organisations_grants(organisation_id: str):
     try:
         organisation = Organisation.query.filter_by(neutral_id=organisation_id).one()
         payload = OrganisationSchema(related_resource='grants', many_related=True).dump(organisation)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/category-schemes')
+@auth()
+def category_schemes_list():
+    """
+    Returns all CategoryScheme resources
+
+    The response is paginated.
+    """
+    page = request.args.get('page', type=int)
+    if page is None:
+        page = 1
+
+    category_schemes = CategoryScheme.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
+    payload = CategorySchemeSchema(many=True, paginate=True, include_data=(
+        'category_terms',
+        'category_terms.categorisations.project'
+    )).dump(category_schemes)
+
+    return jsonify(payload.data)
+
+
+@main.route('/category-schemes/<category_scheme_id>')
+@auth()
+def category_schemes_detail(category_scheme_id: str):
+    """
+    Returns a specific CategoryScheme resource, specified by its Neutral ID
+
+    :type category_scheme_id: str
+    :param category_scheme_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
+        payload = CategorySchemeSchema(include_data=(
+            'category_terms',
+            'category_terms.categorisations.project'
+        )).dump(category_scheme)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/category-schemes/<category_scheme_id>/relationships/categories')
+@auth()
+def category_schemes_relationship_category_terms(category_scheme_id: str):
+    """
+    Returns CategoryTerm resource linkages associated with a specific CategoryScheme resource, specified by its Neutral
+    ID
+
+    :type category_scheme_id: str
+    :param category_scheme_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
+        payload = CategorySchemeSchema(resource_linkage='category-terms').dump(category_scheme)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/category-schemes/<category_scheme_id>/categories')
+@auth()
+def category_schemes_category_terms(category_scheme_id: str):
+    """
+    Returns CategoryTerm resources associated with a specific CategoryScheme resource, specified by its Neutral ID
+
+    :type category_scheme_id: str
+    :param category_scheme_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
+        payload = CategorySchemeSchema(related_resource='category_terms', many_related=True).dump(category_scheme)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categories')
+@auth()
+def category_terms_list():
+    """
+    Returns all CategoryTerm resources
+
+    The response is paginated.
+    """
+    page = request.args.get('page', type=int)
+    if page is None:
+        page = 1
+
+    category_terms = CategoryTerm.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
+    payload = CategoryTermSchema(many=True, paginate=True, include_data=(
+        'categorisations',
+        'categorisations.project',
+        'category_scheme'
+    )).dump(category_terms)
+
+    return jsonify(payload.data)
+
+
+@main.route('/categories/<category_term_id>')
+@auth()
+def category_terms_detail(category_term_id: str):
+    """
+    Returns a specific CategoryTerm resource, specified by its Neutral ID
+
+    :type category_term_id: str
+    :param category_term_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
+        payload = CategoryTermSchema(include_data=(
+            'categorisations.project',
+            'category_scheme'
+        )).dump(category_term)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categories/<category_term_id>/relationships/category-schemes')
+@auth()
+def category_terms_relationship_category_schemes(category_term_id: str):
+    """
+    Returns CategoryScheme resource linkages associated with a specific CategoryTerm resource, specified by its Neutral
+    ID
+
+    :type category_term_id: str
+    :param category_term_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
+        payload = CategoryTermSchema(resource_linkage='category-scheme').dump(category_term)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categories/<category_term_id>/relationships/categorisations')
+@auth()
+def category_terms_relationship_categorisations(category_term_id: str):
+    """
+    Returns Categorisation resource linkages associated with a specific CategoryTerm resource, specified by its Neutral
+    ID
+
+    :type category_term_id: str
+    :param category_term_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
+        payload = CategoryTermSchema(resource_linkage='categorisations').dump(category_term)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categories/<category_term_id>/category-schemes')
+@auth()
+def category_terms_category_schemes(category_term_id: str):
+    """
+    Returns CategoryScheme resources associated with a specific CategoryTerm resource, specified by its Neutral ID
+
+    :type category_term_id: str
+    :param category_term_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
+        payload = CategoryTermSchema(related_resource='category_scheme', many_related=False).dump(category_term)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categories/<category_term_id>/categorisations')
+@auth()
+def category_terms_categorisations(category_term_id: str):
+    """
+    Returns Categorisation resources associated with a specific CategoryTerm resource, specified by its Neutral ID
+
+    :type category_term_id: str
+    :param category_term_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
+        payload = CategoryTermSchema(related_resource='categorisations', many_related=True).dump(category_term)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categorisations')
+@auth()
+def categorisations_list():
+    """
+    Returns all Categorisation resources
+
+    The response is paginated.
+    """
+    page = request.args.get('page', type=int)
+    if page is None:
+        page = 1
+
+    categorisations = Categorisation.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
+    payload = CategorisationSchema(many=True, paginate=True, include_data=(
+        'project',
+        'category_term'
+    )).dump(categorisations)
+
+    return jsonify(payload.data)
+
+
+@main.route('/categorisations/<categorisation_id>')
+@auth()
+def categorisations_detail(categorisation_id: str):
+    """
+    Returns a specific Categorisation resource, specified by its Neutral ID
+
+    :type categorisation_id: str
+    :param categorisation_id: neutral ID of a Categorisation resource
+    """
+    try:
+        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
+        payload = CategorisationSchema(include_data=(
+            'project',
+            'category_term'
+        )).dump(categorisation)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categorisations/<categorisation_id>/relationships/projects')
+@auth()
+def categorisations_relationship_projects(categorisation_id: str):
+    """
+    Returns Project resource linkages associated with a specific Categorisation resource, specified by its Neutral ID
+
+    :type categorisation_id: str
+    :param categorisation_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
+        payload = CategorisationSchema(resource_linkage='project').dump(categorisation)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categorisations/<categorisation_id>/relationships/categories')
+@auth()
+def categorisations_relationship_category_terms(categorisation_id: str):
+    """
+    Returns CategoryTerm resource linkages associated with a specific Categorisation resource, specified by its Neutral
+    ID
+
+    :type categorisation_id: str
+    :param categorisation_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
+        payload = CategorisationSchema(resource_linkage='category-term').dump(categorisation)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categorisations/<categorisation_id>/projects')
+@auth()
+def categorisations_projects(categorisation_id: str):
+    """
+    Returns Project resources associated with a specific Categorisation resource, specified by its Neutral ID
+
+    :type categorisation_id: str
+    :param categorisation_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
+        payload = CategorisationSchema(related_resource='project', many_related=False).dump(categorisation)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categorisations/<categorisation_id>/categories')
+@auth()
+def categorisations_category_terms(categorisation_id: str):
+    """
+    Returns CategoryTerm resources associated with a specific Categorisation resource, specified by its Neutral ID
+
+    :type categorisation_id: str
+    :param categorisation_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
+        payload = CategorisationSchema(related_resource='category_term', many_related=False).dump(categorisation)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()

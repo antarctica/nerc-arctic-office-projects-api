@@ -11,6 +11,8 @@ from flask_sqlalchemy import Pagination, Model
 from psycopg2.extras import DateRange
 from typing import Union, Optional
 
+from arctic_office_projects_api.models import CategoryTerm
+
 
 class Schema(_Schema):
     """
@@ -526,6 +528,18 @@ class ProjectSchema(Schema):
         schema='AllocationSchema'
     )
 
+    categorisations = Relationship(
+        self_view='main.projects_relationship_categorisations',
+        self_view_kwargs={'project_id': '<neutral_id>'},
+        related_view='main.projects_categorisations',
+        related_view_kwargs={'project_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='categorisations',
+        schema='CategorisationSchema'
+    )
+
     class Meta(Schema.Meta):
         type_ = 'projects'
         self_view = 'main.projects_detail'
@@ -714,3 +728,125 @@ class OrganisationSchema(Schema):
         self_view = 'main.organisations_detail'
         self_view_kwargs = {'organisation_id': '<id>'}
         self_view_many = 'main.organisations_list'
+
+
+class CategorySchemeSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    name = fields.String(dump_only=True, required=True)
+    acronym = fields.String(dump_only=True, required=False)
+    description = fields.String(dump_only=True, required=False)
+    version = fields.String(dump_only=True, required=False)
+    revision = fields.String(dump_only=True, required=False)
+
+    category_terms = Relationship(
+        self_view='main.category_schemes_relationship_category_terms',
+        self_view_kwargs={'category_scheme_id': '<neutral_id>'},
+        related_view='main.category_schemes_category_terms',
+        related_view_kwargs={'category_scheme_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='categories',
+        schema='CategoryTermSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'category-schemes'
+        self_view = 'main.category_schemes_detail'
+        self_view_kwargs = {'category_scheme_id': '<id>'}
+        self_view_many = 'main.category_schemes_list'
+
+
+class CategoryTermSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    scheme = fields.Method('scheme_class', dump_only=True, required=True)
+    concept = fields.String(attribute="scheme_identifier", dump_only=True, required=True)
+    title = fields.String(attribute="name", dump_only=True, required=True)
+    notation = fields.String(attribute="scheme_notation", dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    aliases = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    definitions = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    examples = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    notes = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    scope_notes = fields.List(fields.String, dump_only=True, required=False)
+
+    # noinspection PyMethodMayBeStatic
+    def scheme_class(self, obj: CategoryTerm) -> str:
+        """
+        Returns the identifier of the category term's schema (i.e. SKOS:inScheme)
+
+        :type obj: CategoryTerm
+        :param obj: an CategoryTerm model instance representing the category term being manipulated
+
+        :rtype str
+        :return: identifier of the category term's schema
+        """
+        return obj.category_scheme.namespace
+
+    category_scheme = Relationship(
+        self_view='main.category_terms_relationship_category_schemes',
+        self_view_kwargs={'category_term_id': '<neutral_id>'},
+        related_view='main.category_terms_category_schemes',
+        related_view_kwargs={'category_term_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='category-schemes',
+        schema='CategorySchemeSchema'
+    )
+
+    categorisations = Relationship(
+        self_view='main.category_terms_relationship_categorisations',
+        self_view_kwargs={'category_term_id': '<neutral_id>'},
+        related_view='main.category_terms_categorisations',
+        related_view_kwargs={'category_term_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='categorisations',
+        schema='CategorisationSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'categories'
+        self_view = 'main.category_terms_detail'
+        self_view_kwargs = {'category_term_id': '<id>'}
+        self_view_many = 'main.category_terms_list'
+
+
+class CategorisationSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+
+    project = Relationship(
+        self_view='main.categorisations_relationship_projects',
+        self_view_kwargs={'categorisation_id': '<neutral_id>'},
+        related_view='main.categorisations_projects',
+        related_view_kwargs={'categorisation_id': '<neutral_id>'},
+        id_field='project.neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='projects',
+        schema='ProjectSchema'
+    )
+
+    category_term = Relationship(
+        self_view='main.categorisations_relationship_category_terms',
+        self_view_kwargs={'categorisation_id': '<neutral_id>'},
+        related_view='main.categorisations_category_terms',
+        related_view_kwargs={'categorisation_id': '<neutral_id>'},
+        id_field='categorisation.neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='categories',
+        schema='CategoryTermSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'categorisations'
+        self_view = 'main.categorisations_detail'
+        self_view_kwargs = {'categorisation_id': '<id>'}
+        self_view_many = 'main.categorisations_list'

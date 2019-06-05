@@ -13,6 +13,7 @@ psycopg2-binary==2.7.7
 python-dotenv==0.10.1
 sentry-sdk[flask]==0.7.6
 simplejson==3.16.0
+SQLAlchemy-Utils==0.33.11
 str2bool==1.1
 waitress==1.2.0
 ulid-py==0.0.9
