@@ -9325,108 +9325,37 @@ paths:
                               title: Self
                               description: URL to resource
                     example:
-                      - id: 01DC6HYAKX53S13HCN2SBN4333
-                        type: categories
-                        attributes:
-                          scheme: https://www.example.com/category-scheme-1
-                          concept: https://www.example.com/category-scheme-1/category-term-4
-                          notation: 1.2.3
-                          title: 'Example Category Term: Level 3'
-                          definitions:
-                            ->
-                            This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change.
-
-                            This term (3) is a third level term with a second level term as a parent (2) and no child terms.
-                          aliases:
-                            - Third Term
-                          examples:
-                            - 'Example category term 3 - example'
-                          notes:
-                            - 'Example category term 3 - note'
-                          scope-notes:
-                            - 'Example category term 3 - scope note'
-                        relationships:
-                          category-scheme:
-                            data:
-                              id: 01DC6HYAKXG8FCN63D7DH06W84
-                              type: category-schemes
-                            links:
-                              self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes
-                              related: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes
-                          categorisations:
-                            data:
-                              - id: 01DC6HYAKX53S13HCN2SBN4333
-                                type: categorisations
-                            links:
-                              self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations
-                              related: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations
-                        links:
-                          self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333
-                  included:
-                    type: array
-                    title: Included
-                    description: Resources related to resource
-                    items:
-                      type: object
                   links:
                     type: object
                     title: Links
                     description: Links to additional information or actions
                     required:
                       - self
-                      - first
-                      - last
                     properties:
                       self:
                         readOnly: true
                         type: string
                         format: uri
-                        title: Current page
-                        description: URL to current page of resources
-                      first:
                         readOnly: true
                         type: string
                         format: uri
-                        title: First page
-                        description: URL to first page of resources
-                      last:
+                        readOnly: true
+                        type: string
                         readOnly: true
                         type: string
                         format: uri
-                        title: Last page
-                        description: URL to last page of resources
-                      prev:
                         readOnly: true
                         type: string
                         format: uri
-                        title: Previous page
-                        description: URL to previous page of resources (if applicable)
-                      next:
-                        readOnly: true
-                        type: string
-                        format: uri
-                        title: Next page
-                        description: URL to next page of resources (if applicable)
                     example:
-                      self: https://api.bas.ac.uk/arctic-office-projects/testing/categories?page=2
-                      first: https://api.bas.ac.uk/arctic-office-projects/testing/categories?page=1
-                      last: https://api.bas.ac.uk/arctic-office-projects/testing/categories?page=4
-                      prev: https://api.bas.ac.uk/arctic-office-projects/testing/categories?page=1
-                      next: https://api.bas.ac.uk/arctic-office-projects/testing/categories?page=3
-  /categories/{id}:
-    summary: Categories details
-    description: Details for a specific Categories resource
     get:
       tags:
         - categories
-      summary: Returns details for a single Category resource, specified by its ID
-      operationId: get-categories-detail
       security:
         - azure-oauth: []
       parameters:
         - in: path
           name: id
-          description: ID of a Category Scheme resource
           required: true
           schema:
             type: string
@@ -9446,11 +9375,9 @@ paths:
                   data:
                     type: object
                     title: Category
-                    description: Represents information about an category
                     required:
                       - id
                       - type
-                      - attributes
                       - links
                     properties:
                       id:
@@ -9651,47 +9578,29 @@ paths:
                             title: Self
                             description: URL to resource
                     example:
-                      id: 01DC6HYAKX53S13HCN2SBN4333
                       type: categories
                       attributes:
                         scheme: https://www.example.com/category-scheme-1
-                        concept: https://www.example.com/category-scheme-1/category-term-4
-                        notation: 1.2.3
-                        title: 'Example Category Term: Level 3'
                         definitions:
                           ->
-                          This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change.
 
-                          This term (3) is a third level term with a second level term as a parent (2) and no child terms.
                         aliases:
-                          - Third Term
                         examples:
-                          - 'Example category term 3 - example'
                         notes:
-                          - 'Example category term 3 - note'
                         scope-notes:
-                          - 'Example category term 3 - scope note'
                       relationships:
                         category-scheme:
                           data:
                             id: 01DC6HYAKXG8FCN63D7DH06W84
                             type: category-schemes
                           links:
-                            self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes
-                            related: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes
                         categorisations:
                           data:
-                            - id: 01DC6HYAKX53S13HCN2SBN4333
-                              type: categorisations
                           links:
-                            self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations
-                            related: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations
                       links:
-                        self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333
                   included:
                     type: array
                     title: Included
-                    description: Resources related to resource
                     items:
                       type: object
                   links:
@@ -9706,161 +9615,7 @@ paths:
                         type: string
                         format: uri
                         title: Self
-                        description: URL to current resource
                     example:
-                      self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333
-  /categories/{id}/relationships/category-schemes:
-    summary: Category category scheme relationship
-    description: Relationship between a Category and the Category Scheme it appears within
-    get:
-      tags:
-        - categories
-      summary: Returns details of how a Category resource is related to a Category Scheme resource
-      operationId: get-categories-category-schemes-relationship
-      security:
-        - azure-oauth: []
-      parameters:
-        - in: path
-          name: id
-          description: ID of a Category resource
-          required: true
-          schema:
-            type: string
-          example:
-            value: 01DC6HYAKX53S13HCN2SBN4333
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - links
-                properties:
-                  data:
-                    type: object
-                    title: Category Scheme resource linkage
-                    description: Related category scheme resource identifier
-                    required:
-                      - type
-                      - id
-                    properties:
-                      type:
-                        readOnly: true
-                        type: string
-                        title: Type
-                        description: Type of resource
-                        enum:
-                          - category-schemes
-                      id:
-                        readOnly: true
-                        type: string
-                        title: ID
-                        description: Resource identifier
-                    example:
-                      id: 01DC6HYAKXG8FCN63D7DH06W84
-                      type: category-schemes
-                  links:
-                    type: object
-                    title: Links
-                    description: Links to additional information or actions
-                    required:
-                      - self
-                      - related
-                    properties:
-                      self:
-                        readOnly: true
-                        type: string
-                        format: uri
-                        title: Self
-                        description: URL to relationship
-                      related:
-                        readOnly: true
-                        type: string
-                        format: uri
-                        title: Self
-                        description: URL to related resources
-                    example:
-                      self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes
-                      related: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes
-  /categories/{id}/relationships/categorisations:
-    summary: Category categorisations relationship
-    description: Relationship between a Category and its Categorisations
-    get:
-      tags:
-        - categories
-      summary: Returns details of how a Category resource is related to one or more Categorisation resources
-      operationId: get-categories-categorisations-relationship
-      security:
-        - azure-oauth: []
-      parameters:
-        - in: path
-          name: id
-          description: ID of a Category resource
-          required: true
-          schema:
-            type: string
-          example:
-            value: 01DC6HYAKX53S13HCN2SBN4333
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - links
-                properties:
-                  data:
-                    type: object
-                    title: Categorisation resource linkage
-                    description: Related categorisation resource identifier
-                    required:
-                      - type
-                      - id
-                    properties:
-                      type:
-                        readOnly: true
-                        type: string
-                        title: Type
-                        description: Type of resource
-                        enum:
-                          - categorisation
-                      id:
-                        readOnly: true
-                        type: string
-                        title: ID
-                        description: Resource identifier
-                    example:
-                      id: 01DC6HYAKYAXE7MZMD08QV5JWG
-                      type: categorisation
-                  links:
-                    type: object
-                    title: Links
-                    description: Links to additional information or actions
-                    required:
-                      - self
-                      - related
-                    properties:
-                      self:
-                        readOnly: true
-                        type: string
-                        format: uri
-                        title: Self
-                        description: URL to relationship
-                      related:
-                        readOnly: true
-                        type: string
-                        format: uri
-                        title: Self
-                        description: URL to related resources
-                    example:
-                      self: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations
-                      related: https://api.bas.ac.uk/arctic-office-projects/testing/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations
   /categories/{id}/category-schemes:
     summary: Category category schemes
     description: Details of the Categories Scheme a Category appears within

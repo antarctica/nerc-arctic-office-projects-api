@@ -19,6 +19,11 @@ class Schema(_Schema):
     Custom base Marshmallow schema class, based on marshmallow_jsonapi default 'flask' class
 
     All schemas in this application should inherit from this class.
+
+    Implements or related to:
+    * https://github.com/marshmallow-code/marshmallow-jsonapi/issues/57
+        * https://github.com/marshmallow-code/marshmallow-jsonapi/pull/64
+    * https://github.com/marshmallow-code/marshmallow-jsonapi/issues/195
     """
 
     def __init__(self, *args, **kwargs):

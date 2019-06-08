@@ -462,6 +462,9 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
+                        },
+                    "type": "categories"
+                },
                         }
                     },
                     "type": "categories"
@@ -1522,6 +1525,10 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
+                        },
+                    },
+                    "type": "categories"
+                },
                         }
                     },
                     "type": "categories"
@@ -6285,9 +6292,7 @@ class MainBlueprintTestCase(BaseTestCase):
                 {
                     "attributes": {
                         "acronym": "EXCATSCH1",
-                        "description": "This category scheme is used as an example, for demonstration or testing "
-                                       "purposes. The terms in this scheme, and resources they relates to, will not "
-                                       "change.",
+                        "description": "This category scheme is used as an example, for demonstration or testing purposes. The terms in this scheme, and resources they relates to, will not change.",
                         "name": "Example Category Scheme 1",
                         "revision": "2019-05-28",
                         "version": "1.0"
@@ -6365,9 +6370,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         ],
                         "concept": "https://www.example.com/category-scheme-1/category-term-1",
                         "definitions": [
-                            "This category term is used as an example, for demonstration or testing purposes. The "
-                            "contents of this term, and resources it relates to, will not change. \n This term (0) is "
-                            "the root term with a single child term (1)."
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (0) is the root term with a single child term (1)."
                         ],
                         "examples": [
                             "Example root category term - example"
@@ -6403,6 +6406,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -6414,9 +6418,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         ],
                         "concept": "https://www.example.com/category-scheme-1/category-term-2",
                         "definitions": [
-                            "This category term is used as an example, for demonstration or testing purposes. The "
-                            "contents of this term, and resources it relates to, will not change. \n This term (1) is "
-                            "a first level term with the root term (0) as a parent and a single child term (2)."
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (1) is a first level term with the root term (0) as a parent and a single child term (2)."
                         ],
                         "examples": [
                             "Example category term 1 - example"
@@ -6452,6 +6454,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -6463,9 +6466,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         ],
                         "concept": "https://www.example.com/category-scheme-1/category-term-3",
                         "definitions": [
-                            "This category term is used as an example, for demonstration or testing purposes. The "
-                            "contents of this term, and resources it relates to, will not change. \n This term (2) is "
-                            "a second level term with a first level term as a parent (1) and a single child term (3)."
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (2) is a second level term with a first level term as a parent (1) and a single child term (3)."
                         ],
                         "examples": [
                             "Example category term 2 - example"
@@ -6501,6 +6502,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -6512,9 +6514,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         ],
                         "concept": "https://www.example.com/category-scheme-1/category-term-4",
                         "definitions": [
-                            "This category term is used as an example, for demonstration or testing purposes. The "
-                            "contents of this term, and resources it relates to, will not change. \n This term (3) is "
-                            "a third level term with a second level term as a parent (2) and no child terms."
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (3) is a third level term with a second level term as a parent (2) and no child terms."
                         ],
                         "examples": [
                             "Example category term 3 - example"
@@ -6555,6 +6555,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -6590,47 +6591,7 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "abstract": "This project is used as an example, for demonstration or testing purposes. The "
-                                    "contents of this project, and resources it relates to, will not change. \n This "
-                                    "example project (1) is a project with a single PI and single CoI belonging to the "
-                                    "same organisation. It is also associated with a single grant and funder. The "
-                                    "people, grants and organisations related to this project will not be related to "
-                                    "another project. This project has an acronym, abstract, website and country "
-                                    "property. The project duration is in the past. \n The remainder of this abstract "
-                                    "is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet"
-                                    ", consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum "
-                                    "sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis "
-                                    "dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class "
-                                    "aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos "
-                                    "himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis "
-                                    "dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec "
-                                    "euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet "
-                                    "tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, "
-                                    "lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus "
-                                    "sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id "
-                                    "consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. "
-                                    "Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent "
-                                    "ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, "
-                                    "malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum "
-                                    "facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec "
-                                    "sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque "
-                                    "tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci "
-                                    "varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
-                                    "Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius "
-                                    "est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. "
-                                    "Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut "
-                                    "sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo "
-                                    "ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis "
-                                    "tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a "
-                                    "rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit "
-                                    "egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est "
-                                    "efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id "
-                                    "diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et "
-                                    "netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. "
-                                    "Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper "
-                                    "elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum "
-                                    "mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh "
-                                    "fermentum volutpat. Sed vel tincidunt lectus.",
+                        "abstract": "This project is used as an example, for demonstration or testing purposes. The contents of this project, and resources it relates to, will not change. \n This example project (1) is a project with a single PI and single CoI belonging to the same organisation. It is also associated with a single grant and funder. The people, grants and organisations related to this project will not be related to another project. This project has an acronym, abstract, website and country property. The project duration is in the past. \n The remainder of this abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
                         "access-duration": {
                             "end-instant": None,
                             "interval": "2012-03-01/..",
@@ -6737,6 +6698,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -6781,6 +6743,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -6816,47 +6779,7 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "abstract": "This project is used as an example, for demonstration or testing purposes. The "
-                                    "contents of this project, and resources it relates to, will not change. This "
-                                    "example project (3) has a single PI and multiple CoIs belonging to different "
-                                    "organisations. It is also associated with a single grant and funder. The "
-                                    "resources related to this project will also relate to other projects. This "
-                                    "project has an acronym and country properties, it does not have a website or "
-                                    "publications. The project duration is in the future. \n The remainder of this "
-                                    "abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor "
-                                    "sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis "
-                                    "vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus "
-                                    "quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. "
-                                    "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos "
-                                    "himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis "
-                                    "dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec "
-                                    "euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet "
-                                    "tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, "
-                                    "lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus "
-                                    "sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id "
-                                    "consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. "
-                                    "Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent "
-                                    "ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, "
-                                    "malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum "
-                                    "facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec "
-                                    "sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque "
-                                    "tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci "
-                                    "varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
-                                    "Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius "
-                                    "est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. "
-                                    "Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut "
-                                    "sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo "
-                                    "ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis "
-                                    "tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a "
-                                    "rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit "
-                                    "egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est "
-                                    "efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id "
-                                    "diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et "
-                                    "netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. "
-                                    "Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper "
-                                    "elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum "
-                                    "mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh "
-                                    "fermentum volutpat. Sed vel tincidunt lectus.",
+                        "abstract": "This project is used as an example, for demonstration or testing purposes. The contents of this project, and resources it relates to, will not change. This example project (3) has a single PI and multiple CoIs belonging to different organisations. It is also associated with a single grant and funder. The resources related to this project will also relate to other projects. This project has an acronym and country properties, it does not have a website or publications. The project duration is in the future. \n The remainder of this abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
                         "access-duration": {
                             "end-instant": None,
                             "interval": "2052-03-01/..",
@@ -6970,9 +6893,8 @@ class MainBlueprintTestCase(BaseTestCase):
             "data": {
                 "attributes": {
                     "acronym": "EXCATSCH1",
-                    "description": "This category scheme is used as an example, for demonstration or testing "
-                                   "purposes. The terms in this scheme, and resources they relates to, will not "
-                                   "change.",
+                    "description": "This category scheme is used as an example, for demonstration or testing purposes. "
+                                   "The terms in this scheme, and resources they relates to, will not change.",
                     "name": "Example Category Scheme 1",
                     "revision": "2019-05-28",
                     "version": "1.0"
@@ -7055,6 +6977,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7067,8 +6990,8 @@ class MainBlueprintTestCase(BaseTestCase):
                         "concept": "https://www.example.com/category-scheme-1/category-term-2",
                         "definitions": [
                             "This category term is used as an example, for demonstration or testing purposes. The "
-                            "contents of this term, and resources it relates to, will not change. \n This term (1) is a "
-                            "first level term with the root term (0) as a parent and a single child term (2)."
+                            "contents of this term, and resources it relates to, will not change. \n This term (1) is "
+                            "a first level term with the root term (0) as a parent and a single child term (2)."
                         ],
                         "examples": [
                             "Example category term 1 - example"
@@ -7104,6 +7027,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7153,6 +7077,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7207,6 +7132,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7242,47 +7168,7 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "abstract": "This project is used as an example, for demonstration or testing purposes. The "
-                                    "contents of this project, and resources it relates to, will not change. \n This "
-                                    "example project (1) is a project with a single PI and single CoI belonging to the "
-                                    "same organisation. It is also associated with a single grant and funder. The "
-                                    "people, grants and organisations related to this project will not be related to "
-                                    "another project. This project has an acronym, abstract, website and country "
-                                    "property. The project duration is in the past. \n The remainder of this abstract "
-                                    "is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, "
-                                    "consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum "
-                                    "sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis "
-                                    "dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class "
-                                    "aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos "
-                                    "himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis "
-                                    "dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec "
-                                    "euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet "
-                                    "tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, "
-                                    "lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus "
-                                    "sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id "
-                                    "consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. "
-                                    "Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent "
-                                    "ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, "
-                                    "malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum "
-                                    "facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec "
-                                    "sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque "
-                                    "tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci "
-                                    "varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
-                                    "Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius "
-                                    "est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. "
-                                    "Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut "
-                                    "sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo "
-                                    "ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis "
-                                    "tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a "
-                                    "rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit "
-                                    "egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est "
-                                    "efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id "
-                                    "diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et "
-                                    "netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. "
-                                    "Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper "
-                                    "elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum "
-                                    "mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh "
-                                    "fermentum volutpat. Sed vel tincidunt lectus.",
+                        "abstract": "This project is used as an example, for demonstration or testing purposes. The contents of this project, and resources it relates to, will not change. \n This example project (1) is a project with a single PI and single CoI belonging to the same organisation. It is also associated with a single grant and funder. The people, grants and organisations related to this project will not be related to another project. This project has an acronym, abstract, website and country property. The project duration is in the past. \n The remainder of this abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
                         "access-duration": {
                             "end-instant": None,
                             "interval": "2012-03-01/..",
@@ -7473,6 +7359,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7522,6 +7409,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7571,6 +7459,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7625,6 +7514,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7693,6 +7583,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7705,8 +7596,8 @@ class MainBlueprintTestCase(BaseTestCase):
                         "concept": "https://www.example.com/category-scheme-1/category-term-2",
                         "definitions": [
                             "This category term is used as an example, for demonstration or testing purposes. The "
-                            "contents of this term, and resources it relates to, will not change. \n This term (1) is a "
-                            "first level term with the root term (0) as a parent and a single child term (2)."
+                            "contents of this term, and resources it relates to, will not change. \n This term (1) is "
+                            "a first level term with the root term (0) as a parent and a single child term (2)."
                         ],
                         "examples": [
                             "Example category term 1 - example"
@@ -7742,6 +7633,7 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
+                        },
                         }
                     },
                     "type": "categories"
@@ -7789,6 +7681,55 @@ class MainBlueprintTestCase(BaseTestCase):
                         }
                     },
                     "type": "category-schemes"
+                },
+                {
+                    "attributes": {
+                        "aliases": [
+                            "ROOT"
+                        ],
+                        'concept': 'https://www.example.com/category-scheme-1/category-term-1',
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The "
+                            "contents of this term, and resources it relates to, will not change. \n This term (0) is "
+                            "the root term with a single child term (1)."
+                        ],
+                        "examples": [
+                            "Example root category term - example"
+                        ],
+                        "notation": "0",
+                        "notes": [
+                            "Example root category term - note"
+                        ],
+                        'scheme': 'https://www.example.com/category-scheme-1',
+                        "scope-notes": [
+                            "Example root category term - scope note"
+                        ],
+                        "title": "Example Category Term: 0"
+                    },
+                    "id": "01DC6HYAKX993ZK6YHCVWAE169",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
+                            }
+                        },
+                    },
+                    "type": "categories"
                 }
             ],
             "links": {
@@ -7867,6 +7808,7 @@ class MainBlueprintTestCase(BaseTestCase):
                             "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                             "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                         }
+                    },
                     }
                 },
                 "type": "categories"
@@ -8056,6 +7998,55 @@ class MainBlueprintTestCase(BaseTestCase):
                         }
                     },
                     "type": "projects"
+                },
+                {
+                    "attributes": {
+                        "aliases": [
+                            "Second Term"
+                        ],
+                        'concept': 'https://www.example.com/category-scheme-1/category-term-3',
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The "
+                            "contents of this term, and resources it relates to, will not change. \n This term (2) is "
+                            "a second level term with a first level term as a parent (1) and a single child term (3)."
+                        ],
+                        "examples": [
+                            "Example category term 2 - example"
+                        ],
+                        "notation": "1.2",
+                        "notes": [
+                            "Example category term 2 - note"
+                        ],
+                        'scheme': 'https://www.example.com/category-scheme-1',
+                        "scope-notes": [
+                            "Example category term 2 - scope note"
+                        ],
+                        "title": "Example Category Term: Level 2"
+                    },
+                    "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                            }
+                        },
+                    },
+                    "type": "categories"
                 }
             ],
             "links": {
@@ -8310,101 +8301,7 @@ class MainBlueprintTestCase(BaseTestCase):
             "included": [
                 {
                     "attributes": {
-                        "aliases": [
-                            "Third Term"
-                        ],
-                        "concept": "https://www.example.com/category-scheme-1/category-term-4",
-                        "definitions": [
-                            "This category term is used as an example, for demonstration or testing purposes. The "
-                            "contents of this term, and resources it relates to, will not change. \n This term (3) is "
-                            "a third level term with a second level term as a parent (2) and no child terms."
-                        ],
-                        "examples": [
-                            "Example category term 3 - example"
-                        ],
-                        "notation": "1.2.3",
-                        "notes": [
-                            "Example category term 3 - note"
-                        ],
-                        "scheme": "https://www.example.com/category-scheme-1",
-                        "scope-notes": [
-                            "Example category term 3 - scope note"
-                        ],
-                        "title": "Example Category Term: Level 3"
-                    },
-                    "id": "01DC6HYAKX53S13HCN2SBN4333",
-                    "links": {
-                        "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333"
-                    },
-                    "relationships": {
-                        "categorisations": {
-                            "data": [
-                                {
-                                    "id": "01DC6HYAKYAXE7MZMD08QV5JWG",
-                                    "type": "categorisations"
-                                }
-                            ],
-                            "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations"
-                            }
-                        },
-                        "category-scheme": {
-                            "data": {
-                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
-                                "type": "category-schemes"
-                            },
-                            "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
-                            }
-                        }
-                    },
-                    "type": "categories"
-                },
-                {
-                    "attributes": {
-                        "abstract": "This project is used as an example, for demonstration or testing purposes. The "
-                                    "contents of this project, and resources it relates to, will not change. \n This "
-                                    "example project (1) is a project with a single PI and single CoI belonging to the "
-                                    "same organisation. It is also associated with a single grant and funder. The "
-                                    "people, grants and organisations related to this project will not be related to "
-                                    "another project. This project has an acronym, abstract, website and country "
-                                    "property. The project duration is in the past. \n The remainder of this abstract "
-                                    "is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit "
-                                    "amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum "
-                                    "sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis "
-                                    "dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class "
-                                    "aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos "
-                                    "himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis "
-                                    "dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec "
-                                    "euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet "
-                                    "tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, "
-                                    "lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus "
-                                    "sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id "
-                                    "consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. "
-                                    "Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent "
-                                    "ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, "
-                                    "malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum "
-                                    "facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec "
-                                    "sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque "
-                                    "tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci "
-                                    "varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
-                                    "Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius "
-                                    "est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. "
-                                    "Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut "
-                                    "sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo "
-                                    "ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis "
-                                    "tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a "
-                                    "rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit "
-                                    "egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est "
-                                    "efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id "
-                                    "diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et "
-                                    "netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. "
-                                    "Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper "
-                                    "elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum "
-                                    "mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh "
-                                    "fermentum volutpat. Sed vel tincidunt lectus.",
+                        "abstract": "This project is used as an example, for demonstration or testing purposes. The contents of this project, and resources it relates to, will not change. \n This example project (1) is a project with a single PI and single CoI belonging to the same organisation. It is also associated with a single grant and funder. The people, grants and organisations related to this project will not be related to another project. This project has an acronym, abstract, website and country property. The project duration is in the past. \n The remainder of this abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
                         "access-duration": {
                             "end-instant": None,
                             "interval": "2012-03-01/..",
@@ -8478,43 +8375,53 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "aliases": None,
-                        "concept": "https://www.example.com/category-scheme-2/category-term-2",
-                        "definitions": [
-                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (1A) is a first level term with the root term as a parent (0) and no child terms."
+                        "aliases": [
+                            "Third Term"
                         ],
-                        "examples": None,
-                        "notation": None,
-                        "notes": None,
-                        "scheme": "https://www.example.com/category-scheme-2",
-                        "scope-notes": None,
-                        "title": "Example Category Term: Level 1"
+                        "concept": "https://www.example.com/category-scheme-1/category-term-4",
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (3) is a third level term with a second level term as a parent (2) and no child terms."
+                        ],
+                        "examples": [
+                            "Example category term 3 - example"
+                        ],
+                        "notation": "1.2.3",
+                        "notes": [
+                            "Example category term 3 - note"
+                        ],
+                        "scheme": "https://www.example.com/category-scheme-1",
+                        "scope-notes": [
+                            "Example category term 3 - scope note"
+                        ],
+                        "title": "Example Category Term: Level 3"
                     },
-                    "id": "01DC6HYAKXK6PMXX2TTTFTK5B4",
+                    "id": "01DC6HYAKX53S13HCN2SBN4333",
                     "links": {
-                        "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4"
+                        "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333"
                     },
                     "relationships": {
                         "categorisations": {
                             "data": [
                                 {
-                                    "id": "01DC6HYAKY9ZEK8NQ1JGDMKCK7",
+                                    "id": "01DC6HYAKYAXE7MZMD08QV5JWG",
                                     "type": "categorisations"
                                 }
                             ],
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/categorisations",
-                                "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/categorisations"
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations"
                             }
                         },
                         "category-scheme": {
                             "data": {
-                                "id": "01DC6HYAKXMK47A45KCHZBH0CQ",
+                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
                                 "type": "category-schemes"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/category-schemes",
-                                "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/category-schemes"
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
+                            }
+                        },
                             }
                         }
                     },
@@ -8522,47 +8429,94 @@ class MainBlueprintTestCase(BaseTestCase):
                 },
                 {
                     "attributes": {
-                        "abstract": "This project is used as an example, for demonstration or testing purposes. The "
-                                    "contents of this project, and resources it relates to, will not change. This "
-                                    "example project (3) has a single PI and multiple CoIs belonging to different "
-                                    "organisations. It is also associated with a single grant and funder. The "
-                                    "resources related to this project will also relate to other projects. This "
-                                    "project has an acronym and country properties, it does not have a website or "
-                                    "publications. The project duration is in the future. \n The remainder of this "
-                                    "abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor "
-                                    "sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis "
-                                    "vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus "
-                                    "quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. "
-                                    "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos "
-                                    "himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis "
-                                    "dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec "
-                                    "euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet "
-                                    "tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, "
-                                    "lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus "
-                                    "sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id "
-                                    "consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. "
-                                    "Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent "
-                                    "ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, "
-                                    "malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum "
-                                    "facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec "
-                                    "sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque "
-                                    "tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci "
-                                    "varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
-                                    "Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius "
-                                    "est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. "
-                                    "Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut "
-                                    "sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo "
-                                    "ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis "
-                                    "tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a "
-                                    "rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit "
-                                    "egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est "
-                                    "efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam "
-                                    "id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus "
-                                    "et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu "
-                                    "sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris "
-                                    "ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer "
-                                    "malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus "
-                                    "quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
+                        "acronym": "EXCATSCH1",
+                        "description": "This category scheme is used as an example, for demonstration or testing purposes. The terms in this scheme, and resources they relates to, will not change.",
+                        "name": "Example Category Scheme 1",
+                        "revision": "2019-05-28",
+                        "version": "1.0"
+                    },
+                    "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                    "links": {
+                        "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
+                    },
+                    "relationships": {
+                        "categories": {
+                            "data": [
+                                {
+                                    "id": "01DC6HYAKX993ZK6YHCVWAE169",
+                                    "type": "categories"
+                                },
+                                {
+                                    "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                    "type": "categories"
+                                },
+                                {
+                                    "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                    "type": "categories"
+                                },
+                                {
+                                    "id": "01DC6HYAKX53S13HCN2SBN4333",
+                                    "type": "categories"
+                                }
+                            ],
+                            "links": {
+                                "related": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
+                                "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
+                            }
+                        }
+                    },
+                    "type": "category-schemes"
+                },
+                {
+                    "attributes": {
+                        "aliases": [
+                            "Second Term"
+                        ],
+                        "concept": "https://www.example.com/category-scheme-1/category-term-3",
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (2) is a second level term with a first level term as a parent (1) and a single child term (3)."
+                        ],
+                        "examples": [
+                            "Example category term 2 - example"
+                        ],
+                        "notation": "1.2",
+                        "notes": [
+                            "Example category term 2 - note"
+                        ],
+                        "scheme": "https://www.example.com/category-scheme-1",
+                        "scope-notes": [
+                            "Example category term 2 - scope note"
+                        ],
+                        "title": "Example Category Term: Level 2"
+                    },
+                    "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                            }
+                        },
+                    },
+                    "type": "categories"
+                },
+                {
+                    "attributes": {
+                        "abstract": "This project is used as an example, for demonstration or testing purposes. The contents of this project, and resources it relates to, will not change. This example project (3) has a single PI and multiple CoIs belonging to different organisations. It is also associated with a single grant and funder. The resources related to this project will also relate to other projects. This project has an acronym and country properties, it does not have a website or publications. The project duration is in the future. \n The remainder of this abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
                         "access-duration": {
                             "end-instant": None,
                             "interval": "2052-03-01/..",
@@ -8645,6 +8599,121 @@ class MainBlueprintTestCase(BaseTestCase):
                         }
                     },
                     "type": "projects"
+                },
+                {
+                    "attributes": {
+                        "aliases": None,
+                        "concept": "https://www.example.com/category-scheme-2/category-term-2",
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (1A) is a first level term with the root term as a parent (0) and no child terms."
+                        ],
+                        "examples": None,
+                        "notation": None,
+                        "notes": None,
+                        "scheme": "https://www.example.com/category-scheme-2",
+                        "scope-notes": None,
+                        "title": "Example Category Term: Level 1"
+                    },
+                    "id": "01DC6HYAKXK6PMXX2TTTFTK5B4",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [
+                                {
+                                    "id": "01DC6HYAKY9ZEK8NQ1JGDMKCK7",
+                                    "type": "categorisations"
+                                }
+                            ],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXMK47A45KCHZBH0CQ",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/category-schemes"
+                            }
+                        },
+                    },
+                    "type": "categories"
+                },
+                {
+                    "attributes": {
+                        "acronym": None,
+                        "description": None,
+                        "name": "Example Category Scheme 2",
+                        "revision": None,
+                        "version": None
+                    },
+                    "id": "01DC6HYAKXMK47A45KCHZBH0CQ",
+                    "links": {
+                        "self": "http://localhost:9000/category-schemes/01DC6HYAKXMK47A45KCHZBH0CQ"
+                    },
+                    "relationships": {
+                        "categories": {
+                            "data": [
+                                {
+                                    "id": "01DC6HYAKXY0JT6583RCXTJY3Q",
+                                    "type": "categories"
+                                },
+                                {
+                                    "id": "01DC6HYAKXK6PMXX2TTTFTK5B4",
+                                    "type": "categories"
+                                }
+                            ],
+                            "links": {
+                                "related": "http://localhost:9000/category-schemes/01DC6HYAKXMK47A45KCHZBH0CQ/categories",
+                                "self": "http://localhost:9000/category-schemes/01DC6HYAKXMK47A45KCHZBH0CQ/relationships/categories"
+                            }
+                        }
+                    },
+                    "type": "category-schemes"
+                },
+                {
+                    "attributes": {
+                        "aliases": None,
+                        "concept": "https://www.example.com/category-scheme-2/category-term-1",
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The contents of this term, and resources it relates to, will not change. \n This term (0) is the root term with a single child term (1)."
+                        ],
+                        "examples": None,
+                        "notation": None,
+                        "notes": None,
+                        "scheme": "https://www.example.com/category-scheme-2",
+                        "scope-notes": None,
+                        "title": "Example Category Term: 0"
+                    },
+                    "id": "01DC6HYAKXY0JT6583RCXTJY3Q",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXMK47A45KCHZBH0CQ",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/relationships/category-schemes"
+                            }
+                        },
+                    },
+                    "type": "categories"
                 }
             ],
             "links": {
@@ -8674,35 +8743,77 @@ class MainBlueprintTestCase(BaseTestCase):
     def test_categorisations_detail(self):
         expected_payload = {
             "data": {
-                    "id": "01DC6HYAKYAXE7MZMD08QV5JWG",
+                "id": "01DC6HYAKYAXE7MZMD08QV5JWG",
+                "links": {
+                    "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
+                },
+                "relationships": {
+                    "category": {
+                        "data": {
+                            "id": "01DC6HYAKX53S13HCN2SBN4333",
+                            "type": "categories"
+                        },
+                        "links": {
+                            "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories",
+                            "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories"
+                        }
+                    },
+                    "project": {
+                        "data": {
+                            "id": "01DB2ECBP24NHYV5KZQG2N3FS2",
+                            "type": "projects"
+                        },
+                        "links": {
+                            "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects",
+                            "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects"
+                        }
+                    }
+                },
+                "type": "categorisations"
+            },
+            "included": [
+                {
+                    "attributes": {
+                        "acronym": "EXCATSCH1",
+                        "description": "This category scheme is used as an example, for demonstration or testing "
+                                       "purposes. The terms in this scheme, and resources they relates to, will not "
+                                       "change.",
+                        "name": "Example Category Scheme 1",
+                        "revision": "2019-05-28",
+                        "version": "1.0"
+                    },
+                    "id": "01DC6HYAKXG8FCN63D7DH06W84",
                     "links": {
-                        "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
+                        "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
-                        "category-term": {
-                            "data": {
-                                "id": "01DC6HYAKX53S13HCN2SBN4333",
-                                "type": "categories"
-                            },
+                        "categories": {
+                            "data": [
+                                {
+                                    "id": "01DC6HYAKX993ZK6YHCVWAE169",
+                                    "type": "categories"
+                                },
+                                {
+                                    "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                    "type": "categories"
+                                },
+                                {
+                                    "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                    "type": "categories"
+                                },
+                                {
+                                    "id": "01DC6HYAKX53S13HCN2SBN4333",
+                                    "type": "categories"
+                                }
+                            ],
                             "links": {
-                                "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories",
-                                "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories"
-                            }
-                        },
-                        "project": {
-                            "data": {
-                                "id": "01DB2ECBP24NHYV5KZQG2N3FS2",
-                                "type": "projects"
-                            },
-                            "links": {
-                                "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects",
-                                "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects"
+                                "related": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
+                                "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
                             }
                         }
                     },
-                    "type": "categorisations"
+                    "type": "category-schemes"
                 },
-            "included": [
                 {
                     "attributes": {
                         "aliases": [
@@ -8753,6 +8864,56 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
+                        },
+                    },
+                    "type": "categories"
+                },
+                {
+                    "attributes": {
+                        "aliases": [
+                            "Second Term"
+                        ],
+                        'concept': 'https://www.example.com/category-scheme-1/category-term-3',
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The "
+                            "contents of this term, and resources it relates to, will not change. \n This term (2) is "
+                            "a second level term with a first level term as a parent (1) and a single child term (3)."
+                        ],
+                        "examples": [
+                            "Example category term 2 - example"
+                        ],
+                        "notation": "1.2",
+                        "notes": [
+                            "Example category term 2 - note"
+                        ],
+                        'scheme': 'https://www.example.com/category-scheme-1',
+                        "scope-notes": [
+                            "Example category term 2 - scope note"
+                        ],
+                        "title": "Example Category Term: Level 2"
+                    },
+                    "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                            }
+                        },
                         }
                     },
                     "type": "categories"

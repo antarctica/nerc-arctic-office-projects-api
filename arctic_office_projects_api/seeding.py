@@ -571,7 +571,7 @@ static_resources = {
             'examples': [],
             'notes': [],
             'scope_notes': [],
-            'path': '0',
+            'path': '00',
             'category_scheme_nid': '01DC6HYAKXMK47A45KCHZBH0CQ'
         },
         '01DC6HYAKXK6PMXX2TTTFTK5B4': {
@@ -588,7 +588,7 @@ static_resources = {
             'examples': [],
             'notes': [],
             'scope_notes': [],
-            'path': '0.1',
+            'path': '00.11',
             'category_scheme_nid': '01DC6HYAKXMK47A45KCHZBH0CQ'
         },
         '01DC6HYAKX4JBJ94Q69M6GCMZB': {

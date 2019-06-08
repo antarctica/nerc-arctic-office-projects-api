@@ -922,6 +922,7 @@ def category_terms_detail(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(include_data=(
+            'categorisations',
             'categorisations.project',
             'category_scheme'
         )).dump(category_term)
@@ -1026,6 +1027,7 @@ def categorisations_list():
     payload = CategorisationSchema(many=True, paginate=True, include_data=(
         'project',
         'category',
+        'category.category_scheme'
     )).dump(categorisations)
 
     return jsonify(payload.data)
@@ -1045,6 +1047,7 @@ def categorisations_detail(categorisation_id: str):
         payload = CategorisationSchema(include_data=(
             'project',
             'category',
+            'category.category_scheme'
         )).dump(categorisation)
         return jsonify(payload.data)
     except NoResultFound:
