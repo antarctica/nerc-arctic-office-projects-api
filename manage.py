@@ -53,7 +53,7 @@ def seed_predictable_mock_projects():
 def seed_random_mock_projects():
     """Seed database with 100 random mock projects."""
     seed_random_test_resources()
-    print("Seeded 100 random mock resources")
+    print("Seeded random mock resources")
 
 
 if 'PYCHARM_HOSTED' in os.environ:
