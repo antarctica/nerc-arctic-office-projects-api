@@ -49,8 +49,8 @@ def projects_list():
         'allocations.grant',
         'allocations.grant.funder',
         'categorisations',
-        'categorisations.category_term',
-        'categorisations.category_term.category_scheme'
+        'categorisations.category',
+        'categorisations.category.category_scheme',
     )).dump(projects)
 
     return jsonify(payload.data)
@@ -75,8 +75,8 @@ def projects_detail(project_id: str):
             'allocations.grant',
             'allocations.grant.funder',
             'categorisations',
-            'categorisations.category_term',
-            'categorisations.category_term.category_scheme'
+            'categorisations.category',
+            'categorisations.category.category_scheme',
         )).dump(project)
         return jsonify(payload.data)
     except NoResultFound:
@@ -820,8 +820,8 @@ def category_schemes_list():
 
     category_schemes = CategoryScheme.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
     payload = CategorySchemeSchema(many=True, paginate=True, include_data=(
-        'category_terms',
-        'category_terms.categorisations.project'
+        'categories',
+        'categories.categorisations.project'
     )).dump(category_schemes)
 
     return jsonify(payload.data)
@@ -839,8 +839,8 @@ def category_schemes_detail(category_scheme_id: str):
     try:
         category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
         payload = CategorySchemeSchema(include_data=(
-            'category_terms',
-            'category_terms.categorisations.project'
+            'categories',
+            'categories.categorisations.project'
         )).dump(category_scheme)
         return jsonify(payload.data)
     except NoResultFound:
@@ -861,7 +861,7 @@ def category_schemes_relationship_category_terms(category_scheme_id: str):
     """
     try:
         category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
-        payload = CategorySchemeSchema(resource_linkage='category-terms').dump(category_scheme)
+        payload = CategorySchemeSchema(resource_linkage='categories').dump(category_scheme)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -880,7 +880,7 @@ def category_schemes_category_terms(category_scheme_id: str):
     """
     try:
         category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
-        payload = CategorySchemeSchema(related_resource='category_terms', many_related=True).dump(category_scheme)
+        payload = CategorySchemeSchema(related_resource='categories', many_related=True).dump(category_scheme)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -1025,7 +1025,7 @@ def categorisations_list():
     categorisations = Categorisation.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
     payload = CategorisationSchema(many=True, paginate=True, include_data=(
         'project',
-        'category_term'
+        'category',
     )).dump(categorisations)
 
     return jsonify(payload.data)
@@ -1044,7 +1044,7 @@ def categorisations_detail(categorisation_id: str):
         categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
         payload = CategorisationSchema(include_data=(
             'project',
-            'category_term'
+            'category',
         )).dump(categorisation)
         return jsonify(payload.data)
     except NoResultFound:
@@ -1084,7 +1084,7 @@ def categorisations_relationship_category_terms(categorisation_id: str):
     """
     try:
         categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
-        payload = CategorisationSchema(resource_linkage='category-term').dump(categorisation)
+        payload = CategorisationSchema(resource_linkage='category').dump(categorisation)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -1122,7 +1122,7 @@ def categorisations_category_terms(categorisation_id: str):
     """
     try:
         categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
-        payload = CategorisationSchema(related_resource='category_term', many_related=False).dump(categorisation)
+        payload = CategorisationSchema(related_resource='category', many_related=False).dump(categorisation)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()

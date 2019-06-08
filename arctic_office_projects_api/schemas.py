@@ -747,7 +747,8 @@ class CategorySchemeSchema(Schema):
     version = fields.String(dump_only=True, required=False)
     revision = fields.String(dump_only=True, required=False)
 
-    category_terms = Relationship(
+    categories = Relationship(
+        attribute='category_terms',
         self_view='main.category_schemes_relationship_category_terms',
         self_view_kwargs={'category_scheme_id': '<neutral_id>'},
         related_view='main.category_schemes_category_terms',
@@ -842,7 +843,8 @@ class CategorisationSchema(Schema):
         schema='ProjectSchema'
     )
 
-    category_term = Relationship(
+    category = Relationship(
+        attribute='category_term',
         self_view='main.categorisations_relationship_category_terms',
         self_view_kwargs={'categorisation_id': '<neutral_id>'},
         related_view='main.categorisations_category_terms',

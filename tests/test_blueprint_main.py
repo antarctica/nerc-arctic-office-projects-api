@@ -389,7 +389,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -481,7 +481,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
-                        "category-terms": {
+                        "categories": {
                             "data": [
                                 {
                                     "id": "01DC6HYAKX993ZK6YHCVWAE169",
@@ -1449,7 +1449,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -1541,7 +1541,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
-                        "category-terms": {
+                        "categories": {
                             "data": [
                                 {
                                     "id": "01DC6HYAKX993ZK6YHCVWAE169",
@@ -1829,7 +1829,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -6297,7 +6297,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
-                        "category-terms": {
+                        "categories": {
                             "data": [
                                 {
                                     "id": "01DC6HYAKX993ZK6YHCVWAE169",
@@ -6337,7 +6337,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/category-schemes/01DC6HYAKXMK47A45KCHZBH0CQ"
                     },
                     "relationships": {
-                        "category-terms": {
+                        "categories": {
                             "data": [
                                 {
                                     "id": "01DC6HYAKXY0JT6583RCXTJY3Q",
@@ -6565,7 +6565,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -6791,7 +6791,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKY9ZEK8NQ1JGDMKCK7"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKXK6PMXX2TTTFTK5B4",
                                 "type": "categories"
@@ -6982,7 +6982,7 @@ class MainBlueprintTestCase(BaseTestCase):
                     "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                 },
                 "relationships": {
-                    "category-terms": {
+                    "categories": {
                         "data": [
                             {
                                 "id": "01DC6HYAKX993ZK6YHCVWAE169",
@@ -7217,7 +7217,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -7763,7 +7763,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
-                        "category-terms": {
+                        "categories": {
                             "data": [
                                 {
                                     "id": "01DC6HYAKX993ZK6YHCVWAE169",
@@ -7887,7 +7887,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
-                        "category-terms": {
+                        "categories": {
                             "data": [
                                 {
                                     "id": "01DC6HYAKX993ZK6YHCVWAE169",
@@ -7920,7 +7920,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -8155,7 +8155,7 @@ class MainBlueprintTestCase(BaseTestCase):
                     "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                 },
                 "relationships": {
-                    "category-terms": {
+                    "categories": {
                         "data": [
                             {
                                 "id": "01DC6HYAKX993ZK6YHCVWAE169",
@@ -8206,7 +8206,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -8254,7 +8254,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                                 "type": "categories"
@@ -8283,7 +8283,7 @@ class MainBlueprintTestCase(BaseTestCase):
                         "self": "http://localhost:9000/categorisations/01DC6HYAKY9ZEK8NQ1JGDMKCK7"
                     },
                     "relationships": {
-                        "category-term": {
+                        "category": {
                             "data": {
                                 "id": "01DC6HYAKXK6PMXX2TTTFTK5B4",
                                 "type": "categories"
