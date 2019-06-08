@@ -2,7 +2,9 @@ from enum import Enum
 
 # noinspection PyPackageRequirements
 from sqlalchemy.dialects import postgresql
-from sqlalchemy_utils import LtreeType
+# noinspection PyPackageRequirements
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy_utils import LtreeType, Ltree
 
 from arctic_office_projects_api import db
 from arctic_office_projects_api.main.utils import generate_countries_enum
@@ -724,6 +726,29 @@ class CategoryTerm(db.Model):
 
     category_scheme = db.relationship('CategoryScheme', back_populates="category_terms")
     categorisations = db.relationship("Categorisation", back_populates="category_term")
+
+    @hybrid_property
+    def parent_category_term(self):
+        """
+        Hybrid property representing the parent (CategoryTerm) of a CategoryTerm, if one exists
+
+        Performs a query based on the CategoryTerm.path Ltree property. If the path of the CategoryTerm is a single
+        (root) level (e.g. 'root' rather than 'root.foo.bar') then there isn't a parent CategoryTerm and this property
+        is made empty.
+
+        Otherwise the current path is shortened (up) by a single level and used to find the relevant parent
+        CategoryTerm (i.e. '1.2.3' becomes '1.2').
+
+        :rtype CategoryTerm
+        :return: CategoryTerm that is a parent of the current CategoryTerm as determined by the Ltree column
+        """
+        parent_category_term_path = Ltree(self.path)
+        if len(parent_category_term_path) == 1:
+            return None
+
+        parent_category_term_path = Ltree(self.path)[:-1]
+
+        return CategoryTerm.query.filter_by(path=parent_category_term_path).first()
 
     def __repr__(self):
         return f"<CategoryTerm { self.neutral_id } ({ self.category_scheme.name } - '{ self.name }')>"

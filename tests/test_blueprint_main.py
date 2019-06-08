@@ -463,8 +463,74 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                            }
+                        }
+                    },
                     "type": "categories"
                 },
+                {
+                    "attributes": {
+                        "aliases": [
+                            "Second Term"
+                        ],
+                        'concept': 'https://www.example.com/category-scheme-1/category-term-3',
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The "
+                            "contents of this term, and resources it relates to, will not change. \n This term (2) is "
+                            "a second level term with a first level term as a parent (1) and a single child term (3)."
+                        ],
+                        "examples": [
+                            "Example category term 2 - example"
+                        ],
+                        "notation": "1.2",
+                        "notes": [
+                            "Example category term 2 - note"
+                        ],
+                        'scheme': 'https://www.example.com/category-scheme-1',
+                        "scope-notes": [
+                            "Example category term 2 - scope note"
+                        ],
+                        "title": "Example Category Term: Level 2"
+                    },
+                    "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                            }
+                        },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -1526,9 +1592,74 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                            }
+                        }
                     },
                     "type": "categories"
                 },
+                {
+                    "attributes": {
+                        "aliases": [
+                            "Second Term"
+                        ],
+                        'concept': 'https://www.example.com/category-scheme-1/category-term-3',
+                        "definitions": [
+                            "This category term is used as an example, for demonstration or testing purposes. The "
+                            "contents of this term, and resources it relates to, will not change. \n This term (2) is "
+                            "a second level term with a first level term as a parent (1) and a single child term (3)."
+                        ],
+                        "examples": [
+                            "Example category term 2 - example"
+                        ],
+                        "notation": "1.2",
+                        "notes": [
+                            "Example category term 2 - note"
+                        ],
+                        'scheme': 'https://www.example.com/category-scheme-1',
+                        "scope-notes": [
+                            "Example category term 2 - scope note"
+                        ],
+                        "title": "Example Category Term: Level 2"
+                    },
+                    "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                    "links": {
+                        "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                    },
+                    "relationships": {
+                        "categorisations": {
+                            "data": [],
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                            }
+                        },
+                        "category-scheme": {
+                            "data": {
+                                "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                                "type": "category-schemes"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                            }
+                        },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -6407,6 +6538,12 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": None,
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -6455,6 +6592,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX993ZK6YHCVWAE169",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -6503,6 +6649,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -6556,6 +6711,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -6699,6 +6863,12 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": None,
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -6744,6 +6914,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXY0JT6583RCXTJY3Q",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -6978,6 +7157,12 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": None,
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7028,6 +7213,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX993ZK6YHCVWAE169",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7078,6 +7272,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7133,6 +7336,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7360,6 +7572,12 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": None,
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7410,6 +7628,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX993ZK6YHCVWAE169",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7460,6 +7687,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7515,6 +7751,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7584,6 +7829,12 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": None,
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7634,6 +7885,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX993ZK6YHCVWAE169",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -7728,6 +7988,13 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": None,
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+                            }
+                        }
                     },
                     "type": "categories"
                 }
@@ -7809,6 +8076,15 @@ class MainBlueprintTestCase(BaseTestCase):
                             "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                         }
                     },
+                    "parent-category": {
+                        "data": {
+                            "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                            "type": "categories"
+                        },
+                        "links": {
+                            "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                            "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                        }
                     }
                 },
                 "type": "categories"
@@ -8045,6 +8321,16 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
+                        }
                     },
                     "type": "categories"
                 }
@@ -8082,6 +8368,28 @@ class MainBlueprintTestCase(BaseTestCase):
                 json_response = self.util_prepare_error_response(json_response)
                 self.assertEqual(HTTPStatus.NOT_FOUND, response.status_code)
                 self.assertDictEqual(json_response, expected_payload)
+
+    def test_category_term_relationship_parent_category_terms(self):
+        expected_payload = {
+            "data": {
+                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                "type": "categories"
+            },
+            "links": {
+                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+            }
+        }
+
+        token = self.util_create_auth_token()
+        response = self.client.get(
+            '/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories',
+            headers={'authorization': f"bearer {token}"},
+            base_url='http://localhost:9000'
+        )
+        json_response = response.get_json()
+        self.assertEqual(HTTPStatus.OK, response.status_code)
+        self.assertDictEqual(json_response, expected_payload)
 
     def test_category_term_relationship_category_schemes(self):
         expected_payload = {
@@ -8122,6 +8430,82 @@ class MainBlueprintTestCase(BaseTestCase):
         token = self.util_create_auth_token()
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations',
+            headers={'authorization': f"bearer {token}"},
+            base_url='http://localhost:9000'
+        )
+        json_response = response.get_json()
+        self.assertEqual(HTTPStatus.OK, response.status_code)
+        self.assertDictEqual(json_response, expected_payload)
+
+    def test_category_term_parent_category_terms(self):
+        expected_payload = {
+            "data": {
+                "attributes": {
+                    "aliases": [
+                        "Second Term"
+                    ],
+                    'concept': 'https://www.example.com/category-scheme-1/category-term-3',
+                    "definitions": [
+                        "This category term is used as an example, for demonstration or testing purposes. The "
+                        "contents of this term, and resources it relates to, will not change. \n This term (2) is "
+                        "a second level term with a first level term as a parent (1) and a single child term (3)."
+                    ],
+                    "examples": [
+                        "Example category term 2 - example"
+                    ],
+                    "notation": "1.2",
+                    "notes": [
+                        "Example category term 2 - note"
+                    ],
+                    'scheme': 'https://www.example.com/category-scheme-1',
+                    "scope-notes": [
+                        "Example category term 2 - scope note"
+                    ],
+                    "title": "Example Category Term: Level 2"
+                },
+                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                "links": {
+                    "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                },
+                "relationships": {
+                    "categorisations": {
+                        "data": [],
+                        "links": {
+                            "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                            "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                        }
+                    },
+                    "category-scheme": {
+                        "data": {
+                            "id": "01DC6HYAKXG8FCN63D7DH06W84",
+                            "type": "category-schemes"
+                        },
+                        "links": {
+                            "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                            "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                        }
+                    },
+                    "parent-category": {
+                        "data": {
+                            "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                            "type": "categories"
+                        },
+                        "links": {
+                            "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                            "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                        }
+                    }
+                },
+                "type": "categories"
+            },
+            "links": {
+                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories"
+            }
+        }
+
+        token = self.util_create_auth_token()
+        response = self.client.get(
+            '/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories',
             headers={'authorization': f"bearer {token}"},
             base_url='http://localhost:9000'
         )
@@ -8422,6 +8806,14 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
                             }
                         }
                     },
@@ -8511,6 +8903,16 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
+                        }
                     },
                     "type": "categories"
                 },
@@ -8641,6 +9043,16 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXY0JT6583RCXTJY3Q",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXK6PMXX2TTTFTK5B4/relationships/parent-categories"
+                            }
+                        }
                     },
                     "type": "categories"
                 },
@@ -8712,6 +9124,13 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": None,
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXY0JT6583RCXTJY3Q/relationships/parent-categories"
+                            }
+                        }
                     },
                     "type": "categories"
                 }
@@ -8865,6 +9284,16 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                            }
+                        }
                     },
                     "type": "categories"
                 },
@@ -8914,6 +9343,15 @@ class MainBlueprintTestCase(BaseTestCase):
                                 "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
                         },
+                        "parent-category": {
+                            "data": {
+                                "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
+                                "type": "categories"
+                            },
+                            "links": {
+                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            }
                         }
                     },
                     "type": "categories"
@@ -9288,6 +9726,16 @@ class MainBlueprintTestCase(BaseTestCase):
                         "links": {
                             "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
                             "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
+                        }
+                    },
+                    "parent-category": {
+                        "data": {
+                            "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
+                            "type": "categories"
+                        },
+                        "links": {
+                            "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                            "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
                         }
                     }
                 },

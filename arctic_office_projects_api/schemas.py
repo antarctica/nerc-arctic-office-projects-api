@@ -802,6 +802,19 @@ class CategoryTermSchema(Schema):
         """
         return obj.category_scheme.namespace
 
+    parent_category = Relationship(
+        attribute='parent_category_term',
+        self_view='main.category_terms_relationship_parent_category_terms',
+        self_view_kwargs={'category_term_id': '<neutral_id>'},
+        related_view='main.category_terms_parent_category_terms',
+        related_view_kwargs={'category_term_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='categories',
+        schema='ParentCategoryTermSchema'
+    )
+
     category_scheme = Relationship(
         self_view='main.category_terms_relationship_category_schemes',
         self_view_kwargs={'category_term_id': '<neutral_id>'},
@@ -826,6 +839,14 @@ class CategoryTermSchema(Schema):
         schema='CategorisationSchema'
     )
 
+    class Meta(Schema.Meta):
+        type_ = 'categories'
+        self_view = 'main.category_terms_detail'
+        self_view_kwargs = {'category_term_id': '<id>'}
+        self_view_many = 'main.category_terms_list'
+
+
+class ParentCategoryTermSchema(CategoryTermSchema):
     class Meta(Schema.Meta):
         type_ = 'categories'
         self_view = 'main.category_terms_detail'

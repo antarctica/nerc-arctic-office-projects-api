@@ -51,6 +51,7 @@ def projects_list():
         'categorisations',
         'categorisations.category',
         'categorisations.category.category_scheme',
+        'categorisations.category.parent_category'
     )).dump(projects)
 
     return jsonify(payload.data)
@@ -77,6 +78,7 @@ def projects_detail(project_id: str):
             'categorisations',
             'categorisations.category',
             'categorisations.category.category_scheme',
+            'categorisations.category.parent_category'
         )).dump(project)
         return jsonify(payload.data)
     except NoResultFound:
@@ -902,6 +904,7 @@ def category_terms_list():
 
     category_terms = CategoryTerm.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
     payload = CategoryTermSchema(many=True, paginate=True, include_data=(
+        'parent_category',
         'categorisations',
         'categorisations.project',
         'category_scheme'
@@ -922,10 +925,30 @@ def category_terms_detail(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(include_data=(
+            'parent_category',
             'categorisations',
             'categorisations.project',
             'category_scheme'
         )).dump(category_term)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categories/<category_term_id>/relationships/parent-categories')
+@auth()
+def category_terms_relationship_parent_category_terms(category_term_id: str):
+    """
+    Returns parent CategoryTerm resource linkages for a specific CategoryTerm resource, specified by its Neutral ID
+
+    :type category_term_id: str
+    :param category_term_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
+        payload = CategoryTermSchema(resource_linkage='parent-category').dump(category_term)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -966,6 +989,25 @@ def category_terms_relationship_categorisations(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(resource_linkage='categorisations').dump(category_term)
+        return jsonify(payload.data)
+    except NoResultFound:
+        raise NotFound()
+    except MultipleResultsFound:
+        raise UnprocessableEntity()
+
+
+@main.route('/categories/<category_term_id>/parent-categories')
+@auth()
+def category_terms_parent_category_terms(category_term_id: str):
+    """
+    Returns parent CategoryTerm resources associated with a specific CategoryTerm resource, specified by its Neutral ID
+
+    :type category_term_id: str
+    :param category_term_id: neutral ID of a CategoryTerm resource
+    """
+    try:
+        category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
+        payload = CategoryTermSchema(related_resource='parent_category', many_related=False).dump(category_term)
         return jsonify(payload.data)
     except NoResultFound:
         raise NotFound()
@@ -1027,6 +1069,7 @@ def categorisations_list():
     payload = CategorisationSchema(many=True, paginate=True, include_data=(
         'project',
         'category',
+        'category.parent_category',
         'category.category_scheme'
     )).dump(categorisations)
 
@@ -1047,6 +1090,7 @@ def categorisations_detail(categorisation_id: str):
         payload = CategorisationSchema(include_data=(
             'project',
             'category',
+            'category.parent_category',
             'category.category_scheme'
         )).dump(categorisation)
         return jsonify(payload.data)
