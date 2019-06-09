@@ -775,4 +775,3 @@ class PeopleResourceTestCase(BaseResourceTestCase):
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
         self.assertDictEqual(json_response, expected_payload)
-
