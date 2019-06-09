@@ -17,7 +17,6 @@ from arctic_office_projects_api.errors import error_handler_generic_bad_request,
     error_handler_generic_internal_server_error, error_handler_generic_unprocessable_entity
 
 from arctic_office_projects_api.resources.projects import projects as projects_blueprint
-from arctic_office_projects_api.resources.projects import projects as projects_blueprint
 from arctic_office_projects_api.resources.people import people as people_blueprint
 from arctic_office_projects_api.resources.grants import grants as grants_blueprint
 from arctic_office_projects_api.resources.organisations import organisations as organisations_blueprint
