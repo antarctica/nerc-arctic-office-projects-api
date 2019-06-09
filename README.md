@@ -710,6 +710,18 @@ def error_route():
     return error.response()
 ```
 
+### Adding a Flask CLI command
+
+[Flask CLI](#flask-cli) commands are used to expose processes and actions that control a Flask application. These 
+commands may be provided by Flask (such as listing all application routes), by third-party modules (such as managing
+[Database Migrations](#run-database-migrations)) or defined within this project (such as for 
+[Importing data](#import-data)).
+
+These first party commands are defined in `manage.py` and call methods defined elsewhere in the application.
+
+To define a new command, add a method to `manage.py` with the appropriate 
+[Click](http://flask.pocoo.org/docs/1.0/cli/#custom-commands) decorators and configuration.
+
 ### Logging
 
 In a request context, the default Flask log will include the URL and [Request ID](#request-ids) of the current request.

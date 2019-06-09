@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Updated Pip dependencies
 * Instructions in README on how to access a `psql` prompt in development environments
 * Refactoring README to add a usage section on how to run various Flask CLI commands
+* Adding instructions on adding custom Flask CLI commands
 * Adding project purpose
 
 ### Fixed
