@@ -38,7 +38,7 @@ def test():
     return sys.exit(not tests_runner.run(tests).wasSuccessful())
 
 
-seeding_cli_group = AppGroup('seed', help='Perform database seeding')
+seeding_cli_group = AppGroup('seed', help='Perform database seeding.')
 app.cli.add_command(seeding_cli_group)
 
 

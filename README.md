@@ -35,7 +35,7 @@ Data for this API is held in a PostgreSQL database. The database structure is ma
 [alembic](https://alembic.sqlalchemy.org/en/latest/) migrations, defined in `migrations/`. 
 [SQL Alchemy](https://www.sqlalchemy.org) is used to access the database within the application, using models defined 
 in `arctic_office_projects_api/models.py`.
- 
+
 ### Data representations
 
 [Marshmallow](https://marshmallow.readthedocs.io) and 
@@ -357,6 +357,11 @@ connection string. Other non-sensitive config vars should be set using Terraform
 Once running, add the appropriate configuration to the 
 [BAS API Load Balancer](https://gitlab.data.bas.ac.uk/WSF/api-load-balancer).
 
+Configure the relevant variables in the GitLab [Continuous Deployment](#continuous-deployment) configuration to enable
+the application Docker image to be deployed automatically.
+
+See the [Usage](#usage) section for instructions on how to configure and use the deployed application instance.
+ 
 ##### Staging - Heroku sensitive config vars
 
 Config vars should be set [manually](https://dashboard.heroku.com/apps/bas-arctic-projects-api-stage/settings) for 
@@ -597,7 +602,10 @@ See the `ApiException` class for other supported properties.
 To return an API error exception as a flask response:
 
 ```python
+from arctic_office_projects_api import create_app
 from arctic_office_projects_api.errors import ApiException
+
+app = create_app('production')
 
 class ApiFooError(ApiException):
     """
@@ -605,7 +613,7 @@ class ApiFooError(ApiException):
     """
     title = 'Foo'
     detail = 'Foo details'
-    
+
 @app.route('/error')
 def error_route():
     """
@@ -689,14 +697,16 @@ conventions established by the main Faker package. Custom providers should be de
 `arctic_office_projects_api.main.faker.providers` module. When adding the custom provider to Faker, ensure the 
 providers `Provider` class is added, rather than the module itself.
 
+For example:
+
 ```python
 from faker import Faker
-from arctic_office_projects_api.main.faker.providers.foo import Provider as Foo
+from arctic_office_projects_api.main.faker.providers.person import Provider as Person
 
 faker = Faker('en_GB')
-faker.add_provider(Foo)  # a custom provider
+faker.add_provider(Person)  # a custom provider
 
-foo = faker.foo()  # use of a custom provider
+person_gender = faker.male_or_female()  # use of a custom provider
 ```
 
 ### Resource schemas
@@ -737,18 +747,26 @@ To use pagination:
 For example:
 
 ```python
-@main.route('/foo')
-def foo_list():
+from flask import request, jsonify
+
+from arctic_office_projects_api import create_app
+from arctic_office_projects_api.models import Person
+from arctic_office_projects_api.schemas import PersonSchema
+
+app = create_app('production')
+
+@app.route('/people')
+def people_list():
     # Determine the pagination page number from the request, or default to page 1
     page = request.args.get('page', type=int)
     if page is None:
         page = 1
 
     # Get a Pagination object based on the current pagination page number and a fixed page size
-    foo = Foo.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
+    people = Person.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
 
     # Enable pagination support on schema
-    payload = FooSummarySchema(many=True, paginate=True).dump(foo)
+    payload = PersonSchema(many=True, paginate=True).dump(people)
 
     return jsonify(payload.data)
 ```
@@ -794,11 +812,20 @@ To return a relationship response:
 For example:
 
 ```python
-@main.route('/foo/<foo_id>/relationships/bar')
-def foo_list(foo_id: str):
+from flask import request, jsonify
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
+from arctic_office_projects_api import create_app
+from arctic_office_projects_api.models import Person
+from arctic_office_projects_api.schemas import PersonSchema
+
+app = create_app('production')
+
+@app.route('/people/<person_id>/relationships/organisations')
+def people_relationship_organisations(person_id: str):
     try:
-        foo = Foo.query.filter_by(id=foo_id).one()
-        payload = FooSchema(resource_linkage='bar').dump(foo)
+        person = Person.query.filter_by(id=person_id).one()
+        payload = PersonSchema(resource_linkage='organisation').dump(person)
         return jsonify(payload.data)
     except NoResultFound:
         return 'Not found error'
@@ -853,11 +880,20 @@ To return a related resource response:
 For example:
 
 ```python
-@main.route('/foo/<foo_id>/bar')
-def foo_list(foo_id: str):
+from flask import request, jsonify
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
+from arctic_office_projects_api import create_app
+from arctic_office_projects_api.models import Person
+from arctic_office_projects_api.schemas import PersonSchema
+
+app = create_app('production')
+
+@app.route('/people/<person_id>/organisations')
+def people_organisations(person_id: str):
     try:
-        foo = Foo.query.filter_by(id=foo_id).one()
-        payload = FooSchema(related_resource='bar').dump(foo)
+        person = Person.query.filter_by(id=person_id).one()
+        payload = PersonSchema(resource_resource='organisation').dump(person)
         return jsonify(payload.data)
     except NoResultFound:
         return 'Not found error'
