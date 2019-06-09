@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask_migrate import Config, upgrade, downgrade, Migrate
 
-from arctic_office_projects_api.meta.errors import ApiNotFoundError
+from arctic_office_projects_api.errors import ApiNotFoundError
 from arctic_office_projects_api import db
 from arctic_office_projects_api.seeding import seed_predictable_test_resources
 from tests.base_test import BaseTestCase

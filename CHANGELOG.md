@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Importing Grant (Project) type enum from Grant provider, rather than duplicating in Project provider
 * Faker Grant references are now dependent on the type of grant
 * Refactoring index and meta routes out of blueprints
+* Refactoring main and meta blueprint utilities and errors into main application
 
 ## [0.2.0] 2019-04-04
 

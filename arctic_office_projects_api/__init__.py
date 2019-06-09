@@ -15,7 +15,7 @@ from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, Unpro
 from arctic_office_projects_api.utils import healthcheck_db
 from config import config
 from arctic_office_projects_api.extensions import db, auth
-from arctic_office_projects_api.meta.errors import error_handler_generic_bad_request, error_handler_generic_not_found, \
+from arctic_office_projects_api.errors import error_handler_generic_bad_request, error_handler_generic_not_found, \
     error_handler_generic_internal_server_error, error_handler_generic_unprocessable_entity
 from arctic_office_projects_api.main import main as main_blueprint
 
