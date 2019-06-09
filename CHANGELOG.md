@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Methods in Projects Faker provider to decide whether a PI or CoI has worked on other projects before
 * Updated Pip dependencies
 * Instructions to access a `psql` prompt in development environments
+* Adding project purpose
 
 ### Fixed
 

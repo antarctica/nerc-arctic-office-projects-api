@@ -2,13 +2,14 @@
 
 API for NERC Arctic Office projects database.
 
-## Purpose
-
-...
 
 ## Usage
+## Purpose
 
 See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-office-projects) for how to use this API.
+This API is used to record details of projects related to the [NERC Arctic Office](https://www.arctic.ac.uk). This API
+is primarily intended for populating the [projects database](https://www.arctic.ac.uk/research/projects-database) in 
+the Arctic Office website but is designed for general use where applicable.
 
 ## Implementation
 

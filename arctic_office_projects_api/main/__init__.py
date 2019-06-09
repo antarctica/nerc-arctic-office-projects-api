@@ -21,7 +21,8 @@ def index():
 
     payload = {
         'meta': {
-            'summary': 'xxx'
+            'summary': 'This API is used to record details of projects related to the NERC Arctic Office - '
+                       'https://www.arctic.ac.uk'
         }
     }
 

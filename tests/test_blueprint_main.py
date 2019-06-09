@@ -39,7 +39,8 @@ class MainBlueprintTestCase(BaseTestCase):
         self.assertIn('meta', json_response.keys())
         self.assertIn('summary', json_response['meta'].keys())
         self.assertEqual(
-            'xxx',
+            'This API is used to record details of projects related to the NERC Arctic Office - '
+            'https://www.arctic.ac.uk',
             json_response['meta']['summary']
         )
 
