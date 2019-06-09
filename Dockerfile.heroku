@@ -9,8 +9,8 @@ ENV APP_RELEASE $APP_RELEASE
 ENV FLASK_ENV $APP_ENV
 
 # Add application - more complicated because COPY only copies the contents of a directory for some insane reason
-COPY migrations/ /usr/src/app/migrations/
 COPY arctic_office_projects_api/ /usr/src/app/arctic_office_projects_api/
+COPY migrations/ /usr/src/app/migrations/
 COPY config.py manage.py /usr/src/app/
 
 # Setup runtime

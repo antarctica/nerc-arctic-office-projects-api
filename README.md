@@ -251,8 +251,8 @@ this API.
 For all new instances you will need to:
 
 1. run [Database migrations](#run-database-migrations)
-2. if relevant, run [Database seeding](#run-database-seeding)
-3. if relevant, [Import science categories](#importing-science-categories)
+2. if relevant, [Import science categories](#importing-science-categories)
+3. if relevant, run [Database seeding](#run-database-seeding)
 
 ### Flask CLI
 
