@@ -17,7 +17,17 @@ from arctic_office_projects_api.logging import RequestFormatter
 from arctic_office_projects_api.extensions import db, auth
 from arctic_office_projects_api.errors import error_handler_generic_bad_request, error_handler_generic_not_found, \
     error_handler_generic_internal_server_error, error_handler_generic_unprocessable_entity
-from arctic_office_projects_api.main import main as main_blueprint
+
+from arctic_office_projects_api.resources.projects import projects as projects_blueprint
+from arctic_office_projects_api.resources.projects import projects as projects_blueprint
+from arctic_office_projects_api.resources.people import people as people_blueprint
+from arctic_office_projects_api.resources.grants import grants as grants_blueprint
+from arctic_office_projects_api.resources.organisations import organisations as organisations_blueprint
+from arctic_office_projects_api.resources.category_schemes import category_schemes as category_schemes_blueprint
+from arctic_office_projects_api.resources.category_terms import category_terms as category_terms_blueprint
+from arctic_office_projects_api.resources.participants import participants as participants_blueprint
+from arctic_office_projects_api.resources.allocations import allocations as allocations_blueprint
+from arctic_office_projects_api.resources.categorisations import categorisations as categorisations_blueprint
 
 
 def create_app(config_name):
@@ -52,12 +62,20 @@ def create_app(config_name):
     app.register_error_handler(UnprocessableEntity, error_handler_generic_unprocessable_entity)
     app.register_error_handler(InternalServerError, error_handler_generic_internal_server_error)
 
-    app.register_blueprint(main_blueprint)
     # Routes
     app.add_url_rule('/', 'index', index_route)
     app.add_url_rule('/meta/health/canary', 'canary_health_check', healthcheck_canary_route, methods=['get', 'options'])
 
-    # Blueprints
+    # Resource blueprints
+    app.register_blueprint(projects_blueprint)
+    app.register_blueprint(people_blueprint)
+    app.register_blueprint(grants_blueprint)
+    app.register_blueprint(organisations_blueprint)
+    app.register_blueprint(category_schemes_blueprint)
+    app.register_blueprint(category_terms_blueprint)
+    app.register_blueprint(participants_blueprint)
+    app.register_blueprint(allocations_blueprint)
+    app.register_blueprint(categorisations_blueprint)
 
     return app
 
