@@ -8,10 +8,11 @@ from sqlalchemy import exists
 # noinspection PyPackageRequirements
 from sqlalchemy.sql import func
 from faker import Faker
+from sqlalchemy_utils import Ltree
 
 from arctic_office_projects_api import db
 from arctic_office_projects_api.models import Project, ProjectCountry, Person, Organisation, Grant, GrantStatus, \
-    GrantCurrency, Participant, ParticipantRole, Allocation
+    GrantCurrency, Participant, ParticipantRole, Allocation, CategoryScheme, CategoryTerm, Categorisation
 from arctic_office_projects_api.main.utils import generate_neutral_id
 from arctic_office_projects_api.main.faker.providers.project import Provider as ProjectProvider
 from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
@@ -33,12 +34,12 @@ static_resources = {
             'title': 'Example project 1',
             'acronym': 'EXPRO1',
             'abstract': 'This project is used as an example, for demonstration or testing purposes. '
-                        'The contents of this project, and resources it relates to, will not change. \n'
+                        'The contents of this project, and resources it relates to, will not change. \n '
                         'This example project (1) is a project with a single PI and single CoI belonging to the same '
                         'organisation. It is also associated with a single grant and funder. The people, grants and '
                         'organisations related to this project will not be related to another project. This project '
-                        'has an acronym, abstract, website and country property. The project duration is in the past.'
-                        '\n The remainder of this abstract is padding text to give a realistic abstract length.\n'
+                        'has an acronym, abstract, website and country property. The project duration is in the past. '
+                        '\n The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -50,7 +51,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '
@@ -75,14 +76,14 @@ static_resources = {
                 'https://doi.org/10.5555/79026270'
             ],
             'duration': DateRange(date(2012, 3, 1), date(2015, 10, 1)),
-            'country': ProjectCountry.SJM,
+            'country': ProjectCountry.SJM
         },
         '01DB2ECBP2DXX8VN7S7AYJBGBT': {
             'id': '01DB2ECBP2DXX8VN7S7AYJBGBT',
             'title': 'Example project 2',
             'acronym': None,
-            'abstract': 'This project is used as an example, for demonstration or testing purposes.'
-                        'The contents of this project, and resources it relates to, will not change.'
+            'abstract': 'This project is used as an example, for demonstration or testing purposes. '
+                        'The contents of this project, and resources it relates to, will not change. '
                         'This example project (2) has a single PI, organisation, grant and funder. The resources '
                         'related to this project will also relate to other projects. This project does not have an '
                         'acronym, website, publication or country property. The project duration is in the present. \n '
@@ -96,13 +97,13 @@ static_resources = {
             'id': '01DB2ECBP2MB2Z9K1BSK5BND0V',
             'title': 'Example project 3',
             'acronym': 'EXPRO3',
-            'abstract': 'This project is used as an example, for demonstration or testing purposes.'
-                        'The contents of this project, and resources it relates to, will not change.'
+            'abstract': 'This project is used as an example, for demonstration or testing purposes. '
+                        'The contents of this project, and resources it relates to, will not change. '
                         'This example project (3) has a single PI and multiple CoIs belonging to different '
                         'organisations. It is also associated with a single grant and funder. The resources related to '
                         'this project will also relate to other projects. This project has an acronym and country '
                         'properties, it does not have a website or publications. The project duration is in the future'
-                        '. \n The remainder of this abstract is padding text to give a realistic abstract length. \n'
+                        '. \n The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -114,7 +115,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '
@@ -244,11 +245,11 @@ static_resources = {
             'reference': 'EX-GRANT-0001',
             'title': 'Example grant 1',
             'abstract': 'This grant is used as an example, for demonstration or testing purposes. '
-                        'The contents of this grant, and resources it relates to, will not change. \n'
+                        'The contents of this grant, and resources it relates to, will not change. \n '
                         'This example grant (1) is a grant with a single project and funder. The project and '
                         'organisations related to this grant will not be related to another grant. This grant has an '
-                        'abstract, website and publications. The grant is closed and occurs in the past. \n'
-                        'The remainder of this abstract is padding text to give a realistic abstract length.\n'
+                        'abstract, website and publications. The grant is closed and occurs in the past. \n '
+                        'The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -260,7 +261,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '
@@ -295,12 +296,11 @@ static_resources = {
             'reference': 'EX-GRANT-0002',
             'title': 'Example grant 2',
             'abstract': 'This grant is used as an example, for demonstration or testing purposes. '
-                        'The contents of this grant, and resources it relates to, will not change. \n'
+                        'The contents of this grant, and resources it relates to, will not change. \n '
                         'This example grant (2) is a grant with a single project and funder. The project and '
                         'organisations related to this grant will also relate to other grants. This grant does not '
                         'have a website, publications or total funding amount. The grant is active and occurs in the '
-                        'present. \n'
-                        'No padding text is added to this abstract.',
+                        'present. \n No padding text is added to this abstract.',
             'website': None,
             'publications': [],
             'duration': DateRange(date(2012, 3, 1), date(2055, 10, 1)),
@@ -314,12 +314,12 @@ static_resources = {
             'reference': 'EX-GRANT-0003',
             'title': 'Example grant 3',
             'abstract': 'This grant is used as an example, for demonstration or testing purposes. '
-                        'The contents of this grant, and resources it relates to, will not change. \n'
+                        'The contents of this grant, and resources it relates to, will not change. \n '
                         'This example grant (3) is a grant with a single project and funder. The project and '
                         'organisations related to this grant will also relate to other grants. This grant has an '
                         'abstract and total funding amount, it does not have a website or publications. The grant is '
-                        'approved and occurs in the future. \n'
-                        'The remainder of this abstract is padding text to give a realistic abstract length.\n'
+                        'approved and occurs in the future. \n '
+                        'The remainder of this abstract is padding text to give a realistic abstract length. \n '
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis '
                         'vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. '
                         'Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu '
@@ -331,7 +331,7 @@ static_resources = {
                         'sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, '
                         'sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, '
                         'rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, '
-                        'dignissim sit amet efficitur a, malesuada at nisi \n. Curabitur auctor ut libero ac pharetra. '
+                        'dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. '
                         'Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec '
                         'sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo '
                         'purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et '
@@ -417,6 +417,460 @@ static_resources = {
             'id': '01DB2ECBP3GETAEV6PT70TZJM9',
             'project_nid': '01DB2ECBP2MB2Z9K1BSK5BND0V',
             'grant_nid': '01DB2ECBP3S0PJ4PND3XTVGX25'
+        }
+    },
+    'category_schemes': {
+        '01DC6HYAKXG8FCN63D7DH06W84': {
+            'id': '01DC6HYAKXG8FCN63D7DH06W84',
+            'name': 'Example Category Scheme 1',
+            'acronym': 'EXCATSCH1',
+            'description': 'This category scheme is used as an example, for demonstration or testing purposes. The '
+                           'terms in this scheme, and resources they relates to, will not change.',
+            'version': '1.0',
+            'revision': '2019-05-28',
+            'namespace': 'https://www.example.com/category-scheme-1',
+            'root_concepts': ['https://www.example.com/category-scheme-1/category-term-1']
+        },
+        '01DC6HYAKXMK47A45KCHZBH0CQ': {
+            'id': '01DC6HYAKXMK47A45KCHZBH0CQ',
+            'name': 'Example Category Scheme 2',
+            'acronym': None,
+            'description': None,
+            'version': None,
+            'revision': None,
+            'namespace': 'https://www.example.com/category-scheme-2',
+            'root_concepts': ['https://www.example.com/category-scheme-2/category-term-1']
+        },
+        '01DC6HYAKXK7ECF8WV496YNQY7': {
+            'id': '01DC6HYAKXK7ECF8WV496YNQY7',
+            'name': 'Example Category Scheme 3',
+            'acronym': 'EXCATSCH3',
+            'description': 'This category scheme is used as an example, for demonstration or testing purposes. The '
+                           'terms in this scheme, and resources they relates to, will not change.',
+            'version': '1.0',
+            'revision': None,
+            'namespace': 'https://www.example.com/category-scheme-3',
+            'root_concepts': [
+                'https://www.example.com/category-scheme-3/category-term-1',
+                'https://www.example.com/category-scheme-3/category-term-2'
+            ]
+        }
+    },
+    'category_terms': {
+        '01DC6HYAKX993ZK6YHCVWAE169': {
+            'id': '01DC6HYAKX993ZK6YHCVWAE169',
+            'scheme_identifier': 'https://www.example.com/category-scheme-1/category-term-1',
+            'scheme_notation': '0',
+            'name': 'Example Category Term: 0',
+            'aliases': [
+                'ROOT'
+            ],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of '
+                'this term, and resources it relates to, will not change. \n This term (0) is the root term with a '
+                'single child term (1).'
+            ],
+            'examples': [
+                'Example root category term - example'
+            ],
+            'notes': [
+                'Example root category term - note'
+            ],
+            'scope_notes': [
+                'Example root category term - scope note'
+            ],
+            'path': '0',
+            'category_scheme_nid': '01DC6HYAKXG8FCN63D7DH06W84'
+        },
+        '01DC6HYAKX5NT8WBYWASQ9ENC8': {
+            'id': '01DC6HYAKX5NT8WBYWASQ9ENC8',
+            'scheme_identifier': 'https://www.example.com/category-scheme-1/category-term-2',
+            'scheme_notation': '1',
+            'name': 'Example Category Term: Level 1',
+            'aliases': [
+                'First Term'
+            ],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (1) is a first level term with the '
+                'root term (0) as a parent and a single child term (2).'
+            ],
+            'examples': [
+                'Example category term 1 - example'
+            ],
+            'notes': [
+                'Example category term 1 - note'
+            ],
+            'scope_notes': [
+                'Example category term 1 - scope note'
+            ],
+            'path': '0.1',
+            'category_scheme_nid': '01DC6HYAKXG8FCN63D7DH06W84'
+        },
+        '01DC6HYAKXSM2ZRMVQ2P1PHKZE': {
+            'id': '01DC6HYAKXSM2ZRMVQ2P1PHKZE',
+            'scheme_identifier': 'https://www.example.com/category-scheme-1/category-term-3',
+            'scheme_notation': '1.2',
+            'name': 'Example Category Term: Level 2',
+            'aliases': [
+                'Second Term'
+            ],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (2) is a second level term with a '
+                'first level term as a parent (1) and a single child term (3).'
+            ],
+            'examples': [
+                'Example category term 2 - example'
+            ],
+            'notes': [
+                'Example category term 2 - note'
+            ],
+            'scope_notes': [
+                'Example category term 2 - scope note'
+            ],
+            'path': '0.1.2',
+            'category_scheme_nid': '01DC6HYAKXG8FCN63D7DH06W84'
+        },
+        '01DC6HYAKX53S13HCN2SBN4333': {
+            'id': '01DC6HYAKX53S13HCN2SBN4333',
+            'scheme_identifier': 'https://www.example.com/category-scheme-1/category-term-4',
+            'scheme_notation': '1.2.3',
+            'name': 'Example Category Term: Level 3',
+            'aliases': [
+                'Third Term'
+            ],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (3) is a third level term with a '
+                'second level term as a parent (2) and no child terms.'
+            ],
+            'examples': [
+                'Example category term 3 - example'
+            ],
+            'notes': [
+                'Example category term 3 - note'
+            ],
+            'scope_notes': [
+                'Example category term 3 - scope note'
+            ],
+            'path': '0.1.2.3',
+            'category_scheme_nid': '01DC6HYAKXG8FCN63D7DH06W84'
+        },
+        '01DC6HYAKXY0JT6583RCXTJY3Q': {
+            'id': '01DC6HYAKXY0JT6583RCXTJY3Q',
+            'scheme_identifier': 'https://www.example.com/category-scheme-2/category-term-1',
+            'scheme_notation': None,
+            'name': 'Example Category Term: 0',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of '
+                'this term, and resources it relates to, will not change. \n This term (0) is the root term with a '
+                'single child term (1).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '00',
+            'category_scheme_nid': '01DC6HYAKXMK47A45KCHZBH0CQ'
+        },
+        '01DC6HYAKXK6PMXX2TTTFTK5B4': {
+            'id': '01DC6HYAKXK6PMXX2TTTFTK5B4',
+            'scheme_identifier': 'https://www.example.com/category-scheme-2/category-term-2',
+            'scheme_notation': None,
+            'name': 'Example Category Term: Level 1',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (1A) is a first level term with the '
+                'root term as a parent (0) and no child terms.'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '00.11',
+            'category_scheme_nid': '01DC6HYAKXMK47A45KCHZBH0CQ'
+        },
+        '01DC6HYAKX4JBJ94Q69M6GCMZB': {
+            'id': '01DC6HYAKX4JBJ94Q69M6GCMZB',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-1',
+            'scheme_notation': '0A',
+            'name': 'Example Category Term: 0 (A)',
+            'aliases': [
+                'ROOT'
+            ],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of '
+                'this term, and resources it relates to, will not change. \n This term (0A) is a root term with '
+                'multiple child terms (1A, 1B).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKX7NFNHSV58M7MVZC3': {
+            'id': '01DC6HYAKX7NFNHSV58M7MVZC3',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-2',
+            'scheme_notation': '0B',
+            'name': 'Example Category Term: 0 (B)',
+            'aliases': [
+                'ROOT'
+            ],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of '
+                'this term, and resources it relates to, will not change. \n This term (0B) is a root term with a '
+                'single child term (1C).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKX832S99QJ1GHVKHCD': {
+            'id': '01DC6HYAKX832S99QJ1GHVKHCD',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-3',
+            'scheme_notation': '1A',
+            'name': 'Example Category Term: Level 1 (A)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (1A) is a first level term with a '
+                'root term as a parent (0A) and a single child term (2A).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0A.1A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKXV8TPGHKZADGC23QX': {
+            'id': '01DC6HYAKXV8TPGHKZADGC23QX',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-4',
+            'scheme_notation': '1B',
+            'name': 'Example Category Term: Level 1 (B)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (1B) is a first level term with a '
+                'root term as a parent (0A) and multiple child terms (2B, 2C).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0A.1B',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKXS03NADS0CG4PMR98': {
+            'id': '01DC6HYAKXS03NADS0CG4PMR98',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-5',
+            'scheme_notation': '1C',
+            'name': 'Example Category Term: Level 1 (C)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (1C) is a first level term with a '
+                'root term as a parent (0B) and a single child term (2D).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKXGQQR6QA0W2E37H7N': {
+            'id': '01DC6HYAKXGQQR6QA0W2E37H7N',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-6',
+            'scheme_notation': '2A',
+            'name': 'Example Category Term: Level 2 (A)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (2A) is a second level term with a '
+                'first level term as a parent (1A) and no child terms.'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0A.1A.2A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKXY55CNS6406GDYMVM': {
+            'id': '01DC6HYAKXY55CNS6406GDYMVM',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-7',
+            'scheme_notation': '2B',
+            'name': 'Example Category Term: Level 2 (B)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (2B) is a second level term with a '
+                'first level term as a parent (1B) and no child terms.'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0A.1B.2B',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKX5Y1Y1RY3GC7SSJ28': {
+            'id': '01DC6HYAKX5Y1Y1RY3GC7SSJ28',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-8',
+            'scheme_notation': '2C',
+            'name': 'Example Category Term: Level 2 (C)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (2C) is a second level term with a '
+                'first level term as a parent (1B) and no child terms.'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0A.1B.2C',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKX2GFW9AA9W5M8QPVF': {
+            'id': '01DC6HYAKX2GFW9AA9W5M8QPVF',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-9',
+            'scheme_notation': '2D',
+            'name': 'Example Category Term: Level 2 (D)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (2D) is a second level term with a '
+                'first level term as a parent (1C) and a single child term (3A).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C.2D',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKXWSAQX4QN9VZ39TR4': {
+            'id': '01DC6HYAKXWSAQX4QN9VZ39TR4',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-10',
+            'scheme_notation': '3A',
+            'name': 'Example Category Term: Level 3 (A)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (3A) is a third level term with a '
+                'second level term as a parent (2D) and a single child term (4A).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C.2D.3A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKXDWQXP2WDV9JSBATG': {
+            'id': '01DC6HYAKXDWQXP2WDV9JSBATG',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-11',
+            'scheme_notation': '4A',
+            'name': 'Example Category Term: Level 4 (A)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (4A) is a fourth level term with a '
+                'third level term as a parent (3A) and a single child term (5A).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C.2D.3A.4A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKXEJ3S8AR9HHN1BQQD': {
+            'id': '01DC6HYAKXEJ3S8AR9HHN1BQQD',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-12',
+            'scheme_notation': '5A',
+            'name': 'Example Category Term: Level 5 (A)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (5A) is a fifth level term with a '
+                'fourth level term as a parent (4A) and multiple child terms (6A, 6B).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C.2D.3A.4A.5A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKYJ3E82J8Z9DC02H2Z': {
+            'id': '01DC6HYAKYJ3E82J8Z9DC02H2Z',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-13',
+            'scheme_notation': '6A',
+            'name': 'Example Category Term: Level 6 (A)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (6A) is a sixth level term with a '
+                'fifth level term as a parent (5A) and a single child term (7A).'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C.2D.3A.4A.5A.6A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKY8N7ZGNR0316Q0ZEC': {
+            'id': '01DC6HYAKY8N7ZGNR0316Q0ZEC',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-14',
+            'scheme_notation': '6B',
+            'name': 'Example Category Term: Level 6 (B)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (6B) is a sixth level term with a '
+                'fifth level term as a parent (5A) and no child terms.'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C.2D.3A.4A.5A.6B',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        },
+        '01DC6HYAKYN537NAH5224PP52M': {
+            'id': '01DC6HYAKYN537NAH5224PP52M',
+            'scheme_identifier': 'https://www.example.com/category-scheme-3/category-term-15',
+            'scheme_notation': '7A',
+            'name': 'Example Category Term: Level 7 (A)',
+            'aliases': [],
+            'definitions': [
+                'This category term is used as an example, for demonstration or testing purposes. The contents of this '
+                'term, and resources it relates to, will not change. \n This term (7A) is a seventh level term with a '
+                'sixth level term as a parent (6A) and no child terms.'
+            ],
+            'examples': [],
+            'notes': [],
+            'scope_notes': [],
+            'path': '0B.1C.2D.3A.4A.5A.6A.7A',
+            'category_scheme_nid': '01DC6HYAKXK7ECF8WV496YNQY7'
+        }
+    },
+    'categorisations': {
+        '01DC6HYAKYAXE7MZMD08QV5JWG': {
+            'id': '01DC6HYAKYAXE7MZMD08QV5JWG',
+            'project_nid': '01DB2ECBP24NHYV5KZQG2N3FS2',
+            'category_term_nid': '01DC6HYAKX53S13HCN2SBN4333'
+        },
+        '01DC6HYAKY9ZEK8NQ1JGDMKCK7': {
+            'id': '01DC6HYAKY9ZEK8NQ1JGDMKCK7',
+            'project_nid': '01DB2ECBP2MB2Z9K1BSK5BND0V',
+            'category_term_nid': '01DC6HYAKXK6PMXX2TTTFTK5B4'
+        },
+        '01DC6HYAKYMAEWTS5GDWX5P7Y0': {
+            'id': '01DC6HYAKYMAEWTS5GDWX5P7Y0',
+            'project_nid': '01DB2ECBP2MB2Z9K1BSK5BND0V',
+            'category_term_nid': '01DC6HYAKXY55CNS6406GDYMVM'
+        },
+        '01DC6HYAKYSC023KCPG5WWQ7PN': {
+            'id': '01DC6HYAKYSC023KCPG5WWQ7PN',
+            'project_nid': '01DB2ECBP2MB2Z9K1BSK5BND0V',
+            'category_term_nid': '01DC6HYAKYN537NAH5224PP52M'
         }
     }
 }
@@ -527,6 +981,61 @@ def seed_predictable_test_resources():
                 )
                 db.session.add(allocation_resource)
 
+        # Category schemes
+        for category_scheme in static_resources['category_schemes'].values():
+            if not db.session.query(exists().where(CategoryScheme.neutral_id == category_scheme['id'])).scalar():
+                category_scheme_resource = CategoryScheme(
+                    neutral_id=category_scheme['id'],
+                    name=category_scheme['name'],
+                    namespace=category_scheme['namespace'],
+                    root_concepts=category_scheme['root_concepts']
+                )
+                db.session.add(category_scheme_resource)
+                if category_scheme['acronym'] is not None:
+                    category_scheme_resource.acronym = category_scheme['acronym']
+                if category_scheme['description'] is not None:
+                    category_scheme_resource.description = category_scheme['description']
+                if category_scheme['version'] is not None:
+                    category_scheme_resource.version = category_scheme['version']
+                if category_scheme['revision'] is not None:
+                    category_scheme_resource.revision = category_scheme['revision']
+
+        # Category terms
+        for category_term in static_resources['category_terms'].values():
+            if not db.session.query(exists().where(CategoryTerm.neutral_id == category_term['id'])).scalar():
+                category_term_resource = CategoryTerm(
+                    neutral_id=category_term['id'],
+                    scheme_identifier=category_term['scheme_identifier'],
+                    name=category_term['name'],
+                    path=Ltree(category_term['path']),
+                    category_scheme=CategoryScheme.query.filter_by(
+                        neutral_id=category_term['category_scheme_nid']
+                    ).one()
+                )
+                db.session.add(category_term_resource)
+                if category_term['scheme_notation'] is not None:
+                    category_term_resource.scheme_notation = category_term['scheme_notation']
+                if len(category_term['aliases']) > 0:
+                    category_term_resource.aliases = category_term['aliases']
+                if len(category_term['definitions']) > 0:
+                    category_term_resource.definitions = category_term['definitions']
+                if len(category_term['examples']) > 0:
+                    category_term_resource.examples = category_term['examples']
+                if len(category_term['notes']) > 0:
+                    category_term_resource.notes = category_term['notes']
+                if len(category_term['scope_notes']) > 0:
+                    category_term_resource.scope_notes = category_term['scope_notes']
+
+        # Categorisations
+        for categorisation in static_resources['categorisations'].values():
+            if not db.session.query(exists().where(Categorisation.neutral_id == categorisation['id'])).scalar():
+                categorisation_resource = Categorisation(
+                    neutral_id=categorisation['id'],
+                    project=Project.query.filter_by(neutral_id=categorisation['project_nid']).one(),
+                    category_term=CategoryTerm.query.filter_by(neutral_id=categorisation['category_term_nid']).one()
+                )
+                db.session.add(categorisation_resource)
+
         db.session.commit()
     except Exception as e:
         db.session.rollback()
@@ -624,6 +1133,17 @@ def seed_random_test_resources(count: int = 100):
                 project=project,
                 grant=grant
             ))
+
+            # Categories
+            project_has_categories = faker.has_science_categories(grant_type=grant_type)
+            if project_has_categories:
+                categories = _get_categories()
+                for category in categories:
+                    db.session.add(Categorisation(
+                        neutral_id=generate_neutral_id(),
+                        project=project,
+                        category_term=category
+                    ))
 
             db.session.commit()
     except Exception as e:
@@ -963,3 +1483,23 @@ def _get_new_co_investigator_count(co_investigators_count: int, principle_invest
         return new_co_investigators_count + initial_co_investigators_count
 
     return new_co_investigators_count
+
+
+def _get_categories() -> List[CategoryTerm]:
+    """
+    Returns a series of CategoryTerm resources for a fake project's science categories
+
+    A project may not be categorised - where it is, categories will be chosen at random.
+
+    :rtype list
+    :return: List of CategoryTerm model instance for use as categories for a fake project
+    """
+    categories_count = faker.science_categories_count()
+    ineligible_category_schemes = [
+        'https://www.example.com/category-scheme-1',
+        'https://www.example.com/category-scheme-2',
+        'https://www.example.com/category-scheme-3'
+    ]
+    return CategoryTerm.query.join(CategoryScheme).filter(CategoryScheme.namespace.notin_(
+        ineligible_category_schemes
+    )).order_by(func.random()).limit(categories_count).all()

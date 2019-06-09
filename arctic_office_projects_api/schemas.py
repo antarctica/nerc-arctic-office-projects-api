@@ -11,12 +11,19 @@ from flask_sqlalchemy import Pagination, Model
 from psycopg2.extras import DateRange
 from typing import Union, Optional
 
+from arctic_office_projects_api.models import CategoryTerm
+
 
 class Schema(_Schema):
     """
     Custom base Marshmallow schema class, based on marshmallow_jsonapi default 'flask' class
 
     All schemas in this application should inherit from this class.
+
+    Implements or related to:
+    * https://github.com/marshmallow-code/marshmallow-jsonapi/issues/57
+        * https://github.com/marshmallow-code/marshmallow-jsonapi/pull/64
+    * https://github.com/marshmallow-code/marshmallow-jsonapi/issues/195
     """
 
     def __init__(self, *args, **kwargs):
@@ -183,16 +190,19 @@ class Schema(_Schema):
             raise KeyError(f"No relationship found for '{ self.resource_linkage }'")
 
         if self.related_resource is not None:
+            # Inflect related resource so it can be found in pre-generated output
+            related_resource = self.related_resource.replace('_', '-')
+
             if many:
                 raise RuntimeError('A related resource response can\'t be returned for multiple resources')
 
-            if self.related_resource in response['data']['relationships']:
-                if 'links' in response['data']['relationships'][self.related_resource]:
-                    if 'related' in response['data']['relationships'][self.related_resource]['links']:
+            if related_resource in response['data']['relationships']:
+                if 'links' in response['data']['relationships'][related_resource]:
+                    if 'related' in response['data']['relationships'][related_resource]['links']:
                         _response = {
                             'data': [],
                             'links': {
-                                'self': response['data']['relationships'][self.related_resource]['links']['related']
+                                'self': response['data']['relationships'][related_resource]['links']['related']
                             }
                         }
                         if not self.many_related:
@@ -204,9 +214,9 @@ class Schema(_Schema):
                                 _response['data'] = _response['data'][0]
 
                         return _response
-                    raise KeyError(f"No related resource link found for '{ self.related_resource }' relationship")
-                raise KeyError(f"No links found for '{self.related_resource}' relationship")
-            raise KeyError(f"No relationship found for '{self.related_resource}'")
+                    raise KeyError(f"No related resource link found for '{related_resource}' relationship")
+                raise KeyError(f"No links found for '{related_resource}' relationship")
+            raise KeyError(f"No relationship found for '{related_resource}'")
 
         return response
 
@@ -526,6 +536,18 @@ class ProjectSchema(Schema):
         schema='AllocationSchema'
     )
 
+    categorisations = Relationship(
+        self_view='main.projects_relationship_categorisations',
+        self_view_kwargs={'project_id': '<neutral_id>'},
+        related_view='main.projects_categorisations',
+        related_view_kwargs={'project_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='categorisations',
+        schema='CategorisationSchema'
+    )
+
     class Meta(Schema.Meta):
         type_ = 'projects'
         self_view = 'main.projects_detail'
@@ -543,6 +565,7 @@ class ParticipantSchema(Schema):
         related_view='main.participants_projects',
         related_view_kwargs={'participant_id': '<neutral_id>'},
         id_field='project.neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='projects',
         schema='ProjectSchema'
@@ -554,6 +577,7 @@ class ParticipantSchema(Schema):
         related_view='main.participants_people',
         related_view_kwargs={'participant_id': '<neutral_id>'},
         id_field='person.neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='people',
         schema='PersonSchema'
@@ -579,6 +603,7 @@ class PersonSchema(Schema):
         related_view='main.people_organisations',
         related_view_kwargs={'person_id': '<neutral_id>'},
         id_field='neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='organisations',
         schema='OrganisationSchema'
@@ -621,6 +646,7 @@ class GrantSchema(Schema):
         related_view='main.grants_organisations',
         related_view_kwargs={'grant_id': '<neutral_id>'},
         id_field='neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='organisations',
         schema='OrganisationSchema'
@@ -648,26 +674,28 @@ class GrantSchema(Schema):
 class AllocationSchema(Schema):
     id = fields.String(attribute="neutral_id", dump_only=True, required=True)
 
-    grant = Relationship(
-        self_view='main.allocations_relationship_grants',
-        self_view_kwargs={'allocation_id': '<neutral_id>'},
-        related_view='main.allocations_grants',
-        related_view_kwargs={'allocation_id': '<neutral_id>'},
-        id_field='grant.neutral_id',
-        include_resource_linkage=True,
-        type_='grants',
-        schema='GrantSchema'
-    )
-
     project = Relationship(
         self_view='main.allocations_relationship_projects',
         self_view_kwargs={'allocation_id': '<neutral_id>'},
         related_view='main.allocations_projects',
         related_view_kwargs={'allocation_id': '<neutral_id>'},
         id_field='project.neutral_id',
+        many=False,
         include_resource_linkage=True,
         type_='projects',
         schema='ProjectSchema'
+    )
+
+    grant = Relationship(
+        self_view='main.allocations_relationship_grants',
+        self_view_kwargs={'allocation_id': '<neutral_id>'},
+        related_view='main.allocations_grants',
+        related_view_kwargs={'allocation_id': '<neutral_id>'},
+        id_field='grant.neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='grants',
+        schema='GrantSchema'
     )
 
     class Meta(Schema.Meta):
@@ -714,3 +742,148 @@ class OrganisationSchema(Schema):
         self_view = 'main.organisations_detail'
         self_view_kwargs = {'organisation_id': '<id>'}
         self_view_many = 'main.organisations_list'
+
+
+class CategorySchemeSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    name = fields.String(dump_only=True, required=True)
+    acronym = fields.String(dump_only=True, required=False)
+    description = fields.String(dump_only=True, required=False)
+    version = fields.String(dump_only=True, required=False)
+    revision = fields.String(dump_only=True, required=False)
+
+    categories = Relationship(
+        attribute='category_terms',
+        self_view='main.category_schemes_relationship_category_terms',
+        self_view_kwargs={'category_scheme_id': '<neutral_id>'},
+        related_view='main.category_schemes_category_terms',
+        related_view_kwargs={'category_scheme_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='categories',
+        schema='CategoryTermSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'category-schemes'
+        self_view = 'main.category_schemes_detail'
+        self_view_kwargs = {'category_scheme_id': '<id>'}
+        self_view_many = 'main.category_schemes_list'
+
+
+class CategoryTermSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+    scheme = fields.Method('scheme_class', dump_only=True, required=True)
+    concept = fields.String(attribute="scheme_identifier", dump_only=True, required=True)
+    title = fields.String(attribute="name", dump_only=True, required=True)
+    notation = fields.String(attribute="scheme_notation", dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    aliases = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    definitions = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    examples = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    notes = fields.List(fields.String, dump_only=True, required=False)
+    # noinspection PyTypeChecker
+    scope_notes = fields.List(fields.String, dump_only=True, required=False)
+
+    # noinspection PyMethodMayBeStatic
+    def scheme_class(self, obj: CategoryTerm) -> str:
+        """
+        Returns the identifier of the category term's schema (i.e. SKOS:inScheme)
+
+        :type obj: CategoryTerm
+        :param obj: an CategoryTerm model instance representing the category term being manipulated
+
+        :rtype str
+        :return: identifier of the category term's schema
+        """
+        return obj.category_scheme.namespace
+
+    parent_category = Relationship(
+        attribute='parent_category_term',
+        self_view='main.category_terms_relationship_parent_category_terms',
+        self_view_kwargs={'category_term_id': '<neutral_id>'},
+        related_view='main.category_terms_parent_category_terms',
+        related_view_kwargs={'category_term_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='categories',
+        schema='ParentCategoryTermSchema'
+    )
+
+    category_scheme = Relationship(
+        self_view='main.category_terms_relationship_category_schemes',
+        self_view_kwargs={'category_term_id': '<neutral_id>'},
+        related_view='main.category_terms_category_schemes',
+        related_view_kwargs={'category_term_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='category-schemes',
+        schema='CategorySchemeSchema'
+    )
+
+    categorisations = Relationship(
+        self_view='main.category_terms_relationship_categorisations',
+        self_view_kwargs={'category_term_id': '<neutral_id>'},
+        related_view='main.category_terms_categorisations',
+        related_view_kwargs={'category_term_id': '<neutral_id>'},
+        id_field='neutral_id',
+        many=True,
+        include_resource_linkage=True,
+        type_='categorisations',
+        schema='CategorisationSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'categories'
+        self_view = 'main.category_terms_detail'
+        self_view_kwargs = {'category_term_id': '<id>'}
+        self_view_many = 'main.category_terms_list'
+
+
+class ParentCategoryTermSchema(CategoryTermSchema):
+    class Meta(Schema.Meta):
+        type_ = 'categories'
+        self_view = 'main.category_terms_detail'
+        self_view_kwargs = {'category_term_id': '<id>'}
+        self_view_many = 'main.category_terms_list'
+
+
+class CategorisationSchema(Schema):
+    id = fields.String(attribute="neutral_id", dump_only=True, required=True)
+
+    project = Relationship(
+        self_view='main.categorisations_relationship_projects',
+        self_view_kwargs={'categorisation_id': '<neutral_id>'},
+        related_view='main.categorisations_projects',
+        related_view_kwargs={'categorisation_id': '<neutral_id>'},
+        id_field='project.neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='projects',
+        schema='ProjectSchema'
+    )
+
+    category = Relationship(
+        attribute='category_term',
+        self_view='main.categorisations_relationship_category_terms',
+        self_view_kwargs={'categorisation_id': '<neutral_id>'},
+        related_view='main.categorisations_category_terms',
+        related_view_kwargs={'categorisation_id': '<neutral_id>'},
+        id_field='categorisation.neutral_id',
+        many=False,
+        include_resource_linkage=True,
+        type_='categories',
+        schema='CategoryTermSchema'
+    )
+
+    class Meta(Schema.Meta):
+        type_ = 'categorisations'
+        self_view = 'main.categorisations_detail'
+        self_view_kwargs = {'categorisation_id': '<id>'}
+        self_view_many = 'main.categorisations_list'

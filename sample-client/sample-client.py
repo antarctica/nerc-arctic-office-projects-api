@@ -6,9 +6,9 @@ from oauthlib.oauth2 import BackendApplicationClient
 # This client uses the testing version of the API, in production a stable version should be used.
 
 auth_client_id = 'xxx'
-auth_client_secret = 'xxx'
+auth_client_secret = 'xxx'  # nosec
 auth_token_scopes = ['api://2b3f5c55-1a7d-4e26-a9a7-5b56b0f612f1/.default']
-auth_token_url = 'https://login.microsoftonline.com/d14c529b-5558-4a80-93b6-7655681e55d6/oauth2/v2.0/token'
+auth_token_url = 'https://login.microsoftonline.com/d14c529b-5558-4a80-93b6-7655681e55d6/oauth2/v2.0/token'  # nosec
 
 api_base_url = 'https://api.bas.ac.uk/arctic-office-projects/testing'
 

@@ -2,6 +2,9 @@ from enum import Enum
 
 # noinspection PyPackageRequirements
 from sqlalchemy.dialects import postgresql
+# noinspection PyPackageRequirements
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy_utils import LtreeType, Ltree
 
 from arctic_office_projects_api import db
 from arctic_office_projects_api.main.utils import generate_countries_enum
@@ -576,6 +579,7 @@ class Project(db.Model):
 
     participants = db.relationship("Participant", back_populates="project")
     allocations = db.relationship("Allocation", back_populates="project")
+    categorisations = db.relationship("Categorisation", back_populates="project")
 
     def __repr__(self):
         return f"<Project { self.neutral_id }>"
@@ -676,3 +680,92 @@ class Organisation(db.Model):
 
     grants = db.relationship('Grant', back_populates="funder")
     people = db.relationship('Person', back_populates="organisation")
+
+    def __repr__(self):
+        return f"<Organisation { self.neutral_id } ({ self.name })>"
+
+
+class CategoryScheme(db.Model):
+    """
+    Represents a category scheme, an entity that defines and contains a series of category terms
+    """
+    __tablename__ = 'category_schemes'
+    id = db.Column(db.Integer, primary_key=True)
+    neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
+    name = db.Column(db.Text(), nullable=False)
+    acronym = db.Column(db.Text(), nullable=True)
+    description = db.Column(db.Text(), nullable=True)
+    version = db.Column(db.Text(), nullable=True)
+    revision = db.Column(db.Text(), nullable=True)
+    namespace = db.Column(db.Text(), nullable=False)
+    root_concepts = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=False)
+
+    category_terms = db.relationship('CategoryTerm', back_populates="category_scheme")
+
+    def __repr__(self):
+        return f"<CategoryScheme { self.neutral_id } ({ self.name })>"
+
+
+class CategoryTerm(db.Model):
+    """
+    Represents a category term, an entity that defines a single concept with a category scheme
+    """
+    __tablename__ = 'category_terms'
+    id = db.Column(db.Integer, primary_key=True)
+    category_scheme_id = db.Column(db.Integer, db.ForeignKey('category_schemes.id'), nullable=False)
+    neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
+    scheme_identifier = db.Column(db.Text(), nullable=False)
+    scheme_notation = db.Column(db.Text(), nullable=True)
+    name = db.Column(db.Text(), nullable=False)
+    aliases = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    definitions = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    examples = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    notes = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    scope_notes = db.Column(postgresql.ARRAY(db.Text(), dimensions=1, zero_indexes=True), nullable=True)
+    path = db.Column(LtreeType, nullable=False, index=True)
+
+    category_scheme = db.relationship('CategoryScheme', back_populates="category_terms")
+    categorisations = db.relationship("Categorisation", back_populates="category_term")
+
+    @hybrid_property
+    def parent_category_term(self):
+        """
+        Hybrid property representing the parent (CategoryTerm) of a CategoryTerm, if one exists
+
+        Performs a query based on the CategoryTerm.path Ltree property. If the path of the CategoryTerm is a single
+        (root) level (e.g. 'root' rather than 'root.foo.bar') then there isn't a parent CategoryTerm and this property
+        is made empty.
+
+        Otherwise the current path is shortened (up) by a single level and used to find the relevant parent
+        CategoryTerm (i.e. '1.2.3' becomes '1.2').
+
+        :rtype CategoryTerm
+        :return: CategoryTerm that is a parent of the current CategoryTerm as determined by the Ltree column
+        """
+        parent_category_term_path = Ltree(self.path)
+        if len(parent_category_term_path) == 1:
+            return None
+
+        parent_category_term_path = Ltree(self.path)[:-1]
+
+        return CategoryTerm.query.filter_by(path=parent_category_term_path).first()
+
+    def __repr__(self):
+        return f"<CategoryTerm { self.neutral_id } ({ self.category_scheme.name } - '{ self.name }')>"
+
+
+class Categorisation(db.Model):
+    """
+    Represents the relationship between a category term and a project (i.e. the categories of a project)
+    """
+    __tablename__ = 'categorisations'
+    id = db.Column(db.Integer, primary_key=True)
+    neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+    category_term_id = db.Column(db.Integer, db.ForeignKey('category_terms.id'), nullable=False)
+
+    project = db.relationship("Project", back_populates="categorisations")
+    category_term = db.relationship("CategoryTerm", back_populates="categorisations")
+
+    def __repr__(self):
+        return f"<Categorisation { self.neutral_id } ({ self.category_term.neutral_id }:{ self.project.neutral_id })>"

@@ -1,14 +1,14 @@
 # NERC Arctic Office Projects API
 
-API for NERC Arctic Office projects database
+API for NERC Arctic Office projects database.
+
+See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-office-projects) for how to use this API.
 
 ## Purpose
 
-...
-
-## Usage
-
-See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-office-projects) for how to use this API.
+This API is used to record details of projects related to the [NERC Arctic Office](https://www.arctic.ac.uk). This API
+is primarily intended for populating the [projects database](https://www.arctic.ac.uk/research/projects-database) in 
+the Arctic Office website but is designed for general use where applicable.
 
 ## Implementation
 
@@ -34,7 +34,7 @@ Data for this API is held in a PostgreSQL database. The database structure is ma
 [alembic](https://alembic.sqlalchemy.org/en/latest/) migrations, defined in `migrations/`. 
 [SQL Alchemy](https://www.sqlalchemy.org) is used to access the database within the application, using models defined 
 in `arctic_office_projects_api/models.py`.
- 
+
 ### Data representations
 
 [Marshmallow](https://marshmallow.readthedocs.io) and 
@@ -61,9 +61,57 @@ Neutral identifiers are created as part of [Data loading](#data-loading).
 
 ### Data loading
 
-Production data for this API is loaded from ...
+Production data for this API is imported from a variety of sources.
 
-[Database seeding](#database-seeding) is used to create fake, but realistic, data in non-production environments.
+In non-production environments, [Database seeding](#database-seeding) is used to create fake, but realistic, data in 
+non-production environments.
+
+#### Science categories
+
+Science categories are used to categorise research projects, for example that a project relates to sea-ice.
+
+These categories are defined in well-known schemes to ensure well considered and systematic coverage of general or 
+discipline specific categories. Categories are structured into a hierarchy to allow navigation from general to more
+specific terms, or inversely, to generalise a term.
+
+The schemes used by this project are:
+
+* the [Universal Decimal Classification (UDC) - Summary](http://www.udcsummary.info)
+* the [NASA Global Change Master Directory (GCMD) - Earth Science keywords](https://earthdata.nasa.gov/earth-observation-data/find-data/gcmd/gcmd-keywords)
+* the [UK Data Service - Humanities And Social Science Electronic Thesaurus (HASSET)](https://hasset.ukdataservice.ac.uk)
+
+The UDC Summary scheme is used as a base scheme, covering all aspects of human knowledge. As this scheme is only a 
+summary, it does not include detailed terms for any particular areas. The GCMD Earth Science keywords and UK Data 
+Service HASSET schemes are used to provide additional detail for physical sciences and social sciences respectively, as
+these are areas that the majority of research projects included in this API lie within.
+
+These schemes and their categories are implemented as RDF graphs that describe properties about each category, such as
+name, examples and aliases, and the relationships between categories using 'broader than' and 'narrower than' relations.
+
+These graphs are expressed as RDF triples by each scheme authority (i.e. the UDC consortium, NASA and the UK Data 
+Service respectively). A set of additional triples are used to link concepts (categories) between each concept scheme. 
+
+| Scheme                      | Linked UDC Concept                       |
+| --------------------------- | ---------------------------------------- |
+| GCMD Earth Science keywords | *55 Earth Sciences. Geological sciences* |
+| UK Data Service HASSET      | *3 Social Sciences*                      |
+
+**Note:** These linkages are unofficial and currently very course, linking the top concept(s) of the Earth Science and
+HASSET schemes to a single concept in the UDC.
+
+A series of processing steps are used to load RDF triples/graphs from each scheme, generate linkages between schemes 
+and export a series of categories and category schemes into a file that can be imported into this API using the 
+`import categories` CLI command.
+
+The categories and category schemes import file is included in this project as `resources/science-categories.json` 
+and can imported without needing to perform any processing. See the [Usage](#import-data) section for more information.
+
+If additional category schemes need to be included, or existing schemes require updating, the processing steps will 
+need to be ran again to generate a replacement import file. See the [Development](#generating-category-import-files) 
+section for more information.
+
+**Note:** There is currently no support for updating a category scheme in cases where its categories have changed and
+require re-mapping to project resources.
 
 ### Documentation
 
@@ -192,7 +240,127 @@ for how to assign permissions defined by this API to client applications.
 **Note:** It is not yet possible to assign permissions programmatically due to limitations with the Azure CLI and Azure
 provider for Terraform.
 
+## Usage
+
+This section describes how to manage existing instances of this project in any environment. See the [Setup](#setup) 
+section for how to create instances.
+
+**Note:** See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-office-projects) for how to use 
+this API.
+
+For all new instances you will need to:
+
+1. run [Database migrations](#run-database-migrations)
+2. if relevant, run [Database seeding](#run-database-seeding)
+3. if relevant, [Import science categories](#importing-science-categories)
+
+### Flask CLI
+
+Many of the tasks needed to manage instances of this project use the [Flask CLI](http://flask.pocoo.org/docs/1.0/cli/).
+
+To run flask CLI commands in a local development environment:
+
+1. run `docker-compose up` to start the application and database containers
+2. in another terminal window, run `docker-compose exec app ash` to launch a shell within the application container
+3. in this shell, run `flask [command]` to perform a command
+
+To run flask CLI commands in a staging and production environment:
+
+1. navigate to the relevant Heroku application from the [Heroku dashboard](https://dashboard.heroku.com)
+2. from the application dashboard, select *More* -> *Run Console* from the right hand menu
+3. in the console overlay, enter `ash` to launch a shell within the application container
+4. in this shell, run `flask [command]` to perform a command
+
+**Note:** In any environment, run `flask` alone to list available commands and view basic usage instructions.
+
+### Run database migrations
+
+[Database migrations](#database-migrations) are used to control the structure of the application database for persisting
+[Data models](#data-models).
+
+The [Flask migrate](https://flask-migrate.readthedocs.io/en/latest/) package is used to provide a 
+[Flask CLI](#flask-cli) command for running database migrations:
+
+```shell
+$ flask db [command]
+```
+
+To view the current (applied) migration:
+
+```shell
+$ flask db current
+```
+
+To view the latest (possibly un-applied) migration:
+
+```shell
+$ flask db head
+```
+
+To update an instance to the latest migration:
+
+```shell
+$ flask db upgrade
+```
+
+To un-apply all migrations (effectively emptying the database):
+
+**WARNING:** This will drop all tables in the application database, removing any data.
+
+```shell
+$ flask db downgrade base
+```
+
+### Run database seeding
+
+**Note:** This process only applies to instances in local development or staging environments.
+
+[Database seeding](#database-seeding) is used to populate the application with fake, but realistic data.
+
+A custom [Flask CLI](#flask-cli) command is included for running database seeding:
+
+```shell
+$ flask seed [command]
+```
+
+To seed predictable, stable, test data for use when [Testing](#testing):
+
+```shell
+$ flask seed predictable
+```
+
+To seed 100 random, fake but realistic, projects and related resources for use in non-production environments:
+
+```shell
+$ flask seed random
+```
+
+### Import data
+
+**Note:** This process usually only applies to instances in staging or production environments.
+
+A custom [Flask CLI](#flask-cli) command is included for importing various resources into the API:
+
+```shell
+$ flask import [resource] [command]
+```
+
+#### Importing science categories
+
+To import [categories and category schemes](#science-categories):
+
+```shell
+$ flask import categories [path to import file]
+```
+
+**Note:** The structure of the import file will be validated against a JSON Schema before import. 
+
+**Note:** Existing categories and category schemes will be skipped if imported again, their properties will not be 
+updated.
+
 ## Setup
+
+This section describes how to create new instances of this project in a given environment.
 
 ```shell
 $ git clone https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api.git
@@ -241,16 +409,7 @@ PostgreSQL database:
 $ docker-compose up
 ```
 
-To run other commands against the Flask application (such as [Integration tests](#integration-tests)):
-
-```shell
-# in a separate terminal to `docker-compose up`
-$ docker-compose run app flask [command]
-# E.g.
-$ docker-compose run app flask test
-# List all available commands
-$ docker-compose run app flask
-```
+See the [Usage](#usage) section for instructions on how to configure and use the application instance.
 
 #### Local development - database
 
@@ -274,6 +433,19 @@ To connect to the database in a local development environment:
 | Username  | `app`       |
 | Password  | `password`  |
 | Schema    | `public`    |
+
+To connect to the database using `psql` in a local development environment:
+
+```shell
+$ docker-compose exec app-db ash
+$ psql -U app
+= SELECT current_database();
+> current_database 
+> ------------------
+> app
+= \q
+$ exit
+```
 
 #### Local development - auth
 
@@ -343,6 +515,11 @@ connection string. Other non-sensitive config vars should be set using Terraform
 Once running, add the appropriate configuration to the 
 [BAS API Load Balancer](https://gitlab.data.bas.ac.uk/WSF/api-load-balancer).
 
+Configure the relevant variables in the GitLab [Continuous Deployment](#continuous-deployment) configuration to enable
+the application Docker image to be deployed automatically.
+
+See the [Usage](#usage) section for instructions on how to configure and use the deployed application instance.
+ 
 ##### Staging - Heroku sensitive config vars
 
 Config vars should be set [manually](https://dashboard.heroku.com/apps/bas-arctic-projects-api-stage/settings) for 
@@ -583,7 +760,10 @@ See the `ApiException` class for other supported properties.
 To return an API error exception as a flask response:
 
 ```python
+from arctic_office_projects_api import create_app
 from arctic_office_projects_api.errors import ApiException
+
+app = create_app('production')
 
 class ApiFooError(ApiException):
     """
@@ -591,7 +771,7 @@ class ApiFooError(ApiException):
     """
     title = 'Foo'
     detail = 'Foo details'
-    
+
 @app.route('/error')
 def error_route():
     """
@@ -601,6 +781,30 @@ def error_route():
     error = ApiFooError()
     return error.response()
 ```
+
+### Adding a Flask CLI command
+
+[Flask CLI](#flask-cli) commands are used to expose processes and actions that control a Flask application. These 
+commands may be provided by Flask (such as listing all application routes), by third-party modules (such as managing
+[Database Migrations](#run-database-migrations)) or defined within this project (such as for 
+[Importing data](#import-data)).
+
+These first party commands are defined in `manage.py` and call methods defined elsewhere in the application.
+
+To define a new command, add a method to `manage.py` with the appropriate 
+[Click](http://flask.pocoo.org/docs/1.0/cli/#custom-commands) decorators and configuration.
+
+### Generating category import files
+
+**Note:** This section is still experimental until it can be formalised as part of 
+[#34](https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api/issues/34).
+
+Experiments 6 and 7 of the [RDF Experiments](https://gitlab.data.bas.ac.uk/felnne/ref-experiments) project are used to:
+
+* generate a series of a RDF triples linking the GCMD Earth Science keywords and UK Data Service HASSET schemes to the
+  UDC Summary scheme (experiment 7)
+* loading the concepts from the UDC, GCMD and HASSET schemes and producing a JSON file that can be imported into this
+  project (experiment 6)
 
 ### Logging
 
@@ -635,13 +839,7 @@ which should be reviewed to remove the auto-generated comments and check the cor
 All migrations must include a reverse/down migration, as these are used to reset the database when
 [Testing](#integration-tests).
 
-Alembic CLI commands such as `upgrade` are available through the Flask CLI as `db`:
-
-```shell
-$ docker-compose run app flask db [command]
-# E.g.
-$ docker-compose run app flask db upgrade
-```
+See the [Usage](#run-database-migrations) section for instructions on applying database migrations.
 
 ### Database models
 
@@ -656,11 +854,7 @@ Database seeding is used to populate the application database with either:
 1. predictable, stable, test data for use in [Testing](#testing)
 2. random, fake but realistic, test data for use in development and staging environments
 
-A `seed` Flask CLI command is defined in `manage.py` to call methods in `arctic_office_projects_api/seeding.py`.
-
-```shell
-$ docker-compose run app flask seed --count 3
-```
+See the [Usage](#run-database-seeding) section for instructions on running database seeding.
 
 #### Faker
 
@@ -675,14 +869,16 @@ conventions established by the main Faker package. Custom providers should be de
 `arctic_office_projects_api.main.faker.providers` module. When adding the custom provider to Faker, ensure the 
 providers `Provider` class is added, rather than the module itself.
 
+For example:
+
 ```python
 from faker import Faker
-from arctic_office_projects_api.main.faker.providers.foo import Provider as Foo
+from arctic_office_projects_api.main.faker.providers.person import Provider as Person
 
 faker = Faker('en_GB')
-faker.add_provider(Foo)  # a custom provider
+faker.add_provider(Person)  # a custom provider
 
-foo = faker.foo()  # use of a custom provider
+person_gender = faker.male_or_female()  # use of a custom provider
 ```
 
 ### Resource schemas
@@ -723,18 +919,26 @@ To use pagination:
 For example:
 
 ```python
-@main.route('/foo')
-def foo_list():
+from flask import request, jsonify
+
+from arctic_office_projects_api import create_app
+from arctic_office_projects_api.models import Person
+from arctic_office_projects_api.schemas import PersonSchema
+
+app = create_app('production')
+
+@app.route('/people')
+def people_list():
     # Determine the pagination page number from the request, or default to page 1
     page = request.args.get('page', type=int)
     if page is None:
         page = 1
 
     # Get a Pagination object based on the current pagination page number and a fixed page size
-    foo = Foo.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
+    people = Person.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
 
     # Enable pagination support on schema
-    payload = FooSummarySchema(many=True, paginate=True).dump(foo)
+    payload = PersonSchema(many=True, paginate=True).dump(people)
 
     return jsonify(payload.data)
 ```
@@ -780,11 +984,20 @@ To return a relationship response:
 For example:
 
 ```python
-@main.route('/foo/<foo_id>/relationships/bar')
-def foo_list(foo_id: str):
+from flask import request, jsonify
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
+from arctic_office_projects_api import create_app
+from arctic_office_projects_api.models import Person
+from arctic_office_projects_api.schemas import PersonSchema
+
+app = create_app('production')
+
+@app.route('/people/<person_id>/relationships/organisations')
+def people_relationship_organisations(person_id: str):
     try:
-        foo = Foo.query.filter_by(id=foo_id).one()
-        payload = FooSchema(resource_linkage='bar').dump(foo)
+        person = Person.query.filter_by(id=person_id).one()
+        payload = PersonSchema(resource_linkage='organisation').dump(person)
         return jsonify(payload.data)
     except NoResultFound:
         return 'Not found error'
@@ -839,11 +1052,20 @@ To return a related resource response:
 For example:
 
 ```python
-@main.route('/foo/<foo_id>/bar')
-def foo_list(foo_id: str):
+from flask import request, jsonify
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
+from arctic_office_projects_api import create_app
+from arctic_office_projects_api.models import Person
+from arctic_office_projects_api.schemas import PersonSchema
+
+app = create_app('production')
+
+@app.route('/people/<person_id>/organisations')
+def people_organisations(person_id: str):
     try:
-        foo = Foo.query.filter_by(id=foo_id).one()
-        payload = FooSchema(related_resource='bar').dump(foo)
+        person = Person.query.filter_by(id=person_id).one()
+        payload = PersonSchema(resource_resource='organisation').dump(person)
         return jsonify(payload.data)
     except NoResultFound:
         return 'Not found error'

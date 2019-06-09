@@ -323,3 +323,52 @@ class Provider(BaseProvider):
         :return: whether a project with a new Co-Investigator is from an existing organisation
         """
         return self.random_element({True: 0.8, False: 0.2})
+
+    def has_science_categories(self, grant_type: GrantType) -> bool:
+        """
+        Determines whether a project has any science categories or not, based on the type of grant a project is created
+        from
+
+        Currently assumes:
+          * 100% of UKRI standard/large grant based projects are categorised
+          * 100% of EU standard grant based projects are categorised
+          * 75% of Other grant based projects are categorised
+
+        :type grant_type: GrantType
+        :param grant_type: member of the GrantType enumerated class
+
+        :example: True
+        :rtype: bool
+        :return: whether a project has any science categories
+        """
+        chances = {
+            'UKRI_STANDARD_GRANT': (1, 0),
+            'UKRI_LARGE_GRANT': (1, 0),
+            'EU_STANDARD_GRANT': (1, 0),
+            'OTHER': (0.75, 0.25)
+        }
+        return self.random_element({True: chances[grant_type.name][0], False: chances[grant_type.name][1]})
+
+    def science_categories_count(self) -> int:
+        """
+        Generates the number of science categories a project is categorised by
+
+        Currently assumes:
+         * 75% of projects have 1 categories
+         * 20% of projects have between 2 and 3 categories
+         * 5% of projects have between 2 and 6 categories
+
+        :example: 2
+        :rtype: int
+        :return: the number of science categories a project is categorised by
+        """
+        category_ranges = {
+            '1': (1, 1),
+            '2-3': (2, 3),
+            '2-6': (2, 6)
+        }
+        category_range = self.random_element({'1': 0.75, '2-3': 0.2, '2-6': 0.05})
+        return self.generator.random_int(
+            min=category_ranges[category_range][0],
+            max=category_ranges[category_range][1]
+        )

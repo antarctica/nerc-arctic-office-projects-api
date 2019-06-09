@@ -9,10 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* Category, Category Scheme and Categorisation resources to categorise projects with subjects
 * Updating Flask Azure OAuth provider (0.3.0)
 * White listing Arctic Office Projects Manager staging application to use staging instance
 * BAS API Docs OpenAPI extensions
-* Methods in Projects Faker provider for whether a PI or CoI has worked on other projects before
+* Methods in Projects Faker provider to decide whether a PI or CoI has worked on other projects before
+* Updated Pip dependencies
+* Instructions in README on how to access a `psql` prompt in development environments
+* Refactoring README to add a usage section on how to run various Flask CLI commands
+* Adding instructions on adding custom Flask CLI commands
+* Adding project purpose
 
 ### Fixed
 
@@ -20,6 +26,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Correcting OpenAPI specification
 * Correcting project duration method in Projects Faker provider to generate end dates correctly
 * Allowing related resources to have no items in Marshmallow schemas
+* Marshmallow JSON API resource linkages where the related resource uses multiple words (e.g `foo-bar`)
+* Correcting examples in README
 
 ### Changed
 
