@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "required": [
+    "schemes",
+    "root-term",
+    "terms"
+  ],
+  "properties": {
+    "schemes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "namespace",
+          "title",
+          "root-concepts"
+        ],
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "format": "uri"
+          },
+          "title": {
+            "type": "string"
+          },
+          "sub-title": {
+            "type": ["string", "null"]
+          },
+          "acronym": {
+            "type": ["string", "null"]
+          },
+          "version": {
+            "type": ["string", "null"]
+          },
+          "revision": {
+            "type": ["string", "null"]
+          },
+          "root-concepts": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "root-term": {
+      "type": "string"
+    },
+    "terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scheme": {
+            "type": "string"
+          },
+          "subject": {
+            "type":  "string"
+          },
+          "pref-label": {
+            "type":  "string"
+          },
+          "alt-labels": {
+            "type":  "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notation": {
+            "type":  ["string", "null"]
+          },
+          "definitions": {
+            "type":  "array",
+            "items":  {
+              "type":  "string"
+            }
+          },
+          "examples": {
+            "type":  "array",
+            "items":  {
+              "type":  "string"
+            }
+          },
+          "notes": {
+            "type":  "array",
+            "items":  {
+              "type":  "string"
+            }
+          },
+          "scope-notes": {
+            "type":  "array",
+            "items":  {
+              "type":  "string"
+            }
+          },
+          "path": {
+            "type":  "object",
+            "minimum": 1,
+            "propertyNames": {
+              "pattern": "^\\d+$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

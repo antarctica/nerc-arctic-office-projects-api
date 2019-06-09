@@ -1134,6 +1134,17 @@ def seed_random_test_resources(count: int = 100):
                 grant=grant
             ))
 
+            # Categories
+            project_has_categories = faker.has_science_categories(grant_type=grant_type)
+            if project_has_categories:
+                categories = _get_categories()
+                for category in categories:
+                    db.session.add(Categorisation(
+                        neutral_id=generate_neutral_id(),
+                        project=project,
+                        category_term=category
+                    ))
+
             db.session.commit()
     except Exception as e:
         db.session.rollback()
@@ -1472,3 +1483,23 @@ def _get_new_co_investigator_count(co_investigators_count: int, principle_invest
         return new_co_investigators_count + initial_co_investigators_count
 
     return new_co_investigators_count
+
+
+def _get_categories() -> List[CategoryTerm]:
+    """
+    Returns a series of CategoryTerm resources for a fake project's science categories
+
+    A project may not be categorised - where it is, categories will be chosen at random.
+
+    :rtype list
+    :return: List of CategoryTerm model instance for use as categories for a fake project
+    """
+    categories_count = faker.science_categories_count()
+    ineligible_category_schemes = [
+        'https://www.example.com/category-scheme-1',
+        'https://www.example.com/category-scheme-2',
+        'https://www.example.com/category-scheme-3'
+    ]
+    return CategoryTerm.query.join(CategoryScheme).filter(CategoryScheme.namespace.notin_(
+        ineligible_category_schemes
+    )).order_by(func.random()).limit(categories_count).all()

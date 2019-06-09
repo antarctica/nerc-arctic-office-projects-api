@@ -61,9 +61,57 @@ Neutral identifiers are created as part of [Data loading](#data-loading).
 
 ### Data loading
 
-Production data for this API is loaded from ...
+Production data for this API is imported from a variety of sources.
 
-[Database seeding](#database-seeding) is used to create fake, but realistic, data in non-production environments.
+In non-production environments, [Database seeding](#database-seeding) is used to create fake, but realistic, data in 
+non-production environments.
+
+#### Science categories
+
+Science categories are used to categorise research projects, for example that a project relates to sea-ice.
+
+These categories are defined in well-known schemes to ensure well considered and systematic coverage of general or 
+discipline specific categories. Categories are structured into a hierarchy to allow navigation from general to more
+specific terms, or inversely, to generalise a term.
+
+The schemes used by this project are:
+
+* the [Universal Decimal Classification (UDC) - Summary](http://www.udcsummary.info)
+* the [NASA Global Change Master Directory (GCMD) - Earth Science keywords](https://earthdata.nasa.gov/earth-observation-data/find-data/gcmd/gcmd-keywords)
+* the [UK Data Service - Humanities And Social Science Electronic Thesaurus (HASSET)](https://hasset.ukdataservice.ac.uk)
+
+The UDC Summary scheme is used as a base scheme, covering all aspects of human knowledge. As this scheme is only a 
+summary, it does not include detailed terms for any particular areas. The GCMD Earth Science keywords and UK Data 
+Service HASSET schemes are used to provide additional detail for physical sciences and social sciences respectively, as
+these are areas that the majority of research projects included in this API lie within.
+
+These schemes and their categories are implemented as RDF graphs that describe properties about each category, such as
+name, examples and aliases, and the relationships between categories using 'broader than' and 'narrower than' relations.
+
+These graphs are expressed as RDF triples by each scheme authority (i.e. the UDC consortium, NASA and the UK Data 
+Service respectively). A set of additional triples are used to link concepts (categories) between each concept scheme. 
+
+| Scheme                      | Linked UDC Concept                       |
+| --------------------------- | ---------------------------------------- |
+| GCMD Earth Science keywords | *55 Earth Sciences. Geological sciences* |
+| UK Data Service HASSET      | *3 Social Sciences*                      |
+
+**Note:** These linkages are unofficial and currently very course, linking the top concept(s) of the Earth Science and
+HASSET schemes to a single concept in the UDC.
+
+A series of processing steps are used to load RDF triples/graphs from each scheme, generate linkages between schemes 
+and export a series of categories and category schemes into a file that can be imported into this API using the 
+`import categories` CLI command.
+
+The categories and category schemes import file is included in this project as `resources/science-categories.json` 
+and can imported without needing to perform any processing. See the [Usage](#import-data) section for more information.
+
+If additional category schemes need to be included, or existing schemes require updating, the processing steps will 
+need to be ran again to generate a replacement import file. See the [Development](#generating-category-import-files) 
+section for more information.
+
+**Note:** There is currently no support for updating a category scheme in cases where its categories have changed and
+require re-mapping to project resources.
 
 ### Documentation
 
@@ -204,6 +252,7 @@ For all new instances you will need to:
 
 1. run [Database migrations](#run-database-migrations)
 2. if relevant, run [Database seeding](#run-database-seeding)
+3. if relevant, [Import science categories](#importing-science-categories)
 
 ### Flask CLI
 
@@ -285,6 +334,29 @@ To seed 100 random, fake but realistic, projects and related resources for use i
 ```shell
 $ flask seed random
 ```
+
+### Import data
+
+**Note:** This process usually only applies to instances in staging or production environments.
+
+A custom [Flask CLI](#flask-cli) command is included for importing various resources into the API:
+
+```shell
+$ flask import [resource] [command]
+```
+
+#### Importing science categories
+
+To import [categories and category schemes](#science-categories):
+
+```shell
+$ flask import categories [path to import file]
+```
+
+**Note:** The structure of the import file will be validated against a JSON Schema before import. 
+
+**Note:** Existing categories and category schemes will be skipped if imported again, their properties will not be 
+updated.
 
 ## Setup
 
@@ -721,6 +793,18 @@ These first party commands are defined in `manage.py` and call methods defined e
 
 To define a new command, add a method to `manage.py` with the appropriate 
 [Click](http://flask.pocoo.org/docs/1.0/cli/#custom-commands) decorators and configuration.
+
+### Generating category import files
+
+**Note:** This section is still experimental until it can be formalised as part of 
+[#34](https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api/issues/34).
+
+Experiments 6 and 7 of the [RDF Experiments](https://gitlab.data.bas.ac.uk/felnne/ref-experiments) project are used to:
+
+* generate a series of a RDF triples linking the GCMD Earth Science keywords and UK Data Service HASSET schemes to the
+  UDC Summary scheme (experiment 7)
+* loading the concepts from the UDC, GCMD and HASSET schemes and producing a JSON file that can be imported into this
+  project (experiment 6)
 
 ### Logging
 
