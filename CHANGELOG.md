@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Methods in Projects Faker provider to decide whether a PI or CoI has worked on other projects before
 * Updated Pip dependencies
 * Instructions in README on how to access a `psql` prompt in development environments
+* Refactoring README to add a usage section on how to run various Flask CLI commands
 * Adding project purpose
 
 ### Fixed

@@ -2,11 +2,10 @@
 
 API for NERC Arctic Office projects database.
 
+See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-office-projects) for how to use this API.
 
-## Usage
 ## Purpose
 
-See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-office-projects) for how to use this API.
 This API is used to record details of projects related to the [NERC Arctic Office](https://www.arctic.ac.uk). This API
 is primarily intended for populating the [projects database](https://www.arctic.ac.uk/research/projects-database) in 
 the Arctic Office website but is designed for general use where applicable.
@@ -193,7 +192,103 @@ for how to assign permissions defined by this API to client applications.
 **Note:** It is not yet possible to assign permissions programmatically due to limitations with the Azure CLI and Azure
 provider for Terraform.
 
+## Usage
+
+This section describes how to manage existing instances of this project in any environment. See the [Setup](#setup) 
+section for how to create instances.
+
+**Note:** See the [BAS API documentation](https://docs.api.bas.ac.uk/services/arctic-office-projects) for how to use 
+this API.
+
+For all new instances you will need to:
+
+1. run [Database migrations](#run-database-migrations)
+2. if relevant, run [Database seeding](#run-database-seeding)
+
+### Flask CLI
+
+Many of the tasks needed to manage instances of this project use the [Flask CLI](http://flask.pocoo.org/docs/1.0/cli/).
+
+To run flask CLI commands in a local development environment:
+
+1. run `docker-compose up` to start the application and database containers
+2. in another terminal window, run `docker-compose exec app ash` to launch a shell within the application container
+3. in this shell, run `flask [command]` to perform a command
+
+To run flask CLI commands in a staging and production environment:
+
+1. navigate to the relevant Heroku application from the [Heroku dashboard](https://dashboard.heroku.com)
+2. from the application dashboard, select *More* -> *Run Console* from the right hand menu
+3. in the console overlay, enter `ash` to launch a shell within the application container
+4. in this shell, run `flask [command]` to perform a command
+
+**Note:** In any environment, run `flask` alone to list available commands and view basic usage instructions.
+
+### Run database migrations
+
+[Database migrations](#database-migrations) are used to control the structure of the application database for persisting
+[Data models](#data-models).
+
+The [Flask migrate](https://flask-migrate.readthedocs.io/en/latest/) package is used to provide a 
+[Flask CLI](#flask-cli) command for running database migrations:
+
+```shell
+$ flask db [command]
+```
+
+To view the current (applied) migration:
+
+```shell
+$ flask db current
+```
+
+To view the latest (possibly un-applied) migration:
+
+```shell
+$ flask db head
+```
+
+To update an instance to the latest migration:
+
+```shell
+$ flask db upgrade
+```
+
+To un-apply all migrations (effectively emptying the database):
+
+**WARNING:** This will drop all tables in the application database, removing any data.
+
+```shell
+$ flask db downgrade base
+```
+
+### Run database seeding
+
+**Note:** This process only applies to instances in local development or staging environments.
+
+[Database seeding](#database-seeding) is used to populate the application with fake, but realistic data.
+
+A custom [Flask CLI](#flask-cli) command is included for running database seeding:
+
+```shell
+$ flask seed [command]
+```
+
+To seed predictable, stable, test data for use when [Testing](#testing):
+
+```shell
+$ flask seed predictable
+```
+
+To seed 100 random, fake but realistic, projects and related resources for use in non-production environments:
+
+```shell
+$ flask seed random
+```
+
 ## Setup
+
+This section describes how to create new instances of this project in a given environment.
 
 ```shell
 $ git clone https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api.git
@@ -242,16 +337,7 @@ PostgreSQL database:
 $ docker-compose up
 ```
 
-To run other commands against the Flask application (such as [Integration tests](#integration-tests)):
-
-```shell
-# in a separate terminal to `docker-compose up`
-$ docker-compose run app flask [command]
-# E.g.
-$ docker-compose run app flask test
-# List all available commands
-$ docker-compose run app flask
-```
+See the [Usage](#usage) section for instructions on how to configure and use the application instance.
 
 #### Local development - database
 
@@ -657,13 +743,7 @@ which should be reviewed to remove the auto-generated comments and check the cor
 All migrations must include a reverse/down migration, as these are used to reset the database when
 [Testing](#integration-tests).
 
-Alembic CLI commands such as `upgrade` are available through the Flask CLI as `db`:
-
-```shell
-$ docker-compose run app flask db [command]
-# E.g.
-$ docker-compose run app flask db upgrade
-```
+See the [Usage](#run-database-migrations) section for instructions on applying database migrations.
 
 ### Database models
 
@@ -678,11 +758,7 @@ Database seeding is used to populate the application database with either:
 1. predictable, stable, test data for use in [Testing](#testing)
 2. random, fake but realistic, test data for use in development and staging environments
 
-A `seed` Flask CLI command is defined in `manage.py` to call methods in `arctic_office_projects_api/seeding.py`.
-
-```shell
-$ docker-compose run app flask seed --help
-```
+See the [Usage](#run-database-seeding) section for instructions on running database seeding.
 
 #### Faker
 
