@@ -29,21 +29,6 @@ class MainBlueprintTestCase(BaseTestCase):
 
         super().tearDown()
 
-    def test_index(self):
-        response = self.client.get(
-            '/',
-            base_url='http://localhost:9000'
-        )
-        json_response = response.get_json()
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertIn('meta', json_response.keys())
-        self.assertIn('summary', json_response['meta'].keys())
-        self.assertEqual(
-            'This API is used to record details of projects related to the NERC Arctic Office - '
-            'https://www.arctic.ac.uk',
-            json_response['meta']['summary']
-        )
-
     def test_projects_list(self):
         expected_payload = {
             "data": [
