@@ -1,4 +1,3 @@
-import logging
 from http import HTTPStatus
 
 import sentry_sdk
@@ -14,6 +13,7 @@ from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, Unpro
 
 from arctic_office_projects_api.utils import healthcheck_db
 from config import config
+from arctic_office_projects_api.logging import RequestFormatter
 from arctic_office_projects_api.extensions import db, auth
 from arctic_office_projects_api.errors import error_handler_generic_bad_request, error_handler_generic_not_found, \
     error_handler_generic_internal_server_error, error_handler_generic_unprocessable_entity
@@ -40,17 +40,6 @@ def create_app(config_name):
         sentry_sdk.init(**app.config['SENTRY_CONFIG'])
 
     # Logging
-    class RequestFormatter(logging.Formatter):
-        def format(self, record):
-            record.url = 'NA'
-            record.request_id = 'NA'
-
-            if has_request_context():
-                record.url = request.url
-                if app.config['APP_ENABLE_REQUEST_ID']:
-                    record.request_id = request.environ.get("HTTP_X_REQUEST_ID")
-
-            return super().format(record)
     formatter = RequestFormatter(
         '[%(asctime)s] [%(levelname)s] [%(request_id)s] [%(url)s] %(module)s: %(message)s'
     )
