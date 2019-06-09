@@ -2,7 +2,8 @@ import os
 import sys
 import unittest
 
-from click import argument, File, Path
+# noinspection PyPackageRequirements
+from click import argument, Path
 from flask.cli import AppGroup
 from flask_migrate import Migrate
 
