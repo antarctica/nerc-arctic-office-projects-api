@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Refactoring index and meta routes out of blueprints
 * Refactoring main and meta blueprint utilities and errors into main application
 * Refactoring RequestFormatter to standalone module
+* Refactoring Faker providers out of blueprints
 
 ## [0.2.0] 2019-04-04
 

@@ -13,12 +13,12 @@ from sqlalchemy_utils import Ltree
 from arctic_office_projects_api import db
 from arctic_office_projects_api.models import Project, ProjectCountry, Person, Organisation, Grant, GrantStatus, \
     GrantCurrency, Participant, ParticipantRole, Allocation, CategoryScheme, CategoryTerm, Categorisation
-from arctic_office_projects_api.main.faker.providers.project import Provider as ProjectProvider
-from arctic_office_projects_api.main.faker.providers.person import Provider as PersonProvider
-from arctic_office_projects_api.main.faker.providers.profile import Provider as ProfileProvider
-from arctic_office_projects_api.main.faker.providers.grant import Provider as GrantProvider, GrantType, UKRICouncil
-from arctic_office_projects_api.main.faker.providers.organisation import Provider as OrganisationProvider
 from arctic_office_projects_api.utils import generate_neutral_id
+from arctic_office_projects_api.faker.providers.project import Provider as ProjectProvider
+from arctic_office_projects_api.faker.providers.person import Provider as PersonProvider
+from arctic_office_projects_api.faker.providers.profile import Provider as ProfileProvider
+from arctic_office_projects_api.faker.providers.grant import Provider as GrantProvider, GrantType, UKRICouncil
+from arctic_office_projects_api.faker.providers.organisation import Provider as OrganisationProvider
 
 faker = Faker('en_GB')
 faker.add_provider(ProjectProvider)

@@ -6,7 +6,7 @@ from faker.providers import BaseProvider
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
 
-from arctic_office_projects_api.main.faker.providers.grant import GrantType
+from arctic_office_projects_api.faker.providers.grant import GrantType
 
 localized = False
 
