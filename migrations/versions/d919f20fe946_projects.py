@@ -9,7 +9,7 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-from arctic_office_projects_api.main.utils import generate_countries_enum
+from arctic_office_projects_api.utils import generate_countries_enum
 
 # revision identifiers, used by Alembic.
 revision = 'd919f20fe946'

@@ -9,7 +9,7 @@ from sqlalchemy import exists
 from sqlalchemy_utils import Ltree
 
 from arctic_office_projects_api import db
-from arctic_office_projects_api.main.utils import generate_neutral_id
+from arctic_office_projects_api.utils import generate_neutral_id
 from arctic_office_projects_api.models import CategoryScheme, CategoryTerm
 
 

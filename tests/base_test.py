@@ -1,9 +1,11 @@
 import unittest
 
+from flask_migrate import Config, upgrade, downgrade, Migrate
 from flask_azure_oauth.tokens import TestJwt
 
-from arctic_office_projects_api import create_app, auth
+from arctic_office_projects_api import create_app, auth, db
 from arctic_office_projects_api.errors import ApiException
+from arctic_office_projects_api.seeding import seed_predictable_test_resources
 
 
 class BaseTestCase(unittest.TestCase):
@@ -38,3 +40,25 @@ class BaseTestCase(unittest.TestCase):
     def util_create_auth_token(self, *, scopes: list = None):
         jwt = TestJwt(app=self.app, scopes=scopes)
         return jwt.dumps()
+
+
+class BaseResourceTestCase(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+
+        with self.app.app_context():
+            # Migrate and seed database
+            config = Config("migrations/alembic.ini")
+            config.set_main_option("script_location", "migrations")
+            Migrate(self.app, db)
+            upgrade()
+            seed_predictable_test_resources()
+            db.session.commit()
+
+    def tearDown(self):
+        db.session.remove()
+        with self.app.app_context():
+            # Rollback all DB migrations
+            downgrade(revision='base')
+
+        super().tearDown()

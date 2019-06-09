@@ -35,6 +35,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Reimplementing database seeding using standalone class and expanded, generic, predictable resources 
 * Importing Grant (Project) type enum from Grant provider, rather than duplicating in Project provider
 * Faker Grant references are now dependent on the type of grant
+* Refactoring resource routes into separate blueprints
+* Refactoring resource tests into separate test cases
+* Refactoring index and meta routes out of blueprints
+* Refactoring main and meta blueprint utilities and errors into main application
+* Refactoring RequestFormatter to standalone module
+* Refactoring Faker providers out of blueprints
 
 ## [0.2.0] 2019-04-04
 

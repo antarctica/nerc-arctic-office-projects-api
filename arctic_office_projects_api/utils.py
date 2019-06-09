@@ -3,7 +3,13 @@ import ulid
 
 from enum import Enum
 
+# noinspection PyProtectedMember
+from psycopg2._psycopg import Error
+# noinspection PyPackageRequirements
+from sqlalchemy.exc import OperationalError
 from iso3166 import countries as iso_countries
+
+from arctic_office_projects_api.extensions import db
 
 
 def generate_neutral_id() -> str:
@@ -29,3 +35,13 @@ def generate_countries_enum(*, name: str = 'Countries') -> Enum:
 
     # noinspection PyArgumentList
     return Enum(name, countries)
+
+
+def healthcheck_db() -> bool:
+    try:
+        # run basic connectivity check
+        db.engine.execute('SELECT 1')
+    except (Error, OperationalError):
+        return False
+
+    return True
