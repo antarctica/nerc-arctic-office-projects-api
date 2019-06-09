@@ -2,10 +2,8 @@ from http import HTTPStatus
 
 import sentry_sdk
 
-from flask import Flask, request, has_request_context
 from flask import Flask, jsonify
 from flask.logging import default_handler
-
 from flask_reverse_proxy_fix.middleware import ReverseProxyPrefixFix
 from flask_request_id_header.middleware import RequestID
 # noinspection PyPackageRequirements
