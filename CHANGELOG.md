@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 * Improving OpenAPI specification
+* Improving End user documentation, including documenting identifiers and controlled values used
 * Reimplementing database seeding using standalone class and expanded, generic, predictable resources 
 * Importing Grant (Project) type enum from Grant provider, rather than duplicating in Project provider
 * Faker Grant references are now dependent on the type of grant
@@ -41,6 +42,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Refactoring main and meta blueprint utilities and errors into main application
 * Refactoring RequestFormatter to standalone module
 * Refactoring Faker providers out of blueprints
+
+### Removed
+
+* Proof of concept API changelog until this can be redeveloped as part of the BAS API Docs project
 
 ## [0.2.0] 2019-04-04
 

@@ -6,29 +6,29 @@ title: NERC Arctic Office Projects API - Usage
 
 ### Support
 
-Limited, best effort, support is offered for using this API to integrate NERC Arctic Office Project information
-into the Arctic Office website ([www.arctic.ac.uk](https://www.arctic.ac.uk)) as part of it's redevelopment.
+Limited, best effort, support is offered for using this API to integrate project information into the NERC Arctic 
+Office website ([www.arctic.ac.uk](https://www.arctic.ac.uk)) as part of it's redevelopment.
 
 Contact the [BAS Service Desk](mailto:servicedesk@bas.ac.uk) for support.
 
 ### Information handling
 
-Reasonable policies and technical measures are in place to ensure information in this API is held and transferred 
-securely. Where third parties are used to operate this API, we ensure they are used for a necessary task, with
-measures in place to ensure they are used appropriately and securely.
+This API is provided by the [British Antarctic Survey (BAS)](https://www.bas.ac.uk) on behalf of the 
+Natural Environment Research Council (NERC) [Arctic Office](https://www.arctic.ac.uk). Both BAS and NERC are part of 
+[UK Research and Innovation (URKI)](https://www.ukri.org), UKRI is the legal operator of this service.
 
-Applicable services used by this API are:
+Reasonable policies and technical measures are in place to ensure information in this API is held and transferred 
+securely. Where third parties are used to operate this API, they are used for a necessary task and with measures in 
+place to ensure they are used appropriately and securely.
+
+Third party services used by this API are:
 
 * [Heroku](https://heroku.com) - for storing data and hosting the API
-* [Sentry](https://sentry.io/) - for reporting API errors, which may include API responses
-
-This API is provided by the [British Antarctic Survey](https://www.bas.ac.uk) on behalf of the 
-Natural Environment Research Council [Arctic Office](https://www.arctic.ac.uk). Both BAS and NERC are part of 
-[UK Research and Innovation](https://www.ukri.org).
+* [Sentry](https://sentry.io/) - for monitoring API errors, which may include API responses
 
 If you have any questions about how information is used by this API please contact the 
-[BAS Service Desk](mailto:servicedesk@bas.ac.uk) in the first instance. If you do not receive a reply within a few days
-please contact the [BAS Freedom of Information Officer](foi@bas.ac.uk).
+[BAS Service Desk](mailto:servicedesk@bas.ac.uk) in the first instance. If you do not receive a prompt reply please 
+contact the [BAS Freedom of Information Officer](foi@bas.ac.uk).
 
 ### Security disclosures
 
@@ -38,17 +38,28 @@ Contact us for instructions if you need to report any sensitive information.
 
 ### Versioning policy
 
-This API is versioned. An API version must be specified as a URL prefix (e.g. `/v1/foo`).
-
-Changes between versions are documented in the [Change log](../changelog).
+This API is versioned. An API version must be specified as a URL prefix (e.g. `/v1`).
 
 Only the latest, stable, API version is [Supported](#support). When a new version is released, all previous versions 
-are deprecated for a period of time to allow clients time to move to supported version before being retired and removed.
+are deprecated for a period of time to allow clients time to move to the new version before being retired and removed.
 
 #### Testing version
 
-For testing new features and changes, a non-stable, testing version (`/testing`)is available. This version should only 
-be used for testing and may change any time. Separate credentials are required to use the testing version.
+For testing new features and changes, an unstable, testing, version (`/testing`) is available. The functionality and 
+data in this version may change or break at any time. Separate credentials are required to use this version.
+
+The testing version uses fake, but realistic, data subject to these limitations:
+
+* the number of fake date items is arbitrary and are created or removed in bulk, whereas the number of real data items 
+  is variable, based on the current number of relevant projects
+* fake data may be removed or replaced with new data at any time whereas real data typically doesn't change often and 
+  will be added or removed gradually
+* project and organisation acronym's don't relate to a projects title
+* project and grant publications are fake, using the reserved testing prefix `10.5555` and will not resolve
+* project participant's will only use a subset of available participant roles (Principle or Co Investigator)
+* project countries will always be *Svalbard and Jan Mayen* (`SJM`)
+* people ORCID iDs are fake, and will not resolve
+* organisation Grid IDs are fake, and will not resolve
 
 ### Deprecation policy
 
@@ -56,35 +67,7 @@ Features may be deprecated in this API as it evolves. This may include changes t
 versions. Usually an alternative feature will be available but in some cases a feature may be removed without one.
 
 As with API versions, deprecated features will be supported for a period of time for clients to move to an alternative,
-before being retired/removed.
-
-Deprecated features will be referenced in this documentation and the [Change log](../changelog).
-
-### Information available
-
-During initial development, all versions of this API use fake data, intended to be realistic but meaningless. This 
-ensures any potentially sensitive information contained in real data is not exposed to unreliable and untested 
-integrations.
-
-In the future, stable versions of the API will have access to real data. The [Testing version](#testing-version) will 
-always use fake data.
-
-#### Fake data
-
-Fake data is generated randomly using the [Faker](https://faker.readthedocs.io/en/master/) library, with custom methods 
-added for resources in this API. Various ratios and weightings are used to generate mostly 'average' data as well as 
-known extremes to allow for testing edge cases.
-
-##### Fake data limitations
-
-There are a number of general differences/limitations between fake and real data:
-
-1. the number of fake date items is arbitrary and are created or removed in bulk, whereas the number of real data items 
-   is variable, based on the current number of relevant projects
-2. all fake data items may be removed and replaced with new items when changes are made to resource properties, whereas
-   real data items will be added or removed gradually, with most remaining the same
-
-See each resource for additional limitations.
+before being retired/removed. Deprecated features will be referenced in this documentation.
 
 ## Technical information
 
@@ -92,18 +75,20 @@ See each resource for additional limitations.
 
 This API follows the [JSON API](http://jsonapi.org/format/1.0/) standard, unless stated otherwise.
 
-### Authentication and authorisation
-
-Clients must be allowed access to information held by this API using OAuth tokens.
-
-Clients must first be registered by contacting [Support](#support) to be granted suitable permissions and issued with a
-client ID and secret.
-
 ### Content Types
 
 This API supports the `application/json` content type only, unless stated otherwise.
 
 This API supports `UTF-8` character encoding only, unless stated otherwise.
+
+### Errors
+
+Errors reported by this API follow the [JSON API](http://jsonapi.org/format/1.0/#errors) standard.
+
+The `id` property will vary with each error using a UUID (version 4).
+
+**Note:** Non-client API errors are captured automatically by an error tracking service. Persistent client errors can
+be raised directly through [Support](#support).
 
 ### Request IDs
 
@@ -115,6 +100,38 @@ generated value.
 **Note:** In some cases a client specified value will be ignored, ensure you do not rely on this value being returned.
 
 **Note:** This header may include multiple values (multiple Request IDs) separated by a `,` with possible whitespace. 
+
+### Authentication and authorisation
+
+Clients must be granted access to information held in this API using OAuth tokens.
+
+Clients may be registered by contacting [Support](#support) to be granted suitable permissions and will be issued with 
+a client ID and secret.
+
+### Pagination
+
+API methods that return large numbers of items will use pagination to split items into a number of pages based on the
+[JSON API specification](https://jsonapi.org/format/#fetching-pagination).
+
+Pages are fixed to **10** items, with the `page` query parameter selecting a page. Pages start from `1`, which will be 
+used when a page isn't specified. Where a page doesn't exist, a *404 Not Found* error will be returned. 
+ 
+Responses will include links to navigate between pages. Where a link isn't applicable (e.g. previous on the first page), 
+its value will be `null`.
+
+For example:
+
+```json
+{
+  "links": {
+    "first": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=1",
+    "last": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=4",
+    "next": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=2",
+    "prev": null,
+    "self": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=1"
+  }
+}
+```
 
 ### Data Types
 
@@ -207,100 +224,67 @@ Examples:
 }
 ```
 
-### Pagination
+## Resource related information
 
-API methods that return large numbers of items will use pagination to split items into a number of pages based on the
-[JSON API specification](https://jsonapi.org/format/#fetching-pagination).
+### Controlled values
 
-Pages are a fixed size of **10** items per page, with the `page` query parameter selecting a page. Responses will
-include links to navigate between pages. Where a link isn't applicable (e.g. previous on the first page, its value will 
-be `null`).
+#### Currency symbols and codes 
 
-Pages start from `1`, where a page isn't specified, the first page will be assumed. Where a page doesn't exist, a 
-*404 Not Found* error will be returned (e.g. if 4 pages exist but page 8 is requested, a 404 error will be returned).
+Currency symbols and codes used in this API are specified by the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) 
+standard (Table A.1).
 
-For example:
+#### Country names and codes 
 
-```json
-{
-  "data": [],
-  "links": {
-    "first": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=1",
-    "last": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=4",
-    "next": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=2",
-    "prev": null,
-    "self": "https://api.bas.ac.uk/arctic-office-projects/v1/projects?page=1"
-  }
-}
-```
+Country names and codes used in this API are specified by the [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) 
+standard.
 
-## Errors
+#### Participant roles
 
-Errors reported by this API follow the [JSON API](http://jsonapi.org/format/1.0/#errors) standard.
+Participant roles used in this API are specified by the 
+[Scholarly Contributions and Roles Ontology (SCoRO)](http://purl.org/spar/scoro).
 
-The `id` property will vary with each error using a UUID (version 4).
+**Note:** All classes and members of this ontology are supported by this API but in practice a limited number are used.
 
-**Note:** Some API errors are automatically captured by an error tracking service.
+### Use of identifiers
 
-## Resources
+#### ORCID iDs
 
-### Projects
+[ORCID iDs](https://orcid.org/) provide researchers and academics persistent digital identifiers to distinguish 
+themselves from others.
 
-Represents information about a research project.
+They have quickly become a standard for distinguishing between, and providing a common reference to, individuals in 
+tools, services and content within academia. They are used in this API to allow additional context and information that
+may be provided by an individuals ORCID record.
 
-#### Fake data limitations
+**Note:** ORCID iDs are a user led initiative and therefore may not be available for all individuals.
 
-* project acronym's don't relate to a projects title
-* titles, abstracts, publications and other properties shared with corresponding grants are not the same
-* projects are assigned to grants at random
-* where publications are in a project, all are fake using the prefix 10.5555 and an 8 digit random suffix
-* the project country is always `SJM` (Svalbard and Jan Mayen)
+ORCID identifiers are formatted as a URI (e.g. 
+[https://orcid.org/0000-0002-1825-0097](https://orcid.org/0000-0002-1825-0097)). They should not be split or otherwise
+modified. When displayed, [ORCID's display guidelines](https://orcid.org/trademark-and-id-display-guidelines) should be 
+followed in full. 
 
-### Participants
+**Note:** ORCID iDs are not yet supported in the BAS Style Kit, however this is 
+[planned](https://trello.com/c/lFiqyuHi). Until support is available, it is recommended to use the 
+[Academicons](http://jpswalsh.github.io/academicons/) icon font for future compatibility.
 
-Represents information about an individuals involvement in a research project.
+#### GRID IDs
 
-#### Fake data limitations
+[GRID IDs](https://www.grid.ac) provide academic organisations and research institutions persistent digital identifiers
+to distinguish themselves from others.
 
-* projects will only use a subset of available participant roles (Principle Investigator and Co-Investigator)
-* a random person will be chosen as the PI of a project
-* a random number of CoIs (that are not the PI) may be chosen as Co-Is
+The GRID (Global Research Identifier Database) acts as both an authority (assigning identifiers) and as an aggregator 
+of other authorities identifiers for the same organisation to provide increased context. They are used in this API to 
+allow additional context and information that may be provided by an organisations GRID record.
 
-### People
+GRID IDs are formatted as identifiers only (e.g. `grid.496779.2`). They should not be split or otherwise modified. When 
+displayed, GRID IDs should be shown as a linked identifier by adding `https://www.grid.ac/institutes/` as a prefix.
 
-Represents information about an individual.
+#### Digital Object Identifiers (DOIs)
 
-#### Fake data limitations
+[DOIs](https://www.doi.org) provide objects such as academic journal articles and datasets persistent digital 
+identifiers to enable durable references to these objects, even as the services that host them change.
 
-* ORCiD IDs are fake and can't be used to lookup additional information on a person
-* Organisation allocations are made at random
-
-### Grants
-
-Represents information about a research grant.
-
-#### Fake data limitations
-
-* grant references do not correspond to the format of each grant type
-* grant funder's (organisations) are chosen at random
-* where publications are in a grant, all are fake using the prefix 10.5555 and an 8 digit random suffix
-* titles, abstracts, publications and other properties shared with corresponding projects are not the same
-* all grants total funds will be random within a range based on the grant type (i.e. not in multiples of 10, 100, etc.) 
-
-### Allocations
-
-Represents information about how research projects are funded by grants.
-
-#### Fake data limitations
-
-* grants are related to projects at random
-
-### Organisations
-
-Represents information about an organisation, acting either as an agent (e.g. a funder) or an entity (e.g. that an 
-individual belongs to).
-
-#### Fake data limitations
-
-* organisation acronym's don't relate to a organisation's name
-* Grid IDs are fake and can't be used to lookup additional information on an organisation
+Digital Object Identifiers are used extensively in tools, services and content within academia. They are used in this
+API for referring to publications related to research projects and grants. DOI metadata can be used to provide 
+additional context and information using services such as 
+[CrossRef](https://www.crossref.org/services/metadata-delivery/rest-api/).
