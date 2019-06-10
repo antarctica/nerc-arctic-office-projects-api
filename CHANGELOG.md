@@ -42,6 +42,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Refactoring RequestFormatter to standalone module
 * Refactoring Faker providers out of blueprints
 
+### Removed
+
+* Proof of concept API changelog until this can be redeveloped as part of the BAS API Docs project
+
 ## [0.2.0] 2019-04-04
 
 ### Added

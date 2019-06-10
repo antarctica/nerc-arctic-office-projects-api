@@ -1,5 +1,0 @@
-versions:
-  v1:
-    changes:
-      added:
-        - Projects resource
