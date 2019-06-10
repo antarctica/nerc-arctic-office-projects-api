@@ -245,6 +245,26 @@ Participant roles used in this API are specified by the
 
 **Note:** All classes and members of this ontology are supported by this API but in practice a limited number are used.
 
+#### Science categories
+
+Categories used for classifying research projects by subject are specified by a combination of knowledge/subject 
+schemes:
+
+* [Universal Decimal Classification (UDC) - Summary](http://udcdata.info) - 
+  used as a general/base classification scheme
+* [NASA Global Change Master Directory (GCMD) - Earth Science keywords](https://earthdata.nasa.gov/earth-observation-data/find-data/gcmd/gcmd-keywords) -
+  used as a specific classification scheme for the physical sciences
+* [UK Data Service - Humanities And Social Science Electronic Thesaurus (HASSET)](https://hasset.ukdataservice.ac.uk) - 
+  used as a specific classification scheme for the social sciences
+
+Categories within these schemes are organised into a hierarchy allowing general concepts to be narrowed and specific 
+concepts to be generalised. The UDC Summary scheme is used as a base against which other schemes are linked, to give a
+unified classification.
+
+In this API relationships between categories are expressed as a tree, where each category has a single parent category
+and any number of optional child categories. Parent categories can be viewed as more general terms, child terms can be
+viewed as more specific terms.
+
 ### Use of identifiers
 
 #### ORCID iDs
