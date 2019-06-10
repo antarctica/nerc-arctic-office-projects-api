@@ -224,25 +224,67 @@ Examples:
 }
 ```
 
+## Resource related information
 
+### Controlled values
 
+#### Currency symbols and codes 
 
+Currency symbols and codes used in this API are specified by the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) 
+standard (Table A.1).
 
+#### Country names and codes 
 
+Country names and codes used in this API are specified by the [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) 
+standard.
 
+#### Participant roles
 
+Participant roles used in this API are specified by the 
+[Scholarly Contributions and Roles Ontology (SCoRO)](http://purl.org/spar/scoro).
 
+**Note:** All classes and members of this ontology are supported by this API but in practice a limited number are used.
 
+### Use of identifiers
 
+#### ORCID iDs
 
+[ORCID iDs](https://orcid.org/) provide researchers and academics persistent digital identifiers to distinguish 
+themselves from others.
 
+They have quickly become a standard for distinguishing between, and providing a common reference to, individuals in 
+tools, services and content within academia. They are used in this API to allow additional context and information that
+may be provided by an individuals ORCID record.
 
+**Note:** ORCID iDs are a user led initiative and therefore may not be available for all individuals.
 
+ORCID identifiers are formatted as a URI (e.g. 
+[https://orcid.org/0000-0002-1825-0097](https://orcid.org/0000-0002-1825-0097)). They should not be split or otherwise
+modified. When displayed, [ORCID's display guidelines](https://orcid.org/trademark-and-id-display-guidelines) should be 
+followed in full. 
 
+**Note:** ORCID iDs are not yet supported in the BAS Style Kit, however this is 
+[planned](https://trello.com/c/lFiqyuHi). Until support is available, it is recommended to use the 
+[Academicons](http://jpswalsh.github.io/academicons/) icon font for future compatibility.
 
+#### GRID IDs
 
+[GRID IDs](https://www.grid.ac) provide academic organisations and research institutions persistent digital identifiers
+to distinguish themselves from others.
 
+The GRID (Global Research Identifier Database) acts as both an authority (assigning identifiers) and as an aggregator 
+of other authorities identifiers for the same organisation to provide increased context. They are used in this API to 
+allow additional context and information that may be provided by an organisations GRID record.
 
+GRID IDs are formatted as identifiers only (e.g. `grid.496779.2`). They should not be split or otherwise modified. When 
+displayed, GRID IDs should be shown as a linked identifier by adding `https://www.grid.ac/institutes/` as a prefix.
 
+#### Digital Object Identifiers (DOIs)
 
+[DOIs](https://www.doi.org) provide objects such as academic journal articles and datasets persistent digital 
+identifiers to enable durable references to these objects, even as the services that host them change.
 
+Digital Object Identifiers are used extensively in tools, services and content within academia. They are used in this
+API for referring to publications related to research projects and grants. DOI metadata can be used to provide 
+additional context and information using services such as 
+[CrossRef](https://www.crossref.org/services/metadata-delivery/rest-api/).
