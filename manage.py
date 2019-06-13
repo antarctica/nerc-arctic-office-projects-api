@@ -3,12 +3,13 @@ import sys
 import unittest
 
 # noinspection PyPackageRequirements
-from click import argument, Path
+from click import argument, Path, Choice
 from flask.cli import AppGroup
 from flask_migrate import Migrate
 
 from arctic_office_projects_api import create_app, db
-from arctic_office_projects_api.importing import import_category_terms_from_file_interactively
+from arctic_office_projects_api.importing import import_category_terms_from_file_interactively, \
+    import_gateway_to_research_grant_interactively
 from arctic_office_projects_api.models import Project, Person, Participant, Grant, Allocation, Organisation, \
     CategoryScheme, CategoryTerm, Categorisation
 from arctic_office_projects_api.seeding import seed_predictable_test_resources, seed_random_test_resources
@@ -42,7 +43,7 @@ def test():
 
 
 seeding_cli_group = AppGroup('seed', help='Perform database seeding.')
-importing_cli_group = AppGroup('import', help='Import data.')
+importing_cli_group = AppGroup('import', help='Import category/grant data.')
 app.cli.add_command(seeding_cli_group)
 app.cli.add_command(importing_cli_group)
 
@@ -66,6 +67,15 @@ def seed_random_mock_projects():
 def import_categories_from_file(file_path):
     """Import research categories from a JSON file"""
     import_category_terms_from_file_interactively(categories_file_path=file_path)
+
+
+@importing_cli_group.command('grant')
+@argument('grant_provider', type=Choice(['gtr']))
+@argument('grant_reference')
+def import_grant_from_provider(grant_provider, grant_reference):
+    """Import a research grant from a provider"""
+    if grant_provider == 'gtr':
+        import_gateway_to_research_grant_interactively(grant_reference)
 
 
 if 'PYCHARM_HOSTED' in os.environ:
