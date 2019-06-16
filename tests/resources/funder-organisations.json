@@ -1,0 +1,52 @@
+{
+  "organisations": [
+    {
+      "name": "Arts and Humanities Research Council",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.426413.6",
+      "acronym": "AHRC",
+      "website": "https://ahrc.ukri.org"
+    },
+    {
+      "name": "Biotechnology and Biological Sciences Research Council",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.418100.c",
+      "acronym": "BBSRC",
+      "website": "https://bbsrc.ukri.org"
+    },
+    {
+      "name": "Economic and Social Research Council",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.434257.3",
+      "acronym": "ESRC",
+      "website": "https://esrc.ukri.org"
+    },
+    {
+      "name": "Engineering and Physical Sciences Research Council",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.421091.f",
+      "acronym": "EPSRC",
+      "website": "https://epsrc.ukri.org"
+    },
+    {
+      "name": "Medical Research Council",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.14105.31",
+      "acronym": "MRC",
+      "website": "https://mrc.ukri.org"
+    },
+    {
+      "name": "Natural Environment Research Council",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.8682.4",
+      "acronym": "NERC",
+      "website": "https://nerc.ukri.org"
+    },
+    {
+      "name": "Science and Technology Facilities Council",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.14467.30",
+      "acronym": "STFC",
+      "website": "https://stfc.ukri.org"
+    },
+    {
+      "name": "European Union",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.453396.e",
+      "acronym": "EU",
+      "website": "https://europa.eu"
+    }
+  ]
+}

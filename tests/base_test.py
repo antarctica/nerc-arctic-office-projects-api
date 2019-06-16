@@ -62,3 +62,25 @@ class BaseResourceTestCase(BaseTestCase):
             downgrade(revision='base')
 
         super().tearDown()
+
+
+class BaseCommandTestCase(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+
+        with self.app.app_context():
+            # Migrate database
+            config = Config("migrations/alembic.ini")
+            config.set_main_option("script_location", "migrations")
+            Migrate(self.app, db)
+            upgrade()
+
+        self.runner = self.app.test_cli_runner()
+
+    def tearDown(self):
+        db.session.remove()
+        with self.app.app_context():
+            # Rollback all DB migrations
+            downgrade(revision='base')
+
+        super().tearDown()

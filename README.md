@@ -802,6 +802,7 @@ commands may be provided by Flask (such as listing all application routes), by t
 Custom/first-party commands are defined in `arctic_office_projects_api/commands.py`, registered in the `create_app()`
 factory method.
 
+**Note:** Ensure tests are added for any custom commands. See `tests/test_commands.py` for examples.
 
 ### Generating category import files
 

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+* Integration tests for custom CLI commands
+
 ### Changed
 
 * Refactoring commands into main application
