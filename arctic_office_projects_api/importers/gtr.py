@@ -754,7 +754,7 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
         importer = GatewayToResearchGrantImporter(gtr_grant_reference=gtr_grant_reference)
         if importer.exists():
             print(
-                f"* Finished importing GTR project with grant reference ({gtr_grant_reference}), already imported")
+                f"Finished importing GTR project with grant reference ({gtr_grant_reference}), already imported")
             return True
 
         gtr_project_id = importer.search()
@@ -765,8 +765,8 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
             return False
         print(f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}], importing")
 
-        if importer.fetch():
-            print(f"* Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+        importer.fetch()
+        print(f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
     except Exception as e:
         db.session.rollback()
         # Remove any added, but non-committed, entities
