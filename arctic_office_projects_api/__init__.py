@@ -12,6 +12,7 @@ from arctic_office_projects_api.logging import RequestFormatter
 from arctic_office_projects_api.extensions import db, auth
 from arctic_office_projects_api.errors import error_handler_generic_bad_request, error_handler_generic_not_found, \
     error_handler_generic_internal_server_error, error_handler_generic_unprocessable_entity
+from arctic_office_projects_api.commands import seeding_cli_group, importing_cli_group
 from arctic_office_projects_api.routes import index_route, healthcheck_canary_route
 from arctic_office_projects_api.resources.projects import projects as projects_blueprint
 from arctic_office_projects_api.resources.people import people as people_blueprint
@@ -55,6 +56,10 @@ def create_app(config_name):
     app.register_error_handler(NotFound, error_handler_generic_not_found)
     app.register_error_handler(UnprocessableEntity, error_handler_generic_unprocessable_entity)
     app.register_error_handler(InternalServerError, error_handler_generic_internal_server_error)
+
+    # CLI commands
+    app.cli.add_command(seeding_cli_group)
+    app.cli.add_command(importing_cli_group)
 
     # Routes
     app.add_url_rule('/', 'index', index_route)
