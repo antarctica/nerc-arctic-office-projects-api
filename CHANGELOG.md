@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+* Refactoring commands into main application
 * Refactoring standalone routes into a separate module
 * Improving categories import file JSON Schema
 * Renaming standalone route test cases to more clearly separate them from application tests

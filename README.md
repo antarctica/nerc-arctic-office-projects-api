@@ -802,8 +802,6 @@ commands may be provided by Flask (such as listing all application routes), by t
 Custom/first-party commands are defined in `arctic_office_projects_api/commands.py`, registered in the `create_app()`
 factory method.
 
-To define a new command, add a method to `manage.py` with the appropriate 
-[Click](http://flask.pocoo.org/docs/1.0/cli/#custom-commands) decorators and configuration.
 
 ### Generating category import files
 
