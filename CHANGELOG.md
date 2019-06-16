@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+* Adding unique constraint for categorisations
+* Adding organisation importer
+* Integration tests for custom CLI commands
+
+### Fixed
+
+* Table name on categorisations migration statement
+
+### Changed
+
+* Refactoring importers into a package
+* Refactoring commands into main application
+* Refactoring standalone routes into a separate module
+* Improving categories import file JSON Schema
+* Renaming standalone route test cases to more clearly separate them from application tests
+
 ## [0.3.0] 2019-06-10
 
 ### Added

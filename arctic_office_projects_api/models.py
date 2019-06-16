@@ -6,7 +6,7 @@ from sqlalchemy.dialects import postgresql
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_utils import LtreeType, Ltree
 
-from arctic_office_projects_api import db
+from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.utils import generate_countries_enum
 
 ProjectCountry = generate_countries_enum(name='ProjectCountries')

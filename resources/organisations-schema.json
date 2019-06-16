@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "required": [
+    "organisations"
+  ],
+  "properties": {
+    "organisations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "grid-identifier"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "grid-identifier": {
+            "type": "string",
+            "format": "uri"
+          },
+          "acronym": {
+            "type": ["string", "null"]
+          },
+          "website": {
+            "type": ["string", "null"]
+          },
+          "logo-url": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri"
+              },
+              {
+                "format": "null"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

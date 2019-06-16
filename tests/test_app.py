@@ -15,7 +15,7 @@ class AppTestCase(BaseTestCase):
         self.assertTrue(current_app.config['TESTING'])
 
 
-class AppIndexTestCase(BaseTestCase):
+class RouteIndexTestCase(BaseTestCase):
     def test_index_route(self):
         response = self.client.get(
             '/',
@@ -32,7 +32,7 @@ class AppIndexTestCase(BaseTestCase):
         )
 
 
-class AppMetaTestCase(BaseTestCase):
+class RouteMetaTestCase(BaseTestCase):
     def test_meta_healthcheck_canary_success(self):
         for method in ['get', 'options']:
             with self.subTest(method=method):

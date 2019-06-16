@@ -10,7 +10,7 @@ from sqlalchemy.sql import func
 from faker import Faker
 from sqlalchemy_utils import Ltree
 
-from arctic_office_projects_api import db
+from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.models import Project, ProjectCountry, Person, Organisation, Grant, GrantStatus, \
     GrantCurrency, Participant, ParticipantRole, Allocation, CategoryScheme, CategoryTerm, Categorisation
 from arctic_office_projects_api.utils import generate_neutral_id
@@ -906,11 +906,12 @@ def seed_predictable_test_resources():
                 project_resource = Project(
                     neutral_id=project['id'],
                     title=project['title'],
-                    abstract=project['abstract'],
                     access_duration=DateRange(project['duration'].lower, None),
                     project_duration=project['duration'],
                 )
                 db.session.add(project_resource)
+                if project['abstract'] is not None:
+                    project_resource.abstract = project['abstract']
                 if project['acronym'] is not None:
                     project_resource.acronym = project['acronym']
                 if project['website'] is not None:
@@ -1059,7 +1060,7 @@ def seed_random_test_resources(count: int = 100):
     """
     try:
         # some funders are not random and don't need to be made for each test resource
-        funders = make_common_funders()
+        funders = get_common_funders()
 
         for i in range(0, count):
             # Project
@@ -1153,115 +1154,22 @@ def seed_random_test_resources(count: int = 100):
         raise e
 
 
-def make_common_funders() -> Dict[str, Organisation]:
+def get_common_funders() -> Dict[str, Organisation]:
     """
-    Creates a series of common funder (Organisations) resources
-
-    When generating fake projects most will be UKRI grants, which will be funded by a UKRI research council.
-    Some others will be EU grants, which will be funded by the EU.
-
-    This method creates these funders if they don't already exist.
+    Get a series of common funder (Organisations) resources (UKRI research councils and the EU)
 
     :rtype dict
     :return: Dictionary of common funder resources indexed by acronym
     """
-    if not db.session.query(exists().where(Organisation.website == 'https://ahrc.ukri.org')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='Arts and Humanities Research Council',
-            acronym='AHRC',
-            website='https://ahrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    ahrc = Organisation.query.filter_by(website='https://ahrc.ukri.org').one()
-
-    if not db.session.query(exists().where(Organisation.website == 'https://bbsrc.ukri.org')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='Biotechnology and Biological Sciences Research Council',
-            acronym='BBSRC',
-            website='https://bbsrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    bbsrc = Organisation.query.filter_by(website='https://bbsrc.ukri.org').one()
-
-    if not db.session.query(exists().where(Organisation.website == 'https://esrc.ukri.org')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='Economic and Social Research Council',
-            acronym='ESRC',
-            website='https://esrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    esrc = Organisation.query.filter_by(website='https://esrc.ukri.org').one()
-
-    if not db.session.query(exists().where(Organisation.website == 'https://epsrc.ukri.org')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='Engineering and Physical Sciences Research Council',
-            acronym='EPSRC',
-            website='https://epsrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    epsrc = Organisation.query.filter_by(website='https://epsrc.ukri.org').one()
-
-    if not db.session.query(exists().where(Organisation.website == 'https://mrc.ukri.org')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='Medical Research Council',
-            acronym='MRC',
-            website='https://mrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    mrc = Organisation.query.filter_by(website='https://mrc.ukri.org').one()
-
-    if not db.session.query(exists().where(Organisation.website == 'https://nerc.ukri.org')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='Natural Environment Research Council',
-            acronym='NERC',
-            website='https://nerc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    nerc = Organisation.query.filter_by(website='https://nerc.ukri.org').one()
-
-    if not db.session.query(exists().where(Organisation.website == 'https://stfc.ukri.org')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='Science and Technology Facilities Council',
-            acronym='STFC',
-            website='https://stfc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    stfc = Organisation.query.filter_by(website='https://stfc.ukri.org').one()
-
-    if not db.session.query(exists().where(Organisation.website == 'https://europa.eu')).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier=faker.grid_id(),
-            name='European Union',
-            acronym='EU',
-            website='https://europa.eu',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    eu = Organisation.query.filter_by(website='https://europa.eu').one()
-
     return {
-        'AHRC': ahrc,
-        'BBSRC': bbsrc,
-        'ESRC': esrc,
-        'EPSRC': epsrc,
-        'MRC': mrc,
-        'NERC': nerc,
-        'STFC': stfc,
-        'EU': eu
+        'AHRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.426413.6').one(),
+        'BBSRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.418100.c').one(),
+        'ESRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.434257.3').one(),
+        'EPSRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.421091.f').one(),
+        'MRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.14105.31').one(),
+        'NERC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.8682.4').one(),
+        'STFC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.14467.30').one(),
+        'EU': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.453396.e').one()
     }
 
 

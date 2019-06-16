@@ -104,7 +104,8 @@ and export a series of categories and category schemes into a file that can be i
 `import categories` CLI command.
 
 The categories and category schemes import file is included in this project as `resources/science-categories.json` 
-and can imported without needing to perform any processing. See the [Usage](#import-data) section for more information.
+and can imported without needing to perform any processing. See the [Usage](#importing-science-categories) section for 
+more information.
 
 If additional category schemes need to be included, or existing schemes require updating, the processing steps will 
 need to be ran again to generate a replacement import file. See the [Development](#generating-category-import-files) 
@@ -112,6 +113,114 @@ section for more information.
 
 **Note:** There is currently no support for updating a category scheme in cases where its categories have changed and
 require re-mapping to project resources.
+
+#### Organisations
+
+Organisations are used to represent funders of research grants and/or home institutes/organisations of people.
+
+Organisations are added to this API based on need (i.e. for a grant or a person). To avoid duplication, organisations 
+are distinguished by their [GRID ID](https://www.grid.ac), equivalent to ORCID iDs but for (academic) organisations.
+
+Organisations are imported using a JSON encoded import file, with a structure defined and validated by a JSON Schema,
+defined in `resources/organisations-schema.json`, see the [Usage](#importing-organisations) section for more 
+information.
+
+Two import files are included in this project:
+
+* `resources/funder-organisations.json` - represents organisations that fund grants, includes UKRI research councils 
+and the EU as a funding body
+* `resources/people-organisations.json` - represents the organisations individuals (PIs/CoIs) are members of
+
+**Note:** These files should be expanded with additional organisations as needed.
+
+#### Projects and Grants
+
+Projects are used to represent activities, grants are used to represent the funding for these activities. All grants
+will have a project, however a project may not have a grant (i.e. for unfunded activities).
+
+**Note:** In the future, grants may fund multiple activities or be part of larger grants (split awards). Projects may
+in turn be funded by multiple grants (matched or follow-on funding) and be part of larger programmes. See 
+[#21](https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api/issues/21) and
+[#22](https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api/issues/21) for more information.
+
+Projects and Grants are added to this API from third-party providers, their functionality and usage varies.
+
+**Note:** The semantic difference between a grant and project is not clear cut and are used interchangeably by different
+providers. I.e. a 'project' in one system may represent a 'grant' in the context of this API, or may combine aspects of
+both together.
+
+##### Gateway to Research
+
+[Gateway to Research (GTR)](https://gtr.ukri.org) is a database of all research and innovation funded by UK Research
+and Innovation, the umbrella organisation for the UK's funding councils, including NERC and it's various Arctic funding
+programmes and grants.
+
+GTR terms grants as 'projects'. Each project includes properties such as the reference, title, abstract, funding amount 
+and  categories. Relationships include people (PIs, CoIs and others), publications and outcomes. It is updated through 
+[Researchfish](https://www.researchfish.net), currently on an annual basis by funders and reporting institutions.
+
+GTR projects are imported into this project through a GTR provided [API](https://gtr.ukri.org/resources/api.html) which 
+represents each project as a series of related resources. A GTR project and its resources are created as resources in
+this API as below:
+
+| GTR Resource    | GTR Attribute                         | API Resource    | API Attribute        | Notes                                    |
+| --------------- | ------------------------------------- | --------------- | -------------------- | ---------------------------------------- |
+| GTR Project     | Title                                 | Project         | Title                | Duplicated between Project and Grant     |
+| GTR Project     | Abstract                              | Project         | Abstract             | Duplicated between Project and Grant     |
+| GTR Publication | DOI                                   | Project         | Publications         | Duplicated between Project and Grant     |
+| -               | -                                     | Project         | Access Duration      | Set from project duration                |
+| GTR Fund        | Start *and* End                       | Project         | Project Duration     | Set from grant duration                  |
+| GTR Project     | Identifier                            | Grant           | Reference            | -                                        |
+| GTR Project     | Title                                 | Grant           | Title                | Duplicated between Project and Grant     |
+| GTR Project     | Abstract                              | Grant           | Abstract             | Duplicated between Project and Grant     |
+| GTR Publication | DOI                                   | Grant           | Publications         | Duplicated between Project and Grant     |
+| GTR Fund        | Start *and* End                       | Grant           | Duration             | -                                        |
+| GTR Project     | Status                                | Grant           | Status               | -                                        |
+| GTR Fund        | Amount                                | Grant           | Total Funds          | -                                        |
+| GTR Fund        | Currency Code                         | Grant           | Total Funds Currency | -                                        |
+| GTR Funder      | ID                                    | Grant           | Funder               | ID requires mapping to GRID ID           |
+| -               | -                                     | Allocation      | Project              | Implied                                  |
+| -               | -                                     | Allocation      | Grant                | Implied                                  |
+| GTR Person      | First Name                            | People          | First Name           | -                                        |
+| GTR Person      | Surname                               | People          | Last Name            | -                                        |
+| GTR Person      | ORCID iD                              | People          | ORCID iD             | -                                        |
+| GTR Employer    | ID                                    | People          | Organisation         | ID requires mapping to GRID ID           |
+| GTR Person      | ORCID iD *or* ID                      | Participant     | Person               | ID requires mapping to ORCID iD          |
+| -               | -                                     | Participant     | Project              | Implied                                  |
+| GTR Project     | Rel                                   | Participant     | Role                 | Based on Rel value mapping               |
+| GTR Project     | Research Subject *and* Research Topic | Categorisations | Category             | ID requires mapping to Scheme Identifier |
+| -               | -                                     | Categorisations | Project              | Implied                                  |
+
+**Note:** API attributes that are not listed in this mapping are not set and will be omitted.
+
+There are automatic mappings used by this provider:
+
+1. The *Rel* property between a GTR Project and GTR Person is used as the Participant role:
+    * `PI_PER` is mapped to `ParticipantRole.InvestigationRole_PrincipleInvestigator`
+    * `COI_PER` is mapped to `ParticipantRole.InvestigationRole_CoInvestigator`
+ 
+There are mandatory, manual, mappings required by this provider:
+
+1. GTR resources mapped to Organisations (GTR Funder and GTR Employer) do not include GRID IDs, or another identifier 
+   that can be mapped to a GRID ID automatically - an internal mapping is therefore used to map GTR IDs to Grid IDs
+
+2. GTR People are mapped to People but do not always include an ORCID iD, or another identifier that can be mapped to 
+   an ORCID iD automatically - an internal mapping is therefore used to map GTR IDs to ORCID iDs GTR is not aware of
+
+3. GTR Projects include attributes that map to Categories, but the terms used are not in a scheme supported by this API
+   (see [Science categories](#science-categories) for more information) - an internal mapping is therefore used to map
+   GTR Subject or Topic categories to Categories in this API
+
+Mappings are currently defined in methods in the GTR importer class (`arctic_office_projectsapi/importers/gtr.py`):
+
+* GTR Funder/Employer to Organisation mappings are defined in `_map_to_grid_id()`
+* GTR People to People mappings are defined in `_map_id_to_orcid_ids()`
+* GTR Project categories/topics to Category mappings are defined in `_map_gtr_project_category_to_category_term()`
+
+In addition, any Organisations related to the grant being imported (funder) or people related to the grant being 
+imported, need to already exist. See [Organisations](#organisations) for more information.
+
+See the [Usage](#importing-grants) section on the command used to import a grant.
 
 ### Documentation
 
@@ -251,8 +360,13 @@ this API.
 For all new instances you will need to:
 
 1. run [Database migrations](#run-database-migrations)
-2. if relevant, [Import science categories](#importing-science-categories)
-3. if relevant, run [Database seeding](#run-database-seeding)
+2. import [science categories](#importing-science-categories)
+3. import [organisations](#importing-organisations)
+4. import [grants](#importing-grants)
+
+For development or staging environments you may also need to:
+
+1. run [Database seeding](#run-database-seeding)
 
 ### Flask CLI
 
@@ -335,9 +449,9 @@ To seed 100 random, fake but realistic, projects and related resources for use i
 $ flask seed random
 ```
 
-### Import data
+**Note:** You need to have imported the science categories and funder organisations before running this command.
 
-**Note:** This process usually only applies to instances in staging or production environments.
+### Import data
 
 A custom [Flask CLI](#flask-cli) command is included for importing various resources into the API:
 
@@ -347,16 +461,63 @@ $ flask import [resource] [command]
 
 #### Importing science categories
 
-To import [categories and category schemes](#science-categories):
+To import [categories and category schemes](#science-categories) from a file:
 
 ```shell
 $ flask import categories [path to import file]
 ```
 
-**Note:** The structure of the import file will be validated against a JSON Schema before import. 
+For example:
 
-**Note:** Existing categories and category schemes will be skipped if imported again, their properties will not be 
-updated.
+```shell
+$ flask import categories resources/science-categories.json
+```
+
+**Note:** The structure of the import file will be validated against the `resources/categories-schema.json` JSON Schema 
+before import.
+
+**Note:** Previously imported categories, identified by their *namespace* or *subject*, will be skipped if imported 
+again. Their properties will not be updated.
+
+#### Importing organisations
+
+To import [organisations](#organisations) from a file:
+
+```shell
+$ flask import organisations [path to import file]
+```
+
+For example:
+
+```shell
+$ flask import organisations resources/funder-organisations.json
+```
+
+**Note:** The structure of the import file will be validated against the `resources/organisations-schema.json` JSON 
+Schema before import. 
+
+**Note:** Previously imported organisations, identified by their *GRID identifier*, will be skipped if imported again. 
+Their properties will not be updated.
+
+#### Importing grants
+
+To import a grant from Gateway to Research (GTR):
+
+```shell
+$ flask import grant gtr [grant reference]
+```
+
+For example:
+
+```shell
+$ flask import grant gtr NE/K011820/1
+```
+
+**Note:** It will take a few seconds to import each grant due to the number of GTR API calls needed to collect all 
+relevant information (grant, fund, funder, people, employers, publications, etc.).
+
+**Note:** Previously imported grants, identified by their *Grant reference*, will be skipped if imported again. Their 
+properties will not be updated.
 
 ## Setup
 
@@ -786,13 +947,12 @@ def error_route():
 
 [Flask CLI](#flask-cli) commands are used to expose processes and actions that control a Flask application. These 
 commands may be provided by Flask (such as listing all application routes), by third-party modules (such as managing
-[Database Migrations](#run-database-migrations)) or defined within this project (such as for 
-[Importing data](#import-data)).
+[Database Migrations](#run-database-migrations)) or custom to this project (such as for [Importing data](#import-data)).
 
-These first party commands are defined in `manage.py` and call methods defined elsewhere in the application.
+Custom/first-party commands are defined in `arctic_office_projects_api/commands.py`, registered in the `create_app()`
+factory method.
 
-To define a new command, add a method to `manage.py` with the appropriate 
-[Click](http://flask.pocoo.org/docs/1.0/cli/#custom-commands) decorators and configuration.
+**Note:** Ensure tests are added for any custom commands. See `tests/test_commands.py` for examples.
 
 ### Generating category import files
 
