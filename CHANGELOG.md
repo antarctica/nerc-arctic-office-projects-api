@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* Adding unique constraint for categorisations
 * Adding organisation importer
 * Integration tests for custom CLI commands
 

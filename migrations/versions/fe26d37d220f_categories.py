@@ -69,12 +69,17 @@ def upgrade():
         sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_categorisations_neutral_id'), 'categorisations', ['neutral_id'], unique=True)
+    op.create_unique_constraint('uq_categorisations_project_category_term', 'categorisations', [
+        'project_id',
+        'category_term_id'
+    ])
 
 
 def downgrade():
     # Categorisation
     #
     op.drop_index(op.f('ix_categorisations_neutral_id'), table_name='category_schemes')
+    op.drop_constraint(op.f('uq_categorisations_project_category_term'), table_name='categorisations')
     op.drop_table('categorisations')
 
     # CategoryTerm
