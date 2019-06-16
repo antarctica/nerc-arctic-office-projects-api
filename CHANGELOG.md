@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+* Refactoring importers into a package
 * Refactoring commands into main application
 * Refactoring standalone routes into a separate module
 * Improving categories import file JSON Schema
