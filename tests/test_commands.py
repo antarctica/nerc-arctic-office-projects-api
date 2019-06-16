@@ -30,3 +30,11 @@ class ImportCommandTestCase(BaseCommandTestCase):
         result = self.runner.invoke(args=['import', 'organisations', 'tests/resources/funder-organisations.json'])
         self.assertIn('Finished importing organisations', result.output)
 
+    def test_import_grant_from_gtr(self):
+        # Prerequisites
+        self.runner.invoke(args=['import', 'categories', 'tests/resources/science-categories.json'])
+        self.runner.invoke(args=['import', 'organisations', 'tests/resources/funder-organisations.json'])
+        self.runner.invoke(args=['import', 'organisations', 'tests/resources/people-organisations.json'])
+
+        result = self.runner.invoke(args=['import', 'grant', 'gtr', 'NE/K011820/1'])
+        self.assertIn('Finished importing GTR project', result.output)

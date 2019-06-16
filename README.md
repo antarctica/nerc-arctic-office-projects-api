@@ -133,6 +133,95 @@ and the EU as a funding body
 
 **Note:** These files should be expanded with additional organisations as needed.
 
+#### Projects and Grants
+
+Projects are used to represent activities, grants are used to represent the funding for these activities. All grants
+will have a project, however a project may not have a grant (i.e. for unfunded activities).
+
+**Note:** In the future, grants may fund multiple activities or be part of larger grants (split awards). Projects may
+in turn be funded by multiple grants (matched or follow-on funding) and be part of larger programmes. See 
+[#21](https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api/issues/21) and
+[#22](https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api/issues/21) for more information.
+
+Projects and Grants are added to this API from third-party providers, their functionality and usage varies.
+
+**Note:** The semantic difference between a grant and project is not clear cut and are used interchangeably by different
+providers. I.e. a 'project' in one system may represent a 'grant' in the context of this API, or may combine aspects of
+both together.
+
+##### Gateway to Research
+
+[Gateway to Research (GTR)](https://gtr.ukri.org) is a database of all research and innovation funded by UK Research
+and Innovation, the umbrella organisation for the UK's funding councils, including NERC and it's various Arctic funding
+programmes and grants.
+
+GTR terms grants as 'projects'. Each project includes properties such as the reference, title, abstract, funding amount 
+and  categories. Relationships include people (PIs, CoIs and others), publications and outcomes. It is updated through 
+[Researchfish](https://www.researchfish.net), currently on an annual basis by funders and reporting institutions.
+
+GTR projects are imported into this project through a GTR provided [API](https://gtr.ukri.org/resources/api.html) which 
+represents each project as a series of related resources. A GTR project and its resources are created as resources in
+this API as below:
+
+| GTR Resource    | GTR Attribute                         | API Resource    | API Attribute        | Notes                                    |
+| --------------- | ------------------------------------- | --------------- | -------------------- | ---------------------------------------- |
+| GTR Project     | Title                                 | Project         | Title                | Duplicated between Project and Grant     |
+| GTR Project     | Abstract                              | Project         | Abstract             | Duplicated between Project and Grant     |
+| GTR Publication | DOI                                   | Project         | Publications         | Duplicated between Project and Grant     |
+| -               | -                                     | Project         | Access Duration      | Set from project duration                |
+| GTR Fund        | Start *and* End                       | Project         | Project Duration     | Set from grant duration                  |
+| GTR Project     | Identifier                            | Grant           | Reference            | -                                        |
+| GTR Project     | Title                                 | Grant           | Title                | Duplicated between Project and Grant     |
+| GTR Project     | Abstract                              | Grant           | Abstract             | Duplicated between Project and Grant     |
+| GTR Publication | DOI                                   | Grant           | Publications         | Duplicated between Project and Grant     |
+| GTR Fund        | Start *and* End                       | Grant           | Duration             | -                                        |
+| GTR Project     | Status                                | Grant           | Status               | -                                        |
+| GTR Fund        | Amount                                | Grant           | Total Funds          | -                                        |
+| GTR Fund        | Currency Code                         | Grant           | Total Funds Currency | -                                        |
+| GTR Funder      | ID                                    | Grant           | Funder               | ID requires mapping to GRID ID           |
+| -               | -                                     | Allocation      | Project              | Implied                                  |
+| -               | -                                     | Allocation      | Grant                | Implied                                  |
+| GTR Person      | First Name                            | People          | First Name           | -                                        |
+| GTR Person      | Surname                               | People          | Last Name            | -                                        |
+| GTR Person      | ORCID iD                              | People          | ORCID iD             | -                                        |
+| GTR Employer    | ID                                    | People          | Organisation         | ID requires mapping to GRID ID           |
+| GTR Person      | ORCID iD *or* ID                      | Participant     | Person               | ID requires mapping to ORCID iD          |
+| -               | -                                     | Participant     | Project              | Implied                                  |
+| GTR Project     | Rel                                   | Participant     | Role                 | Based on Rel value mapping               |
+| GTR Project     | Research Subject *and* Research Topic | Categorisations | Category             | ID requires mapping to Scheme Identifier |
+| -               | -                                     | Categorisations | Project              | Implied                                  |
+
+**Note:** API attributes that are not listed in this mapping are not set and will be omitted.
+
+There are automatic mappings used by this provider:
+
+1. The *Rel* property between a GTR Project and GTR Person is used as the Participant role:
+    * `PI_PER` is mapped to `ParticipantRole.InvestigationRole_PrincipleInvestigator`
+    * `COI_PER` is mapped to `ParticipantRole.InvestigationRole_CoInvestigator`
+ 
+There are mandatory, manual, mappings required by this provider:
+
+1. GTR resources mapped to Organisations (GTR Funder and GTR Employer) do not include GRID IDs, or another identifier 
+   that can be mapped to a GRID ID automatically - an internal mapping is therefore used to map GTR IDs to Grid IDs
+
+2. GTR People are mapped to People but do not always include an ORCID iD, or another identifier that can be mapped to 
+   an ORCID iD automatically - an internal mapping is therefore used to map GTR IDs to ORCID iDs GTR is not aware of
+
+3. GTR Projects include attributes that map to Categories, but the terms used are not in a scheme supported by this API
+   (see [Science categories](#science-categories) for more information) - an internal mapping is therefore used to map
+   GTR Subject or Topic categories to Categories in this API
+
+Mappings are currently defined in methods in the GTR importer class (`arctic_office_projectsapi/importers/gtr.py`):
+
+* GTR Funder/Employer to Organisation mappings are defined in `_map_to_grid_id()`
+* GTR People to People mappings are defined in `_map_id_to_orcid_ids()`
+* GTR Project categories/topics to Category mappings are defined in `_map_gtr_project_category_to_category_term()`
+
+In addition, any Organisations related to the grant being imported (funder) or people related to the grant being 
+imported, need to already exist. See [Organisations](#organisations) for more information.
+
+See the [Usage](#importing-grants) section on the command used to import a grant.
+
 ### Documentation
 
 Usage and reference documentation for this API is hosted within the 
@@ -273,6 +362,7 @@ For all new instances you will need to:
 1. run [Database migrations](#run-database-migrations)
 2. import [science categories](#importing-science-categories)
 3. import [organisations](#importing-organisations)
+4. import [grants](#importing-grants)
 
 For development or staging environments you may also need to:
 
@@ -409,7 +499,25 @@ Schema before import.
 **Note:** Previously imported organisations, identified by their *GRID identifier*, will be skipped if imported again. 
 Their properties will not be updated.
 
+#### Importing grants
 
+To import a grant from Gateway to Research (GTR):
+
+```shell
+$ flask import grant gtr [grant reference]
+```
+
+For example:
+
+```shell
+$ flask import grant gtr NE/K011820/1
+```
+
+**Note:** It will take a few seconds to import each grant due to the number of GTR API calls needed to collect all 
+relevant information (grant, fund, funder, people, employers, publications, etc.).
+
+**Note:** Previously imported grants, identified by their *Grant reference*, will be skipped if imported again. Their 
+properties will not be updated.
 
 ## Setup
 
