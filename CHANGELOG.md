@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+* Renaming standalone route test cases to more clearly separate them from application tests
+
 ## [0.3.0] 2019-06-10
 
 ### Added
