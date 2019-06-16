@@ -1156,129 +1156,20 @@ def seed_random_test_resources(count: int = 100):
 
 def get_common_funders() -> Dict[str, Organisation]:
     """
-    Creates a series of common funder (Organisations) resources
-
-    When generating fake projects most will be UKRI grants, which will be funded by a UKRI research council.
-    Some others will be EU grants, which will be funded by the EU.
-
-    This method creates these funders if they don't already exist.
+    Get a series of common funder (Organisations) resources (UKRI research councils and the EU)
 
     :rtype dict
     :return: Dictionary of common funder resources indexed by acronym
     """
-    if not db.session.query(exists().where(
-        Organisation.grid_identifier == 'https://www.grid.ac/institutes/grid.426413.6'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.426413.6',
-            name='Arts and Humanities Research Council',
-            acronym='AHRC',
-            website='https://ahrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    ahrc = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.426413.6').one()
-
-    if not db.session.query(exists().where(
-        Organisation.grid_identifier == 'https://www.grid.ac/institutes/grid.418100.c'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.418100.c',
-            name='Biotechnology and Biological Sciences Research Council',
-            acronym='BBSRC',
-            website='https://bbsrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    bbsrc = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.418100.c').one()
-
-    if not db.session.query(exists().where(
-        Organisation.grid_identifier == 'https://www.grid.ac/institutes/grid.434257.3'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.434257.3',
-            name='Economic and Social Research Council',
-            acronym='ESRC',
-            website='https://esrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    esrc = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.434257.3').one()
-
-    if not db.session.query(exists().where(
-        Organisation.grid_identifier == 'https://www.grid.ac/institutes/grid.421091.f'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.421091.f',
-            name='Engineering and Physical Sciences Research Council',
-            acronym='EPSRC',
-            website='https://epsrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    epsrc = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/421091.f').one()
-
-    if not db.session.query(exists().where(
-        Organisation.grid_identifier == 'https://www.grid.ac/institutes/grid.14105.31'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.14105.31',
-            name='Medical Research Council',
-            acronym='MRC',
-            website='https://mrc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    mrc = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.14105.31').one()
-
-    if not db.session.query(exists().where(
-        Organisation.grid_identifier == 'https://www.grid.ac/institutes/grid.8682.4'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.8682.4',
-            name='Natural Environment Research Council',
-            acronym='NERC',
-            website='https://nerc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    nerc = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.8682.4').one()
-
-    if not db.session.query(exists().where(
-        Organisation.grid_identifier == 'https://www.grid.ac/institutes/grid.14467.30'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.14467.30',
-            name='Science and Technology Facilities Council',
-            acronym='STFC',
-            website='https://stfc.ukri.org',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    stfc = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.14467.30').one()
-
-    if not db.session.query(exists().where(
-        Organisation.website == 'https://www.grid.ac/institutes/grid.453396.e'
-    )).scalar():
-        db.session.add(Organisation(
-            neutral_id=generate_neutral_id(),
-            grid_identifier='https://www.grid.ac/institutes/grid.453396.e',
-            name='European Union',
-            acronym='EU',
-            website='https://europa.eu',
-            logo_url='https://placeimg.com/256/256/arch'
-        ))
-    eu = Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.453396.e').one()
-
     return {
-        'AHRC': ahrc,
-        'BBSRC': bbsrc,
-        'ESRC': esrc,
-        'EPSRC': epsrc,
-        'MRC': mrc,
-        'NERC': nerc,
-        'STFC': stfc,
-        'EU': eu
+        'AHRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.426413.6').one(),
+        'BBSRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.418100.c').one(),
+        'ESRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.434257.3').one(),
+        'EPSRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.421091.f').one(),
+        'MRC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.14105.31').one(),
+        'NERC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.8682.4').one(),
+        'STFC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.14467.30').one(),
+        'EU': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.453396.e').one()
     }
 
 

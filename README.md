@@ -114,6 +114,25 @@ section for more information.
 **Note:** There is currently no support for updating a category scheme in cases where its categories have changed and
 require re-mapping to project resources.
 
+#### Organisations
+
+Organisations are used to represent funders of research grants and/or home institutes/organisations of people.
+
+Organisations are added to this API based on need (i.e. for a grant or a person). To avoid duplication, organisations 
+are distinguished by their [GRID ID](https://www.grid.ac), equivalent to ORCID iDs but for (academic) organisations.
+
+Organisations are imported using a JSON encoded import file, with a structure defined and validated by a JSON Schema,
+defined in `resources/organisations-schema.json`, see the [Usage](#importing-organisations) section for more 
+information.
+
+Two import files are included in this project:
+
+* `resources/funder-organisations.json` - represents organisations that fund grants, includes UKRI research councils 
+and the EU as a funding body
+* `resources/people-organisations.json` - represents the organisations individuals (PIs/CoIs) are members of
+
+**Note:** These files should be expanded with additional organisations as needed.
+
 ### Documentation
 
 Usage and reference documentation for this API is hosted within the 
@@ -253,6 +272,7 @@ For all new instances you will need to:
 
 1. run [Database migrations](#run-database-migrations)
 2. import [science categories](#importing-science-categories)
+3. import [organisations](#importing-organisations)
 
 For development or staging environments you may also need to:
 
@@ -339,6 +359,8 @@ To seed 100 random, fake but realistic, projects and related resources for use i
 $ flask seed random
 ```
 
+**Note:** You need to have imported the science categories and funder organisations before running this command.
+
 ### Import data
 
 A custom [Flask CLI](#flask-cli) command is included for importing various resources into the API:
@@ -366,6 +388,26 @@ before import.
 
 **Note:** Previously imported categories, identified by their *namespace* or *subject*, will be skipped if imported 
 again. Their properties will not be updated.
+
+#### Importing organisations
+
+To import [organisations](#organisations) from a file:
+
+```shell
+$ flask import organisations [path to import file]
+```
+
+For example:
+
+```shell
+$ flask import organisations resources/funder-organisations.json
+```
+
+**Note:** The structure of the import file will be validated against the `resources/organisations-schema.json` JSON 
+Schema before import. 
+
+**Note:** Previously imported organisations, identified by their *GRID identifier*, will be skipped if imported again. 
+Their properties will not be updated.
 
 
 

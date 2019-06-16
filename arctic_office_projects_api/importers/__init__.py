@@ -12,7 +12,7 @@ from sqlalchemy_utils import Ltree
 
 from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.utils import generate_neutral_id
-from arctic_office_projects_api.models import CategoryScheme, CategoryTerm
+from arctic_office_projects_api.models import CategoryScheme, CategoryTerm, Organisation
 
 
 def import_category_terms_from_file_interactively(categories_file_path: str):
@@ -108,6 +108,67 @@ def import_category_terms_from_file_interactively(categories_file_path: str):
 
             db.session.commit()
             print("Finished importing research categories")
+    except Exception as e:
+        db.session.rollback()
+        # Remove any added, but non-committed, entities
+        db.session.flush()
+        raise e
+
+
+def import_organisations_from_file_interactively(organisations_file_path: str):
+    """
+    Command to import organisations from an import file.
+
+    Import files are JSON encoded and must be structured according to the 'resources/organisations-scheme.json' JSON
+    Schema. Files will be validated against this schema prior to import. See the project README for more information.
+
+    All errors will trigger an exception to be raised with any pending database models to be removed/flushed.
+
+    :type organisations_file_path: str
+    :param organisations_file_path: path to organisations import file
+    """
+    print(f"Importing organisations from [{organisations_file_path}]:")
+
+    try:
+        with open(organisations_file_path, 'r') as organisations_file, \
+                open(Path('resources/organisations-schema.json'), 'r') as organisations_schema_file:
+            organisations_schema = json.load(organisations_schema_file)
+            organisations_data = json.load(organisations_file)
+            validate(instance=organisations_data, schema=organisations_schema)
+            print("* organisations data valid and ready for import")
+            print(f"* discovered {len(organisations_data['organisations'])} organisations")
+
+            print("* importing organisations ...")
+            total_organisations = len(organisations_data['organisations'])
+            imported_organisations = 0
+            skipped_organisations = 0
+
+            for organisation in organisations_data['organisations']:
+                if db.session.query(exists().where(
+                    Organisation.grid_identifier == organisation['grid-identifier']
+                )).scalar():
+                    skipped_organisations += 1
+                    continue
+
+                organisation_resource = Organisation(
+                    neutral_id=generate_neutral_id(),
+                    grid_identifier=organisation['grid-identifier'],
+                    name=organisation['name']
+                )
+                if 'acronym' in organisation and organisation['acronym'] is not None:
+                    organisation_resource.acronym = organisation['acronym']
+                if 'website' in organisation and organisation['website'] is not None:
+                    organisation_resource.website = organisation['website']
+                if 'logo-url' in organisation and organisation['version'] is not None:
+                    organisation_resource.logo_url = organisation['logo-url']
+                db.session.add(organisation_resource)
+                imported_organisations += 1
+
+            print(f"* ... finished importing organisations [{imported_organisations} imported, "
+                  f"{skipped_organisations} already exist, {total_organisations} total]")
+
+            db.session.commit()
+            print("Finished importing organisations")
     except Exception as e:
         db.session.rollback()
         # Remove any added, but non-committed, entities
