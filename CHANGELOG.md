@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Adding organisation importer
 * Integration tests for custom CLI commands
 
+### Fixed
+
+* Table name on categorisations migration statement
+
 ### Changed
 
 * Refactoring importers into a package
