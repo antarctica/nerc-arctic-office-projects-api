@@ -104,7 +104,8 @@ and export a series of categories and category schemes into a file that can be i
 `import categories` CLI command.
 
 The categories and category schemes import file is included in this project as `resources/science-categories.json` 
-and can imported without needing to perform any processing. See the [Usage](#import-data) section for more information.
+and can imported without needing to perform any processing. See the [Usage](#importing-science-categories) section for 
+more information.
 
 If additional category schemes need to be included, or existing schemes require updating, the processing steps will 
 need to be ran again to generate a replacement import file. See the [Development](#generating-category-import-files) 
@@ -251,8 +252,11 @@ this API.
 For all new instances you will need to:
 
 1. run [Database migrations](#run-database-migrations)
-2. if relevant, [Import science categories](#importing-science-categories)
-3. if relevant, run [Database seeding](#run-database-seeding)
+2. import [science categories](#importing-science-categories)
+
+For development or staging environments you may also need to:
+
+1. run [Database seeding](#run-database-seeding)
 
 ### Flask CLI
 
@@ -337,8 +341,6 @@ $ flask seed random
 
 ### Import data
 
-**Note:** This process usually only applies to instances in staging or production environments.
-
 A custom [Flask CLI](#flask-cli) command is included for importing various resources into the API:
 
 ```shell
@@ -347,16 +349,25 @@ $ flask import [resource] [command]
 
 #### Importing science categories
 
-To import [categories and category schemes](#science-categories):
+To import [categories and category schemes](#science-categories) from a file:
 
 ```shell
 $ flask import categories [path to import file]
 ```
 
-**Note:** The structure of the import file will be validated against a JSON Schema before import. 
+For example:
 
-**Note:** Existing categories and category schemes will be skipped if imported again, their properties will not be 
-updated.
+```shell
+$ flask import categories resources/science-categories.json
+```
+
+**Note:** The structure of the import file will be validated against the `resources/categories-schema.json` JSON Schema 
+before import.
+
+**Note:** Previously imported categories, identified by their *namespace* or *subject*, will be skipped if imported 
+again. Their properties will not be updated.
+
+
 
 ## Setup
 
@@ -786,10 +797,10 @@ def error_route():
 
 [Flask CLI](#flask-cli) commands are used to expose processes and actions that control a Flask application. These 
 commands may be provided by Flask (such as listing all application routes), by third-party modules (such as managing
-[Database Migrations](#run-database-migrations)) or defined within this project (such as for 
-[Importing data](#import-data)).
+[Database Migrations](#run-database-migrations)) or custom to this project (such as for [Importing data](#import-data)).
 
-These first party commands are defined in `manage.py` and call methods defined elsewhere in the application.
+Custom/first-party commands are defined in `arctic_office_projects_api/commands.py`, registered in the `create_app()`
+factory method.
 
 To define a new command, add a method to `manage.py` with the appropriate 
 [Click](http://flask.pocoo.org/docs/1.0/cli/#custom-commands) decorators and configuration.

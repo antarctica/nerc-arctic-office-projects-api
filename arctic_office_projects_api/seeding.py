@@ -10,7 +10,7 @@ from sqlalchemy.sql import func
 from faker import Faker
 from sqlalchemy_utils import Ltree
 
-from arctic_office_projects_api import db
+from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.models import Project, ProjectCountry, Person, Organisation, Grant, GrantStatus, \
     GrantCurrency, Participant, ParticipantRole, Allocation, CategoryScheme, CategoryTerm, Categorisation
 from arctic_office_projects_api.utils import generate_neutral_id
@@ -1060,7 +1060,7 @@ def seed_random_test_resources(count: int = 100):
     """
     try:
         # some funders are not random and don't need to be made for each test resource
-        funders = make_common_funders()
+        funders = get_common_funders()
 
         for i in range(0, count):
             # Project
@@ -1154,7 +1154,7 @@ def seed_random_test_resources(count: int = 100):
         raise e
 
 
-def make_common_funders() -> Dict[str, Organisation]:
+def get_common_funders() -> Dict[str, Organisation]:
     """
     Creates a series of common funder (Organisations) resources
 
