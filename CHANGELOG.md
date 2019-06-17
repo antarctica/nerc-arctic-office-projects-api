@@ -15,10 +15,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+* Application exception to act as a generic error class for all types of error, not just those at the API layer
 * Table name on categorisations migration statement
 
 ### Changed
 
+* Refactoring API exception to inherit from new application exception
 * Refactoring importers into a package
 * Refactoring commands into main application
 * Refactoring standalone routes into a separate module
