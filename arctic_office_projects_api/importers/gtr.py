@@ -9,10 +9,30 @@ from requests import HTTPError
 # noinspection PyPackageRequirements
 from sqlalchemy import exists
 
+from arctic_office_projects_api.errors import AppException
 from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.utils import generate_neutral_id
 from arctic_office_projects_api.models import CategoryTerm, Grant, GrantStatus, GrantCurrency, Organisation, Project, \
     Allocation, Person, Participant, ParticipantRole, Categorisation
+
+
+# Exceptions
+
+
+class UnmappedGatewayToResearchOrganisation(AppException):
+    title = 'Unmapped Gateway to Research organisation'
+    detail = 'A Gateway to Research organisation has not been mapped to an application Organisation via a GRID ID'
+
+
+class UnmappedGatewayToResearchPerson(AppException):
+    title = 'Unmapped Gateway to Research person'
+    detail = 'A Gateway to Research person has not been mapped to an application Person via a ORCID iD'
+
+
+class UnmappedGatewayToResearchProjectCategory(AppException):
+    title = 'Unmapped Gateway to Research category or topic'
+    detail = 'A Gateway to Research category or topic has not been mapped to an application category term via a ' \
+             'scheme identifier'
 
 
 # Resources
@@ -121,11 +141,11 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        self.grid_id = self._map_to_grid_id()
-
         if 'name' not in self.resource:
             raise KeyError('Name element not in GTR organisation')
         self.name = self.resource['name']
+
+        self.grid_id = self._map_to_grid_id()
 
     def _map_to_grid_id(self) -> str:
         """
@@ -143,6 +163,13 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
             return 'https://www.grid.ac/institutes/grid.8682.4'
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/83D87776-5958-42AE-889D-B8AECF16B468':
             return 'https://www.grid.ac/institutes/grid.9909.9'
+
+        raise UnmappedGatewayToResearchOrganisation(meta={
+            'gtr_organisation': {
+                'resource_uri': self.resource_uri,
+                'name': self.name
+            }
+        })
 
 
 class GatewayToResearchFunder(GatewayToResearchOrganisation):
@@ -306,11 +333,19 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         if self.resource_uri in gtr_people_orcid_id_mappings.keys():
             self.orcid_id = gtr_people_orcid_id_mappings[self.resource_uri]
 
+        raise UnmappedGatewayToResearchPerson(meta={
+            'gtr_person': {
+                'resource_uri': self.resource_uri,
+                'name': f"{self.first_name} {self.surname}"
+            }
+        })
+
 
 class GatewayToResearchPublication(GatewayToResearchResource):
     """
     Represents a GTR Publication, associated with a GTR Project
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -406,7 +441,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
 
         return project_references
 
-    def _process_categories(self) -> List[str]:
+    def _process_categories(self) -> List[dict]:
         """
         Merges 'categories' and 'topics' used in projects into a single set of classifications
 
@@ -425,7 +460,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
                 if len(self.resource['researchSubjects']['researchSubject']) > 0:
                     for gtr_research_subject in self.resource['researchSubjects']['researchSubject']:
                         if 'id' in gtr_research_subject:
-                            gtr_project_categories.append(gtr_research_subject['id'])
+                            gtr_project_categories.append(gtr_research_subject)
         if 'researchTopics' in self.resource:
             if 'researchTopic' in self.resource['researchTopics']:
                 if len(self.resource['researchTopics']['researchTopic']) > 0:
@@ -712,7 +747,7 @@ class GatewayToResearchGrantImporter:
         raise ValueError("Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
 
     @staticmethod
-    def _map_gtr_project_category_to_category_term(category_term_scheme_id: str) -> str:
+    def _map_gtr_project_category_to_category_term(gtr_category: dict) -> str:
         """
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
@@ -721,20 +756,27 @@ class GatewayToResearchGrantImporter:
         This mapping therefore needs to be defined manually in this method. Currently this is done using a simple if
         statement, but in future a more scalable solution will be needed.
 
-        :type category_term_scheme_id: str
-        :param category_term_scheme_id: GTR project category or topic ID
+        :type gtr_category: dict
+        :param gtr_category: GTR project category or topic
 
         :rtype str
         :return for a given GTR category or topic ID, a corresponding Category as a scheme identifier
         """
-        if category_term_scheme_id == 'E4C03353-6311-43F9-9204-CFC2536D2017':
+        if gtr_category['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
-        elif category_term_scheme_id == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
+        elif gtr_category['id'] == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif category_term_scheme_id == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
+        elif gtr_category['id'] == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif category_term_scheme_id == 'B01D3878-E7BD-4830-9503-2F54544E809E':
+        elif gtr_category['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+
+        raise UnmappedGatewayToResearchProjectCategory(meta={
+            'gtr_category': {
+                'id': gtr_category['id'],
+                'name': gtr_category['text']
+            }
+        })
 
 
 def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
