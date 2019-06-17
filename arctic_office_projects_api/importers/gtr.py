@@ -536,13 +536,16 @@ class GatewayToResearchGrantImporter:
 
     GTR projects are loosely equivalent to Grants in this project.
     """
-    def __init__(self, gtr_grant_reference: str):
+
+    def __init__(self, gtr_grant_reference: str = None, gtr_project_id: str = None):
         """
         :type gtr_grant_reference: str
         :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
+        :type gtr_project_id: str
+        :param gtr_grant_reference: Gateway to Research project ID (e.g. '87D5AD44-2123-442B-B186-75C3878471BD')
         """
         self.grant_reference = gtr_grant_reference
-        self.gtr_project_id = None
+        self.gtr_project_id = gtr_project_id
 
     def exists(self) -> bool:
         """

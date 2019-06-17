@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Adding exceptions for unmapped GTR resources
 * Adding unique constraint for categorisations
 * Adding organisation importer
+* Allowing GTR importer instances to accept a GTR resource URI
 * Integration tests for custom CLI commands
 
 ### Fixed
