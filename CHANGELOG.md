@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+* Support for unclassified grants in GTR importer
 * Difference in handling GTR project topics compared to categories in GTR importer
 * Application exception to act as a generic error class for all types of error, not just those at the API layer
 * Table name on categorisations migration statement

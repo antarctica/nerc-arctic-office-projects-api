@@ -857,6 +857,8 @@ class GatewayToResearchGrantImporter:
         """
         For a series of GTR project categories/topics, return a distinct list
 
+        If the 'unclassified' category is included, it is silently removed.
+
         :type gtr_categories: list
         :param gtr_categories: list of GTR project categories/topics
 
@@ -866,12 +868,13 @@ class GatewayToResearchGrantImporter:
         category_term_scheme_identifiers = []
         for category in gtr_categories:
             category_term_scheme_identifier = self._map_gtr_project_category_to_category_term(category)
-            if category_term_scheme_identifier not in category_term_scheme_identifiers:
-                category_term_scheme_identifiers.append(category_term_scheme_identifier)
+            if category_term_scheme_identifier is not None:
+                if category_term_scheme_identifier not in category_term_scheme_identifiers:
+                    category_term_scheme_identifiers.append(category_term_scheme_identifier)
         return category_term_scheme_identifiers
 
     @staticmethod
-    def _map_gtr_project_category_to_category_term(gtr_category: dict) -> str:
+    def _map_gtr_project_category_to_category_term(gtr_category: dict) -> Optional[str]:
         """
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
@@ -883,8 +886,8 @@ class GatewayToResearchGrantImporter:
         :type gtr_category: dict
         :param gtr_category: GTR project category or topic
 
-        :rtype str
-        :return for a given GTR category or topic ID, a corresponding Category as a scheme identifier
+        :rtype str or None
+        :return a Category scheme identifier corresponding to a GTR category or topic ID, or None if unclassified
         """
         if gtr_category['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
@@ -894,6 +897,9 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
         elif gtr_category['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+        # Unclassified
+        elif gtr_category['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
+            return None
 
         raise UnmappedGatewayToResearchProjectCategory(meta={
             'gtr_category': {
