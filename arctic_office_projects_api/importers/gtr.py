@@ -330,15 +330,15 @@ class GatewayToResearchPerson(GatewayToResearchResource):
                 'https://orcid.org/0000-0001-8932-9256'
         }
 
-        if self.resource_uri in gtr_people_orcid_id_mappings.keys():
-            self.orcid_id = gtr_people_orcid_id_mappings[self.resource_uri]
+        if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
+            raise UnmappedGatewayToResearchPerson(meta={
+                'gtr_person': {
+                    'resource_uri': self.resource_uri,
+                    'name': f"{self.first_name} {self.surname}"
+                }
+            })
 
-        raise UnmappedGatewayToResearchPerson(meta={
-            'gtr_person': {
-                'resource_uri': self.resource_uri,
-                'name': f"{self.first_name} {self.surname}"
-            }
-        })
+        self.orcid_id = gtr_people_orcid_id_mappings[self.resource_uri]
 
 
 class GatewayToResearchPublication(GatewayToResearchResource):
