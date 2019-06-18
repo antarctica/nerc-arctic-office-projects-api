@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+* Updating Heroku release script to load organisations
 * Refactoring finding distinct GTR project category/topics in GTR importer
 * Refactoring API exception to inherit from new application exception
 * Refactoring importers into a package
