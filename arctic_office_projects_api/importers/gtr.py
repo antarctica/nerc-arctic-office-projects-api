@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime, timezone
 from typing import Dict, Optional, List
 from urllib.parse import quote as url_encode
 
@@ -306,8 +306,10 @@ class GatewayToResearchFund(GatewayToResearchResource):
         if 'end' not in self.resource:
             raise KeyError('End date element not in GTR fund')
 
-        # Duration is currently hard-coded until dates can be interpreted correctly (see #37 for details)
-        self.duration = DateRange(date(2012, 1, 1), date(2015, 1, 1))
+        self.duration = DateRange(
+            self._process_gtr_datetime(self.resource['start']),
+            self._process_gtr_datetime(self.resource['end'])
+        )
 
         if 'valuePounds' not in self.resource:
             raise KeyError('ValuePounds element not in GTR fund')
@@ -355,6 +357,23 @@ class GatewayToResearchFund(GatewayToResearchResource):
             raise KeyError("Multiple GTR funder identifiers found in GTR fund links, one expected")
 
         return self.resource_links['FUNDER'][0]
+
+    @staticmethod
+    def _process_gtr_datetime(gtr_date: str) -> date:
+        """
+        Converts a GTR datetime into a Python date object
+
+        Gateway to Research's JSON encoding uses Unix timestamps with milliseconds and which first need correcting and
+        then returned as a date, as durations in this project are whole days.
+
+        :type gtr_date: str
+        :param gtr_date: GTR datetime
+
+        :rtype date
+        :return: GTR datetime encoded as a python date
+        """
+        timestamp = int(gtr_date) / 1000
+        return datetime.fromtimestamp(timestamp, timezone.utc).date()
 
 
 class GatewayToResearchPerson(GatewayToResearchResource):
