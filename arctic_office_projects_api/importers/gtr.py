@@ -466,7 +466,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
                 if len(self.resource['researchTopics']['researchTopic']) > 0:
                     for gtr_research_topic in self.resource['researchTopics']['researchTopic']:
                         if 'id' in gtr_research_topic:
-                            gtr_project_categories.append(gtr_research_topic['id'])
+                            gtr_project_categories.append(gtr_research_topic)
 
         return gtr_project_categories
 
