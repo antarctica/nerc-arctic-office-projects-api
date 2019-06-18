@@ -160,10 +160,105 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         :rtype str
         :return for a given GTR resource URI, a corresponding GRID ID as a URI
         """
+        # Natural Environment Research Council
         if self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A03ED41-E67D-4F4A-B5DD-AAFB272B6471':
             return 'https://www.grid.ac/institutes/grid.8682.4'
+        # University of Leeds
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/83D87776-5958-42AE-889D-B8AECF16B468':
             return 'https://www.grid.ac/institutes/grid.9909.9'
+        # University of Sheffield
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/03D8AFBB-3EA5-4885-B036-BD4F9F4F9849':
+            return 'https://www.grid.ac/institutes/grid.11835.3e'
+        # Scottish Association For Marine Science
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1ED25A21-FD91-4EC2-A06F-724F9F2CDC3D':
+            return 'https://www.grid.ac/institutes/grid.410415.5'
+        # NERC British Antarctic Survey
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/21CFC584-0BCD-450C-B2C1-EFF574194DBF':
+            return 'https://www.grid.ac/institutes/grid.478592.5'
+        # University of Ulster
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/245EB81A-808F-4697-BAED-263C20266B74':
+            return 'https://www.grid.ac/institutes/grid.12641.30'
+        # University of Edinburgh
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/2DB7ED73-8E89-457A-A395-FAC12F929C1A':
+            return 'https://www.grid.ac/institutes/grid.4305.2'
+        # University of Southampton
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/30A429E3-83B7-4E41-99C0-14A144F07DFE':
+            return 'https://www.grid.ac/institutes/grid.5491.9'
+        # University College London
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/3A5E126D-C175-4730-9B7B-E6D8CF447F83':
+            return 'https://www.grid.ac/institutes/grid.83440.3b'
+        # University of Oxford
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/3EAE04CA-9D62-4483-B9C4-F91AD9F4C5A9':
+            return 'https://www.grid.ac/institutes/grid.4991.5'
+        # Imperial College London
+        elif self.resource_uri == "https://gtr.ukri.org:443/gtr/api/organisations/46387D84-F71E-4B7D-8C7D-9C288F113510":
+            return 'https://www.grid.ac/institutes/grid.7445.2'
+        # Durham University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/46B41008-0EB4-4E28-BBFB-E98366999EC5':
+            return 'https://www.grid.ac/institutes/grid.8250.f'
+        # National Oceanography Centre
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4DB630C7-7E13-4610-A1C3-29601903CEE3':
+            return 'https://www.grid.ac/institutes/grid.418022.d'
+        # NERC Centre for Ecology and Hydrology
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4FC881BE-799E-459C-A287-2A68170426DA':
+            return 'https://www.grid.ac/institutes/grid.494924.6'
+        # University of Manchester
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/68D0E3C9-9246-4CFC-B5E9-48584CF82993':
+            return 'https://www.grid.ac/institutes/grid.5379.8'
+        # Royal Holloway, University of London
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7A0397DD-E0C6-4EA3-8031-B841D2503C4D':
+            return 'https://www.grid.ac/institutes/grid.4970.a'
+        # NERC British Geological Survey
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7ADE0AB2-1050-4241-987D-F3B1C3322E05':
+            return 'https://www.grid.ac/institutes/grid.474329.f'
+        # University of York
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8319F78A-DCBD-49F6-BE00-78E1CD75CDA9':
+            return 'https://www.grid.ac/institutes/grid.5685.e'
+        # University of East Anglia
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/88C5F7F9-8DCC-41C9-BC4F-F37DA01075C7':
+            return 'https://www.grid.ac/institutes/grid.8273.e'
+        # University of the Highlands and Islands
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8BA3C264-769F-487E-B61A-2D4CB6A105B6':
+            return 'https://www.grid.ac/institutes/grid.23378.3d'
+        # University of Dundee
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/90051600-6EF2-4093-BA8C-2B4B6F550895':
+            return 'https://www.grid.ac/institutes/grid.8241.f'
+        # University of Nottingham
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/936D002F-A8D1-4A93-AE5D-825ED0903D8D':
+            return 'https://www.grid.ac/institutes/grid.4563.4'
+        # University of Portsmouth
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/955C55E8-783E-4842-BB2C-2D275A3CAF82':
+            return 'https://www.grid.ac/institutes/grid.4701.2'
+        # University of Exeter
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/961756BF-E31F-4A13-836F-0A09BA02385C':
+            return 'https://www.grid.ac/institutes/grid.8391.3'
+        # University of Sussex
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A8967420-49D3-4509-9912-25FB3EC75B74':
+            return 'https://www.grid.ac/institutes/grid.12082.39'
+        # Leibniz Institute of Freshwater Ecology
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AB007A2D-2086-4B7A-8539-DBD5836A8503':
+            return 'https://www.grid.ac/institutes/grid.419247.d'
+        # University of Stirling
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/C7510606-A36F-4725-A89B-9D592374972A':
+            return 'https://www.grid.ac/institutes/grid.11918.30'
+        # Loughborough University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/CAA9A40D-0226-4A4F-AC0D-D8299E30A1EF':
+            return 'https://www.grid.ac/institutes/grid.6571.5'
+        # University of Cambridge
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/D1774113-D5D2-4B7C-A412-66A90FE4B96F':
+            return 'https://www.grid.ac/institutes/grid.5335.0'
+        # University of Huddersfield
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/DC934AED-9432-4385-AEAF-006EA2369001':
+            return 'https://www.grid.ac/institutes/grid.15751.37'
+        # University of Reading
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E89C3602-0FB4-4044-A918-58966B8A10B2':
+            return 'https://www.grid.ac/institutes/grid.9435.b'
+        # University of Aberdeen
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F7E13617-2678-475B-99E4-31479C92038D':
+            return 'https://www.grid.ac/institutes/grid.7107.1'
+        # Bangor University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F9F1D136-12E3-4BE4-9668-0C9BC4A7C1BF':
+            return 'https://www.grid.ac/institutes/grid.7362.0'
 
         raise UnmappedGatewayToResearchOrganisation(meta={
             'gtr_organisation': {

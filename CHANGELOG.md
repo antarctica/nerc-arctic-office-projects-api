@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* Additional organisations for people
 * Allowing GTR importer instances to accept a GTR resource URI
 * Exceptions for unmapped GTR resources
 * Unique database constraint for categorisations
