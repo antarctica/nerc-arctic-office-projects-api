@@ -9,13 +9,34 @@ from requests import HTTPError
 # noinspection PyPackageRequirements
 from sqlalchemy import exists
 
+from arctic_office_projects_api.errors import AppException
 from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.utils import generate_neutral_id
 from arctic_office_projects_api.models import CategoryTerm, Grant, GrantStatus, GrantCurrency, Organisation, Project, \
     Allocation, Person, Participant, ParticipantRole, Categorisation
 
 
+# Exceptions
+
+
+class UnmappedGatewayToResearchOrganisation(AppException):
+    title = 'Unmapped Gateway to Research organisation'
+    detail = 'A Gateway to Research organisation has not been mapped to an application Organisation via a GRID ID'
+
+
+class UnmappedGatewayToResearchPerson(AppException):
+    title = 'Unmapped Gateway to Research person'
+    detail = 'A Gateway to Research person has not been mapped to an application Person via a ORCID iD'
+
+
+class UnmappedGatewayToResearchProjectCategory(AppException):
+    title = 'Unmapped Gateway to Research category or topic'
+    detail = 'A Gateway to Research category or topic has not been mapped to an application category term via a ' \
+             'scheme identifier'
+
+
 # Resources
+
 
 class GatewayToResearchResource:
     """
@@ -121,11 +142,11 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        self.grid_id = self._map_to_grid_id()
-
         if 'name' not in self.resource:
             raise KeyError('Name element not in GTR organisation')
         self.name = self.resource['name']
+
+        self.grid_id = self._map_to_grid_id()
 
     def _map_to_grid_id(self) -> str:
         """
@@ -139,10 +160,112 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         :rtype str
         :return for a given GTR resource URI, a corresponding GRID ID as a URI
         """
+        # Natural Environment Research Council
         if self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A03ED41-E67D-4F4A-B5DD-AAFB272B6471':
             return 'https://www.grid.ac/institutes/grid.8682.4'
+        # University of Leeds
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/83D87776-5958-42AE-889D-B8AECF16B468':
             return 'https://www.grid.ac/institutes/grid.9909.9'
+        # University of Sheffield
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/03D8AFBB-3EA5-4885-B036-BD4F9F4F9849':
+            return 'https://www.grid.ac/institutes/grid.11835.3e'
+        # Scottish Association For Marine Science
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1ED25A21-FD91-4EC2-A06F-724F9F2CDC3D':
+            return 'https://www.grid.ac/institutes/grid.410415.5'
+        # NERC British Antarctic Survey
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/21CFC584-0BCD-450C-B2C1-EFF574194DBF':
+            return 'https://www.grid.ac/institutes/grid.478592.5'
+        # University of Ulster
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/245EB81A-808F-4697-BAED-263C20266B74':
+            return 'https://www.grid.ac/institutes/grid.12641.30'
+        # University of Edinburgh
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/2DB7ED73-8E89-457A-A395-FAC12F929C1A':
+            return 'https://www.grid.ac/institutes/grid.4305.2'
+        # University of Southampton
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/30A429E3-83B7-4E41-99C0-14A144F07DFE':
+            return 'https://www.grid.ac/institutes/grid.5491.9'
+        # University College London
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/3A5E126D-C175-4730-9B7B-E6D8CF447F83':
+            return 'https://www.grid.ac/institutes/grid.83440.3b'
+        # University of Oxford
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/3EAE04CA-9D62-4483-B9C4-F91AD9F4C5A9':
+            return 'https://www.grid.ac/institutes/grid.4991.5'
+        # Imperial College London
+        elif self.resource_uri == "https://gtr.ukri.org:443/gtr/api/organisations/46387D84-F71E-4B7D-8C7D-9C288F113510":
+            return 'https://www.grid.ac/institutes/grid.7445.2'
+        # Durham University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/46B41008-0EB4-4E28-BBFB-E98366999EC5':
+            return 'https://www.grid.ac/institutes/grid.8250.f'
+        # National Oceanography Centre
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4DB630C7-7E13-4610-A1C3-29601903CEE3':
+            return 'https://www.grid.ac/institutes/grid.418022.d'
+        # NERC Centre for Ecology and Hydrology
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4FC881BE-799E-459C-A287-2A68170426DA':
+            return 'https://www.grid.ac/institutes/grid.494924.6'
+        # University of Manchester
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/68D0E3C9-9246-4CFC-B5E9-48584CF82993':
+            return 'https://www.grid.ac/institutes/grid.5379.8'
+        # Royal Holloway, University of London
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7A0397DD-E0C6-4EA3-8031-B841D2503C4D':
+            return 'https://www.grid.ac/institutes/grid.4970.a'
+        # NERC British Geological Survey
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7ADE0AB2-1050-4241-987D-F3B1C3322E05':
+            return 'https://www.grid.ac/institutes/grid.474329.f'
+        # University of York
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8319F78A-DCBD-49F6-BE00-78E1CD75CDA9':
+            return 'https://www.grid.ac/institutes/grid.5685.e'
+        # University of East Anglia
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/88C5F7F9-8DCC-41C9-BC4F-F37DA01075C7':
+            return 'https://www.grid.ac/institutes/grid.8273.e'
+        # University of the Highlands and Islands
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8BA3C264-769F-487E-B61A-2D4CB6A105B6':
+            return 'https://www.grid.ac/institutes/grid.23378.3d'
+        # University of Dundee
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/90051600-6EF2-4093-BA8C-2B4B6F550895':
+            return 'https://www.grid.ac/institutes/grid.8241.f'
+        # University of Nottingham
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/936D002F-A8D1-4A93-AE5D-825ED0903D8D':
+            return 'https://www.grid.ac/institutes/grid.4563.4'
+        # University of Portsmouth
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/955C55E8-783E-4842-BB2C-2D275A3CAF82':
+            return 'https://www.grid.ac/institutes/grid.4701.2'
+        # University of Exeter
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/961756BF-E31F-4A13-836F-0A09BA02385C':
+            return 'https://www.grid.ac/institutes/grid.8391.3'
+        # University of Sussex
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A8967420-49D3-4509-9912-25FB3EC75B74':
+            return 'https://www.grid.ac/institutes/grid.12082.39'
+        # Leibniz Institute of Freshwater Ecology
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AB007A2D-2086-4B7A-8539-DBD5836A8503':
+            return 'https://www.grid.ac/institutes/grid.419247.d'
+        # University of Stirling
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/C7510606-A36F-4725-A89B-9D592374972A':
+            return 'https://www.grid.ac/institutes/grid.11918.30'
+        # Loughborough University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/CAA9A40D-0226-4A4F-AC0D-D8299E30A1EF':
+            return 'https://www.grid.ac/institutes/grid.6571.5'
+        # University of Cambridge
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/D1774113-D5D2-4B7C-A412-66A90FE4B96F':
+            return 'https://www.grid.ac/institutes/grid.5335.0'
+        # University of Huddersfield
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/DC934AED-9432-4385-AEAF-006EA2369001':
+            return 'https://www.grid.ac/institutes/grid.15751.37'
+        # University of Reading
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E89C3602-0FB4-4044-A918-58966B8A10B2':
+            return 'https://www.grid.ac/institutes/grid.9435.b'
+        # University of Aberdeen
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F7E13617-2678-475B-99E4-31479C92038D':
+            return 'https://www.grid.ac/institutes/grid.7107.1'
+        # Bangor University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F9F1D136-12E3-4BE4-9668-0C9BC4A7C1BF':
+            return 'https://www.grid.ac/institutes/grid.7362.0'
+
+        raise UnmappedGatewayToResearchOrganisation(meta={
+            'gtr_organisation': {
+                'resource_uri': self.resource_uri,
+                'name': self.name
+            }
+        })
 
 
 class GatewayToResearchFunder(GatewayToResearchOrganisation):
@@ -299,18 +422,36 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         :return for a given GTR resource URI, a corresponding ORCID iD as a URL
         """
         gtr_people_orcid_id_mappings = {
-            'https://gtr.ukri.org:443/gtr/api/persons/4B79375A-2E7B-42EB-A981-3EAEE5AD4066':
-                'https://orcid.org/0000-0001-8932-9256'
+            # Kenneth Carslaw - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/00ECDD3F-DE95-4E2C-85C6-A73578A9256E":
+                "https://orcid.org/0000-0002-6800-154X",
+            # Barbara Brooks
+            "https://gtr.ukri.org:443/gtr/api/persons/4B79375A-2E7B-42EB-A981-3EAEE5AD4066":
+                'https://orcid.org/0000-0001-8932-9256',
+            # Ian Brooks
+            "https://gtr.ukri.org:443/gtr/api/persons/BBCB83F2-B5D2-43B9-859E-0DA9CC0F63D5":
+                'https://orcid.org/0000-0002-5051-1322',
+            # Steven Dobbie [uncertain]
+            "https://gtr.ukri.org:443/gtr/api/persons/8DFA8601-00EB-47B4-A565-8F2956F92B41":
+                'https://orcid.org/0000-0001-8474-176X',
         }
 
-        if self.resource_uri in gtr_people_orcid_id_mappings.keys():
-            self.orcid_id = gtr_people_orcid_id_mappings[self.resource_uri]
+        if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
+            raise UnmappedGatewayToResearchPerson(meta={
+                'gtr_person': {
+                    'resource_uri': self.resource_uri,
+                    'name': f"{self.first_name} {self.surname}"
+                }
+            })
+
+        self.orcid_id = gtr_people_orcid_id_mappings[self.resource_uri]
 
 
 class GatewayToResearchPublication(GatewayToResearchResource):
     """
     Represents a GTR Publication, associated with a GTR Project
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -406,7 +547,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
 
         return project_references
 
-    def _process_categories(self) -> List[str]:
+    def _process_categories(self) -> List[dict]:
         """
         Merges 'categories' and 'topics' used in projects into a single set of classifications
 
@@ -425,13 +566,13 @@ class GatewayToResearchProject(GatewayToResearchResource):
                 if len(self.resource['researchSubjects']['researchSubject']) > 0:
                     for gtr_research_subject in self.resource['researchSubjects']['researchSubject']:
                         if 'id' in gtr_research_subject:
-                            gtr_project_categories.append(gtr_research_subject['id'])
+                            gtr_project_categories.append(gtr_research_subject)
         if 'researchTopics' in self.resource:
             if 'researchTopic' in self.resource['researchTopics']:
                 if len(self.resource['researchTopics']['researchTopic']) > 0:
                     for gtr_research_topic in self.resource['researchTopics']['researchTopic']:
                         if 'id' in gtr_research_topic:
-                            gtr_project_categories.append(gtr_research_topic['id'])
+                            gtr_project_categories.append(gtr_research_topic)
 
         return gtr_project_categories
 
@@ -501,13 +642,16 @@ class GatewayToResearchGrantImporter:
 
     GTR projects are loosely equivalent to Grants in this project.
     """
-    def __init__(self, gtr_grant_reference: str):
+
+    def __init__(self, gtr_grant_reference: str = None, gtr_project_id: str = None):
         """
         :type gtr_grant_reference: str
         :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
+        :type gtr_project_id: str
+        :param gtr_grant_reference: Gateway to Research project ID (e.g. '87D5AD44-2123-442B-B186-75C3878471BD')
         """
         self.grant_reference = gtr_grant_reference
-        self.gtr_project_id = None
+        self.gtr_project_id = gtr_project_id
 
     def exists(self) -> bool:
         """
@@ -600,11 +744,9 @@ class GatewayToResearchGrantImporter:
             grant=grant
         ))
 
-        category_term_scheme_identifiers = []
-        for category in gtr_project.categories:
-            category_term_scheme_identifier = self._map_gtr_project_category_to_category_term(category)
-            if category_term_scheme_identifier not in category_term_scheme_identifiers:
-                category_term_scheme_identifiers.append(category_term_scheme_identifier)
+        category_term_scheme_identifiers = self._find_unique_gtr_project_categories(
+            gtr_categories=gtr_project.categories
+        )
         for category_term_scheme_identifier in category_term_scheme_identifiers:
             db.session.add(Categorisation(
                 neutral_id=generate_neutral_id(),
@@ -711,8 +853,28 @@ class GatewayToResearchGrantImporter:
 
         raise ValueError("Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
 
+    def _find_unique_gtr_project_categories(self, gtr_categories: list) -> list:
+        """
+        For a series of GTR project categories/topics, return a distinct list
+
+        If the 'unclassified' category is included, it is silently removed.
+
+        :type gtr_categories: list
+        :param gtr_categories: list of GTR project categories/topics
+
+        :rtype list
+        :return: distinct list of GTR project categories/topics
+        """
+        category_term_scheme_identifiers = []
+        for category in gtr_categories:
+            category_term_scheme_identifier = self._map_gtr_project_category_to_category_term(category)
+            if category_term_scheme_identifier is not None:
+                if category_term_scheme_identifier not in category_term_scheme_identifiers:
+                    category_term_scheme_identifiers.append(category_term_scheme_identifier)
+        return category_term_scheme_identifiers
+
     @staticmethod
-    def _map_gtr_project_category_to_category_term(category_term_scheme_id: str) -> str:
+    def _map_gtr_project_category_to_category_term(gtr_category: dict) -> Optional[str]:
         """
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
@@ -721,20 +883,30 @@ class GatewayToResearchGrantImporter:
         This mapping therefore needs to be defined manually in this method. Currently this is done using a simple if
         statement, but in future a more scalable solution will be needed.
 
-        :type category_term_scheme_id: str
-        :param category_term_scheme_id: GTR project category or topic ID
+        :type gtr_category: dict
+        :param gtr_category: GTR project category or topic
 
-        :rtype str
-        :return for a given GTR category or topic ID, a corresponding Category as a scheme identifier
+        :rtype str or None
+        :return a Category scheme identifier corresponding to a GTR category or topic ID, or None if unclassified
         """
-        if category_term_scheme_id == 'E4C03353-6311-43F9-9204-CFC2536D2017':
+        if gtr_category['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
-        elif category_term_scheme_id == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
+        elif gtr_category['id'] == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif category_term_scheme_id == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
+        elif gtr_category['id'] == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif category_term_scheme_id == 'B01D3878-E7BD-4830-9503-2F54544E809E':
+        elif gtr_category['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+        # Unclassified
+        elif gtr_category['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
+            return None
+
+        raise UnmappedGatewayToResearchProjectCategory(meta={
+            'gtr_category': {
+                'id': gtr_category['id'],
+                'name': gtr_category['text']
+            }
+        })
 
 
 def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):

@@ -791,6 +791,7 @@ Also ensure:
 * if needed, [Database migrations](#database-migrations), including reverse migrations, are written for database 
   structure changes
 * if needed, [Database seeding](#database-seeding) is in place for use in development environments and running tests
+* all application errors implement, or inherit from, `AppException` in `arctic_office_projects_api/errors.py`
 
 ### Code Style
 
