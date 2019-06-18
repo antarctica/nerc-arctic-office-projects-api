@@ -6,11 +6,11 @@
 # This resource implicitly depends on the "heroku_app.bas-arctic-office-projects-api-stage" resource.
 # This resource relies on the Heroku Terraform provider being previously configured.
 #
-# AWS source: https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres
+# Heroku source: https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres
 # Terraform source: https://www.terraform.io/docs/providers/heroku/r/addon.html
 resource "heroku_addon" "database-stage" {
   app  = "${heroku_app.bas-arctic-office-projects-api-stage.name}"
-  plan = "heroku-postgresql:hobby-dev"
+  plan = "heroku-postgresql:hobby-basic"
 }
 
 # # Production instance database
@@ -18,7 +18,7 @@ resource "heroku_addon" "database-stage" {
 # # This resource implicitly depends on the "heroku_app.bas-arctic-office-projects-api-prod" resource.
 # # This resource relies on the Heroku Terraform provider being previously configured.
 # #
-# # AWS source: https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres
+# # Heroku source: https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres
 # # Terraform source: https://www.terraform.io/docs/providers/heroku/r/addon.html
 # resource "heroku_addon" "database-prod" {
 #   app  = "${heroku_app.bas-arctic-office-projects-api-prod.name}"
