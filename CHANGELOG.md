@@ -9,19 +9,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-* Adding exceptions for unmapped GTR resources
-* Adding unique constraint for categorisations
-* Adding organisation importer
 * Allowing GTR importer instances to accept a GTR resource URI
+* Exceptions for unmapped GTR resources
+* Unique database constraint for categorisations
+* Organisation importer command
 * Integration tests for custom CLI commands
 
 ### Fixed
 
+* Difference in handling GTR project topics compared to categories in GTR importer
 * Application exception to act as a generic error class for all types of error, not just those at the API layer
 * Table name on categorisations migration statement
 
 ### Changed
 
+* Refactoring finding distinct GTR project category/topics in GTR importer
 * Refactoring API exception to inherit from new application exception
 * Refactoring importers into a package
 * Refactoring commands into main application

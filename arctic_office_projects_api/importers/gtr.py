@@ -37,6 +37,7 @@ class UnmappedGatewayToResearchProjectCategory(AppException):
 
 # Resources
 
+
 class GatewayToResearchResource:
     """
     Represents the API response for a GTR resource
