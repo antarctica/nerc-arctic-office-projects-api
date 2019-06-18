@@ -422,8 +422,18 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         :return for a given GTR resource URI, a corresponding ORCID iD as a URL
         """
         gtr_people_orcid_id_mappings = {
-            'https://gtr.ukri.org:443/gtr/api/persons/4B79375A-2E7B-42EB-A981-3EAEE5AD4066':
-                'https://orcid.org/0000-0001-8932-9256'
+            # Kenneth Carslaw - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/00ECDD3F-DE95-4E2C-85C6-A73578A9256E":
+                "https://orcid.org/0000-0002-6800-154X",
+            # Barbara Brooks
+            "https://gtr.ukri.org:443/gtr/api/persons/4B79375A-2E7B-42EB-A981-3EAEE5AD4066":
+                'https://orcid.org/0000-0001-8932-9256',
+            # Ian Brooks
+            "https://gtr.ukri.org:443/gtr/api/persons/BBCB83F2-B5D2-43B9-859E-0DA9CC0F63D5":
+                'https://orcid.org/0000-0002-5051-1322',
+            # Steven Dobbie [uncertain]
+            "https://gtr.ukri.org:443/gtr/api/persons/8DFA8601-00EB-47B4-A565-8F2956F92B41":
+                'https://orcid.org/0000-0001-8474-176X',
         }
 
         if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
