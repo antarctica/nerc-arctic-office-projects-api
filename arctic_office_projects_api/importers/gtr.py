@@ -638,11 +638,9 @@ class GatewayToResearchGrantImporter:
             grant=grant
         ))
 
-        category_term_scheme_identifiers = []
-        for category in gtr_project.categories:
-            category_term_scheme_identifier = self._map_gtr_project_category_to_category_term(category)
-            if category_term_scheme_identifier not in category_term_scheme_identifiers:
-                category_term_scheme_identifiers.append(category_term_scheme_identifier)
+        category_term_scheme_identifiers = self._find_unique_gtr_project_categories(
+            gtr_categories=gtr_project.categories
+        )
         for category_term_scheme_identifier in category_term_scheme_identifiers:
             db.session.add(Categorisation(
                 neutral_id=generate_neutral_id(),
@@ -748,6 +746,23 @@ class GatewayToResearchGrantImporter:
             return GrantStatus.Closed
 
         raise ValueError("Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
+
+    def _find_unique_gtr_project_categories(self, gtr_categories: list) -> list:
+        """
+        For a series of GTR project categories/topics, return a distinct list
+
+        :type gtr_categories: list
+        :param gtr_categories: list of GTR project categories/topics
+
+        :rtype list
+        :return: distinct list of GTR project categories/topics
+        """
+        category_term_scheme_identifiers = []
+        for category in gtr_categories:
+            category_term_scheme_identifier = self._map_gtr_project_category_to_category_term(category)
+            if category_term_scheme_identifier not in category_term_scheme_identifiers:
+                category_term_scheme_identifiers.append(category_term_scheme_identifier)
+        return category_term_scheme_identifiers
 
     @staticmethod
     def _map_gtr_project_category_to_category_term(gtr_category: dict) -> str:
