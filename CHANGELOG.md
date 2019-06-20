@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+* JUnit test results support
 * Additional people ORCID mappings
 * Additional organisations for people
 * Allowing GTR importer instances to accept a GTR resource URI
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+* Upgrading to a hobby Heroku application due to allow multiple processes to be ran
 * Upgrading to a hobby basic Heroku database due to row count requirement
 * Updating Heroku release script to load organisations
 * Refactoring finding distinct GTR project category/topics in GTR importer

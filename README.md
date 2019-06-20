@@ -1267,6 +1267,14 @@ In *Configuration* tab:
 
 **Note:** This configuration can be also be used to debug tests (by choosing *debug* instead of *run*).
 
+#### JUnit support
+
+To run integration tests to produce a JUnit compatible file, `test-results.xml`:
+
+```
+$ docker-compose run -e FLASK_ENV=testing app flask test --test-runner junit
+```
+
 #### Integration testing - databases
 
 Where the application database is needed, a separate test database (`app_test`) will be used to prevent touching 
