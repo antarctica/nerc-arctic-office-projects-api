@@ -64,7 +64,7 @@ resource "heroku_formation" "bas-arctic-office-projects-api-stage" {
   app      = "${heroku_app.bas-arctic-office-projects-api-stage.name}"
   type     = "web"
   quantity = 1
-  size     = "free"
+  size     = "hobby"
 }
 
 # # Production dyno
