@@ -1,7 +1,10 @@
 import os
 import sys
 import unittest
+import xmlrunner
 
+# noinspection PyPackageRequirements
+from click import option, Choice
 from flask_migrate import Migrate
 
 from arctic_office_projects_api import create_app, db
@@ -29,11 +32,20 @@ def make_shell_context():
 
 
 @app.cli.command()
-def test():
+@option('--test-runner', type=Choice(['text', 'junit']))
+def test(test_runner: str = 'text'):
     """Run integration tests."""
     tests = unittest.TestLoader().discover(os.path.join(os.path.dirname(__file__), 'tests'))
-    tests_runner = unittest.TextTestRunner(verbosity=2)
-    return sys.exit(not tests_runner.run(tests).wasSuccessful())
+
+    if test_runner == 'text':
+        tests_runner = unittest.TextTestRunner(verbosity=2)
+        return sys.exit(not tests_runner.run(tests).wasSuccessful())
+    elif test_runner == 'junit':
+        with open('test-results.xml', 'wb') as output:
+            tests_runner = xmlrunner.XMLTestRunner(output=output)
+            return sys.exit(not tests_runner.run(tests).wasSuccessful())
+
+    return RuntimeError('Unknown Python unit test runner type')
 
 
 if 'PYCHARM_HOSTED' in os.environ:
