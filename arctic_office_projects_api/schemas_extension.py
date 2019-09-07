@@ -4,7 +4,7 @@ from typing import Union, Optional
 
 from flask_sqlalchemy import Pagination, Model
 # noinspection PyPackageRequirements
-from marshmallow import MarshalResult, post_dump
+from marshmallow import post_dump
 # noinspection PyPackageRequirements
 from marshmallow.fields import Field
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
@@ -125,7 +125,7 @@ class Schema(_Schema):
         many: bool = None,
         update_fields: bool = True,
         **kwargs
-    ) -> MarshalResult:
+    ) -> dict:
         """
         Overloaded implementation of the 'dump' method in the marshmallow default 'schema' class
 
@@ -141,8 +141,8 @@ class Schema(_Schema):
             when serializing a homogeneous collection. This parameter is used by `fields.Nested` to avoid multiple
             updates.
 
-        :rtype: `MarshalResult`, a `collections.namedtuple`
-        :return: A tuple of the form (``data``, ``errors``)
+        :rtype: dict
+        :return: A dict of serialized data
         """
         if self.paginate:
             if not isinstance(obj, Pagination):
@@ -154,9 +154,9 @@ class Schema(_Schema):
                 self.next_page = obj.next_num
             if obj.has_prev:
                 self.previous_page = obj.prev_num
-            return super().dump(obj.items, many=many, update_fields=update_fields, **kwargs)
+            return super().dump(obj.items, many=many)
 
-        return super().dump(obj, many=many, update_fields=update_fields, **kwargs)
+        return super().dump(obj, many=many)
 
     @post_dump(pass_many=True)
     def format_json_api_response(self, data: dict, many: bool) -> dict:
@@ -276,7 +276,7 @@ class DateRangeField(Field):
     """
     Custom Marshmallow field for the PostgreSQL DateRange class
     """
-    def _serialize(self, value: DateRange, attr: str, obj) -> dict:
+    def _serialize(self, value: DateRange, attr: str, obj, **kwargs) -> dict:
         """
         When serialising, the DateRange is converted into a dict containing a ISO 8601 date interval, covering the date
         range, and two date instants, indicating the beginning and end of the date range.
@@ -289,6 +289,8 @@ class DateRangeField(Field):
         :type attr: str
         :param attr: name of the field within the schema being dumped
         :param obj: the object 'value' was taken from
+        :type kwargs: dict
+        :param kwargs: field-specific keyword arguments
 
         :rtype: dict
         :return: ISO 8601 date interval and date instants for the beginning and end of a date range
@@ -347,7 +349,7 @@ class EnumField(Field):
         class Foo(Enum):
             Foo = 'bar'
     """
-    def _serialize(self, value: Enum, attr: str, obj: Model):
+    def _serialize(self, value: Enum, attr: str, obj: Model, **kwargs):
         """
         When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
 
@@ -357,6 +359,8 @@ class EnumField(Field):
         :param attr: name of the field within the schema being dumped
         :type obj: Model
         :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+        :type kwargs: dict
+        :param kwargs: field-specific keyword arguments
 
         :return: the enumerator item's value
         """
@@ -396,7 +400,7 @@ class EnumStrField(EnumField):
         class Foo(Enum):
             Foo = 'bar'
     """
-    def _serialize(self, value: Enum, attr: str, obj: Model) -> str:
+    def _serialize(self, value: Enum, attr: str, obj: Model, **kwargs) -> str:
         """
         When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
 
@@ -406,10 +410,13 @@ class EnumStrField(EnumField):
         :param attr: name of the field within the schema being dumped
         :type obj: Model
         :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+        :type kwargs: dict
+        :param kwargs: field-specific keyword arguments
 
         :rtype: str
         :return: the enumerator item's value
         """
+        # noinspection PyTypeChecker
         return super()._serialize(value, attr, obj)
 
 
@@ -421,7 +428,7 @@ class EnumDictField(EnumField):
         class Foo(Enum):
             Foo = {'bar': 'baz'}
     """
-    def _serialize(self, value: Enum, attr: str, obj: Model) -> dict:
+    def _serialize(self, value: Enum, attr: str, obj: Model, **kwargs) -> dict:
         """
         When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
 
@@ -431,6 +438,9 @@ class EnumDictField(EnumField):
         :param attr: name of the field within the schema being dumped
         :type obj: Model
         :param obj: the object 'value' was taken from, in this case an SQLAlchemy model instance
+        :type kwargs: dict
+        :param kwargs: field-specific keyword arguments
+
 
         :rtype: dict
         :return: the enumerator item's value
@@ -458,7 +468,7 @@ class CurrencyField(Field):
                 'major_symbol': '£'
             }
     """
-    def _serialize(self, value: float, attr: str, obj: Model) -> Optional[dict]:
+    def _serialize(self, value: float, attr: str, obj: Model, **kwargs) -> Optional[dict]:
         """
         When serialising, a numeric value is combined with currency unit defined by a metadata argument
 
@@ -470,6 +480,8 @@ class CurrencyField(Field):
         :param attr: name of the field within the schema being dumped
         :type obj: Model
         :param obj: the object containing the numeric value and currency unit, in this case a SQLAlchemy model
+        :type kwargs: dict
+        :param kwargs: field-specific keyword arguments
 
         :rtype: dict
         :return: a numeric value is combined with currency unit
