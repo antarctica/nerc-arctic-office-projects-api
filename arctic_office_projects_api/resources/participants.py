@@ -29,7 +29,7 @@ def participants_list():
         'person'
     )).dump(_participants)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @participants.route('/participants/<participant_id>')
@@ -47,7 +47,7 @@ def participants_detail(participant_id: str):
             'project',
             'person'
         )).dump(participant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -66,7 +66,7 @@ def participants_relationship_projects(participant_id: str):
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
         payload = ParticipantSchema(resource_linkage='project').dump(participant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -85,7 +85,7 @@ def participants_relationship_people(participant_id: str):
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
         payload = ParticipantSchema(resource_linkage='person').dump(participant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -104,7 +104,7 @@ def participants_projects(participant_id: str):
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
         payload = ParticipantSchema(related_resource='project', many_related=False).dump(participant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -123,7 +123,7 @@ def participants_people(participant_id: str):
     try:
         participant = Participant.query.filter_by(neutral_id=participant_id).one()
         payload = ParticipantSchema(related_resource='person', many_related=False).dump(participant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

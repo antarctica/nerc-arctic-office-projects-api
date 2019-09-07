@@ -30,7 +30,7 @@ def people_list():
         'participation.project'
     )).dump(_people)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @people.route('/people/<person_id>')
@@ -49,7 +49,7 @@ def people_detail(person_id: str):
             'participation',
             'participation.project'
         )).dump(person)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -68,7 +68,7 @@ def people_relationship_participants(person_id: str):
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
         payload = PersonSchema(resource_linkage='participation').dump(person)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -87,7 +87,7 @@ def people_relationship_organisations(person_id: str):
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
         payload = PersonSchema(resource_linkage='organisation').dump(person)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -106,7 +106,7 @@ def people_participants(person_id: str):
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
         payload = PersonSchema(related_resource='participation', many_related=True).dump(person)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -125,7 +125,7 @@ def people_organisations(person_id: str):
     try:
         person = Person.query.filter_by(neutral_id=person_id).one()
         payload = PersonSchema(related_resource='organisation', many_related=False).dump(person)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

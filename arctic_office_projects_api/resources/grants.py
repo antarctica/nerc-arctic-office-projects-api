@@ -30,7 +30,7 @@ def grants_list():
         'allocations.project'
     )).dump(_grants)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @grants.route('/grants/<grant_id>')
@@ -49,7 +49,7 @@ def grants_detail(grant_id: str):
             'allocations',
             'allocations.project'
         )).dump(grant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -68,7 +68,7 @@ def grants_relationship_allocations(grant_id: str):
     try:
         grant = Grant.query.filter_by(neutral_id=grant_id).one()
         payload = GrantSchema(resource_linkage='allocations').dump(grant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -87,7 +87,7 @@ def grants_relationship_organisations(grant_id: str):
     try:
         grant = Grant.query.filter_by(neutral_id=grant_id).one()
         payload = GrantSchema(resource_linkage='funder').dump(grant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -106,7 +106,7 @@ def grants_allocations(grant_id: str):
     try:
         grant = Grant.query.filter_by(neutral_id=grant_id).one()
         payload = GrantSchema(related_resource='allocations', many_related=True).dump(grant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -125,7 +125,7 @@ def grants_organisations(grant_id: str):
     try:
         grant = Grant.query.filter_by(neutral_id=grant_id).one()
         payload = GrantSchema(related_resource='funder', many_related=False).dump(grant)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

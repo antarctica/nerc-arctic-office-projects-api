@@ -31,7 +31,7 @@ def categorisations_list():
         'category.category_scheme'
     )).dump(_categorisations)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @categorisations.route('/categorisations/<categorisation_id>')
@@ -51,7 +51,7 @@ def categorisations_detail(categorisation_id: str):
             'category.parent_category',
             'category.category_scheme'
         )).dump(categorisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -70,7 +70,7 @@ def categorisations_relationship_projects(categorisation_id: str):
     try:
         categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
         payload = CategorisationSchema(resource_linkage='project').dump(categorisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -90,7 +90,7 @@ def categorisations_relationship_category_terms(categorisation_id: str):
     try:
         categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
         payload = CategorisationSchema(resource_linkage='category').dump(categorisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -109,7 +109,7 @@ def categorisations_projects(categorisation_id: str):
     try:
         categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
         payload = CategorisationSchema(related_resource='project', many_related=False).dump(categorisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -128,7 +128,7 @@ def categorisations_category_terms(categorisation_id: str):
     try:
         categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
         payload = CategorisationSchema(related_resource='category', many_related=False).dump(categorisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

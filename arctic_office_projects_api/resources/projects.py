@@ -37,7 +37,7 @@ def projects_list():
         'categorisations.category.parent_category'
     )).dump(projects)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @projects.route('/projects/<project_id>')
@@ -63,7 +63,7 @@ def projects_detail(project_id: str):
             'categorisations.category.category_scheme',
             'categorisations.category.parent_category'
         )).dump(project)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -82,7 +82,7 @@ def projects_relationship_participants(project_id: str):
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
         payload = ProjectSchema(resource_linkage='participants').dump(project)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -101,7 +101,7 @@ def projects_relationship_allocations(project_id: str):
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
         payload = ProjectSchema(resource_linkage='allocations').dump(project)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -120,7 +120,7 @@ def projects_participants(project_id: str):
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
         payload = ProjectSchema(related_resource='participants', many_related=True).dump(project)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -139,7 +139,7 @@ def projects_allocations(project_id: str):
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
         payload = ProjectSchema(related_resource='allocations', many_related=True).dump(project)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -158,7 +158,7 @@ def projects_relationship_categorisations(project_id: str):
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
         payload = ProjectSchema(resource_linkage='categorisations').dump(project)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -177,7 +177,7 @@ def projects_categorisations(project_id: str):
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
         payload = ProjectSchema(related_resource='categorisations', many_related=True).dump(project)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

@@ -33,7 +33,7 @@ def organisations_list():
         'grants.allocations.project'
     )).dump(_organisations)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @organisations.route('/organisations/<organisation_id>')
@@ -55,7 +55,7 @@ def organisations_detail(organisation_id: str):
             'grants.allocations',
             'grants.allocations.project'
         )).dump(organisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -74,7 +74,7 @@ def organisations_relationship_people(organisation_id: str):
     try:
         organisation = Organisation.query.filter_by(neutral_id=organisation_id).one()
         payload = OrganisationSchema(resource_linkage='people').dump(organisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -93,7 +93,7 @@ def organisations_relationship_grants(organisation_id: str):
     try:
         organisation = Organisation.query.filter_by(neutral_id=organisation_id).one()
         payload = OrganisationSchema(resource_linkage='grants').dump(organisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -112,7 +112,7 @@ def organisations_people(organisation_id: str):
     try:
         organisation = Organisation.query.filter_by(neutral_id=organisation_id).one()
         payload = OrganisationSchema(related_resource='people', many_related=True).dump(organisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -131,7 +131,7 @@ def organisations_grants(organisation_id: str):
     try:
         organisation = Organisation.query.filter_by(neutral_id=organisation_id).one()
         payload = OrganisationSchema(related_resource='grants', many_related=True).dump(organisation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

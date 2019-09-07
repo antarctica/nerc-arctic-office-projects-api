@@ -29,7 +29,7 @@ def allocations_list():
         'grant'
     )).dump(_allocations)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @allocations.route('/allocations/<allocation_id>')
@@ -47,7 +47,7 @@ def allocations_detail(allocation_id: str):
             'project',
             'grant'
         )).dump(allocation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -66,7 +66,7 @@ def allocations_relationship_projects(allocation_id: str):
     try:
         allocation = Allocation.query.filter_by(neutral_id=allocation_id).one()
         payload = AllocationSchema(resource_linkage='project').dump(allocation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -85,7 +85,7 @@ def allocations_relationship_grants(allocation_id: str):
     try:
         allocation = Allocation.query.filter_by(neutral_id=allocation_id).one()
         payload = AllocationSchema(resource_linkage='grant').dump(allocation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -104,7 +104,7 @@ def allocations_projects(allocation_id: str):
     try:
         allocation = Allocation.query.filter_by(neutral_id=allocation_id).one()
         payload = AllocationSchema(related_resource='project', many_related=False).dump(allocation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -123,7 +123,7 @@ def allocations_grants(allocation_id: str):
     try:
         allocation = Allocation.query.filter_by(neutral_id=allocation_id).one()
         payload = AllocationSchema(related_resource='grant', many_related=False).dump(allocation)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

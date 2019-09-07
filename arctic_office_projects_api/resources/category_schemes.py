@@ -29,7 +29,7 @@ def category_schemes_list():
         'categories.categorisations.project'
     )).dump(_category_schemes)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @category_schemes.route('/category-schemes/<category_scheme_id>')
@@ -47,7 +47,7 @@ def category_schemes_detail(category_scheme_id: str):
             'categories',
             'categories.categorisations.project'
         )).dump(category_scheme)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -67,7 +67,7 @@ def category_schemes_relationship_category_terms(category_scheme_id: str):
     try:
         category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
         payload = CategorySchemeSchema(resource_linkage='categories').dump(category_scheme)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -86,7 +86,7 @@ def category_schemes_category_terms(category_scheme_id: str):
     try:
         category_scheme = CategoryScheme.query.filter_by(neutral_id=category_scheme_id).one()
         payload = CategorySchemeSchema(related_resource='categories', many_related=True).dump(category_scheme)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:

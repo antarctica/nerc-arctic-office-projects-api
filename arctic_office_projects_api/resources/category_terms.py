@@ -31,7 +31,7 @@ def category_terms_list():
         'category_scheme'
     )).dump(_category_terms)
 
-    return jsonify(payload.data)
+    return jsonify(payload)
 
 
 @category_terms.route('/categories/<category_term_id>')
@@ -51,7 +51,7 @@ def category_terms_detail(category_term_id: str):
             'categorisations.project',
             'category_scheme'
         )).dump(category_term)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -70,7 +70,7 @@ def category_terms_relationship_parent_category_terms(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(resource_linkage='parent-category').dump(category_term)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -90,7 +90,7 @@ def category_terms_relationship_category_schemes(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(resource_linkage='category-scheme').dump(category_term)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -110,7 +110,7 @@ def category_terms_relationship_categorisations(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(resource_linkage='categorisations').dump(category_term)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -129,7 +129,7 @@ def category_terms_parent_category_terms(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(related_resource='parent_category', many_related=False).dump(category_term)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -148,7 +148,7 @@ def category_terms_category_schemes(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(related_resource='category_scheme', many_related=False).dump(category_term)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
@@ -167,7 +167,7 @@ def category_terms_categorisations(category_term_id: str):
     try:
         category_term = CategoryTerm.query.filter_by(neutral_id=category_term_id).one()
         payload = CategoryTermSchema(related_resource='categorisations', many_related=True).dump(category_term)
-        return jsonify(payload.data)
+        return jsonify(payload)
     except NoResultFound:
         raise NotFound()
     except MultipleResultsFound:
