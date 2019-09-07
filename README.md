@@ -634,11 +634,12 @@ Set the `AZURE_OAUTH_TENANCY`, `AZURE_OAUTH_APPLICATION_ID` and `AZURE_OAUTH_CLI
 local `.env` file.
 
 For testing the API locally, register and assign all permissions to a testing client:
-    * see the [Registering API clients](#registering-api-clients) section to register a local testing API client
-        * named `BAS NERC Arctic Office Projects API Client Testing`, using accounts in the home tenancy only, with no 
-          redirect URL
-    * see the [Assigning scopes to clients ](#assigning-scopes-to-clients) section to assign all permissions to this 
-      client
+
+* see the [Registering API clients](#registering-api-clients) section to register a local testing API client
+  * named `BAS NERC Arctic Office Projects API Client Testing`, using accounts in the home tenancy only, with no 
+    redirect URL
+* see the [Assigning scopes to clients ](#assigning-scopes-to-clients) section to assign all permissions to this 
+  client
 
 [1] Application roles for the BAS NERC Arctic Office Projects API:
 

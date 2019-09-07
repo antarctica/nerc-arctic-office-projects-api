@@ -411,7 +411,7 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         If there isn't a single employer resource an appropriate exception is raised instead.
 
         :rtype str
-        :return URI of the GTR Funder resource for a GTR Fund
+        :return URI of the GTR Employer resource for a GTR Person
         """
         if 'EMPLOYED' not in self.resource_links.keys():
             raise KeyError("GTR employer relation not found in GTR person links")
@@ -444,10 +444,10 @@ class GatewayToResearchPerson(GatewayToResearchResource):
             # Kenneth Carslaw - Leeds
             "https://gtr.ukri.org:443/gtr/api/persons/00ECDD3F-DE95-4E2C-85C6-A73578A9256E":
                 "https://orcid.org/0000-0002-6800-154X",
-            # Barbara Brooks
+            # Barbara Brooks - Leeds
             "https://gtr.ukri.org:443/gtr/api/persons/4B79375A-2E7B-42EB-A981-3EAEE5AD4066":
                 'https://orcid.org/0000-0001-8932-9256',
-            # Ian Brooks
+            # Ian Brooks - Leeds
             "https://gtr.ukri.org:443/gtr/api/persons/BBCB83F2-B5D2-43B9-859E-0DA9CC0F63D5":
                 'https://orcid.org/0000-0002-5051-1322',
             # Steven Dobbie [uncertain]
@@ -963,12 +963,3 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
         # Remove any added, but non-committed, entities
         db.session.flush()
         raise e
-
-
-# temp
-def foo():
-    from http import HTTPStatus
-
-    import_gateway_to_research_grant_interactively(gtr_grant_reference='NE/K011820/1')
-
-    return '', HTTPStatus.OK
