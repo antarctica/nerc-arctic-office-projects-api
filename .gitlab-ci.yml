@@ -107,7 +107,7 @@ build-heroku-stage:
   services:
     - docker:dind
   image:
-    name: docker:stable-dind
+    name: docker:19.03-dind
     entrypoint: [""]
   script:
     - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY"
@@ -126,7 +126,7 @@ build-heroku-prod:
   services:
     - docker:dind
   image:
-    name: docker:stable-dind
+    name: docker:19.03-dind
     entrypoint: [""]
   script:
     - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY"
