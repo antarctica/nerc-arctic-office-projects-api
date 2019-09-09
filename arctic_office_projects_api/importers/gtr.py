@@ -268,8 +268,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
         raise UnmappedGatewayToResearchOrganisation(meta={
             'gtr_organisation': {
-                'resource_uri': self.resource_uri,
-                'name': self.name
+                'resource_uri': self.resource_uri
             }
         })
 
@@ -464,8 +463,7 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
             raise UnmappedGatewayToResearchPerson(meta={
                 'gtr_person': {
-                    'resource_uri': self.resource_uri,
-                    'name': f"{self.first_name} {self.surname}"
+                    'resource_uri': self.resource_uri
                 }
             })
 
