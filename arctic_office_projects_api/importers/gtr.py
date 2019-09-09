@@ -876,7 +876,9 @@ class GatewayToResearchGrantImporter:
         :rtype GrantStatus
         :return member of the GrantStatus enumeration corresponding to the status in a GTR project
         """
-        if status == 'Closed':
+        if status == 'Active':
+            return GrantStatus.Active
+        elif status == 'Closed':
             return GrantStatus.Closed
 
         raise ValueError("Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
