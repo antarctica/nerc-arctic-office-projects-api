@@ -44,9 +44,9 @@ stages:
 
 variables:
   DOCKER_HOST: tcp://docker:2376
+  DOCKER_CERT_PATH: /certs/client
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_VERIFY: 1
-  DOCKER_TLS_CERTDIR: /certs
   GITLAB_REGISTRY: docker-registry.data.bas.ac.uk
   POSTGRES_DB: app_test
   POSTGRES_USER: app
