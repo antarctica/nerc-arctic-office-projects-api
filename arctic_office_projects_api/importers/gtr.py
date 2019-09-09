@@ -1,9 +1,10 @@
+import requests
+
 from datetime import date, datetime, timezone
 from typing import Dict, Optional, List
 from urllib.parse import quote as url_encode
 
-import requests
-
+from flask import current_app as app
 from psycopg2.extras import DateRange
 from requests import HTTPError
 # noinspection PyPackageRequirements
@@ -940,24 +941,30 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
     :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
     """
     try:
-        print(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
+        app.logger.info(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
 
         importer = GatewayToResearchGrantImporter(gtr_grant_reference=gtr_grant_reference)
         if importer.exists():
-            print(
-                f"Finished importing GTR project with grant reference ({gtr_grant_reference}), already imported")
+            app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}) - Already "
+                            f"imported")
             return True
 
         gtr_project_id = importer.search()
         if gtr_project_id is None:
-            print(
-                f"* Failed importing GTR project with grant reference ({gtr_grant_reference}), no or multiple GTR "
-                f"projects found")
+            app.logger.error(f"* Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
+                             f"multiple GTR projects found")
             return False
-        print(f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}], importing")
+        app.logger.info(f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+                        f"Importing")
 
         importer.fetch()
-        print(f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+        app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+    except UnmappedGatewayToResearchOrganisation as e:
+        app.logger.error(f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]")
+    except UnmappedGatewayToResearchPerson as e:
+        app.logger.error(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
+    except UnmappedGatewayToResearchProjectCategory as e:
+        app.logger.error(f"Unmapped GTR Category [{e.meta['gtr_category']['id']}, {e.meta['gtr_category']['name']}]")
     except Exception as e:
         db.session.rollback()
         # Remove any added, but non-committed, entities
