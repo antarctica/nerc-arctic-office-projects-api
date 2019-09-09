@@ -43,9 +43,10 @@ stages:
   - deploy
 
 variables:
-  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_HOST: tcp://docker:2376
   DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_TLS_VERIFY: 1
+  DOCKER_TLS_CERTDIR: /certs
   GITLAB_REGISTRY: docker-registry.data.bas.ac.uk
   POSTGRES_DB: app_test
   POSTGRES_USER: app
@@ -109,10 +110,6 @@ build-heroku-stage:
   image:
     name: docker:19.03-dind
     entrypoint: [""]
-  before_script:
-    - "echo $DOCKER_TLS_CERTDIR"
-    - "ls -l $DOCKER_TLS_CERTDIR"
-    - "docker build --verbose -t registry.heroku.com/$HEROKU_APP_STAGE_NAME/web -f Dockerfile.heroku --build-arg APP_RELEASE=$CI_COMMIT_SHA --build-arg APP_ENV=staging ."
   script:
     - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY"
     - "docker login -u _ -p $HEROKU_API_KEY registry.heroku.com"
