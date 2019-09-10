@@ -1,9 +1,11 @@
+import requests
+
 from datetime import date, datetime, timezone
 from typing import Dict, Optional, List
 from urllib.parse import quote as url_encode
 
-import requests
-
+from click import echo, style
+from flask import current_app as app
 from psycopg2.extras import DateRange
 from requests import HTTPError
 # noinspection PyPackageRequirements
@@ -33,6 +35,11 @@ class UnmappedGatewayToResearchProjectCategory(AppException):
     title = 'Unmapped Gateway to Research category or topic'
     detail = 'A Gateway to Research category or topic has not been mapped to an application category term via a ' \
              'scheme identifier'
+
+
+class GatewayToResearchPublicationWithoutDOI(AppException):
+    title = "Gateway to Research publication doesn't have a DOI"
+    detail = 'A Gateway to Research publication needs to include a DOI to be valid in this API'
 
 
 # Resources
@@ -262,8 +269,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
         raise UnmappedGatewayToResearchOrganisation(meta={
             'gtr_organisation': {
-                'resource_uri': self.resource_uri,
-                'name': self.name
+                'resource_uri': self.resource_uri
             }
         })
 
@@ -453,13 +459,255 @@ class GatewayToResearchPerson(GatewayToResearchResource):
             # Steven Dobbie [uncertain]
             "https://gtr.ukri.org:443/gtr/api/persons/8DFA8601-00EB-47B4-A565-8F2956F92B41":
                 'https://orcid.org/0000-0001-8474-176X',
+            # David Lowry - Royal Holloway
+            "https://gtr.ukri.org:443/gtr/api/persons/01EDB04B-CAAA-477B-AE23-7BA9BA1B4552":
+                "https://orcid.org/0000-0002-8535-0346",
+            # Sian Henley - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/04DB4916-2E9B-4746-B5AC-CD8FFD98DBAD":
+                "https://orcid.org/0000-0003-1221-1983",
+            # Finlo Cottier - SAMS
+            "https://gtr.ukri.org:443/gtr/api/persons/0AD27E81-D523-48AA-AA6B-C9C3821DF182":
+                "https://orcid.org/0000-0002-3068-1754",
+            # Rowan Sutton - Reading / NCAS
+            "https://gtr.ukri.org:443/gtr/api/persons/0B2C1A4A-6D80-488E-A28A-23D2EB48B7B6":
+                "https://orcid.org/0000-0001-8345-8583",
+            # Hugh Coe - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/0C563960-68AC-41EB-8535-4F23806F09AA":
+                "https://orcid.org/0000-0002-3264-1713",
+            # Peter Langdon - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/0FB14E60-3A55-4CE1-B476-DDCFDDE621B5":
+                "https://orcid.org/0000-0003-2724-2643",
+            # Bhavani Narayanaswamy - Highlands & Islands (possibly also SAMS)
+            "https://gtr.ukri.org:443/gtr/api/persons/13FA7765-399D-4905-8260-F849DBDE2068":
+                "https://orcid.org/0000-0002-5810-9127",
+            # Keith Haines - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/1A191F76-65F5-46A6-8E4F-2443B2ED6E31":
+                "https://orcid.org/0000-0003-2768-2374",
+            # John Adrian Pyle - Cambridge [needs organisation mapping manually]
+            "https://gtr.ukri.org:443/gtr/api/persons/1A4B6425-F976-4667-AABF-DBCBBB7C3645":
+                "https://orcid.org/0000-0003-3629-9916",
+            # Andrew Manning - UEA
+            "https://gtr.ukri.org:443/gtr/api/persons/2001E910-8250-41BA-A0B3-103175B8E241":
+                "https://orcid.org/0000-0001-6952-7773",
+            # David Tappin - BGS
+            "https://gtr.ukri.org:443/gtr/api/persons/2A66F565-101A-46A7-A306-2740803946BE":
+                "https://orcid.org/0000-0003-3186-8403",
+            # Carl Percival - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/2C40BFD4-78D8-4474-A310-60EEEB4D4367":
+                "https://orcid.org/0000-0003-2525-160X",
+            # David Marshall - Oxford
+            "https://gtr.ukri.org:443/gtr/api/persons/2E94CCB3-6825-4CC3-BF3D-3EF3DC94095E":
+                "https://orcid.org/0000-0002-5199-6579",
+            # Matthew Piggott - Imperial
+            "https://gtr.ukri.org:443/gtr/api/persons/3015433E-450E-4FFC-84C8-A8C98F95C19F":
+                "https://orcid.org/0000-0002-7526-6853",
+            # Peter Challenor - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/36A16C19-AD10-4C08-9AA5-2DA6BF1805C1":
+                "https://orcid.org/0000-0001-8661-2718",
+            # Dan Charman - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/3AF9853E-C741-4AFA-80A6-D81028DFF965":
+                "https://orcid.org/0000-0003-3464-4536",
+            # Doerthe Tetzlaff - Leibniz Institute of Freshwater Ecology
+            "https://gtr.ukri.org:443/gtr/api/persons/3B2929B5-E2B3-4E97-AA3A-5E50A04E8DBB":
+                "https://orcid.org/0000-0002-7183-8674",
+            # Lucy Carpenter - York
+            "https://gtr.ukri.org:443/gtr/api/persons/3BB1C2AE-A72C-4EE4-BEBC-9A26941B7FC9":
+                "https://orcid.org/0000-0002-6257-3950",
+            # Thomas Choularton - Manchester [needs organisation mapping manually]
+            "https://gtr.ukri.org:443/gtr/api/persons/3CC2AEBF-3922-47F7-82C5-35F9748A3011":
+                "https://orcid.org/0000-0002-0409-4329",
+            # Kerry Dinsmore - CEH
+            "https://gtr.ukri.org:443/gtr/api/persons/3ED15A53-9882-4859-9096-54BFFCF6474D":
+                "https://orcid.org/0000-0002-3586-6256",
+            # John King - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/3EDDE53B-29D3-4B5B-BAFE-5F6198D2E5F1":
+                "https://orcid.org/0000-0003-3315-7568",
+            # Jonathan Jackson - OceanLab, University of Aberdeen [needs organisation mapping manually]
+            "https://gtr.ukri.org:443/gtr/api/persons/41C3F70F-AA57-4176-AB5C-1A8DD4CEFFF9":
+                'https://orcid.org/0000-0001-6387-3114',
+            # Helen Johnson - Oxford [check mapping]
+            "https://gtr.ukri.org:443/gtr/api/persons/5115097B-0BA3-4A05-A822-7A777FD7EEE5":
+                'https://orcid.org/0000-0003-1873-2085',
+            # Glenn Carver [Unknown?]
+            "https://gtr.ukri.org:443/gtr/api/persons/517CA55C-9F65-4C9F-B6F5-E212FAAA59F1":
+                'https://orcid.org/0000-0001-7582-6497',
+            # Antonios Zervos - Southampton [check mapping]
+            "https://gtr.ukri.org:443/gtr/api/persons/52EF2886-B160-4D84-9338-E49A2F60CD33":
+                'http://orcid.org/0000-0002-2662-9320',
+            # Iain Hartley - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/5425E38B-D4A4-4F7D-BC5D-ADEBADE91EAA":
+                'https://orcid.org/0000-0002-9183-6617',
+            # Paul Connolly - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/5D9BDBDF-E33A-4CEA-851D-170139511C17":
+                'https://orcid.org/0000-0002-3294-7405',
+            # Jeffery Priest - Calgary (prev. Southampton)
+            "https://gtr.ukri.org:443/gtr/api/persons/650EAE92-D384-4F8F-96C0-8027C839AA5E":
+                'https://orcid.org/0000-0001-5639-2101',
+            # Benedict Rogers - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/657FE816-0279-44C6-AE38-AA7296375B10":
+                'https://orcid.org/0000-0002-3269-7979',
+            # Ed Hawkins - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/65A4C49F-8C74-43F0-BCA3-B06AFE4E859D":
+                'https://orcid.org/0000-0001-9477-3677',
+            # Martin Gallagher - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/66F27E10-48BB-4714-9A85-9BCC4090FB65":
+                'https://orcid.org/0000-0002-4968-6088',
+            # Gareth Phoenix - Sheffield
+            "https://gtr.ukri.org:443/gtr/api/persons/67095429-F0EF-47CD-B197-219035F0127D":
+                'https://orcid.org/0000-0002-0911-8107',
+            # James Dorsey - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/6A8E4532-EA54-4909-8DEC-1125A79A7FDE":
+                'https://orcid.org/0000-0002-1720-9412',
+            # Mark Inall - SAMS
+            "https://gtr.ukri.org:443/gtr/api/persons/7542AC4E-A691-4B52-92DB-027DB27A247D":
+                'https://orcid.org/0000-0002-1624-4275',
+            # Sue Dawson - Dundee
+            "https://gtr.ukri.org:443/gtr/api/persons/777013B8-E933-4376-9EA6-828D6D17C822":
+                'https://orcid.org/0000-0001-8115-4551',
+            # Daniel Feltham - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/77F2F26D-01E9-41D8-9FDF-82087A6A1CF1":
+                'https://orcid.org/0000-0003-2289-014X',
+            # Jens-Arne Subke - Stirling
+            "https://gtr.ukri.org:443/gtr/api/persons/79B6AE08-32D0-40C5-991E-369ACB7A6D56":
+                'https://orcid.org/0000-0001-9244-639X',
+            # Lee Cunningham - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/79EB4379-F6F4-410C-B31F-BE021E3F0639":
+                'http://orcid.org/0000-0002-7686-7490',
+            # Alberto Naveira Garabato - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/828DE68A-0A00-4ACF-B386-584524C563BE":
+                'https://orcid.org/0000-0001-6071-605X',
+            # Richard Essery - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/86F46246-B5D0-444A-861F-1C71DF678511":
+                'http://orcid.org/0000-0003-1756-9095',
+            # Jacqueline Hamilton - York
+            "https://gtr.ukri.org:443/gtr/api/persons/8C1A67B8-1338-4644-888A-E583BDACF5DF":
+                'https://orcid.org/0000-0003-0975-4311',
+            # Julian Murton - Sussex
+            "https://gtr.ukri.org:443/gtr/api/persons/8D799711-CEB0-4DF1-A534-B10AFF1EAC26":
+                'https://orcid.org/0000-0002-9469-5856',
+            # Kim Last - SAMS
+            "https://gtr.ukri.org:443/gtr/api/persons/90679B1B-37B4-4290-A0F1-777FBACFD849":
+                'https://orcid.org/0000-0001-9402-2347',
+            # Peter Allison - Imperial
+            "https://gtr.ukri.org:443/gtr/api/persons/9296FC3E-797B-4F98-8DD2-F690561F9C90":
+                'https://orcid.org/0000-0002-4997-5314',
+            # Julian Dowdeswell - SPRI, Cambridge
+            "https://gtr.ukri.org:443/gtr/api/persons/9394F178-672F-4841-A7D2-11BAA0F96CA4":
+                'https://orcid.org/0000-0003-1369-9482',
+            # Matthew Collins - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/9920CC72-2421-470F-BAD2-F70C4D6F7777":
+                'https://orcid.org/0000-0003-3785-6008',
+            # Garry Hayman - CEH
+            "https://gtr.ukri.org:443/gtr/api/persons/9AE998A7-816E-4351-9152-2EC0794F4F42":
+                'http://orcid.org/0000-0003-3825-4156',
+            # Emily Shuckburgh - Cambridge (prev. BAS)
+            "https://gtr.ukri.org:443/gtr/api/persons/9FD6EE4D-1FA0-4C91-9029-9B8C8ECFF9D0":
+                'https://orcid.org/0000-0001-9206-3444',
+            # Ian Renfrew - UEA
+            "https://gtr.ukri.org:443/gtr/api/persons/A243B3E6-B6CF-49CE-B9CD-95B34AF61D22":
+                'https://orcid.org/0000-0001-9379-8215',
+            # Euan Nisbet - Royal Holloway
+            "https://gtr.ukri.org:443/gtr/api/persons/A39C85BA-D5AA-4B93-9221-A8FF9AFD8D19":
+                'https://orcid.org/0000-0001-9379-8215',
+            # Byongjun Hwang - Huddersfield
+            "https://gtr.ukri.org:443/gtr/api/persons/A745D5F8-8F0A-4F23-B6F7-340B8B83BE04":
+                'https://orcid.org/0000-0003-4579-2040',
+            # Gordon McFiggans - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/A757DCA4-11A9-4E31-A909-4178F9A4326C":
+                'https://orcid.org/0000-0002-3423-7896',
+            # Alistair Dawson [Should be Alastair] - Dundee
+            "https://gtr.ukri.org:443/gtr/api/persons/AA1CB5E7-4FA2-4BB1-9207-E3956F7076A3":
+                'https://orcid.org/0000-0002-8383-8487',
+            # Tom Rippeth - Bangor
+            "https://gtr.ukri.org:443/gtr/api/persons/AB6BDE0A-2AE2-47A0-9D67-2251B15C6113":
+                'http://orcid.org/0000-0002-9286-0176',
+            # Mary Edwards - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/AB93A48C-73D3-4A83-B629-313E442A0AF9":
+                'https://orcid.org/0000-0002-3490-6682',
+            # Nicholas Anderson - Loughborough
+            "https://gtr.ukri.org:443/gtr/api/persons/B11BBEC7-B32B-4456-A861-B1EAA6C960E3":
+                'https://orcid.org/0000-0002-0037-0306',
+            # Kevin Horsburgh - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/B17B3FE8-113A-47B9-85C8-E0D3D59EFEB6":
+                'https://orcid.org/0000-0003-4803-9919',
+            # Jonathan Crosier - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/B3C9A6AB-1A74-4A47-ADE7-E611573CB913":
+                'http://orcid.org/0000-0002-3086-4729',
+            # Mathew Williams - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/B5BB39B9-0CFA-4514-8973-73C327F59EFE":
+                'https://orcid.org/0000-0001-6117-5208',
+            # Philip Wookey - Stirling
+            "https://gtr.ukri.org:443/gtr/api/persons/B6D05E2A-9AD1-4761-B846-552D67EF7926":
+                'https://orcid.org/0000-0001-5957-6424',
+            # Paul Dunlop - Ulster
+            "https://gtr.ukri.org:443/gtr/api/persons/B7AB74E8-2DBC-44C0-A1D6-7D838DE08FB6":
+                'https://orcid.org/0000-0001-9503-5545',
+            # Maria Luneva - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/B7B83DE3-1412-4784-9722-23C818F7683E":
+                'https://orcid.org/0000-0003-3240-5427',
+            # Suleyman Sami Nalbant - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/B908935E-F993-4EAF-9476-1ABA02A4C616":
+                'https://orcid.org/0000-0002-7944-5912',
+            # Robert Baxter - Durham
+            "https://gtr.ukri.org:443/gtr/api/persons/CDF2B354-9377-4106-B9CB-634C20D4D898":
+                'https://orcid.org/0000-0002-7504-6797',
+            # Chris Ian Clayton (C R I) - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/D08E6379-0AB3-40A4-BD55-E73AAC8E2A86":
+                'https://orcid.org/0000-0003-0071-8437',
+            # Gareth Collins - Imperial
+            "https://gtr.ukri.org:443/gtr/api/persons/D11D73BD-AD47-4A9A-979A-DAB6CBAED9CE":
+                'https://orcid.org/0000-0002-6087-6149',
+            # Peter Stansby - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/D246DD86-5AD6-49B8-90BA-7061CD202A51":
+                'https://orcid.org/0000-0002-3552-0810',
+            # Leonard Shaffrey - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/D7395893-00A2-438A-8423-674DDC4AEF22":
+                'https://orcid.org/0000-0003-2696-752X',
+            # Keith Davidson - SAMS
+            "https://gtr.ukri.org:443/gtr/api/persons/DC235160-418A-461C-996D-4AC2A95D3126":
+                'https://orcid.org/0000-0001-9269-3227',
+            # Peter Talling - Durham
+            "https://gtr.ukri.org:443/gtr/api/persons/E186C90F-0312-49F0-9CE8-47E042A5A84F":
+                'https://orcid.org/0000-0001-5234-0398',
+            # Keith Bower - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/E58BC862-996B-4456-84DA-CD9EF3F11A76":
+                'https://orcid.org/0000-0002-9802-3264',
+            # James Hopkins - York
+            "https://gtr.ukri.org:443/gtr/api/persons/E90C079C-3E8B-42C0-AAC6-A9610CA3653C":
+                'http://orcid.org/0000-0002-0447-2633',
+            # David Meldrum - SAMS
+            "https://gtr.ukri.org:443/gtr/api/persons/ECB88D53-17E8-4F83-A11F-24B4654A19B3":
+                'https://orcid.org/0000-0002-9431-7257',
+            # Adrian Martin - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/EE778812-DC4E-4C32-A19F-764FCAA18AE0":
+                'https://orcid.org/0000-0002-1202-8612',
+            # James Allan - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/F011D67C-29CD-4E8E-AFB0-DD8FDEA8F950":
+                'http://orcid.org/0000-0001-6492-4876',
+            # Suzanne McGowan - Nottingham
+            "https://gtr.ukri.org:443/gtr/api/persons/F340DFB4-7E65-4C84-9299-793CD9053628":
+                'https://orcid.org/0000-0003-4034-7140',
+            # Andrew Shepherd - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/F37CEAD9-5B33-4B4B-B024-2EFE300DF6F9":
+                'https://orcid.org/0000-0002-4914-1299',
+            # Walter Distaso - Imperial
+            "https://gtr.ukri.org:443/gtr/api/persons/F686AF09-E90E-4339-992A-FB610DFD9A92":
+                'https://orcid.org/0000-0002-4122-0160',
+            # Sheldon Bacon - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/F99A9B4B-CB30-424B-8584-46AB9B1CD166":
+                'https://orcid.org/0000-0002-2471-9373',
+            # Ute Skiba - CEH
+            "https://gtr.ukri.org:443/gtr/api/persons/FB186100-33CA-4438-BC44-B445A2FC7166":
+                'https://orcid.org/0000-0001-8659-6092',
+            # Michel Tsamados - UCL
+            "https://gtr.ukri.org:443/gtr/api/persons/FFC933A9-265E-4B6F-8CA9-0DA86ADB6976":
+                'https://orcid.org/0000-0001-7034-5360'
         }
 
         if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
             raise UnmappedGatewayToResearchPerson(meta={
                 'gtr_person': {
-                    'resource_uri': self.resource_uri,
-                    'name': f"{self.first_name} {self.surname}"
+                    'resource_uri': self.resource_uri
                 }
             })
 
@@ -479,7 +727,12 @@ class GatewayToResearchPublication(GatewayToResearchResource):
         super().__init__(gtr_resource_uri)
 
         if 'doi' not in self.resource:
-            raise KeyError('DOI element not in GTR publication')
+            raise GatewayToResearchPublicationWithoutDOI(meta={
+                'gtr_publication': {
+                    'resource_uri': self.resource_uri
+                }
+            })
+
         self.doi = self.resource['doi']
 
 
@@ -867,7 +1120,9 @@ class GatewayToResearchGrantImporter:
         :rtype GrantStatus
         :return member of the GrantStatus enumeration corresponding to the status in a GTR project
         """
-        if status == 'Closed':
+        if status == 'Active':
+            return GrantStatus.Active
+        elif status == 'Closed':
             return GrantStatus.Closed
 
         raise ValueError("Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
@@ -940,24 +1195,47 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
     :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
     """
     try:
-        print(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
-
+        app.logger.info(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
+        echo(style(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"))
         importer = GatewayToResearchGrantImporter(gtr_grant_reference=gtr_grant_reference)
         if importer.exists():
-            print(
-                f"Finished importing GTR project with grant reference ({gtr_grant_reference}), already imported")
+            app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}) - Already "
+                            f"imported")
+            echo(style(f"Finished importing GTR project with grant reference ({gtr_grant_reference}) - Already "
+                       f"imported", fg='green'))
             return True
 
         gtr_project_id = importer.search()
         if gtr_project_id is None:
-            print(
-                f"* Failed importing GTR project with grant reference ({gtr_grant_reference}), no or multiple GTR "
-                f"projects found")
+            app.logger.error(f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
+                             f"multiple GTR projects found")
+            echo(style(f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
+                       f"multiple GTR projects found", fg='red'))
             return False
-        print(f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}], importing")
+        app.logger.info(f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+                        f"Importing")
+        echo(style(f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+                   f"Importing"))
 
         importer.fetch()
-        print(f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+        app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+        echo(style(
+            f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported", fg='green'
+        ))
+    except UnmappedGatewayToResearchOrganisation as e:
+        app.logger.error(f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]")
+        echo(style(f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]", fg='red'))
+    except UnmappedGatewayToResearchPerson as e:
+        app.logger.error(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
+        echo(style(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]", fg='red'))
+    except GatewayToResearchPublicationWithoutDOI as e:
+        app.logger.error(f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]")
+        echo(style(f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]", fg='red'))
+    except UnmappedGatewayToResearchProjectCategory as e:
+        app.logger.error(f"Unmapped GTR Category [{e.meta['gtr_category']['id']}, {e.meta['gtr_category']['name']}]")
+        echo(style(
+            f"Unmapped GTR Category [{e.meta['gtr_category']['id']}, {e.meta['gtr_category']['name']}]", fg='red'
+        ))
     except Exception as e:
         db.session.rollback()
         # Remove any added, but non-committed, entities

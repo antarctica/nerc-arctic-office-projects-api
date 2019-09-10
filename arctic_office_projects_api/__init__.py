@@ -46,7 +46,7 @@ def create_app(config_name):
 
     # Logging
     formatter = RequestFormatter(
-        '[%(asctime)s] [%(levelname)s] [%(request_id)s] [%(url)s] %(module)s: %(message)s'
+        '[%(asctime)s] [%(levelname)s] [%(request_id)s] [%(url)s]: %(message)s'
     )
     default_handler.setFormatter(formatter)
     default_handler.setLevel(app.config['LOGGING_LEVEL'])

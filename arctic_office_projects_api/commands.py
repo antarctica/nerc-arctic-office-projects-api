@@ -1,5 +1,5 @@
 # noinspection PyPackageRequirements
-from click import argument, Path, Choice
+from click import argument, Path, Choice, echo, style
 from flask.cli import AppGroup
 
 from arctic_office_projects_api.importers import import_category_terms_from_file_interactively, \
@@ -15,14 +15,14 @@ seeding_cli_group = AppGroup('seed', help='Perform database seeding.')
 def seed_predictable_mock_projects():
     """Seed database with predictable mock projects."""
     seed_predictable_test_resources()
-    print("Seeded predictable mock resources")
+    echo(style("Seeded predictable mock resources", fg='green'))
 
 
 @seeding_cli_group.command('random')
 def seed_random_mock_projects():
     """Seed database with 100 random mock projects."""
     seed_random_test_resources()
-    print("Seeded random mock resources")
+    echo(style("Seeded random mock resources", fg='green'))
 
 
 importing_cli_group = AppGroup('import', help='Import data.')
