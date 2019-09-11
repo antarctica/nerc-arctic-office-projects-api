@@ -19,14 +19,14 @@
       "name": "NERC British Antarctic Survey",
       "grid-identifier": "https://www.grid.ac/institutes/grid.478592.5",
       "website": "https://www.bas.ac.uk"
-        },
+    },
     {
       "name": "University of Ulster",
       "grid-identifier": "https://www.grid.ac/institutes/grid.12641.30",
       "website": "https://www.ulster.ac.uk"
     },
     {
-      "name":"University of Edinburgh",
+      "name": "University of Edinburgh",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4305.2",
       "website": "https://www.ed.ac.uk"
     },
@@ -51,7 +51,7 @@
       "website": "https://www.imperial.ac.uk"
     },
     {
-      "name":"Durham University",
+      "name": "Durham University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8250.f",
       "website": "https://www.dur.ac.uk"
     },
@@ -81,7 +81,7 @@
       "website": "https://www.bgs.ac.uk"
     },
     {
-      "name":"University of York",
+      "name": "University of York",
       "grid-identifier": "https://www.grid.ac/institutes/grid.5685.e",
       "website": "https://www.york.ac.uk"
     },
@@ -101,7 +101,7 @@
       "website": "https://www.dundee.ac.uk"
     },
     {
-      "name":"University of Nottingham",
+      "name": "University of Nottingham",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4563.4",
       "website": "https://www.nottingham.ac.uk"
     },
@@ -159,6 +159,141 @@
       "name": "Bangor University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.7362.0",
       "website": "https://www.bangor.ac.uk"
+    },
+    {
+      "name": "Marine Biological Association",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.14335.30",
+      "website": "https://www.mba.ac.uk"
+    },
+    {
+      "name": "University of St Andrews",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.11914.3c",
+      "website": "https://www.st-andrews.ac.uk"
+    },
+    {
+      "name": "Northumbria University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.42629.3b",
+      "website": "https://www.northumbria.ac.uk"
+    },
+    {
+      "name": "Plymouth Marine Laboratory",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.22319.3b",
+      "website": "https://www.pml.ac.uk"
+    },
+    {
+      "name": "Newcastle University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.1006.7",
+      "website": "https://www.ncl.ac.uk"
+    },
+    {
+      "name": "Aarhus University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.7048.b",
+      "website": "https://international.au.dk"
+    },
+    {
+      "name": "Lancaster University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.9835.7",
+      "website": "https://www.lancaster.ac.uk"
+    },
+    {
+      "name": "University of Strathclyde",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.11984.35",
+      "website": "https://www.strath.ac.uk"
+    },
+    {
+      "name": "Free University of Brussels",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.8767.e",
+      "website": "https://www.vub.be/en/"
+    },
+    {
+      "name": "Warwick University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.7372.1",
+      "website": "https://warwick.ac.uk"
+    },
+    {
+      "name": "Bristol University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.5337.2",
+      "website": "http://bristol.ac.uk"
+    },
+    {
+      "name": "Aberystwyth University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.8186.7",
+      "website": "https://www.aber.ac.uk/en/"
+    },
+    {
+      "name": "University of Hull",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.9481.4",
+      "website": "https://www.hull.ac.uk"
+    },
+    {
+      "name": "Essex University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.8356.8",
+      "website": "https://www.essex.ac.uk"
+    },
+    {
+      "name": "Queen Mary, University of London",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.4868.2",
+      "website": "https://www.qmul.ac.uk"
+    },
+    {
+      "name": "Leicester University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.9918.9",
+      "website": "https://le.ac.uk"
+    },
+    {
+      "name": "Open University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.10837.3d",
+      "website": "https://www.open.ac.uk"
+    },
+    {
+      "name": "Scottish Universities Environmental Research Centre",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.224137.1",
+      "website": "https://www.gla.ac.uk/research/az/suerc/"
+    },
+    {
+      "name": "Birmingham University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.6572.6",
+      "website": "https://www.birmingham.ac.uk/index.aspx"
+    },
+    {
+      "name": "The Natural History Museum",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.35937.3b",
+      "website": "https://www.nhm.ac.uk"
+    },
+    {
+      "name": "Plymouth University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.11201.33",
+      "website": "https://www.plymouth.ac.uk"
+    },
+    {
+      "name": "Glasgow University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.8756.c",
+      "website": "https://www.gla.ac.uk"
+    },
+    {
+      "name": "AHRC",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.426413.6",
+      "website": "https://ahrc.ukri.org"
+    },
+    {
+      "name": "EPSRC",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.421091.f",
+      "website": "https://epsrc.ukri.org"
+    },
+    {
+      "name": "ESRC",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.434257.3",
+      "website": "https://esrc.ukri.org"
+    },
+    {
+      "name": "Innovate Uk",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.423443.6",
+      "website": "https://www.gov.uk/government/organisations/innovate-uk"
+    },
+    {
+      "name": "Cranfield University",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.12026.37",
+      "website": "https://www.cranfield.ac.uk"
     }
   ]
 }
