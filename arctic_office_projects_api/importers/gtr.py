@@ -30,12 +30,16 @@ class UnmappedGatewayToResearchPerson(AppException):
     title = 'Unmapped Gateway to Research person'
     detail = 'A Gateway to Research person has not been mapped to an application Person via a ORCID iD'
 
-
-class UnmappedGatewayToResearchProjectCategory(AppException):
-    title = 'Unmapped Gateway to Research category or topic'
-    detail = 'A Gateway to Research category or topic has not been mapped to an application category term via a ' \
+class UnmappedGatewayToResearchProjectTopic(AppException):
+    title = 'Unmapped Gateway to Research topic'
+    detail = 'A Gateway to Research topic has not been mapped to an application category term via a ' \
              'scheme identifier'
 
+
+class UnmappedGatewayToResearchProjectSubject(AppException):
+    title = 'Unmapped Gateway to Research subject'
+    detail = 'A Gateway to Research subject has not been mapped to an application category term via a ' \
+             'scheme identifier'
 
 class GatewayToResearchPublicationWithoutDOI(AppException):
     title = "Gateway to Research publication doesn't have a DOI"
@@ -53,6 +57,7 @@ class GatewayToResearchResource:
     including a 'links' attribute. This is a list of links to other resources with a 'rel' attribute indicating its
     type/person (e.g. a publication or a person).
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -142,6 +147,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
     This class is intended to hold any common functionality shared by these related classes.
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -157,7 +163,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
     def _map_to_grid_id(self) -> str:
         """
-        Organisations in this project are identified by GIRD IDs (https://www.grid.ac), however these are not used by
+        Organisations in this project are identified by GRID IDs (https://www.grid.ac), however these are not used by
         GTR and no other identifier is available to automatically determine the GIRD ID for an organisation based on its
         GTR resource ID.
 
@@ -378,6 +384,7 @@ class GatewayToResearchFund(GatewayToResearchResource):
 
     GTR Funds are associate with a GTR Funder (funding organisation).
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -385,7 +392,8 @@ class GatewayToResearchFund(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        self.funder = GatewayToResearchFunder(gtr_resource_uri=self._find_gtr_funder_link())
+        self.funder = GatewayToResearchFunder(
+            gtr_resource_uri=self._find_gtr_funder_link())
 
         if 'start' not in self.resource:
             raise KeyError('Start date element not in GTR fund')
@@ -404,7 +412,8 @@ class GatewayToResearchFund(GatewayToResearchResource):
         if 'amount' not in self.resource['valuePounds']:
             raise KeyError('Amount element not in GTR fund')
 
-        self.currency = self._map_gtr_fund_currency_code(self.resource['valuePounds']['currencyCode'])
+        self.currency = self._map_gtr_fund_currency_code(
+            self.resource['valuePounds']['currencyCode'])
         self.amount = self.resource['valuePounds']['amount']
 
     @staticmethod
@@ -440,7 +449,8 @@ class GatewayToResearchFund(GatewayToResearchResource):
         if len(self.resource_links['FUNDER']) == 0:
             raise KeyError("GTR funder relation not found in GTR fund links")
         if len(self.resource_links['FUNDER']) > 1:
-            raise KeyError("Multiple GTR funder identifiers found in GTR fund links, one expected")
+            raise KeyError(
+                "Multiple GTR funder identifiers found in GTR fund links, one expected")
 
         return self.resource_links['FUNDER'][0]
 
@@ -468,6 +478,7 @@ class GatewayToResearchPerson(GatewayToResearchResource):
 
     GTR People are associated with a GTR Employer (host organisation).
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -475,7 +486,8 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        self.employer = GatewayToResearchEmployer(gtr_resource_uri=self._find_gtr_employer_link())
+        self.employer = GatewayToResearchEmployer(
+            gtr_resource_uri=self._find_gtr_employer_link())
 
         self.first_name = None
         if 'firstName' in self.resource:
@@ -500,11 +512,14 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         :return URI of the GTR Employer resource for a GTR Person
         """
         if 'EMPLOYED' not in self.resource_links.keys():
-            raise KeyError("GTR employer relation not found in GTR person links")
+            raise KeyError(
+                "GTR employer relation not found in GTR person links")
         if len(self.resource_links['EMPLOYED']) == 0:
-            raise KeyError("GTR employer relation not found in GTR person links")
+            raise KeyError(
+                "GTR employer relation not found in GTR person links")
         if len(self.resource_links['EMPLOYED']) > 1:
-            raise KeyError("Multiple GTR employer relations found in GTR person links, one expected")
+            raise KeyError(
+                "Multiple GTR employer relations found in GTR person links, one expected")
 
         return self.resource_links['EMPLOYED'][0]
 
@@ -822,6 +837,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
 
     GTR projects are associated various other resources, including funding information, publications and people.
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -830,9 +846,11 @@ class GatewayToResearchProject(GatewayToResearchResource):
         super().__init__(gtr_resource_uri)
 
         self.identifiers = self._process_identifiers()
-        self.categories = self._process_categories()
+        self.research_topics = self._process_research_topics()
+        self.research_subjects = self._process_research_subjects()
         self.publications = self._process_publications()
-        self.fund = GatewayToResearchFund(gtr_resource_uri=self._find_gtr_fund_link())
+        self.fund = GatewayToResearchFund(
+            gtr_resource_uri=self._find_gtr_fund_link())
         self.principle_investigators = self._process_people(relation='PI_PER')
         self.co_investigators = self._process_people(relation='COI_PER')
 
@@ -895,38 +913,48 @@ class GatewayToResearchProject(GatewayToResearchResource):
             if 'value' not in gtr_identifier:
                 raise KeyError("Value attribute not in GTR project identifier")
 
-            project_references[gtr_identifier['type']].append(gtr_identifier['value'])
+            project_references[gtr_identifier['type']].append(
+                gtr_identifier['value'])
 
         return project_references
 
-    def _process_categories(self) -> List[dict]:
+    def _process_research_topics(self) -> List[dict]:
         """
-        Merges 'categories' and 'topics' used in projects into a single set of classifications
-
-        GTR Projects are classified by both 'categories' and 'topics' (using free-text terms), this project uses
-        categories that cover the domains of GTR categories and topics and therefore don't need to be separate.
-
-        To make mapping 'categories' and 'topics' to categories from this project easier, this method merges both into
-        a single list of classifications.
+        Here we process the research topics from the GTR resource into a list
 
         :rtype list
-        :return combined list of classifications for a GTR project
+        :return list of research topic classifications for a GTR project
         """
-        gtr_project_categories = []
-        if 'researchSubjects' in self.resource:
-            if 'researchSubject' in self.resource['researchSubjects']:
-                if len(self.resource['researchSubjects']['researchSubject']) > 0:
-                    for gtr_research_subject in self.resource['researchSubjects']['researchSubject']:
-                        if 'id' in gtr_research_subject:
-                            gtr_project_categories.append(gtr_research_subject)
+        gtr_project_topics = []
         if 'researchTopics' in self.resource:
             if 'researchTopic' in self.resource['researchTopics']:
                 if len(self.resource['researchTopics']['researchTopic']) > 0:
                     for gtr_research_topic in self.resource['researchTopics']['researchTopic']:
                         if 'id' in gtr_research_topic:
-                            gtr_project_categories.append(gtr_research_topic)
+                            gtr_project_topics.append(gtr_research_topic)
 
-        return gtr_project_categories
+        return gtr_project_topics
+
+    def _process_research_subjects(self) -> List[dict]:
+        """
+        GTR Projects are classified by both 'Subjects' and 'Topics', this project uses
+        categories that cover the domains of GTR subjects and topics and therefore don't need to be separate.
+
+        Here we process the research subjects into its own list
+
+        :rtype list
+        :return combined list of classifications for a GTR project
+        """
+        gtr_project_subjects = []
+        if 'researchSubjects' in self.resource:
+            if 'researchSubject' in self.resource['researchSubjects']:
+                if len(self.resource['researchSubjects']['researchSubject']) > 0:
+                    for gtr_research_subject in self.resource['researchSubjects']['researchSubject']:
+                        if 'id' in gtr_research_subject:
+                            gtr_project_subjects.append(
+                                gtr_research_subject)
+
+        return gtr_project_subjects
 
     def _process_publications(self) -> List[str]:
         """
@@ -940,7 +968,8 @@ class GatewayToResearchProject(GatewayToResearchResource):
         publications = []
         if 'PUBLICATION' in self.resource_links:
             for publication_uri in self.resource_links['PUBLICATION']:
-                publication = GatewayToResearchPublication(gtr_resource_uri=publication_uri)
+                publication = GatewayToResearchPublication(
+                    gtr_resource_uri=publication_uri)
                 publications.append(publication.doi)
 
         return publications
@@ -976,7 +1005,8 @@ class GatewayToResearchProject(GatewayToResearchResource):
         if len(self.resource_links['FUND']) == 0:
             raise KeyError("GTR fund relation not found in GTR project links")
         if len(self.resource_links['FUND']) > 1:
-            raise KeyError("Multiple GTR fund identifiers found in GTR project links, one expected")
+            raise KeyError(
+                "Multiple GTR fund identifiers found in GTR project links, one expected")
 
         return self.resource_links['FUND'][0]
 
@@ -1039,7 +1069,8 @@ class GatewayToResearchGrantImporter:
             if 'project' not in gtr_project_data:
                 raise KeyError("Project element not in GTR response")
             if len(gtr_project_data['project']) != 1:
-                raise ValueError("Multiple project elements found in GTR response, only expected one")
+                raise ValueError(
+                    "Multiple project elements found in GTR response, only expected one")
 
             self.gtr_project_id = gtr_project_data['project'][0]['id']
             return self.gtr_project_id
@@ -1060,7 +1091,8 @@ class GatewayToResearchGrantImporter:
         Appropriate mappings will also need to be made in:
             * GatewayToResearchOrganisation._map_to_grid_id()
             * GatewayToResearchPerson._map_id_to_orcid_ids()
-            * _map_gtr_project_category_to_category_term()
+            * _map_gtr_project_research_topic_to_category_term()
+            * _map_gtr_project_research_subject_to_category_term()
         """
         gtr_project = GatewayToResearchProject(
             gtr_resource_uri=f"https://gtr.ukri.org/gtr/api/projects/{self.gtr_project_id}"
@@ -1068,7 +1100,8 @@ class GatewayToResearchGrantImporter:
 
         grant = Grant(
             neutral_id=generate_neutral_id(),
-            reference=self._find_gtr_project_identifier(identifiers=gtr_project.identifiers),
+            reference=self._find_gtr_project_identifier(
+                identifiers=gtr_project.identifiers),
             title=gtr_project.title,
             abstract=gtr_project.abstract,
             status=self._map_gtr_project_status(status=gtr_project.status),
@@ -1076,7 +1109,8 @@ class GatewayToResearchGrantImporter:
             total_funds_currency=gtr_project.fund.currency,
             total_funds=gtr_project.fund.amount,
             publications=gtr_project.publications,
-            funder=Organisation.query.filter_by(grid_identifier=gtr_project.fund.funder.grid_id).one()
+            funder=Organisation.query.filter_by(
+                grid_identifier=gtr_project.fund.funder.grid_id).one()
         )
         db.session.add(grant)
 
@@ -1096,14 +1130,26 @@ class GatewayToResearchGrantImporter:
             grant=grant
         ))
 
-        category_term_scheme_identifiers = self._find_unique_gtr_project_categories(
-            gtr_categories=gtr_project.categories
+        category_term_scheme_identifiers = self._find_unique_gtr_project_research_topics(
+            gtr_research_topics=gtr_project.research_topics
         )
         for category_term_scheme_identifier in category_term_scheme_identifiers:
             db.session.add(Categorisation(
                 neutral_id=generate_neutral_id(),
                 project=project,
-                category_term=CategoryTerm.query.filter_by(scheme_identifier=category_term_scheme_identifier).one()
+                category_term=CategoryTerm.query.filter_by(
+                    scheme_identifier=category_term_scheme_identifier).one()
+            ))
+
+        category_term_scheme_identifiers = self._find_unique_gtr_project_research_subjects(
+            gtr_research_subjects=gtr_project.research_subjects
+        )
+        for category_term_scheme_identifier in category_term_scheme_identifiers:
+            db.session.add(Categorisation(
+                neutral_id=generate_neutral_id(),
+                project=project,
+                category_term=CategoryTerm.query.filter_by(
+                    scheme_identifier=category_term_scheme_identifier).one()
             ))
 
         self._add_gtr_people(
@@ -1132,11 +1178,14 @@ class GatewayToResearchGrantImporter:
         :return Identifier from a GTR project resource matching the grant reference being imported
         """
         if 'RCUK' not in identifiers.keys():
-            raise KeyError("RCUK/GTR identifier not in GTR project identifiers")
+            raise KeyError(
+                "RCUK/GTR identifier not in GTR project identifiers")
         if len(identifiers['RCUK']) == 0:
-            raise KeyError("RCUK/GTR identifier not in GTR project identifiers")
+            raise KeyError(
+                "RCUK/GTR identifier not in GTR project identifiers")
         if len(identifiers['RCUK']) > 1:
-            raise KeyError("Multiple RCUK/GTR identifiers in GTR project identifiers, one expected")
+            raise KeyError(
+                "Multiple RCUK/GTR identifiers in GTR project identifiers, one expected")
 
         if identifiers['RCUK'][0] != self.grant_reference:
             raise ValueError(f"RCUK/GTR identifier in GTR project identifiers ({identifiers['RCUK'][0]}), doesn't "
@@ -1172,7 +1221,8 @@ class GatewayToResearchGrantImporter:
         """
         for person in gtr_people:
             if person.orcid_id is None:
-                raise ValueError("GTR project person could not be mapped to a Person, no ORCID iD")
+                raise ValueError(
+                    "GTR project person could not be mapped to a Person, no ORCID iD")
 
             if not db.session.query(exists().where(Person.orcid_id == person.orcid_id)).scalar():
                 db.session.add(Person(
@@ -1180,7 +1230,8 @@ class GatewayToResearchGrantImporter:
                     first_name=person.first_name,
                     last_name=person.surname,
                     orcid_id=person.orcid_id,
-                    organisation=Organisation.query.filter_by(grid_identifier=person.employer.grid_id).one()
+                    organisation=Organisation.query.filter_by(
+                        grid_identifier=person.employer.grid_id).one()
                 ))
             db.session.add(Participant(
                 neutral_id=generate_neutral_id(),
@@ -1205,60 +1256,158 @@ class GatewayToResearchGrantImporter:
         elif status == 'Closed':
             return GrantStatus.Closed
 
-        raise ValueError("Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
+        raise ValueError(
+            "Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
 
-    def _find_unique_gtr_project_categories(self, gtr_categories: list) -> list:
+    def _find_unique_gtr_project_research_topics(self, gtr_research_topics: list) -> list:
         """
-        For a series of GTR project categories/topics, return a distinct list
+        For a series of GTR project research topics, return a distinct list
 
         If the 'unclassified' category is included, it is silently removed.
 
-        :type gtr_categories: list
-        :param gtr_categories: list of GTR project categories/topics
+        :type gtr_research_topics: list
+        :param gtr_research_topics: list of GTR project research topics
 
         :rtype list
-        :return: distinct list of GTR project categories/topics
+        :return: distinct list of GTR project research topics
         """
         category_term_scheme_identifiers = []
-        for category in gtr_categories:
-            category_term_scheme_identifier = self._map_gtr_project_category_to_category_term(category)
+        for category in gtr_research_topics:
+            category_term_scheme_identifier = self._map_gtr_project_research_topic_to_category_term(
+                category)
             if category_term_scheme_identifier is not None:
                 if category_term_scheme_identifier not in category_term_scheme_identifiers:
-                    category_term_scheme_identifiers.append(category_term_scheme_identifier)
+                    category_term_scheme_identifiers.append(
+                        category_term_scheme_identifier)
+        return category_term_scheme_identifiers
+
+    def _find_unique_gtr_project_research_subjects(self, gtr_research_subjects: list) -> list:
+        """
+        For a series of GTR project subjects, return a distinct list
+
+        :type gtr_research_subjects: list
+        :param gtr_research_subjects: list of GTR project research subjects
+
+        :rtype list
+        :return: distinct list of GTR project research subjects
+        """
+        category_term_scheme_identifiers = []
+        for category in gtr_research_subjects:
+            category_term_scheme_identifier = self._map_gtr_project_research_subject_to_category_term(
+                category)
+            if category_term_scheme_identifier is not None:
+                if category_term_scheme_identifier not in category_term_scheme_identifiers:
+                    category_term_scheme_identifiers.append(
+                        category_term_scheme_identifier)
         return category_term_scheme_identifiers
 
     @staticmethod
-    def _map_gtr_project_category_to_category_term(gtr_category: dict) -> Optional[str]:
+    def _map_gtr_project_research_topic_to_category_term(gtr_research_topic: dict) -> Optional[str]:
         """
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
-        a corresponding Category based on its GTR category or topic ID.
+        a corresponding Category based on its GTR research topic ID.
 
         This mapping therefore needs to be defined manually in this method. Currently this is done using a simple if
         statement, but in future a more scalable solution will be needed.
 
-        :type gtr_category: dict
-        :param gtr_category: GTR project category or topic
+        :type gtr_research_topic: dict
+        :param gtr_research_topic: GTR project research topic
 
         :rtype str or None
-        :return a Category scheme identifier corresponding to a GTR category or topic ID, or None if unclassified
+        :return a Category scheme identifier corresponding to a GTR research topic ID, or None if unclassified
         """
-        if gtr_category['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
+        if gtr_research_topic['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
-        elif gtr_category['id'] == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
+        elif gtr_research_topic['id'] == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif gtr_category['id'] == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
+        elif gtr_research_topic['id'] == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif gtr_category['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
+        elif gtr_research_topic['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+        # Community Ecology
+        elif gtr_research_topic['id'] == 'F4786876-D9A9-404D-8569-BBC813C73074':
+            # COMMUNITY DYNAMICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/8fb66b46-b998-4412-a541-d2acabdf484b'
+        # Biogeochemical Cycles
+        elif gtr_research_topic['id'] == '62DCC1BF-B512-4BDB-A0C3-02BC17E15F6B':
+            # BIOGEOCHEMICAL CYCLES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/9015e65f-bbae-4855-a4b6-1bfa601752bd'
+        # Climate & Climate Change
+        elif gtr_research_topic['id'] == 'EE4457DB-92A3-44EA-8D5F-77013CC107E0':
+            # CLIMATE INDICATORS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
+        # Hydrological Processes
+        elif gtr_research_topic['id'] == 'D4F391DF-BCE0-47FA-BED7-78025F16B14D':
+            # COASTAL PROCESSES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b6fd22ab-dca7-4dfa-8812-913453b5695b'
+        # Geohazards
+        elif gtr_research_topic['id'] == 'BE94F009-26A1-4E5B-B0B3-722A355F282C':
+            # NATURAL HAZARDS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/ec0e2762-f57a-4fdc-b395-c8d7d5590d18'
+        # Sediment/Sedimentary Processes
+        elif gtr_research_topic['id'] == '5537B6B2-9FD6-40FB-B300-64555528D3FF':
+            # EROSION/SEDIMENTATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a246a8cf-e3f9-4045-af9f-dc97f6fe019a'
+        # Environmental Microbiology
+        elif gtr_research_topic['id'] == '5B73146D-6DEF-4D88-BE83-FE7B9DB21D62':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Glacial & Cryospheric Systems
+        elif gtr_research_topic['id'] == '07B1BD3F-A7ED-4640-8B09-C1F296DC56BF':
+            # GLACIERS/ICE SHEETS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/099ab1ae-f4d2-48cc-be2f-86bd58ffc4ca'
+        # Soil science
+        elif gtr_research_topic['id'] == '96F70ACB-D35F-416F-9360-4EFD402DFA6B':
+            # SOILS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/3526afb8-0dc9-43c7-8ad4-f34f250a1e91'
+        # Ecosystem Scale Processes
+        elif gtr_research_topic['id'] == '12C7A68B-3922-4925-9C0B-7FACEC921815':
+            # ECOSYSTEMS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
         # Unclassified
-        elif gtr_category['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
+        elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
             return None
 
-        raise UnmappedGatewayToResearchProjectCategory(meta={
-            'gtr_category': {
-                'id': gtr_category['id'],
-                'name': gtr_category['text']
+        raise UnmappedGatewayToResearchProjectTopic(meta={
+            'gtr_research_topic': {
+                'id': gtr_research_topic['id'],
+                'name': gtr_research_topic['text']
+            }
+        })
+
+    @staticmethod
+    def _map_gtr_project_research_subject_to_category_term(gtr_research_subject: dict) -> Optional[str]:
+        """
+        Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
+        use a category scheme supported by this project and no other identifier is available to automatically determine
+        a corresponding Category based on its GTR research subject name.
+
+        This mapping therefore needs to be defined manually in this method. Currently this is done using a simple if
+        statement, but in future a more scalable solution will be needed.
+
+        :type gtr_research_subject: dict
+        :param gtr_research_subject: GTR project research subject
+
+        :rtype str
+        :return a Category scheme identifier corresponding to a GTR research subject name
+        """
+
+        if gtr_research_subject['text'] == 'Terrest. & freshwater environ.':
+            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/91c64c46-d040-4daa-b26c-61952fdfaf50/'
+        elif gtr_research_subject['text'] == 'Ecol, biodivers. & systematics':
+            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/f1a25060-330c-4f84-9633-ed59ae8c64bf/'
+        elif gtr_research_subject['text'] == 'Marine environments':
+            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/91697b7d-8f2b-4954-850e-61d5f61c867d/'
+        elif gtr_research_subject['text'] == 'Geosciences':
+            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/2b9ad978-d986-4d63-b477-0f5efc8ace72/'
+        elif gtr_research_subject['text'] == 'Climate and climate change':
+            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/c47f6052-634e-40ef-a5ac-13f69f6f4c2a/'
+
+        raise UnmappedGatewayToResearchProjectSubject(meta={
+            'gtr_research_subject': {
+                'id': gtr_research_subject['id'],
+                'name': gtr_research_subject['text']
             }
         })
 
@@ -1275,9 +1424,12 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
     :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
     """
     try:
-        app.logger.info(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
-        echo(style(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"))
-        importer = GatewayToResearchGrantImporter(gtr_grant_reference=gtr_grant_reference)
+        app.logger.info(
+            f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
+        echo(style(
+            f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"))
+        importer = GatewayToResearchGrantImporter(
+            gtr_grant_reference=gtr_grant_reference)
         if importer.exists():
             app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}) - Already "
                             f"imported")
@@ -1298,23 +1450,37 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
                    f"Importing"))
 
         importer.fetch()
-        app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+        app.logger.info(
+            f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
         echo(style(
             f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported", fg='green'
         ))
     except UnmappedGatewayToResearchOrganisation as e:
-        app.logger.error(f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]")
-        echo(style(f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]", fg='red'))
-    except UnmappedGatewayToResearchPerson as e:
-        app.logger.error(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
-        echo(style(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]", fg='red'))
-    except GatewayToResearchPublicationWithoutDOI as e:
-        app.logger.error(f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]")
-        echo(style(f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]", fg='red'))
-    except UnmappedGatewayToResearchProjectCategory as e:
-        app.logger.error(f"Unmapped GTR Category [{e.meta['gtr_category']['id']}, {e.meta['gtr_category']['name']}]")
+        app.logger.error(
+            f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]")
         echo(style(
-            f"Unmapped GTR Category [{e.meta['gtr_category']['id']}, {e.meta['gtr_category']['name']}]", fg='red'
+            f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]", fg='red'))
+    except UnmappedGatewayToResearchPerson as e:
+        app.logger.error(
+            f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
+        echo(
+            style(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]", fg='red'))
+    except GatewayToResearchPublicationWithoutDOI as e:
+        app.logger.error(
+            f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]")
+        echo(style(
+            f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]", fg='red'))
+    except UnmappedGatewayToResearchProjectTopic as e:
+        app.logger.error(
+            f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]")
+        echo(style(
+            f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]", fg='red'
+        ))
+    except UnmappedGatewayToResearchProjectSubject as e:
+        app.logger.error(
+            f"Unmapped GTR Topic [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]")
+        echo(style(
+            f"Unmapped GTR Topic [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]", fg='red'
         ))
     except Exception as e:
         db.session.rollback()
