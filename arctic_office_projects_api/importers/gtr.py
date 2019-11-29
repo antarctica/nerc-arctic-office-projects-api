@@ -1130,20 +1130,20 @@ class GatewayToResearchGrantImporter:
             grant=grant
         ))
 
-        category_term_scheme_identifiers = self._find_unique_gtr_project_research_topics(
+        # Research Topics and Research Subjects
+        topics = self._find_unique_gtr_project_research_topics(
             gtr_research_topics=gtr_project.research_topics
         )
-        for category_term_scheme_identifier in category_term_scheme_identifiers:
-            db.session.add(Categorisation(
-                neutral_id=generate_neutral_id(),
-                project=project,
-                category_term=CategoryTerm.query.filter_by(
-                    scheme_identifier=category_term_scheme_identifier).one()
-            ))
 
-        category_term_scheme_identifiers = self._find_unique_gtr_project_research_subjects(
+        subjects = self._find_unique_gtr_project_research_subjects(
             gtr_research_subjects=gtr_project.research_subjects
         )
+
+        # Flatten the processed topics and subjects to dinstinct list of GCMD identifiers
+        category_term_scheme_identifiers = list(topics)
+        category_term_scheme_identifiers.extend(
+            x for x in subjects if x not in category_term_scheme_identifiers)
+
         for category_term_scheme_identifier in category_term_scheme_identifiers:
             db.session.add(Categorisation(
                 neutral_id=generate_neutral_id(),
