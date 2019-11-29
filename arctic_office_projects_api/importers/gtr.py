@@ -1478,9 +1478,9 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
         ))
     except UnmappedGatewayToResearchProjectSubject as e:
         app.logger.error(
-            f"Unmapped GTR Topic [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]")
+            f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]")
         echo(style(
-            f"Unmapped GTR Topic [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]", fg='red'
+            f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]", fg='red'
         ))
     except Exception as e:
         db.session.rollback()
