@@ -1392,17 +1392,18 @@ class GatewayToResearchGrantImporter:
         :rtype str
         :return a Category scheme identifier corresponding to a GTR research subject name
         """
-
         if gtr_research_subject['text'] == 'Terrest. & freshwater environ.':
-            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/91c64c46-d040-4daa-b26c-61952fdfaf50/'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91c64c46-d040-4daa-b26c-61952fdfaf50'
         elif gtr_research_subject['text'] == 'Ecol, biodivers. & systematics':
-            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/f1a25060-330c-4f84-9633-ed59ae8c64bf/'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
         elif gtr_research_subject['text'] == 'Marine environments':
-            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/91697b7d-8f2b-4954-850e-61d5f61c867d/'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
         elif gtr_research_subject['text'] == 'Geosciences':
-            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/2b9ad978-d986-4d63-b477-0f5efc8ace72/'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
         elif gtr_research_subject['text'] == 'Climate and climate change':
-            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/c47f6052-634e-40ef-a5ac-13f69f6f4c2a/'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        elif gtr_research_subject['text'] == 'Atmospheric phys. & chemistry':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b9c56939-c624-467d-b196-e56a5b660334'
 
         raise UnmappedGatewayToResearchProjectSubject(meta={
             'gtr_research_subject': {
