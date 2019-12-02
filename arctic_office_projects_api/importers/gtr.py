@@ -353,6 +353,9 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # Cranfield University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F45A4578-F962-4EFA-9CC1-9F2FF4F760AE':
             return 'https://www.grid.ac/institutes/grid.12026.37'
+        # Unknown
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
+            return None
         raise UnmappedGatewayToResearchOrganisation(meta={
             'gtr_organisation': {
                 'resource_uri': self.resource_uri
@@ -1110,7 +1113,7 @@ class GatewayToResearchGrantImporter:
             total_funds=gtr_project.fund.amount,
             publications=gtr_project.publications,
             funder=Organisation.query.filter_by(
-                grid_identifier=gtr_project.fund.funder.grid_id).one()
+                grid_identifier=gtr_project.fund.funder.grid_id).one_or_none()
         )
         db.session.add(grant)
 
@@ -1231,7 +1234,7 @@ class GatewayToResearchGrantImporter:
                     last_name=person.surname,
                     orcid_id=person.orcid_id,
                     organisation=Organisation.query.filter_by(
-                        grid_identifier=person.employer.grid_id).one()
+                        grid_identifier=person.employer.grid_id).one_or_none()
                 ))
             db.session.add(Participant(
                 neutral_id=generate_neutral_id(),
