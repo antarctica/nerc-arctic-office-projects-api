@@ -1357,6 +1357,21 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_topic['id'] == '12C7A68B-3922-4925-9C0B-7FACEC921815':
             # ECOSYSTEMS
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
+        # Tropospheric Processes
+        elif gtr_research_topic['id'] == 'AE661B5A-7390-4AD2-BCF2-D611CB668BD1':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # Population Ecology
+        elif gtr_research_topic['id'] == 'DE30777A-E4A8-486B-875D-58CC92FD5525':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Ocean Circulation
+        elif gtr_research_topic['id'] == '723BA0F8-3ECD-4E2A-A39E-44936EAC1517':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a031952d-9f00-4ba5-9966-5f87ab9dfdd4'
+        # Land - Atmosphere Interactions
+        elif gtr_research_topic['id'] == 'E94BED75-343A-47C8-BEA1-E1E927732B34':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/'
+        # Remote Sensing & Earth Obs.
+        elif gtr_research_topic['id'] == '4504C6B4-D825-4F14-B0D3-7931AC636B71':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/'
         # Unclassified
         elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
             return None
@@ -1396,7 +1411,12 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         elif gtr_research_subject['text'] == 'Atmospheric phys. & chemistry':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b9c56939-c624-467d-b196-e56a5b660334'
-
+        elif gtr_research_subject['text'] == 'Climate & Climate Change':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        elif gtr_research_subject['text'] == 'Microbial sciences':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        elif gtr_research_subject['text'] == 'Tools, technologies & methods':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
         raise UnmappedGatewayToResearchProjectSubject(meta={
             'gtr_research_subject': {
                 'id': gtr_research_subject['id'],
