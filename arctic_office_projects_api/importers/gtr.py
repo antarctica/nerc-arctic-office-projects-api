@@ -41,10 +41,6 @@ class UnmappedGatewayToResearchProjectSubject(AppException):
     detail = 'A Gateway to Research subject has not been mapped to an application category term via a ' \
              'scheme identifier'
 
-class GatewayToResearchPublicationWithoutDOI(AppException):
-    title = "Gateway to Research publication doesn't have a DOI"
-    detail = 'A Gateway to Research publication needs to include a DOI to be valid in this API'
-
 
 # Resources
 
@@ -824,13 +820,6 @@ class GatewayToResearchPublication(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        if 'doi' not in self.resource:
-            raise GatewayToResearchPublicationWithoutDOI(meta={
-                'gtr_publication': {
-                    'resource_uri': self.resource_uri
-                }
-            })
-
         self.doi = self.resource['doi']
 
 
@@ -1469,11 +1458,6 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
             f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
         echo(
             style(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]", fg='red'))
-    except GatewayToResearchPublicationWithoutDOI as e:
-        app.logger.error(
-            f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]")
-        echo(style(
-            f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]", fg='red'))
     except UnmappedGatewayToResearchProjectTopic as e:
         app.logger.error(
             f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]")
