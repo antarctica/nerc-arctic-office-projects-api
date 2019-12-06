@@ -795,7 +795,154 @@ class GatewayToResearchPerson(GatewayToResearchResource):
                 'https://orcid.org/0000-0001-8659-6092',
             # Michel Tsamados - UCL
             "https://gtr.ukri.org:443/gtr/api/persons/FFC933A9-265E-4B6F-8CA9-0DA86ADB6976":
-                'https://orcid.org/0000-0001-7034-5360'
+                'https://orcid.org/0000-0001-7034-5360',
+            # Heather Alison Bouman - Oxford University
+            "https://gtr.ukri.org:443/gtr/api/persons/CD9B1E18-1AA3-4E18-9A3F-C2DE79CBBCEB":
+            'https://orcid.org/0000-0002-7407-9431',
+            # Bart Egidius Van Dongen - Manchester University
+            "https://gtr.ukri.org:443/gtr/api/persons/8FCE53A8-0C21-4162-93B1-7424EC08763C":
+            'https://orcid.org/0000-0003-1189-142X',
+            # Raja Ganeshram - University of Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/89874E4D-902B-4B2B-873D-A95B4CFF4738":
+            'https://orcid.org/0000-0002-5150-1310',
+            # Geraint Andrew Tarling - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/138BADBE-2FB1-4D7C-9444-DBD7AC82DF43":
+            'https://orcid.org/0000-0002-3753-5899',
+            # Daniel J Mayor - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/1486F06E-695A-4E98-BD9B-9045254B3FEA":
+            'https://orcid.org/0000-0002-1295-0041',
+            # Yueng-Djern Lenn - Bangor
+            "https://gtr.ukri.org:443/gtr/api/persons/E532D67A-59BE-41CC-8BE8-94DD3E8CCAFE":
+            'https://orcid.org/0000-0001-6031-523X',
+            # Joanne Hopkins - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/EBE6F4FC-967E-4E29-9E61-A6076895BE04":
+            'http://orcid.org/0000-0003-1504-3671',
+            # Martin Solan - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/AFFB5A85-DAC7-48F2-AE07-952481073BAA":
+            'https://orcid.org/0000-0001-9924-5574',
+            # Ben Andrew Ward - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/50444B9C-4782-4135-AC0C-5DE9E7444A05":
+            'https://orcid.org/0000-0003-1290-8270',
+            # Ryan Reynolds Neely - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/622343F7-063E-4E4F-AD2B-3ABB95CB1590":
+            'https://orcid.org/0000-0003-4560-4812',
+            # Markus Michael Frey - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/35CC6C9B-37C1-4791-BA52-EAA4FCC23D16":
+            'https://orcid.org/0000-0003-0535-0416',
+            # Julienne Stroeve - UCL
+            "https://gtr.ukri.org:443/gtr/api/persons/7E95FFC4-B5D5-493A-B5A4-CC6B1BCEB7F6":
+            'https://orcid.org/0000-0001-7316-8320',
+            # Jeremy Charles Ely - Sheffield
+            "https://gtr.ukri.org:443/gtr/api/persons/94CC9220-726B-4738-BF99-DF8E758765BC":
+            'https://orcid.org/0000-0003-4007-1500',
+            # Thomas John Bracegirdle - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/BD3F03BA-8E5A-4084-9A84-62CD0928FE3F":
+            'https://orcid.org/0000-0002-8868-4739',
+            # Beth Scott - Aberdeen
+            "https://gtr.ukri.org:443/gtr/api/persons/840DC5C3-017A-4AD7-9515-563BD0E71163":
+            'https://orcid.org/0000-0001-5412-3952',
+            # Andrew Jonathan Hodson - UNIS, Norway
+            "https://gtr.ukri.org:443/gtr/api/persons/2C27EE95-AC89-423A-B4CA-F75604790961":
+            'https://orcid.org/0000-0002-1255-7987',
+            # Samraat Pawar - Imperial College London
+            "https://gtr.ukri.org:443/gtr/api/persons/0C503344-7D14-4C36-9F3F-73223A796985":
+            'https://orcid.org/0000-0001-8375-5684',
+            # Margaret Jane Yelland - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/E014B362-8B27-4EE7-9B2B-0EE6BA42C13E":
+            'https://orcid.org/0000-0002-0936-4957',
+            # Angus Ian Best - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/3D956DF3-1C35-45B6-ADC2-22D310FE63D5":
+            'https://orcid.org/0000-0001-9558-4261',
+            # James Scourse - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/D4224C78-EC26-41C3-AFF0-6E687034DFA6":
+            'https://orcid.org/0000-0003-2658-8730',
+            # Paul Halloran - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/1A22F476-2DF1-46F4-838E-F576D2C603C7":
+            'https://orcid.org/0000-0002-9227-0678',
+            # Sarah Chadburn - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/41C00C6E-1017-4261-902E-898252080D2B":
+            'https://orcid.org/0000-0003-1320-315X',
+            # Jennifer Gill - UEA
+            "https://gtr.ukri.org:443/gtr/api/persons/ED8FB31C-8D9B-4384-9320-262E20AEE07A":
+            'https://orcid.org/0000-0002-2649-1325',
+            # Andras Sobester - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/542E05E7-780C-4750-96D4-22AD3E78FBF7":
+            'https://orcid.org/0000-0002-8997-4375',
+            # James Screen - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/9B340BDB-C0A9-4BEA-8013-7178B4978BF7":
+            'https://orcid.org/0000-0003-1728-783X',
+            # Angela Victorina Gallego-Sala - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/B2C5E020-7032-4D4A-8474-6C6AE44DDF28":
+            'https://orcid.org/0000-0002-7483-7773',
+            # Simon Frederick Tett - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/3316451E-01DB-4ADD-AE44-25A575ED22C1":
+            'https://orcid.org/0000-0001-7526-560X',
+            # Alastair Lewis - NCAS, York
+            "https://gtr.ukri.org:443/gtr/api/persons/E7265890-DFAA-4CF4-8181-48515950E2FA":
+            'https://orcid.org/0000-0002-4075-3651',
+            # Thomas Mock - UEA
+            "https://gtr.ukri.org:443/gtr/api/persons/B8A0D322-8B6B-48A9-A8B5-1AA3780A89E9":
+            'https://orcid.org/0000-0001-9604-0362',
+            # Walter Oechel - San Diegoa State University, USA
+            "https://gtr.ukri.org:443/gtr/api/persons/943FEA7C-8F21-4565-B579-8359A7C3CCA1":
+            'https://orcid.org/0000-0002-3504-026X',
+            # Tina Van De Flierdt - Imperial; College London
+            "https://gtr.ukri.org:443/gtr/api/persons/3FCFA10D-A17B-4B7B-B342-2EC2293B96A2":
+            'https://orcid.org/0000-0001-7176-9755',
+            # Lorna Street - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/335CF8E0-B236-4424-B60B-7536788288C7":
+            'http://orcid.org/0000-0001-9570-7479',
+            # Amber Luella Annett - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/3C206F0C-E636-4D86-86B7-61F959148559":
+            'https://orcid.org/0000-0002-3730-2438',
+            # Rhodri Jerrett - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/676F942D-1AFE-436D-B60F-C50F23E355AD":
+            'https://orcid.org/0000-0002-1412-3808',
+            # Louise Claire Sime - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/482B3DAB-CBF4-4FC9-BBC3-80C333D3E2C0":
+            'https://orcid.org/0000-0002-9093-7926',
+            # John Campbell Maclennan - Cambridge
+            "https://gtr.ukri.org:443/gtr/api/persons/8DDB527E-9C3C-49EE-B6AE-1BDBDCB8DD97":
+            'https://orcid.org/0000-0001-6857-9600',
+            # Julie Prytulak - Durham University
+            "https://gtr.ukri.org:443/gtr/api/persons/675A3847-2195-41F2-80C1-7DDD4509A8D1":
+            'http://orcid.org/0000-0001-5269-1059',
+            # Emanuel Ulrich Gloor - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/5DABD8C4-83A4-4AB3-93C9-DB49DC66ABFA":
+            'https://orcid.org/0000-0002-9384-6341',
+            # Andrew Watson - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/42391614-350E-4783-9FBF-46F9D67CC682":
+            'http://orcid.org/0000-0002-9654-8147',
+            # Claire Reeves - Open Univeristy
+            "https://gtr.ukri.org:443/gtr/api/persons/26C13F6D-9648-4662-90FA-24F16B9515E7":
+            'https://orcid.org/0000-0002-2493-2123',
+            # Paul Palmer - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/F64F8711-B1DE-406B-B648-5A427216B839":
+            'https://orcid.org/0000-0002-1487-0969',
+            # Steven James Woolnough - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/510BA244-9342-4BBD-AEA9-CB0DA2B6842B":
+            'https://orcid.org/0000-0003-0500-8514',
+            # Erin Louise McClymont - Durham University
+            "https://gtr.ukri.org:443/gtr/api/persons/8930E0D3-F48C-49D1-810E-EA0B8B569206":
+            'https://orcid.org/0000-0003-1562-8768',
+            # Nicholas Pappas Klingaman - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/01F74E77-6453-48B3-9CCD-F19D3F29BF8C":
+            'https://orcid.org/0000-0002-2927-9303',
+            # Amanda Claire Maycock - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/0131E012-F028-4F23-889E-587792EF1723":
+            'https://orcid.org/0000-0002-6614-1127',
+            # Anja Schmidt - Cambridge University
+            "https://gtr.ukri.org:443/gtr/api/persons/222750E9-004A-41D2-B3C1-342CE9BDDCC5":
+            'http://orcid.org/0000-0001-8759-2843',
+            # Mike Burton - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/DC538BAF-E35A-4C0E-BE47-78691A21429C":
+            'http://orcid.org/0000-0003-3779-4812',
+            # Tamsin Alice Mather - Oxford
+            "https://gtr.ukri.org:443/gtr/api/persons/1FCEBE77-7EA1-4CAD-914A-96ECC07349C5":
+            'https://orcid.org/0000-0003-4259-7303',
+            # David Johnson - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/BEB94C7B-24AE-4C04-9D7E-49BEBEDF3D10":
+            'https://orcid.org/0000-0003-2299-2525'
         }
 
         if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
