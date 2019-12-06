@@ -968,7 +968,7 @@ class GatewayToResearchPublication(GatewayToResearchResource):
         super().__init__(gtr_resource_uri)
 
         if 'doi' in self.resource:
-        self.doi = self.resource['doi']
+            self.doi = self.resource['doi']
         else:
             self.doi = None
 
