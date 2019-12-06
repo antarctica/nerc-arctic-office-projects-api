@@ -3,3 +3,5 @@ __pycache__
 /provisioning/terraform/.terraform
 /.idea
 *.log
+*.csv
+/bulk-importer/json
