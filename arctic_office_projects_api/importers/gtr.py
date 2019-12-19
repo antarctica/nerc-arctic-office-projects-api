@@ -206,10 +206,13 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/46B41008-0EB4-4E28-BBFB-E98366999EC5':
             return 'https://www.grid.ac/institutes/grid.8250.f'
         # National Oceanography Centre
-        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4DB630C7-7E13-4610-A1C3-29601903CEE3':
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4DB630C7-7E13-4610-A1C3-29601903CEE3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/333FAC7F-030F-4A9C-87FD-78DB66107E58'):
             return 'https://www.grid.ac/institutes/grid.418022.d'
         # NERC Centre for Ecology and Hydrology
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4FC881BE-799E-459C-A287-2A68170426DA':
+            return 'https://www.grid.ac/institutes/grid.494924.6'
+        # UK Ctr for Ecology & Hydrology fr 011219
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/2431A6E2-13D5-40AB-A58A-AC75E6A3654E':
             return 'https://www.grid.ac/institutes/grid.494924.6'
         # University of Manchester
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/68D0E3C9-9246-4CFC-B5E9-48584CF82993':
@@ -286,8 +289,8 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # Aarhus University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/CE43EBFA-3FC9-44BC-B6FF-001F11664C46':
             return 'https://www.grid.ac/institutes/grid.7048.b'
-        # Lancaster University
-        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A66BFC9-B9A5-48C6-B46C-761D1C13C5DC':
+        # Lancaster University - there are 2 gtr records for this for some reason
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A66BFC9-B9A5-48C6-B46C-761D1C13C5DC') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/44160F04-5CBF-4E8E-A6C6-C0EF61A5865C'):
             return 'https://www.grid.ac/institutes/grid.9835.7'
         # University of Strathclyde
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/5BB4F8BF-B4E0-4EAF-9AF5-885E19D64850':
@@ -313,8 +316,8 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # Queen Mary, University of London
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/D5337A10-AC8A-402A-8164-C5F9CC6B0140':
             return 'https://www.grid.ac/institutes/grid.4868.2'
-        # Leicester University
-        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AE0A6F70-C175-4550-B08F-74C8790007BB':
+        # Leicester University - this has 2 gtr records
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AE0A6F70-C175-4550-B08F-74C8790007BB') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/C842A34F-18F7-454D-A259-FED802368496'):
             return 'https://www.grid.ac/institutes/grid.9918.9'
         # Open University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/89E6D9CB-DAF8-40A2-A9EF-B330A5A7FC24':
@@ -322,8 +325,8 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # Scottish Universities Environmental Research Centre
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/BF1F76BF-B87F-4FE0-B1DB-4650F5E99448':
             return 'https://www.grid.ac/institutes/grid.224137.1'
-        # Birmingham University
-        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A022BD3A-2A7B-4E64-8877-A2E381C4CCB5':
+        # Birmingham University - this has 2 gtr records
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A022BD3A-2A7B-4E64-8877-A2E381C4CCB5') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/818CD6C9-61EE-41F2-9F37-0C7A8F43E25D'):
             return 'https://www.grid.ac/institutes/grid.6572.6'
         # The Natural History Museum
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/B2F6103D-47D2-486A-8F7C-C62362BAACD9':
@@ -344,11 +347,26 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/924BE15C-91F2-4AAD-941A-3F338324B6AE':
             return 'https://www.grid.ac/institutes/grid.434257.3'
         # Innovate Uk
-        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1DA78802-0659-4398-B40B-7FA41B56BBF3':
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1DA78802-0659-4398-B40B-7FA41B56BBF3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E18E2F0F-AC7D-4E02-9559-669F7C8FEC74'):
             return 'https://www.grid.ac/institutes/grid.423443.6'
         # Cranfield University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F45A4578-F962-4EFA-9CC1-9F2FF4F760AE':
             return 'https://www.grid.ac/institutes/grid.12026.37'
+        # University of Liverpool
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A0A585E0-6B0D-4643-A3A6-47943B4CBFEF':
+            return 'https://www.grid.ac/institutes/grid.10025.36'
+        # University of Lincoln
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/D64641C7-D9A6-4B41-9C8F-03F7396CB8DA':
+            return 'https://www.grid.ac/institutes/grid.36511.30'
+        # Cardiff University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/9C10D78F-6430-4CA7-9528-B96B0762A4C6':
+            return 'https://www.grid.ac/institutes/grid.5600.3'
+        # University of Abertay Dundee
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/544242A5-6640-4FD5-87C5-348557ED5307':
+            return 'https://www.grid.ac/institutes/grid.5600.3'
+        # Free University of Brussels
+        elif self.resource_uri == 'https://gtr.ukri.org/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3':
+            return 'https://www.grid.ac/institutes/grid.8767.e'
         # Unknown
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
             return None
@@ -968,7 +986,7 @@ class GatewayToResearchPublication(GatewayToResearchResource):
         super().__init__(gtr_resource_uri)
 
         if 'doi' in self.resource:
-        self.doi = self.resource['doi']
+            self.doi = self.resource['doi']
         else:
             self.doi = None
 
@@ -1481,8 +1499,8 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
         # Hydrological Processes
         elif gtr_research_topic['id'] == 'D4F391DF-BCE0-47FA-BED7-78025F16B14D':
-            # COASTAL PROCESSES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b6fd22ab-dca7-4dfa-8812-913453b5695b'
+            # TERRESTRIAL HYDROSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/885735f3-121e-4ca0-ac8b-f37dbc972f03'
         # Geohazards
         elif gtr_research_topic['id'] == 'BE94F009-26A1-4E5B-B0B3-722A355F282C':
             # NATURAL HAZARDS
@@ -1509,19 +1527,83 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
         # Tropospheric Processes
         elif gtr_research_topic['id'] == 'AE661B5A-7390-4AD2-BCF2-D611CB668BD1':
+            # ATMOSPHERE
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         # Population Ecology
         elif gtr_research_topic['id'] == 'DE30777A-E4A8-486B-875D-58CC92FD5525':
+            # BIOLOGICAL CLASSIFICATION
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Ocean Circulation
         elif gtr_research_topic['id'] == '723BA0F8-3ECD-4E2A-A39E-44936EAC1517':
+            # OCEAN CIRCULATION
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a031952d-9f00-4ba5-9966-5f87ab9dfdd4'
         # Land - Atmosphere Interactions
         elif gtr_research_topic['id'] == 'E94BED75-343A-47C8-BEA1-E1E927732B34':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/'
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         # Remote Sensing & Earth Obs.
         elif gtr_research_topic['id'] == '4504C6B4-D825-4F14-B0D3-7931AC636B71':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/'
+            # SPECTRAL/ENGINEERING
+            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/83150c54-5da8-4ee8-9579-19b95a8dc10c/'
+        # Regional & Extreme Weather
+        elif gtr_research_topic['id'] == '396591D1-8226-43A9-991D-8E0D265D99D0':
+            # EXTREME WEATHER
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b29b46ad-f05f-4144-b965-5f606ce96963'
+        # Palaeoenvironments
+        elif gtr_research_topic['id'] == '7DCAF586-72E2-4881-9251-E72F38AF1CA4':
+            # PALAEOCLIMATE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
+        # Earth & environmental
+        elif gtr_research_topic['id'] == '4237918D-61A8-47E0-91EE-65E98661A88B':
+            # HUMAN DIMENSION/ENVIRONMENTAL IMPACTS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/3f4cfc81-7745-43d9-b313-f68cdf72359b'
+        # Behavioural Ecology
+        elif gtr_research_topic['id'] == '685A8D5E-BD8A-4D8D-BAC5-607439217156':
+            # ECOLOGICAL DYNAMICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/6bef0291-a9ca-4832-bbb4-80459dc1493f'
+        # Environmental Genomics
+        elif gtr_research_topic['id'] == 'DE7203EB-4721-41C9-BB3C-539A8F6E8049':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Conservation Ecology
+        elif gtr_research_topic['id'] == '5020ECC8-E0E8-434D-BDD5-663A9C04EFA2':
+            # CONSERVATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/40869a25-edea-4438-80f9-47c9e6910b9b'
+        # Radiative Processes & Effects
+        elif gtr_research_topic['id'] == '45964B78-B4F7-4098-996B-49505C85B744':
+            # SURFACE RADIATIVE PROPERTIES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/cb5cc628-a1b5-459e-934f-881153a937b8'
+        # Large Scale Dynamics/Transport
+        elif gtr_research_topic['id'] == '59CF5FB3-F46B-448B-AECF-47852750EF3C':
+            # OCEANS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
+        # Land - Ocean Interactions
+        elif gtr_research_topic['id'] == 'B945AA77-44D5-467F-9B53-2EE3C3F550B1':
+            # COASTAL PROCESSES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b6fd22ab-dca7-4dfa-8812-913453b5695b'
+        # Mantle & Core Processes
+        elif gtr_research_topic['id'] == 'C6842010-EC71-44DF-B79C-64B1BA9B3BDE':
+            # TECTONICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1e17c8d3-81d0-473c-8f24-d2a4ea52b6b9'
+        # Quaternary Science
+        elif gtr_research_topic['id'] == 'E32742C9-DE22-4776-82B4-444177FA03AD':
+            # SOLID EARTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+        # Stratospheric Processes
+        elif gtr_research_topic['id'] == 'A8A9F791-62D5-4B6F-90EB-2F6F8813D700':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # Volcanic Processes
+        elif gtr_research_topic['id'] == '052183D5-AB83-4C5E-97FA-7B0C1D4AF3FA':
+            # VOLCANIC ACTIVITY
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1faaede0-2cd6-4447-b28b-0a28d9e2d067'
+        # Agricultural systems
+        elif gtr_research_topic['id'] == '794345CD-A1D5-4984-ADDD-088BCF41822F':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+        # Earth Surface Processes
+        elif gtr_research_topic['id'] == '47491D28-C3A9-416A-8459-3ECC0715B776':
+            # GEOMORPHIC LANDFORMS/PROCESSES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/d35b9ba5-d018-48a5-8f0d-92b9c55b3279'
         # Unclassified
         elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
             return None
@@ -1567,6 +1649,8 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         elif gtr_research_subject['text'] == 'Tools, technologies & methods':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
+        elif gtr_research_subject['text'] == 'Agri-environmental science':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
         raise UnmappedGatewayToResearchProjectSubject(meta={
             'gtr_research_subject': {
                 'id': gtr_research_subject['id'],
