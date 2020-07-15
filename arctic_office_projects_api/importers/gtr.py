@@ -366,8 +366,20 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/544242A5-6640-4FD5-87C5-348557ED5307':
             return 'https://www.grid.ac/institutes/grid.5600.3'
         # Free University of Brussels
-        elif self.resource_uri == 'https://gtr.ukri.org/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3':
+        elif self.resource_uri == ('https://gtr.ukri.org/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3'):
             return 'https://www.grid.ac/institutes/grid.8767.e'
+        # Florida State University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/B916CBD5-C485-400E-9973-216992E6F5DE':
+            return 'https://www.grid.ac/institutes/grid.255986.5'
+        # Manchester Metropolitan University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E594FDB4-DD6F-441F-90D6-C423A2916446':
+            return 'https://www.grid.ac/institutes/grid.25627.34'
+        # Swansea University
+        elif self.resource_uri == 'https://gtr.ukri.org/gtr/api/organisations/AB307619-D4FA-427E-A042-09DBEBA84669':
+            return 'https://www.grid.ac/institutes/grid.4827.9'
+        # Higher School of Economics
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7412B9A7-B073-4FA6-8710-19D1427488FB':
+            return 'https://www.grid.ac/institutes/grid.410682.9'
         # Unknown
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
             return None
