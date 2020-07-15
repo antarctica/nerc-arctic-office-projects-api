@@ -1394,7 +1394,6 @@ class GatewayToResearchGrantImporter:
         for person in gtr_people:
 
             org_id = db.session.query(Organisation.id).filter(Organisation.grid_identifier==person.employer.grid_id).scalar()
-            print(org_id)
 
             if not db.session.query(exists().where(and_(Person.first_name == person.first_name, Person.last_name == person.surname, Person.organisation_id == org_id))).scalar():
                 db.session.add(Person(
