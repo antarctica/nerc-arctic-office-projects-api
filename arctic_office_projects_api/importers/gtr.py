@@ -9,7 +9,7 @@ from flask import current_app as app
 from psycopg2.extras import DateRange
 from requests import HTTPError
 # noinspection PyPackageRequirements
-from sqlalchemy import exists
+from sqlalchemy import exists, and_
 
 from arctic_office_projects_api.errors import AppException
 from arctic_office_projects_api.extensions import db
@@ -29,6 +29,7 @@ class UnmappedGatewayToResearchOrganisation(AppException):
 class UnmappedGatewayToResearchPerson(AppException):
     title = 'Unmapped Gateway to Research person'
     detail = 'A Gateway to Research person has not been mapped to an application Person via a ORCID iD'
+
 
 class UnmappedGatewayToResearchProjectTopic(AppException):
     title = 'Unmapped Gateway to Research topic'
@@ -515,7 +516,6 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         self.orcid_id = None
         if 'orcidId' in self.resource:
             self.orcid_id = f"https://orcid.org/{self.resource['orcidId']}"
-        self._map_id_to_orcid_ids()
 
     def _find_gtr_employer_link(self):
         """
@@ -1380,11 +1380,11 @@ class GatewayToResearchGrantImporter:
         :param role: Member of the ParticipantRole enumeration to apply to Participant resources created
         """
         for person in gtr_people:
-            if person.orcid_id is None:
-                raise ValueError(
-                    "GTR project person could not be mapped to a Person, no ORCID iD")
 
-            if not db.session.query(exists().where(Person.orcid_id == person.orcid_id)).scalar():
+            org_id = db.session.query(Organisation.id).filter(Organisation.grid_identifier==person.employer.grid_id).scalar()
+            print(org_id)
+
+            if not db.session.query(exists().where(and_(Person.first_name == person.first_name, Person.last_name == person.surname, Person.organisation_id == org_id))).scalar():
                 db.session.add(Person(
                     neutral_id=generate_neutral_id(),
                     first_name=person.first_name,
@@ -1397,7 +1397,8 @@ class GatewayToResearchGrantImporter:
                 neutral_id=generate_neutral_id(),
                 role=role,
                 project=project,
-                person=Person.query.filter_by(orcid_id=person.orcid_id).one()
+                person=Person.query.filter_by(first_name=person.first_name).filter_by(
+                    last_name=person.surname).one()
             ))
 
     @staticmethod
