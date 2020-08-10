@@ -1556,7 +1556,7 @@ class GatewayToResearchGrantImporter:
         # Remote Sensing & Earth Obs.
         elif gtr_research_topic['id'] == '4504C6B4-D825-4F14-B0D3-7931AC636B71':
             # SPECTRAL/ENGINEERING
-            return 'https://metadata-standards.data.bas.ac.uk/vocabularies/gcmd/earth-science/terms/83150c54-5da8-4ee8-9579-19b95a8dc10c/'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
         # Regional & Extreme Weather
         elif gtr_research_topic['id'] == '396591D1-8226-43A9-991D-8E0D265D99D0':
             # EXTREME WEATHER
@@ -1611,11 +1611,182 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1faaede0-2cd6-4447-b28b-0a28d9e2d067'
         # Agricultural systems
         elif gtr_research_topic['id'] == '794345CD-A1D5-4984-ADDD-088BCF41822F':
+            #AGRICULTURE
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
         # Earth Surface Processes
         elif gtr_research_topic['id'] == '47491D28-C3A9-416A-8459-3ECC0715B776':
             # GEOMORPHIC LANDFORMS/PROCESSES
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/d35b9ba5-d018-48a5-8f0d-92b9c55b3279'
+        # Technol. for Environ. Appl.
+        elif gtr_research_topic['id'] == '98C0D11F-5C27-40CE-A895-54E4C61784B1':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Responses to environment
+        elif gtr_research_topic['id'] == '8717CFA9-D46B-41A5-8971-BF4431B68E29':
+            # CLIMATE INDICIATORS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
+        # Metabolomics / Metabonomics
+        elif gtr_research_topic['id'] == '9F673176-B1B7-47C8-9D0F-DEC4A0410F7C':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Biochemistry & physiology
+        elif gtr_research_topic['id'] == '649031FD-C21E-42D9-AC12-41ACA59CC11C':
+            # ANIMAL PHYSIOLOGY AND BIOCHEMISTRY
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f9cdf3ae-fe8b-4a19-a946-a8c8780d7894'
+        # Prehistoric Archaeology
+        elif gtr_research_topic['id'] == '14AE809A-4116-46B5-ABF7-DF8BCE2BF069':
+            # PALEOCLIMATE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
+        # Water Quality
+        elif gtr_research_topic['id'] == '99C0726F-47B0-4500-8B73-4DD0C60E31DF':
+            # WATER QUALITY
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1ee8a323-f0ba-4a21-b597-50890c527c8e'
+        # Plant physiology
+        elif gtr_research_topic['id'] == '15080F45-1EA3-41B4-BC23-C49CB918FBC4':
+            # PLANTS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/0b4081fa-5233-4484-bc82-706976defa0e'
+        # Carbon Capture & Storage
+        elif gtr_research_topic['id'] == 'B5705566-FCD9-4E90-A1F6-458BBDED816E':
+            # CARBON CAPTURE AND STORAGE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/e8c24822-7d2d-48c6-9dca-df3860e9bd63'
+        # Survey & Monitoring
+        elif gtr_research_topic['id'] == '189E1F60-BF95-405D-A6F0-62BBD78E2DD5':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Environment & Health
+        elif gtr_research_topic['id'] == '86884005-D98A-4391-95D8-913141C39F7C':
+            # HEALTH ADVISORIES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/370eba54-962b-4e59-9686-86d5c5ab9c88'
+        # Systematics & Taxonomy
+        elif gtr_research_topic['id'] == '2CF6994C-A1AE-435B-853C-2C228927BC9E':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Crop protection
+        elif gtr_research_topic['id'] == '6F3E4891-E3E8-4568-94D8-075A0552DE90':
+            # AGRICULTURAL PLANT SCIENCE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/25be3b9a-9d4c-4b5b-8d24-b1f519913d90'
+        # Earth Resources
+        elif gtr_research_topic['id'] == '859194A3-8EE1-41D7-90C5-DA2999B93E8E':
+            # SOLID EARTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+        # Atmospheric Kinetics
+        elif gtr_research_topic['id'] == '62E0966C-A067-4075-B244-33F1F4DD4B1E':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # Environmental Physiology
+        elif gtr_research_topic['id'] == '6CA01F47-BDE6-46F1-8679-A31D5317A885':
+            # AGRICULTURE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+        # Transport Geography
+        elif gtr_research_topic['id'] == '0C5394E1-D713-4507-8021-0A9785789545':
+            # TRANSPORTATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/37a6c8e2-f2ac-48a4-a4fa-d80f700f68d'
+        # Accelerator R&D
+        elif gtr_research_topic['id'] == 'BF8C9667-2697-4493-8519-7787831D008B':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Properties Of Earth Materials
+        elif gtr_research_topic['id'] == '9C0F9DC0-329C-4C09-B439-E4335EA8F916':
+            # SOLID EARTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72/'
+        # Technology and method dev
+        elif gtr_research_topic['id'] == '80A9D6C5-792D-4DD9-9138-BEC1BB556AA9':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Upper Atmos Process & Geospace
+        elif gtr_research_topic['id'] == '4CF6D0C3-CF9C-4067-9466-B9FC16647C21':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # RF & Microwave Technology
+        elif gtr_research_topic['id'] == 'CEDD6868-376B-45CB-BAB7-5AD38D089AC0':
+            # MICROWAVE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/66700628-2b62-4466-999e-faeb15ca4da5'
+        # Museum & Gallery Studies
+        elif gtr_research_topic['id'] == '51073B72-B972-4034-A0A1-87A6B0DCD198':
+            # RECREATIONAL ACTIVITIES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/9ee8acad-458e-45c1-a1d5-9b1649c82ea7'
+        # Socio Legal Studies
+        elif gtr_research_topic['id'] == 'B75590D5-E385-45F1-B6D0-CC3EDEFDE67D':
+            # SOCIOECONOMICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a96e6cd6-0f35-491d-8198-7551d03e1cbc'
+        # Scandinavian studies
+        elif gtr_research_topic['id'] == '80990855-5789-4612-9DC4-701464F66874':
+            # HUMAN SETTLEMENTS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fee25cad-7ffe-4ee2-a6f2-8116b8a0a707'
+        # Animal behaviour
+        elif gtr_research_topic['id'] == '790AD28C-6380-4025-83C2-6881B93C4602':
+            # ANIMAL ECOLOGY AND BEHAVIOR
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/5d1b53b2-7d69-4b7c-903f-d8cf29430f93'
+        # Theoretical biology
+        elif gtr_research_topic['id'] == '4A6E5CEB-ACA3-4301-98AD-C7EC310948FD':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Pollution
+        elif gtr_research_topic['id'] == 'DC6B2467-35B6-4997-9582-1BF957B82697':
+            # EMISSIONS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2a60df4a-a0d7-4e4b-b02a-372a083f0170'
+        # Animal organisms
+        elif gtr_research_topic['id'] == '4A2A69ED-37ED-4980-91A7-E54B4F6A9BC6':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Diet & health
+        elif gtr_research_topic['id'] == '446B7E7F-04EB-4121-9CC6-9171277E00DA':
+            # PUBLIC HEALTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
+        # Extremophiles
+        elif gtr_research_topic['id'] == '6E4BDD5C-C98C-4B33-B870-6A3A366BEE58':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Plant responses to environment
+        elif gtr_research_topic['id'] == 'AE2D53CC-F199-452E-A1FE-B63F4222D636':
+            # LAND SURFACE/AGRICULTURE INDICATORS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/112e71ec-c0a1-49a8-82d7-bcb317b45860'
+        # Population Genetics/Evolution
+        elif gtr_research_topic['id'] == 'A4209D5A-2E41-4290-9D1A-3172C1F48962':
+            # SPECIES/POPULATION INTERACTIONS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'
+        # Analytical Science
+        elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
+            return None
+        # Animal & human physiology
+        elif gtr_research_topic['id'] == 'E793F7FE-614C-4A45-83A0-BE79B172092C':
+            return None
+        # Assess/Remediate Contamination
+        elif gtr_research_topic['id'] == '4A635FDF-4DC1-48AB-A010-04619A0042EF':
+            return None
+        # Civil Engineering Materials
+        elif gtr_research_topic['id'] == '0F0B5443-BE5E-4DB6-823E-B7E33EE35922':
+            return None
+        # Continuum Mechanics
+        elif gtr_research_topic['id'] == '02B9E893-AC2F-436D-BF88-28E1AC827F5D':
+            return None
+        # Cultural History
+        elif gtr_research_topic['id'] == 'ACF80B6E-2900-42FE-9B9B-C84E295EA0AC':
+            return None
+        # Endocrinology
+        elif gtr_research_topic['id'] == '3646DA55-FE51-4E44-A8FA-E8E83A4CCBA4':
+            return None
+        # Energy - Conventional
+        elif gtr_research_topic['id'] == 'FFAA021A-6F31-43D9-8517-EA79D1E71F54':
+            return None
+        # Environmental Informatics
+        elif gtr_research_topic['id'] == 'F63617E9-02B7-41EA-AD68-B2D597237394':
+            return None
+        # Exploration Technology
+        elif gtr_research_topic['id'] == 'DF27EB97-39D5-4F5C-8F07-21BBABBF9422':
+            return None
+        # Geography and Development
+        elif gtr_research_topic['id'] == '78369800-A95E-49BC-94E7-8659E5C2EFEF':
+            return None
+        # Historical Geography
+        elif gtr_research_topic['id'] == '2D6754CC-B7DE-45FB-BB9D-CE7AA05892D0':
+            return None
+        # Omic sciences & technologies
+        elif gtr_research_topic['id'] == '9BDF80E2-029E-4505-B7EE-DB0FA633E483':
+            return None
+        # Solar & Solar-Terrestrial Phys
+        elif gtr_research_topic['id'] == 'DAA4C99D-BD30-4A55-B416-7AFE780BB7B8':
+            return None
         # Unclassified
         elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
             return None
@@ -1663,6 +1834,30 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
         elif gtr_research_subject['text'] == 'Agri-environmental science':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+        elif gtr_research_subject['text'] == 'Archaeology':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/bf703f22-9775-460d-86bd-149aaef1acde'
+        elif gtr_research_subject['text'] == 'Plant & crop science':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1c35c74-0b10-46de-9c06-efeda92d383a'
+        elif gtr_research_subject['text'] == 'Human Geography':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fb93d937-c17c-45d0-a9e3-ca5c8a800ca8'
+        elif gtr_research_subject['text'] == 'Info. & commun. Technol.':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/d4313915-2d24-424c-a171-30ee9a6f4bb5'
+        elif gtr_research_subject['text'] == 'Medical & health interface':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
+        elif gtr_research_subject['text'] == 'Biomolecules & biochemistry':
+            return None
+        elif gtr_research_subject['text'] == 'Facility Development':
+            return None
+        elif gtr_research_subject['text'] == 'Instrument. sensor & detectors':
+            return None
+        elif gtr_research_subject['text'] == 'Omic sciences & technologies':
+            return None
+        elif gtr_research_subject['text'] == 'Pollution, waste & resources':
+            return None
+        elif gtr_research_subject['text'] == 'Animal Science':
+            return None
+        elif gtr_research_subject['text'] == 'Chemical measurement':
+            return None
         raise UnmappedGatewayToResearchProjectSubject(meta={
             'gtr_research_subject': {
                 'id': gtr_research_subject['id'],
