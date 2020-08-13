@@ -366,7 +366,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/544242A5-6640-4FD5-87C5-348557ED5307':
             return 'https://www.grid.ac/institutes/grid.5600.3'
         # Free University of Brussels
-        elif self.resource_uri == ('https://gtr.ukri.org/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3'):
+        elif (self.resource_uri == 'https://gtr.ukri.org/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3'):
             return 'https://www.grid.ac/institutes/grid.8767.e'
         # Florida State University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/B916CBD5-C485-400E-9973-216992E6F5DE':
@@ -375,11 +375,20 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E594FDB4-DD6F-441F-90D6-C423A2916446':
             return 'https://www.grid.ac/institutes/grid.25627.34'
         # Swansea University
-        elif self.resource_uri == 'https://gtr.ukri.org/gtr/api/organisations/AB307619-D4FA-427E-A042-09DBEBA84669':
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AB307619-D4FA-427E-A042-09DBEBA84669':
             return 'https://www.grid.ac/institutes/grid.4827.9'
         # Higher School of Economics
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7412B9A7-B073-4FA6-8710-19D1427488FB':
             return 'https://www.grid.ac/institutes/grid.410682.9'
+        # National Research Centre for Geosciences
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A4899C8-DF2F-44BC-8431-43C3785C02F7':
+            return 'https://www.grid.ac/institutes/grid.23731.34'
+        # National Research Centre for Geosciences
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A4899C8-DF2F-44BC-8431-43C3785C02F7':
+            return 'https://www.grid.ac/institutes/grid.23731.34'
+        # University of Oslo
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E30B7145-0051-47F4-B2D6-C93EE14B8568':
+            return 'https://www.grid.ac/institutes/grid.5510.1'
         # Unknown
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
             return None
@@ -1679,7 +1688,7 @@ class GatewayToResearchGrantImporter:
         # Transport Geography
         elif gtr_research_topic['id'] == '0C5394E1-D713-4507-8021-0A9785789545':
             # TRANSPORTATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/37a6c8e2-f2ac-48a4-a4fa-d80f700f68d'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/37a6c8e2-f2ac-48a4-a4fa-d80f700f68db'
         # Accelerator R&D
         elif gtr_research_topic['id'] == 'BF8C9667-2697-4493-8519-7787831D008B':
             # EARTH SCIENCE SERVICES
@@ -1687,7 +1696,7 @@ class GatewayToResearchGrantImporter:
         # Properties Of Earth Materials
         elif gtr_research_topic['id'] == '9C0F9DC0-329C-4C09-B439-E4335EA8F916':
             # SOLID EARTH
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72/'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
         # Technology and method dev
         elif gtr_research_topic['id'] == '80A9D6C5-792D-4DD9-9138-BEC1BB556AA9':
             # EARTH SCIENCE SERVICES
@@ -1786,6 +1795,54 @@ class GatewayToResearchGrantImporter:
         # Solar & Solar-Terrestrial Phys
         elif gtr_research_topic['id'] == 'DAA4C99D-BD30-4A55-B416-7AFE780BB7B8':
             return None
+        # Spatial Planning
+        elif gtr_research_topic['id'] == 'AF20B57E-E40B-45BC-85C8-DDC6F4777697':
+            return None
+        # Materials Characterisation
+        elif gtr_research_topic['id'] == '561091A1-9FC9-4508-B1B2-2F3623E1FC9D':
+            return None
+        # Evolution & populations
+        elif gtr_research_topic['id'] == '62F9C365-02D0-4623-9A73-8CA09DA0FFF2':
+            return None
+        # Atoms & Ions
+        elif gtr_research_topic['id'] == '4D22A081-A665-4EAE-8542-CB1050A44B55':
+            return None
+        # Cultural Geography
+        elif gtr_research_topic['id'] == '8990E5FE-B44F-4A5B-8FDE-0610A5BE98C4':
+            return None
+        # International Law
+        elif gtr_research_topic['id'] == 'EC0E734E-D9A1-463E-AB7A-CCB02E877E10':
+            return None
+        # History of Sci./Med./Technol.
+        elif gtr_research_topic['id'] == 'E5E4CBFA-1AC0-405D-A6EC-46A5C0B6704F':
+            return None
+        # Mathematical Analysis
+        elif gtr_research_topic['id'] == '04D8FF87-2CFC-44E7-A7DF-47E10C813E05':
+            return None
+        # Ecotoxicology
+        elif gtr_research_topic['id'] == '6A654DB9-716E-4BAC-867B-E1CE45A994F6':
+            return None
+        # Tectonic Processes
+        elif gtr_research_topic['id'] == '401A9A9F-83DF-48FD-B108-C4CC7FB7572C':
+            return None
+        # Epigenetics
+        elif gtr_research_topic['id'] == 'B6EF57B2-8ACD-48E6-9B45-98507446B053':
+            return None
+        # Applied Arts HTP
+        elif gtr_research_topic['id'] == '287497FB-DD4A-44CC-AC13-DBAFADC9AD82':
+            return None
+        # Environmental Geography
+        elif gtr_research_topic['id'] == 'F6DEB3C9-18A0-4A06-87C5-8C347DF98C60':
+            return None
+        # Social Anthropology
+        elif gtr_research_topic['id'] == '020361E1-B8CA-49FD-9149-27D31D21C7A3':
+            return None
+        # Regional Geography
+        elif gtr_research_topic['id'] == '8DA0F0DB-E15C-4A3D-ADD9-E08898CE6475':
+            return None
+        # Cultural Studies
+        elif gtr_research_topic['id'] == 'ABBA5192-0B16-4BC8-8B3F-3A48625872F0':
+            return None
         # Unclassified
         elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
             return None
@@ -1836,7 +1893,7 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_subject['text'] == 'Archaeology':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/bf703f22-9775-460d-86bd-149aaef1acde'
         elif gtr_research_subject['text'] == 'Plant & crop science':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1c35c74-0b10-46de-9c06-efeda92d383a'
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1c35c74-0b10-46de-9c06-efeda92d383a'
         elif gtr_research_subject['text'] == 'Human Geography':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fb93d937-c17c-45d0-a9e3-ca5c8a800ca8'
         elif gtr_research_subject['text'] == 'Info. & commun. Technol.':
@@ -1856,6 +1913,40 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_subject['text'] == 'Animal Science':
             return None
         elif gtr_research_subject['text'] == 'Chemical measurement':
+            return None
+        elif gtr_research_subject['text'] == 'Planetary science':
+            return None
+        elif gtr_research_subject['text'] == 'Energy':
+            return None
+        elif gtr_research_subject['text'] == 'Genetics & development':
+            return None
+        elif gtr_research_subject['text'] == 'Mathematical sciences':
+            return None
+        elif gtr_research_subject['text'] == 'Food science & nutrition':
+            return None
+        elif gtr_research_subject['text'] == 'Environmental planning':
+            return None
+        elif gtr_research_subject['text'] == 'Civil eng. & built environment':
+            return None
+        elif gtr_research_subject['text'] == 'History':
+            return None
+        elif gtr_research_subject['text'] == 'Materials sciences':
+            return None
+        elif gtr_research_subject['text'] == 'Atomic & molecular physics':
+            return None
+        elif gtr_research_subject['text'] == 'Law & legal studies':
+            return None
+        elif gtr_research_subject['text'] == 'Solar & terrestrial physics':
+            return None
+        elif gtr_research_subject['text'] == 'Social Anthropology':
+            return None
+        elif gtr_research_subject['text'] == 'Sociology':
+            return None
+        elif gtr_research_subject['text'] == 'Visual arts':
+            return None
+        elif gtr_research_subject['text'] == 'Cultural & museum studies':
+            return None
+        elif gtr_research_subject['text'] == 'Development studies':
             return None
         raise UnmappedGatewayToResearchProjectSubject(meta={
             'gtr_research_subject': {
