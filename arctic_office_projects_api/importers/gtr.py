@@ -389,6 +389,9 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # University of Oslo
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E30B7145-0051-47F4-B2D6-C93EE14B8568':
             return 'https://www.grid.ac/institutes/grid.5510.1'
+        # British Trust for Ornithology
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A8BE8EF6-CDA2-41D4-A52B-B66A41997D1D':
+            return 'https://www.grid.ac/institutes/grid.423196.b'
         # Unknown
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
             return None
@@ -1842,6 +1845,12 @@ class GatewayToResearchGrantImporter:
             return None
         # Cultural Studies
         elif gtr_research_topic['id'] == 'ABBA5192-0B16-4BC8-8B3F-3A48625872F0':
+            return None
+        # Ground Engineering
+        elif gtr_research_topic['id'] == '5AAD42DB-C6CB-4B09-8555-8ECA565B6B59':
+            return None
+        # Earth Engineering
+        elif gtr_research_topic['id'] == 'DEEA5CB1-59E6-4D82-92D6-DB74E180E6F7':
             return None
         # Unclassified
         elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
