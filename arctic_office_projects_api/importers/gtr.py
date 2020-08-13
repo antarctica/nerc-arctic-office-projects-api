@@ -1408,8 +1408,7 @@ class GatewayToResearchGrantImporter:
                 neutral_id=generate_neutral_id(),
                 role=role,
                 project=project,
-                person=Person.query.filter_by(first_name=person.first_name).filter_by(
-                    last_name=person.surname).one()
+                person=Person.query.filter_by(first_name=person.first_name, last_name=person.surname).first()
             ))
 
     @staticmethod
