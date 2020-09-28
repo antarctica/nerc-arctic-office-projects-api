@@ -30,8 +30,6 @@ def import_grants(file):
             if grant_reference_valid(project['grant-reference']):  # nosec
                 subprocess.run(['flask', 'import', 'grant', 'gtr',
                                 project['grant-reference']], shell=False)
-            else:
-                print('invalid ref %s' % project['grant-reference'])
 
 
 json_filename = 'json/projects-2019-06-16.json'
