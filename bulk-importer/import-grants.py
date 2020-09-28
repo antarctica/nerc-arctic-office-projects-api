@@ -1,4 +1,4 @@
-import json, subprocess, re
+import json, subprocess, re # nosec
 
 
 def json_valid(filename):
