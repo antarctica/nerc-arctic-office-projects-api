@@ -1,6 +1,5 @@
 import json
-import subprocess
-# nosec
+import subprocess  # nosec
 import re
 
 
