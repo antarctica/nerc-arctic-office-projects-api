@@ -1405,7 +1405,7 @@ class GatewayToResearchGrantImporter:
         """
         for person in gtr_people:
 
-            org_id = db.session.query(Organisation.id).filter(Organisation.grid_identifier==person.employer.grid_id).scalar()
+            org_id = db.session.query(Organisation.id).filter(Organisation.grid_identifier == person.employer.grid_id).scalar()
 
             if not db.session.query(exists().where(and_(Person.first_name == person.first_name, Person.last_name == person.surname, Person.organisation_id == org_id))).scalar():
                 db.session.add(Person(
@@ -1622,7 +1622,7 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1faaede0-2cd6-4447-b28b-0a28d9e2d067'
         # Agricultural systems
         elif gtr_research_topic['id'] == '794345CD-A1D5-4984-ADDD-088BCF41822F':
-            #AGRICULTURE
+            # AGRICULTURE
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
         # Earth Surface Processes
         elif gtr_research_topic['id'] == '47491D28-C3A9-416A-8459-3ECC0715B776':

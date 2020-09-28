@@ -1,4 +1,6 @@
-import json, subprocess, re # nosec
+import json
+import subprocess
+import re  # nosec
 
 
 def json_valid(filename):
@@ -9,15 +11,17 @@ def json_valid(filename):
         print('Invalid json file: %s' % error)
         return False
 
+
 def grant_reference_valid(grant_reference):
     patterns = {
-        'gtr': '^[A-Z]{2}\/[A-Z0-9]{7}\/\d{1}$',
-        'other': '\d{7}'
+        'gtr': r'^[A-Z]{2}\/[A-Z0-9]{7}\/\d{1}$',
+        'other': r'\d{7}'
     }
     for key, pattern in patterns.items():
         if re.match(pattern, grant_reference):
             return True
     return False
+
 
 def import_grants(file):
     with open(file) as json_file:
