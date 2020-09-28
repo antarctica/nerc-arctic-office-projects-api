@@ -9,7 +9,7 @@ from flask import current_app as app
 from psycopg2.extras import DateRange
 from requests import HTTPError
 # noinspection PyPackageRequirements
-from sqlalchemy import exists
+from sqlalchemy import exists, and_
 
 from arctic_office_projects_api.errors import AppException
 from arctic_office_projects_api.extensions import db
@@ -31,15 +31,16 @@ class UnmappedGatewayToResearchPerson(AppException):
     detail = 'A Gateway to Research person has not been mapped to an application Person via a ORCID iD'
 
 
-class UnmappedGatewayToResearchProjectCategory(AppException):
-    title = 'Unmapped Gateway to Research category or topic'
-    detail = 'A Gateway to Research category or topic has not been mapped to an application category term via a ' \
+class UnmappedGatewayToResearchProjectTopic(AppException):
+    title = 'Unmapped Gateway to Research topic'
+    detail = 'A Gateway to Research topic has not been mapped to an application category term via a ' \
              'scheme identifier'
 
 
-class GatewayToResearchPublicationWithoutDOI(AppException):
-    title = "Gateway to Research publication doesn't have a DOI"
-    detail = 'A Gateway to Research publication needs to include a DOI to be valid in this API'
+class UnmappedGatewayToResearchProjectSubject(AppException):
+    title = 'Unmapped Gateway to Research subject'
+    detail = 'A Gateway to Research subject has not been mapped to an application category term via a ' \
+             'scheme identifier'
 
 
 # Resources
@@ -53,6 +54,7 @@ class GatewayToResearchResource:
     including a 'links' attribute. This is a list of links to other resources with a 'rel' attribute indicating its
     type/person (e.g. a publication or a person).
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -142,6 +144,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
     This class is intended to hold any common functionality shared by these related classes.
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -157,7 +160,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
     def _map_to_grid_id(self) -> str:
         """
-        Organisations in this project are identified by GIRD IDs (https://www.grid.ac), however these are not used by
+        Organisations in this project are identified by GRID IDs (https://www.grid.ac), however these are not used by
         GTR and no other identifier is available to automatically determine the GIRD ID for an organisation based on its
         GTR resource ID.
 
@@ -204,10 +207,13 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/46B41008-0EB4-4E28-BBFB-E98366999EC5':
             return 'https://www.grid.ac/institutes/grid.8250.f'
         # National Oceanography Centre
-        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4DB630C7-7E13-4610-A1C3-29601903CEE3':
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4DB630C7-7E13-4610-A1C3-29601903CEE3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/333FAC7F-030F-4A9C-87FD-78DB66107E58'):
             return 'https://www.grid.ac/institutes/grid.418022.d'
         # NERC Centre for Ecology and Hydrology
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4FC881BE-799E-459C-A287-2A68170426DA':
+            return 'https://www.grid.ac/institutes/grid.494924.6'
+        # UK Ctr for Ecology & Hydrology fr 011219
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/2431A6E2-13D5-40AB-A58A-AC75E6A3654E':
             return 'https://www.grid.ac/institutes/grid.494924.6'
         # University of Manchester
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/68D0E3C9-9246-4CFC-B5E9-48584CF82993':
@@ -266,7 +272,129 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # Bangor University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F9F1D136-12E3-4BE4-9668-0C9BC4A7C1BF':
             return 'https://www.grid.ac/institutes/grid.7362.0'
-
+        # Marine Biological Association
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/309F361A-A8CC-438D-AB70-93C74E1E91C3':
+            return 'https://www.grid.ac/institutes/grid.14335.30'
+        # University of St Andrews
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/C0E4FAD2-3C8B-410A-B6DF-3B9B9E433060':
+            return 'https://www.grid.ac/institutes/grid.11914.3c'
+        # Northumbria University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/EF390CF0-ECD3-47D8-B9A8-7602AF319BEE':
+            return 'https://www.grid.ac/institutes/grid.42629.3b'
+        # Plymouth Marine Laboratory
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/EEF9EA95-341D-48C2-8A68-B838D35497C8':
+            return 'https://www.grid.ac/institutes/grid.22319.3b'
+        # Newcastle University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/5E2B04DD-4A03-45ED-9892-61C5CCB8AC68':
+            return 'https://www.grid.ac/institutes/grid.1006.7'
+        # Aarhus University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/CE43EBFA-3FC9-44BC-B6FF-001F11664C46':
+            return 'https://www.grid.ac/institutes/grid.7048.b'
+        # Lancaster University - there are 2 gtr records for this for some reason
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A66BFC9-B9A5-48C6-B46C-761D1C13C5DC') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/44160F04-5CBF-4E8E-A6C6-C0EF61A5865C'):
+            return 'https://www.grid.ac/institutes/grid.9835.7'
+        # University of Strathclyde
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/5BB4F8BF-B4E0-4EAF-9AF5-885E19D64850':
+            return 'https://www.grid.ac/institutes/grid.11984.35'
+        # Free University of Brussels
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/773AC409-21D1-4CA0-87AA-1769A45D718E':
+            return 'https://www.grid.ac/institutes/grid.8767.e'
+        # Warwick University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/B6FB652A-60C3-48DD-9A33-075D1F759B48':
+            return 'https://www.grid.ac/institutes/grid.7372.1'
+        # Bristol University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/4A348A76-B2D0-4DDD-804A-CE735A6D3798':
+            return 'https://www.grid.ac/institutes/grid.5337.2'
+        # Aberystwyth University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E4757A6E-7326-472B-9979-B47D77A65446':
+            return 'https://www.grid.ac/institutes/grid.8186.7'
+        # University of Hull
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A0FC07A-04CD-4F7A-9095-1D2E6C1D918F':
+            return 'https://www.grid.ac/institutes/grid.9481.4'
+        # Essex University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/ED6A6B32-663C-4A62-A33B-2C6A68E2E102':
+            return 'https://www.grid.ac/institutes/grid.8356.8'
+        # Queen Mary, University of London
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/D5337A10-AC8A-402A-8164-C5F9CC6B0140':
+            return 'https://www.grid.ac/institutes/grid.4868.2'
+        # Leicester University - this has 2 gtr records
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AE0A6F70-C175-4550-B08F-74C8790007BB') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/C842A34F-18F7-454D-A259-FED802368496'):
+            return 'https://www.grid.ac/institutes/grid.9918.9'
+        # Open University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/89E6D9CB-DAF8-40A2-A9EF-B330A5A7FC24':
+            return 'https://www.grid.ac/institutes/grid.10837.3d'
+        # Scottish Universities Environmental Research Centre
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/BF1F76BF-B87F-4FE0-B1DB-4650F5E99448':
+            return 'https://www.grid.ac/institutes/grid.224137.1'
+        # Birmingham University - this has 2 gtr records
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A022BD3A-2A7B-4E64-8877-A2E381C4CCB5') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/818CD6C9-61EE-41F2-9F37-0C7A8F43E25D'):
+            return 'https://www.grid.ac/institutes/grid.6572.6'
+        # The Natural History Museum
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/B2F6103D-47D2-486A-8F7C-C62362BAACD9':
+            return 'https://www.grid.ac/institutes/grid.35937.3b'
+        # Plymouth University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7801F008-7C77-45E7-90E9-4345B47D138E':
+            return 'https://www.grid.ac/institutes/grid.11201.33'
+        # Glasgow University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AE58F21F-3622-4382-97BB-1359BD183E9F':
+            return 'https://www.grid.ac/institutes/grid.8756.c'
+        # AHRC
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1291772D-DFCE-493A-AEE7-24F7EEAFE0E9':
+            return 'https://www.grid.ac/institutes/grid.426413.6'
+        # EPSRC
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/798CB33D-C79E-4578-83F2-72606407192C':
+            return 'https://www.grid.ac/institutes/grid.421091.f'
+        # ESRC
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/924BE15C-91F2-4AAD-941A-3F338324B6AE':
+            return 'https://www.grid.ac/institutes/grid.434257.3'
+        # Innovate Uk
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1DA78802-0659-4398-B40B-7FA41B56BBF3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E18E2F0F-AC7D-4E02-9559-669F7C8FEC74'):
+            return 'https://www.grid.ac/institutes/grid.423443.6'
+        # Cranfield University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F45A4578-F962-4EFA-9CC1-9F2FF4F760AE':
+            return 'https://www.grid.ac/institutes/grid.12026.37'
+        # University of Liverpool
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A0A585E0-6B0D-4643-A3A6-47943B4CBFEF':
+            return 'https://www.grid.ac/institutes/grid.10025.36'
+        # University of Lincoln
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/D64641C7-D9A6-4B41-9C8F-03F7396CB8DA':
+            return 'https://www.grid.ac/institutes/grid.36511.30'
+        # Cardiff University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/9C10D78F-6430-4CA7-9528-B96B0762A4C6':
+            return 'https://www.grid.ac/institutes/grid.5600.3'
+        # University of Abertay Dundee
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/544242A5-6640-4FD5-87C5-348557ED5307':
+            return 'https://www.grid.ac/institutes/grid.5600.3'
+        # Free University of Brussels
+        elif (self.resource_uri == 'https://gtr.ukri.org/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/FCD90BB9-BD1C-43D4-98EE-AE74283911E3'):
+            return 'https://www.grid.ac/institutes/grid.8767.e'
+        # Florida State University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/B916CBD5-C485-400E-9973-216992E6F5DE':
+            return 'https://www.grid.ac/institutes/grid.255986.5'
+        # Manchester Metropolitan University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E594FDB4-DD6F-441F-90D6-C423A2916446':
+            return 'https://www.grid.ac/institutes/grid.25627.34'
+        # Swansea University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/AB307619-D4FA-427E-A042-09DBEBA84669':
+            return 'https://www.grid.ac/institutes/grid.4827.9'
+        # Higher School of Economics
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/7412B9A7-B073-4FA6-8710-19D1427488FB':
+            return 'https://www.grid.ac/institutes/grid.410682.9'
+        # National Research Centre for Geosciences
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A4899C8-DF2F-44BC-8431-43C3785C02F7':
+            return 'https://www.grid.ac/institutes/grid.23731.34'
+        # National Research Centre for Geosciences
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/8A4899C8-DF2F-44BC-8431-43C3785C02F7':
+            return 'https://www.grid.ac/institutes/grid.23731.34'
+        # University of Oslo
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E30B7145-0051-47F4-B2D6-C93EE14B8568':
+            return 'https://www.grid.ac/institutes/grid.5510.1'
+        # British Trust for Ornithology
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A8BE8EF6-CDA2-41D4-A52B-B66A41997D1D':
+            return 'https://www.grid.ac/institutes/grid.423196.b'
+        # Unknown
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
+            return None
         raise UnmappedGatewayToResearchOrganisation(meta={
             'gtr_organisation': {
                 'resource_uri': self.resource_uri
@@ -298,6 +426,7 @@ class GatewayToResearchFund(GatewayToResearchResource):
 
     GTR Funds are associate with a GTR Funder (funding organisation).
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -305,7 +434,8 @@ class GatewayToResearchFund(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        self.funder = GatewayToResearchFunder(gtr_resource_uri=self._find_gtr_funder_link())
+        self.funder = GatewayToResearchFunder(
+            gtr_resource_uri=self._find_gtr_funder_link())
 
         if 'start' not in self.resource:
             raise KeyError('Start date element not in GTR fund')
@@ -324,7 +454,8 @@ class GatewayToResearchFund(GatewayToResearchResource):
         if 'amount' not in self.resource['valuePounds']:
             raise KeyError('Amount element not in GTR fund')
 
-        self.currency = self._map_gtr_fund_currency_code(self.resource['valuePounds']['currencyCode'])
+        self.currency = self._map_gtr_fund_currency_code(
+            self.resource['valuePounds']['currencyCode'])
         self.amount = self.resource['valuePounds']['amount']
 
     @staticmethod
@@ -360,7 +491,8 @@ class GatewayToResearchFund(GatewayToResearchResource):
         if len(self.resource_links['FUNDER']) == 0:
             raise KeyError("GTR funder relation not found in GTR fund links")
         if len(self.resource_links['FUNDER']) > 1:
-            raise KeyError("Multiple GTR funder identifiers found in GTR fund links, one expected")
+            raise KeyError(
+                "Multiple GTR funder identifiers found in GTR fund links, one expected")
 
         return self.resource_links['FUNDER'][0]
 
@@ -388,6 +520,7 @@ class GatewayToResearchPerson(GatewayToResearchResource):
 
     GTR People are associated with a GTR Employer (host organisation).
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -395,7 +528,8 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        self.employer = GatewayToResearchEmployer(gtr_resource_uri=self._find_gtr_employer_link())
+        self.employer = GatewayToResearchEmployer(
+            gtr_resource_uri=self._find_gtr_employer_link())
 
         self.first_name = None
         if 'firstName' in self.resource:
@@ -406,7 +540,6 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         self.orcid_id = None
         if 'orcidId' in self.resource:
             self.orcid_id = f"https://orcid.org/{self.resource['orcidId']}"
-        self._map_id_to_orcid_ids()
 
     def _find_gtr_employer_link(self):
         """
@@ -420,11 +553,14 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         :return URI of the GTR Employer resource for a GTR Person
         """
         if 'EMPLOYED' not in self.resource_links.keys():
-            raise KeyError("GTR employer relation not found in GTR person links")
+            raise KeyError(
+                "GTR employer relation not found in GTR person links")
         if len(self.resource_links['EMPLOYED']) == 0:
-            raise KeyError("GTR employer relation not found in GTR person links")
+            raise KeyError(
+                "GTR employer relation not found in GTR person links")
         if len(self.resource_links['EMPLOYED']) > 1:
-            raise KeyError("Multiple GTR employer relations found in GTR person links, one expected")
+            raise KeyError(
+                "Multiple GTR employer relations found in GTR person links, one expected")
 
         return self.resource_links['EMPLOYED'][0]
 
@@ -701,7 +837,154 @@ class GatewayToResearchPerson(GatewayToResearchResource):
                 'https://orcid.org/0000-0001-8659-6092',
             # Michel Tsamados - UCL
             "https://gtr.ukri.org:443/gtr/api/persons/FFC933A9-265E-4B6F-8CA9-0DA86ADB6976":
-                'https://orcid.org/0000-0001-7034-5360'
+                'https://orcid.org/0000-0001-7034-5360',
+            # Heather Alison Bouman - Oxford University
+            "https://gtr.ukri.org:443/gtr/api/persons/CD9B1E18-1AA3-4E18-9A3F-C2DE79CBBCEB":
+            'https://orcid.org/0000-0002-7407-9431',
+            # Bart Egidius Van Dongen - Manchester University
+            "https://gtr.ukri.org:443/gtr/api/persons/8FCE53A8-0C21-4162-93B1-7424EC08763C":
+            'https://orcid.org/0000-0003-1189-142X',
+            # Raja Ganeshram - University of Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/89874E4D-902B-4B2B-873D-A95B4CFF4738":
+            'https://orcid.org/0000-0002-5150-1310',
+            # Geraint Andrew Tarling - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/138BADBE-2FB1-4D7C-9444-DBD7AC82DF43":
+            'https://orcid.org/0000-0002-3753-5899',
+            # Daniel J Mayor - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/1486F06E-695A-4E98-BD9B-9045254B3FEA":
+            'https://orcid.org/0000-0002-1295-0041',
+            # Yueng-Djern Lenn - Bangor
+            "https://gtr.ukri.org:443/gtr/api/persons/E532D67A-59BE-41CC-8BE8-94DD3E8CCAFE":
+            'https://orcid.org/0000-0001-6031-523X',
+            # Joanne Hopkins - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/EBE6F4FC-967E-4E29-9E61-A6076895BE04":
+            'http://orcid.org/0000-0003-1504-3671',
+            # Martin Solan - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/AFFB5A85-DAC7-48F2-AE07-952481073BAA":
+            'https://orcid.org/0000-0001-9924-5574',
+            # Ben Andrew Ward - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/50444B9C-4782-4135-AC0C-5DE9E7444A05":
+            'https://orcid.org/0000-0003-1290-8270',
+            # Ryan Reynolds Neely - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/622343F7-063E-4E4F-AD2B-3ABB95CB1590":
+            'https://orcid.org/0000-0003-4560-4812',
+            # Markus Michael Frey - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/35CC6C9B-37C1-4791-BA52-EAA4FCC23D16":
+            'https://orcid.org/0000-0003-0535-0416',
+            # Julienne Stroeve - UCL
+            "https://gtr.ukri.org:443/gtr/api/persons/7E95FFC4-B5D5-493A-B5A4-CC6B1BCEB7F6":
+            'https://orcid.org/0000-0001-7316-8320',
+            # Jeremy Charles Ely - Sheffield
+            "https://gtr.ukri.org:443/gtr/api/persons/94CC9220-726B-4738-BF99-DF8E758765BC":
+            'https://orcid.org/0000-0003-4007-1500',
+            # Thomas John Bracegirdle - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/BD3F03BA-8E5A-4084-9A84-62CD0928FE3F":
+            'https://orcid.org/0000-0002-8868-4739',
+            # Beth Scott - Aberdeen
+            "https://gtr.ukri.org:443/gtr/api/persons/840DC5C3-017A-4AD7-9515-563BD0E71163":
+            'https://orcid.org/0000-0001-5412-3952',
+            # Andrew Jonathan Hodson - UNIS, Norway
+            "https://gtr.ukri.org:443/gtr/api/persons/2C27EE95-AC89-423A-B4CA-F75604790961":
+            'https://orcid.org/0000-0002-1255-7987',
+            # Samraat Pawar - Imperial College London
+            "https://gtr.ukri.org:443/gtr/api/persons/0C503344-7D14-4C36-9F3F-73223A796985":
+            'https://orcid.org/0000-0001-8375-5684',
+            # Margaret Jane Yelland - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/E014B362-8B27-4EE7-9B2B-0EE6BA42C13E":
+            'https://orcid.org/0000-0002-0936-4957',
+            # Angus Ian Best - NOC
+            "https://gtr.ukri.org:443/gtr/api/persons/3D956DF3-1C35-45B6-ADC2-22D310FE63D5":
+            'https://orcid.org/0000-0001-9558-4261',
+            # James Scourse - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/D4224C78-EC26-41C3-AFF0-6E687034DFA6":
+            'https://orcid.org/0000-0003-2658-8730',
+            # Paul Halloran - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/1A22F476-2DF1-46F4-838E-F576D2C603C7":
+            'https://orcid.org/0000-0002-9227-0678',
+            # Sarah Chadburn - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/41C00C6E-1017-4261-902E-898252080D2B":
+            'https://orcid.org/0000-0003-1320-315X',
+            # Jennifer Gill - UEA
+            "https://gtr.ukri.org:443/gtr/api/persons/ED8FB31C-8D9B-4384-9320-262E20AEE07A":
+            'https://orcid.org/0000-0002-2649-1325',
+            # Andras Sobester - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/542E05E7-780C-4750-96D4-22AD3E78FBF7":
+            'https://orcid.org/0000-0002-8997-4375',
+            # James Screen - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/9B340BDB-C0A9-4BEA-8013-7178B4978BF7":
+            'https://orcid.org/0000-0003-1728-783X',
+            # Angela Victorina Gallego-Sala - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/B2C5E020-7032-4D4A-8474-6C6AE44DDF28":
+            'https://orcid.org/0000-0002-7483-7773',
+            # Simon Frederick Tett - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/3316451E-01DB-4ADD-AE44-25A575ED22C1":
+            'https://orcid.org/0000-0001-7526-560X',
+            # Alastair Lewis - NCAS, York
+            "https://gtr.ukri.org:443/gtr/api/persons/E7265890-DFAA-4CF4-8181-48515950E2FA":
+            'https://orcid.org/0000-0002-4075-3651',
+            # Thomas Mock - UEA
+            "https://gtr.ukri.org:443/gtr/api/persons/B8A0D322-8B6B-48A9-A8B5-1AA3780A89E9":
+            'https://orcid.org/0000-0001-9604-0362',
+            # Walter Oechel - San Diegoa State University, USA
+            "https://gtr.ukri.org:443/gtr/api/persons/943FEA7C-8F21-4565-B579-8359A7C3CCA1":
+            'https://orcid.org/0000-0002-3504-026X',
+            # Tina Van De Flierdt - Imperial; College London
+            "https://gtr.ukri.org:443/gtr/api/persons/3FCFA10D-A17B-4B7B-B342-2EC2293B96A2":
+            'https://orcid.org/0000-0001-7176-9755',
+            # Lorna Street - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/335CF8E0-B236-4424-B60B-7536788288C7":
+            'http://orcid.org/0000-0001-9570-7479',
+            # Amber Luella Annett - Southampton
+            "https://gtr.ukri.org:443/gtr/api/persons/3C206F0C-E636-4D86-86B7-61F959148559":
+            'https://orcid.org/0000-0002-3730-2438',
+            # Rhodri Jerrett - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/676F942D-1AFE-436D-B60F-C50F23E355AD":
+            'https://orcid.org/0000-0002-1412-3808',
+            # Louise Claire Sime - BAS
+            "https://gtr.ukri.org:443/gtr/api/persons/482B3DAB-CBF4-4FC9-BBC3-80C333D3E2C0":
+            'https://orcid.org/0000-0002-9093-7926',
+            # John Campbell Maclennan - Cambridge
+            "https://gtr.ukri.org:443/gtr/api/persons/8DDB527E-9C3C-49EE-B6AE-1BDBDCB8DD97":
+            'https://orcid.org/0000-0001-6857-9600',
+            # Julie Prytulak - Durham University
+            "https://gtr.ukri.org:443/gtr/api/persons/675A3847-2195-41F2-80C1-7DDD4509A8D1":
+            'http://orcid.org/0000-0001-5269-1059',
+            # Emanuel Ulrich Gloor - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/5DABD8C4-83A4-4AB3-93C9-DB49DC66ABFA":
+            'https://orcid.org/0000-0002-9384-6341',
+            # Andrew Watson - Exeter
+            "https://gtr.ukri.org:443/gtr/api/persons/42391614-350E-4783-9FBF-46F9D67CC682":
+            'http://orcid.org/0000-0002-9654-8147',
+            # Claire Reeves - Open Univeristy
+            "https://gtr.ukri.org:443/gtr/api/persons/26C13F6D-9648-4662-90FA-24F16B9515E7":
+            'https://orcid.org/0000-0002-2493-2123',
+            # Paul Palmer - Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/persons/F64F8711-B1DE-406B-B648-5A427216B839":
+            'https://orcid.org/0000-0002-1487-0969',
+            # Steven James Woolnough - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/510BA244-9342-4BBD-AEA9-CB0DA2B6842B":
+            'https://orcid.org/0000-0003-0500-8514',
+            # Erin Louise McClymont - Durham University
+            "https://gtr.ukri.org:443/gtr/api/persons/8930E0D3-F48C-49D1-810E-EA0B8B569206":
+            'https://orcid.org/0000-0003-1562-8768',
+            # Nicholas Pappas Klingaman - Reading
+            "https://gtr.ukri.org:443/gtr/api/persons/01F74E77-6453-48B3-9CCD-F19D3F29BF8C":
+            'https://orcid.org/0000-0002-2927-9303',
+            # Amanda Claire Maycock - Leeds
+            "https://gtr.ukri.org:443/gtr/api/persons/0131E012-F028-4F23-889E-587792EF1723":
+            'https://orcid.org/0000-0002-6614-1127',
+            # Anja Schmidt - Cambridge University
+            "https://gtr.ukri.org:443/gtr/api/persons/222750E9-004A-41D2-B3C1-342CE9BDDCC5":
+            'http://orcid.org/0000-0001-8759-2843',
+            # Mike Burton - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/DC538BAF-E35A-4C0E-BE47-78691A21429C":
+            'http://orcid.org/0000-0003-3779-4812',
+            # Tamsin Alice Mather - Oxford
+            "https://gtr.ukri.org:443/gtr/api/persons/1FCEBE77-7EA1-4CAD-914A-96ECC07349C5":
+            'https://orcid.org/0000-0003-4259-7303',
+            # David Johnson - Manchester
+            "https://gtr.ukri.org:443/gtr/api/persons/BEB94C7B-24AE-4C04-9D7E-49BEBEDF3D10":
+            'https://orcid.org/0000-0003-2299-2525'
         }
 
         if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
@@ -726,14 +1009,10 @@ class GatewayToResearchPublication(GatewayToResearchResource):
         """
         super().__init__(gtr_resource_uri)
 
-        if 'doi' not in self.resource:
-            raise GatewayToResearchPublicationWithoutDOI(meta={
-                'gtr_publication': {
-                    'resource_uri': self.resource_uri
-                }
-            })
-
-        self.doi = self.resource['doi']
+        if 'doi' in self.resource:
+            self.doi = self.resource['doi']
+        else:
+            self.doi = None
 
 
 class GatewayToResearchProject(GatewayToResearchResource):
@@ -742,6 +1021,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
 
     GTR projects are associated various other resources, including funding information, publications and people.
     """
+
     def __init__(self, gtr_resource_uri: str):
         """
         :type gtr_resource_uri: str
@@ -750,9 +1030,11 @@ class GatewayToResearchProject(GatewayToResearchResource):
         super().__init__(gtr_resource_uri)
 
         self.identifiers = self._process_identifiers()
-        self.categories = self._process_categories()
+        self.research_topics = self._process_research_topics()
+        self.research_subjects = self._process_research_subjects()
         self.publications = self._process_publications()
-        self.fund = GatewayToResearchFund(gtr_resource_uri=self._find_gtr_fund_link())
+        self.fund = GatewayToResearchFund(
+            gtr_resource_uri=self._find_gtr_fund_link())
         self.principle_investigators = self._process_people(relation='PI_PER')
         self.co_investigators = self._process_people(relation='COI_PER')
 
@@ -815,38 +1097,48 @@ class GatewayToResearchProject(GatewayToResearchResource):
             if 'value' not in gtr_identifier:
                 raise KeyError("Value attribute not in GTR project identifier")
 
-            project_references[gtr_identifier['type']].append(gtr_identifier['value'])
+            project_references[gtr_identifier['type']].append(
+                gtr_identifier['value'])
 
         return project_references
 
-    def _process_categories(self) -> List[dict]:
+    def _process_research_topics(self) -> List[dict]:
         """
-        Merges 'categories' and 'topics' used in projects into a single set of classifications
-
-        GTR Projects are classified by both 'categories' and 'topics' (using free-text terms), this project uses
-        categories that cover the domains of GTR categories and topics and therefore don't need to be separate.
-
-        To make mapping 'categories' and 'topics' to categories from this project easier, this method merges both into
-        a single list of classifications.
+        Here we process the research topics from the GTR resource into a list
 
         :rtype list
-        :return combined list of classifications for a GTR project
+        :return list of research topic classifications for a GTR project
         """
-        gtr_project_categories = []
-        if 'researchSubjects' in self.resource:
-            if 'researchSubject' in self.resource['researchSubjects']:
-                if len(self.resource['researchSubjects']['researchSubject']) > 0:
-                    for gtr_research_subject in self.resource['researchSubjects']['researchSubject']:
-                        if 'id' in gtr_research_subject:
-                            gtr_project_categories.append(gtr_research_subject)
+        gtr_project_topics = []
         if 'researchTopics' in self.resource:
             if 'researchTopic' in self.resource['researchTopics']:
                 if len(self.resource['researchTopics']['researchTopic']) > 0:
                     for gtr_research_topic in self.resource['researchTopics']['researchTopic']:
                         if 'id' in gtr_research_topic:
-                            gtr_project_categories.append(gtr_research_topic)
+                            gtr_project_topics.append(gtr_research_topic)
 
-        return gtr_project_categories
+        return gtr_project_topics
+
+    def _process_research_subjects(self) -> List[dict]:
+        """
+        GTR Projects are classified by both 'Subjects' and 'Topics', this project uses
+        categories that cover the domains of GTR subjects and topics and therefore don't need to be separate.
+
+        Here we process the research subjects into its own list
+
+        :rtype list
+        :return combined list of classifications for a GTR project
+        """
+        gtr_project_subjects = []
+        if 'researchSubjects' in self.resource:
+            if 'researchSubject' in self.resource['researchSubjects']:
+                if len(self.resource['researchSubjects']['researchSubject']) > 0:
+                    for gtr_research_subject in self.resource['researchSubjects']['researchSubject']:
+                        if 'id' in gtr_research_subject:
+                            gtr_project_subjects.append(
+                                gtr_research_subject)
+
+        return gtr_project_subjects
 
     def _process_publications(self) -> List[str]:
         """
@@ -860,7 +1152,8 @@ class GatewayToResearchProject(GatewayToResearchResource):
         publications = []
         if 'PUBLICATION' in self.resource_links:
             for publication_uri in self.resource_links['PUBLICATION']:
-                publication = GatewayToResearchPublication(gtr_resource_uri=publication_uri)
+                publication = GatewayToResearchPublication(
+                    gtr_resource_uri=publication_uri)
                 publications.append(publication.doi)
 
         return publications
@@ -896,7 +1189,8 @@ class GatewayToResearchProject(GatewayToResearchResource):
         if len(self.resource_links['FUND']) == 0:
             raise KeyError("GTR fund relation not found in GTR project links")
         if len(self.resource_links['FUND']) > 1:
-            raise KeyError("Multiple GTR fund identifiers found in GTR project links, one expected")
+            raise KeyError(
+                "Multiple GTR fund identifiers found in GTR project links, one expected")
 
         return self.resource_links['FUND'][0]
 
@@ -959,7 +1253,8 @@ class GatewayToResearchGrantImporter:
             if 'project' not in gtr_project_data:
                 raise KeyError("Project element not in GTR response")
             if len(gtr_project_data['project']) != 1:
-                raise ValueError("Multiple project elements found in GTR response, only expected one")
+                raise ValueError(
+                    "Multiple project elements found in GTR response, only expected one")
 
             self.gtr_project_id = gtr_project_data['project'][0]['id']
             return self.gtr_project_id
@@ -980,7 +1275,8 @@ class GatewayToResearchGrantImporter:
         Appropriate mappings will also need to be made in:
             * GatewayToResearchOrganisation._map_to_grid_id()
             * GatewayToResearchPerson._map_id_to_orcid_ids()
-            * _map_gtr_project_category_to_category_term()
+            * _map_gtr_project_research_topic_to_category_term()
+            * _map_gtr_project_research_subject_to_category_term()
         """
         gtr_project = GatewayToResearchProject(
             gtr_resource_uri=f"https://gtr.ukri.org/gtr/api/projects/{self.gtr_project_id}"
@@ -988,7 +1284,8 @@ class GatewayToResearchGrantImporter:
 
         grant = Grant(
             neutral_id=generate_neutral_id(),
-            reference=self._find_gtr_project_identifier(identifiers=gtr_project.identifiers),
+            reference=self._find_gtr_project_identifier(
+                identifiers=gtr_project.identifiers),
             title=gtr_project.title,
             abstract=gtr_project.abstract,
             status=self._map_gtr_project_status(status=gtr_project.status),
@@ -996,7 +1293,8 @@ class GatewayToResearchGrantImporter:
             total_funds_currency=gtr_project.fund.currency,
             total_funds=gtr_project.fund.amount,
             publications=gtr_project.publications,
-            funder=Organisation.query.filter_by(grid_identifier=gtr_project.fund.funder.grid_id).one()
+            funder=Organisation.query.filter_by(
+                grid_identifier=gtr_project.fund.funder.grid_id).one_or_none()
         )
         db.session.add(grant)
 
@@ -1016,14 +1314,26 @@ class GatewayToResearchGrantImporter:
             grant=grant
         ))
 
-        category_term_scheme_identifiers = self._find_unique_gtr_project_categories(
-            gtr_categories=gtr_project.categories
+        # Research Topics and Research Subjects
+        topics = self._find_unique_gtr_project_research_topics(
+            gtr_research_topics=gtr_project.research_topics
         )
+
+        subjects = self._find_unique_gtr_project_research_subjects(
+            gtr_research_subjects=gtr_project.research_subjects
+        )
+
+        # Flatten the processed topics and subjects to dinstinct list of GCMD identifiers
+        category_term_scheme_identifiers = list(topics)
+        category_term_scheme_identifiers.extend(
+            x for x in subjects if x not in category_term_scheme_identifiers)
+
         for category_term_scheme_identifier in category_term_scheme_identifiers:
             db.session.add(Categorisation(
                 neutral_id=generate_neutral_id(),
                 project=project,
-                category_term=CategoryTerm.query.filter_by(scheme_identifier=category_term_scheme_identifier).one()
+                category_term=CategoryTerm.query.filter_by(
+                    scheme_identifier=category_term_scheme_identifier).one()
             ))
 
         self._add_gtr_people(
@@ -1052,11 +1362,14 @@ class GatewayToResearchGrantImporter:
         :return Identifier from a GTR project resource matching the grant reference being imported
         """
         if 'RCUK' not in identifiers.keys():
-            raise KeyError("RCUK/GTR identifier not in GTR project identifiers")
+            raise KeyError(
+                "RCUK/GTR identifier not in GTR project identifiers")
         if len(identifiers['RCUK']) == 0:
-            raise KeyError("RCUK/GTR identifier not in GTR project identifiers")
+            raise KeyError(
+                "RCUK/GTR identifier not in GTR project identifiers")
         if len(identifiers['RCUK']) > 1:
-            raise KeyError("Multiple RCUK/GTR identifiers in GTR project identifiers, one expected")
+            raise KeyError(
+                "Multiple RCUK/GTR identifiers in GTR project identifiers, one expected")
 
         if identifiers['RCUK'][0] != self.grant_reference:
             raise ValueError(f"RCUK/GTR identifier in GTR project identifiers ({identifiers['RCUK'][0]}), doesn't "
@@ -1091,22 +1404,23 @@ class GatewayToResearchGrantImporter:
         :param role: Member of the ParticipantRole enumeration to apply to Participant resources created
         """
         for person in gtr_people:
-            if person.orcid_id is None:
-                raise ValueError("GTR project person could not be mapped to a Person, no ORCID iD")
 
-            if not db.session.query(exists().where(Person.orcid_id == person.orcid_id)).scalar():
+            org_id = db.session.query(Organisation.id).filter(Organisation.grid_identifier == person.employer.grid_id).scalar()
+
+            if not db.session.query(exists().where(and_(Person.first_name == person.first_name, Person.last_name == person.surname, Person.organisation_id == org_id))).scalar():
                 db.session.add(Person(
                     neutral_id=generate_neutral_id(),
                     first_name=person.first_name,
                     last_name=person.surname,
                     orcid_id=person.orcid_id,
-                    organisation=Organisation.query.filter_by(grid_identifier=person.employer.grid_id).one()
+                    organisation=Organisation.query.filter_by(
+                        grid_identifier=person.employer.grid_id).one_or_none()
                 ))
             db.session.add(Participant(
                 neutral_id=generate_neutral_id(),
                 role=role,
                 project=project,
-                person=Person.query.filter_by(orcid_id=person.orcid_id).one()
+                person=Person.query.filter_by(first_name=person.first_name, last_name=person.surname).first()
             ))
 
     @staticmethod
@@ -1125,60 +1439,528 @@ class GatewayToResearchGrantImporter:
         elif status == 'Closed':
             return GrantStatus.Closed
 
-        raise ValueError("Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
+        raise ValueError(
+            "Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
 
-    def _find_unique_gtr_project_categories(self, gtr_categories: list) -> list:
+    def _find_unique_gtr_project_research_topics(self, gtr_research_topics: list) -> list:
         """
-        For a series of GTR project categories/topics, return a distinct list
+        For a series of GTR project research topics, return a distinct list
 
         If the 'unclassified' category is included, it is silently removed.
 
-        :type gtr_categories: list
-        :param gtr_categories: list of GTR project categories/topics
+        :type gtr_research_topics: list
+        :param gtr_research_topics: list of GTR project research topics
 
         :rtype list
-        :return: distinct list of GTR project categories/topics
+        :return: distinct list of GTR project research topics
         """
         category_term_scheme_identifiers = []
-        for category in gtr_categories:
-            category_term_scheme_identifier = self._map_gtr_project_category_to_category_term(category)
+        for category in gtr_research_topics:
+            category_term_scheme_identifier = self._map_gtr_project_research_topic_to_category_term(
+                category)
             if category_term_scheme_identifier is not None:
                 if category_term_scheme_identifier not in category_term_scheme_identifiers:
-                    category_term_scheme_identifiers.append(category_term_scheme_identifier)
+                    category_term_scheme_identifiers.append(
+                        category_term_scheme_identifier)
+        return category_term_scheme_identifiers
+
+    def _find_unique_gtr_project_research_subjects(self, gtr_research_subjects: list) -> list:
+        """
+        For a series of GTR project subjects, return a distinct list
+
+        :type gtr_research_subjects: list
+        :param gtr_research_subjects: list of GTR project research subjects
+
+        :rtype list
+        :return: distinct list of GTR project research subjects
+        """
+        category_term_scheme_identifiers = []
+        for category in gtr_research_subjects:
+            category_term_scheme_identifier = self._map_gtr_project_research_subject_to_category_term(
+                category)
+            if category_term_scheme_identifier is not None:
+                if category_term_scheme_identifier not in category_term_scheme_identifiers:
+                    category_term_scheme_identifiers.append(
+                        category_term_scheme_identifier)
         return category_term_scheme_identifiers
 
     @staticmethod
-    def _map_gtr_project_category_to_category_term(gtr_category: dict) -> Optional[str]:
+    def _map_gtr_project_research_topic_to_category_term(gtr_research_topic: dict) -> Optional[str]:
         """
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
-        a corresponding Category based on its GTR category or topic ID.
+        a corresponding Category based on its GTR research topic ID.
 
         This mapping therefore needs to be defined manually in this method. Currently this is done using a simple if
         statement, but in future a more scalable solution will be needed.
 
-        :type gtr_category: dict
-        :param gtr_category: GTR project category or topic
+        :type gtr_research_topic: dict
+        :param gtr_research_topic: GTR project research topic
 
         :rtype str or None
-        :return a Category scheme identifier corresponding to a GTR category or topic ID, or None if unclassified
+        :return a Category scheme identifier corresponding to a GTR research topic ID, or None if unclassified
         """
-        if gtr_category['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
+        if gtr_research_topic['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
-        elif gtr_category['id'] == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
+        elif gtr_research_topic['id'] == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif gtr_category['id'] == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
+        elif gtr_research_topic['id'] == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
-        elif gtr_category['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
+        elif gtr_research_topic['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+        # Community Ecology
+        elif gtr_research_topic['id'] == 'F4786876-D9A9-404D-8569-BBC813C73074':
+            # COMMUNITY DYNAMICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/8fb66b46-b998-4412-a541-d2acabdf484b'
+        # Biogeochemical Cycles
+        elif gtr_research_topic['id'] == '62DCC1BF-B512-4BDB-A0C3-02BC17E15F6B':
+            # BIOGEOCHEMICAL CYCLES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/9015e65f-bbae-4855-a4b6-1bfa601752bd'
+        # Climate & Climate Change
+        elif gtr_research_topic['id'] == 'EE4457DB-92A3-44EA-8D5F-77013CC107E0':
+            # CLIMATE INDICATORS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
+        # Hydrological Processes
+        elif gtr_research_topic['id'] == 'D4F391DF-BCE0-47FA-BED7-78025F16B14D':
+            # TERRESTRIAL HYDROSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/885735f3-121e-4ca0-ac8b-f37dbc972f03'
+        # Geohazards
+        elif gtr_research_topic['id'] == 'BE94F009-26A1-4E5B-B0B3-722A355F282C':
+            # NATURAL HAZARDS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/ec0e2762-f57a-4fdc-b395-c8d7d5590d18'
+        # Sediment/Sedimentary Processes
+        elif gtr_research_topic['id'] == '5537B6B2-9FD6-40FB-B300-64555528D3FF':
+            # EROSION/SEDIMENTATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a246a8cf-e3f9-4045-af9f-dc97f6fe019a'
+        # Environmental Microbiology
+        elif gtr_research_topic['id'] == '5B73146D-6DEF-4D88-BE83-FE7B9DB21D62':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Glacial & Cryospheric Systems
+        elif gtr_research_topic['id'] == '07B1BD3F-A7ED-4640-8B09-C1F296DC56BF':
+            # GLACIERS/ICE SHEETS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/099ab1ae-f4d2-48cc-be2f-86bd58ffc4ca'
+        # Soil science
+        elif gtr_research_topic['id'] == '96F70ACB-D35F-416F-9360-4EFD402DFA6B':
+            # SOILS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/3526afb8-0dc9-43c7-8ad4-f34f250a1e91'
+        # Ecosystem Scale Processes
+        elif gtr_research_topic['id'] == '12C7A68B-3922-4925-9C0B-7FACEC921815':
+            # ECOSYSTEMS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
+        # Tropospheric Processes
+        elif gtr_research_topic['id'] == 'AE661B5A-7390-4AD2-BCF2-D611CB668BD1':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # Population Ecology
+        elif gtr_research_topic['id'] == 'DE30777A-E4A8-486B-875D-58CC92FD5525':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Ocean Circulation
+        elif gtr_research_topic['id'] == '723BA0F8-3ECD-4E2A-A39E-44936EAC1517':
+            # OCEAN CIRCULATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a031952d-9f00-4ba5-9966-5f87ab9dfdd4'
+        # Land - Atmosphere Interactions
+        elif gtr_research_topic['id'] == 'E94BED75-343A-47C8-BEA1-E1E927732B34':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # Remote Sensing & Earth Obs.
+        elif gtr_research_topic['id'] == '4504C6B4-D825-4F14-B0D3-7931AC636B71':
+            # SPECTRAL/ENGINEERING
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
+        # Regional & Extreme Weather
+        elif gtr_research_topic['id'] == '396591D1-8226-43A9-991D-8E0D265D99D0':
+            # EXTREME WEATHER
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b29b46ad-f05f-4144-b965-5f606ce96963'
+        # Palaeoenvironments
+        elif gtr_research_topic['id'] == '7DCAF586-72E2-4881-9251-E72F38AF1CA4':
+            # PALAEOCLIMATE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
+        # Earth & environmental
+        elif gtr_research_topic['id'] == '4237918D-61A8-47E0-91EE-65E98661A88B':
+            # HUMAN DIMENSION/ENVIRONMENTAL IMPACTS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/3f4cfc81-7745-43d9-b313-f68cdf72359b'
+        # Behavioural Ecology
+        elif gtr_research_topic['id'] == '685A8D5E-BD8A-4D8D-BAC5-607439217156':
+            # ECOLOGICAL DYNAMICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/6bef0291-a9ca-4832-bbb4-80459dc1493f'
+        # Environmental Genomics
+        elif gtr_research_topic['id'] == 'DE7203EB-4721-41C9-BB3C-539A8F6E8049':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Conservation Ecology
+        elif gtr_research_topic['id'] == '5020ECC8-E0E8-434D-BDD5-663A9C04EFA2':
+            # CONSERVATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/40869a25-edea-4438-80f9-47c9e6910b9b'
+        # Radiative Processes & Effects
+        elif gtr_research_topic['id'] == '45964B78-B4F7-4098-996B-49505C85B744':
+            # SURFACE RADIATIVE PROPERTIES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/cb5cc628-a1b5-459e-934f-881153a937b8'
+        # Large Scale Dynamics/Transport
+        elif gtr_research_topic['id'] == '59CF5FB3-F46B-448B-AECF-47852750EF3C':
+            # OCEANS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
+        # Land - Ocean Interactions
+        elif gtr_research_topic['id'] == 'B945AA77-44D5-467F-9B53-2EE3C3F550B1':
+            # COASTAL PROCESSES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b6fd22ab-dca7-4dfa-8812-913453b5695b'
+        # Mantle & Core Processes
+        elif gtr_research_topic['id'] == 'C6842010-EC71-44DF-B79C-64B1BA9B3BDE':
+            # TECTONICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1e17c8d3-81d0-473c-8f24-d2a4ea52b6b9'
+        # Quaternary Science
+        elif gtr_research_topic['id'] == 'E32742C9-DE22-4776-82B4-444177FA03AD':
+            # SOLID EARTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+        # Stratospheric Processes
+        elif gtr_research_topic['id'] == 'A8A9F791-62D5-4B6F-90EB-2F6F8813D700':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # Volcanic Processes
+        elif gtr_research_topic['id'] == '052183D5-AB83-4C5E-97FA-7B0C1D4AF3FA':
+            # VOLCANIC ACTIVITY
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1faaede0-2cd6-4447-b28b-0a28d9e2d067'
+        # Agricultural systems
+        elif gtr_research_topic['id'] == '794345CD-A1D5-4984-ADDD-088BCF41822F':
+            # AGRICULTURE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+        # Earth Surface Processes
+        elif gtr_research_topic['id'] == '47491D28-C3A9-416A-8459-3ECC0715B776':
+            # GEOMORPHIC LANDFORMS/PROCESSES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/d35b9ba5-d018-48a5-8f0d-92b9c55b3279'
+        # Technol. for Environ. Appl.
+        elif gtr_research_topic['id'] == '98C0D11F-5C27-40CE-A895-54E4C61784B1':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Responses to environment
+        elif gtr_research_topic['id'] == '8717CFA9-D46B-41A5-8971-BF4431B68E29':
+            # CLIMATE INDICIATORS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
+        # Metabolomics / Metabonomics
+        elif gtr_research_topic['id'] == '9F673176-B1B7-47C8-9D0F-DEC4A0410F7C':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Biochemistry & physiology
+        elif gtr_research_topic['id'] == '649031FD-C21E-42D9-AC12-41ACA59CC11C':
+            # ANIMAL PHYSIOLOGY AND BIOCHEMISTRY
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f9cdf3ae-fe8b-4a19-a946-a8c8780d7894'
+        # Prehistoric Archaeology
+        elif gtr_research_topic['id'] == '14AE809A-4116-46B5-ABF7-DF8BCE2BF069':
+            # PALEOCLIMATE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
+        # Water Quality
+        elif gtr_research_topic['id'] == '99C0726F-47B0-4500-8B73-4DD0C60E31DF':
+            # WATER QUALITY
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1ee8a323-f0ba-4a21-b597-50890c527c8e'
+        # Plant physiology
+        elif gtr_research_topic['id'] == '15080F45-1EA3-41B4-BC23-C49CB918FBC4':
+            # PLANTS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/0b4081fa-5233-4484-bc82-706976defa0e'
+        # Carbon Capture & Storage
+        elif gtr_research_topic['id'] == 'B5705566-FCD9-4E90-A1F6-458BBDED816E':
+            # CARBON CAPTURE AND STORAGE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/e8c24822-7d2d-48c6-9dca-df3860e9bd63'
+        # Survey & Monitoring
+        elif gtr_research_topic['id'] == '189E1F60-BF95-405D-A6F0-62BBD78E2DD5':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Environment & Health
+        elif gtr_research_topic['id'] == '86884005-D98A-4391-95D8-913141C39F7C':
+            # HEALTH ADVISORIES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/370eba54-962b-4e59-9686-86d5c5ab9c88'
+        # Systematics & Taxonomy
+        elif gtr_research_topic['id'] == '2CF6994C-A1AE-435B-853C-2C228927BC9E':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Crop protection
+        elif gtr_research_topic['id'] == '6F3E4891-E3E8-4568-94D8-075A0552DE90':
+            # AGRICULTURAL PLANT SCIENCE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/25be3b9a-9d4c-4b5b-8d24-b1f519913d90'
+        # Earth Resources
+        elif gtr_research_topic['id'] == '859194A3-8EE1-41D7-90C5-DA2999B93E8E':
+            # SOLID EARTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+        # Atmospheric Kinetics
+        elif gtr_research_topic['id'] == '62E0966C-A067-4075-B244-33F1F4DD4B1E':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # Environmental Physiology
+        elif gtr_research_topic['id'] == '6CA01F47-BDE6-46F1-8679-A31D5317A885':
+            # AGRICULTURE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+        # Transport Geography
+        elif gtr_research_topic['id'] == '0C5394E1-D713-4507-8021-0A9785789545':
+            # TRANSPORTATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/37a6c8e2-f2ac-48a4-a4fa-d80f700f68db'
+        # Accelerator R&D
+        elif gtr_research_topic['id'] == 'BF8C9667-2697-4493-8519-7787831D008B':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Properties Of Earth Materials
+        elif gtr_research_topic['id'] == '9C0F9DC0-329C-4C09-B439-E4335EA8F916':
+            # SOLID EARTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+        # Technology and method dev
+        elif gtr_research_topic['id'] == '80A9D6C5-792D-4DD9-9138-BEC1BB556AA9':
+            # EARTH SCIENCE SERVICES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+        # Upper Atmos Process & Geospace
+        elif gtr_research_topic['id'] == '4CF6D0C3-CF9C-4067-9466-B9FC16647C21':
+            # ATMOSPHERE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        # RF & Microwave Technology
+        elif gtr_research_topic['id'] == 'CEDD6868-376B-45CB-BAB7-5AD38D089AC0':
+            # MICROWAVE
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/66700628-2b62-4466-999e-faeb15ca4da5'
+        # Museum & Gallery Studies
+        elif gtr_research_topic['id'] == '51073B72-B972-4034-A0A1-87A6B0DCD198':
+            # RECREATIONAL ACTIVITIES
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/9ee8acad-458e-45c1-a1d5-9b1649c82ea7'
+        # Socio Legal Studies
+        elif gtr_research_topic['id'] == 'B75590D5-E385-45F1-B6D0-CC3EDEFDE67D':
+            # SOCIOECONOMICS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a96e6cd6-0f35-491d-8198-7551d03e1cbc'
+        # Scandinavian studies
+        elif gtr_research_topic['id'] == '80990855-5789-4612-9DC4-701464F66874':
+            # HUMAN SETTLEMENTS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fee25cad-7ffe-4ee2-a6f2-8116b8a0a707'
+        # Animal behaviour
+        elif gtr_research_topic['id'] == '790AD28C-6380-4025-83C2-6881B93C4602':
+            # ANIMAL ECOLOGY AND BEHAVIOR
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/5d1b53b2-7d69-4b7c-903f-d8cf29430f93'
+        # Theoretical biology
+        elif gtr_research_topic['id'] == '4A6E5CEB-ACA3-4301-98AD-C7EC310948FD':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Pollution
+        elif gtr_research_topic['id'] == 'DC6B2467-35B6-4997-9582-1BF957B82697':
+            # EMISSIONS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2a60df4a-a0d7-4e4b-b02a-372a083f0170'
+        # Animal organisms
+        elif gtr_research_topic['id'] == '4A2A69ED-37ED-4980-91A7-E54B4F6A9BC6':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Diet & health
+        elif gtr_research_topic['id'] == '446B7E7F-04EB-4121-9CC6-9171277E00DA':
+            # PUBLIC HEALTH
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
+        # Extremophiles
+        elif gtr_research_topic['id'] == '6E4BDD5C-C98C-4B33-B870-6A3A366BEE58':
+            # BIOLOGICAL CLASSIFICATION
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        # Plant responses to environment
+        elif gtr_research_topic['id'] == 'AE2D53CC-F199-452E-A1FE-B63F4222D636':
+            # LAND SURFACE/AGRICULTURE INDICATORS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/112e71ec-c0a1-49a8-82d7-bcb317b45860'
+        # Population Genetics/Evolution
+        elif gtr_research_topic['id'] == 'A4209D5A-2E41-4290-9D1A-3172C1F48962':
+            # SPECIES/POPULATION INTERACTIONS
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'
+        # Analytical Science
+        elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
+            return None
+        # Animal & human physiology
+        elif gtr_research_topic['id'] == 'E793F7FE-614C-4A45-83A0-BE79B172092C':
+            return None
+        # Assess/Remediate Contamination
+        elif gtr_research_topic['id'] == '4A635FDF-4DC1-48AB-A010-04619A0042EF':
+            return None
+        # Civil Engineering Materials
+        elif gtr_research_topic['id'] == '0F0B5443-BE5E-4DB6-823E-B7E33EE35922':
+            return None
+        # Continuum Mechanics
+        elif gtr_research_topic['id'] == '02B9E893-AC2F-436D-BF88-28E1AC827F5D':
+            return None
+        # Cultural History
+        elif gtr_research_topic['id'] == 'ACF80B6E-2900-42FE-9B9B-C84E295EA0AC':
+            return None
+        # Endocrinology
+        elif gtr_research_topic['id'] == '3646DA55-FE51-4E44-A8FA-E8E83A4CCBA4':
+            return None
+        # Energy - Conventional
+        elif gtr_research_topic['id'] == 'FFAA021A-6F31-43D9-8517-EA79D1E71F54':
+            return None
+        # Environmental Informatics
+        elif gtr_research_topic['id'] == 'F63617E9-02B7-41EA-AD68-B2D597237394':
+            return None
+        # Exploration Technology
+        elif gtr_research_topic['id'] == 'DF27EB97-39D5-4F5C-8F07-21BBABBF9422':
+            return None
+        # Geography and Development
+        elif gtr_research_topic['id'] == '78369800-A95E-49BC-94E7-8659E5C2EFEF':
+            return None
+        # Historical Geography
+        elif gtr_research_topic['id'] == '2D6754CC-B7DE-45FB-BB9D-CE7AA05892D0':
+            return None
+        # Omic sciences & technologies
+        elif gtr_research_topic['id'] == '9BDF80E2-029E-4505-B7EE-DB0FA633E483':
+            return None
+        # Solar & Solar-Terrestrial Phys
+        elif gtr_research_topic['id'] == 'DAA4C99D-BD30-4A55-B416-7AFE780BB7B8':
+            return None
+        # Spatial Planning
+        elif gtr_research_topic['id'] == 'AF20B57E-E40B-45BC-85C8-DDC6F4777697':
+            return None
+        # Materials Characterisation
+        elif gtr_research_topic['id'] == '561091A1-9FC9-4508-B1B2-2F3623E1FC9D':
+            return None
+        # Evolution & populations
+        elif gtr_research_topic['id'] == '62F9C365-02D0-4623-9A73-8CA09DA0FFF2':
+            return None
+        # Atoms & Ions
+        elif gtr_research_topic['id'] == '4D22A081-A665-4EAE-8542-CB1050A44B55':
+            return None
+        # Cultural Geography
+        elif gtr_research_topic['id'] == '8990E5FE-B44F-4A5B-8FDE-0610A5BE98C4':
+            return None
+        # International Law
+        elif gtr_research_topic['id'] == 'EC0E734E-D9A1-463E-AB7A-CCB02E877E10':
+            return None
+        # History of Sci./Med./Technol.
+        elif gtr_research_topic['id'] == 'E5E4CBFA-1AC0-405D-A6EC-46A5C0B6704F':
+            return None
+        # Mathematical Analysis
+        elif gtr_research_topic['id'] == '04D8FF87-2CFC-44E7-A7DF-47E10C813E05':
+            return None
+        # Ecotoxicology
+        elif gtr_research_topic['id'] == '6A654DB9-716E-4BAC-867B-E1CE45A994F6':
+            return None
+        # Tectonic Processes
+        elif gtr_research_topic['id'] == '401A9A9F-83DF-48FD-B108-C4CC7FB7572C':
+            return None
+        # Epigenetics
+        elif gtr_research_topic['id'] == 'B6EF57B2-8ACD-48E6-9B45-98507446B053':
+            return None
+        # Applied Arts HTP
+        elif gtr_research_topic['id'] == '287497FB-DD4A-44CC-AC13-DBAFADC9AD82':
+            return None
+        # Environmental Geography
+        elif gtr_research_topic['id'] == 'F6DEB3C9-18A0-4A06-87C5-8C347DF98C60':
+            return None
+        # Social Anthropology
+        elif gtr_research_topic['id'] == '020361E1-B8CA-49FD-9149-27D31D21C7A3':
+            return None
+        # Regional Geography
+        elif gtr_research_topic['id'] == '8DA0F0DB-E15C-4A3D-ADD9-E08898CE6475':
+            return None
+        # Cultural Studies
+        elif gtr_research_topic['id'] == 'ABBA5192-0B16-4BC8-8B3F-3A48625872F0':
+            return None
+        # Ground Engineering
+        elif gtr_research_topic['id'] == '5AAD42DB-C6CB-4B09-8555-8ECA565B6B59':
+            return None
+        # Earth Engineering
+        elif gtr_research_topic['id'] == 'DEEA5CB1-59E6-4D82-92D6-DB74E180E6F7':
+            return None
         # Unclassified
-        elif gtr_category['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
+        elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
             return None
 
-        raise UnmappedGatewayToResearchProjectCategory(meta={
-            'gtr_category': {
-                'id': gtr_category['id'],
-                'name': gtr_category['text']
+        raise UnmappedGatewayToResearchProjectTopic(meta={
+            'gtr_research_topic': {
+                'id': gtr_research_topic['id'],
+                'name': gtr_research_topic['text']
+            }
+        })
+
+    @staticmethod
+    def _map_gtr_project_research_subject_to_category_term(gtr_research_subject: dict) -> Optional[str]:
+        """
+        Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
+        use a category scheme supported by this project and no other identifier is available to automatically determine
+        a corresponding Category based on its GTR research subject name.
+
+        This mapping therefore needs to be defined manually in this method. Currently this is done using a simple if
+        statement, but in future a more scalable solution will be needed.
+
+        :type gtr_research_subject: dict
+        :param gtr_research_subject: GTR project research subject
+
+        :rtype str
+        :return a Category scheme identifier corresponding to a GTR research subject name
+        """
+        if gtr_research_subject['text'] == 'Terrest. & freshwater environ.':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91c64c46-d040-4daa-b26c-61952fdfaf50'
+        elif gtr_research_subject['text'] == 'Ecol, biodivers. & systematics':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
+        elif gtr_research_subject['text'] == 'Marine environments':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
+        elif gtr_research_subject['text'] == 'Geosciences':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+        elif gtr_research_subject['text'] == 'Climate and climate change':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        elif gtr_research_subject['text'] == 'Atmospheric phys. & chemistry':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b9c56939-c624-467d-b196-e56a5b660334'
+        elif gtr_research_subject['text'] == 'Climate & Climate Change':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+        elif gtr_research_subject['text'] == 'Microbial sciences':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+        elif gtr_research_subject['text'] == 'Tools, technologies & methods':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
+        elif gtr_research_subject['text'] == 'Agri-environmental science':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+        elif gtr_research_subject['text'] == 'Archaeology':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/bf703f22-9775-460d-86bd-149aaef1acde'
+        elif gtr_research_subject['text'] == 'Plant & crop science':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1c35c74-0b10-46de-9c06-efeda92d383a'
+        elif gtr_research_subject['text'] == 'Human Geography':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fb93d937-c17c-45d0-a9e3-ca5c8a800ca8'
+        elif gtr_research_subject['text'] == 'Info. & commun. Technol.':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/d4313915-2d24-424c-a171-30ee9a6f4bb5'
+        elif gtr_research_subject['text'] == 'Medical & health interface':
+            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
+        elif gtr_research_subject['text'] == 'Biomolecules & biochemistry':
+            return None
+        elif gtr_research_subject['text'] == 'Facility Development':
+            return None
+        elif gtr_research_subject['text'] == 'Instrument. sensor & detectors':
+            return None
+        elif gtr_research_subject['text'] == 'Omic sciences & technologies':
+            return None
+        elif gtr_research_subject['text'] == 'Pollution, waste & resources':
+            return None
+        elif gtr_research_subject['text'] == 'Animal Science':
+            return None
+        elif gtr_research_subject['text'] == 'Chemical measurement':
+            return None
+        elif gtr_research_subject['text'] == 'Planetary science':
+            return None
+        elif gtr_research_subject['text'] == 'Energy':
+            return None
+        elif gtr_research_subject['text'] == 'Genetics & development':
+            return None
+        elif gtr_research_subject['text'] == 'Mathematical sciences':
+            return None
+        elif gtr_research_subject['text'] == 'Food science & nutrition':
+            return None
+        elif gtr_research_subject['text'] == 'Environmental planning':
+            return None
+        elif gtr_research_subject['text'] == 'Civil eng. & built environment':
+            return None
+        elif gtr_research_subject['text'] == 'History':
+            return None
+        elif gtr_research_subject['text'] == 'Materials sciences':
+            return None
+        elif gtr_research_subject['text'] == 'Atomic & molecular physics':
+            return None
+        elif gtr_research_subject['text'] == 'Law & legal studies':
+            return None
+        elif gtr_research_subject['text'] == 'Solar & terrestrial physics':
+            return None
+        elif gtr_research_subject['text'] == 'Social Anthropology':
+            return None
+        elif gtr_research_subject['text'] == 'Sociology':
+            return None
+        elif gtr_research_subject['text'] == 'Visual arts':
+            return None
+        elif gtr_research_subject['text'] == 'Cultural & museum studies':
+            return None
+        elif gtr_research_subject['text'] == 'Development studies':
+            return None
+        raise UnmappedGatewayToResearchProjectSubject(meta={
+            'gtr_research_subject': {
+                'id': gtr_research_subject['id'],
+                'name': gtr_research_subject['text']
             }
         })
 
@@ -1195,9 +1977,12 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
     :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
     """
     try:
-        app.logger.info(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
-        echo(style(f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"))
-        importer = GatewayToResearchGrantImporter(gtr_grant_reference=gtr_grant_reference)
+        app.logger.info(
+            f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
+        echo(style(
+            f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"))
+        importer = GatewayToResearchGrantImporter(
+            gtr_grant_reference=gtr_grant_reference)
         if importer.exists():
             app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}) - Already "
                             f"imported")
@@ -1218,23 +2003,32 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
                    f"Importing"))
 
         importer.fetch()
-        app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+        app.logger.info(
+            f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
         echo(style(
             f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported", fg='green'
         ))
     except UnmappedGatewayToResearchOrganisation as e:
-        app.logger.error(f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]")
-        echo(style(f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]", fg='red'))
-    except UnmappedGatewayToResearchPerson as e:
-        app.logger.error(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
-        echo(style(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]", fg='red'))
-    except GatewayToResearchPublicationWithoutDOI as e:
-        app.logger.error(f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]")
-        echo(style(f"GTR Publication has no DOI [{e.meta['gtr_publication']['resource_uri']}]", fg='red'))
-    except UnmappedGatewayToResearchProjectCategory as e:
-        app.logger.error(f"Unmapped GTR Category [{e.meta['gtr_category']['id']}, {e.meta['gtr_category']['name']}]")
+        app.logger.error(
+            f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]")
         echo(style(
-            f"Unmapped GTR Category [{e.meta['gtr_category']['id']}, {e.meta['gtr_category']['name']}]", fg='red'
+            f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]", fg='red'))
+    except UnmappedGatewayToResearchPerson as e:
+        app.logger.error(
+            f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
+        echo(
+            style(f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]", fg='red'))
+    except UnmappedGatewayToResearchProjectTopic as e:
+        app.logger.error(
+            f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]")
+        echo(style(
+            f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]", fg='red'
+        ))
+    except UnmappedGatewayToResearchProjectSubject as e:
+        app.logger.error(
+            f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]")
+        echo(style(
+            f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]", fg='red'
         ))
     except Exception as e:
         db.session.rollback()

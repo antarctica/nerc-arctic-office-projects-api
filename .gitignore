@@ -2,3 +2,6 @@ __pycache__
 .env
 /provisioning/terraform/.terraform
 /.idea
+*.log
+*.csv
+/bulk-importer/json

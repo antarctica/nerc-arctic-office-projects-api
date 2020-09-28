@@ -591,8 +591,10 @@ class Person(db.Model):
     """
     __tablename__ = 'people'
     id = db.Column(db.Integer, primary_key=True)
-    organisation_id = db.Column(db.Integer, db.ForeignKey('organisations.id'), nullable=False)
-    neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
+    organisation_id = db.Column(db.Integer, db.ForeignKey(
+        'organisations.id'), nullable=True)
+    neutral_id = db.Column(db.String(32), unique=True,
+                           nullable=False, index=True)
     first_name = db.Column(db.Text(), nullable=True)
     last_name = db.Column(db.Text(), nullable=True)
     orcid_id = db.Column(db.String(64), unique=True, nullable=True)
@@ -629,8 +631,10 @@ class Grant(db.Model):
     """
     __tablename__ = 'grants'
     id = db.Column(db.Integer, primary_key=True)
-    organisation_id = db.Column(db.Integer, db.ForeignKey('organisations.id'), nullable=False)
-    neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
+    organisation_id = db.Column(db.Integer, db.ForeignKey(
+        'organisations.id'), nullable=True)
+    neutral_id = db.Column(db.String(32), unique=True,
+                           nullable=False, index=True)
     reference = db.Column(db.Text(), unique=True, nullable=False)
     title = db.Column(db.Text(), nullable=False)
     abstract = db.Column(db.Text(), nullable=True)
