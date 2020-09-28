@@ -3,7 +3,7 @@ import json, subprocess, re
 
 def json_valid(filename):
     try:
-        json.load(open(filename))
+        json.load(open(filename))  # nosec
         return True
     except ValueError as error:
         print('Invalid json file: %s' % error)
@@ -24,7 +24,8 @@ def import_grants(file):
         data = json.load(json_file)
         for project in data['data']:
             if grant_reference_valid(project['grant-reference']):
-                subprocess.run(['flask', 'import', 'grant', 'gtr', project['grant-reference']])
+                subprocess.run(['flask', 'import', 'grant', 'gtr',
+                                project['grant-reference']], shell=False)  # nosec
             else:
                 print('invalid ref %s' % project['grant-reference'])
 
