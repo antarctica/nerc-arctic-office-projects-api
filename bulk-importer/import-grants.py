@@ -1,6 +1,7 @@
 import json
 import subprocess
-import re  # nosec
+# nosec
+import re
 
 
 def json_valid(filename):
@@ -32,6 +33,7 @@ def import_grants(file):
                                 project['grant-reference']], shell=False)
             else:
                 print('invalid ref %s' % project['grant-reference'])
+
 
 json_filename = 'json/projects-2019-06-16.json'
 if json_valid(json_filename):
