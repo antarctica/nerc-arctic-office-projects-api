@@ -23,9 +23,6 @@
 # > SENTRY_AUTH_TOKEN: "[Sensetive]"
 # > SENTRY_DSN: "[Sensetive]"
 #
-# - Snyk
-# > SNYK_TOKEN: "[Sensitive]"
-#
 # - BAS API Documentation
 # > API_DOCS_PIPELINE_TOKEN: "[Sensitive]"
 
@@ -56,8 +53,6 @@ variables:
   HEROKU_APP_PROD_NAME: bas-arctic-projects-api-prod
   SENTRY_ORG: antarctica
   SENTRY_PROJECT: arctic-office-projects-api
-  SNYK_ORG: antarctica
-  SNYK_PROJECT: arctic-office-projects-api
   API_DOCS_PROJECT: arctic-office-projects
   API_DOCS_STAGE_BUCKET: bas-api-docs-content-testing
   API_DOCS_PROD_BUCKET: bas-api-docs-content
@@ -81,13 +76,8 @@ test-app:
 
 dependencies-app:
   stage: lint
-  image:
-    name: antarctica/snyk-cli:python-3
-    entrypoint: [""]
   script:
    - "pip install -r requirements.txt"
-   - "snyk test"
-   - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
   only:
     - master
 
