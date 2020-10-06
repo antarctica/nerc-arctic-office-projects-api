@@ -35,4 +35,3 @@ def import_grants(file):
 json_filename = 'json/projects-2019-06-16.json'
 if json_valid(json_filename):
     import_grants(json_filename)
-    # python3 import-grants.py &> import.log
