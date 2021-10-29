@@ -15,7 +15,7 @@ def json_valid(filename):
 def grant_reference_valid(grant_reference):
     patterns = {
         'gtr': r'^[A-Z]{2}\/[A-Z0-9]{7}\/\d{1}$',
-        'other': r'\d{7}'
+        'other': r'\d{5,7}'
     }
     for key, pattern in patterns.items():
         if re.match(pattern, grant_reference):
@@ -32,6 +32,6 @@ def import_grants(file):
                                 project['grant-reference']], shell=False)
 
 
-json_filename = '/usr/src/app/arctic_office_projects_api/bulk_importer/json/projects-2020-08-13.json'
+json_filename = '/usr/src/app/arctic_office_projects_api/bulk_importer/json/projects-2021-10-18.json'
 if json_valid(json_filename):
     import_grants(json_filename)

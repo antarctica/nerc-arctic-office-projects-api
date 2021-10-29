@@ -4,4 +4,4 @@ __pycache__
 /.idea
 *.log
 *.csv
-arctic_office_projects_api/bulk_importer/json/
+/_dev
