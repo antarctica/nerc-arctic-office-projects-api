@@ -347,8 +347,11 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # ESRC
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/924BE15C-91F2-4AAD-941A-3F338324B6AE':
             return 'https://www.grid.ac/institutes/grid.434257.3'
+        # BBSRC
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/2512EF1C-401B-4222-9869-A770D4C5FAC7':
+            return 'https://www.grid.ac/institutes/grid.418100.c'
         # Innovate Uk
-        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1DA78802-0659-4398-B40B-7FA41B56BBF3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E18E2F0F-AC7D-4E02-9559-669F7C8FEC74'):
+        elif (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/1DA78802-0659-4398-B40B-7FA41B56BBF3') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/E18E2F0F-AC7D-4E02-9559-669F7C8FEC74') or (self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/052C4F5E-74CA-4A1D-B771-82891497D8F5'):
             return 'https://www.grid.ac/institutes/grid.423443.6'
         # Cranfield University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F45A4578-F962-4EFA-9CC1-9F2FF4F760AE':
@@ -392,6 +395,9 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # British Trust for Ornithology
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A8BE8EF6-CDA2-41D4-A52B-B66A41997D1D':
             return 'https://www.grid.ac/institutes/grid.423196.b'
+        # University of the West of England
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/2A80FFDA-3B8B-43BA-80C3-3AA850B49BA1':
+            return 'https://www.grid.ac/institutes/grid.6518.a'
         # Unknown
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
             return None
@@ -1756,6 +1762,18 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_topic['id'] == 'A4209D5A-2E41-4290-9D1A-3172C1F48962':
             # SPECIES/POPULATION INTERACTIONS
             return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'
+        # # Water Engineering
+        # elif gtr_research_topic['id'] == '19789484-D6B8-4965-AD25-309DD43054A0':
+        #     # GCMD term?
+        #     return ''
+        # # Research Approaches
+        # elif gtr_research_topic['id'] == '24CF2F4A-1F56-4DD4-9EA6-B54452142544':
+        #     # GCMD term?
+        #     return ''
+        # # Plant developmental biolog
+        # elif gtr_research_topic['id'] == '023A4090-7FA5-4AFE-9071-DCC99F0221C4':
+        #     # GCMD term?
+        #     return ''
         # Analytical Science
         elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
             return None
@@ -1851,6 +1869,24 @@ class GatewayToResearchGrantImporter:
             return None
         # Earth Engineering
         elif gtr_research_topic['id'] == 'DEEA5CB1-59E6-4D82-92D6-DB74E180E6F7':
+            return None
+        # Water Engineering
+        elif gtr_research_topic['id'] == '19789484-D6B8-4965-AD25-309DD43054A0':
+            return None
+        # Research approaches
+        elif gtr_research_topic['id'] == '63F3D26F-05D5-477D-9F77-C6C8AC47C7DD':
+            return None
+        # Plant developmental biology
+        elif gtr_research_topic['id'] == '023A4090-7FA5-4AFE-9071-DCC99F0221C4':
+            return None
+        # Energy Efficiency
+        elif gtr_research_topic['id'] == 'BE7CEC14-3FA2-49BC-89EE-062447C269C1':
+            return None
+        # Genomics
+        elif gtr_research_topic['id'] == '4661C82D-F66E-4672-BA82-7C12180BBDF7':
+            return None
+        # Instrumentation Eng. & Dev.
+        elif gtr_research_topic['id'] == 'F78E4567-DD59-4364-9D1F-0A778996E941':
             return None
         # Unclassified
         elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
