@@ -38,20 +38,29 @@ variable "azure-oauth-client-application-ids-stage" {
   ]
 }
 
-# # Production app
-# #
-# # This resource relies on the Heroku Terraform provider being previously configured.
-# #
-# # Heroku source: https://devcenter.heroku.com/articles/how-heroku-works#defining-an-application
-# # Terraform source: https://www.terraform.io/docs/providers/heroku/r/app.html
-# resource "heroku_app" "bas-arctic-office-projects-api-prod" {
-#   name   = "bas-arctic-projects-api-prod"
-#   region = "eu"
+# Production app
 #
-#   config_vars {
-#     REVERSE_PROXY_PATH = "/arctic-office-projects/testing"
-#   }
-# }
+# This resource relies on the Heroku Terraform provider being previously configured.
+#
+# Heroku source: https://devcenter.heroku.com/articles/how-heroku-works#defining-an-application
+# Terraform source: https://www.terraform.io/docs/providers/heroku/r/app.html
+resource "heroku_app" "bas-arctic-office-projects-api-prod" {
+  name   = "bas-arctic-projects-api-prod"
+  region = "eu"
+
+  config_vars {
+    REVERSE_PROXY_PATH                 = "/arctic-office-projects"
+    AZURE_OAUTH_TENANCY                = "b311db95-32ad-438f-a101-7ba061712a4e"
+    AZURE_OAUTH_APPLICATION_ID         = "e82569d7-861c-4d38-b243-c9400925f2c4"
+    AZURE_OAUTH_CLIENT_APPLICATION_IDS = "${join(",", var.azure-oauth-client-application-ids-prod)}"
+  }
+}
+
+variable "azure-oauth-client-application-ids-prod" {
+  default = [
+    "8d8c9933-2eed-4520-906c-f40d556e0423"
+  ]
+}
 
 # Staging dyno
 #
@@ -67,19 +76,19 @@ resource "heroku_formation" "bas-arctic-office-projects-api-stage" {
   size     = "hobby"
 }
 
-# # Production dyno
-# #
-# # This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-prod' resource.
-# # This resource relies on the Heroku Terraform provider being previously configured.
-# #
-# # Heroku source: https://devcenter.heroku.com/articles/dyno-types
-# # Terraform source: https://www.terraform.io/docs/providers/heroku/r/formation.html
-# resource "heroku_formation" "bas-arctic-office-projects-api-prod" {
-#   app      = "${heroku_app.bas-arctic-office-projects-api-prod.name}"
-#   type     = "web"
-#   quantity = 1
-#   size     = "hobby"
-# }
+# Production dyno
+#
+# This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-prod' resource.
+# This resource relies on the Heroku Terraform provider being previously configured.
+#
+# Heroku source: https://devcenter.heroku.com/articles/dyno-types
+# Terraform source: https://www.terraform.io/docs/providers/heroku/r/formation.html
+resource "heroku_formation" "bas-arctic-office-projects-api-prod" {
+  app      = "${heroku_app.bas-arctic-office-projects-api-prod.name}"
+  type     = "web"
+  quantity = 1
+  size     = "hobby"
+}
 
 # Staging pipeline app
 #
@@ -95,17 +104,16 @@ resource "heroku_pipeline_coupling" "bas-arctic-office-projects-api-stage" {
   stage    = "staging"
 }
 
-# # Production pipeline app
-# #
-# # This resource implicitly depends on the 'heroku_pipeline.bas-arctic-office-projects-api' resource.
-# # This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-prod' resource.
-# # This resource relies on the Heroku Terraform provider being previously configured.
-# #
-# # Heroku source: https://devcenter.heroku.com/articles/pipelines#adding-apps-to-a-pipeline
-# # Terraform source: https://www.terraform.io/docs/providers/heroku/r/pipeline_coupling.html
-# resource "heroku_pipeline_coupling" "bas-arctic-office-projects-api-prod" {
-#   app      = "${heroku_app.bas-arctic-office-projects-api-prod.name}"
-#   pipeline = "${heroku_pipeline.bas-arctic-office-projects-api.id}"
-#   stage    = "production"
-# }
-
+# Production pipeline app
+#
+# This resource implicitly depends on the 'heroku_pipeline.bas-arctic-office-projects-api' resource.
+# This resource implicitly depends on the 'heroku_app.bas-arctic-office-projects-api-prod' resource.
+# This resource relies on the Heroku Terraform provider being previously configured.
+#
+# Heroku source: https://devcenter.heroku.com/articles/pipelines#adding-apps-to-a-pipeline
+# Terraform source: https://www.terraform.io/docs/providers/heroku/r/pipeline_coupling.html
+resource "heroku_pipeline_coupling" "bas-arctic-office-projects-api-prod" {
+  app      = "${heroku_app.bas-arctic-office-projects-api-prod.name}"
+  pipeline = "${heroku_pipeline.bas-arctic-office-projects-api.id}"
+  stage    = "production"
+}
