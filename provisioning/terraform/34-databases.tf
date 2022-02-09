@@ -22,5 +22,5 @@ resource "heroku_addon" "database-stage" {
 # Terraform source: https://www.terraform.io/docs/providers/heroku/r/addon.html
 resource "heroku_addon" "database-prod" {
   app  = "${heroku_app.bas-arctic-office-projects-api-prod.name}"
-  plan = "heroku-postgresql:hobby-dev"
+  plan = "heroku-postgresql:hobby-basic"
 }
