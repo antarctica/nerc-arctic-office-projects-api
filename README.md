@@ -228,6 +228,14 @@ See the [Usage](#importing-grants) section on the command used to import a grant
 
 * Click the 'csv' button at the top to get the list.
 
+### Importing projects/grants
+
+Copy the latest json file here arctic_office_projects_api/bulk_importer/ and add the new projects.
+
+Alter line 35 `json_filename = '/usr/src/app/arctic_office_projects_api/bulk_importer/json/projects-2022-04-19.json'` so it points to the new *.json file.
+
+Log into the Heroku dashboard & go to the project. Click the 'More' button and click 'Open console'. Run this command: `python arctic_office_projects_api/bulk_importer/import_grants.py
+
 ### Documentation
 
 Usage and reference documentation for this API is hosted within the 
