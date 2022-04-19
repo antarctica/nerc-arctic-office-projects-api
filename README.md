@@ -222,6 +222,12 @@ imported, need to already exist. See [Organisations](#organisations) for more in
 
 See the [Usage](#importing-grants) section on the command used to import a grant.
 
+### Finding new GTR projects to add
+
+* The repository is here: https://gtr.ukri.org/. Search for 'Arctic' and then use filters on the right
+
+* Click the 'csv' button at the top to get the list.
+
 ### Documentation
 
 Usage and reference documentation for this API is hosted within the 
