@@ -32,6 +32,6 @@ def import_grants(file):
                                 project['grant-reference']], shell=False)
 
 
-json_filename = '/usr/src/app/arctic_office_projects_api/bulk_importer/json/projects-2021-10-18.json'
+json_filename = '/usr/src/app/arctic_office_projects_api/bulk_importer/json/projects-2022-04-19.json'
 if json_valid(json_filename):
     import_grants(json_filename)
