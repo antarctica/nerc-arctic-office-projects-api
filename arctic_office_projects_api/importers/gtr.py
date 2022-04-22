@@ -127,13 +127,24 @@ class GatewayToResearchResource:
 
         links = {}
         for link in self.resource['links']['link']:
+
             if 'rel' not in link:
                 raise KeyError("Rel type not in GTR resource link")
             if 'href' not in link:
                 raise KeyError("Href not in GTR resource link")
             if link['rel'] not in links.keys():
                 links[link['rel']] = []
-            links[link['rel']].append(link['href'])
+
+            # Remove http://internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080
+            # Replace with https://gtr.ukri.org
+
+            link_href = link['href'].split("/")
+
+            link_url = ''
+            if link_href[2] == 'internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080': 
+                link_url = 'https://gtr.ukri.org:443/gtr/api/' + link_href[5] + '/' + link_href[6]
+
+            links[link['rel']].append(link_url)
 
         return links
 
@@ -1033,14 +1044,20 @@ class GatewayToResearchProject(GatewayToResearchResource):
         :type gtr_resource_uri: str
         :param gtr_resource_uri: URI of a Gateway to Research resource
         """
+
         super().__init__(gtr_resource_uri)
 
         self.identifiers = self._process_identifiers()
+        # print(self.identifiers)
         self.research_topics = self._process_research_topics()
+        # print(self.research_topics)
         self.research_subjects = self._process_research_subjects()
+        # print(self.research_subjects)
         self.publications = self._process_publications()
+        # print(self.publications)
         self.fund = GatewayToResearchFund(
             gtr_resource_uri=self._find_gtr_fund_link())
+        # print (self.fund)
         self.principle_investigators = self._process_people(relation='PI_PER')
         self.co_investigators = self._process_people(relation='COI_PER')
 
@@ -1158,9 +1175,12 @@ class GatewayToResearchProject(GatewayToResearchResource):
         publications = []
         if 'PUBLICATION' in self.resource_links:
             for publication_uri in self.resource_links['PUBLICATION']:
-                publication = GatewayToResearchPublication(
-                    gtr_resource_uri=publication_uri)
-                publications.append(publication.doi)
+                try:
+                    publication = GatewayToResearchPublication(
+                        gtr_resource_uri=publication_uri)
+                    publications.append(publication.doi)
+                except:
+                    publications = []
 
         return publications
 
@@ -1190,13 +1210,16 @@ class GatewayToResearchProject(GatewayToResearchResource):
         :rtype str
         :return URI of the GTR Funder resource for a GTR Fund
         """
-        if 'FUND' not in self.resource_links.keys():
-            raise KeyError("GTR fund relation not found in GTR project links")
-        if len(self.resource_links['FUND']) == 0:
-            raise KeyError("GTR fund relation not found in GTR project links")
-        if len(self.resource_links['FUND']) > 1:
-            raise KeyError(
-                "Multiple GTR fund identifiers found in GTR project links, one expected")
+        try:
+            if 'FUND' not in self.resource_links.keys():
+                raise KeyError("GTR fund relation not found in GTR project links")
+            if len(self.resource_links['FUND']) == 0:
+                raise KeyError("GTR fund relation not found in GTR project links")
+            if len(self.resource_links['FUND']) > 1:
+                raise KeyError(
+                    "Multiple GTR fund identifiers found in GTR project links, one expected")
+        except:
+            return self.resource_links['FUND']["0"]
 
         return self.resource_links['FUND'][0]
 
@@ -2019,6 +2042,7 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
             f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"))
         importer = GatewayToResearchGrantImporter(
             gtr_grant_reference=gtr_grant_reference)
+
         if importer.exists():
             app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}) - Already "
                             f"imported")
