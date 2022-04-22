@@ -5,7 +5,7 @@ services:
   app-db:
     image: postgres:11.1-alpine
     volumes:
-      - ./docker/postgresql-databases.sql:/docker-entrypoint-initdb.d/postgresql-databases.sql
+      - postgres_volume:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=password
@@ -23,3 +23,6 @@ services:
       - .:/usr/src/app
     ports:
       - 9000:9000
+
+volumes:
+  postgres_volume:
