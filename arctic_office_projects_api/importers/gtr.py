@@ -141,7 +141,7 @@ class GatewayToResearchResource:
             link_href = link['href'].split("/")
 
             link_url = ''
-            if link_href[2] == 'internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080': 
+            if link_href[2] == 'internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080':
                 link_url = 'https://gtr.ukri.org:443/gtr/api/' + link_href[5] + '/' + link_href[6]
 
             links[link['rel']].append(link_url)
@@ -1175,12 +1175,9 @@ class GatewayToResearchProject(GatewayToResearchResource):
         publications = []
         if 'PUBLICATION' in self.resource_links:
             for publication_uri in self.resource_links['PUBLICATION']:
-                try:
-                    publication = GatewayToResearchPublication(
-                        gtr_resource_uri=publication_uri)
-                    publications.append(publication.doi)
-                except:
-                    publications = []
+                publication = GatewayToResearchPublication(
+                    gtr_resource_uri=publication_uri)
+                publications.append(publication.doi)
 
         return publications
 
@@ -1210,16 +1207,14 @@ class GatewayToResearchProject(GatewayToResearchResource):
         :rtype str
         :return URI of the GTR Funder resource for a GTR Fund
         """
-        try:
-            if 'FUND' not in self.resource_links.keys():
-                raise KeyError("GTR fund relation not found in GTR project links")
-            if len(self.resource_links['FUND']) == 0:
-                raise KeyError("GTR fund relation not found in GTR project links")
-            if len(self.resource_links['FUND']) > 1:
-                raise KeyError(
-                    "Multiple GTR fund identifiers found in GTR project links, one expected")
-        except:
-            return self.resource_links['FUND']["0"]
+
+        if 'FUND' not in self.resource_links.keys():
+            raise KeyError("GTR fund relation not found in GTR project links")
+        if len(self.resource_links['FUND']) == 0:
+            raise KeyError("GTR fund relation not found in GTR project links")
+        if len(self.resource_links['FUND']) > 1:
+            raise KeyError(
+                "Multiple GTR fund identifiers found in GTR project links, one expected")
 
         return self.resource_links['FUND'][0]
 
