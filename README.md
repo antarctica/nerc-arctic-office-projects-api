@@ -1263,6 +1263,8 @@ test framework. Test cases are defined in files within `tests/` and are automati
 
 Tests are automatically ran on each commit through [Continuous Integration](#continuous-integration).
 
+It may be necesssary to create a test database in the app-db container called `app_test`
+
 To run tests manually:
 
 ```shell
