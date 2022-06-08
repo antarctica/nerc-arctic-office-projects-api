@@ -262,7 +262,7 @@ class CategorySchemeSchema(Schema):
     revision = fields.String(dump_only=True, required=False)
 
     categories = Relationship(
-        attribute='category_terms',
+        attribute='category_term',
         self_view='category_schemes.category_schemes_relationship_category_terms',
         self_view_kwargs={'category_scheme_id': '<neutral_id>'},
         related_view='category_schemes.category_schemes_category_terms',
