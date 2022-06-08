@@ -16,4 +16,4 @@ COPY config.py manage.py /usr/src/app/
 
 # Setup runtime
 ENTRYPOINT []
-CMD waitress-serve --port=$PORT --channel-timeout=300 manage:app
+CMD waitress-serve --port=$PORT --channel-timeout=600 manage:app
