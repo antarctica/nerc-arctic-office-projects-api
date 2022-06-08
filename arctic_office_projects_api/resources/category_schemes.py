@@ -25,8 +25,8 @@ def category_schemes_list():
 
     _category_schemes = CategoryScheme.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
     payload = CategorySchemeSchema(many=True, paginate=True, include_data=(
-        'categories',
-        'categories.categorisations.project'
+        # 'categories',
+        # 'categories.categorisations.project'
     )).dump(_category_schemes)
 
     return jsonify(payload)
