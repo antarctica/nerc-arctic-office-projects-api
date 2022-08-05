@@ -1271,6 +1271,12 @@ To run tests manually:
 $ docker-compose run -e FLASK_ENV=testing app flask test
 ```
 
+or
+```shell
+$ docker-compose run -e FLASK_ENV=testing app flask test --test-runner junit
+```
+
+
 To run tests using PyCharm:
 
 * *Run* -> *Edit Configurations*
