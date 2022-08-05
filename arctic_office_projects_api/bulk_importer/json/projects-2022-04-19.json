@@ -3,6 +3,7 @@
         {
             "parent-id": null,
             "id": 1,
+            "lead-project": true,
             "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
             "grant-reference": "NE/I028858/1",
             "notes": ""
@@ -248,6 +249,7 @@
         {
             "parent-id": null,
             "id": 36,
+            "lead-project": true,
             "title": "Will climate change in the Arctic increase the landslide-tsunami risk to the UK?",
             "grant-reference": "NE/K00008X/1",
             "notes": ""
@@ -339,6 +341,7 @@
         {
             "parent-id": null,
             "id": 49,
+            "lead-project": true,
             "title": "Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE)",
             "grant-reference": "NE/P006302/1",
             "notes": ""
