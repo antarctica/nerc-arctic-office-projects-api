@@ -1,3 +1,5 @@
+import os
+
 import sentry_sdk
 
 from flask import Flask
@@ -31,6 +33,8 @@ def create_app(config_name):
     # Config
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('SQLALCHEMY_DATABASE_URI') or None
 
     # Extensions
     db.init_app(app)
