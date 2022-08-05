@@ -1,6 +1,6 @@
 FROM python:3.6-alpine3.12
 
-LABEL maintainer = "Felix Fennell <felnne@bas.ac.uk>"
+LABEL maintainer = "Web & Apps team <webapps@bas.ac.uk>"
 
 # Setup project
 WORKDIR /usr/src/app
