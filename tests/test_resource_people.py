@@ -206,6 +206,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "iso-3166-alpha3-code": "SJM",
                             "name": "Svalbard and Jan Mayen"
                         },
+                        "lead-project": None,
                         "project-duration": {
                             "end-instant": "2015-10-01",
                             "interval": "2012-03-01/2015-10-01",
@@ -526,6 +527,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "iso-3166-alpha3-code": "SJM",
                             "name": "Svalbard and Jan Mayen"
                         },
+                        "lead-project": None,
                         "project-duration": {
                             "end-instant": "2015-10-01",
                             "interval": "2012-03-01/2015-10-01",

@@ -118,6 +118,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "iso-3166-alpha3-code": "SJM",
                             "name": "Svalbard and Jan Mayen"
                         },
+                        "lead-project": None,
                         "project-duration": {
                             "end-instant": "2015-10-01",
                             "interval": "2012-03-01/2015-10-01",
@@ -222,6 +223,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "interval": "2012-03-01/2015-10-01",
                             "start-instant": "2012-03-01"
                         },
+                        "lead-project": None,
                         "publications": [
                             "https://doi.org/10.5555/15822411",
                             "https://doi.org/10.5555/45284431",
@@ -289,6 +291,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "interval": "2012-03-01/2055-10-01",
                             "start-instant": "2012-03-01"
                         },
+                        "lead-project": None,
                         "publications": None,
                         "title": "Example project 2",
                         "website": None
@@ -345,6 +348,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "interval": "2012-03-01/2055-10-01",
                             "start-instant": "2012-03-01"
                         },
+                        "lead-project": None,
                         "publications": None,
                         "reference": "EX-GRANT-0002",
                         "status": "active",
@@ -488,11 +492,13 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "iso-3166-alpha3-code": "SJM",
                             "name": "Svalbard and Jan Mayen"
                         },
+                        "lead-project": None,
                         "project-duration": {
                             "end-instant": "2015-10-01",
                             "interval": "2012-03-01/2015-10-01",
                             "start-instant": "2012-03-01"
                         },
+                        "lead-project": None,
                         "publications": [
                             "https://doi.org/10.5555/76559541",
                             "https://doi.org/10.5555/97727778",
@@ -592,6 +598,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                             "interval": "2012-03-01/2015-10-01",
                             "start-instant": "2012-03-01"
                         },
+                        "lead-project": None,
                         "publications": [
                             "https://doi.org/10.5555/15822411",
                             "https://doi.org/10.5555/45284431",
@@ -762,6 +769,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                         "interval": "2012-03-01/2015-10-01",
                         "start-instant": "2012-03-01"
                     },
+                    "lead-project": None,
                     "publications": [
                         "https://doi.org/10.5555/15822411",
                         "https://doi.org/10.5555/45284431",
@@ -874,11 +882,13 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                         "iso-3166-alpha3-code": "SJM",
                         "name": "Svalbard and Jan Mayen"
                     },
+                    "lead-project": None,
                     "project-duration": {
                         "end-instant": "2015-10-01",
                         "interval": "2012-03-01/2015-10-01",
                         "start-instant": "2012-03-01"
                     },
+                    "lead-project": None,
                     "publications": [
                         "https://doi.org/10.5555/76559541",
                         "https://doi.org/10.5555/97727778",

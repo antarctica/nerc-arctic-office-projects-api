@@ -70,6 +70,7 @@ static_resources = {
                         'interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum '
                         'volutpat. Sed vel tincidunt lectus.',
             'website': 'https://www.example.com',
+            'lead-project': None,
             'publications': [
                 'https://doi.org/10.5555/76559541',
                 'https://doi.org/10.5555/97727778',
@@ -89,6 +90,7 @@ static_resources = {
                         'acronym, website, publication or country property. The project duration is in the present. \n '
                         'No padding text is added to this abstract.',
             'website': None,
+            'lead-project': None,
             'publications': [],
             'duration': DateRange(date(2012, 3, 1), date(2055, 10, 1)),
             'country': None
@@ -134,6 +136,7 @@ static_resources = {
                         'interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum '
                         'volutpat. Sed vel tincidunt lectus.',
             'website': None,
+            'lead-project': None,
             'publications': [],
             'duration': DateRange(date(2052, 3, 1), date(2055, 10, 1)),
             'country': ProjectCountry.SJM
@@ -280,6 +283,7 @@ static_resources = {
                         'interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum '
                         'volutpat. Sed vel tincidunt lectus.',
             'website': 'https://www.example.com',
+            'lead-project': None,
             'publications': [
                 'https://doi.org/10.5555/15822411',
                 'https://doi.org/10.5555/45284431',
@@ -302,6 +306,7 @@ static_resources = {
                         'have a website, publications or total funding amount. The grant is active and occurs in the '
                         'present. \n No padding text is added to this abstract.',
             'website': None,
+            'lead-project': None,
             'publications': [],
             'duration': DateRange(date(2012, 3, 1), date(2055, 10, 1)),
             'status': GrantStatus.Active,
@@ -350,6 +355,7 @@ static_resources = {
                         'interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum '
                         'volutpat. Sed vel tincidunt lectus.',
             'website': None,
+            'lead-project': None,
             'publications': [],
             'duration': DateRange(date(2052, 3, 1), date(2055, 10, 1)),
             'status': GrantStatus.Approved,

@@ -15,6 +15,7 @@ class ProjectSchema(Schema):
     acronym = fields.String(dump_only=True)
     abstract = fields.String(dump_only=True)
     website = fields.String(dump_only=True)
+    lead_project = fields.String(dump_only=True, required=True)
     # noinspection PyTypeChecker
     publications = fields.List(fields.String, dump_only=True)
     access_duration = DateRangeField(dump_only=True, required=True)
@@ -143,6 +144,7 @@ class GrantSchema(Schema):
     title = fields.String(dump_only=True, required=True)
     abstract = fields.String(dump_only=True)
     website = fields.String(dump_only=True)
+    lead_project = fields.String(dump_only=True, required=True)
     # noinspection PyTypeChecker
     publications = fields.List(fields.String, dump_only=True)
     duration = DateRangeField(dump_only=True, required=True)

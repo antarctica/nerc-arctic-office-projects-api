@@ -1233,15 +1233,18 @@ class GatewayToResearchGrantImporter:
     GTR projects are loosely equivalent to Grants in this project.
     """
 
-    def __init__(self, gtr_grant_reference: str = None, gtr_project_id: str = None):
+    def __init__(self, gtr_grant_reference: str = None, gtr_project_id: str = None, lead_project: bool = None):
         """
         :type gtr_grant_reference: str
         :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
         :type gtr_project_id: str
         :param gtr_grant_reference: Gateway to Research project ID (e.g. '87D5AD44-2123-442B-B186-75C3878471BD')
+        :type lead_project: bool
+        :param lead_project: Is this the lead project for a split award?
         """
         self.grant_reference = gtr_grant_reference
         self.gtr_project_id = gtr_project_id
+        self.lead_project = lead_project
 
     def exists(self) -> bool:
         """
@@ -1317,6 +1320,7 @@ class GatewayToResearchGrantImporter:
             total_funds_currency=gtr_project.fund.currency,
             total_funds=gtr_project.fund.amount,
             publications=gtr_project.publications,
+            lead_project=self.lead_project,
             funder=Organisation.query.filter_by(
                 grid_identifier=gtr_project.fund.funder.grid_id).one_or_none()
         )
@@ -1328,7 +1332,8 @@ class GatewayToResearchGrantImporter:
             abstract=grant.abstract,
             project_duration=grant.duration,
             access_duration=DateRange(grant.duration.lower, None),
-            publications=grant.publications
+            publications=grant.publications,
+            lead_project=self.lead_project
         )
         db.session.add(project)
 
@@ -2019,7 +2024,7 @@ class GatewayToResearchGrantImporter:
         })
 
 
-def import_gateway_to_research_grant_interactively(gtr_grant_reference: str):
+def import_gateway_to_research_grant_interactively(gtr_grant_reference: str, lead_project: str):
     """
     Command to import a project/grant from Gateway to Research
 
