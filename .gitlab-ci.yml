@@ -68,7 +68,7 @@ build-base:
   image: docker:latest
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY
-    - docker build -t $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest -f Dockerfile-ci .
+    - docker build -t $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest -f Dockerfile .
     - docker push $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest
   only:
     - master
