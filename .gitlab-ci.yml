@@ -70,7 +70,7 @@ build:
     - docker build -t $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest -f Dockerfile-ci .
     - docker push $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest
   only:
-    - tags
+    - master
   cache:
     paths:
       - .venv
