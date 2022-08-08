@@ -87,6 +87,7 @@ test-app:
   variables:
     FLASK_APP: manage.py
     FLASK_ENV: testing
+    PRESERVE_CONTEXT_ON_EXCEPTION: 0
   script:
     - "flask test --test-runner junit"
   artifacts:
