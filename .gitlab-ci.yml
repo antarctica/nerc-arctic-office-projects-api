@@ -57,6 +57,24 @@ variables:
   API_DOCS_STAGE_BUCKET: bas-api-docs-content-testing
   API_DOCS_PROD_BUCKET: bas-api-docs-content
 
+
+build:
+  stage: build
+  tags:
+    - dnd
+  services:
+    - docker:dind
+  image: docker:latest
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest -f Dockerfile-ci .
+    - docker push $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest
+  only:
+    - tags
+  cache:
+    paths:
+      - .venv
+
 image:
   name: docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api:latest
   entrypoint: [""]
