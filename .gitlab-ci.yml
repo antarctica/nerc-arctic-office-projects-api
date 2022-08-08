@@ -34,6 +34,7 @@ services:
     alias: app-db
 
 stages:
+  - build-base
   - test
   - lint
   - build
@@ -58,8 +59,8 @@ variables:
   API_DOCS_PROD_BUCKET: bas-api-docs-content
 
 
-build:
-  stage: build
+build-base:
+  stage: build-base
   tags:
     - dnd
   services:
