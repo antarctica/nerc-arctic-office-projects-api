@@ -56,6 +56,7 @@ class TestConfig(Config):
 
     DEBUG = True
     TESTING = True
+    PRESERVE_CONTEXT_ON_EXCEPTION = False
 
     APP_ENABLE_SENTRY = str2bool(os.environ.get('APP_ENABLE_SENTRY')) or False
 
