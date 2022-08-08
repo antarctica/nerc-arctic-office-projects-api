@@ -91,6 +91,7 @@ test-app:
   script:
     - "flask test --test-runner junit"
   artifacts:
+    paths:
     reports:
       junit: test-results.xml
 
