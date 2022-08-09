@@ -20,7 +20,11 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt --no-cache-dir && \
     apk --purge del .build-deps
 
-COPY . /usr/src/app/
+# Add application - more complicated because COPY only copies the contents of a directory for some insane reason
+COPY arctic_office_projects_api/ /usr/src/app/arctic_office_projects_api/
+COPY migrations/ /usr/src/app/migrations/
+COPY resources/ /usr/src/app/resources/
+COPY config.py manage.py /usr/src/app/
 
 # Setup runtime
 ENTRYPOINT []
