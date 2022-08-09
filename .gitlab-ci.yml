@@ -77,7 +77,7 @@ build-base:
       - .venv
 
 image:
-  name: docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api:latest
+  name: docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api/arctic-office-projects-api:latest
   entrypoint: [""]
 
 # == Jobs ==
