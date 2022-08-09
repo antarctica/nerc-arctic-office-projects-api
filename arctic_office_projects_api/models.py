@@ -576,9 +576,7 @@ class Project(db.Model):
     access_duration = db.Column(postgresql.DATERANGE(), nullable=False)
     project_duration = db.Column(postgresql.DATERANGE(), nullable=False)
     country = db.Column(db.Enum(ProjectCountry), nullable=True)
-    
     lead_project = db.Column(db.Boolean(), nullable=True)
-
     participants = db.relationship("Participant", back_populates="project")
     allocations = db.relationship("Allocation", back_populates="project")
     categorisations = db.relationship("Categorisation", back_populates="project")
@@ -646,9 +644,7 @@ class Grant(db.Model):
     status = db.Column(db.Enum(GrantStatus), nullable=False)
     total_funds = db.Column(db.Numeric(24, 2), nullable=True)
     total_funds_currency = db.Column(db.Enum(GrantCurrency), nullable=True)
-    
     lead_project = db.Column(db.Boolean(), nullable=True)
-
     funder = db.relationship('Organisation', back_populates='grants')
     allocations = db.relationship("Allocation", back_populates="grant")
 

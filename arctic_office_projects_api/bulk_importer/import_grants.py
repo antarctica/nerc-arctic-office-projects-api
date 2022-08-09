@@ -39,7 +39,7 @@ def import_grants(file):
                 print('No lead-project')
 
             if grant_reference_valid(project['grant-reference']):  # nosec
-                subprocess.run(['flask', 'import', 'grant', 
+                subprocess.run(['flask', 'import', 'grant',
                                 'gtr', project['grant-reference']], lead_project, shell=False)
 
 
