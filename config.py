@@ -62,7 +62,7 @@ class TestConfig(Config):
 
     LOGGING_LEVEL = logging.DEBUG
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql://app:password@app-db/app_test'
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or 'postgresql://app:password@app-db/app_test'
 
     PREFERRED_URL_SCHEME = os.getenv('PREFERRED_URL_SCHEME') or 'http'
 

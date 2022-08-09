@@ -86,6 +86,7 @@ test-app:
   stage: test
   variables:
     FLASK_ENV: testing
+    SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app_test
   script:
     - "flask test --test-runner junit"
   artifacts:
