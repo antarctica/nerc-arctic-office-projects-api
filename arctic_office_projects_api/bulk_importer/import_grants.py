@@ -31,6 +31,8 @@ def import_grants(file):
 
         for project in data['data']:
 
+            # print(project)
+
             try:
                 lead_project = project['lead-project']
                 print(lead_project)
