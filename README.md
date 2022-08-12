@@ -211,7 +211,7 @@ There are mandatory, manual, mappings required by this provider:
    (see [Science categories](#science-categories) for more information) - an internal mapping is therefore used to map
    GTR Subject or Topic categories to Categories in this API
 
-Mappings are currently defined in methods in the GTR importer class (`arctic_office_projectsapi/importers/gtr.py`):
+Mappings are currently defined in methods in the GTR importer class (`arctic_office_projects_api/importers/gtr.py`):
 
 * GTR Funder/Employer to Organisation mappings are defined in `_map_to_grid_id()`
 * GTR People to People mappings are defined in `_map_id_to_orcid_ids()`
