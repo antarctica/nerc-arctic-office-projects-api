@@ -12,37 +12,37 @@ services:
       FLASK_APP: manage.py
       FLASK_ENV: development
       # FLASK_ENV: testing
-      # SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app
-      SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-test-db:5432/app
+      SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app
+      # SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-test-db:5432/app
     # command: tail -f /dev/null
     command: flask run --host 0.0.0.0 --port 9000
 
-  # app-db:
-  #   image: postgres:11.1-alpine
-  #   volumes:
-  #     - postgres_volume:/var/lib/postgresql/data/
-  #   environment:
-  #     - POSTGRES_USER=app
-  #     - POSTGRES_PASSWORD=password
-  #     - POSTGRES_DB=app
-  #   ports:
-  #     - 5432:5432
-
-    # To run tests:
-    # - switch database containers
-    # - switch the env vars for the app
-    # - inside the app container run `poetry run flask test`
-
-  app-test-db:
+  app-db:
     image: postgres:11.1-alpine
     volumes:
-      - postgres_test_data:/var/lib/postgresql/data/
+      - postgres_volume:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=app
     ports:
       - 5432:5432
+
+    # To run tests:
+    # - switch database containers
+    # - switch the env vars for the app
+    # - inside the app container run `poetry run flask test`
+
+  # app-test-db:
+  #   image: postgres:11.1-alpine
+  #   volumes:
+  #     - postgres_test_data:/var/lib/postgresql/data/
+  #   environment:
+  #     - POSTGRES_USER=app
+  #     - POSTGRES_PASSWORD=password
+  #     - POSTGRES_DB=app
+  #   ports:
+  #     - 5432:5432
 
 
 volumes:
