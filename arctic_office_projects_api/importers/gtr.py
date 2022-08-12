@@ -409,6 +409,21 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # University of the West of England
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/2A80FFDA-3B8B-43BA-80C3-3AA850B49BA1':
             return 'https://www.grid.ac/institutes/grid.6518.a'
+        # Southampton Solent University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/DD18D9A8-0FE2-4857-A405-7F41C183F65D':
+            return 'https://ror.org/05xydav19'
+        # Innovate UK
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/05923FEC-036B-4EA9-8068-0AD5AE082931':
+            return 'https://ror.org/05ar5fy68'
+        # Earlham Institute
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/B7B056A3-95CE-4F90-9F31-708B4612610D':
+            return 'https://ror.org/018cxtf62'
+        # Queen's University of Belfast
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/EC23DA53-CA73-4104-A3F6-2A9523484E69':
+            return 'https://ror.org/00hswnk62'
+        # Anglia Ruskin University
+        elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/56F19F82-4654-46D6-891A-EA80CBC02587':
+            return 'https://ror.org/0009t4v78'
         # Unknown
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
             return None
@@ -1911,6 +1926,54 @@ class GatewayToResearchGrantImporter:
         # Instrumentation Eng. & Dev.
         elif gtr_research_topic['id'] == 'F78E4567-DD59-4364-9D1F-0A778996E941':
             return None
+        # Coastal & Waterway Engineering
+        elif gtr_research_topic['id'] == '44BF93F5-71F4-42EF-A39B-8A0F09C7DDD1':
+            return None
+        # Construction Ops & Management
+        elif gtr_research_topic['id'] == 'F58B1665-2CA2-473F-9805-357FD6CC4529':
+            return None
+        # Social Geography
+        elif gtr_research_topic['id'] == '1AB3F721-B2D1-4875-A568-E7F49B4465E9':
+            return None
+        # Animal Diseases
+        elif gtr_research_topic['id'] == 'A502D25A-BB70-4F74-844D-32A2BAD075A5':
+            return None
+        # Cultural and Anthrop Geography
+        elif gtr_research_topic['id'] == '4CB391BE-87E7-4006-A2C5-43ED9DBA773C':
+            return None
+        # Energy - Marine & Hydropower
+        elif gtr_research_topic['id'] == '6BCCE8AB-CBA5-4D28-9682-5236FE9D0668':
+            return None
+        # Operations Management
+        elif gtr_research_topic['id'] == 'BDA5E012-C5EA-48C7-B1D8-594821FDC78E':
+            return None
+        # Transport Ops & Management
+        elif gtr_research_topic['id'] == '748617DE-4AB0-42C9-9514-B22ECFBE05E1':
+            return None
+        # Social Policy
+        elif gtr_research_topic['id'] == '12179D88-04B3-47E9-89E1-B5EE8F895227':
+            return None
+        # Management & Business Studies
+        elif gtr_research_topic['id'] == '5E9AA4EC-49E3-4D6A-B545-79DA07CE39E0':
+            return None
+        # SStatistics & Appl. Probability
+        elif gtr_research_topic['id'] == '62309876-5C71-411C-B1A7-1B2907AFB5A8':
+            return None
+        # Wind Power
+        elif gtr_research_topic['id'] == 'A006DA8C-29E9-4AF4-85F5-6736BE80583D':
+            return None
+        # Environmental Engineering
+        elif gtr_research_topic['id'] == '97FC8337-8E84-46A6-ACF2-A6047DA8C582':
+            return None
+        # Oceanic Studies
+        elif gtr_research_topic['id'] == 'BF1A1580-BC3D-4008-855B-67221E5AC026':
+            return None
+        # Solar Technology
+        elif gtr_research_topic['id'] == '1175C1D0-52DD-4F11-A1B8-E080CABC3609':
+            return None
+        # Energy Storage
+        elif gtr_research_topic['id'] == '97AD4D1C-4499-4C7E-AF8A-FE9EFE56E306':
+            return None
         # Unclassified
         elif gtr_research_topic['id'] == 'D05BC2E0-0345-4A3F-8C3F-775BC42A0819':
             return None
@@ -2016,6 +2079,35 @@ class GatewayToResearchGrantImporter:
             return None
         elif gtr_research_subject['text'] == 'Development studies':
             return None
+        elif gtr_research_subject['text'] == 'Transport Ops & Management':
+            return None
+        elif gtr_research_subject['text'] == 'Social Policy':
+            return None
+        elif gtr_research_subject['text'] == 'Science-Based Archaeology':
+            return None
+        elif gtr_research_subject['text'] == 'Solar Technology':
+            return None
+        elif gtr_research_subject['text'] == 'Cultural and Anthrop Geography':
+            return None
+        elif gtr_research_subject['text'] == 'Social Geography':
+            return None
+        elif gtr_research_subject['text'] == 'Construction Ops & Management':
+            return None
+        elif gtr_research_subject['text'] == 'Animal Diseases':
+            return None
+        elif gtr_research_subject['text'] == 'Operations Management':
+            return None
+        elif gtr_research_subject['text'] == 'Management & Business Studies':
+            return None
+        elif gtr_research_subject['text'] == 'Statistics & Appl. Probability':
+            return None
+        elif gtr_research_subject['text'] == 'Wind Power':
+            return None
+        elif gtr_research_subject['text'] == 'Energy Storage':
+            return None
+        elif gtr_research_subject['text'] == 'Environmental Engineering':
+            return None
+
         raise UnmappedGatewayToResearchProjectSubject(meta={
             'gtr_research_subject': {
                 'id': gtr_research_subject['id'],
