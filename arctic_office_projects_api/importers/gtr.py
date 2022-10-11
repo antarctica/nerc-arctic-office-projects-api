@@ -1545,261 +1545,261 @@ class GatewayToResearchGrantImporter:
         :return a Category scheme identifier corresponding to a GTR research topic ID, or None if unclassified
         """
         if gtr_research_topic['id'] == 'E4C03353-6311-43F9-9204-CFC2536D2017':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         elif gtr_research_topic['id'] == 'C62D281D-F1B9-423D-BDAB-361EC9BE7C68':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
         elif gtr_research_topic['id'] == 'C29F371D-A988-48F8-BFF5-1657DAB1176F':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
         elif gtr_research_topic['id'] == 'B01D3878-E7BD-4830-9503-2F54544E809E':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532'
         # Community Ecology
         elif gtr_research_topic['id'] == 'F4786876-D9A9-404D-8569-BBC813C73074':
             # COMMUNITY DYNAMICS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/8fb66b46-b998-4412-a541-d2acabdf484b'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/8fb66b46-b998-4412-a541-d2acabdf484b'
         # Biogeochemical Cycles
         elif gtr_research_topic['id'] == '62DCC1BF-B512-4BDB-A0C3-02BC17E15F6B':
             # BIOGEOCHEMICAL CYCLES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/9015e65f-bbae-4855-a4b6-1bfa601752bd'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/9015e65f-bbae-4855-a4b6-1bfa601752bd'
         # Climate & Climate Change
         elif gtr_research_topic['id'] == 'EE4457DB-92A3-44EA-8D5F-77013CC107E0':
             # CLIMATE INDICATORS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
         # Hydrological Processes
         elif gtr_research_topic['id'] == 'D4F391DF-BCE0-47FA-BED7-78025F16B14D':
             # TERRESTRIAL HYDROSPHERE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/885735f3-121e-4ca0-ac8b-f37dbc972f03'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/885735f3-121e-4ca0-ac8b-f37dbc972f03'
         # Geohazards
         elif gtr_research_topic['id'] == 'BE94F009-26A1-4E5B-B0B3-722A355F282C':
             # NATURAL HAZARDS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/ec0e2762-f57a-4fdc-b395-c8d7d5590d18'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/ec0e2762-f57a-4fdc-b395-c8d7d5590d18'
         # Sediment/Sedimentary Processes
         elif gtr_research_topic['id'] == '5537B6B2-9FD6-40FB-B300-64555528D3FF':
             # EROSION/SEDIMENTATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a246a8cf-e3f9-4045-af9f-dc97f6fe019a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a246a8cf-e3f9-4045-af9f-dc97f6fe019a'
         # Environmental Microbiology
         elif gtr_research_topic['id'] == '5B73146D-6DEF-4D88-BE83-FE7B9DB21D62':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Glacial & Cryospheric Systems
         elif gtr_research_topic['id'] == '07B1BD3F-A7ED-4640-8B09-C1F296DC56BF':
             # GLACIERS/ICE SHEETS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/099ab1ae-f4d2-48cc-be2f-86bd58ffc4ca'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/099ab1ae-f4d2-48cc-be2f-86bd58ffc4ca'
         # Soil science
         elif gtr_research_topic['id'] == '96F70ACB-D35F-416F-9360-4EFD402DFA6B':
             # SOILS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/3526afb8-0dc9-43c7-8ad4-f34f250a1e91'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/3526afb8-0dc9-43c7-8ad4-f34f250a1e91'
         # Ecosystem Scale Processes
         elif gtr_research_topic['id'] == '12C7A68B-3922-4925-9C0B-7FACEC921815':
             # ECOSYSTEMS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
         # Tropospheric Processes
         elif gtr_research_topic['id'] == 'AE661B5A-7390-4AD2-BCF2-D611CB668BD1':
             # ATMOSPHERE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         # Population Ecology
         elif gtr_research_topic['id'] == 'DE30777A-E4A8-486B-875D-58CC92FD5525':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Ocean Circulation
         elif gtr_research_topic['id'] == '723BA0F8-3ECD-4E2A-A39E-44936EAC1517':
             # OCEAN CIRCULATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a031952d-9f00-4ba5-9966-5f87ab9dfdd4'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a031952d-9f00-4ba5-9966-5f87ab9dfdd4'
         # Land - Atmosphere Interactions
         elif gtr_research_topic['id'] == 'E94BED75-343A-47C8-BEA1-E1E927732B34':
             # ATMOSPHERE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         # Remote Sensing & Earth Obs.
         elif gtr_research_topic['id'] == '4504C6B4-D825-4F14-B0D3-7931AC636B71':
             # SPECTRAL/ENGINEERING
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
         # Regional & Extreme Weather
         elif gtr_research_topic['id'] == '396591D1-8226-43A9-991D-8E0D265D99D0':
             # EXTREME WEATHER
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b29b46ad-f05f-4144-b965-5f606ce96963'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/b29b46ad-f05f-4144-b965-5f606ce96963'
         # Palaeoenvironments
         elif gtr_research_topic['id'] == '7DCAF586-72E2-4881-9251-E72F38AF1CA4':
             # PALAEOCLIMATE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
         # Earth & environmental
         elif gtr_research_topic['id'] == '4237918D-61A8-47E0-91EE-65E98661A88B':
             # HUMAN DIMENSION/ENVIRONMENTAL IMPACTS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/3f4cfc81-7745-43d9-b313-f68cdf72359b'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/3f4cfc81-7745-43d9-b313-f68cdf72359b'
         # Behavioural Ecology
         elif gtr_research_topic['id'] == '685A8D5E-BD8A-4D8D-BAC5-607439217156':
             # ECOLOGICAL DYNAMICS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/6bef0291-a9ca-4832-bbb4-80459dc1493f'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/6bef0291-a9ca-4832-bbb4-80459dc1493f'
         # Environmental Genomics
         elif gtr_research_topic['id'] == 'DE7203EB-4721-41C9-BB3C-539A8F6E8049':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Conservation Ecology
         elif gtr_research_topic['id'] == '5020ECC8-E0E8-434D-BDD5-663A9C04EFA2':
             # CONSERVATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/40869a25-edea-4438-80f9-47c9e6910b9b'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/40869a25-edea-4438-80f9-47c9e6910b9b'
         # Radiative Processes & Effects
         elif gtr_research_topic['id'] == '45964B78-B4F7-4098-996B-49505C85B744':
             # SURFACE RADIATIVE PROPERTIES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/cb5cc628-a1b5-459e-934f-881153a937b8'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/cb5cc628-a1b5-459e-934f-881153a937b8'
         # Large Scale Dynamics/Transport
         elif gtr_research_topic['id'] == '59CF5FB3-F46B-448B-AECF-47852750EF3C':
             # OCEANS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
         # Land - Ocean Interactions
         elif gtr_research_topic['id'] == 'B945AA77-44D5-467F-9B53-2EE3C3F550B1':
             # COASTAL PROCESSES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b6fd22ab-dca7-4dfa-8812-913453b5695b'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/b6fd22ab-dca7-4dfa-8812-913453b5695b'
         # Mantle & Core Processes
         elif gtr_research_topic['id'] == 'C6842010-EC71-44DF-B79C-64B1BA9B3BDE':
             # TECTONICS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1e17c8d3-81d0-473c-8f24-d2a4ea52b6b9'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/1e17c8d3-81d0-473c-8f24-d2a4ea52b6b9'
         # Quaternary Science
         elif gtr_research_topic['id'] == 'E32742C9-DE22-4776-82B4-444177FA03AD':
             # SOLID EARTH
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
         # Stratospheric Processes
         elif gtr_research_topic['id'] == 'A8A9F791-62D5-4B6F-90EB-2F6F8813D700':
             # ATMOSPHERE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         # Volcanic Processes
         elif gtr_research_topic['id'] == '052183D5-AB83-4C5E-97FA-7B0C1D4AF3FA':
             # VOLCANIC ACTIVITY
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1faaede0-2cd6-4447-b28b-0a28d9e2d067'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/1faaede0-2cd6-4447-b28b-0a28d9e2d067'
         # Agricultural systems
         elif gtr_research_topic['id'] == '794345CD-A1D5-4984-ADDD-088BCF41822F':
             # AGRICULTURE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
         # Earth Surface Processes
         elif gtr_research_topic['id'] == '47491D28-C3A9-416A-8459-3ECC0715B776':
             # GEOMORPHIC LANDFORMS/PROCESSES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/d35b9ba5-d018-48a5-8f0d-92b9c55b3279'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/d35b9ba5-d018-48a5-8f0d-92b9c55b3279'
         # Technol. for Environ. Appl.
         elif gtr_research_topic['id'] == '98C0D11F-5C27-40CE-A895-54E4C61784B1':
             # EARTH SCIENCE SERVICES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
         # Responses to environment
         elif gtr_research_topic['id'] == '8717CFA9-D46B-41A5-8971-BF4431B68E29':
             # CLIMATE INDICIATORS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
         # Metabolomics / Metabonomics
         elif gtr_research_topic['id'] == '9F673176-B1B7-47C8-9D0F-DEC4A0410F7C':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Biochemistry & physiology
         elif gtr_research_topic['id'] == '649031FD-C21E-42D9-AC12-41ACA59CC11C':
             # ANIMAL PHYSIOLOGY AND BIOCHEMISTRY
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f9cdf3ae-fe8b-4a19-a946-a8c8780d7894'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/f9cdf3ae-fe8b-4a19-a946-a8c8780d7894'
         # Prehistoric Archaeology
         elif gtr_research_topic['id'] == '14AE809A-4116-46B5-ABF7-DF8BCE2BF069':
             # PALEOCLIMATE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c7245882-84a1-4192-acfa-a758b5b9c151'
         # Water Quality
         elif gtr_research_topic['id'] == '99C0726F-47B0-4500-8B73-4DD0C60E31DF':
             # WATER QUALITY
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/1ee8a323-f0ba-4a21-b597-50890c527c8e'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/1ee8a323-f0ba-4a21-b597-50890c527c8e'
         # Plant physiology
         elif gtr_research_topic['id'] == '15080F45-1EA3-41B4-BC23-C49CB918FBC4':
             # PLANTS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/0b4081fa-5233-4484-bc82-706976defa0e'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/0b4081fa-5233-4484-bc82-706976defa0e'
         # Carbon Capture & Storage
         elif gtr_research_topic['id'] == 'B5705566-FCD9-4E90-A1F6-458BBDED816E':
             # CARBON CAPTURE AND STORAGE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/e8c24822-7d2d-48c6-9dca-df3860e9bd63'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/e8c24822-7d2d-48c6-9dca-df3860e9bd63'
         # Survey & Monitoring
         elif gtr_research_topic['id'] == '189E1F60-BF95-405D-A6F0-62BBD78E2DD5':
             # EARTH SCIENCE SERVICES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
         # Environment & Health
         elif gtr_research_topic['id'] == '86884005-D98A-4391-95D8-913141C39F7C':
             # HEALTH ADVISORIES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/370eba54-962b-4e59-9686-86d5c5ab9c88'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/370eba54-962b-4e59-9686-86d5c5ab9c88'
         # Systematics & Taxonomy
         elif gtr_research_topic['id'] == '2CF6994C-A1AE-435B-853C-2C228927BC9E':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Crop protection
         elif gtr_research_topic['id'] == '6F3E4891-E3E8-4568-94D8-075A0552DE90':
             # AGRICULTURAL PLANT SCIENCE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/25be3b9a-9d4c-4b5b-8d24-b1f519913d90'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/25be3b9a-9d4c-4b5b-8d24-b1f519913d90'
         # Earth Resources
         elif gtr_research_topic['id'] == '859194A3-8EE1-41D7-90C5-DA2999B93E8E':
             # SOLID EARTH
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
         # Atmospheric Kinetics
         elif gtr_research_topic['id'] == '62E0966C-A067-4075-B244-33F1F4DD4B1E':
             # ATMOSPHERE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         # Environmental Physiology
         elif gtr_research_topic['id'] == '6CA01F47-BDE6-46F1-8679-A31D5317A885':
             # AGRICULTURE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
         # Transport Geography
         elif gtr_research_topic['id'] == '0C5394E1-D713-4507-8021-0A9785789545':
             # TRANSPORTATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/37a6c8e2-f2ac-48a4-a4fa-d80f700f68db'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/37a6c8e2-f2ac-48a4-a4fa-d80f700f68db'
         # Accelerator R&D
         elif gtr_research_topic['id'] == 'BF8C9667-2697-4493-8519-7787831D008B':
             # EARTH SCIENCE SERVICES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
         # Properties Of Earth Materials
         elif gtr_research_topic['id'] == '9C0F9DC0-329C-4C09-B439-E4335EA8F916':
             # SOLID EARTH
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
         # Technology and method dev
         elif gtr_research_topic['id'] == '80A9D6C5-792D-4DD9-9138-BEC1BB556AA9':
             # EARTH SCIENCE SERVICES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/894f9116-ae3c-40b6-981d-5113de961710'
         # Upper Atmos Process & Geospace
         elif gtr_research_topic['id'] == '4CF6D0C3-CF9C-4067-9466-B9FC16647C21':
             # ATMOSPHERE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         # RF & Microwave Technology
         elif gtr_research_topic['id'] == 'CEDD6868-376B-45CB-BAB7-5AD38D089AC0':
             # MICROWAVE
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/66700628-2b62-4466-999e-faeb15ca4da5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/66700628-2b62-4466-999e-faeb15ca4da5'
         # Museum & Gallery Studies
         elif gtr_research_topic['id'] == '51073B72-B972-4034-A0A1-87A6B0DCD198':
             # RECREATIONAL ACTIVITIES
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/9ee8acad-458e-45c1-a1d5-9b1649c82ea7'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/9ee8acad-458e-45c1-a1d5-9b1649c82ea7'
         # Socio Legal Studies
         elif gtr_research_topic['id'] == 'B75590D5-E385-45F1-B6D0-CC3EDEFDE67D':
             # SOCIOECONOMICS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a96e6cd6-0f35-491d-8198-7551d03e1cbc'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a96e6cd6-0f35-491d-8198-7551d03e1cbc'
         # Scandinavian studies
         elif gtr_research_topic['id'] == '80990855-5789-4612-9DC4-701464F66874':
             # HUMAN SETTLEMENTS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fee25cad-7ffe-4ee2-a6f2-8116b8a0a707'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fee25cad-7ffe-4ee2-a6f2-8116b8a0a707'
         # Animal behaviour
         elif gtr_research_topic['id'] == '790AD28C-6380-4025-83C2-6881B93C4602':
             # ANIMAL ECOLOGY AND BEHAVIOR
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/5d1b53b2-7d69-4b7c-903f-d8cf29430f93'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/5d1b53b2-7d69-4b7c-903f-d8cf29430f93'
         # Theoretical biology
         elif gtr_research_topic['id'] == '4A6E5CEB-ACA3-4301-98AD-C7EC310948FD':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Pollution
         elif gtr_research_topic['id'] == 'DC6B2467-35B6-4997-9582-1BF957B82697':
             # EMISSIONS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2a60df4a-a0d7-4e4b-b02a-372a083f0170'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/2a60df4a-a0d7-4e4b-b02a-372a083f0170'
         # Animal organisms
         elif gtr_research_topic['id'] == '4A2A69ED-37ED-4980-91A7-E54B4F6A9BC6':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Diet & health
         elif gtr_research_topic['id'] == '446B7E7F-04EB-4121-9CC6-9171277E00DA':
             # PUBLIC HEALTH
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
         # Extremophiles
         elif gtr_research_topic['id'] == '6E4BDD5C-C98C-4B33-B870-6A3A366BEE58':
             # BIOLOGICAL CLASSIFICATION
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         # Plant responses to environment
         elif gtr_research_topic['id'] == 'AE2D53CC-F199-452E-A1FE-B63F4222D636':
             # LAND SURFACE/AGRICULTURE INDICATORS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/112e71ec-c0a1-49a8-82d7-bcb317b45860'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/112e71ec-c0a1-49a8-82d7-bcb317b45860'
         # Population Genetics/Evolution
         elif gtr_research_topic['id'] == 'A4209D5A-2E41-4290-9D1A-3172C1F48962':
             # SPECIES/POPULATION INTERACTIONS
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'
         # # Water Engineering
         # elif gtr_research_topic['id'] == '19789484-D6B8-4965-AD25-309DD43054A0':
         #     # GCMD term?
@@ -2002,35 +2002,35 @@ class GatewayToResearchGrantImporter:
         :return a Category scheme identifier corresponding to a GTR research subject name
         """
         if gtr_research_subject['text'] == 'Terrest. & freshwater environ.':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91c64c46-d040-4daa-b26c-61952fdfaf50'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/91c64c46-d040-4daa-b26c-61952fdfaf50'
         elif gtr_research_subject['text'] == 'Ecol, biodivers. & systematics':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf'
         elif gtr_research_subject['text'] == 'Marine environments':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d'
         elif gtr_research_subject['text'] == 'Geosciences':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72'
         elif gtr_research_subject['text'] == 'Climate and climate change':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         elif gtr_research_subject['text'] == 'Atmospheric phys. & chemistry':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/b9c56939-c624-467d-b196-e56a5b660334'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/b9c56939-c624-467d-b196-e56a5b660334'
         elif gtr_research_subject['text'] == 'Climate & Climate Change':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a'
         elif gtr_research_subject['text'] == 'Microbial sciences':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5'
         elif gtr_research_subject['text'] == 'Tools, technologies & methods':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c'
         elif gtr_research_subject['text'] == 'Agri-environmental science':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e'
         elif gtr_research_subject['text'] == 'Archaeology':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/bf703f22-9775-460d-86bd-149aaef1acde'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/bf703f22-9775-460d-86bd-149aaef1acde'
         elif gtr_research_subject['text'] == 'Plant & crop science':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/f1c35c74-0b10-46de-9c06-efeda92d383a'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/f1c35c74-0b10-46de-9c06-efeda92d383a'
         elif gtr_research_subject['text'] == 'Human Geography':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/fb93d937-c17c-45d0-a9e3-ca5c8a800ca8'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fb93d937-c17c-45d0-a9e3-ca5c8a800ca8'
         elif gtr_research_subject['text'] == 'Info. & commun. Technol.':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/d4313915-2d24-424c-a171-30ee9a6f4bb5'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/d4313915-2d24-424c-a171-30ee9a6f4bb5'
         elif gtr_research_subject['text'] == 'Medical & health interface':
-            return 'https://gcmdservices.gsfc.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6'
         elif gtr_research_subject['text'] == 'Biomolecules & biochemistry':
             return None
         elif gtr_research_subject['text'] == 'Facility Development':
