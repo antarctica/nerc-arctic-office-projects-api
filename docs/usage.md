@@ -289,6 +289,8 @@ followed in full.
 
 #### GRID IDs
 
+As of 2020 - ish [GRID IDs](https://www.grid.ac) are now superseded by [ROR](https://ror.org/)
+
 [GRID IDs](https://www.grid.ac) provide academic organisations and research institutions persistent digital identifiers
 to distinguish themselves from others.
 
@@ -296,8 +298,7 @@ The GRID (Global Research Identifier Database) acts as both an authority (assign
 of other authorities identifiers for the same organisation to provide increased context. They are used in this API to 
 allow additional context and information that may be provided by an organisations GRID record.
 
-GRID IDs are formatted as identifiers only (e.g. `grid.496779.2`). They should not be split or otherwise modified. When 
-displayed, GRID IDs should be shown as a linked identifier by adding `https://www.grid.ac/institutes/` as a prefix.
+GRID IDs are formatted as identifiers only (e.g. `grid.496779.2`). They should not be split or otherwise modified. When displayed, GRID IDs should be shown as a linked identifier by adding `https://www.grid.ac/institutes/` as a prefix.
 
 #### Digital Object Identifiers (DOIs)
 
