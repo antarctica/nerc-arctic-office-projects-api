@@ -54,5 +54,5 @@ text-unidecode==1.2
 ulid-py==0.0.9
 unittest-xml-reporting==2.5.1
 urllib3==1.25.9
-waitress==2.1.1
+waitress==2.1.2
 Werkzeug==0.15.6
