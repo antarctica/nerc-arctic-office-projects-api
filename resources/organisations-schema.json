@@ -10,13 +10,17 @@
         "type": "object",
         "required": [
           "name",
-          "grid-identifier"
+          "ror-identifier"
         ],
         "properties": {
           "name": {
             "type": "string"
           },
           "grid-identifier": {
+            "type": "string",
+            "format": "uri"
+          },
+          "ror-identifier": {
             "type": "string",
             "format": "uri"
           },

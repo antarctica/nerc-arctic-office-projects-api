@@ -677,6 +677,7 @@ class Organisation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
     grid_identifier = db.Column(db.Text(), nullable=True)
+    ror_identifier = db.Column(db.Text(), nullable=True)
     name = db.Column(db.Text(), nullable=False)
     acronym = db.Column(db.Text(), nullable=True)
     website = db.Column(db.Text(), nullable=True)

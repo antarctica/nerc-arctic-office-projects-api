@@ -3,296 +3,355 @@
     {
       "name": "University of Leeds",
       "grid-identifier": "https://www.grid.ac/institutes/grid.9909.9",
+      "ror-identifier": "https://api.ror.org/organizations?query=024mrxd33",
       "website": "https://www.leeds.ac.uk"
     },
     {
       "name": "University of Sheffield",
       "grid-identifier": "https://www.grid.ac/institutes/grid.11835.3e",
+      "ror-identifier": "https://api.ror.org/organizations?query=05krs5044",
       "website": "https://www.sheffield.ac.uk"
     },
     {
       "name": "Scottish Association For Marine Science",
       "grid-identifier": "https://www.grid.ac/institutes/grid.410415.5",
+      "ror-identifier": "https://api.ror.org/organizations?query=04ke6ht85",
       "website": "https://www.sams.ac.uk"
     },
     {
       "name": "NERC British Antarctic Survey",
       "grid-identifier": "https://www.grid.ac/institutes/grid.478592.5",
+      "ror-identifier": "https://api.ror.org/organizations?query=01rhff309",
       "website": "https://www.bas.ac.uk"
     },
     {
       "name": "University of Ulster",
       "grid-identifier": "https://www.grid.ac/institutes/grid.12641.30",
+      "ror-identifier": "https://api.ror.org/organizations?query=01yp9g959",
       "website": "https://www.ulster.ac.uk"
     },
     {
       "name": "University of Edinburgh",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4305.2",
+      "ror-identifier": "https://api.ror.org/organizations?query=01nrxwf90",
       "website": "https://www.ed.ac.uk"
     },
     {
       "name": "University of Southampton",
       "grid-identifier": "https://www.grid.ac/institutes/grid.5491.9",
+      "ror-identifier": "https://api.ror.org/organizations?query=01ryk1543",
       "website": "https://www.southampton.ac.uk"
     },
     {
       "name": "University College London",
       "grid-identifier": "https://www.grid.ac/institutes/grid.83440.3b",
+      "ror-identifier": "https://api.ror.org/organizations?query=02jx3x895",
       "website": "https://www.ucl.ac.uk"
     },
     {
       "name": "University of Oxford",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4991.5",
+      "ror-identifier": "https://api.ror.org/organizations?query=052gg0110",
       "website": "https://www.ox.ac.uk"
     },
     {
       "name": "Imperial College London",
       "grid-identifier": "https://www.grid.ac/institutes/grid.7445.2",
+      "ror-identifier": "https://api.ror.org/organizations?query=041kmwe10",
       "website": "https://www.imperial.ac.uk"
     },
     {
       "name": "Durham University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8250.f",
+      "ror-identifier": "https://api.ror.org/organizations?query=01v29qb04",
       "website": "https://www.dur.ac.uk"
     },
     {
       "name": "National Oceanography Centre",
       "grid-identifier": "https://www.grid.ac/institutes/grid.418022.d",
+      "ror-identifier": "https://api.ror.org/organizations?query=00874hx02",
       "website": "https://www.noc.ac.uk"
     },
     {
       "name": "NERC Centre for Ecology and Hydrology",
       "grid-identifier": "https://www.grid.ac/institutes/grid.494924.6",
+      "ror-identifier": "https://api.ror.org/organizations?query=00pggkr55",
       "website": "https://www.ceh.ac.uk"
     },
     {
       "name": "University of Manchester",
       "grid-identifier": "https://www.grid.ac/institutes/grid.5379.8",
+      "ror-identifier": "https://api.ror.org/organizations?query=027m9bs27",
       "website": "https://www.manchester.ac.uk"
     },
     {
       "name": "Royal Holloway, University of London",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4970.a",
+      "ror-identifier": "https://api.ror.org/organizations?query=04g2vpn86",
       "website": "https://www.royalholloway.ac.uk"
     },
     {
       "name": "NERC British Geological Survey",
       "grid-identifier": "https://www.grid.ac/institutes/grid.474329.f",
+      "ror-identifier": "https://api.ror.org/organizations?query=04a7gbp98",
       "website": "https://www.bgs.ac.uk"
     },
     {
       "name": "University of York",
       "grid-identifier": "https://www.grid.ac/institutes/grid.5685.e",
+      "ror-identifier": "https://api.ror.org/organizations?query=04m01e293",
       "website": "https://www.york.ac.uk"
     },
     {
       "name": "University of East Anglia",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8273.e",
+      "ror-identifier": "https://api.ror.org/organizations?query=026k5mg93",
       "website": "https://www.uea.ac.uk"
     },
     {
       "name": "University of the Highlands and Islands",
       "grid-identifier": "https://www.grid.ac/institutes/grid.23378.3d",
+      "ror-identifier": "https://api.ror.org/organizations?query=02s08xt61",
       "website": "https://www.uhi.ac.uk"
     },
     {
       "name": "University of Dundee",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8241.f",
+      "ror-identifier": "https://api.ror.org/organizations?query=03h2bxq36",
       "website": "https://www.dundee.ac.uk"
     },
     {
       "name": "University of Nottingham",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4563.4",
+      "ror-identifier": "https://api.ror.org/organizations?query=01ee9ar58",
       "website": "https://www.nottingham.ac.uk"
     },
     {
       "name": "University of Portsmouth",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4701.2",
+      "ror-identifier": "https://api.ror.org/organizations?query=03ykbk197",
       "website": "https://www.port.ac.uk"
     },
     {
       "name": "University of Exeter",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8391.3",
+      "ror-identifier": "https://api.ror.org/organizations?query=03yghzc09",
       "website": "https://www.exeter.ac.uk"
     },
     {
       "name": "University of Sussex",
       "grid-identifier": "https://www.grid.ac/institutes/grid.12082.39",
+      "ror-identifier": "https://api.ror.org/organizations?query=00ayhx656",
       "website": "https://www.sussex.ac.uk"
     },
     {
       "name": "Leibniz Institute of Freshwater Ecology",
       "grid-identifier": "https://www.grid.ac/institutes/grid.419247.d",
+      "ror-identifier": "https://api.ror.org/organizations?query=01nftxb06",
       "website": "https://www.igb-berlin.de/en"
     },
     {
       "name": "University of Stirling",
       "grid-identifier": "https://www.grid.ac/institutes/grid.11918.30",
+      "ror-identifier": "https://api.ror.org/organizations?query=045wgfr59",
       "website": "https://www.stir.ac.uk"
     },
     {
       "name": "Loughborough University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.6571.5",
+      "ror-identifier": "https://api.ror.org/organizations?query=04vg4w365",
       "website": "https://www.lboro.ac.uk"
     },
     {
       "name": "University of Cambridge",
       "grid-identifier": "https://www.grid.ac/institutes/grid.5335.0",
+      "ror-identifier": "https://api.ror.org/organizations?query=013meh722",
       "website": "https://www.cam.ac.uk"
     },
     {
       "name": "University of Huddersfield",
       "grid-identifier": "https://www.grid.ac/institutes/grid.15751.37",
+      "ror-identifier": "https://api.ror.org/organizations?query=05t1h8f27",
       "website": "https://www.hud.ac.uk"
     },
     {
       "name": "University of Reading",
       "grid-identifier": "https://www.grid.ac/institutes/grid.9435.b",
+      "ror-identifier": "https://api.ror.org/organizations?query=05v62cm79",
       "website": "https://www.reading.ac.uk"
     },
     {
       "name": "University of Aberdeen",
       "grid-identifier": "https://www.grid.ac/institutes/grid.7107.1",
+      "ror-identifier": "https://api.ror.org/organizations?query=016476m91",
       "website": "https://www.abdn.ac.uk"
     },
     {
       "name": "Bangor University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.7362.0",
+      "ror-identifier": "https://api.ror.org/organizations?query=006jb1a24",
       "website": "https://www.bangor.ac.uk"
     },
     {
       "name": "Marine Biological Association",
       "grid-identifier": "https://www.grid.ac/institutes/grid.14335.30",
+      "ror-identifier": "https://api.ror.org/organizations?query=046dg4z72",
       "website": "https://www.mba.ac.uk"
     },
     {
       "name": "University of St Andrews",
       "grid-identifier": "https://www.grid.ac/institutes/grid.11914.3c",
+      "ror-identifier": "https://api.ror.org/organizations?query=02wn5qz54",
       "website": "https://www.st-andrews.ac.uk"
     },
     {
       "name": "Northumbria University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.42629.3b",
+      "ror-identifier": "https://api.ror.org/organizations?query=049e6bc10",
       "website": "https://www.northumbria.ac.uk"
     },
     {
       "name": "Plymouth Marine Laboratory",
       "grid-identifier": "https://www.grid.ac/institutes/grid.22319.3b",
+      "ror-identifier": "https://api.ror.org/organizations?query=05av9mn02",
       "website": "https://www.pml.ac.uk"
     },
     {
       "name": "Newcastle University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.1006.7",
+      "ror-identifier": "https://api.ror.org/organizations?query=01kj2bm70",
       "website": "https://www.ncl.ac.uk"
     },
     {
       "name": "Aarhus University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.7048.b",
+      "ror-identifier": "https://api.ror.org/organizations?query=01aj84f44",
       "website": "https://international.au.dk"
     },
     {
       "name": "Lancaster University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.9835.7",
+      "ror-identifier": "https://api.ror.org/organizations?query=04f2nsd36",
       "website": "https://www.lancaster.ac.uk"
     },
     {
       "name": "University of Strathclyde",
       "grid-identifier": "https://www.grid.ac/institutes/grid.11984.35",
+      "ror-identifier": "https://api.ror.org/organizations?query=00n3w3b69",
       "website": "https://www.strath.ac.uk"
     },
     {
       "name": "Free University of Brussels",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8767.e",
+      "ror-identifier": "https://api.ror.org/organizations?query=02vpfbn76",
       "website": "https://www.vub.be/en/"
     },
     {
       "name": "Warwick University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.7372.1",
+      "ror-identifier": "https://api.ror.org/organizations?query=01a77tt86",
       "website": "https://warwick.ac.uk"
     },
     {
       "name": "Bristol University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.5337.2",
+      "ror-identifier": "https://api.ror.org/organizations?query=0524sp257",
       "website": "http://bristol.ac.uk"
     },
     {
       "name": "Aberystwyth University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8186.7",
+      "ror-identifier": "https://api.ror.org/organizations?query=015m2p889",
       "website": "https://www.aber.ac.uk/en/"
     },
     {
       "name": "University of Hull",
       "grid-identifier": "https://www.grid.ac/institutes/grid.9481.4",
+      "ror-identifier": "https://api.ror.org/organizations?query=04nkhwh30",
       "website": "https://www.hull.ac.uk"
     },
     {
       "name": "Essex University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8356.8",
+      "ror-identifier": "https://api.ror.org/organizations?query=02nkf1q06",
       "website": "https://www.essex.ac.uk"
     },
     {
       "name": "Queen Mary, University of London",
       "grid-identifier": "https://www.grid.ac/institutes/grid.4868.2",
+      "ror-identifier": "https://api.ror.org/organizations?query=026zzn846",
       "website": "https://www.qmul.ac.uk"
     },
     {
       "name": "Leicester University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.9918.9",
+      "ror-identifier": "https://api.ror.org/organizations?query=04h699437",
       "website": "https://le.ac.uk"
     },
     {
       "name": "Open University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.10837.3d",
+      "ror-identifier": "https://api.ror.org/organizations?query=02rv3w387",
       "website": "https://www.open.ac.uk"
     },
     {
       "name": "Scottish Universities Environmental Research Centre",
       "grid-identifier": "https://www.grid.ac/institutes/grid.224137.1",
+      "ror-identifier": "https://api.ror.org/organizations?query=05jfq2w07",
       "website": "https://www.gla.ac.uk/research/az/suerc/"
     },
     {
       "name": "Birmingham University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.6572.6",
+      "ror-identifier": "https://api.ror.org/organizations?query=03angcq70",
       "website": "https://www.birmingham.ac.uk/index.aspx"
     },
     {
       "name": "The Natural History Museum",
       "grid-identifier": "https://www.grid.ac/institutes/grid.35937.3b",
+      "ror-identifier": "https://api.ror.org/organizations?query=039zvsn29",
       "website": "https://www.nhm.ac.uk"
     },
     {
       "name": "Plymouth University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.11201.33",
+      "ror-identifier": "https://api.ror.org/organizations?query=008n7pv89",
       "website": "https://www.plymouth.ac.uk"
     },
     {
       "name": "Glasgow University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.8756.c",
+      "ror-identifier": "https://api.ror.org/organizations?query=00vtgdb53",
       "website": "https://www.gla.ac.uk"
     },
     {
       "name": "AHRC",
       "grid-identifier": "https://www.grid.ac/institutes/grid.426413.6",
+      "ror-identifier": "https://api.ror.org/organizations?query=0505m1554",
       "website": "https://ahrc.ukri.org"
     },
     {
       "name": "EPSRC",
       "grid-identifier": "https://www.grid.ac/institutes/grid.421091.f",
+      "ror-identifier": "https://api.ror.org/organizations?query=0439y7842",
       "website": "https://epsrc.ukri.org"
     },
     {
       "name": "ESRC",
       "grid-identifier": "https://www.grid.ac/institutes/grid.434257.3",
+      "ror-identifier": "https://api.ror.org/organizations?query=03n0ht308",
       "website": "https://esrc.ukri.org"
     },
     {
       "name": "Innovate Uk",
       "grid-identifier": "https://www.grid.ac/institutes/grid.423443.6",
+      "ror-identifier": "https://api.ror.org/organizations?query=05ar5fy68",
       "website": "https://www.gov.uk/government/organisations/innovate-uk"
     },
     {
       "name": "Cranfield University",
       "grid-identifier": "https://www.grid.ac/institutes/grid.12026.37",
+      "ror-identifier": "https://api.ror.org/organizations?query=05cncd958",
       "website": "https://www.cranfield.ac.uk"
     }
   ]

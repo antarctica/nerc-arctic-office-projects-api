@@ -145,14 +145,14 @@ def import_organisations_from_file_interactively(organisations_file_path: str):
 
             for organisation in organisations_data['organisations']:
                 if db.session.query(exists().where(
-                    Organisation.grid_identifier == organisation['grid-identifier']
+                    Organisation.ror_identifier == organisation['ror-identifier']
                 )).scalar():
                     skipped_organisations += 1
                     continue
 
                 organisation_resource = Organisation(
                     neutral_id=generate_neutral_id(),
-                    grid_identifier=organisation['grid-identifier'],
+                    ror_identifier=organisation['ror-identifier'],
                     name=organisation['name']
                 )
                 if 'acronym' in organisation and organisation['acronym'] is not None:

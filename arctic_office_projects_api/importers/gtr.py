@@ -120,6 +120,11 @@ class GatewayToResearchResource:
         :rtype dict
         :returns links in a GTR resource indexed by their 'rel' property
         """
+
+        # from pprint import pprint
+
+        # pprint(self.resource)
+
         if 'links' not in self.resource:
             raise KeyError("Links element not in GTR resource")
         if 'link' not in self.resource['links']:
@@ -168,6 +173,177 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         self.name = self.resource['name']
 
         self.grid_id = self._map_to_grid_id()
+
+        self.ror_id = self._map_to_ror()
+
+        print(self.grid_id)
+
+
+    def _ror_dict(resource_uri) -> str:
+
+        ror_dict = {
+            # Natural Environment Research Council
+            "https://gtr.ukri.org:443/gtr/api/organisations/8A03ED41-E67D-4F4A-B5DD-AAFB272B6471": "https://api.ror.org/organizations?query=02b5d8509",
+            # University of Leeds
+            "https://gtr.ukri.org:443/gtr/api/organisations/83D87776-5958-42AE-889D-B8AECF16B468": "https://api.ror.org/organizations?query=024mrxd33",
+            # University of Sheffield
+            "https://gtr.ukri.org:443/gtr/api/organisations/03D8AFBB-3EA5-4885-B036-BD4F9F4F9849": "https://api.ror.org/organizations?query=05krs5044",
+            # Scottish Association For Marine Science
+            "https://gtr.ukri.org:443/gtr/api/organisations/1ED25A21-FD91-4EC2-A06F-724F9F2CDC3D": "https://api.ror.org/organizations?query=04ke6ht85",
+            # NERC British Antarctic Survey
+            "https://gtr.ukri.org:443/gtr/api/organisations/21CFC584-0BCD-450C-B2C1-EFF574194DBF": "https://api.ror.org/organizations?query=01rhff309",
+            # University of Ulster
+            "https://gtr.ukri.org:443/gtr/api/organisations/245EB81A-808F-4697-BAED-263C20266B74": "https://api.ror.org/organizations?query=01yp9g959",
+            # University of Edinburgh
+            "https://gtr.ukri.org:443/gtr/api/organisations/2DB7ED73-8E89-457A-A395-FAC12F929C1A": "https://api.ror.org/organizations?query=01nrxwf90",
+            # University of Southampton
+            "https://gtr.ukri.org:443/gtr/api/organisations/30A429E3-83B7-4E41-99C0-14A144F07DFE": "https://api.ror.org/organizations?query=01ryk1543",
+            # University College London
+            "https://gtr.ukri.org:443/gtr/api/organisations/3A5E126D-C175-4730-9B7B-E6D8CF447F83": "https://api.ror.org/organizations?query=02jx3x895",
+            # University of Oxford
+            "https://gtr.ukri.org:443/gtr/api/organisations/3EAE04CA-9D62-4483-B9C4-F91AD9F4C5A9": "https://api.ror.org/organizations?query=052gg0110",
+            # Imperial College London
+            "https://gtr.ukri.org:443/gtr/api/organisations/46387D84-F71E-4B7D-8C7D-9C288F113510": "https://api.ror.org/organizations?query=041kmwe10",
+            # Durham University
+            "https://gtr.ukri.org:443/gtr/api/organisations/46B41008-0EB4-4E28-BBFB-E98366999EC5": "https://api.ror.org/organizations?query=01v29qb04",
+            # National Oceanography Centre 1
+            "https://gtr.ukri.org:443/gtr/api/organisations/4DB630C7-7E13-4610-A1C3-29601903CEE3": "https://api.ror.org/organizations?query=00874hx02",
+            # National Oceanography Centre 2
+            "https://gtr.ukri.org:443/gtr/api/organisations/333FAC7F-030F-4A9C-87FD-78DB66107E58": "https://api.ror.org/organizations?query=00874hx02",
+            # NERC Centre for Ecology and Hydrology
+            "https://gtr.ukri.org:443/gtr/api/organisations/4FC881BE-799E-459C-A287-2A68170426DA": "https://api.ror.org/organizations?query=00pggkr55",
+            # UK Ctr for Ecology & Hydrology fr 011219
+            # "https://gtr.ukri.org:443/gtr/api/organisations/2431A6E2-13D5-40AB-A58A-AC75E6A3654E": "",
+            # University of Manchester
+            "https://gtr.ukri.org:443/gtr/api/organisations/68D0E3C9-9246-4CFC-B5E9-48584CF82993": "https://api.ror.org/organizations?query=027m9bs27",
+            # Royal Holloway, University of London
+            "https://gtr.ukri.org:443/gtr/api/organisations/7A0397DD-E0C6-4EA3-8031-B841D2503C4D": "https://api.ror.org/organizations?query=04g2vpn86",
+            # NERC British Geological Survey
+            "https://gtr.ukri.org:443/gtr/api/organisations/7ADE0AB2-1050-4241-987D-F3B1C3322E05": "https://api.ror.org/organizations?query=04a7gbp98",
+            # University of York
+            "https://gtr.ukri.org:443/gtr/api/organisations/8319F78A-DCBD-49F6-BE00-78E1CD75CDA9": "https://api.ror.org/organizations?query=04m01e293",
+            # University of East Anglia
+            "https://gtr.ukri.org:443/gtr/api/organisations/88C5F7F9-8DCC-41C9-BC4F-F37DA01075C7": "https://api.ror.org/organizations?query=026k5mg93",
+            # University of the Highlands and Islands
+            "https://gtr.ukri.org:443/gtr/api/organisations/8BA3C264-769F-487E-B61A-2D4CB6A105B6": "https://api.ror.org/organizations?query=02s08xt61",
+            # University of Dundee
+            "https://gtr.ukri.org:443/gtr/api/organisations/90051600-6EF2-4093-BA8C-2B4B6F550895": "https://api.ror.org/organizations?query=03h2bxq36",
+            # University of Nottingham
+            "https://gtr.ukri.org:443/gtr/api/organisations/936D002F-A8D1-4A93-AE5D-825ED0903D8D": "https://api.ror.org/organizations?query=01ee9ar58",
+            # University of Portsmouth
+            "https://gtr.ukri.org:443/gtr/api/organisations/955C55E8-783E-4842-BB2C-2D275A3CAF82": "https://api.ror.org/organizations?query=03ykbk197",
+            # University of Exeter
+            "https://gtr.ukri.org:443/gtr/api/organisations/961756BF-E31F-4A13-836F-0A09BA02385C": "https://api.ror.org/organizations?query=03yghzc09",
+            # University of Sussex
+            "https://gtr.ukri.org:443/gtr/api/organisations/A8967420-49D3-4509-9912-25FB3EC75B74": "https://api.ror.org/organizations?query=00ayhx656",
+            # Leibniz Institute of Freshwater Ecology
+            "https://gtr.ukri.org:443/gtr/api/organisations/AB007A2D-2086-4B7A-8539-DBD5836A8503": "https://api.ror.org/organizations?query=01nftxb06",
+            # University of Stirling
+            "https://gtr.ukri.org:443/gtr/api/organisations/C7510606-A36F-4725-A89B-9D592374972A": "https://api.ror.org/organizations?query=045wgfr59",
+            # Loughborough University
+            "https://gtr.ukri.org:443/gtr/api/organisations/CAA9A40D-0226-4A4F-AC0D-D8299E30A1EF": "https://api.ror.org/organizations?query=04vg4w365",
+            # University of Cambridge
+            "https://gtr.ukri.org:443/gtr/api/organisations/D1774113-D5D2-4B7C-A412-66A90FE4B96F": "https://api.ror.org/organizations?query=013meh722",
+            # University of Huddersfield
+            "https://gtr.ukri.org:443/gtr/api/organisations/DC934AED-9432-4385-AEAF-006EA2369001": "https://api.ror.org/organizations?query=05t1h8f27",
+            # University of Reading
+            "https://gtr.ukri.org:443/gtr/api/organisations/E89C3602-0FB4-4044-A918-58966B8A10B2":
+            "https://api.ror.org/organizations?query=05v62cm79",
+            # University of Aberdeen
+            "https://gtr.ukri.org:443/gtr/api/organisations/F7E13617-2678-475B-99E4-31479C92038D": "https://api.ror.org/organizations?query=016476m91",
+            # Bangor University
+            "https://gtr.ukri.org:443/gtr/api/organisations/F9F1D136-12E3-4BE4-9668-0C9BC4A7C1BF": "https://api.ror.org/organizations?query=006jb1a24",
+            # Marine Biological Association
+            "https://gtr.ukri.org:443/gtr/api/organisations/309F361A-A8CC-438D-AB70-93C74E1E91C3": "https://api.ror.org/organizations?query=046dg4z72",
+            # University of St Andrews
+            "https://gtr.ukri.org:443/gtr/api/organisations/C0E4FAD2-3C8B-410A-B6DF-3B9B9E433060": "https://api.ror.org/organizations?query=02wn5qz54",
+            # Northumbria University
+            "https://gtr.ukri.org:443/gtr/api/organisations/EF390CF0-ECD3-47D8-B9A8-7602AF319BEE": "https://api.ror.org/organizations?query=049e6bc10",
+            # Plymouth Marine Laboratory
+            "https://gtr.ukri.org:443/gtr/api/organisations/EEF9EA95-341D-48C2-8A68-B838D35497C8": "https://www.grid.ac/institutes/grid.22319.3b",
+            # Newcastle University
+            "https://gtr.ukri.org:443/gtr/api/organisations/5E2B04DD-4A03-45ED-9892-61C5CCB8AC68": "https://api.ror.org/organizations?query=01kj2bm70",
+            # Aarhus University
+            "https://gtr.ukri.org:443/gtr/api/organisations/CE43EBFA-3FC9-44BC-B6FF-001F11664C46": "https://api.ror.org/organizations?query=01aj84f44",
+            # Lancaster University 1
+            "https://gtr.ukri.org:443/gtr/api/organisations/8A66BFC9-B9A5-48C6-B46C-761D1C13C5DC": "https://api.ror.org/organizations?query=04f2nsd36",
+            # Lancaster University 2
+            "https://gtr.ukri.org:443/gtr/api/organisations/44160F04-5CBF-4E8E-A6C6-C0EF61A5865C": "https://api.ror.org/organizations?query=04f2nsd36",
+            # University of Strathclyde
+            "https://gtr.ukri.org:443/gtr/api/organisations/5BB4F8BF-B4E0-4EAF-9AF5-885E19D64850": "https://api.ror.org/organizations?query=00n3w3b69",
+            # Free University of Brussels
+            "https://gtr.ukri.org:443/gtr/api/organisations/773AC409-21D1-4CA0-87AA-1769A45D718E": "https://api.ror.org/organizations?query=02vpfbn76",
+            # Warwick University
+            "https://gtr.ukri.org:443/gtr/api/organisations/B6FB652A-60C3-48DD-9A33-075D1F759B48": "https://api.ror.org/organizations?query=01a77tt86",
+            # Bristol University
+            "https://gtr.ukri.org:443/gtr/api/organisations/4A348A76-B2D0-4DDD-804A-CE735A6D3798": "https://api.ror.org/organizations?query=0524sp257",
+            # Aberystwyth University
+            "https://gtr.ukri.org:443/gtr/api/organisations/E4757A6E-7326-472B-9979-B47D77A65446": "https://api.ror.org/organizations?query=015m2p889",
+            # University of Hull
+            "https://gtr.ukri.org:443/gtr/api/organisations/8A0FC07A-04CD-4F7A-9095-1D2E6C1D918F": "https://api.ror.org/organizations?query=04nkhwh30",
+            # Essex University
+            "https://gtr.ukri.org:443/gtr/api/organisations/ED6A6B32-663C-4A62-A33B-2C6A68E2E102": "https://api.ror.org/organizations?query=02nkf1q06",
+            # Queen Mary, University of London
+            "https://gtr.ukri.org:443/gtr/api/organisations/D5337A10-AC8A-402A-8164-C5F9CC6B0140": "https://api.ror.org/organizations?query=026zzn846",
+            # Leicester University - 1
+            "https://gtr.ukri.org:443/gtr/api/organisations/AE0A6F70-C175-4550-B08F-74C8790007BB": "https://api.ror.org/organizations?query=04h699437",
+            # Leicester University - 2
+            "https://gtr.ukri.org:443/gtr/api/organisations/C842A34F-18F7-454D-A259-FED802368496": "https://api.ror.org/organizations?query=04h699437",
+            # Open University
+            "https://gtr.ukri.org:443/gtr/api/organisations/89E6D9CB-DAF8-40A2-A9EF-B330A5A7FC24": "https://api.ror.org/organizations?query=02rv3w387",
+            # Scottish Universities Environmental Research Centre
+            "https://gtr.ukri.org:443/gtr/api/organisations/BF1F76BF-B87F-4FE0-B1DB-4650F5E99448": "https://api.ror.org/organizations?query=05jfq2w07",
+            # Birmingham University 1
+            "https://gtr.ukri.org:443/gtr/api/organisations/A022BD3A-2A7B-4E64-8877-A2E381C4CCB5": "https://api.ror.org/organizations?query=03angcq70",
+            # Birmingham University 2
+            "https://gtr.ukri.org:443/gtr/api/organisations/818CD6C9-61EE-41F2-9F37-0C7A8F43E25D": "https://api.ror.org/organizations?query=03angcq70",
+            # The Natural History Museum
+            "https://gtr.ukri.org:443/gtr/api/organisations/B2F6103D-47D2-486A-8F7C-C62362BAACD9": "https://api.ror.org/organizations?query=039zvsn29",
+            # Plymouth University
+            "https://gtr.ukri.org:443/gtr/api/organisations/7801F008-7C77-45E7-90E9-4345B47D138E": "https://api.ror.org/organizations?query=008n7pv89",
+            # Glasgow University
+            "https://gtr.ukri.org:443/gtr/api/organisations/AE58F21F-3622-4382-97BB-1359BD183E9F": "https://api.ror.org/organizations?query=00vtgdb53",
+            # AHRC
+            "https://gtr.ukri.org:443/gtr/api/organisations/1291772D-DFCE-493A-AEE7-24F7EEAFE0E9": "https://api.ror.org/organizations?query=0505m1554",
+            # EPSRC
+            "https://gtr.ukri.org:443/gtr/api/organisations/798CB33D-C79E-4578-83F2-72606407192C": "https://api.ror.org/organizations?query=0439y7842",
+            # ESRC
+            "https://gtr.ukri.org:443/gtr/api/organisations/924BE15C-91F2-4AAD-941A-3F338324B6AE": "https://api.ror.org/organizations?query=03n0ht308",
+            # BBSRC
+            "https://gtr.ukri.org:443/gtr/api/organisations/2512EF1C-401B-4222-9869-A770D4C5FAC7": "",
+             # Innovate Uk 1
+            "https://gtr.ukri.org:443/gtr/api/organisations/1DA78802-0659-4398-B40B-7FA41B56BBF3": "https://api.ror.org/organizations?query=05ar5fy68",
+             # Innovate Uk 2
+            "https://gtr.ukri.org:443/gtr/api/organisations/E18E2F0F-AC7D-4E02-9559-669F7C8FEC74": "https://api.ror.org/organizations?query=05ar5fy68",
+             # Innovate Uk 3
+            "https://gtr.ukri.org:443/gtr/api/organisations/052C4F5E-74CA-4A1D-B771-82891497D8F5": "https://api.ror.org/organizations?query=05ar5fy68",
+            # Cranfield University
+            "https://gtr.ukri.org:443/gtr/api/organisations/F45A4578-F962-4EFA-9CC1-9F2FF4F760AE": "https://api.ror.org/organizations?query=05cncd958",
+                       
+
+
+        }
+
+        for ror in ror_dict:
+            if resource_uri == ror:
+                return ror
+
+
+    def _map_to_ror(self) -> str:
+
+        _ror_url = GatewayToResearchOrganisation._ror_dict(self.resource_uri)
+
+        if _ror_url == type(str):
+            print(_ror_url)
+            return _ror_url
+
+        raise UnmappedGatewayToResearchOrganisation(meta={
+            'gtr_organisation': {
+                'resource_uri': self.resource_uri
+            }
+        })
+    
+
 
     def _map_to_grid_id(self) -> str:
         """
@@ -367,6 +543,9 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # Cranfield University
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F45A4578-F962-4EFA-9CC1-9F2FF4F760AE':
             return 'https://www.grid.ac/institutes/grid.12026.37'
+
+
+
         # University of Liverpool
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/A0A585E0-6B0D-4643-A3A6-47943B4CBFEF':
             return 'https://www.grid.ac/institutes/grid.10025.36'
@@ -427,6 +606,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         # Unknown
         elif self.resource_uri == 'https://gtr.ukri.org:443/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537':
             return None
+
         raise UnmappedGatewayToResearchOrganisation(meta={
             'gtr_organisation': {
                 'resource_uri': self.resource_uri
@@ -1076,6 +1256,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
         self.principle_investigators = self._process_people(relation='PI_PER')
         self.co_investigators = self._process_people(relation='COI_PER')
 
+
         if 'status' not in self.resource:
             raise KeyError("Status element not in GTR project")
         self.status = self.resource['status']
@@ -1337,7 +1518,7 @@ class GatewayToResearchGrantImporter:
             publications=gtr_project.publications,
             lead_project=self.lead_project,
             funder=Organisation.query.filter_by(
-                grid_identifier=gtr_project.fund.funder.grid_id).one_or_none()
+                ror_identifier=gtr_project.fund.funder.ror_id).one_or_none()
         )
         db.session.add(grant)
 
@@ -1449,7 +1630,7 @@ class GatewayToResearchGrantImporter:
         """
         for person in gtr_people:
 
-            org_id = db.session.query(Organisation.id).filter(Organisation.grid_identifier == person.employer.grid_id).scalar()
+            org_id = db.session.query(Organisation.id).filter(Organisation.ror_identifier == person.employer.ror_id).scalar()
 
             if not db.session.query(exists().where(and_(Person.first_name == person.first_name, Person.last_name == person.surname, Person.organisation_id == org_id))).scalar():
                 db.session.add(Person(
@@ -1458,7 +1639,7 @@ class GatewayToResearchGrantImporter:
                     last_name=person.surname,
                     orcid_id=person.orcid_id,
                     organisation=Organisation.query.filter_by(
-                        grid_identifier=person.employer.grid_id).one_or_none()
+                        ror_identifier=person.employer.ror_id).one_or_none()
                 ))
             db.session.add(Participant(
                 neutral_id=generate_neutral_id(),
@@ -2143,6 +2324,7 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str, lea
             return True
 
         gtr_project_id = importer.search()
+
         if gtr_project_id is None:
             app.logger.error(f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
                              f"multiple GTR projects found")
