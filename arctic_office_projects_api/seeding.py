@@ -196,6 +196,7 @@ static_resources = {
         '01DB2ECBP3WZDP4PES64XKXJ1A': {
             'id': '01DB2ECBP3WZDP4PES64XKXJ1A',
             'grid_identifier': 'XE-EXAMPLE-grid.5500.1',
+            'ror_identifier': '02b5d8509',
             'name': 'Example Organisation 1',
             'acronym': 'EXORG1',
             'website': 'https://www.example.com',
@@ -204,6 +205,7 @@ static_resources = {
         '01DB2ECBP3VF45F1N4XEBF83FE': {
             'id': '01DB2ECBP3VF45F1N4XEBF83FE',
             'grid_identifier': None,
+            'ror_identifier': None,
             'name': 'Example Organisation 2',
             'acronym': None,
             'website': None,
@@ -212,6 +214,7 @@ static_resources = {
         '01DB2ECBP3DRACYX8PSJBG7A8G': {
             'id': '01DB2ECBP3DRACYX8PSJBG7A8G',
             'grid_identifier': 'XE-EXAMPLE-grid.5500.3',
+            'ror_identifier': '024mrxd33',
             'name': 'Example Organisation 3',
             'acronym': 'EXORG3',
             'website': 'https://www.example.com',
@@ -220,6 +223,7 @@ static_resources = {
         '01DB2ECBP3JRA4T9FGFFBWJBCM': {
             'id': '01DB2ECBP3JRA4T9FGFFBWJBCM',
             'grid_identifier': 'XE-EXAMPLE-grid.5500.4',
+            'ror_identifier': '03n0ht308',
             'name': 'Example Organisation 4',
             'acronym': 'EXORG4',
             'website': 'https://www.example.com',
@@ -228,6 +232,7 @@ static_resources = {
         '01DB2ECBP3A13RJ6QEZFN26ZEP': {
             'id': '01DB2ECBP3A13RJ6QEZFN26ZEP',
             'grid_identifier': 'XE-EXAMPLE-grid.5501.1',
+            'ror_identifier': '02b5d8509',
             'name': 'Example Funder Organisation 1',
             'acronym': 'EXFUNDORG1',
             'website': 'https://www.example.com',
@@ -236,6 +241,7 @@ static_resources = {
         '01DB2ECBP3YQE4394T0Q97TPP2': {
             'id': '01DB2ECBP3YQE4394T0Q97TPP2',
             'grid_identifier': 'XE-EXAMPLE-grid.5501.2',
+            'ror_identifier': '024mrxd33',
             'name': 'Example Funder Organisation 2',
             'acronym': 'EXFUNDORG2',
             'website': 'https://www.example.com',
@@ -899,6 +905,8 @@ def seed_predictable_test_resources():
                 db.session.add(organisation_resource)
                 if organisation['grid_identifier'] is not None:
                     organisation_resource.grid_identifier = organisation['grid_identifier']
+                if organisation['ror_identifier'] is not None:
+                    organisation_resource.ror_identifier = organisation['ror_identifier']
                 if organisation['acronym'] is not None:
                     organisation_resource.acronym = organisation['acronym']
                 if organisation['website'] is not None:
@@ -1066,7 +1074,7 @@ def seed_random_test_resources(count: int = 100):
     """
     try:
         # some funders are not random and don't need to be made for each test resource
-        funders = get_common_funders()
+        funders = get_common_funders_ror()
 
         for i in range(0, count):
             # Project
@@ -1160,7 +1168,7 @@ def seed_random_test_resources(count: int = 100):
         raise e
 
 
-def get_common_funders() -> Dict[str, Organisation]:
+def get_common_funders_grid() -> Dict[str, Organisation]:
     """
     Get a series of common funder (Organisations) resources (UKRI research councils and the EU)
 
@@ -1176,6 +1184,25 @@ def get_common_funders() -> Dict[str, Organisation]:
         'NERC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.8682.4').one(),
         'STFC': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.14467.30').one(),
         'EU': Organisation.query.filter_by(grid_identifier='https://www.grid.ac/institutes/grid.453396.e').one()
+    }
+
+
+def get_common_funders_ror() -> Dict[str, Organisation]:
+    """
+    Get a series of common funder (Organisations) resources (UKRI research councils and the EU)
+
+    :rtype dict
+    :return: Dictionary of common funder resources indexed by acronym
+    """
+    return {
+        'AHRC': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=0505m1554').one(),
+        'BBSRC': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=00cwqg982').one(),
+        'ESRC': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=03n0ht308').one(),
+        'EPSRC': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=0439y7842').one(),
+        'MRC': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=03x94j517').one(),
+        'NERC': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=02b5d8509').one(),
+        'STFC': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=057g20z61').one(),
+        'EU': Organisation.query.filter_by(ror_identifier='https://api.ror.org/organizations?query=019w4f821').one()
     }
 
 
@@ -1241,6 +1268,7 @@ def _get_funder(
         funder_organisation = Organisation(
             neutral_id=generate_neutral_id(),
             grid_identifier=faker.grid_id(),
+            ror_identifier=faker.ror_id(),
             name=faker.company(),
             acronym=faker.acronym(),
             website=faker.uri(),
@@ -1305,6 +1333,7 @@ def _get_investigator_organisation() -> Organisation:
     principle_investigator_organisation = Organisation(
         neutral_id=generate_neutral_id(),
         grid_identifier=faker.grid_id(),
+        ror_identifier=faker.ror_id(),
         name=faker.company(),
         acronym=faker.acronym(),
         website=faker.uri(),

@@ -3817,11 +3817,11 @@ paths:
                             type: string
                             title: Acronym
                             description: Organisation acronym
-                          grid-identifier:
+                          ror-identifier:
                             readOnly: true
                             type: string
-                            title: GRID identifier
-                            description: An organisations GRID identifier
+                            title: ROR identifier
+                            description: An organisations ROR identifier
                           website:
                             readOnly: true
                             type: string
@@ -3960,7 +3960,7 @@ paths:
                       attributes:
                         name: Example Organisation 1
                         acronym: EXORG1
-                        grid-identifier: XE-EXAMPLE-grid.5500.1
+                        ror-identifier: 02b5d8509
                         website: https://www.example.com
                         logo-url: https://placeimg.com/256/256/arch
                       relationships:
@@ -5416,11 +5416,11 @@ paths:
                             type: string
                             title: Acronym
                             description: Organisation acronym
-                          grid-identifier:
+                          ror-identifier:
                             readOnly: true
                             type: string
-                            title: GRID identifier
-                            description: An organisations GRID identifier
+                            title: ROR identifier
+                            description: An organisations ROR identifier
                           website:
                             readOnly: true
                             type: string
@@ -5559,7 +5559,7 @@ paths:
                       attributes:
                         name: Example Funder Organisation 1
                         acronym: EXFUNDORG1
-                        grid-identifier: XE-EXAMPLE-grid.5501.1
+                        ror-identifier: 02b5d8509
                         website: https://www.example.com
                         logo-url: https://placeimg.com/256/256/arch
                       relationships:
@@ -6984,11 +6984,11 @@ paths:
                               type: string
                               title: Acronym
                               description: Organisation acronym
-                            grid-identifier:
+                            ror-identifier:
                               readOnly: true
                               type: string
-                              title: GRID identifier
-                              description: An organisations GRID identifier
+                              title: ROR identifier
+                              description: An organisations ROR identifier
                             website:
                               readOnly: true
                               type: string
@@ -7127,7 +7127,7 @@ paths:
                         attributes:
                           name: Example Organisation 1
                           acronym: EXORG1
-                          grid-identifier: XE-EXAMPLE-grid.5500.1
+                          ror-identifier: 02b5d8509
                           website: https://www.example.com
                           logo-url: https://placeimg.com/256/256/arch
                         relationships:
@@ -7266,11 +7266,11 @@ paths:
                             type: string
                             title: Acronym
                             description: Organisation acronym
-                          grid-identifier:
+                          ror-identifier:
                             readOnly: true
                             type: string
-                            title: GRID identifier
-                            description: An organisations GRID identifier
+                            title: ROR identifier
+                            description: An organisations ROR identifier
                           website:
                             readOnly: true
                             type: string
@@ -7409,7 +7409,7 @@ paths:
                       attributes:
                         name: Example Organisation 1
                         acronym: EXORG1
-                        grid-identifier: XE-EXAMPLE-grid.5500.1
+                        ror-identifier: 02b5d8509
                         website: https://www.example.com
                         logo-url: https://placeimg.com/256/256/arch
                       relationships:

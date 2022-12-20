@@ -279,6 +279,7 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": "EXFUNDORG1",
                         "grid-identifier": "XE-EXAMPLE-grid.5501.1",
+                        "ror-identifier": "02b5d8509",
                         "logo-url": "https://placeimg.com/256/256/arch",
                         "name": "Example Funder Organisation 1",
                         "website": "https://www.example.com"
@@ -582,6 +583,7 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": "EXORG1",
                         "grid-identifier": "XE-EXAMPLE-grid.5500.1",
+                        "ror-identifier": "02b5d8509",
                         "logo-url": "https://placeimg.com/256/256/arch",
                         "name": "Example Organisation 1",
                         "website": "https://www.example.com"
@@ -691,6 +693,7 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": None,
                         "grid-identifier": None,
+                        "ror-identifier": None,
                         "logo-url": None,
                         "name": "Example Organisation 2",
                         "website": None
@@ -810,6 +813,7 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": "EXFUNDORG2",
                         "grid-identifier": "XE-EXAMPLE-grid.5501.2",
+                        "ror-identifier": "024mrxd33",
                         "logo-url": "https://placeimg.com/256/256/arch",
                         "name": "Example Funder Organisation 2",
                         "website": "https://www.example.com"
@@ -1104,6 +1108,7 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": "EXORG1",
                         "grid-identifier": "XE-EXAMPLE-grid.5500.1",
+                        "ror-identifier": "02b5d8509",
                         "logo-url": "https://placeimg.com/256/256/arch",
                         "name": "Example Organisation 1",
                         "website": "https://www.example.com"
@@ -1213,6 +1218,7 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": None,
                         "grid-identifier": None,
+                        "ror-identifier": None,
                         "logo-url": None,
                         "name": "Example Organisation 2",
                         "website": None
@@ -1372,6 +1378,7 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": "EXFUNDORG1",
                         "grid-identifier": "XE-EXAMPLE-grid.5501.1",
+                        "ror-identifier": "02b5d8509",
                         "logo-url": "https://placeimg.com/256/256/arch",
                         "name": "Example Funder Organisation 1",
                         "website": "https://www.example.com"
