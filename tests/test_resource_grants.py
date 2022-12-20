@@ -728,7 +728,7 @@ class GrantsResourceTestCase(BaseResourceTestCase):
                     "attributes": {
                         "acronym": "EXFUNDORG1",
                         "grid-identifier": "XE-EXAMPLE-grid.5501.1",
-                        "ror-identifier": "02b5d8509",                        
+                        "ror-identifier": "02b5d8509",
                         "logo-url": "https://placeimg.com/256/256/arch",
                         "name": "Example Funder Organisation 1",
                         "website": "https://www.example.com"

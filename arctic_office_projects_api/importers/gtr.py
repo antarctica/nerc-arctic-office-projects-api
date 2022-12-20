@@ -5,7 +5,6 @@ from typing import Dict, Optional, List
 from urllib.parse import quote as url_encode
 
 from click import echo, style
-from flask import current_app as app
 from psycopg2.extras import DateRange
 from requests import HTTPError
 # noinspection PyPackageRequirements
@@ -145,8 +144,8 @@ class GatewayToResearchResource:
             if link_base_url[1]:
                 link_href = link['href'].replace(
                     "http://internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080",
-                    "https://gtr.ukri.org" 
-                    )
+                    "https://gtr.ukri.org"
+                )
 
             links[link['rel']].append(link_href)
 
@@ -172,7 +171,6 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         self.name = self.resource['name']
 
         self.ror_id = self._map_to_ror()
-
 
     def _ror_dict(resource_uri) -> str:
 
@@ -341,21 +339,20 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
             "https://gtr.ukri.org/gtr/api/organisations/924BE15C-91F2-4AAD-941A-3F338324B6AE": "https://api.ror.org/organizations?query=03n0ht308",
             # BBSRC
             "https://gtr.ukri.org/gtr/api/organisations/2512EF1C-401B-4222-9869-A770D4C5FAC7": "https://api.ror.org/organizations?query=00cwqg982",
-             # Innovate Uk 1
+            # Innovate Uk 1
             "https://gtr.ukri.org/gtr/api/organisations/1DA78802-0659-4398-B40B-7FA41B56BBF3": "https://api.ror.org/organizations?query=05ar5fy68",
-             # Innovate Uk 2
+            # Innovate Uk 2
             "https://gtr.ukri.org/gtr/api/organisations/E18E2F0F-AC7D-4E02-9559-669F7C8FEC74": "https://api.ror.org/organizations?query=05ar5fy68",
-             # Innovate Uk 3
+            # Innovate Uk 3
             "https://gtr.ukri.org/gtr/api/organisations/052C4F5E-74CA-4A1D-B771-82891497D8F5": "https://api.ror.org/organizations?query=05ar5fy68",
             # Unknown
-            "https://gtr.ukri.org/gtr/api/organisations/56F19F82-4654-46D6-891A-EA80CBC02587": None,
-}
+            # "https://gtr.ukri.org/gtr/api/organisations/56F19F82-4654-46D6-891A-EA80CBC02587": None,
+        }
 
         for ror in ror_dict:
             if resource_uri == ror:
                 ror_value = ror_dict.get(ror)
                 return ror_value
-
 
     def _map_to_ror(self) -> str:
         """
@@ -375,7 +372,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
                 'resource_uri': self.resource_uri
             }
         })
-    
+
 
 class GatewayToResearchFunder(GatewayToResearchOrganisation):
     """
@@ -1018,7 +1015,6 @@ class GatewayToResearchProject(GatewayToResearchResource):
         # print (self.fund)
         self.principle_investigators = self._process_people(relation='PI_PER')
         self.co_investigators = self._process_people(relation='COI_PER')
-
 
         if 'status' not in self.resource:
             raise KeyError("Status element not in GTR project")

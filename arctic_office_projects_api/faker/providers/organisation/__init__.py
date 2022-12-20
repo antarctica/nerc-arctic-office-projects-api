@@ -5,6 +5,7 @@ from faker.providers import BaseProvider
 
 localized = False
 
+
 def get_string(letters_count, digits_count):
     letters = ''.join((random.choice(string.ascii_letters) for i in range(letters_count)))
     digits = ''.join((random.choice(string.digits) for i in range(digits_count)))
@@ -38,7 +39,6 @@ class Provider(BaseProvider):
             max=identifier_lengths[identifier_length][1]
         )
         return f"XE-EXAMPLE-grid.5{ identifier }.{ self.generator.random_int(min=0, max=99) }"
-        
 
     def ror_id(self) -> str:
         """
