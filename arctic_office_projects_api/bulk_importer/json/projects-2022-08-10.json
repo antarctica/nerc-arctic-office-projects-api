@@ -3,7 +3,7 @@
         {
             "parent-id": null,
             "id": 1,
-            "lead-project": true,
+            "lead-project": 1,
             "title": "Aerosol-Cloud Coupling And Climate Interactions in the Arctic",
             "grant-reference": "NE/I028858/1",
             "notes": ""
@@ -249,7 +249,7 @@
         {
             "parent-id": null,
             "id": 36,
-            "lead-project": true,
+            "lead-project": 1,
             "title": "Will climate change in the Arctic increase the landslide-tsunami risk to the UK?",
             "grant-reference": "NE/K00008X/1",
             "notes": ""
@@ -341,7 +341,7 @@
         {
             "parent-id": null,
             "id": 49,
-            "lead-project": true,
+            "lead-project": 1,
             "title": "Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE)",
             "grant-reference": "NE/P006302/1",
             "notes": ""
@@ -2801,77 +2801,66 @@
         {
             "parent-id": null,
             "id": 427,
-            "lead-project": 0,
             "grant-reference": "NE/X002608/1",
             "title": "Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat"
         },
         {
             "parent-id": null,
             "id": 428,
-            "lead-project": 0,
             "grant-reference": "NE/X002632/1",
             "title": "Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat"
         },
         {
             "parent-id": null,
             "id": 429,
-            "lead-project": 0,
             "grant-reference": "NE/X004643/1",
             "title": "Empowering our communities to map rough ice and slush for safer sea-ice travel in Inuit Nunangat"
         },
         {
             "parent-id": null,
             "id": 430,
-            "lead-project": 0,
             "grant-reference": "NE/X004201/1",
             "title": "Nunavut Search and Rescue (NSAR) Project: Supporting Inuit Health and Well-Being, Food Security, Economic Development, and Community Resilience"
         },
         {
             "parent-id": null,
             "id": 431,
-            "lead-project": 0,
             "grant-reference": "NE/W006243/1",
             "title": "ASYNC - Resolving asynchronous responses of North Atlantic climate to deglacial changes in ocean circulation"
         },
         {
             "parent-id": null,
             "id": 432,
-            "lead-project": 0,
             "grant-reference": "NE/X002462/1",
             "title": "Carving out Climate Testimony: Inuit Youth, Wellness &amp; Environmental Stewardship"
         },
         {
             "parent-id": null,
             "id": 433,
-            "lead-project": 0,
             "grant-reference": "NE/X004589/1",
             "title": "Renewable Energy Microgrid Integration for Remote, Off-grid Cabins in Nunavut"
         },
         {
             "parent-id": null,
             "id": 434,
-            "lead-project": 0,
             "grant-reference": "NE/X003868/1",
             "title": "Impacts of cryosphere-hydrosphere change on ecosystems and livelihoods in northern Nunatsiavut, Canada (IMAGINE)"
         },
         {
             "parent-id": null,
-            "id": 435,
-            "lead-project": 0,
+            "id": 435,            
             "grant-reference": "NE/X002616/1",
             "title": "Emerging zoonoses in wildlife: understanding the ecology, transmission and impacts of Brucella and Erysipelothrix for conservation and food security"
         },
         {
             "parent-id": null,
-            "id": 436,
-            "lead-project": 0,
+            "id": 436,            
             "grant-reference": "NE/X002578/1",
             "title": "Beavers and Socio-ecological Resilience in Inuit Nunangat (BARIN)"
         },
         {
             "parent-id": null,
-            "id": 437,
-            "lead-project": 0,
+            "id": 437,            
             "grant-reference": "NE/X005658/1",
             "title": "Nuna: Effective mitigation and adaptation to changing ground conditions for resilient coastal futures"
         }

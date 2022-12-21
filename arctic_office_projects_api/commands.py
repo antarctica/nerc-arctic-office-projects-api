@@ -45,7 +45,7 @@ def import_organisations_from_file(file_path):
 @importing_cli_group.command('grant')
 @argument('grant_provider', type=Choice(['gtr']))
 @argument('grant_reference')
-@argument('lead_project', default=False)
+@argument('lead_project', default=0)
 def import_grant_from_provider(grant_provider, grant_reference, lead_project):
     """Import a research grant from a provider"""
     if grant_provider == 'gtr':

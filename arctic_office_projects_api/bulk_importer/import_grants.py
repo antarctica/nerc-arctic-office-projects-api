@@ -27,20 +27,20 @@ def import_grants(file):
     with open(file) as json_file:
         data = json.load(json_file)
 
-        lead_project = False
+        lead_project = "0"
 
         for project in data['data']:
-            # print(project)
             try:
-                lead_project = project['lead-project']
-                print(lead_project)
+                lead_project_bool = project['lead-project']
+                if lead_project_bool == 1:
+                    lead_project = "1"
             except Exception:
-                lead_project = False
+                lead_project = "0"
                 print('No lead-project')
 
             if grant_reference_valid(project['grant-reference']):  # nosec
-                subprocess.run(['flask', 'import', 'grant',
-                                'gtr', project['grant-reference']], lead_project, shell=False)
+                subprocess.run(['flask', 'import', 'grant', 'gtr',
+                                project['grant-reference'], lead_project], shell=False)
 
 
 json_filename = '/usr/src/app/arctic_office_projects_api/bulk_importer/json/projects-2022-08-10.json'
