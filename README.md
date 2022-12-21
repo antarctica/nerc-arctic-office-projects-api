@@ -528,6 +528,11 @@ For example:
 $ flask import grant gtr NE/K011820/1
 ```
 
+* Using the bulk importer - shell into the app container & run:
+```shell
+python arctic_office_projects_api/bulk_importer/import_grants.py
+```
+
 **Note:** It will take a few seconds to import each grant due to the number of GTR API calls needed to collect all 
 relevant information (grant, fund, funder, people, employers, publications, etc.).
 
