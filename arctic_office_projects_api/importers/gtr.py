@@ -206,7 +206,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
             # NERC Centre for Ecology and Hydrology
             "https://gtr.ukri.org/gtr/api/organisations/4FC881BE-799E-459C-A287-2A68170426DA": "https://api.ror.org/organizations?query=00pggkr55",
             # UK Ctr for Ecology & Hydrology fr 011219
-            # "https://gtr.ukri.org/gtr/api/organisations/2431A6E2-13D5-40AB-A58A-AC75E6A3654E": "",
+            "https://gtr.ukri.org/gtr/api/organisations/2431A6E2-13D5-40AB-A58A-AC75E6A3654E": "https://api.ror.org/organizations?query=00pggkr55",
             # University of Manchester
             "https://gtr.ukri.org/gtr/api/organisations/68D0E3C9-9246-4CFC-B5E9-48584CF82993": "https://api.ror.org/organizations?query=027m9bs27",
             # Royal Holloway, University of London
@@ -331,6 +331,10 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
             "https://gtr.ukri.org/gtr/api/organisations/EC23DA53-CA73-4104-A3F6-2A9523484E69": "https://api.ror.org/organizations?query=00hswnk62",
             # Anglia Ruskin University
             "https://gtr.ukri.org/gtr/api/organisations/56F19F82-4654-46D6-891A-EA80CBC02587": "https://api.ror.org/organizations?query=0009t4v78",
+            # Netherlands Inst of Ecology
+            "https://gtr.ukri.org/gtr/api/organisations/223D9435-B6F9-4997-850B-DEEBCECC793B": "https://api.ror.org/organizations?query=01g25jp36",
+            # King's College London
+            "https://gtr.ukri.org/gtr/api/organisations/318B5D98-4CB4-4B10-A876-08FC93071A56": "https://api.ror.org/organizations?query=0220mzb33",
             # AHRC
             "https://gtr.ukri.org/gtr/api/organisations/1291772D-DFCE-493A-AEE7-24F7EEAFE0E9": "https://api.ror.org/organizations?query=0505m1554",
             # EPSRC
@@ -346,7 +350,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
             # Innovate Uk 3
             "https://gtr.ukri.org/gtr/api/organisations/052C4F5E-74CA-4A1D-B771-82891497D8F5": "https://api.ror.org/organizations?query=05ar5fy68",
             # Unknown
-            # "https://gtr.ukri.org/gtr/api/organisations/56F19F82-4654-46D6-891A-EA80CBC02587": None,
+            "https://gtr.ukri.org/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537": "https://api.ror.org/organizations",
         }
 
         for ror in ror_dict:
@@ -1188,18 +1192,18 @@ class GatewayToResearchGrantImporter:
     GTR projects are loosely equivalent to Grants in this project.
     """
 
-    def __init__(self, gtr_grant_reference: str = None, gtr_project_id: str = None, lead_project: bool = None):
+    def __init__(self, gtr_grant_reference: str = None, gtr_project_id: str = None, lead_project: str = None):
         """
         :type gtr_grant_reference: str
         :param gtr_grant_reference: Gateway to Research grant reference (e.g. 'NE/K011820/1')
         :type gtr_project_id: str
         :param gtr_grant_reference: Gateway to Research project ID (e.g. '87D5AD44-2123-442B-B186-75C3878471BD')
         :type lead_project: bool
-        :param lead_project: Is this the lead project for a split award?
+        :param lead_project: Is the project/grant the lead for a split award?
         """
         self.grant_reference = gtr_grant_reference
         self.gtr_project_id = gtr_project_id
-        self.lead_project = lead_project
+        self.lead_project = int(lead_project)
 
     def exists(self) -> bool:
         """
@@ -2073,7 +2077,7 @@ def import_gateway_to_research_grant_interactively(gtr_grant_reference: str, lea
         echo(style(
             f"Importing Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"))
         importer = GatewayToResearchGrantImporter(
-            gtr_grant_reference=gtr_grant_reference)
+            gtr_grant_reference=gtr_grant_reference, lead_project=lead_project)
 
         if importer.exists():
             # app.logger.info(f"Finished importing GTR project with grant reference ({gtr_grant_reference}) - Already "
