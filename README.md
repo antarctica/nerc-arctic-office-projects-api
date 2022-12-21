@@ -822,6 +822,11 @@ To check compliance locally:
 $ docker-compose run app flake8 . --ignore=E501 --exclude migrations
 ```
 
+Shell into the container & run:
+```shell
+$ flake8 . --ignore=E501 --exclude migrations
+```
+
 ### Dependencies
 
 Python dependencies should be defined using Pip through the `requirements.txt` file. The Docker image is configured to
