@@ -141,7 +141,7 @@ class GatewayToResearchResource:
             link_href = link['href']
 
             link_base_url = link['href'].split(":")
-            if link_base_url[1]:
+            if link_base_url[1] == "//internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com":
                 link_href = link['href'].replace(
                     "http://internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080",
                     "https://gtr.ukri.org"
