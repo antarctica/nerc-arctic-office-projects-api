@@ -1368,7 +1368,9 @@ class GatewayToResearchGrantImporter:
         )
 
         # Flatten the processed topics and subjects to dinstinct list of GCMD identifiers
+        # Topics
         category_term_scheme_identifiers = list(topics)
+        # Subjects
         category_term_scheme_identifiers.extend(
             x for x in subjects if x not in category_term_scheme_identifiers)
 
