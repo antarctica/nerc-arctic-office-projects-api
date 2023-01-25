@@ -1,11 +1,12 @@
 import csv
 import json
 
-# id to start from number 
+# id to start from number
 id_counter = 438
 
 csvFilePath = r'projects.csv'
 jsonFilePath = r'projects.json'
+
 
 def make_json(csvFilePath, jsonFilePath):
 
@@ -20,7 +21,7 @@ def make_json(csvFilePath, jsonFilePath):
             lead_project = 0
 
             if(row_list[1][1] == 'Lead'):
-                lead_project = 1            
+                lead_project = 1
 
             json_block = {
                 "parent-id": None,
@@ -33,7 +34,7 @@ def make_json(csvFilePath, jsonFilePath):
             data.append(json_block)
 
     with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
-    	jsonf.write(json.dumps(data, indent=4))
+        jsonf.write(json.dumps(data, indent=4))
 
 
 make_json(csvFilePath, jsonFilePath)
