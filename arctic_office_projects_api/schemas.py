@@ -219,6 +219,7 @@ class AllocationSchema(Schema):
 class OrganisationSchema(Schema):
     id = fields.String(attribute="neutral_id", dump_only=True, required=True)
     grid_identifier = fields.String(dump_only=True)
+    ror_identifier = fields.String(dump_only=True)
     name = fields.String(dump_only=True, required=True)
     acronym = fields.String(dump_only=True)
     website = fields.String(dump_only=True)

@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-	<testsuite errors="0" failures="0" file="test_app.py" name="test_app.AppTestCase-20220809110302" skipped="0" tests="2" time="0.265" timestamp="2022-08-09T11:03:02">
-		<testcase classname="test_app.AppTestCase" file="tests/test_app.py" line="11" name="test_app_exists" time="0.149" timestamp="2022-08-09T11:03:02">
+	<testsuite errors="0" failures="0" file="test_app.py" name="test_app.AppTestCase-20221221102923" skipped="0" tests="2" time="0.209" timestamp="2022-12-21T10:29:23">
+		<testcase classname="test_app.AppTestCase" file="tests/test_app.py" line="11" name="test_app_exists" time="0.063" timestamp="2022-12-21T10:29:23">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
 <![CDATA[]]>			</system-err>
 		</testcase>
-		<testcase classname="test_app.AppTestCase" file="tests/test_app.py" line="14" name="test_app_is_testing" time="0.116" timestamp="2022-08-09T11:03:02">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[]]>			</system-err>
-		</testcase>
-	</testsuite>
-	<testsuite errors="0" failures="0" file="test_app.py" name="test_app.RouteIndexTestCase-20220809110302" skipped="0" tests="1" time="0.062" timestamp="2022-08-09T11:03:02">
-		<testcase classname="test_app.RouteIndexTestCase" file="tests/test_app.py" line="19" name="test_index_route" time="0.062" timestamp="2022-08-09T11:03:02">
+		<testcase classname="test_app.AppTestCase" file="tests/test_app.py" line="14" name="test_app_is_testing" time="0.146" timestamp="2022-12-21T10:29:23">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
 <![CDATA[]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_app.py" name="test_app.RouteMetaTestCase-20220809110302" skipped="0" tests="2" time="0.235" timestamp="2022-08-09T11:03:02">
-		<testcase classname="test_app.RouteMetaTestCase" file="tests/test_app.py" line="54" name="test_meta_healthcheck_canary_failure_db" time="0.145" timestamp="2022-08-09T11:03:02">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[]]>			</system-err>
-		</testcase>
-		<testcase classname="test_app.RouteMetaTestCase" file="tests/test_app.py" line="36" name="test_meta_healthcheck_canary_success" time="0.090" timestamp="2022-08-09T11:03:02">
+	<testsuite errors="0" failures="0" file="test_app.py" name="test_app.RouteIndexTestCase-20221221102923" skipped="0" tests="1" time="0.034" timestamp="2022-12-21T10:29:23">
+		<testcase classname="test_app.RouteIndexTestCase" file="tests/test_app.py" line="19" name="test_index_route" time="0.034" timestamp="2022-12-21T10:29:23">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
 <![CDATA[]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_commands.py" name="test_commands.ImportCommandTestCase-20220809110302" skipped="1" tests="3" time="1.168" timestamp="2022-08-09T11:03:03">
-		<testcase classname="test_commands.ImportCommandTestCase" file="tests/test_commands.py" line="26" name="test_import_categories_from_file" time="0.410" timestamp="2022-08-09T11:03:03">
+	<testsuite errors="0" failures="0" file="test_app.py" name="test_app.RouteMetaTestCase-20221221102923" skipped="0" tests="2" time="10.144" timestamp="2022-12-21T10:29:34">
+		<testcase classname="test_app.RouteMetaTestCase" file="tests/test_app.py" line="54" name="test_meta_healthcheck_canary_failure_db" time="10.053" timestamp="2022-12-21T10:29:34">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[]]>			</system-err>
+		</testcase>
+		<testcase classname="test_app.RouteMetaTestCase" file="tests/test_app.py" line="36" name="test_meta_healthcheck_canary_success" time="0.091" timestamp="2022-12-21T10:29:34">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[]]>			</system-err>
+		</testcase>
+	</testsuite>
+	<testsuite errors="0" failures="0" file="test_commands.py" name="test_commands.ImportCommandTestCase-20221221102923" skipped="1" tests="3" time="0.772" timestamp="2022-12-21T10:29:34">
+		<testcase classname="test_commands.ImportCommandTestCase" file="tests/test_commands.py" line="26" name="test_import_categories_from_file" time="0.275" timestamp="2022-12-21T10:29:34">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -51,8 +51,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -63,7 +65,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_commands.ImportCommandTestCase" file="tests/test_commands.py" line="30" name="test_import_organisations_from_file" time="0.394" timestamp="2022-08-09T11:03:03">
+		<testcase classname="test_commands.ImportCommandTestCase" file="tests/test_commands.py" line="30" name="test_import_organisations_from_file" time="0.238" timestamp="2022-12-21T10:29:34">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -77,8 +79,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -89,7 +93,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_commands.ImportCommandTestCase" file="tests/test_commands.py" line="34" name="test_import_grant_from_gtr" time="0.365" timestamp="2022-08-09T11:03:03">
+		<testcase classname="test_commands.ImportCommandTestCase" file="tests/test_commands.py" line="34" name="test_import_grant_from_gtr" time="0.259" timestamp="2022-12-21T10:29:34">
 			<skipped message="We know this works, running manually works just fine. However due to the way the program outputs the result, it’s not easy to test with assertIn. Equally testing that the record exists in the database is also not working for some unknown reason. This test will be re-instated later but for now we need to progress" type="skip"/>
 			<system-out>
 <![CDATA[]]>			</system-out>
@@ -104,8 +108,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -117,8 +123,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_commands.py" name="test_commands.InbuiltCommandsTestCase-20220809110302" skipped="0" tests="1" time="0.401" timestamp="2022-08-09T11:03:04">
-		<testcase classname="test_commands.InbuiltCommandsTestCase" file="tests/test_commands.py" line="6" name="test_help" time="0.401" timestamp="2022-08-09T11:03:04">
+	<testsuite errors="0" failures="0" file="test_commands.py" name="test_commands.InbuiltCommandsTestCase-20221221102923" skipped="0" tests="1" time="0.216" timestamp="2022-12-21T10:29:35">
+		<testcase classname="test_commands.InbuiltCommandsTestCase" file="tests/test_commands.py" line="6" name="test_help" time="0.216" timestamp="2022-12-21T10:29:35">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -132,8 +138,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -145,8 +153,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_commands.py" name="test_commands.SeedingCommandTestCase-20220809110302" skipped="0" tests="2" time="3.282" timestamp="2022-08-09T11:03:07">
-		<testcase classname="test_commands.SeedingCommandTestCase" file="tests/test_commands.py" line="12" name="test_seeding_predictable" time="0.580" timestamp="2022-08-09T11:03:04">
+	<testsuite errors="0" failures="0" file="test_commands.py" name="test_commands.SeedingCommandTestCase-20221221102923" skipped="0" tests="2" time="2.533" timestamp="2022-12-21T10:29:37">
+		<testcase classname="test_commands.SeedingCommandTestCase" file="tests/test_commands.py" line="12" name="test_seeding_predictable" time="0.421" timestamp="2022-12-21T10:29:35">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -160,8 +168,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -172,7 +182,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_commands.SeedingCommandTestCase" file="tests/test_commands.py" line="16" name="test_seeding_random" time="2.702" timestamp="2022-08-09T11:03:07">
+		<testcase classname="test_commands.SeedingCommandTestCase" file="tests/test_commands.py" line="16" name="test_seeding_random" time="2.112" timestamp="2022-12-21T10:29:37">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -186,192 +196,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_allocations.py" name="test_resource_allocations.PeopleResourceTestCase-20220809110302" skipped="0" tests="7" time="3.809" timestamp="2022-08-09T11:03:11">
-		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="414" name="test_allocations_detail" time="0.538" timestamp="2022-08-09T11:03:08">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="728" name="test_allocations_grants" time="0.571" timestamp="2022-08-09T11:03:08">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="9" name="test_allocations_list" time="0.566" timestamp="2022-08-09T11:03:09">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="835" name="test_allocations_projects" time="0.523" timestamp="2022-08-09T11:03:09">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="684" name="test_allocations_relationship_grants" time="0.522" timestamp="2022-08-09T11:03:10">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="706" name="test_allocations_relationship_projects" time="0.544" timestamp="2022-08-09T11:03:10">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="667" name="test_allocations_single_missing_unknown_id" time="0.545" timestamp="2022-08-09T11:03:11">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -383,8 +211,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_categorisations.py" name="test_resource_categorisations.CategorisationsResourceTestCase-20220809110302" skipped="0" tests="7" time="3.872" timestamp="2022-08-09T11:03:15">
-		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="1068" name="test_categorisations_categories" time="0.515" timestamp="2022-08-09T11:03:11">
+	<testsuite errors="0" failures="0" file="test_resource_allocations.py" name="test_resource_allocations.PeopleResourceTestCase-20221221102923" skipped="0" tests="7" time="2.693" timestamp="2022-12-21T10:29:40">
+		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="414" name="test_allocations_detail" time="0.360" timestamp="2022-12-21T10:29:37">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -398,8 +226,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -410,7 +240,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="550" name="test_categorisations_detail" time="0.582" timestamp="2022-08-09T11:03:12">
+		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="728" name="test_allocations_grants" time="0.348" timestamp="2022-12-21T10:29:38">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -424,8 +254,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -436,7 +268,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="9" name="test_categorisations_list" time="0.599" timestamp="2022-08-09T11:03:13">
+		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="9" name="test_allocations_list" time="0.448" timestamp="2022-12-21T10:29:38">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -450,8 +282,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -462,7 +296,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="941" name="test_categorisations_projects" time="0.517" timestamp="2022-08-09T11:03:13">
+		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="835" name="test_allocations_projects" time="0.418" timestamp="2022-12-21T10:29:39">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -476,8 +310,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -488,7 +324,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="919" name="test_categorisations_relationship_categories" time="0.522" timestamp="2022-08-09T11:03:14">
+		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="684" name="test_allocations_relationship_grants" time="0.348" timestamp="2022-12-21T10:29:39">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -502,8 +338,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -514,7 +352,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="897" name="test_categorisations_relationship_projects" time="0.511" timestamp="2022-08-09T11:03:14">
+		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="706" name="test_allocations_relationship_projects" time="0.387" timestamp="2022-12-21T10:29:39">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -528,8 +366,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -540,7 +380,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="880" name="test_categorisations_single_missing_unknown_id" time="0.626" timestamp="2022-08-09T11:03:15">
+		<testcase classname="test_resource_allocations.PeopleResourceTestCase" file="tests/test_resource_allocations.py" line="667" name="test_allocations_single_missing_unknown_id" time="0.385" timestamp="2022-12-21T10:29:40">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -554,140 +394,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_category_schemes.py" name="test_resource_category_schemes.CategorySchemesResourceTestCase-20220809110302" skipped="0" tests="5" time="2.607" timestamp="2022-08-09T11:03:17">
-		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="1118" name="test_category_scheme_category_terms" time="0.588" timestamp="2022-08-09T11:03:15">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="661" name="test_category_scheme_detail" time="0.533" timestamp="2022-08-09T11:03:16">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="9" name="test_category_scheme_list" time="0.496" timestamp="2022-08-09T11:03:16">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="1082" name="test_category_scheme_relationship_category_terms" time="0.499" timestamp="2022-08-09T11:03:17">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="1065" name="test_category_scheme_single_missing_unknown_id" time="0.491" timestamp="2022-08-09T11:03:17">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -699,8 +409,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_category_terms.py" name="test_resource_category_terms.CategoryTermsResourceTestCase-20220809110302" skipped="0" tests="9" time="5.221" timestamp="2022-08-09T11:03:23">
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="802" name="test_category_term_categorisations" time="0.499" timestamp="2022-08-09T11:03:18">
+	<testsuite errors="0" failures="0" file="test_resource_categorisations.py" name="test_resource_categorisations.CategorisationsResourceTestCase-20221221102923" skipped="0" tests="7" time="2.769" timestamp="2022-12-21T10:29:43">
+		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="1068" name="test_categorisations_categories" time="0.396" timestamp="2022-12-21T10:29:40">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -714,8 +424,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -726,7 +438,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="743" name="test_category_term_category_schemes" time="0.503" timestamp="2022-08-09T11:03:18">
+		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="550" name="test_categorisations_detail" time="0.365" timestamp="2022-12-21T10:29:41">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -740,8 +452,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -752,7 +466,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="252" name="test_category_term_detail" time="0.525" timestamp="2022-08-09T11:03:19">
+		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="9" name="test_categorisations_list" time="0.387" timestamp="2022-12-21T10:29:41">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -766,8 +480,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -778,7 +494,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="9" name="test_category_term_list" time="0.508" timestamp="2022-08-09T11:03:19">
+		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="941" name="test_categorisations_projects" time="0.364" timestamp="2022-12-21T10:29:41">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -792,8 +508,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -804,7 +522,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="667" name="test_category_term_parent_category_terms" time="0.555" timestamp="2022-08-09T11:03:20">
+		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="919" name="test_categorisations_relationship_categories" time="0.408" timestamp="2022-12-21T10:29:42">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -818,8 +536,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -830,7 +550,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="643" name="test_category_term_relationship_categorisations" time="0.667" timestamp="2022-08-09T11:03:21">
+		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="897" name="test_categorisations_relationship_projects" time="0.446" timestamp="2022-12-21T10:29:42">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -844,8 +564,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -856,7 +578,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="621" name="test_category_term_relationship_category_schemes" time="0.538" timestamp="2022-08-09T11:03:21">
+		<testcase classname="test_resource_categorisations.CategorisationsResourceTestCase" file="tests/test_resource_categorisations.py" line="880" name="test_categorisations_single_missing_unknown_id" time="0.403" timestamp="2022-12-21T10:29:43">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -870,60 +592,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="599" name="test_category_term_relationship_parent_category_terms" time="0.871" timestamp="2022-08-09T11:03:22">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="582" name="test_category_term_single_missing_unknown_id" time="0.555" timestamp="2022-08-09T11:03:23">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -935,8 +607,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_grants.py" name="test_resource_grants.GrantsResourceTestCase-20220809110302" skipped="0" tests="7" time="4.158" timestamp="2022-08-09T11:03:27">
-		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="841" name="test_grants_allocations" time="0.528" timestamp="2022-08-09T11:03:23">
+	<testsuite errors="0" failures="0" file="test_resource_category_schemes.py" name="test_resource_category_schemes.CategorySchemesResourceTestCase-20221221102923" skipped="0" tests="5" time="2.110" timestamp="2022-12-21T10:29:45">
+		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="1118" name="test_category_scheme_category_terms" time="0.481" timestamp="2022-12-21T10:29:43">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -950,8 +622,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -962,7 +636,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="488" name="test_grants_detail" time="0.647" timestamp="2022-08-09T11:03:24">
+		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="661" name="test_category_scheme_detail" time="0.416" timestamp="2022-12-21T10:29:43">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -976,8 +650,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -988,7 +664,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="9" name="test_grants_list" time="0.555" timestamp="2022-08-09T11:03:24">
+		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="9" name="test_category_scheme_list" time="0.438" timestamp="2022-12-21T10:29:44">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1002,8 +678,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1014,7 +692,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="889" name="test_grants_organisations" time="0.520" timestamp="2022-08-09T11:03:25">
+		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="1082" name="test_category_scheme_relationship_category_terms" time="0.371" timestamp="2022-12-21T10:29:44">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1028,8 +706,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1040,7 +720,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="795" name="test_grants_relationship_allocations" time="0.742" timestamp="2022-08-09T11:03:26">
+		<testcase classname="test_resource_category_schemes.CategorySchemesResourceTestCase" file="tests/test_resource_category_schemes.py" line="1065" name="test_category_scheme_single_missing_unknown_id" time="0.404" timestamp="2022-12-21T10:29:45">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1054,60 +734,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="819" name="test_grants_relationship_organisations" time="0.645" timestamp="2022-08-09T11:03:26">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="778" name="test_grants_single_missing_unknown_id" time="0.521" timestamp="2022-08-09T11:03:27">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1119,8 +749,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_organisations.py" name="test_resource_organisations.OrganisationsResourceTestCase-20220809110302" skipped="0" tests="7" time="4.543" timestamp="2022-08-09T11:03:31">
-		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="678" name="test_organisations_detail" time="0.577" timestamp="2022-08-09T11:03:27">
+	<testsuite errors="0" failures="0" file="test_resource_category_terms.py" name="test_resource_category_terms.CategoryTermsResourceTestCase-20221221102923" skipped="0" tests="9" time="3.610" timestamp="2022-12-21T10:29:48">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="802" name="test_category_term_categorisations" time="0.412" timestamp="2022-12-21T10:29:45">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1134,8 +764,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1146,7 +778,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="979" name="test_organisations_grants" time="0.558" timestamp="2022-08-09T11:03:28">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="743" name="test_category_term_category_schemes" time="0.410" timestamp="2022-12-21T10:29:46">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1160,8 +792,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1172,7 +806,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="9" name="test_organisations_list" time="0.607" timestamp="2022-08-09T11:03:28">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="252" name="test_category_term_detail" time="0.389" timestamp="2022-12-21T10:29:46">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1186,8 +820,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1198,7 +834,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="997" name="test_organisations_people" time="0.583" timestamp="2022-08-09T11:03:29">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="9" name="test_category_term_list" time="0.369" timestamp="2022-12-21T10:29:46">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1212,8 +848,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1224,7 +862,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="936" name="test_organisations_relationship_grants" time="0.891" timestamp="2022-08-09T11:03:30">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="667" name="test_category_term_parent_category_terms" time="0.373" timestamp="2022-12-21T10:29:47">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1238,8 +876,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1250,7 +890,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="955" name="test_organisations_relationship_people" time="0.834" timestamp="2022-08-09T11:03:31">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="643" name="test_category_term_relationship_categorisations" time="0.395" timestamp="2022-12-21T10:29:47">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1264,8 +904,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1276,7 +918,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="919" name="test_organisations_single_missing_unknown_id" time="0.494" timestamp="2022-08-09T11:03:31">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="621" name="test_category_term_relationship_category_schemes" time="0.362" timestamp="2022-12-21T10:29:47">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1290,8 +932,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1302,9 +946,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_participants.py" name="test_resource_participants.ParticipantsResourceTestCase-20220809110302" skipped="0" tests="7" time="3.765" timestamp="2022-08-09T11:03:35">
-		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="295" name="test_participants_detail" time="0.599" timestamp="2022-08-09T11:03:32">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="599" name="test_category_term_relationship_parent_category_terms" time="0.451" timestamp="2022-12-21T10:29:48">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1318,8 +960,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1330,7 +974,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="9" name="test_participants_list" time="0.528" timestamp="2022-08-09T11:03:32">
+		<testcase classname="test_resource_category_terms.CategoryTermsResourceTestCase" file="tests/test_resource_category_terms.py" line="582" name="test_category_term_single_missing_unknown_id" time="0.449" timestamp="2022-12-21T10:29:48">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1344,138 +988,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="689" name="test_participants_people" time="0.563" timestamp="2022-08-09T11:03:33">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="562" name="test_participants_projects" time="0.573" timestamp="2022-08-09T11:03:34">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="540" name="test_participants_relationship_people" time="0.465" timestamp="2022-08-09T11:03:34">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="518" name="test_participants_relationship_projects" time="0.497" timestamp="2022-08-09T11:03:34">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
-INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
-INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
-INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
-]]>			</system-err>
-		</testcase>
-		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="501" name="test_participants_single_missing_unknown_id" time="0.540" timestamp="2022-08-09T11:03:35">
-			<system-out>
-<![CDATA[]]>			</system-out>
-			<system-err>
-<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
-INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
-INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
-INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
-INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
-INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
-INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
-INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
-INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
-INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
-INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1487,8 +1003,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_people.py" name="test_resource_people.PeopleResourceTestCase-20220809110302" skipped="0" tests="7" time="3.714" timestamp="2022-08-09T11:03:39">
-		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="369" name="test_people_detail" time="0.535" timestamp="2022-08-09T11:03:36">
+	<testsuite errors="0" failures="0" file="test_resource_grants.py" name="test_resource_grants.GrantsResourceTestCase-20221221102923" skipped="0" tests="7" time="2.821" timestamp="2022-12-21T10:29:51">
+		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="844" name="test_grants_allocations" time="0.368" timestamp="2022-12-21T10:29:49">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1502,8 +1018,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1514,7 +1032,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="9" name="test_people_list" time="0.535" timestamp="2022-08-09T11:03:36">
+		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="490" name="test_grants_detail" time="0.451" timestamp="2022-12-21T10:29:49">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1528,8 +1046,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1540,7 +1060,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="729" name="test_people_organisations" time="0.584" timestamp="2022-08-09T11:03:37">
+		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="9" name="test_grants_list" time="0.414" timestamp="2022-12-21T10:29:50">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1554,8 +1074,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1566,7 +1088,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="673" name="test_people_participants" time="0.494" timestamp="2022-08-09T11:03:37">
+		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="892" name="test_grants_organisations" time="0.404" timestamp="2022-12-21T10:29:50">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1580,8 +1102,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1592,7 +1116,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="627" name="test_people_relationship_organisations" time="0.521" timestamp="2022-08-09T11:03:38">
+		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="798" name="test_grants_relationship_allocations" time="0.397" timestamp="2022-12-21T10:29:50">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1606,8 +1130,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1618,7 +1144,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="649" name="test_people_relationship_participants" time="0.506" timestamp="2022-08-09T11:03:38">
+		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="822" name="test_grants_relationship_organisations" time="0.424" timestamp="2022-12-21T10:29:51">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1632,8 +1158,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1644,7 +1172,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="610" name="test_people_single_missing_unknown_id" time="0.540" timestamp="2022-08-09T11:03:39">
+		<testcase classname="test_resource_grants.GrantsResourceTestCase" file="tests/test_resource_grants.py" line="781" name="test_grants_single_missing_unknown_id" time="0.364" timestamp="2022-12-21T10:29:51">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1658,8 +1186,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1671,8 +1201,8 @@ INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Pro
 ]]>			</system-err>
 		</testcase>
 	</testsuite>
-	<testsuite errors="0" failures="0" file="test_resource_projects.py" name="test_resource_projects.ProjectsResourceTestCase-20220809110302" skipped="0" tests="9" time="5.219" timestamp="2022-08-09T11:03:44">
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1711" name="test_projects_allocations" time="0.612" timestamp="2022-08-09T11:03:39">
+	<testsuite errors="0" failures="0" file="test_resource_organisations.py" name="test_resource_organisations.OrganisationsResourceTestCase-20221221102923" skipped="0" tests="7" time="2.750" timestamp="2022-12-21T10:29:54">
+		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="680" name="test_organisations_detail" time="0.416" timestamp="2022-12-21T10:29:52">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1686,8 +1216,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1698,7 +1230,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1852" name="test_projects_categorisations" time="0.667" timestamp="2022-08-09T11:03:40">
+		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="982" name="test_organisations_grants" time="0.338" timestamp="2022-12-21T10:29:52">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1712,8 +1244,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1724,7 +1258,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="951" name="test_projects_detail" time="0.660" timestamp="2022-08-09T11:03:41">
+		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="9" name="test_organisations_list" time="0.392" timestamp="2022-12-21T10:29:52">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1738,8 +1272,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1750,7 +1286,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="9" name="test_projects_list" time="0.560" timestamp="2022-08-09T11:03:41">
+		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="1000" name="test_organisations_people" time="0.361" timestamp="2022-12-21T10:29:53">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1764,8 +1300,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1776,7 +1314,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1759" name="test_projects_participants" time="0.494" timestamp="2022-08-09T11:03:42">
+		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="939" name="test_organisations_relationship_grants" time="0.342" timestamp="2022-12-21T10:29:53">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1790,8 +1328,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1802,7 +1342,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1635" name="test_projects_relationship_allocations" time="0.549" timestamp="2022-08-09T11:03:42">
+		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="958" name="test_organisations_relationship_people" time="0.456" timestamp="2022-12-21T10:29:53">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1816,8 +1356,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1828,7 +1370,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1687" name="test_projects_relationship_categorisations" time="0.561" timestamp="2022-08-09T11:03:43">
+		<testcase classname="test_resource_organisations.OrganisationsResourceTestCase" file="tests/test_resource_organisations.py" line="922" name="test_organisations_single_missing_unknown_id" time="0.444" timestamp="2022-12-21T10:29:54">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1842,8 +1384,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1854,7 +1398,9 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1659" name="test_projects_relationship_participants" time="0.460" timestamp="2022-08-09T11:03:43">
+	</testsuite>
+	<testsuite errors="0" failures="0" file="test_resource_participants.py" name="test_resource_participants.ParticipantsResourceTestCase-20221221102923" skipped="0" tests="7" time="2.915" timestamp="2022-12-21T10:29:57">
+		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="295" name="test_participants_detail" time="0.419" timestamp="2022-12-21T10:29:54">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1868,8 +1414,10 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
@@ -1880,7 +1428,7 @@ INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946
 INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
 ]]>			</system-err>
 		</testcase>
-		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1618" name="test_projects_single_missing_unknown_id" time="0.657" timestamp="2022-08-09T11:03:44">
+		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="9" name="test_participants_list" time="0.381" timestamp="2022-12-21T10:29:55">
 			<system-out>
 <![CDATA[]]>			</system-out>
 			<system-err>
@@ -1894,8 +1442,602 @@ INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, 
 INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
 INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
 INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="689" name="test_participants_people" time="0.393" timestamp="2022-12-21T10:29:55">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="562" name="test_participants_projects" time="0.459" timestamp="2022-12-21T10:29:56">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="540" name="test_participants_relationship_people" time="0.385" timestamp="2022-12-21T10:29:56">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="518" name="test_participants_relationship_projects" time="0.450" timestamp="2022-12-21T10:29:56">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_participants.ParticipantsResourceTestCase" file="tests/test_resource_participants.py" line="501" name="test_participants_single_missing_unknown_id" time="0.427" timestamp="2022-12-21T10:29:57">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+	</testsuite>
+	<testsuite errors="0" failures="0" file="test_resource_people.py" name="test_resource_people.PeopleResourceTestCase-20221221102923" skipped="0" tests="7" time="2.751" timestamp="2022-12-21T10:30:00">
+		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="371" name="test_people_detail" time="0.366" timestamp="2022-12-21T10:29:57">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="9" name="test_people_list" time="0.417" timestamp="2022-12-21T10:29:58">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="732" name="test_people_organisations" time="0.378" timestamp="2022-12-21T10:29:58">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="676" name="test_people_participants" time="0.368" timestamp="2022-12-21T10:29:58">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="630" name="test_people_relationship_organisations" time="0.379" timestamp="2022-12-21T10:29:59">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="652" name="test_people_relationship_participants" time="0.460" timestamp="2022-12-21T10:29:59">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_people.PeopleResourceTestCase" file="tests/test_resource_people.py" line="613" name="test_people_single_missing_unknown_id" time="0.383" timestamp="2022-12-21T10:30:00">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+	</testsuite>
+	<testsuite errors="0" failures="0" file="test_resource_projects.py" name="test_resource_projects.ProjectsResourceTestCase-20221221102923" skipped="0" tests="9" time="3.545" timestamp="2022-12-21T10:30:03">
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1718" name="test_projects_allocations" time="0.358" timestamp="2022-12-21T10:30:00">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1859" name="test_projects_categorisations" time="0.510" timestamp="2022-12-21T10:30:00">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="955" name="test_projects_detail" time="0.373" timestamp="2022-12-21T10:30:01">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="9" name="test_projects_list" time="0.378" timestamp="2022-12-21T10:30:01">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1766" name="test_projects_participants" time="0.385" timestamp="2022-12-21T10:30:02">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1642" name="test_projects_relationship_allocations" time="0.374" timestamp="2022-12-21T10:30:02">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1694" name="test_projects_relationship_categorisations" time="0.368" timestamp="2022-12-21T10:30:02">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1666" name="test_projects_relationship_participants" time="0.431" timestamp="2022-12-21T10:30:03">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
+INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional
+INFO  [alembic.runtime.migration] Running downgrade fe26d37d220f -> 0576cef39dd8, Adding category entities
+INFO  [alembic.runtime.migration] Running downgrade 0576cef39dd8 -> a5b753b898f5, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running downgrade a5b753b898f5 -> 631f964e665f, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running downgrade 631f964e665f -> d919f20fe946, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running downgrade d919f20fe946 -> , Adding Project entity
+]]>			</system-err>
+		</testcase>
+		<testcase classname="test_resource_projects.ProjectsResourceTestCase" file="tests/test_resource_projects.py" line="1625" name="test_projects_single_missing_unknown_id" time="0.367" timestamp="2022-12-21T10:30:03">
+			<system-out>
+<![CDATA[]]>			</system-out>
+			<system-err>
+<![CDATA[INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> d919f20fe946, Adding Project entity
+INFO  [alembic.runtime.migration] Running upgrade d919f20fe946 -> 631f964e665f, Adding Person and Participant entities
+INFO  [alembic.runtime.migration] Running upgrade 631f964e665f -> a5b753b898f5, Adding Grant and Allocation entities
+INFO  [alembic.runtime.migration] Running upgrade a5b753b898f5 -> 0576cef39dd8, Adding Organisation entity
+INFO  [alembic.runtime.migration] Running upgrade 0576cef39dd8 -> fe26d37d220f, Adding category entities
+INFO  [alembic.runtime.migration] Running upgrade fe26d37d220f -> c2f46d74fb33, Making Organisation optional
+INFO  [alembic.runtime.migration] Running upgrade c2f46d74fb33 -> 0da61d9681b1, empty message
+INFO  [alembic.runtime.migration] Running upgrade 0da61d9681b1 -> 5ac27507f77e, empty message
+INFO  [alembic.runtime.migration] Running upgrade 5ac27507f77e -> 03eddf0b8e79, empty message
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running downgrade 03eddf0b8e79 -> 5ac27507f77e, empty message
 INFO  [alembic.runtime.migration] Running downgrade 5ac27507f77e -> 0da61d9681b1, empty message
 INFO  [alembic.runtime.migration] Running downgrade 0da61d9681b1 -> c2f46d74fb33, empty message
 INFO  [alembic.runtime.migration] Running downgrade c2f46d74fb33 -> fe26d37d220f, Making Organisation optional

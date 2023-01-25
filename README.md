@@ -528,6 +528,11 @@ For example:
 $ flask import grant gtr NE/K011820/1
 ```
 
+* Using the bulk importer - shell into the app container & run:
+```shell
+python arctic_office_projects_api/bulk_importer/import_grants.py
+```
+
 **Note:** It will take a few seconds to import each grant due to the number of GTR API calls needed to collect all 
 relevant information (grant, fund, funder, people, employers, publications, etc.).
 
@@ -820,6 +825,11 @@ To check compliance locally:
 
 ```shell
 $ docker-compose run app flake8 . --ignore=E501 --exclude migrations
+```
+
+Shell into the container & run:
+```shell
+$ flake8 . --ignore=E501 --exclude migrations
 ```
 
 ### Dependencies
@@ -1274,6 +1284,11 @@ $ docker-compose run -e FLASK_ENV=testing app flask test
 or
 ```shell
 $ docker-compose run -e FLASK_ENV=testing app flask test --test-runner junit
+```
+
+or - shell into the Docker container and run:
+```shell
+FLASK_ENV=testing flask test --test-runner junit
 ```
 
 
