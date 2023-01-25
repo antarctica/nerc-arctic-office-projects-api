@@ -2,6 +2,11 @@
 
 ### Single project import:
 
+- see the README.md section about importing individual projects
+- example:
+```shell
+$ flask import grant gtr NE/K011820/1
+```
 
 ### Bulk project import:
 
