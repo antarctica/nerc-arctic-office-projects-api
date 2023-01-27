@@ -9,11 +9,12 @@ from psycopg2.extras import DateRange
 from requests import HTTPError
 # noinspection PyPackageRequirements
 from sqlalchemy import exists, and_
+from sqlalchemy_utils import Ltree
 
 from arctic_office_projects_api.errors import AppException
 from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.utils import generate_neutral_id
-from arctic_office_projects_api.models import CategoryTerm, Grant, GrantStatus, GrantCurrency, Organisation, Project, \
+from arctic_office_projects_api.models import CategoryScheme, CategoryTerm, Grant, GrantStatus, GrantCurrency, Organisation, Project, \
     Allocation, Person, Participant, ParticipantRole, Categorisation
 
 
@@ -1302,23 +1303,42 @@ class GatewayToResearchGrantImporter:
             grant=grant
         ))
 
-        # Research Topics and Research Subjects
-        topics = self._find_unique_gtr_project_research_topics(
+        self._save_gtr_category_terms(gtr_project)
+
+        # GTR Research Topics and Subjects
+        gtr_topics = self._find_unique_gtr_project_research_items(
+            gtr_research_items=gtr_project.research_topics
+        )
+
+        gtr_subjects = self._find_unique_gtr_project_research_items(
+            gtr_research_items=gtr_project.research_subjects
+        )
+
+        # GCMD Research Topics and Subjects
+        gcmd_topics = self._find_unique_gcmd_project_research_topics(
             gtr_research_topics=gtr_project.research_topics
         )
 
-        subjects = self._find_unique_gtr_project_research_subjects(
+        gcmd_subjects = self._find_unique_gcmd_project_research_subjects(
             gtr_research_subjects=gtr_project.research_subjects
         )
 
         # Flatten the processed topics and subjects to dinstinct list of GCMD identifiers
-        # Topics
-        category_term_scheme_identifiers = list(topics)
-        # Subjects
+        # GTR Topics
+        category_term_scheme_identifiers = list(gtr_topics)
+        # GTR Subjects
         category_term_scheme_identifiers.extend(
-            x for x in subjects if x not in category_term_scheme_identifiers)
+            x for x in gtr_subjects if x not in category_term_scheme_identifiers)
+        # GCMD Topics
+        category_term_scheme_identifiers.extend(
+            x for x in gcmd_topics if x not in category_term_scheme_identifiers)
+        # GCMD Subjects
+        category_term_scheme_identifiers.extend(
+            x for x in gcmd_subjects if x not in category_term_scheme_identifiers)
 
         for category_term_scheme_identifier in category_term_scheme_identifiers:
+
+            # Save to category terms link table
             db.session.add(Categorisation(
                 neutral_id=generate_neutral_id(),
                 project=project,
@@ -1338,6 +1358,42 @@ class GatewayToResearchGrantImporter:
         )
 
         db.session.commit()
+
+    def _save_gtr_category_terms(self, project):
+
+        gtr_category_path = Ltree("gtr.ukri.org.resources.classificationprojects.html")
+
+        for term in project.research_subjects:
+            if db.session.query(exists().where(CategoryTerm.scheme_identifier == term['id'])).scalar():
+                print("Skipping, GTR Category already imported")
+                continue
+
+            category_term_resource = CategoryTerm(
+                neutral_id=generate_neutral_id(),
+                scheme_identifier=term['id'],
+                name=term['text'],
+                path=gtr_category_path,
+                category_scheme=CategoryScheme.query.filter_by(
+                    namespace="https://gtr.ukri.org/resources/classificationlists.html"
+                ).one()
+            )
+            db.session.add(category_term_resource)
+
+        for term in project.research_topics:
+            if db.session.query(exists().where(CategoryTerm.scheme_identifier == term['id'])).scalar():
+                print("Skipping, GTR Category already imported")
+                continue
+
+            category_term_resource = CategoryTerm(
+                neutral_id=generate_neutral_id(),
+                scheme_identifier=term['id'],
+                name=term['text'],
+                path=gtr_category_path,
+                category_scheme=CategoryScheme.query.filter_by(
+                    namespace="https://gtr.ukri.org/resources/classificationlists.html"
+                ).one()
+            )
+            db.session.add(category_term_resource)
 
     def _find_gtr_project_identifier(self, identifiers: Dict[str, List[str]]) -> str:
         """
@@ -1432,7 +1488,28 @@ class GatewayToResearchGrantImporter:
         raise ValueError(
             "Status element value in GTR project not mapped to a member of the GrantStatus enumeration")
 
-    def _find_unique_gtr_project_research_topics(self, gtr_research_topics: list) -> list:
+    def _find_unique_gtr_project_research_items(self, gtr_research_items: list) -> list:
+        """
+        For a series of GTR project research items, return a distinct list
+
+        If the 'unclassified' category is included, it is silently removed.
+
+        :type gtr_research_items: list
+        :param gtr_research_items: list of GTR project research items
+
+        :rtype list
+        :return: distinct list of GTR project research items
+        """
+        category_term_scheme_identifiers = []
+        for category in gtr_research_items:
+            category_term_scheme_identifier = category['id']
+            if category_term_scheme_identifier is not None:
+                if category_term_scheme_identifier not in category_term_scheme_identifiers:
+                    category_term_scheme_identifiers.append(
+                        category_term_scheme_identifier)
+        return category_term_scheme_identifiers
+
+    def _find_unique_gcmd_project_research_topics(self, gtr_research_topics: list) -> list:
         """
         For a series of GTR project research topics, return a distinct list
 
@@ -1442,7 +1519,7 @@ class GatewayToResearchGrantImporter:
         :param gtr_research_topics: list of GTR project research topics
 
         :rtype list
-        :return: distinct list of GTR project research topics
+        :return: distinct list of GCMD project research topics
         """
         category_term_scheme_identifiers = []
         for category in gtr_research_topics:
@@ -1454,7 +1531,7 @@ class GatewayToResearchGrantImporter:
                         category_term_scheme_identifier)
         return category_term_scheme_identifiers
 
-    def _find_unique_gtr_project_research_subjects(self, gtr_research_subjects: list) -> list:
+    def _find_unique_gcmd_project_research_subjects(self, gtr_research_subjects: list) -> list:
         """
         For a series of GTR project subjects, return a distinct list
 
@@ -1462,7 +1539,7 @@ class GatewayToResearchGrantImporter:
         :param gtr_research_subjects: list of GTR project research subjects
 
         :rtype list
-        :return: distinct list of GTR project research subjects
+        :return: distinct list of GCMD project research subjects
         """
         category_term_scheme_identifiers = []
         for category in gtr_research_subjects:
