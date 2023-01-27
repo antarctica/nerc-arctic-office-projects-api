@@ -814,7 +814,7 @@ Also ensure:
 * if needed, [Database seeding](#database-seeding) is in place for use in development environments and running tests
 * all application errors implement, or inherit from, `AppException` in `arctic_office_projects_api/errors.py`
 
-### Code Style
+### Code Style - linting
 
 PEP-8 style and formatting guidelines must be used for this project, with the exception of the 80 character line limit.
 
