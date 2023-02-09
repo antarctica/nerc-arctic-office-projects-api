@@ -34,6 +34,8 @@ def import_grants(file):
                 lead_project_bool = project['lead-project']
                 if lead_project_bool == 1:
                     lead_project = "1"
+                else:
+                    lead_project = "0"
             except Exception:
                 lead_project = "0"
                 print('No lead-project')
