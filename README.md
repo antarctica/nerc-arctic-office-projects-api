@@ -491,8 +491,7 @@ $ flask import categories resources/science-categories.json
 **Note:** The structure of the import file will be validated against the `resources/categories-schema.json` JSON Schema 
 before import.
 
-**Note:** Previously imported categories, identified by their *namespace* or *subject*, will be skipped if imported 
-again. Their properties will not be updated.
+**Note:** Previously imported categories, identified by their *namespace* or *subject*, will be skipped if imported again. Their properties will not be updated.
 
 #### Importing organisations
 
