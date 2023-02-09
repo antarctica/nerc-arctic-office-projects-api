@@ -1451,9 +1451,13 @@ class GatewayToResearchGrantImporter:
         """
         for person in gtr_people:
 
-            org_id = db.session.query(Organisation.id).filter(Organisation.ror_identifier == person.employer.ror_id).scalar()
+            org_id = db.session.query(Organisation.id).filter(Organisation.ror_identifier == person.employer.ror_id).scalar()            
 
-            if not db.session.query(exists().where(and_(Person.first_name == person.first_name, Person.last_name == person.surname, Person.organisation_id == org_id))).scalar():
+            if not db.session.query(exists().where(and_(
+                                                    Person.first_name == person.first_name, 
+                                                    Person.last_name == person.surname, 
+                                                    Person.organisation_id == org_id
+                                                ))).scalar():
                 db.session.add(Person(
                     neutral_id=generate_neutral_id(),
                     first_name=person.first_name,
@@ -1462,6 +1466,7 @@ class GatewayToResearchGrantImporter:
                     organisation=Organisation.query.filter_by(
                         ror_identifier=person.employer.ror_id).one_or_none()
                 ))
+
             db.session.add(Participant(
                 neutral_id=generate_neutral_id(),
                 role=role,
