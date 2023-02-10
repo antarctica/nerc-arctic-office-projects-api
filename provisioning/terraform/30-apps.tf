@@ -49,7 +49,7 @@ resource "heroku_app" "bas-arctic-office-projects-api-prod" {
   region = "eu"
 
   config_vars {
-    REVERSE_PROXY_PATH                 = "/arctic-office-projects"
+    REVERSE_PROXY_PATH                 = "/arctic-office-projects/v1"
     AZURE_OAUTH_TENANCY                = "b311db95-32ad-438f-a101-7ba061712a4e"
     AZURE_OAUTH_APPLICATION_ID         = "e82569d7-861c-4d38-b243-c9400925f2c4"
     AZURE_OAUTH_CLIENT_APPLICATION_IDS = "${join(",", var.azure-oauth-client-application-ids-prod)}"
