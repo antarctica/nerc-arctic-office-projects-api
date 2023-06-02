@@ -595,252 +595,6 @@
         },
         {
             "parent-id": null,
-            "id": 99,
-            "title": "Support personnel UK station Ny-Ålesund",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 100,
-            "title": "Palaeoecology of the late Permian mass extinction event (SvaLPE)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 101,
-            "title": "Arctic Live 2017",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 102,
-            "title": "Arctic Live 2016",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 103,
-            "title": "AM fungi on Svalbard (AMFOS)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 104,
-            "title": "Fertilisation and carbon sequestration on high Arctic tundra heath",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 105,
-            "title": "Mesospheric ozone radiometer (MOSAIC)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 106,
-            "title": "Functional Diversity of High Arctic Microbiomes (FunArctic)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 107,
-            "title": "AM fungi on Svalbard (AMFOS)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 108,
-            "title": "Biogeochemical drivers of nutrient generation in subglacial systems: a novel stable isotope approach. (ICE-OTOPE)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 109,
-            "title": "Early colonisation of high Arctic substrates exposed by glacier retreat (CHASE)",
-            "grant-reference": ""        
-        },
-        {
-            "parent-id": null,
-            "id": 110,
-            "title": "Safe and effective fieldwork in the polar regions (NERC ATSC Svalbard)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 111,
-            "title": "SeaDrone Engineering Tests (SET)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 112,
-            "title": "Bedmap Himalayas Field Test (BMH-FT)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 113,
-            "title": "Changes to winter conditions effect carbon fluxes in the arctic tundra",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 114,
-            "title": "Bryophyte-associated fungi on Svalbard (BAFoS)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 115,
-            "title": "The origins of tropical vegetation",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 116,
-            "title": "Effects of freeze-thaw and dry-wet events on microbial activity in soils",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 117,
-            "title": "Trace gas fluxes in the cyrosphere",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 118,
-            "title": "Liverwort-fungal associations: novel symbioses in polar regions? (Liverwort-fungal associations in polar regions)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 119,
-            "title": "Meteorite Recovery",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 120,
-            "title": "Responses of microbes in upper soil horizons to environmental manipulations (REMUS)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 121,
-            "title": "Neoglacial moraine dynamics in a warming climate at Austre Lovenbreen, Svalbard",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 122,
-            "title": "The morphological dynamics of 'cut-and-closure' channels in Arctic glaciers",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 123,
-            "title": "Arctic Live 2015",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 124,
-            "title": "The lost meteorites of Antarctica (The lost meteorites of Antarctica)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 125,
-            "title": "Arctic Live 2018",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 126,
-            "title": "Ice-penetrating radar studies on Midtre Lovenbreen",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 127,
-            "title": "Monitoring crevasse field and calving evolution at a tidewater glacier margin with unmanned airborne systems (UAS) for improving glacier and ice sheet models",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 128,
-            "title": "Photosynthetic activity of ice surface communities on Longyearbreen",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 129,
-            "title": "Geochemical Investigation of Warm Springs (GIS)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 130,
-            "title": "More than methane: quantifying melt-driven biogas production and nutrient export from Eurasian Arctic lowland permafrost (LowPerm)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 131,
-            "title": "The enzymic 'latch' and effects of phenolic compounds on soil biogeochemical cycles in Arctic permafrost peatlands (ELAPSE: Enzymic Latch in Arctic Peat Sensitivity Experiment)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 132,
-            "title": "Natural Analogues of an Arctic in Rapid Transition (AnalogueART)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 133,
-            "title": "Paleomagnetic and rock-magnetic investigations of the Western Spitsbergen area (Hornsund, Bellsund) (HornBell)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 134,
-            "title": "Impact of Snow Coverage and Snow Melt on Development of Soil and Ice Communities (SNOW.WAKE)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 135,
-            "title": "Thermal imaging of calving glaciers and associated plumes",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 136,
-            "title": "Antarctic-Arctic Radiation-belt (Dynamic) Deposition - VLF Atmospheric Research Konsortia (AARDDVARK)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 137,
-            "title": "Methane emissions from the Arctic OCean to the Atmosphere: Present and Future Climate Effects (MOCA)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 138,
-            "title": "Integration of palaeomagnetic, isotopic and structural data to understand Svalbard Caledonian Terranes assemblage (PALMAG)",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
-            "id": 142,
-            "title": "Ice, Climate, and Economics - Arctic Research on Change",
-            "grant-reference": ""            
-        },
-        {
-            "parent-id": null,
             "id": 144,
             "title": "A coupled climate-vegetation-mammal-human model for simulating Late Quaternary megafaunal extinctions",
             "grant-reference": "NE/P002536/1"            
@@ -2669,6 +2423,188 @@
             "lead-project": 0,
             "grant-reference": "2737265",
             "title": "Tracing the heat signature of Atlantic Water through the GIN seas and its impact on Arctic ice and climate"
+        },
+        {
+            "parent-id": null,
+            "id": 504,
+            "lead-project": 0,
+            "grant-reference": "NE/X002578/1",
+            "title": "Beavers and Socio-ecological Resilience in Inuit Nunangat (BARIN)"
+        },
+        {
+            "parent-id": null,
+            "id": 505,
+            "lead-project": 0,
+            "grant-reference": "NE/X002462/1",
+            "title": "Carving out Climate Testimony: Inuit Youth, Wellness & Environmental Stewardship"
+        },
+        {
+            "parent-id": null,
+            "id": 506,
+            "lead-project": 0,
+            "grant-reference": "NE/X002497/1",
+            "title": "Community-led wildlife health monitoring for a resilient and healthy Nunavik"
+        },
+        {
+            "parent-id": null,
+            "id": 507,
+            "lead-project": 0,
+            "grant-reference": "NE/X002616/1",
+            "title": "Emerging zoonoses in wildlife: understanding the ecology, transmission and impacts of Brucella and Erysipelothrix for conservation and food security"
+        },
+        {
+            "parent-id": null,
+            "id": 508,
+            "lead-project": 0,
+            "grant-reference": "NE/X004643/1",
+            "title": "Empowering our communities to map rough ice and slush for safer sea-ice travel in Inuit Nunangat"
+        },
+        {
+            "parent-id": null,
+            "id": 509,
+            "lead-project": 0,
+            "grant-reference": "NE/X003868/1",
+            "title": "Impacts of cryosphere-hydrosphere change on ecosystems and livelihoods in northern Nunatsiavut, Canada (IMAGINE)"
+        },
+        {
+            "parent-id": null,
+            "id": 510,
+            "lead-project": 1,
+            "grant-reference": "NE/X002608/1",
+            "title": "Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat"
+        },
+        {
+            "parent-id": 510,
+            "id": 511,
+            "lead-project": 0,
+            "grant-reference": "NE/X002632/1",
+            "title": "Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat"
+        },
+        {
+            "parent-id": null,
+            "id": 512,
+            "lead-project": 0,
+            "grant-reference": "NE/X005666/1",
+            "title": "Inuksiutit: Food Sovereignty in Nunavut and the co-production of country food knowledge"
+        },
+        {
+            "parent-id": null,
+            "id": 513,
+            "lead-project": 0,
+            "grant-reference": "NE/X005658/1",
+            "title": "Nuna: Effective mitigation and adaptation to changing ground conditions for resilient coastal futures"
+        },
+        {
+            "parent-id": null,
+            "id": 514,
+            "lead-project": 0,
+            "grant-reference": "NE/X004201/1",
+            "title": "Nunavut Search and Rescue (NSAR) Project: Supporting Inuit Health and Well-Being, Food Security, Economic Development, and Community Resilience"
+        },
+        {
+            "parent-id": null,
+            "id": 515,
+            "lead-project": 0,
+            "grant-reference": "NE/X006441/1",
+            "title": "Plastics and heavy metals in Nunatsiavut food ways and environments"
+        },
+        {
+            "parent-id": null,
+            "id": 516,
+            "lead-project": 0,
+            "grant-reference": "NE/X004589/1",
+            "title": "Renewable Energy Microgrid Integration for Remote, Off-grid Cabins in Nunavut"
+        },
+        {
+            "parent-id": null,
+            "id": 517,
+            "lead-project": 0,
+            "grant-reference": "NE/X003361/1",
+            "title": "Resilient Responses to Protect Lung Health in Nunavik"
+        },
+        {
+            "parent-id": null,
+            "id": 518,
+            "lead-project": 0,
+            "grant-reference": "2743350",
+            "title": "Controls on short-term calving glacier dynamics"
+        },
+        {
+            "parent-id": null,
+            "id": 519,
+            "lead-project": 0,
+            "grant-reference": "AH/Y000161/1",
+            "title": "Arctic Heritage: Commodification, Identity, and Revitilisation in the Anthropocene"
+        },
+        {
+            "parent-id": 521,
+            "id": 520,
+            "lead-project": 0,
+            "grant-reference": "NE/T000570/1",
+            "title": "Nitrogen fixation in the Arctic Ocean"
+        },
+        {
+            "parent-id": null,
+            "id": 521,
+            "lead-project": 1,
+            "grant-reference": "NE/T001240/1",
+            "title": "Nitrogen fixation in the Arctic Ocean"
+        },
+        {
+            "parent-id": null,
+            "id": 522,
+            "lead-project": 0,
+            "grant-reference": "NE/W005875/1",
+            "title": "Causes and impacts of Greenland atmospheric Blocking changes"
+        },
+        {
+            "parent-id": null,
+            "id": 523,
+            "lead-project": 0,
+            "grant-reference": "NE/X00015X/1",
+            "title": "Microplastic entrainment, transport and fragmentation in atmospheric boundary-layer flows"
+        },
+        {
+            "parent-id": null,
+            "id": 524,
+            "lead-project": 0,
+            "grant-reference": "NE/X000435/1",
+            "title": "Ice-layer Permeability Controls Runoff from Ice Sheets (IPCRIS)"
+        },
+        {
+            "parent-id": null,
+            "id": 525,
+            "lead-project": 0,
+            "grant-reference": "NE/X009416/1",
+            "title": "A novel proxy for Arctic sea surface temperatures (PAST)"
+        },
+        {
+            "parent-id": null,
+            "id": 526,
+            "lead-project": 0,
+            "grant-reference": "NE/X012492/1",
+            "title": "High throughput simultaneous tracking of seabirds to elucidate the environmental drivers of intraspecific competition"
+        },
+        {
+            "parent-id": null,
+            "id": 527,
+            "lead-project": 0,
+            "grant-reference": "NE/X013537/1",
+            "title": "Greenland ice marginal lake evolution as a driver of ice sheet change - how important are rising lake temperatures?"
+        },
+        {
+            "parent-id": null,
+            "id": 528,
+            "lead-project": 0,
+            "grant-reference": "NE/X015076/1",
+            "title": "Turbo-charging the mycorrhizosphere - Could more productive ecosystems threaten soil carbon stocks in boreal and sub-arctic zones of transition?"
+        },
+        {
+            "parent-id": null,
+            "id": 529,
+            "lead-project": 0,
+            "grant-reference": "NE/Y001710/1",
+            "title": "NSFGEO-NERC: Impacts of sea ice melt and anthropogenic emmisions on biogenic sulfur aerosol as measured in a central Greenland ice core"
         }
     ]
 }
