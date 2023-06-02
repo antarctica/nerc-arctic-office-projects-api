@@ -1831,8 +1831,7 @@ class GatewayToResearchGrantImporter:
         # Population Genetics/Evolution
         elif gtr_research_topic['id'] == 'A4209D5A-2E41-4290-9D1A-3172C1F48962':
             # SPECIES/POPULATION INTERACTIONS
-            return 'https://gcmd.earthdata.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'
-        
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'        
         # Water Engineering
         elif gtr_research_topic['id'] == '19789484-D6B8-4965-AD25-309DD43054A0':
             # ENVIRONMENTAL ENGINEERING
@@ -1856,7 +1855,7 @@ class GatewayToResearchGrantImporter:
         # Community Art inc A & H
         elif gtr_research_topic['id'] == '62F4842F-55F4-41C6-A77A-572005E91429':
             # FINE ARTS
-            return 'https://gcmd.earthdata.nasa.gov/kms/concept/ae0ade63-4d8b-4908-9821-a2ec0bec85bc'        
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/ae0ade63-4d8b-4908-9821-a2ec0bec85bc'
         # Optical Devices & Subsystems
         elif gtr_research_topic['id'] == '66CE6BAB-875D-4F4D-B415-F93CA7A2C4CA':
             # Earth Remote Sensing Instruments
