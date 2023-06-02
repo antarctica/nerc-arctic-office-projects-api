@@ -25,6 +25,13 @@ $ flask import grant gtr NE/I028858/1
 - check the output to see whether or not any institions or topics need to be added.
 - for institutions: https://ror.org/search
 
+- make sure the correct json file is referenced in import_grants.py - approx line number 48
+
+- in the Heroku dashboard, run a console & enter
+'''shell
+$ python arctic_office_projects_api/bulk_importer/import_grants.py
+'''
+
 
 ###
 
