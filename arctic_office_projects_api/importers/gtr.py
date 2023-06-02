@@ -350,6 +350,10 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
             "https://gtr.ukri.org/gtr/api/organisations/E18E2F0F-AC7D-4E02-9559-669F7C8FEC74": "https://api.ror.org/organizations?query=05ar5fy68",
             # Innovate Uk 3
             "https://gtr.ukri.org/gtr/api/organisations/052C4F5E-74CA-4A1D-B771-82891497D8F5": "https://api.ror.org/organizations?query=05ar5fy68",
+            # James Hutton Institute
+            "https://gtr.ukri.org/gtr/api/organisations/326B6518-42F3-4CE4-B7C6-8494C6105BF1": "https://api.ror.org/organizations?query=03rzp5127",
+            # University of Groningen
+            "https://gtr.ukri.org/gtr/api/organisations/326EF7F4-5944-472D-BC94-2CA4484AEE74": "https://api.ror.org/organizations?query=012p63287",
             # Unknown
             "https://gtr.ukri.org/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537": "https://api.ror.org/organizations",
         }
@@ -1828,18 +1832,39 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_topic['id'] == 'A4209D5A-2E41-4290-9D1A-3172C1F48962':
             # SPECIES/POPULATION INTERACTIONS
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/58f39353-7e1c-4884-9501-376cd0377fbf'
-        # # Water Engineering
-        # elif gtr_research_topic['id'] == '19789484-D6B8-4965-AD25-309DD43054A0':
-        #     # GCMD term?
-        #     return ''
-        # # Research Approaches
-        # elif gtr_research_topic['id'] == '24CF2F4A-1F56-4DD4-9EA6-B54452142544':
-        #     # GCMD term?
-        #     return ''
-        # # Plant developmental biolog
-        # elif gtr_research_topic['id'] == '023A4090-7FA5-4AFE-9071-DCC99F0221C4':
-        #     # GCMD term?
-        #     return ''
+        
+        # Water Engineering
+        elif gtr_research_topic['id'] == '19789484-D6B8-4965-AD25-309DD43054A0':
+            # ENVIRONMENTAL ENGINEERING
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/596225b7-2cd8-4638-bb75-23bfb491aeb1'
+        # Research Approaches
+        elif gtr_research_topic['id'] == '0fde38f8-b9a4-453f-827e-ba161dd12c78':
+            # ADMINISTRATIVE SCIENCES
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/fbf13798-2bcd-4ae7-99f9-a4b69dd425c1'
+        # Plant developmental biology
+        elif gtr_research_topic['id'] == '023A4090-7FA5-4AFE-9071-DCC99F0221C4':
+            # PLANT BIOLOGY
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/ec5f63cf-d6d6-4af9-8b52-52b9450a5df4'
+        # Med.Instrument.Device& Equip.
+        elif gtr_research_topic['id'] == '16595C3C-600D-4AD2-B394-16E06F96495F':
+            # In Situ/Laboratory Instruments
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/ff564c87-78f2-47eb-a857-a4bdc0a71ae5'
+        # Mathematical Aspects of OR
+        elif gtr_research_topic['id'] == 'F0F2F1A7-287A-4B6F-AA0E-74A55BB4DEE4':
+            # MATHEMATICS
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/c94e9340-2fe5-4254-bcbd-8d8aaed45f6e'
+        # Community Art inc A & H
+        elif gtr_research_topic['id'] == '62F4842F-55F4-41C6-A77A-572005E91429':
+            # FINE ARTS
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/ae0ade63-4d8b-4908-9821-a2ec0bec85bc'        
+        # Optical Devices & Subsystems
+        elif gtr_research_topic['id'] == '66CE6BAB-875D-4F4D-B415-F93CA7A2C4CA':
+            # Earth Remote Sensing Instruments
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/6015ef7b-f3bd-49e1-9193-cc23db566b69'
+        # Imperial/Colonial History
+        elif gtr_research_topic['id'] == '319D6F57-4306-40E8-9F0A-84D514AAF7FC':
+            # SOCIAL SCIENCES
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/89ea7131-263f-4642-bbb5-09c65457ef3d'
         # Analytical Science
         elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
             return None
