@@ -2,7 +2,7 @@ import csv
 import json
 
 # id to start from number
-id_counter = 438
+id_counter = 504
 
 csvFilePath = r'projects.csv'
 jsonFilePath = r'projects.json'
