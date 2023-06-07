@@ -1862,12 +1862,22 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_topic['id'] == '319D6F57-4306-40E8-9F0A-84D514AAF7FC':
             # SOCIAL SCIENCES
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/89ea7131-263f-4642-bbb5-09c65457ef3d'
+        # Knowledge Management
         elif gtr_research_topic['id'] == 'EE390962-5CA1-4D76-A6D5-A303DED717E8':
-            # Knowledge Management
+            # KNOWLEDGE/DECISION SYSTEMS
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/20ed3fa4-20fa-4531-8b02-dceda8eac81f'
+        # Econ, Pol & Env Anthropology
         elif gtr_research_topic['id'] == 'AE63480E-6C03-439A-99F3-2BBCEC64D6A5':
-            # Econ, Pol & Env Anthropology
+            # ANTHROPOLOGY
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/a9251a0f-3144-44fe-8746-71e2b2e68ab4'
+        # Anthropological Methodology
+        elif gtr_research_topic['id'] == '3E2F513B-B936-4DF8-B28D-0ADC57F8BFC7':
+            # ANTHROPOLOGY
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a9251a0f-3144-44fe-8746-71e2b2e68ab4'
+        # Climate & Climate Change
+        elif gtr_research_topic['id'] == 'EE4457DB-92A3-44EA-8D5F-77013CC107E0':
+            # CLIMATE INDICATORS
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
         # Analytical Science
         elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
             return None
