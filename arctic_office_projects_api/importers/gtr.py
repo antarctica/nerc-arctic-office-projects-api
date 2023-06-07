@@ -15,7 +15,9 @@ from arctic_office_projects_api.errors import AppException
 from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.utils import generate_neutral_id
 from arctic_office_projects_api.models import CategoryScheme, CategoryTerm, Grant, GrantStatus, GrantCurrency, Organisation, Project, \
-    Allocation, Person, Participant, ParticipantRole, Categorisation
+    Allocation, Person, Participant, ParticipantRole
+# from arctic_office_projects_api.models import CategoryScheme, CategoryTerm, Grant, GrantStatus, GrantCurrency, Organisation, Project, \
+#     Allocation, Person, Participant, ParticipantRole, Categorisation
 
 
 # Exceptions
