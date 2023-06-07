@@ -354,6 +354,8 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
             "https://gtr.ukri.org/gtr/api/organisations/326B6518-42F3-4CE4-B7C6-8494C6105BF1": "https://api.ror.org/organizations?query=03rzp5127",
             # University of Groningen
             "https://gtr.ukri.org/gtr/api/organisations/326EF7F4-5944-472D-BC94-2CA4484AEE74": "https://api.ror.org/organizations?query=012p63287",
+            # Arctic University of Norway
+            "https://gtr.ukri.org/gtr/api/organisations/4CB92F40-4E51-4027-B354-8C9737DBBCAD": "https://api.ror.org/organizations?query=00wge5k78",
             # Unknown
             "https://gtr.ukri.org/gtr/api/organisations/F0C1AEFB-C222-4BF6-9CA3-8CF628494537": "https://api.ror.org/organizations",
         }
@@ -1592,10 +1594,6 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_topic['id'] == '62DCC1BF-B512-4BDB-A0C3-02BC17E15F6B':
             # BIOGEOCHEMICAL CYCLES
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/9015e65f-bbae-4855-a4b6-1bfa601752bd'
-        # Climate & Climate Change
-        elif gtr_research_topic['id'] == 'EE4457DB-92A3-44EA-8D5F-77013CC107E0':
-            # CLIMATE INDICATORS
-            return 'https://gcmd.earthdata.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
         # Hydrological Processes
         elif gtr_research_topic['id'] == 'D4F391DF-BCE0-47FA-BED7-78025F16B14D':
             # TERRESTRIAL HYDROSPHERE
@@ -1862,8 +1860,14 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/6015ef7b-f3bd-49e1-9193-cc23db566b69'
         # Imperial/Colonial History
         elif gtr_research_topic['id'] == '319D6F57-4306-40E8-9F0A-84D514AAF7FC':
-            # SOCIAL SCIENCES
+        # SOCIAL SCIENCES
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/89ea7131-263f-4642-bbb5-09c65457ef3d'
+        elif gtr_research_topic['id'] == 'EE390962-5CA1-4D76-A6D5-A303DED717E8':
+        # Knowledge Management
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/20ed3fa4-20fa-4531-8b02-dceda8eac81f'
+        elif gtr_research_topic['id'] == 'AE63480E-6C03-439A-99F3-2BBCEC64D6A5':
+        # Econ, Pol & Env Anthropology
+            return 'https://gcmd.earthdata.nasa.gov/kms/concept/a9251a0f-3144-44fe-8746-71e2b2e68ab4'
         # Analytical Science
         elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
             return None
