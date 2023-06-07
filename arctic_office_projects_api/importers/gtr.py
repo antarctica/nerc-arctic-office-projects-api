@@ -1860,7 +1860,7 @@ class GatewayToResearchGrantImporter:
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/6015ef7b-f3bd-49e1-9193-cc23db566b69'
         # Imperial/Colonial History
         elif gtr_research_topic['id'] == '319D6F57-4306-40E8-9F0A-84D514AAF7FC':
-        # SOCIAL SCIENCES
+            # SOCIAL SCIENCES
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/89ea7131-263f-4642-bbb5-09c65457ef3d'
         elif gtr_research_topic['id'] == 'EE390962-5CA1-4D76-A6D5-A303DED717E8':
         # Knowledge Management
