@@ -1342,15 +1342,15 @@ class GatewayToResearchGrantImporter:
         category_term_scheme_identifiers.extend(
             x for x in gcmd_subjects if x not in category_term_scheme_identifiers)
 
-        for category_term_scheme_identifier in category_term_scheme_identifiers:
+        # for category_term_scheme_identifier in category_term_scheme_identifiers:
 
-            # Save to category terms link table
-            # db.session.add(Categorisation(
-            #     neutral_id=generate_neutral_id(),
-            #     project=project,
-            #     category_term=CategoryTerm.query.filter_by(
-            #         scheme_identifier=category_term_scheme_identifier).one()
-            # ))
+        #     # Save to category terms link table
+        #     db.session.add(Categorisation(
+        #         neutral_id=generate_neutral_id(),
+        #         project=project,
+        #         category_term=CategoryTerm.query.filter_by(
+        #             scheme_identifier=category_term_scheme_identifier).one()
+        #     ))
 
         self._add_gtr_people(
             project=project,
