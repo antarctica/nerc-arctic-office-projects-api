@@ -1863,10 +1863,10 @@ class GatewayToResearchGrantImporter:
             # SOCIAL SCIENCES
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/89ea7131-263f-4642-bbb5-09c65457ef3d'
         elif gtr_research_topic['id'] == 'EE390962-5CA1-4D76-A6D5-A303DED717E8':
-        # Knowledge Management
+            # Knowledge Management
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/20ed3fa4-20fa-4531-8b02-dceda8eac81f'
         elif gtr_research_topic['id'] == 'AE63480E-6C03-439A-99F3-2BBCEC64D6A5':
-        # Econ, Pol & Env Anthropology
+            # Econ, Pol & Env Anthropology
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/a9251a0f-3144-44fe-8746-71e2b2e68ab4'
         # Analytical Science
         elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
