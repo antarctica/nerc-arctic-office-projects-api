@@ -2173,6 +2173,8 @@ class GatewayToResearchGrantImporter:
             return None
         elif gtr_research_subject['text'] == 'Environmental Engineering':
             return None
+        elif gtr_research_subject['text'] == 'Area Studies':
+            return None
 
         raise UnmappedGatewayToResearchProjectSubject(meta={
             'gtr_research_subject': {
