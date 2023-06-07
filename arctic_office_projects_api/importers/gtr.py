@@ -1345,12 +1345,12 @@ class GatewayToResearchGrantImporter:
         for category_term_scheme_identifier in category_term_scheme_identifiers:
 
             # Save to category terms link table
-            db.session.add(Categorisation(
-                neutral_id=generate_neutral_id(),
-                project=project,
-                category_term=CategoryTerm.query.filter_by(
-                    scheme_identifier=category_term_scheme_identifier).one()
-            ))
+            # db.session.add(Categorisation(
+            #     neutral_id=generate_neutral_id(),
+            #     project=project,
+            #     category_term=CategoryTerm.query.filter_by(
+            #         scheme_identifier=category_term_scheme_identifier).one()
+            # ))
 
         self._add_gtr_people(
             project=project,
@@ -1878,6 +1878,9 @@ class GatewayToResearchGrantImporter:
         elif gtr_research_topic['id'] == 'EE4457DB-92A3-44EA-8D5F-77013CC107E0':
             # CLIMATE INDICATORS
             return 'https://gcmd.earthdata.nasa.gov/kms/concept/23703b6b-ee15-4512-b5b2-f441547e2edf'
+        # Heritage Management
+        elif gtr_research_topic['id'] == 'AD75E543-5F70-43C2-A40D-4452373465C4':
+            return None
         # Analytical Science
         elif gtr_research_topic['id'] == '98EA7556-1427-44F9-84F3-BF99B7207302':
             return None
