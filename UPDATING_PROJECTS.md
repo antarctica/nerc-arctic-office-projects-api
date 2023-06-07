@@ -28,9 +28,9 @@ $ flask import grant gtr NE/I028858/1
 - make sure the correct json file is referenced in import_grants.py - approx line number 48
 
 - in the Heroku dashboard, run a console & enter
-'''shell
+```shell
 $ python arctic_office_projects_api/bulk_importer/import_grants.py
-'''
+```
 
 
 ###
