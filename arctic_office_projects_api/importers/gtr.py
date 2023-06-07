@@ -518,9 +518,9 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         self.surname = None
         if 'surname' in self.resource:
             self.surname = self.resource['surname']
-        self.orcid_id = None
-        if 'orcidId' in self.resource:
-            self.orcid_id = f"https://orcid.org/{self.resource['orcidId']}"
+        # self.orcid_id = None
+        # if 'orcidId' in self.resource:
+        #     self.orcid_id = f"https://orcid.org/{self.resource['orcidId']}"
 
     def _find_gtr_employer_link(self):
         """
