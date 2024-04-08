@@ -8,14 +8,10 @@ services:
       - .:/usr/src/app
     ports:
       - 9000:9000
-    environment:
-      FLASK_APP: manage.py
-      FLASK_ENV: development
-      # FLASK_ENV: testing
-      SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app
-      # SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-test-db:5432/app
+    env_file:
+      - ./.env
+    command: poetry run flask run --host 0.0.0.0 --port 9000
     # command: tail -f /dev/null
-    command: flask run --host 0.0.0.0 --port 9000
 
   app-db:
     image: postgres:11.1-alpine
@@ -31,7 +27,6 @@ services:
   # To run tests:
   # - switch database containers
   # - switch the env vars for the app
-  # - inside the app container run `poetry run flask test`
 
   # app-test-db:
   #   image: postgres:11.1-alpine

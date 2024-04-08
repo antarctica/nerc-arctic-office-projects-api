@@ -1,41 +1,56 @@
+import os
+
 # noinspection PyPackageRequirements
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
 # noinspection PyPackageRequirements
 from werkzeug.exceptions import NotFound, UnprocessableEntity
 from flask import Blueprint, jsonify, request, current_app as app
 
+from arctic_office_projects_api.utils import conditional_decorator
 from arctic_office_projects_api import auth
 from arctic_office_projects_api.schemas import CategorisationSchema
 from arctic_office_projects_api.models import Categorisation
 
-categorisations = Blueprint('categorisations', __name__)
+categorisations = Blueprint("categorisations", __name__)
+
+flask_env = os.getenv("FLASK_ENV")
+is_production = False
+if flask_env == "production" or flask_env == "staging":
+    is_production = True
 
 
-@categorisations.route('/categorisations')
-@auth()
+@categorisations.route("/categorisations")
+@conditional_decorator(auth(), is_production)
 def categorisations_list():
     """
     Returns all Categorisation resources
 
     The response is paginated.
     """
-    page = request.args.get('page', type=int)
+    page = request.args.get("page", type=int)
     if page is None:
         page = 1
 
-    _categorisations = Categorisation.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
-    payload = CategorisationSchema(many=True, paginate=True, include_data=(
-        'project',
-        'category',
-        'category.parent_category',
-        'category.category_scheme'
-    )).dump(_categorisations)
+    _categorisations = Categorisation.query.paginate(
+        page=page, per_page=app.config["APP_PAGE_SIZE"]
+    )
+    payload = CategorisationSchema(
+        many=True,
+        paginate=True,
+        include_data=(
+            "project",
+            "category",
+            "category.parent_category",
+            "category.category_scheme",
+        ),
+    ).dump(_categorisations)
 
     return jsonify(payload)
 
 
-@categorisations.route('/categorisations/<categorisation_id>')
-@auth()
+@categorisations.route("/categorisations/<categorisation_id>")
+@conditional_decorator(auth(), is_production)
 def categorisations_detail(categorisation_id: str):
     """
     Returns a specific Categorisation resource, specified by its Neutral ID
@@ -44,13 +59,17 @@ def categorisations_detail(categorisation_id: str):
     :param categorisation_id: neutral ID of a Categorisation resource
     """
     try:
-        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
-        payload = CategorisationSchema(include_data=(
-            'project',
-            'category',
-            'category.parent_category',
-            'category.category_scheme'
-        )).dump(categorisation)
+        categorisation = Categorisation.query.filter_by(
+            neutral_id=categorisation_id
+        ).one()
+        payload = CategorisationSchema(
+            include_data=(
+                "project",
+                "category",
+                "category.parent_category",
+                "category.category_scheme",
+            )
+        ).dump(categorisation)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -58,8 +77,8 @@ def categorisations_detail(categorisation_id: str):
         raise UnprocessableEntity()
 
 
-@categorisations.route('/categorisations/<categorisation_id>/relationships/projects')
-@auth()
+@categorisations.route("/categorisations/<categorisation_id>/relationships/projects")
+@conditional_decorator(auth(), is_production)
 def categorisations_relationship_projects(categorisation_id: str):
     """
     Returns Project resource linkages associated with a specific Categorisation resource, specified by its Neutral ID
@@ -68,8 +87,10 @@ def categorisations_relationship_projects(categorisation_id: str):
     :param categorisation_id: neutral ID of a CategoryTerm resource
     """
     try:
-        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
-        payload = CategorisationSchema(resource_linkage='project').dump(categorisation)
+        categorisation = Categorisation.query.filter_by(
+            neutral_id=categorisation_id
+        ).one()
+        payload = CategorisationSchema(resource_linkage="project").dump(categorisation)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -77,8 +98,8 @@ def categorisations_relationship_projects(categorisation_id: str):
         raise UnprocessableEntity()
 
 
-@categorisations.route('/categorisations/<categorisation_id>/relationships/categories')
-@auth()
+@categorisations.route("/categorisations/<categorisation_id>/relationships/categories")
+@conditional_decorator(auth(), is_production)
 def categorisations_relationship_category_terms(categorisation_id: str):
     """
     Returns CategoryTerm resource linkages associated with a specific Categorisation resource, specified by its Neutral
@@ -88,8 +109,10 @@ def categorisations_relationship_category_terms(categorisation_id: str):
     :param categorisation_id: neutral ID of a CategoryTerm resource
     """
     try:
-        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
-        payload = CategorisationSchema(resource_linkage='category').dump(categorisation)
+        categorisation = Categorisation.query.filter_by(
+            neutral_id=categorisation_id
+        ).one()
+        payload = CategorisationSchema(resource_linkage="category").dump(categorisation)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -97,8 +120,8 @@ def categorisations_relationship_category_terms(categorisation_id: str):
         raise UnprocessableEntity()
 
 
-@categorisations.route('/categorisations/<categorisation_id>/projects')
-@auth()
+@categorisations.route("/categorisations/<categorisation_id>/projects")
+@conditional_decorator(auth(), is_production)
 def categorisations_projects(categorisation_id: str):
     """
     Returns Project resources associated with a specific Categorisation resource, specified by its Neutral ID
@@ -107,8 +130,12 @@ def categorisations_projects(categorisation_id: str):
     :param categorisation_id: neutral ID of a CategoryTerm resource
     """
     try:
-        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
-        payload = CategorisationSchema(related_resource='project', many_related=False).dump(categorisation)
+        categorisation = Categorisation.query.filter_by(
+            neutral_id=categorisation_id
+        ).one()
+        payload = CategorisationSchema(
+            related_resource="project", many_related=False
+        ).dump(categorisation)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -116,8 +143,8 @@ def categorisations_projects(categorisation_id: str):
         raise UnprocessableEntity()
 
 
-@categorisations.route('/categorisations/<categorisation_id>/categories')
-@auth()
+@categorisations.route("/categorisations/<categorisation_id>/categories")
+@conditional_decorator(auth(), is_production)
 def categorisations_category_terms(categorisation_id: str):
     """
     Returns CategoryTerm resources associated with a specific Categorisation resource, specified by its Neutral ID
@@ -126,8 +153,12 @@ def categorisations_category_terms(categorisation_id: str):
     :param categorisation_id: neutral ID of a CategoryTerm resource
     """
     try:
-        categorisation = Categorisation.query.filter_by(neutral_id=categorisation_id).one()
-        payload = CategorisationSchema(related_resource='category', many_related=False).dump(categorisation)
+        categorisation = Categorisation.query.filter_by(
+            neutral_id=categorisation_id
+        ).one()
+        payload = CategorisationSchema(
+            related_resource="category", many_related=False
+        ).dump(categorisation)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()

@@ -3,8 +3,14 @@ from http import HTTPStatus
 from uuid import uuid4
 
 from flask import make_response, jsonify, Response
+
 # noinspection PyPackageRequirements
-from werkzeug.exceptions import BadRequest, NotFound, InternalServerError, UnprocessableEntity
+from werkzeug.exceptions import (
+    BadRequest,
+    NotFound,
+    InternalServerError,
+    UnprocessableEntity,
+)
 
 
 class AppException(Exception):
@@ -15,8 +21,9 @@ class AppException(Exception):
 
     In most cases error specifics can be specified when creating each class instance.
     """
+
     code = None
-    title = 'Application Error'
+    title = "Application Error"
     detail = None
     meta = {}
 
@@ -54,16 +61,14 @@ class AppException(Exception):
         :rtype dict
         :return: error as dict
         """
-        error = {
-            'title': self.title
-        }
+        error = {"title": self.title}
 
         if self.code is not None:
-            error['code'] = self.code
+            error["code"] = self.code
         if self.detail is not None:
-            error['detail'] = self.detail
+            error["detail"] = self.detail
         if self.meta:
-            error['meta'] = self.meta
+            error["meta"] = self.meta
         return error
 
     def json(self) -> str:
@@ -88,6 +93,7 @@ class ApiException(AppException):
     to return the error as a Flask response. Where further processing or handling of the error is needed the 'json()'
     method can be used to return the error as a dict.
     """
+
     status = HTTPStatus.INTERNAL_SERVER_ERROR
     links = {}
 
@@ -99,7 +105,7 @@ class ApiException(AppException):
         title: str = None,
         detail: str = None,
         meta: dict = None,
-        about_link: str = None
+        about_link: str = None,
     ):
         """
         :type status: HTTPStatus
@@ -122,9 +128,7 @@ class ApiException(AppException):
         if status is not None:
             self.status = status
         if about_link is not None:
-            self.links = {
-                'about': about_link
-            }
+            self.links = {"about": about_link}
 
     def dict(self) -> dict:
         """
@@ -135,11 +139,11 @@ class ApiException(AppException):
         """
         error = super().dict()
 
-        error['id'] = str(self.id)
-        error['status'] = self.status.value
+        error["id"] = str(self.id)
+        error["status"] = self.status.value
 
-        if 'about' in self.links.keys():
-            error['links'] = {'about': self.links['about']}
+        if "about" in self.links.keys():
+            error["links"] = {"about": self.links["about"]}
 
         return error
 
@@ -150,9 +154,7 @@ class ApiException(AppException):
         :rtype Response
         :return: Flask response containing the error, formatted as JSON
         """
-        payload = {
-            'errors': [self.dict()]
-        }
+        payload = {"errors": [self.dict()]}
         return make_response(jsonify(payload), self.status.value)
 
 
@@ -160,36 +162,40 @@ class APiBadRequestError(ApiException):
     """
     Represents a generic request error
     """
+
     status = HTTPStatus.BAD_REQUEST
-    title = 'Bad Request'
-    detail = 'Check your request and try again'
+    title = "Bad Request"
+    detail = "Check your request and try again"
 
 
 class APiInternalServerError(ApiException):
     """
     Represents a generic internal error
     """
+
     status = HTTPStatus.INTERNAL_SERVER_ERROR
-    title = 'Internal Server Error'
-    detail = 'Please try again in a few minutes or seek support'
+    title = "Internal Server Error"
+    detail = "Please try again in a few minutes or seek support"
 
 
 class ApiNotFoundError(ApiException):
     """
     Represents a generic not found error
     """
+
     status = HTTPStatus.NOT_FOUND
-    title = 'Not Found'
-    detail = 'The requested URL was not found, check the address and try again'
+    title = "Not Found"
+    detail = "The requested URL was not found, check the address and try again"
 
 
 class ApiUnprocessableEntityError(ApiException):
     """
     Represents a generic unprocessable entity error
     """
+
     status = HTTPStatus.UNPROCESSABLE_ENTITY
-    title = 'Unprocessable Entity'
-    detail = 'Your request could not be processed, check your request or seek support'
+    title = "Unprocessable Entity"
+    detail = "Your request could not be processed, check your request or seek support"
 
 
 # noinspection PyUnusedLocal

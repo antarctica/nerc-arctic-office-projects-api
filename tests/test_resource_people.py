@@ -1,5 +1,7 @@
 from http import HTTPStatus
 
+from flask_azure_oauth.mocks.tokens import TestJwt
+
 from arctic_office_projects_api.errors import ApiNotFoundError
 
 from tests.base_test import BaseResourceTestCase
@@ -356,7 +358,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
             }
         }
 
-        token = self.util_create_auth_token()
+        token = TestJwt(app=self.app)
         response = self.client.get(
             '/people',
             base_url='http://localhost:9000',
@@ -598,7 +600,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
             }
         }
 
-        token = self.util_create_auth_token()
+        token = TestJwt(app=self.app)
         response = self.client.get(
             '/people/01DB2ECBP2MFB0DH3EF3PH74R0',
             headers={'authorization': f"bearer {token}"},
@@ -616,7 +618,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
 
         for person_id in ['', 'unknown']:
             with self.subTest(person_id=person_id):
-                token = self.util_create_auth_token()
+                token = TestJwt(app=self.app)
                 response = self.client.get(
                     f"/people/{person_id}",
                     base_url='http://localhost:9000',
@@ -639,7 +641,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
             }
         }
 
-        token = self.util_create_auth_token()
+        token = TestJwt(app=self.app)
         response = self.client.get(
             '/people/01DB2ECBP2MFB0DH3EF3PH74R0/relationships/organisations',
             headers={'authorization': f"bearer {token}"},
@@ -663,7 +665,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
             }
         }
 
-        token = self.util_create_auth_token()
+        token = TestJwt(app=self.app)
         response = self.client.get(
             '/people/01DB2ECBP2MFB0DH3EF3PH74R0/relationships/participants',
             headers={'authorization': f"bearer {token}"},
@@ -719,7 +721,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
             }
         }
 
-        token = self.util_create_auth_token()
+        token = TestJwt(app=self.app)
         response = self.client.get(
             '/people/01DB2ECBP2MFB0DH3EF3PH74R0/participants',
             headers={'authorization': f"bearer {token}"},
@@ -772,7 +774,7 @@ class PeopleResourceTestCase(BaseResourceTestCase):
             }
         }
 
-        token = self.util_create_auth_token()
+        token = TestJwt(app=self.app)
         response = self.client.get(
             '/people/01DB2ECBP2MFB0DH3EF3PH74R0/organisations',
             headers={'authorization': f"bearer {token}"},

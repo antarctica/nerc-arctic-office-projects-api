@@ -6,6 +6,7 @@ from typing import Optional
 
 from faker import Faker
 from faker.providers import BaseProvider
+
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
 from urllib.parse import quote_plus
@@ -17,84 +18,44 @@ class UKRICouncil(Enum):
     """
     Represents the research councils within UK Research and Innovation (UKRI)
     """
-    AHRC = {
-        'acronym': 'AHRC',
-        'prefix': 'AH'
-    }
-    BBSRC = {
-        'acronym': 'BBSRC',
-        'prefix': 'BB'
-    }
-    EPSRC = {
-        'acronym': 'EPSRC',
-        'prefix': 'EP'
-    }
-    ESRC = {
-        'acronym': 'ESRC',
-        'prefix': 'ES'
-    }
-    MRC = {
-        'acronym': 'MRC',
-        'prefix': 'G'
-    }
-    NERC = {
-        'acronym': 'NERC',
-        'prefix': 'NE'
-    }
-    STFC = {
-        'acronym': 'STFC',
-        'prefix': 'ST'
-    }
+
+    AHRC = {"acronym": "AHRC", "prefix": "AH"}
+    BBSRC = {"acronym": "BBSRC", "prefix": "BB"}
+    EPSRC = {"acronym": "EPSRC", "prefix": "EP"}
+    ESRC = {"acronym": "ESRC", "prefix": "ES"}
+    MRC = {"acronym": "MRC", "prefix": "G"}
+    NERC = {"acronym": "NERC", "prefix": "NE"}
+    STFC = {"acronym": "STFC", "prefix": "ST"}
 
 
 class GrantCurrency(Enum):
     """
     Represents the various currencies of a research grant
     """
-    GBP = {
-        'iso_4217_code': 'GBP',
-        'major_symbol': '£'
-    }
-    EUR = {
-        'iso_4217_code': 'EUR',
-        'major_symbol': '€'
-    }
-    NOK = {
-        'iso_4217_code': 'NOK',
-        'major_symbol': 'kr'
-    }
-    CAD = {
-        'iso_4217_code': 'CAD',
-        'major_symbol': '$'
-    }
+
+    GBP = {"iso_4217_code": "GBP", "major_symbol": "£"}
+    EUR = {"iso_4217_code": "EUR", "major_symbol": "€"}
+    NOK = {"iso_4217_code": "NOK", "major_symbol": "kr"}
+    CAD = {"iso_4217_code": "CAD", "major_symbol": "$"}
 
 
 class GrantType(Enum):
-    UKRI_STANDARD_GRANT = 'ukri-standard-grant'
-    UKRI_LARGE_GRANT = 'ukri-large-grant'
-    EU_STANDARD_GRANT = 'eu-standard-grant'
-    OTHER = 'other-grant'
+    UKRI_STANDARD_GRANT = "ukri-standard-grant"
+    UKRI_LARGE_GRANT = "ukri-large-grant"
+    EU_STANDARD_GRANT = "eu-standard-grant"
+    OTHER = "other-grant"
 
 
 class GrantStatus(Enum):
     """
     Represents the various states of a research grant
     """
-    Accepted = {
-        'title': 'accepted'
-    }
-    Active = {
-        'title': 'active'
-    }
-    Approved = {
-        'title': 'approved'
-    }
-    Authorised = {
-        'title': 'active'
-    }
-    Closed = {
-        'title': 'closed'
-    }
+
+    Accepted = {"title": "accepted"}
+    Active = {"title": "active"}
+    Approved = {"title": "approved"}
+    Authorised = {"title": "active"}
+    Closed = {"title": "closed"}
 
 
 class Provider(BaseProvider):
@@ -119,19 +80,27 @@ class Provider(BaseProvider):
         :rtype: GrantCurrency
         :return: member of the GrantCurrency enumerated class, representing the currency of the funds for a grant
         """
-        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
+        if (
+            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
+        ):
             return GrantCurrency.GBP
         if grant_type is GrantType.EU_STANDARD_GRANT:
             return GrantCurrency.EUR
 
-        return GrantCurrency(self.random_element({
-            GrantCurrency.GBP: 0.875,
-            GrantCurrency.EUR: 0.10,
-            GrantCurrency.NOK: 0.02,
-            GrantCurrency.CAD: 0.005
-        }))
+        return GrantCurrency(
+            self.random_element(
+                {
+                    GrantCurrency.GBP: 0.875,
+                    GrantCurrency.EUR: 0.10,
+                    GrantCurrency.NOK: 0.02,
+                    GrantCurrency.CAD: 0.005,
+                }
+            )
+        )
 
-    def grant_reference(self, grant_type: GrantType, ukri_council: Optional[UKRICouncil]) -> str:
+    def grant_reference(
+        self, grant_type: GrantType, ukri_council: Optional[UKRICouncil]
+    ) -> str:
         """
         Generates a fake grant reference, based on the type of grant and optionally UKRI council
 
@@ -144,15 +113,14 @@ class Provider(BaseProvider):
         :rtype: str
         :return: fake grant reference
         """
-        if (grant_type is GrantType.UKRI_LARGE_GRANT and ukri_council is not None) or \
-                (grant_type is GrantType.UKRI_STANDARD_GRANT and ukri_council is not None):
-            version = self.random_element({
-                1: 0.98,
-                2: 0.016,
-                3: 0.004
-            })
-            return f"{ UKRICouncil(ukri_council).value['prefix'] }/{ self.faker.random_uppercase_letter() }" \
+        if (grant_type is GrantType.UKRI_LARGE_GRANT and ukri_council is not None) or (
+            grant_type is GrantType.UKRI_STANDARD_GRANT and ukri_council is not None
+        ):
+            version = self.random_element({1: 0.98, 2: 0.016, 3: 0.004})
+            return (
+                f"{ UKRICouncil(ukri_council).value['prefix'] }/{ self.faker.random_uppercase_letter() }"
                 f"{ str(self.generator.random_int(min=1, max=999999)).zfill(5) }/{ version }"
+            )
         elif grant_type is GrantType.EU_STANDARD_GRANT:
             return str(self.generator.random_int(min=1, max=9999999)).zfill(6)
 
@@ -176,14 +144,13 @@ class Provider(BaseProvider):
         :return: total amount of money awarded through a grant
         """
         grants_ranges = {
-            'UKRI_STANDARD_GRANT': (1000, 80000),
-            'UKRI_LARGE_GRANT': (3000000, 3700000),
-            'EU_STANDARD_GRANT': (2000000, 10000000),
-            'OTHER': (100, 300000)
+            "UKRI_STANDARD_GRANT": (1000, 80000),
+            "UKRI_LARGE_GRANT": (3000000, 3700000),
+            "EU_STANDARD_GRANT": (2000000, 10000000),
+            "OTHER": (100, 300000),
         }
         total_funds = self.generator.random_int(
-            min=grants_ranges[grant_type.name][0],
-            max=grants_ranges[grant_type.name][1]
+            min=grants_ranges[grant_type.name][0], max=grants_ranges[grant_type.name][1]
         )
         # Round to nearest 100
         return int(math.floor(total_funds / 100.0)) * 100
@@ -234,18 +201,24 @@ class Provider(BaseProvider):
         :return: An identifier. For UKRI large/standard grants, an identifier for a UKRI council, for EU grants, an
         identifier for the EU, for 'other' grants, any non-None value indicates an existing funder should be used.
         """
-        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
-            return UKRICouncil(self.random_element({
-                UKRICouncil.AHRC: 3.4,
-                UKRICouncil.BBSRC: 1.9,
-                UKRICouncil.EPSRC: 1.7,
-                UKRICouncil.ESRC: 1.7,
-                UKRICouncil.MRC: 0,
-                UKRICouncil.NERC: 91,
-                UKRICouncil.STFC: 0.3
-            })).name
+        if (
+            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
+        ):
+            return UKRICouncil(
+                self.random_element(
+                    {
+                        UKRICouncil.AHRC: 3.4,
+                        UKRICouncil.BBSRC: 1.9,
+                        UKRICouncil.EPSRC: 1.7,
+                        UKRICouncil.ESRC: 1.7,
+                        UKRICouncil.MRC: 0,
+                        UKRICouncil.NERC: 91,
+                        UKRICouncil.STFC: 0.3,
+                    }
+                )
+            ).name
         elif grant_type is GrantType.EU_STANDARD_GRANT:
-            return 'EU'
+            return "EU"
         elif grant_type is GrantType.OTHER:
             return self.random_element({True: 0.8, None: 0.2})
 
@@ -266,9 +239,13 @@ class Provider(BaseProvider):
         :rtype: str
         :return: fake grant website
         """
-        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
+        if (
+            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
+        ):
             return f"https://gtr.ukri.org/projects?ref={ quote_plus(grant_reference) }"
         elif grant_type is GrantType.EU_STANDARD_GRANT:
-            return f"https://cordis.europa.eu/project/rcn/{ quote_plus(grant_reference) }"
+            return (
+                f"https://cordis.europa.eu/project/rcn/{ quote_plus(grant_reference) }"
+            )
 
         return self.faker.uri()

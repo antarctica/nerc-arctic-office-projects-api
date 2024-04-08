@@ -1,47 +1,60 @@
+import os
+
 # noinspection PyPackageRequirements
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
 # noinspection PyPackageRequirements
 from werkzeug.exceptions import NotFound, UnprocessableEntity
 from flask import Blueprint, jsonify, request, current_app as app
 
+from arctic_office_projects_api.utils import conditional_decorator
 from arctic_office_projects_api import auth
 from arctic_office_projects_api.schemas import ProjectSchema
 from arctic_office_projects_api.models import Project
 
-projects = Blueprint('projects', __name__)
+projects = Blueprint("projects", __name__)
+
+flask_env = os.getenv("FLASK_ENV")
+is_production = False
+if flask_env == "production" or flask_env == "staging":
+    is_production = True
 
 
-@projects.route('/projects')
-@auth()
+@projects.route("/projects")
+@conditional_decorator(auth(), is_production)
 def projects_list():
     """
     Returns all Project resources
 
     The response is paginated.
     """
-    page = request.args.get('page', type=int)
+    page = request.args.get("page", type=int)
     if page is None:
         page = 1
 
-    projects = Project.query.paginate(page=page, per_page=app.config['APP_PAGE_SIZE'])
-    payload = ProjectSchema(many=True, paginate=True, include_data=(
-        'participants',
-        'participants.person',
-        'participants.person.organisation',
-        'allocations',
-        'allocations.grant',
-        'allocations.grant.funder',
-        'categorisations',
-        'categorisations.category',
-        'categorisations.category.category_scheme',
-        'categorisations.category.parent_category'
-    )).dump(projects)
+    projects = Project.query.paginate(page=page, per_page=app.config["APP_PAGE_SIZE"])
+    payload = ProjectSchema(
+        many=True,
+        paginate=True,
+        include_data=(
+            "participants",
+            "participants.person",
+            "participants.person.organisation",
+            "allocations",
+            "allocations.grant",
+            "allocations.grant.funder",
+            "categorisations",
+            "categorisations.category",
+            "categorisations.category.category_scheme",
+            "categorisations.category.parent_category",
+        ),
+    ).dump(projects)
 
     return jsonify(payload)
 
 
-@projects.route('/projects/<project_id>')
-@auth()
+@projects.route("/projects/<project_id>")
+@conditional_decorator(auth(), is_production)
 def projects_detail(project_id: str):
     """
     Returns a specific Project resource, specified by its Neutral ID
@@ -51,18 +64,20 @@ def projects_detail(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(include_data=(
-            'participants',
-            'participants.person',
-            'participants.person.organisation',
-            'allocations',
-            'allocations.grant',
-            'allocations.grant.funder',
-            'categorisations',
-            'categorisations.category',
-            'categorisations.category.category_scheme',
-            'categorisations.category.parent_category'
-        )).dump(project)
+        payload = ProjectSchema(
+            include_data=(
+                "participants",
+                "participants.person",
+                "participants.person.organisation",
+                "allocations",
+                "allocations.grant",
+                "allocations.grant.funder",
+                "categorisations",
+                "categorisations.category",
+                "categorisations.category.category_scheme",
+                "categorisations.category.parent_category",
+            )
+        ).dump(project)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -70,8 +85,8 @@ def projects_detail(project_id: str):
         raise UnprocessableEntity()
 
 
-@projects.route('/projects/<project_id>/relationships/participants')
-@auth()
+@projects.route("/projects/<project_id>/relationships/participants")
+@conditional_decorator(auth(), is_production)
 def projects_relationship_participants(project_id: str):
     """
     Returns Participant resource linkages associated with a specific Project resource, specified by its Neutral ID
@@ -81,7 +96,7 @@ def projects_relationship_participants(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(resource_linkage='participants').dump(project)
+        payload = ProjectSchema(resource_linkage="participants").dump(project)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -89,8 +104,8 @@ def projects_relationship_participants(project_id: str):
         raise UnprocessableEntity()
 
 
-@projects.route('/projects/<project_id>/relationships/allocations')
-@auth()
+@projects.route("/projects/<project_id>/relationships/allocations")
+@conditional_decorator(auth(), is_production)
 def projects_relationship_allocations(project_id: str):
     """
     Returns Allocation resource linkages associated with a specific Project resource, specified by its Neutral ID
@@ -100,7 +115,7 @@ def projects_relationship_allocations(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(resource_linkage='allocations').dump(project)
+        payload = ProjectSchema(resource_linkage="allocations").dump(project)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -108,8 +123,8 @@ def projects_relationship_allocations(project_id: str):
         raise UnprocessableEntity()
 
 
-@projects.route('/projects/<project_id>/participants')
-@auth()
+@projects.route("/projects/<project_id>/participants")
+@conditional_decorator(auth(), is_production)
 def projects_participants(project_id: str):
     """
     Returns Participant resources associated with a specific Project resource, specified by its Neutral ID
@@ -119,7 +134,9 @@ def projects_participants(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(related_resource='participants', many_related=True).dump(project)
+        payload = ProjectSchema(
+            related_resource="participants", many_related=True
+        ).dump(project)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -127,8 +144,8 @@ def projects_participants(project_id: str):
         raise UnprocessableEntity()
 
 
-@projects.route('/projects/<project_id>/allocations')
-@auth()
+@projects.route("/projects/<project_id>/allocations")
+@conditional_decorator(auth(), is_production)
 def projects_allocations(project_id: str):
     """
     Returns Allocation resources associated with a specific Project resource, specified by its Neutral ID
@@ -138,7 +155,9 @@ def projects_allocations(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(related_resource='allocations', many_related=True).dump(project)
+        payload = ProjectSchema(related_resource="allocations", many_related=True).dump(
+            project
+        )
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -146,8 +165,8 @@ def projects_allocations(project_id: str):
         raise UnprocessableEntity()
 
 
-@projects.route('/projects/<project_id>/relationships/categorisations')
-@auth()
+@projects.route("/projects/<project_id>/relationships/categorisations")
+@conditional_decorator(auth(), is_production)
 def projects_relationship_categorisations(project_id: str):
     """
     Returns Categorisation resource linkages associated with a specific Project resource, specified by its Neutral ID
@@ -157,7 +176,7 @@ def projects_relationship_categorisations(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(resource_linkage='categorisations').dump(project)
+        payload = ProjectSchema(resource_linkage="categorisations").dump(project)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()
@@ -165,8 +184,8 @@ def projects_relationship_categorisations(project_id: str):
         raise UnprocessableEntity()
 
 
-@projects.route('/projects/<project_id>/categorisations')
-@auth()
+@projects.route("/projects/<project_id>/categorisations")
+@conditional_decorator(auth(), is_production)
 def projects_categorisations(project_id: str):
     """
     Returns Categorisation resources associated with a specific Project resource, specified by its Neutral ID
@@ -176,7 +195,9 @@ def projects_categorisations(project_id: str):
     """
     try:
         project = Project.query.filter_by(neutral_id=project_id).one()
-        payload = ProjectSchema(related_resource='categorisations', many_related=True).dump(project)
+        payload = ProjectSchema(
+            related_resource="categorisations", many_related=True
+        ).dump(project)
         return jsonify(payload)
     except NoResultFound:
         raise NotFound()

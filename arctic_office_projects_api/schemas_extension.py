@@ -2,9 +2,12 @@ from datetime import datetime
 from enum import Enum
 from typing import Union, Optional
 
-from flask_sqlalchemy import Pagination, Model
+from flask_sqlalchemy.model import Model
+from flask_sqlalchemy.pagination import Pagination
+
 # noinspection PyPackageRequirements
 from marshmallow import post_dump
+
 # noinspection PyPackageRequirements
 from marshmallow.fields import Field
 from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
@@ -45,20 +48,20 @@ class Schema(_Schema):
         self.related_resource = None
         self.many_related = False
 
-        if 'paginate' in kwargs:
-            self.paginate = kwargs['paginate']
-            del kwargs['paginate']
+        if "paginate" in kwargs:
+            self.paginate = kwargs["paginate"]
+            del kwargs["paginate"]
 
-        if 'resource_linkage' in kwargs:
-            self.resource_linkage = kwargs['resource_linkage']
-            del kwargs['resource_linkage']
-        if 'related_resource' in kwargs:
-            self.related_resource = kwargs['related_resource']
-            kwargs['include_data'] = (self.related_resource,)
-            del kwargs['related_resource']
-        if 'many_related' in kwargs:
-            self.many_related = kwargs['many_related']
-            del kwargs['many_related']
+        if "resource_linkage" in kwargs:
+            self.resource_linkage = kwargs["resource_linkage"]
+            del kwargs["resource_linkage"]
+        if "related_resource" in kwargs:
+            self.related_resource = kwargs["related_resource"]
+            kwargs["include_data"] = (self.related_resource,)
+            del kwargs["related_resource"]
+        if "many_related" in kwargs:
+            self.many_related = kwargs["many_related"]
+            del kwargs["many_related"]
 
         super().__init__(*args, **kwargs)
 
@@ -77,29 +80,37 @@ class Schema(_Schema):
         :rtype dict
         :return: top-level links
         """
-        links = {
-            'self': None
-        }
+        links = {"self": None}
 
         if many:
             if self.opts.self_url_many:
-                links['self'] = self.generate_url(self.opts.self_url_many)
+                links["self"] = self.generate_url(self.opts.self_url_many)
 
                 if self.paginate:
-                    links['self'] = self.generate_url(self.opts.self_url_many, page=self.current_page)
+                    links["self"] = self.generate_url(
+                        self.opts.self_url_many, page=self.current_page
+                    )
         else:
             if self.opts.self_url:
-                links['self'] = data.get('links', {}).get('self', None)
+                links["self"] = data.get("links", {}).get("self", None)
 
         if self.paginate:
-            links['prev'] = None
-            links['next'] = None
-            links['first'] = self.generate_url(self.opts.self_url_many, page=self.first_page)
-            links['last'] = self.generate_url(self.opts.self_url_many, page=self.last_page)
+            links["prev"] = None
+            links["next"] = None
+            links["first"] = self.generate_url(
+                self.opts.self_url_many, page=self.first_page
+            )
+            links["last"] = self.generate_url(
+                self.opts.self_url_many, page=self.last_page
+            )
             if self.previous_page is not None:
-                links['prev'] = self.generate_url(self.opts.self_url_many, page=self.previous_page)
+                links["prev"] = self.generate_url(
+                    self.opts.self_url_many, page=self.previous_page
+                )
             if self.next_page is not None:
-                links['next'] = self.generate_url(self.opts.self_url_many, page=self.next_page)
+                links["next"] = self.generate_url(
+                    self.opts.self_url_many, page=self.next_page
+                )
 
         return links
 
@@ -124,7 +135,7 @@ class Schema(_Schema):
         obj: Union[list, Pagination],
         many: bool = None,
         update_fields: bool = True,
-        **kwargs
+        **kwargs,
     ) -> dict:
         """
         Overloaded implementation of the 'dump' method in the marshmallow default 'schema' class
@@ -146,7 +157,9 @@ class Schema(_Schema):
         """
         if self.paginate:
             if not isinstance(obj, Pagination):
-                raise ValueError("Pagination dumping requires a FlaskSQLAlchemy pagination object.")
+                raise ValueError(
+                    "Pagination dumping requires a FlaskSQLAlchemy pagination object."
+                )
 
             self.current_page = obj.page
             self.last_page = obj.pages
@@ -181,39 +194,50 @@ class Schema(_Schema):
 
         if self.resource_linkage is not None:
             if many:
-                raise RuntimeError('A resource linkage can\'t be returned for multiple resources')
+                raise RuntimeError(
+                    "A resource linkage can't be returned for multiple resources"
+                )
 
-            if self.resource_linkage in response['data']['relationships']:
-                return response['data']['relationships'][self.resource_linkage]
+            if self.resource_linkage in response["data"]["relationships"]:
+                return response["data"]["relationships"][self.resource_linkage]
 
             raise KeyError(f"No relationship found for '{ self.resource_linkage }'")
 
         if self.related_resource is not None:
             # Inflect related resource so it can be found in pre-generated output
-            related_resource = self.related_resource.replace('_', '-')
+            related_resource = self.related_resource.replace("_", "-")
 
             if many:
-                raise RuntimeError('A related resource response can\'t be returned for multiple resources')
+                raise RuntimeError(
+                    "A related resource response can't be returned for multiple resources"
+                )
 
-            if related_resource in response['data']['relationships']:
-                if 'links' in response['data']['relationships'][related_resource]:
-                    if 'related' in response['data']['relationships'][related_resource]['links']:
+            if related_resource in response["data"]["relationships"]:
+                if "links" in response["data"]["relationships"][related_resource]:
+                    if (
+                        "related"
+                        in response["data"]["relationships"][related_resource]["links"]
+                    ):
                         _response = {
-                            'data': [],
-                            'links': {
-                                'self': response['data']['relationships'][related_resource]['links']['related']
-                            }
+                            "data": [],
+                            "links": {
+                                "self": response["data"]["relationships"][
+                                    related_resource
+                                ]["links"]["related"]
+                            },
                         }
                         if not self.many_related:
-                            _response['data'] = None
+                            _response["data"] = None
 
-                        if 'included' in response:
-                            _response['data'] = response['included']
+                        if "included" in response:
+                            _response["data"] = response["included"]
                             if not self.many_related:
-                                _response['data'] = _response['data'][0]
+                                _response["data"] = _response["data"][0]
 
                         return _response
-                    raise KeyError(f"No related resource link found for '{related_resource}' relationship")
+                    raise KeyError(
+                        f"No related resource link found for '{related_resource}' relationship"
+                    )
                 raise KeyError(f"No links found for '{related_resource}' relationship")
             raise KeyError(f"No relationship found for '{related_resource}'")
 
@@ -239,7 +263,7 @@ class Schema(_Schema):
             :rtype str
             :return: converted field name
             """
-            return field.replace('_', '-')
+            return field.replace("_", "-")
 
         strict = True
         inflect = _inflection
@@ -268,7 +292,7 @@ class Relationship(_Relationship):
         :rtype str
         :return: generated URL
         """
-        view_kwargs['_external'] = True
+        view_kwargs["_external"] = True
         return super().get_url(obj, view_name, view_kwargs)
 
 
@@ -276,6 +300,7 @@ class DateRangeField(Field):
     """
     Custom Marshmallow field for the PostgreSQL DateRange class
     """
+
     def _serialize(self, value: DateRange, attr: str, obj, **kwargs) -> dict:
         """
         When serialising, the DateRange is converted into a dict containing a ISO 8601 date interval, covering the date
@@ -297,8 +322,8 @@ class DateRangeField(Field):
         """
         instant_start = None
         instant_end = None
-        interval_start = '..'
-        interval_end = '..'
+        interval_start = ".."
+        interval_end = ".."
 
         if value.lower is not None:
             instant_start = value.lower.isoformat()
@@ -308,9 +333,9 @@ class DateRangeField(Field):
             interval_end = instant_end
 
         return {
-            'interval': f"{ interval_start }/{ interval_end }",
-            'start-instant': instant_start,
-            'end-instant': instant_end
+            "interval": f"{ interval_start }/{ interval_end }",
+            "start-instant": instant_start,
+            "end-instant": instant_end,
         }
 
     # noinspection PyMethodOverriding
@@ -327,18 +352,25 @@ class DateRangeField(Field):
         :rtype: DateRange
         :return: a DateRange instance
         """
-        if 'interval' not in value.keys():
+        if "interval" not in value.keys():
             raise KeyError(f"No 'interval' property in { attr } to cover date range")
 
-        interval = value['interval'].split('/')
+        interval = value["interval"].split("/")
         if len(interval != 2):
-            raise ValueError(f"Interval '{ value['interval'] }' is not in the form [start date]/[end date]")
+            raise ValueError(
+                f"Interval '{ value['interval'] }' is not in the form [start date]/[end date]"
+            )
 
         try:
-            interval = DateRange(datetime.strptime(interval[0], "%Y-%m-%d"), datetime.strptime(interval[1], "%Y-%m-%d"))
+            interval = DateRange(
+                datetime.strptime(interval[0], "%Y-%m-%d"),
+                datetime.strptime(interval[1], "%Y-%m-%d"),
+            )
             return interval
         except ValueError:
-            raise ValueError(f"Invalid '{ value['interval'] }' is not in the form [YYYY-MM-DD]/[YYYY-MM-DD]")
+            raise ValueError(
+                f"Invalid '{ value['interval'] }' is not in the form [YYYY-MM-DD]/[YYYY-MM-DD]"
+            )
 
 
 class EnumField(Field):
@@ -349,6 +381,7 @@ class EnumField(Field):
         class Foo(Enum):
             Foo = 'bar'
     """
+
     def _serialize(self, value: Enum, attr: str, obj: Model, **kwargs):
         """
         When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
@@ -388,7 +421,7 @@ class EnumField(Field):
         for k, v in dictionary.items():
             if isinstance(v, dict):
                 v = self._inflection(v)
-            converted_dict[k.replace('_', '-')] = v
+            converted_dict[k.replace("_", "-")] = v
         return converted_dict
 
 
@@ -400,6 +433,7 @@ class EnumStrField(EnumField):
         class Foo(Enum):
             Foo = 'bar'
     """
+
     def _serialize(self, value: Enum, attr: str, obj: Model, **kwargs) -> str:
         """
         When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
@@ -428,6 +462,7 @@ class EnumDictField(EnumField):
         class Foo(Enum):
             Foo = {'bar': 'baz'}
     """
+
     def _serialize(self, value: Enum, attr: str, obj: Model, **kwargs) -> dict:
         """
         When serialising, the value of the enumerator item corresponding to the 'value' parameter is returned.
@@ -468,7 +503,10 @@ class CurrencyField(Field):
                 'major_symbol': '£'
             }
     """
-    def _serialize(self, value: float, attr: str, obj: Model, **kwargs) -> Optional[dict]:
+
+    def _serialize(
+        self, value: float, attr: str, obj: Model, **kwargs
+    ) -> Optional[dict]:
         """
         When serialising, a numeric value is combined with currency unit defined by a metadata argument
 
@@ -489,21 +527,25 @@ class CurrencyField(Field):
         if value is None:
             return None
 
-        if 'currency' not in self.metadata:
-            raise KeyError('Missing currency unit in field metadata')
-        currency = getattr(obj, self.metadata['currency'])
+        if "currency" not in self.metadata:
+            raise KeyError("Missing currency unit in field metadata")
+        currency = getattr(obj, self.metadata["currency"])
 
         if currency is None:
-            raise ValueError('The currency unit cannot be None')
+            raise ValueError("The currency unit cannot be None")
         if not isinstance(currency, Enum):
-            raise TypeError('The currency unit value is expected to be from an enumeration')
-        if type(currency.value) != dict:
-            raise TypeError('The currency unit enumeration value is expected to be a dictionary')
+            raise TypeError(
+                "The currency unit value is expected to be from an enumeration"
+            )
+        if type(currency.value) is not dict:
+            raise TypeError(
+                "The currency unit enumeration value is expected to be a dictionary"
+            )
 
         return {
-            'value': value,
-            'currency': {
-                'iso-4217-code': currency.value['iso_4217_code'],
-                'major-symbol': currency.value['major_symbol']
-            }
+            "value": value,
+            "currency": {
+                "iso-4217-code": currency.value["iso_4217_code"],
+                "major-symbol": currency.value["major_symbol"],
+            },
         }

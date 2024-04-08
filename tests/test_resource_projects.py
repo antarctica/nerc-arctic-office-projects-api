@@ -182,98 +182,46 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                 },
                 {
                     "attributes": {
-                        "abstract": "This grant is used as an example, for demonstration or testing purposes. The "
-                                    "contents of this grant, and resources it relates to, will not change. \n This "
-                                    "example grant (1) is a grant with a single project and funder. The project and "
-                                    "organisations related to this grant will not be related to another grant. This "
-                                    "grant has an abstract, website and publications. The grant is closed and occurs "
-                                    "in the past. \n The remainder of this abstract is padding text to give a realistic "
-                                    "abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                                    "Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero "
-                                    "nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed "
-                                    "volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora "
-                                    "torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante "
-                                    "ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis "
-                                    "scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. "
-                                    "\n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis "
-                                    "laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna "
-                                    "ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet "
-                                    "vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat "
-                                    "tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, "
-                                    "rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus "
-                                    "lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur "
-                                    "auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem "
-                                    "pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus "
-                                    "mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, "
-                                    "eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis "
-                                    "parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque "
-                                    "eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. "
-                                    "Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget "
-                                    "pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat "
-                                    "dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. "
-                                    "Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean "
-                                    "sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, "
-                                    "augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar "
-                                    "dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam "
-                                    "sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n "
-                                    "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac "
-                                    "turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur "
-                                    "molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis "
-                                    "enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem "
-                                    "tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel "
-                                    "tincidunt lectus.",
+                        "abstract": "This grant is used as an example, for demonstration or testing purposes. The contents of this grant, and resources it relates to, will not change. \n This example grant (1) is a grant with a single project and funder. The project and organisations related to this grant will not be related to another grant. This grant has an abstract, website and publications. The grant is closed and occurs in the past. \n The remainder of this abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
                         "duration": {
                             "end-instant": "2015-10-01",
                             "interval": "2012-03-01/2015-10-01",
-                            "start-instant": "2012-03-01"
+                            "start-instant": "2012-03-01",
                         },
                         "lead-project": None,
                         "publications": [
                             "https://doi.org/10.5555/15822411",
                             "https://doi.org/10.5555/45284431",
-                            "https://doi.org/10.5555/59959290"
+                            "https://doi.org/10.5555/59959290",
                         ],
                         "reference": "EX-GRANT-0001",
                         "status": "closed",
                         "title": "Example grant 1",
                         "total-funds": {
-                            "currency": {
-                                "iso-4217-code": "GBP",
-                                "major-symbol": "\u00a3"
-                            },
-                            "value": 120000.00
+                            "currency": {"iso-4217-code": "GBP", "major-symbol": "£"},
+                            "value": "120000.00",
                         },
-                        "website": "https://www.example.com"
+                        "website": "https://www.example.com",
                     },
                     "id": "01DB2ECBP3XQ4B8Z5DW7W963YD",
-                    "links": {
-                        "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD"
-                    },
+                    "links": {"self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD"},
                     "relationships": {
                         "allocations": {
-                            "data": [
-                                {
-                                    "id": "01DB2ECBP35AT5WBG092J5GDQ9",
-                                    "type": "allocations"
-                                }
-                            ],
+                            "data": [{"id": "01DB2ECBP35AT5WBG092J5GDQ9", "type": "allocations"}],
                             "links": {
                                 "related": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/allocations",
-                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/allocations"
-                            }
+                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/allocations",
+                            },
                         },
                         "funder": {
-                            "data": {
-                                "id": "01DB2ECBP3A13RJ6QEZFN26ZEP",
-                                "type": "organisations"
-                            },
+                            "data": {"id": "01DB2ECBP3A13RJ6QEZFN26ZEP", "type": "organisations"},
                             "links": {
                                 "related": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/organisations",
-                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/organisations"
-                            }
-                        }
+                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/organisations",
+                            },
+                        },
                     },
-                    "type": "grants"
+                    "type": "grants",
                 },
                 {
                     "attributes": {
@@ -1285,94 +1233,46 @@ class ProjectsResourceTestCase(BaseResourceTestCase):
                 },
                 {
                     "attributes": {
-                        "abstract": "This grant is used as an example, for demonstration or testing purposes. The contents of "
-                                    "this grant, and resources it relates to, will not change. \n This example grant (1) is a "
-                                    "grant with a single project and funder. The project and organisations related to this "
-                                    "grant will not be related to another grant. This grant has an abstract, website and "
-                                    "publications. The grant is closed and occurs in the past. \n The remainder of this "
-                                    "abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit "
-                                    "amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum "
-                                    "sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc "
-                                    "ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu "
-                                    "ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante "
-                                    "ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo "
-                                    "fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero "
-                                    "quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque "
-                                    "pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum "
-                                    "lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id "
-                                    "consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur "
-                                    "eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. "
-                                    "Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur "
-                                    "auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar "
-                                    "quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, "
-                                    "risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget "
-                                    "justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus "
-                                    "mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, "
-                                    "et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin "
-                                    "fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien "
-                                    "elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt "
-                                    "finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. "
-                                    "Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, "
-                                    "augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor "
-                                    "felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu "
-                                    "ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi "
-                                    "tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi "
-                                    "eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris "
-                                    "ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada "
-                                    "interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh "
-                                    "fermentum volutpat. Sed vel tincidunt lectus.",
+                        "abstract": "This grant is used as an example, for demonstration or testing purposes. The contents of this grant, and resources it relates to, will not change. \n This example grant (1) is a grant with a single project and funder. The project and organisations related to this grant will not be related to another grant. This grant has an abstract, website and publications. The grant is closed and occurs in the past. \n The remainder of this abstract is padding text to give a realistic abstract length. \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget lorem eleifend turpis vestibulum sollicitudin. Curabitur libero nulla, maximus ut facilisis et, maximus quis dolor. Nunc ut malesuada felis. Sed volutpat et lectus vitae convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce ullamcorper nec ante ut vulputate. Praesent ultricies mattis dolor quis ultrices. Ut sagittis scelerisque leo fringilla malesuada. Donec euismod tincidunt purus vel commodo. \n Aenean volutpat libero quis imperdiet tincidunt. Proin iaculis eros at turpis laoreet molestie. Quisque pellentesque, lorem id ornare fermentum, nunc urna ultrices libero, eget tempor ipsum lectus sollicitudin nibh. Sed sit amet vestibulum nulla. Vivamus dictum, dui id consectetur mattis, sapien erat tristique nulla, at lobortis enim nibh eu orci. Curabitur eu purus porttitor, rhoncus libero sed, mattis tellus. Praesent ullamcorper tincidunt ex. Vivamus lectus urna, dignissim sit amet efficitur a, malesuada at nisi. \n Curabitur auctor ut libero ac pharetra. Nunc rutrum facilisis felis, ac rhoncus lorem pulvinar quis. In felis neque, mollis nec sagittis feugiat, finibus maximus mauris. Nullam varius, risus id scelerisque tempor, justo purus malesuada nulla, eu sagittis purus arcu eget justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vel pretium augue. Pellentesque eu semper odio. Suspendisse congue varius est, et euismod justo accumsan sed. Etiam nec scelerisque risus, sed tempus ante. Proin fringilla leo urna, eget pulvinar leo placerat et. \n Etiam mollis lacus ut sapien elementum, sed volutpat dui faucibus. Fusce ligula risus, tempor at justo ac, tincidunt finibus magna. Duis eget sapien et nibh tincidunt faucibus. Duis tempus tincidunt leo. Aenean sit amet cursus ex. Etiam eget finibus nulla, a rutrum turpis. Proin imperdiet, augue consectetur varius varius, lectus elit egestas velit, ullamcorper pulvinar dolor felis at leo. Cras nec est ut est efficitur pulvinar nec vel nisi. Nullam sed elit eu ante finibus volutpat. Nam id diam a urna rutrum dictum. \n Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer accumsan et mi eu sagittis. Ut id nulla at quam efficitur molestie. Donec viverra ex vitae mauris ullamcorper elementum. Proin sed felis enim. Suspendisse potenti. Integer malesuada interdum mi, ornare semper lorem tempus condimentum. Cras sodales risus quis nibh fermentum volutpat. Sed vel tincidunt lectus.",
                         "duration": {
                             "end-instant": "2015-10-01",
                             "interval": "2012-03-01/2015-10-01",
-                            "start-instant": "2012-03-01"
+                            "start-instant": "2012-03-01",
                         },
                         "lead-project": None,
                         "publications": [
                             "https://doi.org/10.5555/15822411",
                             "https://doi.org/10.5555/45284431",
-                            "https://doi.org/10.5555/59959290"
+                            "https://doi.org/10.5555/59959290",
                         ],
                         "reference": "EX-GRANT-0001",
                         "status": "closed",
                         "title": "Example grant 1",
                         "total-funds": {
-                            "currency": {
-                                "iso-4217-code": "GBP",
-                                "major-symbol": "\u00a3"
-                            },
-                            "value": 120000.00
+                            "currency": {"iso-4217-code": "GBP", "major-symbol": "£"},
+                            "value": "120000.00",
                         },
-                        "website": "https://www.example.com"
+                        "website": "https://www.example.com",
                     },
                     "id": "01DB2ECBP3XQ4B8Z5DW7W963YD",
-                    "links": {
-                        "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD"
-                    },
+                    "links": {"self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD"},
                     "relationships": {
                         "allocations": {
-                            "data": [
-                                {
-                                    "id": "01DB2ECBP35AT5WBG092J5GDQ9",
-                                    "type": "allocations"
-                                }
-                            ],
+                            "data": [{"id": "01DB2ECBP35AT5WBG092J5GDQ9", "type": "allocations"}],
                             "links": {
                                 "related": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/allocations",
-                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/allocations"
-                            }
+                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/allocations",
+                            },
                         },
                         "funder": {
-                            "data": {
-                                "id": "01DB2ECBP3A13RJ6QEZFN26ZEP",
-                                "type": "organisations"
-                            },
+                            "data": {"id": "01DB2ECBP3A13RJ6QEZFN26ZEP", "type": "organisations"},
                             "links": {
                                 "related": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/organisations",
-                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/organisations"
-                            }
-                        }
+                                "self": "http://localhost:9000/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/organisations",
+                            },
+                        },
                     },
-                    "type": "grants"
+                    "type": "grants",
                 },
                 {
                     "attributes": {

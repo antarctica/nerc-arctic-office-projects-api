@@ -233,13 +233,10 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                         "status": "closed",
                         "title": "Example grant 1",
                         "total-funds": {
-                            "currency": {
-                                "iso-4217-code": "GBP",
-                                "major-symbol": "\u00a3"
-                            },
-                            "value": 120000.00
+                            "currency": {"iso-4217-code": "GBP", "major-symbol": "£"},
+                            "value": "120000.00",
                         },
-                        "website": "https://www.example.com"
+                        "website": "https://www.example.com",
                     },
                     "id": "01DB2ECBP3XQ4B8Z5DW7W963YD",
                     "links": {
@@ -608,13 +605,10 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                         "status": "closed",
                         "title": "Example grant 1",
                         "total-funds": {
-                            "currency": {
-                                "iso-4217-code": "GBP",
-                                "major-symbol": "\u00a3"
-                            },
-                            "value": 120000.00
+                            "currency": {"iso-4217-code": "GBP", "major-symbol": "£"},
+                            "value": "120000.00",
                         },
-                        "website": "https://www.example.com"
+                        "website": "https://www.example.com",
                     },
                     "id": "01DB2ECBP3XQ4B8Z5DW7W963YD",
                     "links": {
@@ -659,6 +653,9 @@ class PeopleResourceTestCase(BaseResourceTestCase):
             base_url='http://localhost:9000'
         )
         json_response = response.get_json()
+
+        self.maxDiff = None
+
         self.assertEqual(HTTPStatus.OK, response.status_code)
         self.assertDictEqual(json_response['data'], expected_payload['data'])
         self.assertCountEqual(json_response['included'], expected_payload['included'])
@@ -778,14 +775,11 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                     "reference": "EX-GRANT-0001",
                     "status": "closed",
                     "title": "Example grant 1",
-                    "total-funds": {
-                        "currency": {
-                            "iso-4217-code": "GBP",
-                            "major-symbol": "\u00a3"
+                        "total-funds": {
+                            "currency": {"iso-4217-code": "GBP", "major-symbol": "£"},
+                            "value": "120000.00",
                         },
-                        "value": 120000.00
-                    },
-                    "website": "https://www.example.com"
+                        "website": "https://www.example.com",
                 },
                 "id": "01DB2ECBP3XQ4B8Z5DW7W963YD",
                 "links": {

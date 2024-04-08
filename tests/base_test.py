@@ -1,24 +1,34 @@
 import unittest
+from unittest.mock import patch
 
 from flask_migrate import Config, upgrade, downgrade, Migrate
-from flask_azure_oauth.tokens import TestJwt
 
-from arctic_office_projects_api import create_app, auth, db
+from flask_azure_oauth import FlaskAzureOauth
+from flask_azure_oauth.mocks.keys import TestJwk as TestJwk_key
+from flask_azure_oauth.mocks.tokens import TestJwt as TestJwt_token
+
+from arctic_office_projects_api import create_app, db
 from arctic_office_projects_api.errors import ApiException
 from arctic_office_projects_api.seeding import seed_predictable_test_resources
 
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = create_app('testing')
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-        self.client = self.app.test_client()
+        self.test_jwks = TestJwk_key()
 
-        self.maxDiff = None
+        with patch.object(FlaskAzureOauth, "_get_jwks") as mocked_get_jwks:
+            
+            mocked_get_jwks.return_value = self.test_jwks.jwks()
+
+            # `self.app` should be set to a Flask application, either by direct import, or by calling an app factory
+            self.app = create_app('testing')
+
+            self.app.config["TEST_JWKS"] = self.test_jwks
+            self.app_context = self.app.app_context()
+            self.app_context.push()
+            self.client = self.app.test_client()
 
     def tearDown(self):
-        auth.reset_app()
         self.app_context.pop()
 
     @staticmethod
@@ -38,7 +48,7 @@ class BaseTestCase(unittest.TestCase):
         return json_response
 
     def util_create_auth_token(self, *, scopes: list = None):
-        jwt = TestJwt(app=self.app, scopes=scopes)
+        jwt = TestJwt_token(app=self.app, scps=scopes)
         return jwt.dumps()
 
 

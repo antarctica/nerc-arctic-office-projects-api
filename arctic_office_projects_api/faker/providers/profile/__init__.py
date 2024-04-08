@@ -29,10 +29,12 @@ class Provider(BaseProvider):
         :rtype: str
         :return: a fake Orcid ID
         """
-        return f"https://fake.orcid.org/0000-" \
-            f"{ str(self.generator.random_int(min=0, max=2)).zfill(4) }-" \
-            f"{ str(self.generator.random_int(min=0, max=9999)).zfill(4) }-" \
+        return (
+            f"https://fake.orcid.org/0000-"
+            f"{ str(self.generator.random_int(min=0, max=2)).zfill(4) }-"
+            f"{ str(self.generator.random_int(min=0, max=9999)).zfill(4) }-"
             f"{ str(self.generator.random_int(min=0, max=9999)).zfill(4) }"
+        )
 
     def has_avatar(self) -> bool:
         """
@@ -56,8 +58,10 @@ class Provider(BaseProvider):
         :rtype: str
         :return: URL to a random user avatar
         """
-        return f"https://randomuser.me/api/portraits/{ self.random_element(('men', 'women')) }/" \
+        return (
+            f"https://randomuser.me/api/portraits/{ self.random_element(('men', 'women')) }/"
             f"{ str(self.generator.random_int(min=1, max=99)) }.jpg"
+        )
 
     def avatar_male(self) -> str:
         """

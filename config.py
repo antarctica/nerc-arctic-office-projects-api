@@ -35,7 +35,7 @@ class Config(object):
     SERVER_NAME = os.getenv('SERVER_NAME') or None
     PREFERRED_URL_SCHEME = os.getenv('PREFERRED_URL_SCHEME') or 'https'
     REVERSE_PROXY_PATH = os.getenv('REVERSE_PROXY_PATH') or None
-    REQUEST_ID_UNIQUE_VALUE_PREFIX = 'BAS-API-LB-RV1'
+    REQUEST_ID_UNIQUE_VALUE_PREFIX = os.getenv('REQUEST_ID_UNIQUE_VALUE_PREFIX') or 'BAS-API-LB-RV1'
 
     APP_PAGE_SIZE = int(os.getenv('APP_PAGE_SIZE') or 10)
 

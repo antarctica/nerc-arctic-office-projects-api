@@ -5,11 +5,22 @@ from enum import Enum
 
 # noinspection PyProtectedMember
 from psycopg2._psycopg import Error
+
 # noinspection PyPackageRequirements
-from sqlalchemy.exc import OperationalError
+from sqlalchemy.exc import SQLAlchemyError
 from iso3166 import countries as iso_countries
 
 from arctic_office_projects_api.extensions import db
+
+
+def conditional_decorator(decor, condition):
+    def decorator(function):
+        if not condition:
+            # Return the function unchanged, not decorated.
+            return function
+        return decor(function)
+
+    return decorator
 
 
 def generate_neutral_id() -> str:
@@ -28,10 +39,15 @@ def generate_neutral_id() -> str:
     return ulid.new().str
 
 
-def generate_countries_enum(*, name: str = 'Countries') -> Enum:
+def generate_countries_enum(*, name: str = "Countries") -> Enum:
     countries = []
     for country in iso_countries:
-        countries.append((country.alpha3, {'name': country.name, 'iso_3166_alpha3-code': country.alpha3}))
+        countries.append(
+            (
+                country.alpha3,
+                {"name": country.name, "iso_3166_alpha3-code": country.alpha3},
+            )
+        )
 
     # noinspection PyArgumentList
     return Enum(name, countries)
@@ -39,9 +55,10 @@ def generate_countries_enum(*, name: str = 'Countries') -> Enum:
 
 def healthcheck_db() -> bool:
     try:
-        # run basic connectivity check
-        db.engine.execute('SELECT 1')
-    except (Error, OperationalError):
+        # Establish a connection
+        with db.engine.connect():
+            pass
+    except SQLAlchemyError as e:
         return False
 
     return True

@@ -43,6 +43,13 @@
       "website": "https://nerc.ukri.org"
     },
     {
+      "name": "National Oceanography Centre",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.418022.d",
+      "ror-identifier": "https://api.ror.org/organizations?query=00874hx02",
+      "acronym": "NOC",
+      "website": "https://noc.ac.uk"
+    },
+    {
       "name": "Science and Technology Facilities Council",
       "grid-identifier": "https://www.grid.ac/institutes/grid.14467.30",
       "ror-identifier": "https://api.ror.org/organizations?query=057g20z61",

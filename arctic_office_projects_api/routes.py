@@ -9,11 +9,10 @@ def index_route():
     """
     Returns a simple welcome message
     """
-
     payload = {
-        'meta': {
-            'summary': 'This API is used to record details of projects related to the NERC Arctic Office - '
-                       'https://www.arctic.ac.uk'
+        "meta": {
+            "summary": "This API is used to record details of projects related to the NERC Arctic Office - "
+            "https://www.arctic.ac.uk"
         }
     }
 
@@ -33,11 +32,9 @@ def healthcheck_canary_route():
     Other healthcheck's should be used where more details are required. This healthcheck is intended for use with load
     balancers to give early indication of a service not being available.
     """
-    dependencies = {
-        'db': healthcheck_db()
-    }
+    dependencies = {"db": healthcheck_db()}
 
     if False in dependencies.values():
-        return '', HTTPStatus.SERVICE_UNAVAILABLE
+        return "", HTTPStatus.SERVICE_UNAVAILABLE
 
-    return '', HTTPStatus.NO_CONTENT
+    return "", HTTPStatus.NO_CONTENT

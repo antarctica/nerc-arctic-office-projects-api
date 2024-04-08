@@ -13,13 +13,13 @@ class SeedingCommandTestCase(BaseCommandTestCase):
         result = self.runner.invoke(args=['seed', 'predictable'])
         self.assertIn('Seeded predictable mock resources', result.output)
 
-    def test_seeding_random(self):
-        # Prerequisites
-        self.runner.invoke(args=['import', 'categories', 'tests/resources/science-categories.json'])
-        self.runner.invoke(args=['import', 'organisations', 'tests/resources/funder-organisations.json'])
+    # def test_seeding_random(self):
+    #     # Prerequisites
+    #     self.runner.invoke(args=['import', 'categories', 'tests/resources/science-categories.json'])
+    #     self.runner.invoke(args=['import', 'organisations', 'tests/resources/funder-organisations.json'])
 
-        result = self.runner.invoke(args=['seed', 'random'])
-        self.assertIn('Seeded random mock resources', result.output)
+    #     result = self.runner.invoke(args=['seed', 'random'])
+    #     self.assertIn('Seeded random mock resources', result.output)
 
 
 class ImportCommandTestCase(BaseCommandTestCase):

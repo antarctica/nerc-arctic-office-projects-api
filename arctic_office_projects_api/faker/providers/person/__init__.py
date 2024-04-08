@@ -10,4 +10,4 @@ class Provider(BaseProvider):
         :rtype: str
         :return: whether an individual is male or female
         """
-        return self.random_element(('male', 'female'))
+        return self.random_element(("male", "female"))

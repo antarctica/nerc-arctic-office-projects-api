@@ -532,11 +532,24 @@ $ flask import grant gtr NE/K011820/1
 python arctic_office_projects_api/bulk_importer/import_grants.py
 ```
 
+**Note:** It may be necessary to add to the mappings here: `arctic_office_projects_api/importers/gtr.py`  
+Projects will fail to import if they cannot resolve these mappings.
+* `_map_gtr_project_research_topic_to_category_term`
+* `_map_id_to_orcid_ids`
+* `_ror_dict`
+
+
+
 **Note:** It will take a few seconds to import each grant due to the number of GTR API calls needed to collect all 
 relevant information (grant, fund, funder, people, employers, publications, etc.).
 
+
+
 **Note:** Previously imported grants, identified by their *Grant reference*, will be skipped if imported again. Their 
 properties will not be updated.
+
+
+
 
 ## Setup
 
