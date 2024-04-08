@@ -97,7 +97,7 @@ test-app:
 dependencies-app:
   stage: lint
   script:
-   - "pip install -r requirements.txt"
+   - "poetry install"
   only:
     - master
 
