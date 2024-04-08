@@ -27,4 +27,6 @@ RUN poetry run python -m pip install --upgrade pip
 
 COPY . /usr/src/app/
 
+ENV FLASK_APP manage.py
+
 ENTRYPOINT []
