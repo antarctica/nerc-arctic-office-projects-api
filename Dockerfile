@@ -17,12 +17,14 @@ RUN python3 -m pipx install poetry==1.7.1
 
 FROM poetry as run
 
+WORKDIR /usr/src/app
+
 ENV PATH="/venv/bin:/root/.local/bin:$PATH"
 COPY pyproject.toml poetry.lock /
 RUN poetry config virtualenvs.in-project true
 RUN poetry install --no-root --no-interaction --no-ansi
 RUN poetry run python -m pip install --upgrade pip
 
-WORKDIR /usr/src/app
+COPY . /usr/src/app/
 
 ENTRYPOINT []
