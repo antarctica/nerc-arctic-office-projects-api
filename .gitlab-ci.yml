@@ -88,7 +88,8 @@ test-app:
     FLASK_ENV: testing
     SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app_test
   script:
-    - "poetry run flask test --test-runner junit"
+    - "poetry shell"
+    - "flask test --test-runner junit"
   artifacts:
     paths:
     reports:
@@ -104,7 +105,8 @@ dependencies-app:
 pep8-app:
   stage: lint
   script:
-    - "poetry run flake8 . --ignore=E501 --exclude migrations"
+    - "poetry shell"
+    - "flake8 . --ignore=E501 --exclude migrations"
 
 bandit-app:
   stage: lint
