@@ -68,9 +68,9 @@ class TestConfig(Config):
 
     APP_PAGE_SIZE = 2
 
-    AZURE_OAUTH_TENANCY = 'testing'
-    AZURE_OAUTH_APPLICATION_ID = 'testing'
-    AZURE_OAUTH_CLIENT_APPLICATION_IDS = ['testing']
+    # AZURE_OAUTH_TENANCY = 'testing'
+    # AZURE_OAUTH_APPLICATION_ID = 'testing'
+    # AZURE_OAUTH_CLIENT_APPLICATION_IDS = ['testing']
 
 
 class DevelopmentConfig(Config):
