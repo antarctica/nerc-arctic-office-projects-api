@@ -58,7 +58,6 @@ variables:
   API_DOCS_STAGE_BUCKET: bas-api-docs-content-testing
   API_DOCS_PROD_BUCKET: bas-api-docs-content
 
-
 build-base:
   stage: build-base
   tags:
