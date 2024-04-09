@@ -68,6 +68,7 @@ class TestConfig(Config):
 
     APP_PAGE_SIZE = 2
 
+    # Commented out whilst the generation of an Auth Jwt token is figured out...
     # AZURE_OAUTH_TENANCY = 'testing'
     # AZURE_OAUTH_APPLICATION_ID = 'testing'
     # AZURE_OAUTH_CLIENT_APPLICATION_IDS = ['testing']
