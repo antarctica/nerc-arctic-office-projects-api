@@ -1,4 +1,5 @@
-FROM docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api:latest
+# FROM docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api:latest
+FROM docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api/arctic-office-projects-api:latest
 
 LABEL maintainer = "Web & Apps team <webapps@bas.ac.uk>"
 
