@@ -20,7 +20,7 @@ def make_json(csvFilePath, jsonFilePath):
 
             lead_project = 0
 
-            if(row_list[1][1] == 'Lead'):
+            if (row_list[1][1] == 'Lead'):
                 lead_project = 1
 
             json_block = {

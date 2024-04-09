@@ -4,6 +4,7 @@ import ulid
 from enum import Enum
 
 # noinspection PyProtectedMember
+# flake8: noqa
 from psycopg2._psycopg import Error
 
 # noinspection PyPackageRequirements

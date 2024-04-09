@@ -17,7 +17,7 @@ class BaseTestCase(unittest.TestCase):
         self.test_jwks = TestJwk_key()
 
         with patch.object(FlaskAzureOauth, "_get_jwks") as mocked_get_jwks:
-            
+
             mocked_get_jwks.return_value = self.test_jwks.jwks()
 
             # `self.app` should be set to a Flask application, either by direct import, or by calling an app factory

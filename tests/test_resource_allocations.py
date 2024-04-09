@@ -775,11 +775,11 @@ class PeopleResourceTestCase(BaseResourceTestCase):
                     "reference": "EX-GRANT-0001",
                     "status": "closed",
                     "title": "Example grant 1",
-                        "total-funds": {
-                            "currency": {"iso-4217-code": "GBP", "major-symbol": "£"},
-                            "value": "120000.00",
-                        },
-                        "website": "https://www.example.com",
+                    "total-funds": {
+                        "currency": {"iso-4217-code": "GBP", "major-symbol": "£"},
+                        "value": "120000.00",
+                    },
+                    "website": "https://www.example.com",
                 },
                 "id": "01DB2ECBP3XQ4B8Z5DW7W963YD",
                 "links": {
