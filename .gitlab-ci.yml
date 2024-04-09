@@ -105,12 +105,14 @@ dependencies-app:
 pep8-app:
   stage: lint
   script:
-    - "flake8 . --ignore=E501 --exclude migrations"
+    - "poetry install"
+    - "poetry run flake8 . --ignore=E501 --exclude migrations"
 
 bandit-app:
   stage: lint
   script:
-    - "bandit -r ."
+    - "poetry install"
+    - "poetry run bandit -r ."
 
 build-heroku-stage:
   stage: build
