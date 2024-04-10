@@ -86,25 +86,27 @@ test-app:
   variables:
     FLASK_ENV: development
     SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app_test
+  before_script:
+    - poetry install
   script:
-    - "poetry install"
     - "poetry run flask test --test-runner junit"
   artifacts:
     paths:
     reports:
       junit: test-results.xml
 
-dependencies-app:
-  stage: lint
-  script:
-   - "poetry install"
-  only:
-    - master
+# dependencies-app:
+#   stage: lint
+#   script:
+#    - "poetry install"
+#   only:
+#     - master
 
 pep8-app:
   stage: lint
+  before_script:
+    - poetry install
   script:
-    - "poetry install"
     - "poetry run flake8 . --ignore=E501 --exclude migrations,.venv"
 
 bandit-app:
