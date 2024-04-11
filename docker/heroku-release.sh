@@ -1,5 +1,7 @@
 #!/usr/bin/env ash -e -x
 
+# install dependencies
+poetry install
 # migrate database
 poetry run flask db upgrade;
 # import static data
