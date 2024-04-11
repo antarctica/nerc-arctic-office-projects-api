@@ -561,7 +561,7 @@ class Project(db.Model):
     __tablename__ = "projects"
     id = db.Column(db.Integer, primary_key=True)
     neutral_id = db.Column(db.String(32), unique=True, nullable=False, index=True)
-    grant_reference = db.Column(db.Text(), nullable=False)
+    grant_reference = db.Column(db.Text())
     title = db.Column(db.Text(), nullable=False)
     acronym = db.Column(db.Text(), nullable=True)
     abstract = db.Column(db.Text(), nullable=True)
