@@ -40,10 +40,8 @@ def import_grants(file):
             if grant_reference_valid(project["grant-reference"]):  # nosec
                 subprocess.run(
                     [
-                        "poetry"
-                        "install"
-                        "poetry"
-                        "run"
+                        "poetry",
+                        "run",
                         "flask",
                         "import",
                         "grant",
