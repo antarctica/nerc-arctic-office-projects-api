@@ -17,4 +17,4 @@ COPY config.py manage.py /usr/src/app/
 
 # Setup runtime
 ENTRYPOINT []
-CMD poetry run waitress-serve --port=$PORT --channel-timeout=600 manage:app
+CMD poetry install && poetry run waitress-serve --port=$PORT --channel-timeout=600 manage:app
