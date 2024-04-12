@@ -26,6 +26,13 @@ def import_grants(file):
 
         lead_project = "0"
 
+        subprocess.run(
+            [
+                "poetry",
+                "install"
+            ]
+        )
+
         for project in data["data"]:
             try:
                 lead_project_bool = project["lead-project"]
