@@ -95,12 +95,12 @@ test-app:
     reports:
       junit: test-results.xml
 
-# dependencies-app:
-#   stage: lint
-#   script:
-#    - "poetry install"
-#   only:
-#     - master
+dependencies-app:
+  stage: lint
+  script:
+   - "poetry install"
+  only:
+    - master
 
 pep8-app:
   stage: lint
