@@ -80,9 +80,7 @@ class Provider(BaseProvider):
         :rtype: GrantCurrency
         :return: member of the GrantCurrency enumerated class, representing the currency of the funds for a grant
         """
-        if (
-            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
-        ):
+        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
             return GrantCurrency.GBP
         if grant_type is GrantType.EU_STANDARD_GRANT:
             return GrantCurrency.EUR
@@ -201,9 +199,7 @@ class Provider(BaseProvider):
         :return: An identifier. For UKRI large/standard grants, an identifier for a UKRI council, for EU grants, an
         identifier for the EU, for 'other' grants, any non-None value indicates an existing funder should be used.
         """
-        if (
-            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
-        ):
+        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
             return UKRICouncil(
                 self.random_element(
                     {
@@ -239,9 +235,7 @@ class Provider(BaseProvider):
         :rtype: str
         :return: fake grant website
         """
-        if (
-            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
-        ):
+        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
             return f"https://gtr.ukri.org/projects?ref={ quote_plus(grant_reference) }"
         elif grant_type is GrantType.EU_STANDARD_GRANT:
             return (

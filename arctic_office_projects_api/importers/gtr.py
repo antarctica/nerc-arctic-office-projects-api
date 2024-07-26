@@ -30,11 +30,12 @@ from arctic_office_projects_api.models import (
     Allocation,
     Person,
     Participant,
-    ParticipantRole    
+    ParticipantRole,
 )
 
 
 # Exceptions
+
 
 class UnmappedGatewayToResearchOrganisation(AppException):
     title = "Unmapped Gateway to Research organisation"
@@ -196,12 +197,12 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         _ror_list = []
 
         try:
-            with open(csv_file, 'r', newline='') as csvfile:
+            with open(csv_file, "r", newline="") as csvfile:
                 reader = csv.DictReader(csvfile)
-                for row in reader:                    
+                for row in reader:
                     _ror_dict = {
-                        "organisation_uri": gtr_path + row['organisation_id'],
-                        "ror_uri": row['organisation_ror']
+                        "organisation_uri": gtr_path + row["organisation_id"],
+                        "ror_uri": row["organisation_ror"],
                     }
                     _ror_list.append(_ror_dict)
 
@@ -210,7 +211,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         except KeyError as e:
             print(f"Missing expected column: {e}")
         except Exception as e:
-            print(f"An error occurred: {e}")        
+            print(f"An error occurred: {e}")
 
         for ror_item in _ror_list:
             if resource_uri == ror_item["organisation_uri"]:
@@ -224,12 +225,12 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
         :rtype str
         :return for a given GTR resource URI, a corresponding ROR ID as a URI
-        """  
+        """
 
         _ror_url = GatewayToResearchOrganisation._ror_dict(self.resource_uri)
         if isinstance(_ror_url, str):
             return _ror_url
-        
+
         raise UnmappedGatewayToResearchOrganisation(
             meta={"gtr_organisation": {"resource_uri": self.resource_uri}}
         )
@@ -379,8 +380,8 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         if "surname" in self.resource:
             self.surname = self.resource["surname"]
         self.orcid_id = None
-        if 'orcidId' in self.resource:
-            if self.resource['orcidId'] != None:
+        if "orcidId" in self.resource:
+            if self.resource["orcidId"] is not None:
                 self.orcid_id = f"https://orcid.org/{self.resource['orcidId']}"
 
     def _find_gtr_employer_link(self):
@@ -429,11 +430,11 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         gtr_people_orcid_id_mappings = {}
 
         try:
-            with open(csv_file, 'r', newline='') as csv_file:
+            with open(csv_file, "r", newline="") as csv_file:
                 reader = csv.DictReader(csv_file)
                 for row in reader:
-                    key = gtr_person_url + row['gtr_person']
-                    value = row['orcid']
+                    key = gtr_person_url + row["gtr_person"]
+                    value = row["orcid"]
                     gtr_people_orcid_id_mappings[key] = value
                     gtr_people_orcid_id_mappings.append({key: value})
 
@@ -875,19 +876,24 @@ class GatewayToResearchGrantImporter:
             # print(category_term_scheme_identifier)
 
             # Ignore gcmd for now - causing import errors
-            pattern = re.compile(r'https://gcmd\.earthdata\.nasa\.gov/kms/concept/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}')
+            pattern = re.compile(
+                r"https://gcmd\.earthdata\.nasa\.gov/kms/concept/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+            )
 
             if category_term_scheme_identifier != "none":
 
                 if not pattern.match(category_term_scheme_identifier):
                     # print(f"Matched: {category_term_scheme_identifier}")
                     # Save to category terms link table
-                    db.session.add(Categorisation(
-                        neutral_id=generate_neutral_id(),
-                        project=project,
-                        category_term=CategoryTerm.query.filter_by(
-                            scheme_identifier=category_term_scheme_identifier).one()
-                ))
+                    db.session.add(
+                        Categorisation(
+                            neutral_id=generate_neutral_id(),
+                            project=project,
+                            category_term=CategoryTerm.query.filter_by(
+                                scheme_identifier=category_term_scheme_identifier
+                            ).one(),
+                        )
+                    )
 
         self._add_gtr_people(
             project=project,
@@ -1161,12 +1167,12 @@ class GatewayToResearchGrantImporter:
         protocol = "https://"
 
         try:
-            with open(csv_file, 'r', newline='') as csvfile:
+            with open(csv_file, "r", newline="") as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    key = row['topic_id']
-                    if row['gcmd_link_code'] != "none":
-                        value = protocol + row['gcmd_link_code']
+                    key = row["topic_id"]
+                    if row["gcmd_link_code"] != "none":
+                        value = protocol + row["gcmd_link_code"]
                     else:
                         value = "none"
                     topics_list.append({key: value})
@@ -1181,7 +1187,7 @@ class GatewayToResearchGrantImporter:
                 # print(f"Checking: {gtr_research_topic['id']} against {key} with value {value}")
                 if gtr_research_topic["id"] == key:
                     # print(f"Match found: {key}")
-                    if value == 'none':
+                    if value == "none":
                         return None
                     else:
                         return value
@@ -1218,12 +1224,12 @@ class GatewayToResearchGrantImporter:
         protocol = "https://"
 
         try:
-            with open(psv_file, 'r', newline='') as psv_file:
+            with open(psv_file, "r", newline="") as psv_file:
                 reader = csv.DictReader(psv_file, delimiter="|")
                 for row in reader:
-                    key = row['subject_text']
-                    if row['gcmd_link_code'] != "none":
-                        value = protocol + row['gcmd_link_code']
+                    key = row["subject_text"]
+                    if row["gcmd_link_code"] != "none":
+                        value = protocol + row["gcmd_link_code"]
                     else:
                         value = "none"
                     subjects_list.append({key: value})
@@ -1263,7 +1269,8 @@ def import_gateway_to_research_grant_interactively(
     """
     try:
         app.logger.info(
-            f"Importing/Updating Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})")
+            f"Importing/Updating Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"
+        )
         echo(
             style(
                 f"Importing/Updating Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"
@@ -1278,7 +1285,8 @@ def import_gateway_to_research_grant_interactively(
         if importer.exists():
             importer.update(gtr_project_id)
             app.logger.info(
-                f"Finished importing/updating GTR project with grant reference ({gtr_grant_reference}")
+                f"Finished importing/updating GTR project with grant reference ({gtr_grant_reference}"
+            )
             echo(
                 style(
                     f"Finished importing/Updating GTR project with grant reference ({gtr_grant_reference})",
@@ -1288,8 +1296,10 @@ def import_gateway_to_research_grant_interactively(
             return True
 
         if gtr_project_id is None:
-            app.logger.error(f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
-                             f"multiple GTR projects found")
+            app.logger.error(
+                f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
+                f"multiple GTR projects found"
+            )
             echo(
                 style(
                     f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
@@ -1298,8 +1308,10 @@ def import_gateway_to_research_grant_interactively(
                 )
             )
             return False
-        app.logger.info(f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
-                        f"Importing")
+        app.logger.info(
+            f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+            f"Importing"
+        )
         echo(
             style(
                 f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
@@ -1309,7 +1321,8 @@ def import_gateway_to_research_grant_interactively(
 
         importer.fetch()
         app.logger.info(
-            f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported")
+            f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported"
+        )
         echo(
             style(
                 f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported",
@@ -1318,7 +1331,8 @@ def import_gateway_to_research_grant_interactively(
         )
     except UnmappedGatewayToResearchOrganisation as e:
         app.logger.error(
-            f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]")
+            f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]"
+        )
         echo(
             style(
                 f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]",
@@ -1327,7 +1341,8 @@ def import_gateway_to_research_grant_interactively(
         )
     except UnmappedGatewayToResearchPerson as e:
         app.logger.error(
-            f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]")
+            f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]"
+        )
         echo(
             style(
                 f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]",
@@ -1336,7 +1351,8 @@ def import_gateway_to_research_grant_interactively(
         )
     except UnmappedGatewayToResearchProjectTopic as e:
         app.logger.error(
-            f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]")
+            f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]"
+        )
         echo(
             style(
                 f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]",
@@ -1345,7 +1361,8 @@ def import_gateway_to_research_grant_interactively(
         )
     except UnmappedGatewayToResearchProjectSubject as e:
         app.logger.error(
-            f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]")
+            f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]"
+        )
         echo(
             style(
                 f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]",

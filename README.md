@@ -841,8 +841,14 @@ $ docker-compose run app flake8 . --ignore=E501 --exclude migrations
 
 Shell into the container & run:
 ```shell
-$ flake8 . --ignore=E501 --exclude migrations
+$ poetry run flake8 . --ignore=E501 --exclude migrations
 ```
+
+To assist with linting run Black:
+```shell
+$ poetry run black arctic_office_projects_api
+```
+
 
 ### Dependencies
 

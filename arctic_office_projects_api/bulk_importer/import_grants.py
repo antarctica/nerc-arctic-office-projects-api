@@ -1,11 +1,10 @@
-import json
 import csv
 import subprocess  # nosec
 import re
 
 
 def grant_reference_valid(grant_reference):
-    
+
     patterns = {"gtr": r"^[A-Z]{2}\/[A-Z0-9]{7}\/\d{1}$", "other": r"\d{5,7}"}
     for key, pattern in patterns.items():
         if re.match(pattern, grant_reference):
@@ -16,20 +15,20 @@ def grant_reference_valid(grant_reference):
 def gtr_csv_to_json(csv_file):
 
     data_list = []
-    
-    with open(csv_file, mode='r', newline='', encoding='utf-8') as csv_file:
+
+    with open(csv_file, mode="r", newline="", encoding="utf-8") as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             # Convert 'parent-id' empty strings to None
-            if row['parent-id'] == '':
-                row['parent-id'] = None
+            if row["parent-id"] == "":
+                row["parent-id"] = None
             else:
-                row['parent-id'] = int(row['parent-id'])
+                row["parent-id"] = int(row["parent-id"])
             # Convert 'id' and 'lead-project' to integers
-            row['id'] = int(row['id'])
-            row['lead-project'] = int(row['lead-project'])
+            row["id"] = int(row["id"])
+            row["lead-project"] = int(row["lead-project"])
             data_list.append(row)
-    
+
     # Create the final JSON structure
     projects_json = {"data": data_list}
     return projects_json
@@ -38,16 +37,11 @@ def gtr_csv_to_json(csv_file):
 def import_grants(csv_file):
 
     projects_json = gtr_csv_to_json(csv_file)
- 
+
     data = projects_json
     lead_project = "0"
 
-    subprocess.run(
-        [
-            "poetry",
-            "install"
-        ]
-    )
+    subprocess.run(["poetry", "install"])
 
     for project in data["data"]:
         try:
@@ -76,8 +70,7 @@ def import_grants(csv_file):
             )
 
 
-csv_file = '/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/projects-2023-06-02.csv'    
+csv_file = (
+    "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/projects-2023-06-02.csv"
+)
 import_grants(csv_file)
-
-
-
