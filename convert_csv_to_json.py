@@ -24,11 +24,12 @@ def make_json(csvFilePath, jsonFilePath):
                 lead_project = 1
 
             json_block = {
-                "parent-id": None,
                 "id": int(row_list[0][1]),
+                "parent-id": None,
                 "lead-project": lead_project,
-                "grant-reference": row_list[2][1],
-                "title": row_list[3][1]
+                "title": row_list[3][1],
+                "grant-reference": row_list[2][1]
+
             }
 
             data.append(json_block)

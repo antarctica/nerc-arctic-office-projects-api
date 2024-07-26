@@ -35,14 +35,14 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                     },
                     "id": "01DC6HYAKX993ZK6YHCVWAE169",
                     "links": {
-                        "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169"
+                        "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169"
                     },
                     "relationships": {
                         "categorisations": {
                             "data": [],
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/categorisations",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/categorisations"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/categorisations",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/categorisations"
                             }
                         },
                         "category-scheme": {
@@ -51,15 +51,15 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "category-schemes"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
                         },
                         "parent-category": {
                             "data": None,
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
                             }
                         }
                     },
@@ -91,14 +91,14 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                     },
                     "id": "01DC6HYAKX5NT8WBYWASQ9ENC8",
                     "links": {
-                        "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8"
+                        "self": "http://localhost:9001/categories/01DC6HYAKX5NT8WBYWASQ9ENC8"
                     },
                     "relationships": {
                         "categorisations": {
                             "data": [],
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/categorisations",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/categorisations"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/categorisations",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/categorisations"
                             }
                         },
                         "category-scheme": {
@@ -107,8 +107,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "category-schemes"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/category-schemes",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/category-schemes",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/category-schemes"
                             }
                         },
                         "parent-category": {
@@ -117,8 +117,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "categories"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/parent-categories",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/parent-categories"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/parent-categories",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX5NT8WBYWASQ9ENC8/relationships/parent-categories"
                             }
                         }
                     },
@@ -138,7 +138,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                     },
                     "id": "01DC6HYAKXG8FCN63D7DH06W84",
                     "links": {
-                        "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
+                        "self": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
                         "categories": {
@@ -161,8 +161,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 }
                             ],
                             "links": {
-                                "related": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
-                                "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
+                                "related": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
+                                "self": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
                             }
                         }
                     },
@@ -194,14 +194,14 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                     },
                     "id": "01DC6HYAKX993ZK6YHCVWAE169",
                     "links": {
-                        "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169"
+                        "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169"
                     },
                     "relationships": {
                         "categorisations": {
                             "data": [],
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/categorisations",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/categorisations"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/categorisations",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/categorisations"
                             }
                         },
                         "category-scheme": {
@@ -210,15 +210,15 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "category-schemes"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
                             }
                         },
                         "parent-category": {
                             "data": None,
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
-                                "self": "http://localhost:9000/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+                                "related": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+                                "self": "http://localhost:9001/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
                             }
                         }
                     },
@@ -226,18 +226,18 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 }
             ],
             "links": {
-                "first": "http://localhost:9000/categories?page=1",
-                "last": "http://localhost:9000/categories?page=11",
-                "next": "http://localhost:9000/categories?page=2",
+                "first": "http://localhost:9001/categories?page=1",
+                "last": "http://localhost:9001/categories?page=11",
+                "next": "http://localhost:9001/categories?page=2",
                 "prev": None,
-                "self": "http://localhost:9000/categories?page=1"
+                "self": "http://localhost:9001/categories?page=1"
             }
         }
 
         token = self.util_create_auth_token()
         response = self.client.get(
             '/categories',
-            base_url='http://localhost:9000',
+            base_url='http://localhost:9001',
             headers={'authorization': f"bearer {token}"},
             query_string={
                 'page': 1
@@ -277,7 +277,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 },
                 "id": "01DC6HYAKX53S13HCN2SBN4333",
                 "links": {
-                    "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333"
+                    "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333"
                 },
                 "relationships": {
                     "categorisations": {
@@ -288,8 +288,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                             }
                         ],
                         "links": {
-                            "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations",
-                            "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations"
+                            "related": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations",
+                            "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations"
                         }
                     },
                     "category-scheme": {
@@ -298,8 +298,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                             "type": "category-schemes"
                         },
                         "links": {
-                            "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
-                            "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
+                            "related": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
+                            "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
                         }
                     },
                     "parent-category": {
@@ -308,8 +308,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                             "type": "categories"
                         },
                         "links": {
-                            "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
-                            "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                            "related": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                            "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
                         }
                     }
                 },
@@ -328,7 +328,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                     },
                     "id": "01DC6HYAKXG8FCN63D7DH06W84",
                     "links": {
-                        "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
+                        "self": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                     },
                     "relationships": {
                         "categories": {
@@ -351,8 +351,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 }
                             ],
                             "links": {
-                                "related": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
-                                "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
+                                "related": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
+                                "self": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
                             }
                         }
                     },
@@ -361,7 +361,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 {
                     "id": "01DC6HYAKYAXE7MZMD08QV5JWG",
                     "links": {
-                        "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
+                        "self": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
                         "category": {
@@ -370,8 +370,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "categories"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories",
-                                "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories"
+                                "related": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories",
+                                "self": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories"
                             }
                         },
                         "project": {
@@ -380,8 +380,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "projects"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects",
-                                "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects"
+                                "related": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects",
+                                "self": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects"
                             }
                         }
                     },
@@ -456,7 +456,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                     },
                     "id": "01DB2ECBP24NHYV5KZQG2N3FS2",
                     "links": {
-                        "self": "http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2"
+                        "self": "http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2"
                     },
                     "relationships": {
                         "allocations": {
@@ -467,8 +467,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 }
                             ],
                             "links": {
-                                "related": "http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/allocations",
-                                "self": "http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/allocations"
+                                "related": "http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/allocations",
+                                "self": "http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/allocations"
                             }
                         },
                         "categorisations": {
@@ -479,8 +479,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 }
                             ],
                             "links": {
-                                "related": "http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations",
-                                "self": "http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations"
+                                "related": "http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations",
+                                "self": "http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations"
                             }
                         },
                         "participants": {
@@ -495,8 +495,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 }
                             ],
                             "links": {
-                                "related": "http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/participants",
-                                "self": "http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/participants"
+                                "related": "http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/participants",
+                                "self": "http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/participants"
                             }
                         }
                     },
@@ -528,14 +528,14 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                     },
                     "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
                     "links": {
-                        "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                        "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
                     },
                     "relationships": {
                         "categorisations": {
                             "data": [],
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
-                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                                "related": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                                "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
                             }
                         },
                         "category-scheme": {
@@ -544,8 +544,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "category-schemes"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
-                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                                "related": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                                "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                             }
                         },
                         "parent-category": {
@@ -554,8 +554,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "categories"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
-                                "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                                "related": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                                "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
                             }
                         }
                     },
@@ -563,7 +563,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 }
             ],
             "links": {
-                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333"
+                "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333"
             }
         }
 
@@ -571,7 +571,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333',
             headers={'authorization': f"bearer {token}"},
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
@@ -589,7 +589,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 response = self.client.get(
                     f"/categories/{allocation_id}",
                     headers={'authorization': f"bearer {token}"},
-                    base_url='http://localhost:9000'
+                    base_url='http://localhost:9001'
                 )
                 json_response = response.get_json()
                 json_response = self.util_prepare_error_response(json_response)
@@ -603,8 +603,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 "type": "categories"
             },
             "links": {
-                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
-                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
+                "related": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories",
+                "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories"
             }
         }
 
@@ -612,7 +612,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/parent-categories',
             headers={'authorization': f"bearer {token}"},
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
@@ -625,8 +625,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 "type": "category-schemes"
             },
             "links": {
-                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
-                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
+                "related": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes",
+                "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes"
             }
         }
 
@@ -634,7 +634,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/category-schemes',
             headers={'authorization': f"bearer {token}"},
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
@@ -649,8 +649,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 }
             ],
             "links": {
-                "related": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations",
-                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations"
+                "related": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations",
+                "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations"
             }
         }
 
@@ -658,7 +658,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333/relationships/categorisations',
             headers={'authorization': f"bearer {token}"},
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
@@ -692,14 +692,14 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 },
                 "id": "01DC6HYAKXSM2ZRMVQ2P1PHKZE",
                 "links": {
-                    "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
+                    "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE"
                 },
                 "relationships": {
                     "categorisations": {
                         "data": [],
                         "links": {
-                            "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
-                            "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
+                            "related": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/categorisations",
+                            "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/categorisations"
                         }
                     },
                     "category-scheme": {
@@ -708,8 +708,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                             "type": "category-schemes"
                         },
                         "links": {
-                            "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
-                            "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
+                            "related": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/category-schemes",
+                            "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/category-schemes"
                         }
                     },
                     "parent-category": {
@@ -718,15 +718,15 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                             "type": "categories"
                         },
                         "links": {
-                            "related": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
-                            "self": "http://localhost:9000/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
+                            "related": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/parent-categories",
+                            "self": "http://localhost:9001/categories/01DC6HYAKXSM2ZRMVQ2P1PHKZE/relationships/parent-categories"
                         }
                     }
                 },
                 "type": "categories"
             },
             "links": {
-                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories"
+                "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories"
             }
         }
 
@@ -734,7 +734,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333/parent-categories',
             headers={'authorization': f"bearer {token}"},
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
@@ -754,7 +754,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 },
                 "id": "01DC6HYAKXG8FCN63D7DH06W84",
                 "links": {
-                    "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
+                    "self": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84"
                 },
                 "relationships": {
                     "categories": {
@@ -777,15 +777,15 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                             }
                         ],
                         "links": {
-                            "related": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
-                            "self": "http://localhost:9000/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
+                            "related": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
+                            "self": "http://localhost:9001/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
                         }
                     }
                 },
                 "type": "category-schemes"
             },
             "links": {
-                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes"
+                "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes"
             }
         }
 
@@ -793,7 +793,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333/category-schemes',
             headers={'authorization': f"bearer {token}"},
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)
@@ -805,7 +805,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 {
                     "id": "01DC6HYAKYAXE7MZMD08QV5JWG",
                     "links": {
-                        "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
+                        "self": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG"
                     },
                     "relationships": {
                         "category": {
@@ -814,8 +814,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "categories"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories",
-                                "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories"
+                                "related": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories",
+                                "self": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories"
                             }
                         },
                         "project": {
@@ -824,8 +824,8 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                                 "type": "projects"
                             },
                             "links": {
-                                "related": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects",
-                                "self": "http://localhost:9000/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects"
+                                "related": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects",
+                                "self": "http://localhost:9001/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects"
                             }
                         }
                     },
@@ -833,7 +833,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
                 }
             ],
             "links": {
-                "self": "http://localhost:9000/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations"
+                "self": "http://localhost:9001/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations"
             }
         }
 
@@ -841,7 +841,7 @@ class CategoryTermsResourceTestCase(BaseResourceTestCase):
         response = self.client.get(
             '/categories/01DC6HYAKX53S13HCN2SBN4333/categorisations',
             headers={'authorization': f"bearer {token}"},
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(HTTPStatus.OK, response.status_code)

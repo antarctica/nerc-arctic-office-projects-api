@@ -4,13 +4,13 @@
 
 - see the README.md section about importing individual projects
 ```shell
-$ flask import grant <grant_type> <grant_ref> <lead_project - 0 or 1 - optional>
+$ poetry install && poetry run flask import grant <grant_type> <grant_ref> <lead_project - 0 or 1 - optional>
 ```
 
 
 - example:
 ```shell
-$ poetry install && poetry run flask import grant gtr NE/I028858/1 
+$ poetry install && poetry run flask import grant gtr NE/R012865/1
 ```
 
 ### Bulk project import:

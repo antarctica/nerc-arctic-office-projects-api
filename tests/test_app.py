@@ -19,7 +19,7 @@ class RouteIndexTestCase(BaseTestCase):
     def test_index_route(self):
         response = self.client.get(
             '/',
-            base_url='http://localhost:9000'
+            base_url='http://localhost:9001'
         )
         json_response = response.get_json()
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -39,12 +39,12 @@ class RouteMetaTestCase(BaseTestCase):
                 if method == 'get':
                     response = self.client.get(
                         '/meta/health/canary',
-                        base_url='http://localhost:9000'
+                        base_url='http://localhost:9001'
                     )
                 elif method == 'options':
                     response = self.client.options(
                         '/meta/health/canary',
-                        base_url='http://localhost:9000'
+                        base_url='http://localhost:9001'
                     )
                 else:
                     raise NotImplementedError("HTTP method not supported")
@@ -62,12 +62,12 @@ class RouteMetaTestCase(BaseTestCase):
                     if method == 'get':
                         response = self.client.get(
                             '/meta/health/canary',
-                            base_url='http://localhost:9000'
+                            base_url='http://localhost:9001'
                         )
                     elif method == 'options':
                         response = self.client.options(
                             '/meta/health/canary',
-                            base_url='http://localhost:9000'
+                            base_url='http://localhost:9001'
                         )
                     else:
                         raise NotImplementedError("HTTP method not supported")

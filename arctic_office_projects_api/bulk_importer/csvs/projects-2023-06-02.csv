@@ -1,0 +1,424 @@
+id,parent-id,lead-project,title,grant-reference
+1,,1,Aerosol-Cloud Coupling And Climate Interactions in the Arctic,NE/I028858/1
+2,1,0,Aerosol-Cloud Coupling And Climate Interactions in the Arctic,NE/I028653/1
+3,1,0,Aerosol-Cloud Coupling And Climate Interactions in the Arctic,NE/I028696/1
+4,1,0,Aerosol-Cloud Coupling And Climate Interactions in the Arctic,NE/I028769/1
+5,1,0,Aerosol-Cloud Coupling And Climate Interactions in the Arctic,NE/I028297/1
+6,,1,Arctic Predictability and Prediction On Seasonal to Inter-annual Timescales,NE/I029447/1
+7,6,0,Arctic Predictability and Prediction On Seasonal to Inter-annual Timescales,NE/I029137/1
+8,,1,Carbon Cycling Linkages of Permafrost Sysems,NE/K000292/1
+9,8,0,Carbon Cycling Linkages of Permafrost Sysems,NE/K000179/1
+10,8,0,Carbon Cycling Linkages of Permafrost Sysems,NE/K00025X/1
+11,8,0,Carbon Cycling Linkages of Permafrost Sysems,NE/K000241/1
+12,,1,Lakes and the Arctic Carbon Cycle,NE/K000349/1
+13,12,0,Lakes and the Arctic Carbon Cycle,NE/K000233/1
+14,12,0,Lakes and the Arctic Carbon Cycle,NE/K000276/1
+15,12,0,Lakes and the Arctic Carbon Cycle,NE/K000276/1
+16,,1,"Methane and Other Greenhouse Gases in the Arctic - Measurements, Process Studies and Modelling (MAMM)",NE/I029161/1
+17,16,0,"Methane and Other Greenhouse Gases in the Arctic - Measurements, Process Studies and Modelling (MAMM)",NE/I029293/1
+18,16,0,"Methane and Other Greenhouse Gases in the Arctic - Measurements, Process Studies and Modelling (MAMM)",NE/I028327/1
+19,16,0,"Methane and Other Greenhouse Gases in the Arctic - Measurements, Process Studies and Modelling (MAMM)",NE/I028874/1
+20,16,0,"Methane and Other Greenhouse Gases in the Arctic - Measurements, Process Studies and Modelling (MAMM)",NE/I02934X/1
+21,,1,Permafrost catchments in transition: hydrological controls on carbon cycling and greenhouse gas budgets,NE/K000284/1
+22,21,0,Permafrost catchments in transition: hydrological controls on carbon cycling and greenhouse gas budgets, NE/K000217/1
+23,21,0,Permafrost catchments in transition: hydrological controls on carbon cycling and greenhouse gas budgets,NE/K000268/1
+24,21,0,Permafrost catchments in transition: hydrological controls on carbon cycling and greenhouse gas budgets,NE/K000225/1
+25,21,0,Permafrost catchments in transition: hydrological controls on carbon cycling and greenhouse gas budgets,NE/K000217/2
+26,21,0,Permafrost catchments in transition: hydrological controls on carbon cycling and greenhouse gas budgets,NE/K000284/2
+27,,0,Submarine Estimates of Arctic Turbulance Spectra ,NE/I028408/1
+28,,1,"The Environment of the Arctic:  Climate, Ocean and Sea Ice",NE/I028947/1
+29,28,0,"The Environment of the Arctic:  Climate, Ocean and Sea Ice",NE/I029439/1
+30,28,0,"The Environment of the Arctic:  Climate, Ocean and Sea Ice",NE/I028831/1
+31,28,0,"The Environment of the Arctic:  Climate, Ocean and Sea Ice",NE/I028939/1
+32,28,0,"The Environment of the Arctic:  Climate, Ocean and Sea Ice",NE/I02867X/1
+33,28,0,"The Environment of the Arctic:  Climate, Ocean and Sea Ice", NE/I029072/1
+34,28,0,"The Environment of the Arctic:  Climate, Ocean and Sea Ice",NE/I029633/1
+35,28,0,"The Environment of the Arctic:  Climate, Ocean and Sea Ice",NE/I029226/1
+36,,1,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K00008X/1
+37,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K00008X/2
+38,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000152/1
+39,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000160/1
+40,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000063/1
+41,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000055/2
+42,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000144/2
+43,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000136/1
+44,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000187/1
+45,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000144/1
+46,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000055/1
+47,36,0,Will climate change in the Arctic increase the landslide-tsunami risk to the UK?,NE/K000047/1
+48,,0,Advective pathways of nutrients and key ecological substances in the Arctic ,NE/R012865/1
+49,,1,Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE),NE/P006302/1
+50,49,0,Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE),NE/P006086/1
+51,49,0,Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE),NE/P006078/1
+52,49,0,Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE),NE/P00573X/1
+53,49,0,Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE),NE/P005721/1
+54,49,0,Arctic PRoductivity in the seasonal Ice ZonE (Arctic PRIZE),NE/P006507/1
+55,,1,Can we detect changes in Arctic ecosystems?,NE/P006035/1
+56,55,0,Can we detect changes in Arctic ecosystems?, NE/P006000/1
+57,55,0,Can we detect changes in Arctic ecosystems?, NE/P006221/1
+58,55,0,Can we detect changes in Arctic ecosystems?,NE/P006310/1
+59,55,0,Can we detect changes in Arctic ecosystems?,NE/P005896/1
+60,55,0,Can we detect changes in Arctic ecosystems?,NE/P00623X/1
+61,,1,Changing Arctic carbon cycle in the cOastal Ocean Near-shore,NE/R012806/1
+62,61,0,Changing Arctic carbon cycle in the cOastal Ocean Near-shore,NE/R012814/1
+63,,1,Chronobiology of changing Arctic Sea Ecosystems,NE/R012733/1
+64,63,0,Chronobiology of changing Arctic Sea Ecosystems,NE/R012687/1
+65,,1,Coldfish: potential benefits and risks of borealisation for fish stocks and ecosystems in a changing Arctic Ocean,NE/R012520/1
+66,65,0,Coldfish: potential benefits and risks of borealisation for fish stocks and ecosystems in a changing Arctic Ocean,NE/R012563/1
+67,,0,Diatom Autecological Responses with Changes To Ice Cover (Diatom-ARCTIC),NE/R012849/1
+68,,0,Ecosystem functions controlled by sea ice and light in a changing Arctic (Eco-Light) ,NE/R012725/1
+69,,0,Effects of ice-associated stressors and pollutants on the Arctic marine cryosphere,NE/R012857/1
+70,,1,Mechanistic understanding of the role of diatoms in the success of the Arctic Calanus complex and implications for a warmer Arctic,NE/P006280/2
+71,70,0,Mechanistic understanding of the role of diatoms in the success of the Arctic Calanus complex and implications for a warmer Arctic,NE/P006353/1
+72,70,0,Mechanistic understanding of the role of diatoms in the success of the Arctic Calanus complex and implications for a warmer Arctic, NE/P006183/1
+73,70,0,Mechanistic understanding of the role of diatoms in the success of the Arctic Calanus complex and implications for a warmer Arctic, NE/P00590X/1
+74,70,0,Mechanistic understanding of the role of diatoms in the success of the Arctic Calanus complex and implications for a warmer Arctic,NE/P005985/1
+75,70,0,Mechanistic understanding of the role of diatoms in the success of the Arctic Calanus complex and implications for a warmer Arctic,NE/P006213/1
+76,,1,Microbes to Megafauna Modelling of Arctic Seas (MiMeMo),NE/R012571/1
+77,76,0,Microbes to Megafauna Modelling of Arctic Seas (MiMeMo),NE/R012679/1
+78,,0,Pathways and Emissions of climate-relevant Trace gases in a changing Arctic Ocean,NE/R012830/1
+79,,1,Primary productivity driven by escalating nutrient fluxes?,NE/R01275X/1
+80,79,0,Primary productivity driven by escalating nutrient fluxes?,NE/R012547/1
+81,79,0,Primary productivity driven by escalating nutrient fluxes?,NE/R012636/1
+82,,0,"Project LOMVIA: Linking Oceanography and Multi-specific, spatially-Variable Interactions of seabirds and their prey in the Arctic",NE/R012660/1
+83,,1,"The Changing Arctic Ocean Seafloor (ChAOS) - how changing sea ice conditions impact biological communities, biogeochemical processes and ecosystems ",NE/P006493/1
+84,83,0,"The Changing Arctic Ocean Seafloor (ChAOS) - how changing sea ice conditions impact biological communities, biogeochemical processes and ecosystems ",NE/P006108/1
+85,83,0,"The Changing Arctic Ocean Seafloor (ChAOS) - how changing sea ice conditions impact biological communities, biogeochemical processes and ecosystems ",NE/P006434/1
+86,83,0,"The Changing Arctic Ocean Seafloor (ChAOS) - how changing sea ice conditions impact biological communities, biogeochemical processes and ecosystems ",NE/P005942/1
+87,83,0,"The Changing Arctic Ocean Seafloor (ChAOS) - how changing sea ice conditions impact biological communities, biogeochemical processes and ecosystems ", NE/P00637X/1
+88,83,0,"The Changing Arctic Ocean Seafloor (ChAOS) - how changing sea ice conditions impact biological communities, biogeochemical processes and ecosystems ",NE/P006426/1
+89,,1,Understanding the links between pelagic microbial ecosystems and organic matter cycling in the changing Arctic (Micro-ARC),NE/R012644/1
+90,89,0,Understanding the links between pelagic microbial ecosystems and organic matter cycling in the changing Arctic,NE/R012822/1
+91,,0,MOSAiC Boundary Layer,NE/S002472/1
+92,,0,MOSAiC: Floe-scale observation and quantification of Arctic sea ice breakup and floe size during the autumn-to-summer transition (MOSAiCFSD) , NE/S002545/1
+93,,1,Quantifying the contribution of sympagic versus pelagic diatoms to Arctic food webs and biogeochemical fluxes (SYM-PEL) ,NE/S002502/1
+94,93,0,Quantifying the contribution of sympagic versus pelagic diatoms to Arctic food webs and biogeochemical fluxes (SYM-PEL) ,NE/S002480/1
+95,,0,"SIMbRICS: Sea Ice Microbiology and the Role In Cycling of Sulfur (DMS, DMSP, DMSO, MT)",NE/S002596/1
+96,,0,"Sea Salt Aerosol above Arctic Sea Ice - sources, processes and climate impacts (SSAASI-CLIM)",NE/S00257X/1
+97,,1,Seasonal evolution of Ku- and Ka-band backscattering horizon over snow on first-year and multiyear sea ice ,NE/S002510/1
+98,97,0,Seasonal evolution of Ku- and Ka-band backscattering horizon over snow on first-year and multiyear sea ice ,NE/S002499/1
+144,,0,A coupled climate-vegetation-mammal-human model for simulating Late Quaternary megafaunal extinctions,NE/P002536/1
+145,,0,A novel approach to constraining ice sheet models with glacial geomorphology,NE/R014574/1
+146,,0,An integrated data-model study of interactions between tropical monsoons and extra-tropical climate variability and extremes (INTEGRATE),NE/P006809/1
+147,,0,Arctic Emissivity of Snow for Operational Prediction (AESOP) of Weather,NE/S009280/1
+148,,1,Atmosphere to ocean momentum transfer by sea ice,NE/M015025/1
+149,148,0,Atmosphere to ocean momentum transfer by sea ice,NE/M015238/1
+150,,0,Atmospheric Forcing of the Iceland Sea,NE/N009754/1
+151,150,0,Atmospheric Forcing of the Iceland Sea (AFIS),NE/N009924/1
+152,,0,Automation of Marine Growth Analysis for Decommissioning Offshore Installations,NE/N019865/1
+153,,0,Better understanding of Interregional Teleconnections for prediction in the Monsoon and Poles,NE/P006795/1
+154,,1,BLACK and BLOOM: variations in the albedo of the Greenland Ice Sheet as a result of interactions between microbes and particulates.,NE/M021025/1
+155,154,0,BLACK and BLOOM: variations in the albedo of the Greenland Ice Sheet as a result of interactions between microbes and particulates.,NE/M020991/1
+156,154,0,BLACK and BLOOM: variations in the albedo of the Greenland Ice Sheet as a result of interactions between microbes and particulates.,NE/M020770/1
+157,154,0,BLACK and BLOOM: variations in the albedo of the Greenland Ice Sheet as a result of interactions between microbes and particulates.,NE/M021084/1
+158,,0,Calving Laws for Ice Sheet Models CALISMO,NE/P011365/1
+159,,1,Can metabolic traits limit species invasions under climate change?,NE/M004740/1
+160,159,0,Can metabolic traits limit species invasions under climate change?,NE/M003205/1
+161,,0,Can the formation of new soil organic matter offset decomposition losses from thawed permafrost soils?,NE/S010122/1
+162,,1,Characterising and Interpreting FLuxes Over Sea-ice (CANDIFLOS),NE/S000690/1
+163,162,0,Characterising and Interpreting FLuxes Over Sea-ice (CANDIFLOS),NE/S000453/1
+164,,1,Characterising the Ice Shelf/Ocean Boundary Layer,NE/N009746/1
+165,164,0,Characterising the Ice Shelf/Ocean Boundary Layer,NE/N010027/1
+166,,1,Characterization of major overburden leakage pathways above sub-seafloor CO2 storage reservoirs in the North Sea (CHIMNEY),NE/N016130/1
+167,166,0,Characterization of major overburden leakage pathways above sub-seafloor CO2 storage reservoirs in the North Sea (CHIMNEY),NE/N015762/1
+168,166,0,Characterization of major overburden leakage pathways above sub-seafloor CO2 storage reservoirs in the North Sea (CHIMNEY),NE/N016041/1
+169,,0,Climate as a driver of shrub expansion and tundra greening,NE/M016323/1
+170,,0,Climate feedbacks from wetlands and permafrost thaw in a warming world (CLIFFTOP),NE/P015050/1
+171,,0,Climate impact on the carbon emission and export from Siberian inland waters (SIWA),NE/M019896/1
+172,,1,Climate of the LAst Millennium (CLAM): An Integrated Data-Model Approach to Reconstruct and Interpret Annual Variability in North Atlantic Circulation,NE/N001176/1
+173,172,0,Climate of the LAst Millennium (CLAM): An Integrated Data-Model Approach to Reconstruct and Interpret Annual Variability in North Atlantic Circulation,NE/N002733/1
+174,172,0,Climate of the LAst Millennium (CLAM): An Integrated Data-Model Approach to Reconstruct and Interpret Annual Variability in North Atlantic Circulation,NE/N001435/1
+175,172,0,Climate of the LAst Millennium (CLAM): An Integrated Data-Model Approach to Reconstruct and Interpret Annual Variability in North Atlantic Circulation,NE/N002733/2
+176,,0,Constraining Arctic Carbon-Cycle Feedbacks,NE/R015791/1
+177,,0,COUP: Constraining uncertainties in the permafrost-climate feedback,NE/M01990X/1
+178,,0,Development of an international research group in hyperspectral thermal remote sensing of volcanic processes and terrains,NE/R004935/1
+179,,1,Ecological effects of glacial dust deposition on remote Arctic lakes,NE/P011578/1
+180,179,0,Ecological effects of glacial dust deposition on remote Arctic lakes,NE/P012019/1
+181,,0,Environmental and demographic drivers of migratory strategies in birds,NE/M012549/1
+182,,0,Exploring the role of sea ice physics in Arctic climate variability and predictability,NE/P001645/1
+183,,0,Fresh WAys of Targeting and Employing Robotic Systems (FreshWATERS),NE/P003176/1
+184,,0,Greenland in a warmer climate: What controls the advance &amp; retreat of the NE Greenland Ice Stream,NE/N011228/1
+185,,0,"High Impact Weather Events in Eurasia: Selected, Simulated and Storified",NE/P006760/1
+186,,0,How did primordial and recycled geochemical signatures come to coexist in the Earth's deep mantle?,NE/P002331/1
+187,,0,How will glacial meltwater microbes come in from the cold in this &quot;Peak Melt&quot; century?,NE/S001034/1
+188,,0,ICAAP: Increasing Carbon Accumulation in Arctic Peatlands,NE/S001166/1
+189,,1,ICE-IMPACT: International Consortium for the Exploitation of Infrared Measurements of PolAr ClimaTe,NE/N01376X/1
+190,189,0,ICE-IMPACT: International Consortium for the Exploitation of Infrared Measurements of PolAr ClimaTe,NE/N013786/1
+191,,1,Impacts of global warming in sentinel systems: from genes to ecosystems,NE/M020843/1
+192,191,0,Impacts of global warming in sentinel systems: from genes to ecosystems,NE/M02086X/1
+193,191,0,Impacts of global warming in sentinel systems: from genes to ecosystems,NE/M020886/1
+194,,0,Impacts of habitat fragmentation in a warming world,NE/L011840/2
+195,,0,Improved understanding of accidental releases from oil and gas industries offshore.,NE/M007146/1
+196,,0,Limits to Evolutionary Adaptation of Phytoplankton in the Arctic Ocean,NE/R000883/1
+197,,0,Market study for device to improve non-destructive testing of material samples.,NE/N009355/1
+198,,0,Meltwater Ice-sheet Interactions and the changing climate of Greenland (MII-Greenland),NE/S011390/1
+199,,0,Meteoric Influences on Stratospheric Aerosol and Clouds (MeteorStrat),NE/R011222/1
+200,,1,Methane Production in the Arctic: Under-recognized Cold Season and Upland Tundra - Arctic Methane Sources-UAMS,NE/P003028/1
+201,200,0,Methane Production in the Arctic: Under-recognized Cold Season and Upland Tundra - Arctic Methane Sources-UAMS,NE/P002552/1
+202,,0,"MOCCHA Analysis of Dynamic, Cloud, and Aerosol Processes",NE/R009686/1
+203,,0,More than methane: quantifying melt-driven biogas production and nutrient export from Eurasian Arctic lowland permafrost (LowPerm),NE/M019829/1
+204,,0,NCEO NC ODA Full,NE/R000115/1
+205,,0,NERC KE ERIIP Fellowship - Environmental risks to infrastructure: Identifying and filling the gaps,NE/P005780/1
+206,,0,NERC LRI Commissioning: UK Arctic Research Station,NE/R017042/1
+207,,0,NI: Benthos of the Arctic as a Storage reservoir for sea-Ice Carbon,NE/S007245/1
+208,,0,NI: Developing Innovative Multi-proxy Analysis for Long-term environmental change in Siberia and the Russian Far East,NE/S008276/1
+209,,0,NSFGEO-NERC Advancing Predictability of Sea Ice: Phase 2 of the Sea Ice Prediction Network (SIPN2),NE/R017123/1
+210,,0,"NSFGEO-NERC: The Integrated Characterization of Energy, Clouds, Atmospheric state, and Precipitation at Summit,Aerosol-Cloud Experiment",NE/S00906X/1
+211,,0,NSFGEO-NERC: WOOD-BASED CARBON DISCHARGE TO THE ARCTIC OCEAN,NE/R017530/1
+212,,1,Obesogens in a naturally obese animal: An experimental approach to assess the impact of marine pollutants on fat tissue function in seals,NE/M013723/1
+213,212,0,Obesogens in a naturally obese animal: An experimental approach to assess the impact of marine pollutants on fat tissue function in seals,NE/M01357X/1
+214,,0,Ocean-ice Interaction in the Ross Sea during Past Warm Periods,NE/R018219/1
+215,,1,Physiology and stable isotope ecology of moss growth for modeling spatial and temporal climatic signals,NE/M001946/1
+216,215,0,Physiology and stable isotope ecology of moss growth for modelling spatial and temporal climatic signals,NE/M00113X/1
+217,,0,Plant nutrition as Earth System Science: understanding the links between plant nutrient gain and soil carbon storage.,NE/N015460/1
+218,,0,Polar Amplification Model Intercomparison Project,NE/R005125/1
+219,,1,Primary productivity driven by escalating nutrient fluxes?,NE/R01275X/1
+220,219,0,Primary productivity driven by escalating nutrient fluxes?,NE/R012636/1
+221,219,0,Primary productivity driven by escalating nutrient fluxes?,NE/R012547/1
+222,,0,Radium in Changing Environments: A Novel Tracer of Iron Fluxes at Ocean Margins,NE/P017630/1
+223,,0,RECONSTRUCTING LATITUDINAL TERRESTRIAL TEMPERATURE GRADIENTS AT THE CRETACEOUS-PALAEOGENE BOUNDARY: TESTING THE &quot;EQUABLE EARTH&quot; HYPOTHESIS,NE/S002324/1
+224,,0,Reducing the economic impact of volcanic activity to aviation (OPEN),NE/P006744/1
+225,,0,Resilience of floodplain productivity to Environmental Change,NE/M017710/1
+226,,0,Resolving Enthalpy Budget to Understand Surging (REBUS),NE/R018243/1
+227,,0,"Retreat of Southern Hemisphere Sea Ice, 130 000 to 116 000 years BP",NE/P013279/1
+228,,0,ScotIce - How fast could ice caps collapse?,NE/S01120X/1
+229,,1,SEANA -Shipping Emissions in the Arctic and North Atlantic atmosphere,NE/S00579X/1
+230,229,0,SEANA -Shipping Emissions in the Arctic and North Atlantic atmosphere,NE/S005587/1
+231,,0,Subglacial Bedrock Sampler,NE/P003761/1
+232,,0,Tellus How - An exemplar approach for end-user innovation and follow up of major NERC environmental survey projects,NE/M021777/1
+233,,0,The colonisation of hydrothermal vents by complex life: a natural experiment in macroevolution,NE/R000670/1
+234,,1,The Distribution of Oxygen in Earth's mantle,NE/N009886/1
+235,234,0,The Distribution of Oxygen in Earth's Mantle,NE/N009568/2
+236,234,0,The Distribution of Oxygen in Earth's Mantle,NE/N009568/1
+237,,0,THE GEOLOGICAL RECORD OF THE EARTHQUAKE CYCLE IN THE LOWER CRUST,NE/P001548/1
+238,,1,The Global Methane Budget,NE/N016211/1
+239,238,0,The Global Methane Budget,NE/N015657/1
+240,238,0,The Global Methane Budget,NE/N015630/1
+241,238,0,The Global Methane Budget,NE/N015835/1
+242,238,0,The Global Methane Budget,NE/N015932/1
+243,238,0,The Global Methane Budget,NE/N016238/1
+244,238,0,The Global Methane Budget,NE/N015584/1
+245,238,0,The Global Methane Budget,NE/N015681/1
+246,238,0,The Global Methane Budget,NE/N015916/1
+247,238,0,The Global Methane Budget,NE/N015606/1
+248,238,0,The Global Methane Budget,NE/N016548/1
+249,238,0,The Global Methane Budget,NE/N016092/1
+250,238,0,The Global Methane Budget,NE/N015746/1
+251,238,0,The Global Methane Budget,NE/N016122/1
+252,,1,The North Atlantic Climate System Integrated Study,NE/N018044/1
+253,252,0,The North Atlantic Climate System Integrated Study,NE/N018052/1
+254,252,0,The North Atlantic Climate System Integrated Study,NE/N018028/1
+255,252,0,The North Atlantic Climate System Integrated Study,NE/N018001/1
+256,,0,The potential of seasonal-to-decadal-scale inter-regional linkages to advance climate predictions (InterDec),NE/P006787/1
+257,,0,The predictability and limits of evolution in response to increased temperature: insights from a natural 'experiment',NE/N016734/1
+258,,0,The response of the Agulhas Leakage system to Pliocene-Pleistocene climate evolution,NE/P009573/1
+259,,0,The role of Arctic sea ice in climatic and ecological processes,NE/L011859/1
+260,,0,Thresholds for the future of the Greenland ice-sheet,NE/P014976/1
+261,,1,Towards a marginal Arctic sea ice cover,NE/R000654/1
+262,261,0,Towards a marginal Arctic sea ice cover,NE/R000085/1
+263,261,0,Towards a marginal Arctic sea ice cover,NE/R000263/1
+264,,0,Towards improved forecasting of volcanic explosivity: Investigating the role of magma mixing,NE/N014286/1
+265,,0,Tracking Marine sources of a Cholera outbreak using high throughput molecular methods on archival samples,NE/S013431/1
+266,,0,Understanding and Attributing Composition-Climate Feedbacks in the Earth System,NE/M018199/1
+267,,0,Variability of neutral temperature in the high-latitude upper atmosphere,NE/N004051/1
+268,,0,Volcanic balloon-borne laboratory,NE/P003362/1
+269,,1,"Volcanic plume understanding and forecasting: Integrating remote-sensing, in-situ observations and models (V-PLUS)",NE/S00436X/1
+270,269,0,"Volcanic plume understanding and forecasting: Integrating remote-sensing, in-situ observations and models (V-PLUS)",NE/S004106/1
+271,269,0,"Volcanic plume understanding and forecasting: Integrating remote-sensing, in-situ observations and models (V-PLUS)",NE/S004025/1
+272,,0,Will more productive Arctic ecosystems sequester less soil carbon? A key role for priming in the rhizosphere ('PRIME-TIME'),NE/P002722/1
+273,,0,Will more productive Arctic ecosystems sequester less soil carbon? A key role for priming in the rhizosphere ('PRIME-TIME'),NE/P002722/2
+274,,0,Narrative Objects: The Sakha Summer Festival and Cultural Revitalization,AH/M000265/1
+275,,0,Science Based Regulation of Arctic Energy Installations (SciBAr Installations),AH/R003203/1
+276,,0,Soviet climate science and its intellectual legacies,AH/P004431/1
+278,,0,Cryoegg: a novel wireless instrument for exploring deep ice,EP/R03530X/1
+279,,0,Svalbard Futures: Value and Adaptations in the Anthropocene,ES/S01084X/1
+281,,0,The Global Methane Budget,NE/N016092/2
+282,,0,ICAAP: Increasing Carbon Accumulation in Arctic Peatlands,NE/S001166/1
+283,,0,ScotIce - How fast could ice caps collapse?,NE/S01120X/1
+284,,0,Tundra shrub growth in response to micro-site conditions across multiple spatial scales,2284254
+285,,0,Consequences of the response of Arctic biodiversity to climate change for benthic ecosystem functioning,2293664
+286,,0,An experimental and macroecological investigation of precipitation effects on Arctic plant root traits,2277271
+287,,0,Arctic carbon under threat from climate extremes: Impacts of extreme climatic events on soil carbon and microbial communities,2277950
+288,,0,How do Arctic seabirds coordinate parental care in changing climate?,2275002
+289,,0,Internal Solitary Waves in Ice-Covered Waters,2287120
+290,,0,Laser induced fluorescence instrument for the detection of trace levels of atmospheric sulfur dioxide (SO2),NE/T008555/1
+291,,0,"Past, present and future of permafrost peatlands",2287884
+292,,0,Proton-Transfer-Reaction Time-of-Flight Mass Spectrometer (PTR-ToF-MS) for aircraft and ground-based applications,NE/T009020/1
+293,,0,"Quantifying the role of oceanic storminess in determining the survival and recruitment of long-distance, oversea, migratory birds",2280705
+294,,0,Rapid in-situ phytoplankton monitoring to support marine aquaculture and long term climate science,NE/T008571/1
+295,,0,"Sources, transfer and fate of microplastics in the Arctic marine environment",2295414
+296,,0,Where's my dinner? Do Arctic benthic communities show preferential food uptake?,2269779
+297,,0,ScotIce - How fast could ice caps collapse?,NE/S01120X/1
+298,,0,Advective pathways of nutrients and key ecological substances in the Arctic (APEAR),NE/R012865/2
+299,,0,Arctic PRoductivity in the seasonal Ice ZonE (Arctic PrIZE),NE/P006078/2
+300,,0,Can we detect changes in Arctic Ecosystems?,NE/P006000/2
+301,,0,Mechanistic understanding of the role of diatoms in the success of the Arctic Calanus complex and implications for a warmer Arctic,NE/P006353/2
+302,,0,Primary productivity driven by escalating nutrient fluxes?,NE/R012547/2
+303,,0,The UK Overturning in the Subpolar North Atlantic Program (UK-OSNAP),NE/K010875/2
+304,,0,Towards a marginal Arctic sea ice cover,NE/R000085/2
+305,,1,PRE-MELT: Preconditioning the trigger for rapid Arctic ice melt,NE/T000260/1
+306,305,0,PRE-MELT: Preconditioning the trigger for rapid Arctic ice melt,NE/T001399/1
+307,305,0,PRE-MELT: Preconditioning the trigger for rapid Arctic ice melt,NE/T000546/1
+308,,1,Arctic Summer-time Cyclones: Dynamics and Sea-ice Interaction,NE/T006811/1
+309,308,0,Arctic Summer-time Cyclones: Dynamics and Sea-Ice Interaction,NE/T00682X/1
+310,308,0,Arctic Summer-time Cyclones: Dynamics and Sea-ice Interaction,NE/T006773/1
+311,,0,Arctic Community Resilience to Boreal Environmental change: Assessing Risks from fire and disease (ACRoBEAR),NE/T013672/1
+312,,1,SitS NSF-UKRI: Collaborative Research: Sensors UNder snow Seasonal Processes in the Evolution of ARctic Soils (SUN SPEARS),NE/T010967/1
+313,312,0,SitS NSF-UKRI: Collaborative Research: Sensors UNder snow Seasonal Processes in the Evolution of ARctic Soils (SUN SPEARS),NE/T010568/1
+314,,0,Quantifying the contribution of sympagic versus pelagic diatoms to Arctic food webs and biogeochemical fluxes (SYM-PEL),NE/S002502/1
+315,,0,The Future of Extreme European Winter Weather,NE/S014713/1
+316,,1,SNAP-DRAGON: Subpolar North Atlantic Processes - Dynamics and pRedictability of vAriability in Gyre and OverturNing,NE/T013400/1
+317,316,0,SNAP-DRAGON: Subpolar North Atlantic Processes - Dynamics and pRedictability of vAriability in Gyre and OverturNing,NE/T013494/1
+318,,0,An investigation into open-system pingos in Canada as an analogue to drift-filled hollows in London,NE/T013605/1
+319,,0,Biodegradable cellulose microbeads for high-volume applications,41329
+320,,1,Wider impacts of Subpolar North Atlantic decadal variability on the ocean and atmosphere (WISHBONE),NE/T013478/1
+321,320,0,Wider Impacts of Subpolar nortH atlantic decadal variaBility on the OceaN and atmospherE' (WISHBONE),NE/T013540/1
+323,320,0,Wider Impacts of Subpolar nortH atlantic decadal variaBility on the OceaN and atmosphere (WISHBONE),NE/T013451/1
+324,320,0,Wider impacts of Subpolar North Atlantic decadal variability on the ocean and atmosphere (WISHBONE),NE/T013516/1
+325,,0,Explaining and Predicting the Migration and Phenology of Europe-African Migratory Birds,NE/T001038/1
+326,,0,Controls upon dissolved organic matter export from glaciers,NE/T014563/1
+327,,0,Explaining and Predicting the Migration and Phenology of Europe-African Migratory Birds,NE/T001070/1
+328,,1,Resolving climate sensitivity associated with shallow mixed phase cloud in the oceanic mid- to high-latitudes (M-Phase),NE/T00648X/1
+329,328,0,Resolving climate sensitivity associated with shallow mixed phase cloud in the oceanic mid- to high-latitudes (M-Phase),NE/T006463/1
+330,,0,A multi-instrument exploration of the cusp ionosphere,NE/V000748/1
+331,,0,A shifting jet stream in a changing climate. Exploring the response of the polar jet stream in the Northern Hemisphere to various climate futures.,2390205
+332,,0,An investigation into open-system pingos in Canada as an analogue to drift-filled hollows in London,NE/T013605/1
+333,,0,Arctic Greening Across Scales,2438842
+334,,1,Arctic Summer-time Cyclones: Dynamics and Sea-ice Interaction,NE/T006773/1
+335,334,0,Arctic Summer-time Cyclones: Dynamics and Sea-ice Interaction,NE/T006811/1
+336,334,0,Arctic Summer-time Cyclones: Dynamics and Sea-Ice Interaction,NE/T00682X/1
+337,,0,ArcticBuzz: bumblebee community responses to climate change in Lapland,2445781
+338,,0,Are There Perennial and Light-Independent Microbial Processes on Supraglacial Ecosystems?#,NE/V012991/1
+339,,0,AutoNaut for Extreme Environments - extension,91129
+340,,0,Benefit of high resolution models for climate predictions.,2415542
+341,,0,Carbon Emissions under Arctic Snow (CEAS),NE/W003686/1
+342,,0,Changing Arctic: Estimation of freshwater changes over the full Arctic basin including land and ocean from satellite observations,2438969
+343,,0,Climate change impacts on global wildfire ignitions by lightning and the safe management of landscape fuels,NE/V01417X/1
+344,345,0,Consequences of Arctic Warming for European Climate and Extreme Weather,NE/V004875/1
+345,,1,Consequences of Arctic Warming for European Climate and Extreme Weather,NE/V005855/1
+346,,0,Controls upon dissolved organic matter export from glaciers,NE/T014563/1
+347,,0,Data assimilation of satellite snow thickness products in the Arctic Ocean,2390206
+348,,0,Decentralised water technologies,EP/V030515/1
+349,,0,Devonian Tropical Plant Assemblages from Arctic Svalbard,2435953
+350,,1,Discovering reasons for global atmospheric methane growth using deuterium isotopes,NE/V000780/1
+351,350,0,Discovering reasons for global atmospheric methane growth using deuterium isotopes,NE/V00090X/1
+352,,0,Diversity and ecological function of fungi and protists in Antarctic and Arctic freshwater ecosystems,2446079
+353,,0,Explaining and Predicting the Migration and Phenology of Europe-African Migratory Birds,NE/T001070/1
+354,,0,Fingerprinting bioactive trace elements in a changing Arctic Ocean,2399893
+355,,0,Fundamental Mechanisms of Arctic Summer-time Cyclone Growth and Sea-ice Interaction,2435642
+356,,0,"Gender and histories of Arctic field science, 1900-1950",2420730
+357,,0,Geochemical habitability potential of magmatic vs impact induced heat hydrothermal environment on early Earth and Mars.,NE/V009982/1
+358,,0,HOMEs under the microscope: Citizen-led characterisation Of airborne micropLAstic sources (HOME Co-LAb),BB/V012584/1
+359,,0,How do redox and temperature fluctuations influence mineral protection of organic matter during permafrost thaw?,2446405
+360,,0,Ice-ocean-atmosphere interactions in the Arctic,2438686
+361,,0,Image processing and machine learning applied to Earth Observation of the cryosphere,2438667
+362,,0,Improved understanding of Arctic atmospheric composition and climate through exploitation of satellite observations,2443087
+363,,0,Intra-interglacial variability: are warmer periods climatically more unstable?,NE/V001620/1
+364,,0,Is macroalgal carbon sequestration the 'elephant in the Blue Carbon room' ?,2436234
+365,,0,Mapping above- and belowground vegetation traits in the Canadian Rockies and surrounding regions at multiple spatial and temporal scales,NE/V010336/1
+366,,0,Melt Ponds on Sea Ice,2449019
+367,,0,"Monitoring &amp; modelling ice rich permafrost coastal responses to in-situ and dynamic drivers in a changing climate along the Beaufort Sea coast, Canada",2434523
+368,,0,Muddying the waters: cation exchange processes as a major control on weathering fluxes.,2393952
+369,,0,NI: CONFLUENCE - Disentangling the role of rivers as greenhouse gas conduits,NE/V009001/1
+370,371,0,Nitrogen fixation in the Arctic Ocean,NE/T000570/1
+371,,1,Nitrogen fixation in the Arctic Ocean,NE/T001240/1
+372,,0,Palaeo Constraints on the 1.5C World: What does the Pliocene tell us about the long-terms effects of atmospheric CO2 at ~400 ppmv,2442758
+373,,0,Quantifying carbon accumulation and loss in Russian Arctic peatlands,2435883
+374,,0,Remote sensing of recent changes in northern peatlands,2442788
+375,376,0,SNAP-DRAGON: Subpolar North Atlantic Processes - Dynamics and pRedictability of vAriability in Gyre and OverturNing,NE/T013400/1
+376,,1,SNAP-DRAGON: Subpolar North Atlantic Processes - Dynamics and pRedictability of vAriability in Gyre and OverturNing,NE/T013494/1
+377,,0,Tackling the Arctic Cloud Problem,NE/V013769/1
+378,,0,The case-study of Iceland and artic surfing is unique and contribute to health geographies understanding wellbeing in dark winter months.,2435044
+379,,0,Towards a better understanding of the lifecycle of Pesticides in the Atmosphere,2440396
+380,,0,Treeline advances in a changing climate: understanding how climate affects reproduction and early life stages in Black spruce,NE/V021397/1
+381,,0,Understanding Arctic greening across scales,2449030
+382,,0,Understanding the impact of trace level sulphur dioxide on air pollution and climate,2432302
+383,,0,Understanding the resilience of wild birds to climate change: seasonal genomics of the annual migratory breeding cycle,BB/V001647/1
+387,320,0,Wider Impacts of Subpolar nortH atlantic decadal variaBility on the OceaN and atmospherE' (WISHBONE),NE/T013540/1
+388,,0,Wireline tap on the construction of the North Atlantic Deep water - IODP Exp. 395 &quot;Reykjanes Mantle Convection and Climate&quot;,NE/W002310/1
+391,,0,Fragmentation and melt of Arctic sea ice,NE/V011693/1
+394,,0,Arctic blue carbon: human and climatic drivers of change,2604278
+395,,0,Traces of microbial life and activity in Arctic endolithic habitats,2548385
+396,,0,Measurement and Modelling of Snow in Arctic Tundra and Taiga Biomes,2597850
+397,,0,TundraTime: Plant phenology change as a driver of Arctic greening trends,NE/W006448/1
+398,,0,Can megafauna shift the carbon and surface radiation budgets of the Arctic?,NE/W00089X/1
+399,,0,Northern Perspectives: community-based monitoring for tracing environmental change in the Canadian Arctic,2594847
+400,,0,Investigating the Arctic sea ice snowpack and modelling its interaction with microwave radiation,2547163
+401,,0,Accelerating sea ice loss in the Arctic: models and melt ponds,2598078
+402,,0,In silico and Experimental Screening Platform for Characterising Environmental Impact of Impact of Industry Development in the Arctic (EXPECT),2605032
+403,,0,High-resolution genomics to reveal changes in microbial biodiversity across space and time in the warming Arctic Ocean,NE/W005654/1
+404,,0,Remote Sensing of Snow for Improvement of Weather Forecasts,2593502
+405,,0,THE GLOBAL IMPACTS OF POLAR GEOENGINEERING,2547090
+407,,0,Impact of polar climate change on coastal regions,2583856
+408,,0,"NSFGEO-NERC Collaborative Research: Environmental change and impacts on prehistoric human colonization of Peary Land, northernmost Greenland",NE/W007541/1
+409,,0,Methane in and above the polar oceans,2620762
+412,,0,Far-flung influences on midlatitude climate and weather extremes: The stratospheric pathway,2578994
+414,,0,White Sea meromictic lakes as rich archives of paleoenvironmental change,2597778
+415,,0,Fanning the flames: past and future links between climate change and fire activity across Siberia.,2558826
+416,,0,What are the physiological costs to seabirds adapting to polar climate change?,2601200
+418,,0,Causes and impacts of Greenland atmospheric Blocking changes,NE/W005875/1
+419,,0,NSFGEO-NERC: Collaborative Research: ICECAPS-MELT,NE/X002403/1
+421,,0,Mapping the functional gene-scape of the oceans under conditions of global change,2575865
+422,,1,Fine-scale auroral structure: Causes and effects,NE/V012436/1
+423,422,0,Fine-scale auroral structure: Causes and effects,NE/V012541/1
+426,,0,Orographic Flows off Greenland and their Impact on the Ocean,2576503
+427,,1,Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat,NE/X002608/1
+428,427,0,Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat,NE/X002632/1
+429,,0,Empowering our communities to map rough ice and slush for safer sea-ice travel in Inuit Nunangat,NE/X004643/1
+430,,0,"Nunavut Search and Rescue (NSAR) Project: Supporting Inuit Health and Well-Being, Food Security, Economic Development, and Community Resilience",NE/X004201/1
+431,,0,ASYNC - Resolving asynchronous responses of North Atlantic climate to deglacial changes in ocean circulation,NE/W006243/1
+432,,0,"Carving out Climate Testimony: Inuit Youth, Wellness &amp; Environmental Stewardship",NE/X002462/1
+433,,0,"Renewable Energy Microgrid Integration for Remote, Off-grid Cabins in Nunavut",NE/X004589/1
+434,,0,"Impacts of cryosphere-hydrosphere change on ecosystems and livelihoods in northern Nunatsiavut, Canada (IMAGINE)",NE/X003868/1
+435,,0,"Emerging zoonoses in wildlife: understanding the ecology, transmission and impacts of Brucella and Erysipelothrix for conservation and food security",NE/X002616/1
+436,,0,Beavers and Socio-ecological Resilience in Inuit Nunangat (BARIN),NE/X002578/1
+437,,0,Nuna: Effective mitigation and adaptation to changing ground conditions for resilient coastal futures,NE/X005658/1
+438,,0,A multi-instrument exploration of the cusp ionosphere,NE/V000748/1
+439,,0,A novel proxy for Arctic sea surface temperatures (PAST),NE/X009416/1
+440,,0,Abrupt sea ice loss in the Arctic: Tipping points in warm and cold climates,2738290
+442,,0,Ammonia (NH3) in the marine atmosphere and impact on aerosols (Ref:4299),2698395
+444,,0,Arctic climate change: the vital role of pollution and climate feedbacks,2743372
+447,,0,Atmospheric Rivers and The Onset of Sea-Ice Melt (ARTofMELT),NE/X000087/1
+451,,0,Can polar seabirds really adapt to climate change?,2750501
+455,,0,Controls on short-term calving glacier dynamics,2743350
+465,,0,High throughput simultaneous tracking of seabirds to elucidate the environmental drivers of intraspecific competition,NE/X012492/1
+467,,0,How do some of the world's biggest geopolitical actors construct the Arctic in relation to each other?,2742814
+468,,0,Ice-layer Permeability Controls Runoff from Ice Sheets (IPCRIS),NE/X000435/1
+479,,0,"Microplastic entrainment, transport and fragmentation in atmospheric boundary-layer flows",NE/X00015X/1
+480,,0,Multi-scale environmental remote sensing for understanding dust in the high latitudes,2755219
+481,,0,"Museums, Empire and Northern Irish Identity",ES/V00767X/1
+482,,0,Nature of cold-air outbreaks in Europe in a warming climate,2743359
+483,,0,New approaches for understanding group-specific phytoplankton photosynthesis in mixed populations,NE/X009742/1
+495,,0,Resilience and adaptation of First Nations Communities in Canada to Disappearing Winter Road Infrastructure in a Changing Climate,2608640
+496,,0,River ecosystem responses to decreasing glacier cover,2607779
+498,,1,The future of Arctic sea ice,NE/X000079/1
+499,,0,The future of Arctic sea ice,NE/X000125/1
+500,,0,The influence of ocean circulation on local biogeochemistry and melting tidewater glaciers in northern Baffin Bay,NE/X008304/1
+501,,0,Timing and impact of variable Arctic outflow on the Atlantic Meridional Overturning Circulation,NE/X011690/1
+503,,0,Tracing the heat signature of Atlantic Water through the GIN seas and its impact on Arctic ice and climate,2737265
+504,,0,Beavers and Socio-ecological Resilience in Inuit Nunangat (BARIN),NE/X002578/1
+505,,0,"Carving out Climate Testimony: Inuit Youth, Wellness & Environmental Stewardship",NE/X002462/1
+506,,0,Community-led wildlife health monitoring for a resilient and healthy Nunavik,NE/X002497/1
+507,,0,"Emerging zoonoses in wildlife: understanding the ecology, transmission and impacts of Brucella and Erysipelothrix for conservation and food security",NE/X002616/1
+508,,0,Empowering our communities to map rough ice and slush for safer sea-ice travel in Inuit Nunangat,NE/X004643/1
+509,,0,"Impacts of cryosphere-hydrosphere change on ecosystems and livelihoods in northern Nunatsiavut, Canada (IMAGINE)",NE/X003868/1
+510,,1,Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat,NE/X002608/1
+511,510,0,Inuit Qaujisarnirmut Pilirijjutit on Arctic Shipping Risks in Inuit Nunangat,NE/X002632/1
+512,,0,Inuksiutit: Food Sovereignty in Nunavut and the co-production of country food knowledge,NE/X005666/1
+513,,0,Nuna: Effective mitigation and adaptation to changing ground conditions for resilient coastal futures,NE/X005658/1
+514,,0,"Nunavut Search and Rescue (NSAR) Project: Supporting Inuit Health and Well-Being, Food Security, Economic Development, and Community Resilience",NE/X004201/1
+515,,0,Plastics and heavy metals in Nunatsiavut food ways and environments,NE/X006441/1
+516,,0,"Renewable Energy Microgrid Integration for Remote, Off-grid Cabins in Nunavut",NE/X004589/1
+517,,0,Resilient Responses to Protect Lung Health in Nunavik,NE/X003361/1
+518,,0,Controls on short-term calving glacier dynamics,2743350
+519,,0,"Arctic Heritage: Commodification, Identity, and Revitilisation in the Anthropocene",AH/Y000161/1
+520,521,0,Nitrogen fixation in the Arctic Ocean,NE/T000570/1
+521,,1,Nitrogen fixation in the Arctic Ocean,NE/T001240/1
+522,,0,Causes and impacts of Greenland atmospheric Blocking changes,NE/W005875/1
+523,,0,"Microplastic entrainment, transport and fragmentation in atmospheric boundary-layer flows",NE/X00015X/1
+524,,0,Ice-layer Permeability Controls Runoff from Ice Sheets (IPCRIS),NE/X000435/1
+525,,0,A novel proxy for Arctic sea surface temperatures (PAST),NE/X009416/1
+526,,0,High throughput simultaneous tracking of seabirds to elucidate the environmental drivers of intraspecific competition,NE/X012492/1
+527,,0,Greenland ice marginal lake evolution as a driver of ice sheet change - how important are rising lake temperatures?,NE/X013537/1
+528,,0,Turbo-charging the mycorrhizosphere - Could more productive ecosystems threaten soil carbon stocks in boreal and sub-arctic zones of transition?,NE/X015076/1
+529,,0,NSFGEO-NERC: Impacts of sea ice melt and anthropogenic emmisions on biogenic sulfur aerosol as measured in a central Greenland ice core,NE/Y001710/1

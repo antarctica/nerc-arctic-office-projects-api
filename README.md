@@ -882,6 +882,12 @@ Some vulnerabilities have been ignored in this project, see `.snyk` for definiti
 Through [Continuous Integration](#continuous-integration), on each commit current dependencies are tested and a snapshot
 uploaded to Snyk. This snapshot is then monitored for vulnerabilities.
 
+Manually adding a scan:
+- Install the Snyk CLI tool (See Snyk docs, install using npm?)  
+- Activate a venv and install the dependencies: `poerty shell`, `poetry install`
+- Run `snyk test`
+- Run `snyk monitor --project-name=arctic-office-projects-api --org=antarctica`
+
 #### Dependency vulnerability exceptions
 
 This project contains known vulnerabilities that have been ignored for a specific reason.
@@ -1170,8 +1176,8 @@ For example, a Person resource may be related to one or more Participant resourc
     }
   ],
   "links": {
-    "related": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants",
-    "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
+    "related": "http://localhost:9001/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants",
+    "self": "http://localhost:9001/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
   }
 }
 ```
@@ -1220,7 +1226,7 @@ For example, a Person resource may be related to one or more Participant resourc
       },
       "id": "01D5T4N25RV2062NVVQKZ9NBYX",
       "links": {
-        "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX"
+        "self": "http://localhost:9001/participants/01D5T4N25RV2062NVVQKZ9NBYX"
       },
       "relationships": {
         "person": {
@@ -1229,8 +1235,8 @@ For example, a Person resource may be related to one or more Participant resourc
             "type": "people"
            },
            "links": {
-             "related": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/people",
-             "self": "http://localhost:9000/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people"
+             "related": "http://localhost:9001/participants/01D5T4N25RV2062NVVQKZ9NBYX/people",
+             "self": "http://localhost:9001/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people"
           }
         }
       },
@@ -1238,7 +1244,7 @@ For example, a Person resource may be related to one or more Participant resourc
     }
   ],
     "links": {
-      "self": "http://localhost:9000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
+      "self": "http://localhost:9001/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
   }
 }
 ```
@@ -1427,3 +1433,8 @@ You may use and re-use this software and associated documentation files free of 
 the terms of the Open Government Licence v3.0.
 
 You may obtain a copy of the Open Government Licence at http://www.nationalarchives.gov.uk/doc/open-government-licence/
+
+
+###
+
+Add `import sqlalchemy_utils` to the migration file E.g: `migrations/versions/83da90ee9d2c_.py`

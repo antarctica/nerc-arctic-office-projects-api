@@ -389,8 +389,8 @@ paths:
                                 id: 01DC6HYAKYAXE7MZMD08QV5JWG
                                 type: categorisations
                             links:
-                              related: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
-                              self: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
+                              related: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
+                              self: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
                           participants:
                             data:
                               -
@@ -791,8 +791,8 @@ paths:
                             - id: 01DC6HYAKYAXE7MZMD08QV5JWG
                               type: categorisations
                           links:
-                            related: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
-                            self: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
+                            related: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
+                            self: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
                         participants:
                           data:
                             -
@@ -2788,8 +2788,8 @@ paths:
                             - id: 01DC6HYAKYAXE7MZMD08QV5JWG
                               type: categorisations
                           links:
-                            related: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
-                            self: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
+                            related: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
+                            self: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
                         participants:
                           data:
                             - id: 01DB2ECBP3622SPB5PS3J8W4XF
@@ -6878,8 +6878,8 @@ paths:
                             - id: 01DC6HYAKYAXE7MZMD08QV5JWG
                               type: categorisations
                           links:
-                            related: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
-                            self: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
+                            related: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
+                            self: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
                         participants:
                           data:
                             -
@@ -11807,8 +11807,8 @@ paths:
                             - id: 01DC6HYAKYAXE7MZMD08QV5JWG
                               type: categorisations
                           links:
-                            related: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
-                            self: http://localhost:9000/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
+                            related: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations
+                            self: http://localhost:9001/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations
                         participants:
                           data:
                             - id: 01DB2ECBP3622SPB5PS3J8W4XF

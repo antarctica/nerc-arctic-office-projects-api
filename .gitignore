@@ -3,7 +3,6 @@ __pycache__
 /provisioning/terraform/.terraform
 /.idea
 *.log
-*.csv
 /_dev
 
 test-results.xml
