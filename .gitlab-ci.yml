@@ -99,14 +99,13 @@ test-app:
 
 dependencies-app:
   stage: lint
-  image:
-    name: snyk/snyk-cli:python-3.6
     entrypoint: [""]
   before_script:
-    - "poetry install"
+    - "apk add --update nodejs npm"
+    - "npm install snyk -g"
   script:
-    - "poetry run snyk test"
-    - "poetry run snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
+    - "snyk test"
+    - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
 
   only:
     - master
