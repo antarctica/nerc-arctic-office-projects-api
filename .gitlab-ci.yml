@@ -98,7 +98,7 @@ test-app:
       junit: test-results.xml
 
 dependencies-app:
-  stage: test
+  stage: lint
   before_script:
     - "apk add --update nodejs npm"
     - "npm install snyk -g"
