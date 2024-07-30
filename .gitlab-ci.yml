@@ -106,7 +106,6 @@ dependencies-app:
   script:
     - "snyk test"
     - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
-
   only:
     - master
 
