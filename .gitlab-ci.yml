@@ -99,10 +99,10 @@ test-app:
 
 dependencies-app:
   stage: lint
-    entrypoint: [""]
-  script:
+  before_script:
     - "apk add --update nodejs npm"
     - "npm install snyk -g"
+  script:
     - "snyk test"
     - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
   only:
