@@ -102,10 +102,11 @@ dependencies-app:
   image:
     name: snyk/snyk-cli:python-3.6
     entrypoint: [""]
+  before_script:
+    - "poetry install"
   script:
-    - "pip install -r requirements.txt"
-    - "snyk test"
-    - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
+    - "poetry run snyk test"
+    - "poetry run snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
 
   only:
     - master
