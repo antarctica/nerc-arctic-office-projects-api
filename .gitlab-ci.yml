@@ -100,7 +100,7 @@ test-app:
 dependencies-app:
   stage: lint
   image:
-    name: antarctica/snyk-cli:python-3
+    name: snyk/snyk-cli:python-3.6
     entrypoint: [""]
   script:
     - "pip install -r requirements.txt"
