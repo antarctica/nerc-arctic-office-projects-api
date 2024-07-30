@@ -54,6 +54,8 @@ variables:
   HEROKU_APP_PROD_NAME: bas-arctic-projects-api-prod
   SENTRY_ORG: antarctica
   SENTRY_PROJECT: arctic-office-projects-api
+  SNYK_ORG: antarctica
+  SNYK_PROJECT: arctic-office-projects-api
   API_DOCS_PROJECT: arctic-office-projects
   API_DOCS_STAGE_BUCKET: bas-api-docs-content-testing
   API_DOCS_PROD_BUCKET: bas-api-docs-content
@@ -97,8 +99,13 @@ test-app:
 
 dependencies-app:
   stage: lint
+  image:
+    name: antarctica/snyk-cli:python-3
+    entrypoint: [""]
   script:
    - "poetry install"
+   - "poetry run snyk test"
+   - "poetry run snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
   only:
     - master
 
