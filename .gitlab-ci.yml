@@ -102,6 +102,7 @@ dependencies-app:
   before_script:
     - "apk add --update nodejs npm"
     - "npm install snyk -g"
+    - "poetry install"
   script:
     - "snyk test"
     - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
