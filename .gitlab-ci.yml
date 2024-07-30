@@ -103,9 +103,10 @@ dependencies-app:
     name: antarctica/snyk-cli:python-3
     entrypoint: [""]
   script:
-   - "poetry install"
-   - "poetry run snyk test"
-   - "poetry run snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
+    - "pip install -r requirements.txt"
+    - "snyk test"
+    - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
+
   only:
     - master
 
