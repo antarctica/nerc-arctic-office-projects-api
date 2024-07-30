@@ -103,10 +103,9 @@ dependencies-app:
     - "apk add --update nodejs npm"
     - "npm install snyk -g"
     - "poetry install"
-    - "poetry shell"
   script:
-    - "snyk test"
-    - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
+    - "poetry run snyk test"
+    - "poetry run snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
   only:
     - master
 
