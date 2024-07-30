@@ -104,6 +104,7 @@ dependencies-app:
     - "npm install snyk -g"
     - "poetry install"
   script:
+    - "poetry shell"
     - "snyk test"
     - "snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
   only:
