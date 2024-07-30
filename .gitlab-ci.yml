@@ -98,7 +98,7 @@ test-app:
       junit: test-results.xml
 
 dependencies-app:
-  stage: lint
+  stage: test
   before_script:
     - "apk add --update nodejs npm"
     - "npm install snyk -g"
@@ -118,8 +118,9 @@ pep8-app:
 
 bandit-app:
   stage: lint
-  script:
+  before_script:
     - "poetry install"
+  script:
     - "poetry run bandit -r arctic-office-project-api/"
 
 build-heroku-stage:
