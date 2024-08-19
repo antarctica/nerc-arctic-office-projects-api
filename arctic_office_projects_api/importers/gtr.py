@@ -96,6 +96,7 @@ class GatewayToResearchResource:
             gtr_resource_response = requests.get(
                 url=gtr_resource_uri,
                 headers={"accept": "application/vnd.rcuk.gtr.json-v7"},
+                timeout=100,
             )
             gtr_resource_response.raise_for_status()
             return gtr_resource_response.json()
@@ -755,6 +756,7 @@ class GatewayToResearchGrantImporter:
                 url=f'{"https://gtr.ukri.org/gtr/api/projects"}',
                 params={"q": url_encode(self.grant_reference), "f": "pro.gr"},
                 headers={"accept": "application/vnd.rcuk.gtr.json-v7"},
+                timeout=100,
             )
             gtr_project_response.raise_for_status()
             gtr_project_data = gtr_project_response.json()

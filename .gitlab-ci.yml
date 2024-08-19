@@ -29,8 +29,7 @@
 # == Global settings ==
 
 services:
-  -
-    name: postgres:11.1-alpine
+  - name: postgres:11.1-alpine
     alias: app-db
 
 stages:
@@ -121,7 +120,7 @@ bandit-app:
   before_script:
     - "poetry install"
   script:
-    - "poetry run bandit -r arctic-office-project-api/"
+    - "poetry run bandit -r arctic_office_project_api"
 
 build-heroku-stage:
   stage: build
