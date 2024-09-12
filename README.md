@@ -836,12 +836,12 @@ PEP-8 style and formatting guidelines must be used for this project, with the ex
 To check compliance locally:
 
 ```shell
-$ docker-compose run app flake8 . --ignore=E501 --exclude migrations
+$ docker-compose run app poetry run flake8 arctic_office_projects_api --ignore=E501 --exclude migrations
 ```
 
 Shell into the container & run:
 ```shell
-$ poetry run flake8 . --ignore=E501 --exclude migrations
+$ poetry run flake8 arctic_office_projects_api --ignore=E501 --exclude migrations
 ```
 
 To assist with linting run Black:

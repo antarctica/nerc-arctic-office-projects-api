@@ -3,9 +3,13 @@ from unittest.mock import patch
 
 from flask_migrate import Config, upgrade, downgrade, Migrate
 
-from flask_azure_oauth import FlaskAzureOauth
-from flask_azure_oauth.mocks.keys import TestJwk as TestJwk_key
-from flask_azure_oauth.mocks.tokens import TestJwt as TestJwt_token
+# from flask_azure_oauth import FlaskAzureOauth
+# from flask_azure_oauth.mocks.keys import TestJwk as TestJwk_key
+# from flask_azure_oauth.mocks.tokens import TestJwt as TestJwt_token
+
+from flask_entra_auth.resource_protector import FlaskEntraAuth
+from flask_entra_auth.mocks.jwt import MockClaims as TestJwt_token
+from flask_entra_auth.mocks.jwks import MockJwk as TestJwk_key
 
 from arctic_office_projects_api import create_app, db
 from arctic_office_projects_api.errors import ApiException
@@ -16,7 +20,7 @@ class BaseTestCase(unittest.TestCase):
     def setUp(self):
         self.test_jwks = TestJwk_key()
 
-        with patch.object(FlaskAzureOauth, "_get_jwks") as mocked_get_jwks:
+        with patch.object(FlaskEntraAuth, "_signing_key") as mocked_get_jwks:
 
             mocked_get_jwks.return_value = self.test_jwks.jwks()
 

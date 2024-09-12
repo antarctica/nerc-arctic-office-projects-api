@@ -30,9 +30,9 @@ class ProjectSchema(Schema):
     country = EnumDictField(dump_only=True)
 
     participants = Relationship(
-        self_view="projects.projects_relationship_participants",
+        self_view="projects_relationship_participants",
         self_view_kwargs={"project_id": "<neutral_id>"},
-        related_view="projects.projects_participants",
+        related_view="projects_participants",
         related_view_kwargs={"project_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -42,9 +42,9 @@ class ProjectSchema(Schema):
     )
 
     allocations = Relationship(
-        self_view="projects.projects_relationship_allocations",
+        self_view="projects_relationship_allocations",
         self_view_kwargs={"project_id": "<neutral_id>"},
-        related_view="projects.projects_allocations",
+        related_view="projects_allocations",
         related_view_kwargs={"project_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -54,9 +54,9 @@ class ProjectSchema(Schema):
     )
 
     categorisations = Relationship(
-        self_view="projects.projects_relationship_categorisations",
+        self_view="projects_relationship_categorisations",
         self_view_kwargs={"project_id": "<neutral_id>"},
-        related_view="projects.projects_categorisations",
+        related_view="projects_categorisations",
         related_view_kwargs={"project_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -67,9 +67,9 @@ class ProjectSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "projects"
-        self_view = "projects.projects_detail"
+        self_view = "projects_detail"
         self_view_kwargs = {"project_id": "<id>"}
-        self_view_many = "projects.projects_list"
+        self_view_many = "projects_list"
 
 
 class ParticipantSchema(Schema):
@@ -77,9 +77,9 @@ class ParticipantSchema(Schema):
     role = EnumDictField(dump_only=True, required=True)
 
     project = Relationship(
-        self_view="participants.participants_relationship_projects",
+        self_view="participants_relationship_projects",
         self_view_kwargs={"participant_id": "<neutral_id>"},
-        related_view="participants.participants_projects",
+        related_view="participants_projects",
         related_view_kwargs={"participant_id": "<neutral_id>"},
         id_field="project.neutral_id",
         many=False,
@@ -89,9 +89,9 @@ class ParticipantSchema(Schema):
     )
 
     person = Relationship(
-        self_view="participants.participants_relationship_people",
+        self_view="participants_relationship_people",
         self_view_kwargs={"participant_id": "<neutral_id>"},
-        related_view="participants.participants_people",
+        related_view="participants_people",
         related_view_kwargs={"participant_id": "<neutral_id>"},
         id_field="person.neutral_id",
         many=False,
@@ -102,9 +102,9 @@ class ParticipantSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "participants"
-        self_view = "participants.participants_detail"
+        self_view = "participants_detail"
         self_view_kwargs = {"participant_id": "<id>"}
-        self_view_many = "participants.participants_list"
+        self_view_many = "participants_list"
 
 
 class PersonSchema(Schema):
@@ -115,9 +115,9 @@ class PersonSchema(Schema):
     avatar_url = fields.String(attribute="logo_url", dump_only=True)
 
     organisation = Relationship(
-        self_view="people.people_relationship_organisations",
+        self_view="people_relationship_organisations",
         self_view_kwargs={"person_id": "<neutral_id>"},
-        related_view="people.people_organisations",
+        related_view="people_organisations",
         related_view_kwargs={"person_id": "<neutral_id>"},
         id_field="neutral_id",
         many=False,
@@ -127,9 +127,9 @@ class PersonSchema(Schema):
     )
 
     participation = Relationship(
-        self_view="people.people_relationship_participants",
+        self_view="people_relationship_participants",
         self_view_kwargs={"person_id": "<neutral_id>"},
-        related_view="people.people_participants",
+        related_view="people_participants",
         related_view_kwargs={"person_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -140,9 +140,9 @@ class PersonSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "people"
-        self_view = "people.people_detail"
+        self_view = "people_detail"
         self_view_kwargs = {"person_id": "<id>"}
-        self_view_many = "people.people_list"
+        self_view_many = "people_list"
 
 
 class GrantSchema(Schema):
@@ -156,12 +156,12 @@ class GrantSchema(Schema):
     publications = fields.List(fields.String, dump_only=True)
     duration = DateRangeField(dump_only=True, required=True)
     status = EnumStrField(dump_only=True, required=True)
-    total_funds = CurrencyField(dump_only=True, currency="total_funds_currency")
+    total_funds = CurrencyField(dump_only=True, metadata={'currency': 'total_funds_currency'})
 
     funder = Relationship(
-        self_view="grants.grants_relationship_organisations",
+        self_view="grants_relationship_organisations",
         self_view_kwargs={"grant_id": "<neutral_id>"},
-        related_view="grants.grants_organisations",
+        related_view="grants_organisations",
         related_view_kwargs={"grant_id": "<neutral_id>"},
         id_field="neutral_id",
         many=False,
@@ -171,9 +171,9 @@ class GrantSchema(Schema):
     )
 
     allocations = Relationship(
-        self_view="grants.grants_relationship_allocations",
+        self_view="grants_relationship_allocations",
         self_view_kwargs={"grant_id": "<neutral_id>"},
-        related_view="grants.grants_allocations",
+        related_view="grants_allocations",
         related_view_kwargs={"grant_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -184,18 +184,18 @@ class GrantSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "grants"
-        self_view = "grants.grants_detail"
+        self_view = "grants_detail"
         self_view_kwargs = {"grant_id": "<id>"}
-        self_view_many = "grants.grants_list"
+        self_view_many = "grants_list"
 
 
 class AllocationSchema(Schema):
     id = fields.String(attribute="neutral_id", dump_only=True, required=True)
 
     project = Relationship(
-        self_view="allocations.allocations_relationship_projects",
+        self_view="allocations_relationship_projects",
         self_view_kwargs={"allocation_id": "<neutral_id>"},
-        related_view="allocations.allocations_projects",
+        related_view="allocations_projects",
         related_view_kwargs={"allocation_id": "<neutral_id>"},
         id_field="project.neutral_id",
         many=False,
@@ -205,9 +205,9 @@ class AllocationSchema(Schema):
     )
 
     grant = Relationship(
-        self_view="allocations.allocations_relationship_grants",
+        self_view="allocations_relationship_grants",
         self_view_kwargs={"allocation_id": "<neutral_id>"},
-        related_view="allocations.allocations_grants",
+        related_view="allocations_grants",
         related_view_kwargs={"allocation_id": "<neutral_id>"},
         id_field="grant.neutral_id",
         many=False,
@@ -218,9 +218,9 @@ class AllocationSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "allocations"
-        self_view = "allocations.allocations_detail"
+        self_view = "allocations_detail"
         self_view_kwargs = {"allocation_id": "<id>"}
-        self_view_many = "allocations.allocations_list"
+        self_view_many = "allocations_list"
 
 
 class OrganisationSchema(Schema):
@@ -233,9 +233,9 @@ class OrganisationSchema(Schema):
     logo_url = fields.String(dump_only=True)
 
     people = Relationship(
-        self_view="organisations.organisations_relationship_people",
+        self_view="organisations_relationship_people",
         self_view_kwargs={"organisation_id": "<neutral_id>"},
-        related_view="organisations.organisations_people",
+        related_view="organisations_people",
         related_view_kwargs={"organisation_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -245,9 +245,9 @@ class OrganisationSchema(Schema):
     )
 
     grants = Relationship(
-        self_view="organisations.organisations_relationship_grants",
+        self_view="organisations_relationship_grants",
         self_view_kwargs={"organisation_id": "<neutral_id>"},
-        related_view="organisations.organisations_grants",
+        related_view="organisations_grants",
         related_view_kwargs={"organisation_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -258,9 +258,9 @@ class OrganisationSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "organisations"
-        self_view = "organisations.organisations_detail"
+        self_view = "organisations_detail"
         self_view_kwargs = {"organisation_id": "<id>"}
-        self_view_many = "organisations.organisations_list"
+        self_view_many = "organisations_list"
 
 
 class CategorySchemeSchema(Schema):
@@ -273,9 +273,9 @@ class CategorySchemeSchema(Schema):
 
     categories = Relationship(
         attribute="category_terms",
-        self_view="category_schemes.category_schemes_relationship_category_terms",
+        self_view="category_schemes_relationship_category_terms",
         self_view_kwargs={"category_scheme_id": "<neutral_id>"},
-        related_view="category_schemes.category_schemes_category_terms",
+        related_view="category_schemes_category_terms",
         related_view_kwargs={"category_scheme_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -286,9 +286,9 @@ class CategorySchemeSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "category-schemes"
-        self_view = "category_schemes.category_schemes_detail"
+        self_view = "category_schemes_detail"
         self_view_kwargs = {"category_scheme_id": "<id>"}
-        self_view_many = "category_schemes.category_schemes_list"
+        self_view_many = "category_schemes_list"
 
 
 class CategoryTermSchema(Schema):
@@ -327,9 +327,9 @@ class CategoryTermSchema(Schema):
 
     parent_category = Relationship(
         attribute="parent_category_term",
-        self_view="category_terms.category_terms_relationship_parent_category_terms",
+        self_view="category_terms_relationship_parent_category_terms",
         self_view_kwargs={"category_term_id": "<neutral_id>"},
-        related_view="category_terms.category_terms_parent_category_terms",
+        related_view="category_terms_parent_category_terms",
         related_view_kwargs={"category_term_id": "<neutral_id>"},
         id_field="neutral_id",
         many=False,
@@ -339,9 +339,9 @@ class CategoryTermSchema(Schema):
     )
 
     category_scheme = Relationship(
-        self_view="category_terms.category_terms_relationship_category_schemes",
+        self_view="category_terms_relationship_category_schemes",
         self_view_kwargs={"category_term_id": "<neutral_id>"},
-        related_view="category_terms.category_terms_category_schemes",
+        related_view="category_terms_category_schemes",
         related_view_kwargs={"category_term_id": "<neutral_id>"},
         id_field="neutral_id",
         many=False,
@@ -351,9 +351,9 @@ class CategoryTermSchema(Schema):
     )
 
     categorisations = Relationship(
-        self_view="category_terms.category_terms_relationship_categorisations",
+        self_view="category_terms_relationship_categorisations",
         self_view_kwargs={"category_term_id": "<neutral_id>"},
-        related_view="category_terms.category_terms_categorisations",
+        related_view="category_terms_categorisations",
         related_view_kwargs={"category_term_id": "<neutral_id>"},
         id_field="neutral_id",
         many=True,
@@ -364,26 +364,26 @@ class CategoryTermSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "categories"
-        self_view = "category_terms.category_terms_detail"
+        self_view = "category_terms_detail"
         self_view_kwargs = {"category_term_id": "<id>"}
-        self_view_many = "category_terms.category_terms_list"
+        self_view_many = "category_terms_list"
 
 
 class ParentCategoryTermSchema(CategoryTermSchema):
     class Meta(Schema.Meta):
         type_ = "categories"
-        self_view = "category_terms.category_terms_detail"
+        self_view = "category_terms_detail"
         self_view_kwargs = {"category_term_id": "<id>"}
-        self_view_many = "category_terms.category_terms_list"
+        self_view_many = "category_terms_list"
 
 
 class CategorisationSchema(Schema):
     id = fields.String(attribute="neutral_id", dump_only=True, required=True)
 
     project = Relationship(
-        self_view="categorisations.categorisations_relationship_projects",
+        self_view="categorisations_relationship_projects",
         self_view_kwargs={"categorisation_id": "<neutral_id>"},
-        related_view="categorisations.categorisations_projects",
+        related_view="categorisations_projects",
         related_view_kwargs={"categorisation_id": "<neutral_id>"},
         id_field="project.neutral_id",
         many=False,
@@ -394,9 +394,9 @@ class CategorisationSchema(Schema):
 
     category = Relationship(
         attribute="category_term",
-        self_view="categorisations.categorisations_relationship_category_terms",
+        self_view="categorisations_relationship_category_terms",
         self_view_kwargs={"categorisation_id": "<neutral_id>"},
-        related_view="categorisations.categorisations_category_terms",
+        related_view="categorisations_category_terms",
         related_view_kwargs={"categorisation_id": "<neutral_id>"},
         id_field="categorisation.neutral_id",
         many=False,
@@ -407,6 +407,6 @@ class CategorisationSchema(Schema):
 
     class Meta(Schema.Meta):
         type_ = "categorisations"
-        self_view = "categorisations.categorisations_detail"
+        self_view = "categorisations_detail"
         self_view_kwargs = {"categorisation_id": "<id>"}
-        self_view_many = "categorisations.categorisations_list"
+        self_view_many = "categorisations_list"

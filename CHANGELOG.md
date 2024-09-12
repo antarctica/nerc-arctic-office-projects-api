@@ -5,11 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [0.6.0] 2024-09-11
+
+### Changed
+
+* Manage the app with Poetry
+* Replaced Flask-Azure-OAuth with Flask-Entra-Auth & refactored app to use the new auth method - mainly .env vars
+* Allow projects & grants to be updated - now they can keep the same UUID
+* All tests rewritten to accomodate the new Auth package and to use PyTest & PyTest Coverage
+
+
 ## [0.4.2] 2023-02-09
 
 ### Added
 
-* Ability to save and use GTR categories directly alongside the mapping of these to GCMD categories
+* Ability to save and use GTR categories directly and not just the mapping to GCMD categories
 
 ### Changed
 

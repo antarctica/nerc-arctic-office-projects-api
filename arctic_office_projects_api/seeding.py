@@ -1297,7 +1297,9 @@ def _get_ukri_council(project_type: GrantType) -> Optional[UKRICouncil]:
     :rtype UKRICouncil
     :return: an Organisation model if a project is funded by a UKRI grant, otherwise None
     """
-    if project_type is GrantType.UKRI_STANDARD_GRANT or project_type is GrantType.UKRI_LARGE_GRANT:
+    if (
+        project_type is GrantType.UKRI_STANDARD_GRANT or project_type is GrantType.UKRI_LARGE_GRANT
+    ):
         return UKRICouncil[faker.grant_funder(project_type)]
 
     return None
@@ -1327,7 +1329,9 @@ def _get_funder(
     :rtype Organisation
     :return: Organisation model instance for use as a funder for a grant in a fake project
     """
-    if project_type is GrantType.UKRI_STANDARD_GRANT or project_type is GrantType.UKRI_LARGE_GRANT:
+    if (
+        project_type is GrantType.UKRI_STANDARD_GRANT or project_type is GrantType.UKRI_LARGE_GRANT
+    ):
         return funders[ukri_council.name]
 
     funder_identifier = faker.grant_funder(project_type)

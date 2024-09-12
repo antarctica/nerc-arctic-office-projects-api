@@ -1,0 +1,10 @@
+{
+  "organisations": [
+    {
+      "name": "University of Leeds",
+      "grid-identifier": "https://www.grid.ac/institutes/grid.9909.9",
+      "ror-identifier": "https://api.ror.org/organizations?query=024mrxd33",
+      "website": "https://www.leeds.ac.uk"
+    }
+  ]
+}

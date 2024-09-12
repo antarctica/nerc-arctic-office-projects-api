@@ -1,0 +1,150 @@
+{
+  "root-term": "http://udcdata.info/078887",
+  "schemes": [
+    {
+      "acronym": "EXAMPLE",
+      "namespace": "http://www.example.com",
+      "revision": "1234",
+      "root-concepts": [
+        "http://www.example.com/01"
+      ],
+      "sub-title": "Testing",
+      "title": "Example Classification",
+      "version": "1.0"
+    },
+    {
+      "acronym": "GCMD",
+      "namespace": "https://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/sciencekeywords",
+      "revision": "2019-04-05 11:57:34",
+      "root-concepts": [
+        "https://gcmdservices.gsfc.nasa.gov/kms/concept/1eb0ea0a-312c-4d74-8d42-6f1ad758f999"
+      ],
+      "sub-title": "Science Keywords",
+      "title": "Global Change Master Directory",
+      "version": "8.6"
+    }
+  ],
+  "terms": [
+    {
+      "alt-labels": [
+        "Alt label (1)"
+      ],
+      "definitions": [
+        "Definition (1)"
+      ],
+      "examples": [
+        "Example (1)"
+      ],
+      "notation": "(1)",
+      "notes": [
+        "Note (1)"
+      ],
+      "path": {
+        "0": "http://www.example.com/01"
+      },
+      "pref-label": "Example category term 1",
+      "scheme": "http://www.example.com",
+      "scope-notes": [
+        "Scope note (1)"
+      ],
+      "subject": "http://www.example.com/01"
+    },
+    {
+      "alt-labels": [
+        "Alt label (2)"
+      ],
+      "definitions": [
+        "Definition (2)"
+      ],
+      "examples": [
+        "Example (2)"
+      ],
+      "notation": "(2)",
+      "notes": [
+        "Note (2)"
+      ],
+      "path": {
+        "0": "http://www.example.com/01",
+        "1": "http://www.example.com/02"
+      },
+      "pref-label": "Example category term 2",
+      "scheme": "http://www.example.com",
+      "scope-notes": [
+        "Scope note (2)"
+      ],
+      "subject": "http://www.example.com/02"
+    },
+    {
+      "alt-labels": [
+        "Alt label (3)"
+      ],
+      "definitions": [
+        "Definition (3)"
+      ],
+      "examples": [
+        "Example (3)"
+      ],
+      "notation": "(3)",
+      "notes": [
+        "Note (3)"
+      ],
+      "path": {
+        "0": "http://www.example.com/01",
+        "1": "http://www.example.com/02",
+        "2": "http://www.example.com/03"
+      },
+      "pref-label": "Example category term 3",
+      "scheme": "http://www.example.com",
+      "scope-notes": [
+        "Scope note (3)"
+      ],
+      "subject": "http://www.example.com/03"
+    },
+    {
+      "alt-labels": [
+        "OCEANS",
+        "BIOSPHERE"
+      ],
+      "definitions": [
+        "A gaseous envelope gravitationally bound to a celestial body (e.g., a planet, its satellite, or a star)."
+      ],
+      "examples": [],
+      "notation": null,
+      "notes": [],
+      "path": {
+        "0": "http://udcdata.info/078887",
+        "1": "http://udcdata.info/025403",
+        "2": "http://udcdata.info/032958",
+        "3": "https://gcmdservices.gsfc.nasa.gov/kms/concept/e9f67a66-e9fc-435c-b720-ae32a2c3d8f5",
+        "4": "https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a"
+      },
+      "pref-label": "ATMOSPHERE",
+      "scheme": "https://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/sciencekeywords",
+      "scope-notes": [],
+      "subject": "https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a"
+    },
+    {
+      "alt-labels": [
+        "TERRESTRIAL ECOSYSTEMS"
+      ],
+      "definitions": [
+        "(Also called aqueous vapor, moisture.) Water substance in vapor form; one of the most important of all constituents of the atmosphere.Air in motion relative to the surface of the earth."
+      ],
+      "examples": [],
+      "notation": null,
+      "notes": [],
+      "path": {
+        "0": "http://udcdata.info/078887",
+        "1": "http://udcdata.info/025403",
+        "2": "http://udcdata.info/032958",
+        "3": "https://gcmdservices.gsfc.nasa.gov/kms/concept/e9f67a66-e9fc-435c-b720-ae32a2c3d8f5",
+        "4": "https://gcmdservices.gsfc.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a",
+        "5": "https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532"
+      },
+      "pref-label": "ATMOSPHERIC WATER VAPOR",
+      "scheme": "https://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/sciencekeywords",
+      "scope-notes": [],
+      "subject": "https://gcmdservices.gsfc.nasa.gov/kms/concept/286d2ae0-9d86-4ef0-a2b4-014843a98532"
+    }
+  ]
+}
