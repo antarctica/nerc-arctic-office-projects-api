@@ -35,11 +35,9 @@ from arctic_office_projects_api.models import (
 
 
 # Exceptions
-
-
 class UnmappedGatewayToResearchOrganisation(AppException):
     title = "Unmapped Gateway to Research organisation"
-    detail = "A Gateway to Research organisation has not been mapped to an application Organisation via an ROR ID"
+    detail = "A Gateway to Research organisation has not been mapped to an application Organisation via a GRID ID"
 
 
 class UnmappedGatewayToResearchPerson(AppException):
@@ -158,9 +156,7 @@ class GatewayToResearchResource:
             link_href = link["href"]
 
             link_base_url = link["href"].split(":")
-            if (
-                link_base_url[1] == "//internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com"
-            ):
+            if link_base_url[1] == "//internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com":
                 link_href = link["href"].replace(
                     "http://internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080",
                     "https://gtr.ukri.org",
@@ -194,6 +190,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
     def _ror_dict(resource_uri) -> str:
 
         csv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_organisations.csv"
+
         gtr_path = "http://gtr.ukri.org/gtr/api/organisations/"
         _ror_list = []
 
@@ -227,7 +224,6 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         :rtype str
         :return for a given GTR resource URI, a corresponding ROR ID as a URI
         """
-
         _ror_url = GatewayToResearchOrganisation._ror_dict(self.resource_uri)
         if isinstance(_ror_url, str):
             return _ror_url
@@ -688,6 +684,7 @@ class GatewayToResearchGrantImporter:
         self.grant_reference = gtr_grant_reference
         self.gtr_project_id = gtr_project_id
         self.lead_project = int(lead_project)
+        self.grant_exists = False
 
     def exists(self) -> bool:
         """
@@ -696,10 +693,15 @@ class GatewayToResearchGrantImporter:
         :rtype bool
         :return: Whether a GTR project has already been imported as a Grant
         """
-        return db.session.query(
+        data_exists = db.session.query(
             exists().where(Grant.reference == self.grant_reference)
         ).scalar()
 
+        if data_exists:
+            self.grant_exists = True
+
+        return data_exists
+    
     def update(self, gtr_project_id):
         """
         Updates a Gateway to Research project & grant which have previously been imported
@@ -750,7 +752,6 @@ class GatewayToResearchGrantImporter:
         :rtype str
         :return ID of a GTR project resource
         """
-
         try:
             gtr_project_response = requests.get(
                 url=f'{"https://gtr.ukri.org/gtr/api/projects"}',
@@ -760,7 +761,6 @@ class GatewayToResearchGrantImporter:
             )
             gtr_project_response.raise_for_status()
             gtr_project_data = gtr_project_response.json()
-
             if "project" not in gtr_project_data:
                 raise KeyError("Project element not in GTR response")
             if len(gtr_project_data["project"]) != 1:
@@ -794,108 +794,81 @@ class GatewayToResearchGrantImporter:
             gtr_resource_uri=f"https://gtr.ukri.org/gtr/api/projects/{self.gtr_project_id}"
         )
 
-        grant_reference = self._find_gtr_project_identifier(
-            identifiers=gtr_project.identifiers
-        )
+        # If the grant exists - update it & the project too
+        if self.grant_exists is True:
 
-        grant = Grant(
-            neutral_id=generate_neutral_id(),
-            reference=grant_reference,
-            title=gtr_project.title,
-            abstract=gtr_project.abstract,
-            status=self._map_gtr_project_status(status=gtr_project.status),
-            duration=gtr_project.fund.duration,
-            total_funds_currency=gtr_project.fund.currency,
-            total_funds=gtr_project.fund.amount,
-            publications=gtr_project.publications,
-            lead_project=self.lead_project,
-            funder=Organisation.query.filter_by(
-                ror_identifier=gtr_project.fund.funder.ror_id
-            ).one_or_none(),
-        )
-        db.session.add(grant)
-
-        project = Project(
-            neutral_id=generate_neutral_id(),
-            grant_reference=grant_reference,
-            title=grant.title,
-            abstract=grant.abstract,
-            project_duration=grant.duration,
-            access_duration=DateRange(grant.duration.lower, None),
-            publications=grant.publications,
-            lead_project=self.lead_project,
-        )
-        db.session.add(project)
-
-        db.session.add(
-            Allocation(neutral_id=generate_neutral_id(), project=project, grant=grant)
-        )
-
-        self._save_gtr_category_terms(gtr_project)
-
-        # GTR Research Topics and Subjects
-        gtr_topics = self._find_unique_gtr_project_research_items(
-            gtr_research_items=gtr_project.research_topics
-        )
-
-        gtr_subjects = self._find_unique_gtr_project_research_items(
-            gtr_research_items=gtr_project.research_subjects
-        )
-
-        # GCMD Research Topics and Subjects
-        gcmd_topics = self._find_unique_gcmd_project_research_topics(
-            gtr_research_topics=gtr_project.research_topics
-        )
-
-        # print("gcmd_topics")
-        # print(gcmd_topics)
-
-        gcmd_subjects = self._find_unique_gcmd_project_research_subjects(
-            gtr_research_subjects=gtr_project.research_subjects
-        )
-
-        # print("gcmd_subjects")
-        # print(gcmd_subjects)
-
-        # Flatten the processed topics and subjects to dinstinct list of GCMD identifiers
-        # GTR Topics
-        category_term_scheme_identifiers = list(gtr_topics)
-        # GTR Subjects
-        category_term_scheme_identifiers.extend(
-            x for x in gtr_subjects if x not in category_term_scheme_identifiers
-        )
-        # GCMD Topics
-        category_term_scheme_identifiers.extend(
-            x for x in gcmd_topics if x not in category_term_scheme_identifiers
-        )
-        # GCMD Subjects
-        category_term_scheme_identifiers.extend(
-            x for x in gcmd_subjects if x not in category_term_scheme_identifiers
-        )
-
-        for category_term_scheme_identifier in category_term_scheme_identifiers:
-            # print("category_term_scheme_identifier")
-            # print(category_term_scheme_identifier)
-
-            # Ignore gcmd for now - causing import errors
-            pattern = re.compile(
-                r"https://gcmd\.earthdata\.nasa\.gov/kms/concept/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+            project_reference = self._find_gtr_project_identifier(
+                identifiers=gtr_project.identifiers
             )
 
-            if category_term_scheme_identifier != "none":
+            grant = Grant.query.filter_by(reference=project_reference).first()
 
-                if not pattern.match(category_term_scheme_identifier):
-                    # print(f"Matched: {category_term_scheme_identifier}")
-                    # Save to category terms link table
-                    db.session.add(
-                        Categorisation(
-                            neutral_id=generate_neutral_id(),
-                            project=project,
-                            category_term=CategoryTerm.query.filter_by(
-                                scheme_identifier=category_term_scheme_identifier
-                            ).one(),
-                        )
-                    )
+            grant.title = gtr_project.title
+            grant.abstract = gtr_project.abstract
+            grant.status = self._map_gtr_project_status(status=gtr_project.status)
+            grant.duration = gtr_project.fund.duration
+            grant.total_funds_currency = gtr_project.fund.currency
+            grant.total_funds = gtr_project.fund.amount
+            grant.publications = gtr_project.publications
+            grant.lead_project = self.lead_project
+            grant.funder = Organisation.query.filter_by(
+                ror_identifier=gtr_project.fund.funder.ror_id
+            ).one_or_none()
+
+            allocations = Allocation.query.filter_by(grant_id=grant.id).all()
+
+            for allocation in allocations:
+                project = Project.query.filter_by(id=allocation.project_id).first()
+                project.title = grant.title
+                project.abstract = grant.abstract
+                project.project_duration = grant.duration
+                project.access_duration = DateRange(grant.duration.lower, None)
+                project.publications = grant.publications
+                project.lead_project = self.lead_project
+
+        # Otherwise - add the new grant & the new project
+        else:
+            grant = Grant(
+                neutral_id=generate_neutral_id(),
+                reference=self._find_gtr_project_identifier(
+                    identifiers=gtr_project.identifiers
+                ),
+                title=gtr_project.title,
+                abstract=gtr_project.abstract,
+                status=self._map_gtr_project_status(status=gtr_project.status),
+                duration=gtr_project.fund.duration,
+                total_funds_currency=gtr_project.fund.currency,
+                total_funds=gtr_project.fund.amount,
+                publications=gtr_project.publications,
+                lead_project=self.lead_project,
+                funder=Organisation.query.filter_by(
+                    ror_identifier=gtr_project.fund.funder.ror_id
+                ).one_or_none(),
+            )
+
+            project = Project(
+                neutral_id=generate_neutral_id(),
+                title=grant.title,
+                abstract=grant.abstract,
+                project_duration=grant.duration,
+                access_duration=DateRange(grant.duration.lower, None),
+                publications=grant.publications,
+                lead_project=self.lead_project,
+                grant_reference=self._find_gtr_project_identifier(
+                    identifiers=gtr_project.identifiers
+                ),
+            )
+
+            db.session.add(project)
+
+            db.session.add(
+                Allocation(
+                    neutral_id=generate_neutral_id(), project=project, grant=grant
+                )
+            )
+
+        self._save_gtr_category_terms(gtr_project)
+        self._link_gtr_category_terms(gtr_project)
 
         self._add_gtr_people(
             project=project,
@@ -915,40 +888,178 @@ class GatewayToResearchGrantImporter:
         gtr_category_path = Ltree("gtr.ukri.org.resources.classificationprojects.html")
 
         for term in project.research_subjects:
+            # If the subjects exist - update them
             if db.session.query(
                 exists().where(CategoryTerm.scheme_identifier == term["id"])
             ).scalar():
-                print("Skipping, GTR Category already imported")
-                continue
+                research_subject_to_update = CategoryTerm.query.filter_by(
+                    scheme_identifier=term["id"]
+                ).one()
 
-            category_term_resource = CategoryTerm(
-                neutral_id=generate_neutral_id(),
-                scheme_identifier=term["id"],
-                name=term["text"],
-                path=gtr_category_path,
-                category_scheme=CategoryScheme.query.filter_by(
+                research_subject_to_update.scheme_identifier = term["id"]
+                research_subject_to_update.name = term["text"]
+                research_subject_to_update.path = gtr_category_path
+                research_subject_to_update.category_scheme = CategoryScheme.query.filter_by(
                     namespace="https://gtr.ukri.org/resources/classificationlists.html"
-                ).one(),
-            )
-            db.session.add(category_term_resource)
+                ).one()
+                print("GTR research_subject updated")
+            # Otherwise add them
+            else:
+                category_term_resource = CategoryTerm(
+                    neutral_id=generate_neutral_id(),
+                    scheme_identifier=term["id"],
+                    name=term["text"],
+                    path=gtr_category_path,
+                    category_scheme=CategoryScheme.query.filter_by(
+                        namespace="https://gtr.ukri.org/resources/classificationlists.html"
+                    ).one(),
+                )
+                print("GTR research_subject added")
+                db.session.add(category_term_resource)
 
         for term in project.research_topics:
+            # If the topics exist - update them
             if db.session.query(
                 exists().where(CategoryTerm.scheme_identifier == term["id"])
             ).scalar():
-                print("Skipping, GTR Category already imported")
-                continue
+                research_topic_to_update = CategoryTerm.query.filter_by(
+                    scheme_identifier=term["id"]
+                ).one()
 
-            category_term_resource = CategoryTerm(
-                neutral_id=generate_neutral_id(),
-                scheme_identifier=term["id"],
-                name=term["text"],
-                path=gtr_category_path,
-                category_scheme=CategoryScheme.query.filter_by(
+                research_topic_to_update.scheme_identifier = term["id"]
+                research_topic_to_update.name = term["text"]
+                research_topic_to_update.path = gtr_category_path
+                research_topic_to_update.category_scheme = CategoryScheme.query.filter_by(
                     namespace="https://gtr.ukri.org/resources/classificationlists.html"
-                ).one(),
-            )
-            db.session.add(category_term_resource)
+                ).one()
+                print("GTR research_topic updated")
+            # Otherwise add them
+            else:
+                category_term_resource = CategoryTerm(
+                    neutral_id=generate_neutral_id(),
+                    scheme_identifier=term["id"],
+                    name=term["text"],
+                    path=gtr_category_path,
+                    category_scheme=CategoryScheme.query.filter_by(
+                        namespace="https://gtr.ukri.org/resources/classificationlists.html"
+                    ).one(),
+                )
+                print("GTR research_topic added")
+                db.session.add(category_term_resource)
+
+    def _link_gtr_category_terms(self, project):
+
+        # GTR Research Topics and Subjects
+        gtr_topics = self._find_unique_gtr_project_research_items(
+            gtr_research_items=project.research_topics
+        )
+        gtr_subjects = self._find_unique_gtr_project_research_items(
+            gtr_research_items=project.research_subjects
+        )
+
+        # GCMD Research Topics and Subjects
+        gcmd_topics = self._find_unique_gcmd_project_research_topics(
+            gtr_research_topics=project.research_topics
+        )
+        gcmd_subjects = self._find_unique_gcmd_project_research_subjects(
+            gtr_research_subjects=project.research_subjects
+        )
+
+        # Flatten the processed topics and subjects to dinstinct list of GCMD identifiers
+
+        # GTR Topics
+        category_term_scheme_identifiers = list(gtr_topics)
+        # GTR Subjects
+        category_term_scheme_identifiers.extend(
+            x for x in gtr_subjects if x not in category_term_scheme_identifiers
+        )
+        # GCMD Topics
+        category_term_scheme_identifiers.extend(
+            x for x in gcmd_topics if x not in category_term_scheme_identifiers
+        )
+        # GCMD Subjects
+        category_term_scheme_identifiers.extend(
+            x for x in gcmd_subjects if x not in category_term_scheme_identifiers
+        )
+
+        # Get project_id if it exists
+        grant = Grant.query.filter_by(reference=self.grant_reference).first()
+        allocation = Allocation.query.filter_by(grant_id=grant.id).first()
+        project_id = allocation.project_id
+
+        # Get the project
+        project = Project.query.filter_by(id=allocation.project_id).first()
+
+        project_category_terms = Categorisation.query.filter_by(
+            project_id=project_id
+        ).all()
+
+        # If terms exist in the database see if they need altering
+        # create two lists. 1. exsisting terms. 2. incoming terms.
+        if project_category_terms:
+
+            existing_terms = []
+            incoming_terms = []
+
+            for project_category_term in project_category_terms:
+                category_term = CategoryTerm.query.filter_by(
+                    id=project_category_term.category_term_id
+                ).one()
+                existing_terms.append(category_term.scheme_identifier)
+
+            for category_term_scheme_identifier in category_term_scheme_identifiers:
+                incoming_terms.append(category_term_scheme_identifier)
+
+            # Compare the lists for adding
+            existing = set(existing_terms)
+            missing_in_existing_add = [x for x in incoming_terms if x not in existing]
+            for category_term_scheme_identifier in missing_in_existing_add:
+
+                # Save to category terms link table - links cat terms to projects
+                db.session.add(
+                    Categorisation(
+                        neutral_id=generate_neutral_id(),
+                        project_id=project_id,
+                        category_term=CategoryTerm.query.filter_by(
+                            scheme_identifier=category_term_scheme_identifier
+                        ).one(),
+                    )
+                )
+                print("linking topic/subject", category_term_scheme_identifier)
+
+            # Compare the lists for removing
+            # incoming_terms.pop() # Pop off an incoming record to test if this works.
+            incoming = set(incoming_terms)
+            missing_in_incoming_remove = [
+                x for x in existing_terms if x not in incoming
+            ]
+            for category_term_scheme_identifier in missing_in_incoming_remove:
+
+                # Remove from category terms link table - unlinks cat terms to projects
+                category_term = CategoryTerm.query.filter_by(
+                    scheme_identifier=category_term_scheme_identifier
+                ).one()
+
+                Categorisation.query.filter_by(
+                    category_term_id=category_term.id
+                ).delete()
+                print("unlinking topic/subject", category_term_scheme_identifier)
+
+        # Otherwise this is a new grant import so link the categories
+        else:
+            for category_term_scheme_identifier in category_term_scheme_identifiers:
+                # Save to category terms link table - links projects to cat terms
+                if category_term_scheme_identifier is not "none":
+                    db.session.add(
+                        Categorisation(
+                            neutral_id=generate_neutral_id(),
+                            project=project,
+                            category_term=CategoryTerm.query.filter_by(
+                                scheme_identifier=category_term_scheme_identifier
+                            ).one(),
+                        )
+                    )
+                    print("GTR topic/subject link added", category_term_scheme_identifier)
 
     def _find_gtr_project_identifier(self, identifiers: Dict[str, List[str]]) -> str:
         """
@@ -1155,7 +1266,8 @@ class GatewayToResearchGrantImporter:
         use a category scheme supported by this project and no other identifier is available to automatically determine
         a corresponding Category based on its GTR research topic ID.
 
-        This mapping therefore needs to be defined manually in this method.
+        This mapping therefore needs to be defined manually in this method. Currently this is done using a simple if
+        statement, but in future a more scalable solution will be needed.
 
         :type gtr_research_topic: dict
         :param gtr_research_topic: GTR project research topic
@@ -1163,7 +1275,6 @@ class GatewayToResearchGrantImporter:
         :rtype str or None
         :return a Category scheme identifier corresponding to a GTR research topic ID, or None if unclassified
         """
-
         csv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_topics.csv"
         topics_list = []
         protocol = "https://"
@@ -1193,6 +1304,7 @@ class GatewayToResearchGrantImporter:
                         return None
                     else:
                         return value
+
         raise UnmappedGatewayToResearchProjectTopic(
             meta={
                 "gtr_research_topic": {
@@ -1220,11 +1332,9 @@ class GatewayToResearchGrantImporter:
         :rtype str
         :return a Category scheme identifier corresponding to a GTR research subject name
         """
-
         psv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_subjects.psv"
         subjects_list = []
         protocol = "https://"
-
         try:
             with open(psv_file, "r", newline="") as psv_file:
                 reader = csv.DictReader(psv_file, delimiter="|")
