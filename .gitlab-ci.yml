@@ -86,7 +86,7 @@ test-app:
   stage: test
   variables:
     FLASK_ENV: development
-    SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app_test
+    SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app
   before_script:
     - "poetry install"
   script:
