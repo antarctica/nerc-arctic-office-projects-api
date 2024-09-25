@@ -16,7 +16,7 @@ from arctic_office_projects_api.extensions import db
 
 def conditional_decorator(decor, condition):
     def decorator(function):
-        if not condition:
+        if condition:
             # Return the function unchanged, not decorated.
             return function
         return decor(function)
