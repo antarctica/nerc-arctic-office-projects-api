@@ -51,27 +51,10 @@ from arctic_office_projects_api.models import Allocation
 from arctic_office_projects_api.schemas import CategorisationSchema
 from arctic_office_projects_api.models import Categorisation
 
+from arctic_office_projects_api.utils import conditional_decorator
 
-# from arctic_office_projects_api.resources.people import people as people_blueprint
-# from arctic_office_projects_api.resources.grants import grants as grants_blueprint
-# from arctic_office_projects_api.resources.organisations import (
-#     organisations as organisations_blueprint,
-# )
-# from arctic_office_projects_api.resources.category_schemes import (
-#     category_schemes as category_schemes_blueprint,
-# )
-# from arctic_office_projects_api.resources.category_terms import (
-#     category_terms as category_terms_blueprint,
-# )
-# from arctic_office_projects_api.resources.participants import (
-#     participants as participants_blueprint,
-# )
-# from arctic_office_projects_api.resources.allocations import (
-#     allocations as allocations_blueprint,
-# )
-# from arctic_office_projects_api.resources.categorisations import (
-#     categorisations as categorisations_blueprint,
-# )
+
+auth = FlaskEntraAuth()
 
 
 def create_app(config_name):
@@ -80,13 +63,12 @@ def create_app(config_name):
     # Config
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
-
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI") or None
-
-    db.init_app(app)
 
     auth = FlaskEntraAuth()
     auth.init_app(app)
+
+    db.init_app(app)
 
     # # Middleware / Wrappers
     if app.config["APP_ENABLE_PROXY_FIX"]:
@@ -97,7 +79,7 @@ def create_app(config_name):
     if app.config["APP_ENABLE_REQUEST_ID"]:
         RequestID(app)
     if app.config["APP_ENABLE_SENTRY"]:
-        sentry_sdk.init(**app.config["SENTRY_CONFIG"])
+        sentry_sdk.init(**app.config["SENTRY_CONFIG"])  # pragma: no cover
 
     # Logging
     formatter = RequestFormatter(
@@ -129,10 +111,11 @@ def create_app(config_name):
         methods=["get", "options"],
     )
 
-    # Resources
+    is_testing = app.config.get("TESTING")
 
+    # Resources
     @app.route("/projects")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_list():
         """
         Returns all Project resources
@@ -166,7 +149,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/projects/<project_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_detail(project_id: str):
         """
         Returns a specific Project resource, specified by its Neutral ID
@@ -197,7 +180,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/projects/<project_id>/relationships/participants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_relationship_participants(project_id: str):
         """
         Returns Participant resource linkages associated with a specific Project resource, specified by its Neutral ID
@@ -215,7 +198,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/projects/<project_id>/relationships/allocations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_relationship_allocations(project_id: str):
         """
         Returns Allocation resource linkages associated with a specific Project resource, specified by its Neutral ID
@@ -233,7 +216,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/projects/<project_id>/participants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_participants(project_id: str):
         """
         Returns Participant resources associated with a specific Project resource, specified by its Neutral ID
@@ -253,7 +236,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/projects/<project_id>/allocations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_allocations(project_id: str):
         """
         Returns Allocation resources associated with a specific Project resource, specified by its Neutral ID
@@ -273,7 +256,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/projects/<project_id>/relationships/categorisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_relationship_categorisations(project_id: str):
         """
         Returns Categorisation resource linkages associated with a specific Project resource, specified by its Neutral ID
@@ -291,7 +274,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/projects/<project_id>/categorisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def projects_categorisations(project_id: str):
         """
         Returns Categorisation resources associated with a specific Project resource, specified by its Neutral ID
@@ -311,7 +294,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/people")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def people_list():
         """
         Returns all People resources
@@ -332,7 +315,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/people/<person_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def people_detail(person_id: str):
         """
         Returns a specific Person resource, specified by its Neutral ID
@@ -352,7 +335,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/people/<person_id>/relationships/participants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def people_relationship_participants(person_id: str):
         """
         Returns Participant resource linkages associated with a specific Person resource, specified by its Neutral ID
@@ -370,7 +353,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/people/<person_id>/relationships/organisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def people_relationship_organisations(person_id: str):
         """
         Returns Organisation resource linkages associated with a specific Person resource, specified by its Neutral ID
@@ -388,7 +371,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/people/<person_id>/participants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def people_participants(person_id: str):
         """
         Returns Participant resources associated with a specific Person resource, specified by its Neutral ID
@@ -408,7 +391,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/people/<person_id>/organisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def people_organisations(person_id: str):
         """
         Returns Organisation resources associated with a specific Person resource, specified by its Neutral ID
@@ -428,7 +411,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/grants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def grants_list():
         """
         Returns all Grant resources
@@ -449,7 +432,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/grants/<grant_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def grants_detail(grant_id: str):
         """
         Returns a specific Grant resource, specified by its Neutral ID
@@ -469,7 +452,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/grants/<grant_id>/relationships/allocations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def grants_relationship_allocations(grant_id: str):
         """
         Returns Allocation resource linkages associated with a specific Grant resource, specified by its Neutral ID
@@ -487,7 +470,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/grants/<grant_id>/relationships/organisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def grants_relationship_organisations(grant_id: str):
         """
         Returns Organisation resource linkages associated with a specific Grant resource, specified by its Neutral ID
@@ -505,7 +488,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/grants/<grant_id>/allocations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def grants_allocations(grant_id: str):
         """
         Returns Allocation resources associated with a specific Grant resource, specified by its Neutral ID
@@ -525,7 +508,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/grants/<grant_id>/organisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def grants_organisations(grant_id: str):
         """
         Returns Organisation resources associated with a specific Grant resource, specified by its Neutral ID
@@ -545,7 +528,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/organisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def organisations_list():
         """
         Returns all Organisation resources
@@ -575,7 +558,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/organisations/<organisation_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def organisations_detail(organisation_id: str):
         """
         Returns a specific Organisation resource, specified by its Neutral ID
@@ -604,7 +587,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/organisations/<organisation_id>/relationships/people")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def organisations_relationship_people(organisation_id: str):
         """
         Returns Person resource linkages associated with a specific Organisation resource, specified by its Neutral ID
@@ -624,7 +607,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/organisations/<organisation_id>/relationships/grants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def organisations_relationship_grants(organisation_id: str):
         """
         Returns Grant resource linkages associated with a specific Organisation resource, specified by its Neutral ID
@@ -644,7 +627,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/organisations/<organisation_id>/people")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def organisations_people(organisation_id: str):
         """
         Returns Person resources associated with a specific Organisation resource, specified by its Neutral ID
@@ -666,7 +649,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/organisations/<organisation_id>/grants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def organisations_grants(organisation_id: str):
         """
         Returns Grant resources associated with a specific Organisation resource, specified by its Neutral ID
@@ -688,7 +671,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/category-schemes")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_schemes_list():
         """
         Returns all CategoryScheme resources
@@ -714,7 +697,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/category-schemes/<category_scheme_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_schemes_detail(category_scheme_id: str):
         """
         Returns a specific CategoryScheme resource, specified by its Neutral ID
@@ -736,7 +719,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/category-schemes/<category_scheme_id>/relationships/categories")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_schemes_relationship_category_terms(category_scheme_id: str):
         """
         Returns CategoryTerm resource linkages associated with a specific CategoryScheme resource, specified by its Neutral
@@ -759,7 +742,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/category-schemes/<category_scheme_id>/categories")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_schemes_category_terms(category_scheme_id: str):
         """
         Returns CategoryTerm resources associated with a specific CategoryScheme resource, specified by its Neutral ID
@@ -781,7 +764,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categories")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_list():
         """
         Returns all CategoryTerm resources
@@ -809,7 +792,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/categories/<category_term_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_detail(category_term_id: str):
         """
         Returns a specific CategoryTerm resource, specified by its Neutral ID
@@ -836,7 +819,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categories/<category_term_id>/relationships/parent-categories")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_relationship_parent_category_terms(category_term_id: str):
         """
         Returns parent CategoryTerm resource linkages for a specific CategoryTerm resource, specified by its Neutral ID
@@ -858,7 +841,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categories/<category_term_id>/relationships/category-schemes")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_relationship_category_schemes(category_term_id: str):
         """
         Returns CategoryScheme resource linkages associated with a specific CategoryTerm resource, specified by its Neutral
@@ -881,7 +864,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categories/<category_term_id>/relationships/categorisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_relationship_categorisations(category_term_id: str):
         """
         Returns Categorisation resource linkages associated with a specific CategoryTerm resource, specified by its Neutral
@@ -904,7 +887,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categories/<category_term_id>/parent-categories")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_parent_category_terms(category_term_id: str):
         """
         Returns parent CategoryTerm resources associated with a specific CategoryTerm resource, specified by its Neutral ID
@@ -926,7 +909,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categories/<category_term_id>/category-schemes")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_category_schemes(category_term_id: str):
         """
         Returns CategoryScheme resources associated with a specific CategoryTerm resource, specified by its Neutral ID
@@ -948,7 +931,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categories/<category_term_id>/categorisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def category_terms_categorisations(category_term_id: str):
         """
         Returns Categorisation resources associated with a specific CategoryTerm resource, specified by its Neutral ID
@@ -970,7 +953,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/participants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def participants_list():
         """
         Returns all Participant resources (People, Project association)
@@ -991,7 +974,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/participants/<participant_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def participants_detail(participant_id: str):
         """
         Returns a specific Participant resource, specified by its Neutral ID
@@ -1011,7 +994,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/participants/<participant_id>/relationships/projects")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def participants_relationship_projects(participant_id: str):
         """
         Returns Project resource linkages associated with a specific Participant resource, specified by its Neutral ID
@@ -1029,7 +1012,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/participants/<participant_id>/relationships/people")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def participants_relationship_people(participant_id: str):
         """
         Returns People resource linkages associated with a specific Participant resource, specified by its Neutral ID
@@ -1047,7 +1030,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/participants/<participant_id>/projects")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def participants_projects(participant_id: str):
         """
         Returns the Project resource associated with a specific Participant resource, specified by its Neutral ID
@@ -1067,7 +1050,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/participants/<participant_id>/people")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def participants_people(participant_id: str):
         """
         Returns the People resource associated with a specific Participant resource, specified by its Neutral ID
@@ -1087,7 +1070,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/allocations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def allocations_list():
         """
         Returns all Allocation resources (Grant, Project association)
@@ -1108,7 +1091,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/allocations/<allocation_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def allocations_detail(allocation_id: str):
         """
         Returns a specific Allocation resource, specified by its Neutral ID
@@ -1128,7 +1111,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/allocations/<allocation_id>/relationships/projects")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def allocations_relationship_projects(allocation_id: str):
         """
         Returns Project resource linkages associated with a specific Allocation resource, specified by its Neutral ID
@@ -1146,7 +1129,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/allocations/<allocation_id>/relationships/grants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def allocations_relationship_grants(allocation_id: str):
         """
         Returns Grant resource linkages associated with a specific Allocation resource, specified by its Neutral ID
@@ -1164,7 +1147,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/allocations/<allocation_id>/projects")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def allocations_projects(allocation_id: str):
         """
         Returns the Project resource associated with a specific Allocation resource, specified by its Neutral ID
@@ -1184,7 +1167,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/allocations/<allocation_id>/grants")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def allocations_grants(allocation_id: str):
         """
         Returns the People resource associated with a specific Allocation resource, specified by its Neutral ID
@@ -1204,7 +1187,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categorisations")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def categorisations_list():
         """
         Returns all Categorisation resources
@@ -1232,7 +1215,7 @@ def create_app(config_name):
         return jsonify(payload)
 
     @app.route("/categorisations/<categorisation_id>")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def categorisations_detail(categorisation_id: str):
         """
         Returns a specific Categorisation resource, specified by its Neutral ID
@@ -1259,7 +1242,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categorisations/<categorisation_id>/relationships/projects")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def categorisations_relationship_projects(categorisation_id: str):
         """
         Returns Project resource linkages associated with a specific Categorisation resource, specified by its Neutral ID
@@ -1281,7 +1264,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categorisations/<categorisation_id>/relationships/categories")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def categorisations_relationship_category_terms(categorisation_id: str):
         """
         Returns CategoryTerm resource linkages associated with a specific Categorisation resource, specified by its Neutral
@@ -1304,7 +1287,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categorisations/<categorisation_id>/projects")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def categorisations_projects(categorisation_id: str):
         """
         Returns Project resources associated with a specific Categorisation resource, specified by its Neutral ID
@@ -1326,7 +1309,7 @@ def create_app(config_name):
             raise UnprocessableEntity()
 
     @app.route("/categorisations/<categorisation_id>/categories")
-    @app.auth()
+    @conditional_decorator(app.auth(), is_testing)
     def categorisations_category_terms(categorisation_id: str):
         """
         Returns CategoryTerm resources associated with a specific Categorisation resource, specified by its Neutral ID
