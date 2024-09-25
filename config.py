@@ -29,7 +29,7 @@ class Config(object):
 
     LOGGING_LEVEL = logging.WARNING
 
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or None
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS') or False
 
     SERVER_NAME = os.getenv('SERVER_NAME') or None
@@ -51,7 +51,7 @@ class Config(object):
 
 
 class TestConfig(Config):
-    ENV = 'testing'
+    # ENV = 'testing'
 
     DEBUG = True
     TESTING = True
@@ -61,16 +61,11 @@ class TestConfig(Config):
 
     LOGGING_LEVEL = logging.DEBUG
 
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or 'postgresql://app:password@app-db/app_test'
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_TEST_DATABASE_URI')
 
     PREFERRED_URL_SCHEME = os.getenv('PREFERRED_URL_SCHEME') or 'http'
 
     APP_PAGE_SIZE = 2
-
-    # Commented out whilst the generation of an Auth Jwt token is figured out...
-    # AZURE_OAUTH_TENANCY = 'testing'
-    # AZURE_OAUTH_APPLICATION_ID = 'testing'
-    # AZURE_OAUTH_CLIENT_APPLICATION_IDS = ['testing']
 
 
 class DevelopmentConfig(Config):
@@ -81,7 +76,7 @@ class DevelopmentConfig(Config):
 
     LOGGING_LEVEL = logging.INFO
 
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or 'postgresql://app:password@app-db/app'
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
 
     SERVER_NAME = os.getenv('SERVER_NAME') or 'localhost:9001'
     PREFERRED_URL_SCHEME = os.getenv('PREFERRED_URL_SCHEME') or 'http'
@@ -89,18 +84,17 @@ class DevelopmentConfig(Config):
 
 class ReviewConfig(Config):
     LOGGING_LEVEL = logging.INFO
-
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or os.getenv('DATABASE_URL')
+    # SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 
 class StagingConfig(Config):
     LOGGING_LEVEL = logging.INFO
-
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or os.getenv('DATABASE_URL')
+    # SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or os.getenv('DATABASE_URL')
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or os.getenv('DATABASE_URL')
+    LOGGING_LEVEL = logging.INFO
+    # SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or os.getenv('DATABASE_URL')
 
 
 config = {
