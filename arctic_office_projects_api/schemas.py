@@ -156,7 +156,9 @@ class GrantSchema(Schema):
     publications = fields.List(fields.String, dump_only=True)
     duration = DateRangeField(dump_only=True, required=True)
     status = EnumStrField(dump_only=True, required=True)
-    total_funds = CurrencyField(dump_only=True, metadata={'currency': 'total_funds_currency'})
+    total_funds = CurrencyField(
+        dump_only=True, metadata={"currency": "total_funds_currency"}
+    )
 
     funder = Relationship(
         self_view="grants_relationship_organisations",
