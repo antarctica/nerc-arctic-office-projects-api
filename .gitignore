@@ -5,5 +5,7 @@ __pycache__
 *.log
 /_dev
 
+htmlcov
+
 test-results.xml
 projects.json
