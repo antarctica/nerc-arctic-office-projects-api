@@ -1563,20 +1563,6 @@ pytest = ">=4.6"
 testing = ["fields", "hunter", "process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
-name = "pytest-httpserver"
-version = "1.1.0"
-description = "pytest-httpserver is a httpserver for pytest"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "pytest_httpserver-1.1.0-py3-none-any.whl", hash = "sha256:7ef88be8ed3354b6784daa3daa75a422370327c634053cefb124903fa8d73a41"},
-    {file = "pytest_httpserver-1.1.0.tar.gz", hash = "sha256:6b1cb0199e2ed551b1b94d43f096863bbf6ae5bcd7c75c2c06845e5ce2dc8701"},
-]
-
-[package.dependencies]
-Werkzeug = ">=2.0.0"
-
-[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 description = "Extensions to the standard Python datetime module"
@@ -2306,4 +2292,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "1e3fa04638dd7426cca87ec90fabb3ba9c1e8e88c7c21ba85cf4aecb061dae4c"
+content-hash = "afd3d7fa056d2d1c3e4e3c0301a82f2b38491ab5d90cc94dfe8810012dee7c74"
