@@ -1297,7 +1297,10 @@ def _get_ukri_council(project_type: GrantType) -> Optional[UKRICouncil]:
     :rtype UKRICouncil
     :return: an Organisation model if a project is funded by a UKRI grant, otherwise None
     """
-    if project_type is GrantType.UKRI_STANDARD_GRANT or project_type is GrantType.UKRI_LARGE_GRANT:
+    if (
+        project_type is GrantType.UKRI_STANDARD_GRANT
+        or project_type is GrantType.UKRI_LARGE_GRANT
+    ):
         return UKRICouncil[faker.grant_funder(project_type)]
 
     return None
@@ -1327,7 +1330,10 @@ def _get_funder(
     :rtype Organisation
     :return: Organisation model instance for use as a funder for a grant in a fake project
     """
-    if project_type is GrantType.UKRI_STANDARD_GRANT or project_type is GrantType.UKRI_LARGE_GRANT:
+    if (
+        project_type is GrantType.UKRI_STANDARD_GRANT
+        or project_type is GrantType.UKRI_LARGE_GRANT
+    ):
         return funders[ukri_council.name]
 
     funder_identifier = faker.grant_funder(project_type)
@@ -1341,9 +1347,11 @@ def _get_funder(
             non_other_funders.append(funder.neutral_id)
 
         if (
-            funder_identifier is not None and Organisation.query.filter(
+            funder_identifier is not None
+            and Organisation.query.filter(
                 Organisation.neutral_id.notin_(non_other_funders)
-            ).count() >= 3
+            ).count()
+            >= 3
         ):
             return (
                 Organisation.query.filter(
@@ -1376,9 +1384,11 @@ def _get_principle_investigator() -> Person:
     :return: Person model instance for use as the principle investigator for a fake project
     """
     if (
-        faker.has_existing_principle_investigator() and Person.query.filter(
+        faker.has_existing_principle_investigator()
+        and Person.query.filter(
             Person.neutral_id.notin_(static_resources["people"].keys())
-        ).count() >= 3
+        ).count()
+        >= 3
     ):
         return (
             Person.query.filter(
@@ -1420,9 +1430,11 @@ def _get_investigator_organisation() -> Organisation:
     :return: Organisation model instance for use as the organisation for a fake person resource
     """
     if (
-        faker.has_existing_principle_investigator_organisation() and Organisation.query.filter(
+        faker.has_existing_principle_investigator_organisation()
+        and Organisation.query.filter(
             Organisation.neutral_id.notin_(static_resources["organisations"].keys())
-        ).count() >= 3
+        ).count()
+        >= 3
     ):
         return (
             Organisation.query.filter(
