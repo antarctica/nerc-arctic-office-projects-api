@@ -33,7 +33,7 @@ def db_create(app):
         seed_predictable_test_resources()
         db.session.commit()
         yield db
-        # db.session.remove()
+        db.session.remove()
         # db.drop_all()  # Clean up after the test
 
 
