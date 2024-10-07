@@ -1,6 +1,5 @@
 import requests
 import csv
-import re
 
 from datetime import date, datetime, timezone
 from typing import Dict, Optional, List
@@ -156,7 +155,10 @@ class GatewayToResearchResource:
             link_href = link["href"]
 
             link_base_url = link["href"].split(":")
-            if link_base_url[1] == "//internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com":
+            if (
+                link_base_url[1]
+                == "//internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com"
+            ):
                 link_href = link["href"].replace(
                     "http://internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080",
                     "https://gtr.ukri.org",
@@ -239,7 +241,6 @@ class GatewayToResearchFunder(GatewayToResearchOrganisation):
 
     All logic for this resource is defined in it's parent class.
     """
-
     pass
 
 
@@ -683,7 +684,7 @@ class GatewayToResearchGrantImporter:
         """
         self.grant_reference = gtr_grant_reference
         self.gtr_project_id = gtr_project_id
-        self.lead_project = int(lead_project)
+        self.lead_project = int(lead_project) if lead_project is not None else 0  # Handle NoneType safely
         self.grant_exists = False
 
     def exists(self) -> bool:
@@ -701,7 +702,7 @@ class GatewayToResearchGrantImporter:
             self.grant_exists = True
 
         return data_exists
-    
+
     def update(self, gtr_project_id):
         """
         Updates a Gateway to Research project & grant which have previously been imported
@@ -1049,7 +1050,7 @@ class GatewayToResearchGrantImporter:
         else:
             for category_term_scheme_identifier in category_term_scheme_identifiers:
                 # Save to category terms link table - links projects to cat terms
-                if category_term_scheme_identifier is not "none":
+                if category_term_scheme_identifier != "none":
                     db.session.add(
                         Categorisation(
                             neutral_id=generate_neutral_id(),
@@ -1059,7 +1060,9 @@ class GatewayToResearchGrantImporter:
                             ).one(),
                         )
                     )
-                    print("GTR topic/subject link added", category_term_scheme_identifier)
+                    print(
+                        "GTR topic/subject link added", category_term_scheme_identifier
+                    )
 
     def _find_gtr_project_identifier(self, identifiers: Dict[str, List[str]]) -> str:
         """
@@ -1171,6 +1174,14 @@ class GatewayToResearchGrantImporter:
             return GrantStatus.Active
         elif status == "Closed":
             return GrantStatus.Closed
+        elif status == "Completed":
+            return GrantStatus.Completed
+        elif status == "Terminated":
+            return GrantStatus.Terminated
+        elif status == "Pending":
+            return GrantStatus.Pending
+        elif status == "Unknown":
+            return GrantStatus.Unknown
 
         raise ValueError(
             "Status element value in GTR project not mapped to a member of the GrantStatus enumeration"
