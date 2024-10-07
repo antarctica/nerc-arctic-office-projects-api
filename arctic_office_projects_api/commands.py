@@ -14,7 +14,6 @@ from arctic_office_projects_api.seeding import (
     seed_random_test_resources,
 )
 
-
 seeding_cli_group = AppGroup("seed", help="Perform database seeding.")
 
 
@@ -57,30 +56,3 @@ def import_grant_from_provider(grant_provider, grant_reference, lead_project):
     """Import a research grant from a provider"""
     if grant_provider == "gtr":
         import_gateway_to_research_grant_interactively(grant_reference, lead_project)
-
-
-# updating_cli_group = AppGroup('update', help='Update data.')
-
-
-# @updating_cli_group.command('categories')
-# @argument('file_path', type=Path(exists=True))
-# def update_categories_from_file(file_path):
-#     """Update research categories from a JSON file"""
-#     update_category_terms_from_file_interactively(categories_file_path=file_path)
-
-
-# @updating_cli_group.command('organisations')
-# @argument('file_path', type=Path(exists=True))
-# def update_organisations_from_file(file_path):
-#     """Update organisations from a JSON file"""
-#     update_organisations_from_file_interactively(organisations_file_path=file_path)
-
-
-# @updating_cli_group.command('grant')
-# @argument('grant_provider', type=Choice(['gtr']))
-# @argument('grant_reference')
-# @argument('lead_project', default=0)
-# def update_grant_from_provider(grant_provider, grant_reference, lead_project):
-#     """Update a research grant from a provider"""
-#     if grant_provider == 'gtr':
-#         update_gateway_to_research_grant_interactively(grant_reference, lead_project)
