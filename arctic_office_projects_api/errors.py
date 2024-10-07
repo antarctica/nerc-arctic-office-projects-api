@@ -158,7 +158,7 @@ class ApiException(AppException):
         return make_response(jsonify(payload), self.status.value)
 
 
-class APiBadRequestError(ApiException):
+class ApiBadRequestError(ApiException):
     """
     Represents a generic request error
     """
@@ -168,7 +168,7 @@ class APiBadRequestError(ApiException):
     detail = "Check your request and try again"
 
 
-class APiInternalServerError(ApiException):
+class ApiInternalServerError(ApiException):
     """
     Represents a generic internal error
     """
@@ -208,7 +208,7 @@ def error_handler_generic_bad_request(e: BadRequest) -> Response:
 
     :return: Flask response
     """
-    error = APiBadRequestError()
+    error = ApiBadRequestError()
     return error.response()
 
 
@@ -222,7 +222,7 @@ def error_handler_generic_internal_server_error(e: InternalServerError) -> Respo
 
     :return: Flask response
     """
-    error = APiInternalServerError()
+    error = ApiInternalServerError()
     return error.response()
 
 
