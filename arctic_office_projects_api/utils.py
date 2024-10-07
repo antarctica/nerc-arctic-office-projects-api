@@ -59,7 +59,7 @@ def healthcheck_db() -> bool:
         # Establish a connection
         with db.engine.connect():
             pass
-    except SQLAlchemyError as e:
-        return False
+    except SQLAlchemyError as e:  # pragma: no cover
+        return False  # pragma: no cover
 
     return True

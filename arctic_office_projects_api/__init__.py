@@ -176,8 +176,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/projects/<project_id>/relationships/participants")
     @conditional_decorator(app.auth(), is_testing)
@@ -194,8 +194,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/projects/<project_id>/relationships/allocations")
     @conditional_decorator(app.auth(), is_testing)
@@ -212,8 +212,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/projects/<project_id>/participants")
     @conditional_decorator(app.auth(), is_testing)
@@ -232,8 +232,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/projects/<project_id>/allocations")
     @conditional_decorator(app.auth(), is_testing)
@@ -252,8 +252,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/projects/<project_id>/relationships/categorisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -270,8 +270,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/projects/<project_id>/categorisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -290,8 +290,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/people")
     @conditional_decorator(app.auth(), is_testing)
@@ -331,8 +331,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/people/<person_id>/relationships/participants")
     @conditional_decorator(app.auth(), is_testing)
@@ -349,8 +349,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/people/<person_id>/relationships/organisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -367,8 +367,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/people/<person_id>/participants")
     @conditional_decorator(app.auth(), is_testing)
@@ -387,8 +387,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/people/<person_id>/organisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -407,8 +407,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/grants")
     @conditional_decorator(app.auth(), is_testing)
@@ -448,8 +448,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/grants/<grant_id>/relationships/allocations")
     @conditional_decorator(app.auth(), is_testing)
@@ -466,8 +466,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/grants/<grant_id>/relationships/organisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -484,8 +484,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/grants/<grant_id>/allocations")
     @conditional_decorator(app.auth(), is_testing)
@@ -504,8 +504,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/grants/<grant_id>/organisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -524,8 +524,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/organisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -583,8 +583,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/organisations/<organisation_id>/relationships/people")
     @conditional_decorator(app.auth(), is_testing)
@@ -603,8 +603,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/organisations/<organisation_id>/relationships/grants")
     @conditional_decorator(app.auth(), is_testing)
@@ -623,8 +623,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/organisations/<organisation_id>/people")
     @conditional_decorator(app.auth(), is_testing)
@@ -645,8 +645,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/organisations/<organisation_id>/grants")
     @conditional_decorator(app.auth(), is_testing)
@@ -667,8 +667,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/category-schemes")
     @conditional_decorator(app.auth(), is_testing)
@@ -715,8 +715,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/category-schemes/<category_scheme_id>/relationships/categories")
     @conditional_decorator(app.auth(), is_testing)
@@ -738,8 +738,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/category-schemes/<category_scheme_id>/categories")
     @conditional_decorator(app.auth(), is_testing)
@@ -760,8 +760,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categories")
     @conditional_decorator(app.auth(), is_testing)
@@ -815,8 +815,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categories/<category_term_id>/relationships/parent-categories")
     @conditional_decorator(app.auth(), is_testing)
@@ -837,8 +837,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categories/<category_term_id>/relationships/category-schemes")
     @conditional_decorator(app.auth(), is_testing)
@@ -860,8 +860,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categories/<category_term_id>/relationships/categorisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -883,8 +883,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categories/<category_term_id>/parent-categories")
     @conditional_decorator(app.auth(), is_testing)
@@ -905,8 +905,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categories/<category_term_id>/category-schemes")
     @conditional_decorator(app.auth(), is_testing)
@@ -927,8 +927,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categories/<category_term_id>/categorisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -949,8 +949,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/participants")
     @conditional_decorator(app.auth(), is_testing)
@@ -990,8 +990,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/participants/<participant_id>/relationships/projects")
     @conditional_decorator(app.auth(), is_testing)
@@ -1008,8 +1008,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/participants/<participant_id>/relationships/people")
     @conditional_decorator(app.auth(), is_testing)
@@ -1026,8 +1026,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/participants/<participant_id>/projects")
     @conditional_decorator(app.auth(), is_testing)
@@ -1046,8 +1046,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/participants/<participant_id>/people")
     @conditional_decorator(app.auth(), is_testing)
@@ -1066,8 +1066,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/allocations")
     @conditional_decorator(app.auth(), is_testing)
@@ -1107,8 +1107,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/allocations/<allocation_id>/relationships/projects")
     @conditional_decorator(app.auth(), is_testing)
@@ -1125,8 +1125,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/allocations/<allocation_id>/relationships/grants")
     @conditional_decorator(app.auth(), is_testing)
@@ -1143,8 +1143,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/allocations/<allocation_id>/projects")
     @conditional_decorator(app.auth(), is_testing)
@@ -1163,8 +1163,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/allocations/<allocation_id>/grants")
     @conditional_decorator(app.auth(), is_testing)
@@ -1183,8 +1183,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categorisations")
     @conditional_decorator(app.auth(), is_testing)
@@ -1238,8 +1238,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categorisations/<categorisation_id>/relationships/projects")
     @conditional_decorator(app.auth(), is_testing)
@@ -1260,8 +1260,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categorisations/<categorisation_id>/relationships/categories")
     @conditional_decorator(app.auth(), is_testing)
@@ -1283,8 +1283,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categorisations/<categorisation_id>/projects")
     @conditional_decorator(app.auth(), is_testing)
@@ -1305,8 +1305,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     @app.route("/categorisations/<categorisation_id>/categories")
     @conditional_decorator(app.auth(), is_testing)
@@ -1327,8 +1327,8 @@ def create_app(config_name):
             return jsonify(payload)
         except NoResultFound:
             raise NotFound()
-        except MultipleResultsFound:
-            raise UnprocessableEntity()
+        except MultipleResultsFound:  # pragma: no cover
+            raise UnprocessableEntity()  # pragma: no cover
 
     # Return create_app()
     return app

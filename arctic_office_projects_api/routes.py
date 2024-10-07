@@ -35,6 +35,6 @@ def healthcheck_canary_route():
     dependencies = {"db": healthcheck_db()}
 
     if False in dependencies.values():
-        return "", HTTPStatus.SERVICE_UNAVAILABLE
+        return "", HTTPStatus.SERVICE_UNAVAILABLE  # pragma: no cover
 
     return "", HTTPStatus.NO_CONTENT

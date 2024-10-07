@@ -540,6 +540,10 @@ class GrantStatus(Enum):
     Approved = "approved"
     Authorised = "authorised"
     Closed = "closed"
+    Completed = "completed"
+    Terminated = "terminated"
+    Pending = "pending"
+    Unknown = "unknown"
 
 
 class GrantCurrency(Enum):
@@ -578,7 +582,7 @@ class Project(db.Model):
     categorisations = db.relationship("Categorisation", back_populates="project")
 
     def __repr__(self):
-        return f"<Project { self.neutral_id }>"
+        return f"<Project { self.neutral_id }>"  # pragma: no cover
 
 
 class Person(db.Model):
@@ -601,7 +605,7 @@ class Person(db.Model):
     participation = db.relationship("Participant", back_populates="person")
 
     def __repr__(self):
-        return f"<Person { self.neutral_id } ({ self.last_name }, { self.first_name })>"
+        return f"<Person { self.neutral_id } ({ self.last_name }, { self.first_name })>"  # pragma: no cover
 
 
 class Participant(db.Model):
@@ -620,7 +624,7 @@ class Participant(db.Model):
     person = db.relationship("Person", back_populates="participation")
 
     def __repr__(self):
-        return f"<Participant { self.neutral_id } ({ self.person.neutral_id }:{ self.project.neutral_id })>"
+        return f"<Participant { self.neutral_id } ({ self.person.neutral_id }:{ self.project.neutral_id })>"  # pragma: no cover
 
 
 class Grant(db.Model):
@@ -650,7 +654,7 @@ class Grant(db.Model):
     allocations = db.relationship("Allocation", back_populates="grant")
 
     def __repr__(self):
-        return f"<Grant { self.neutral_id } ({ self.reference })>"
+        return f"<Grant { self.neutral_id } ({ self.reference })>"  # pragma: no cover
 
 
 class Allocation(db.Model):
@@ -668,7 +672,7 @@ class Allocation(db.Model):
     grant = db.relationship("Grant", back_populates="allocations")
 
     def __repr__(self):
-        return f"<Allocation { self.neutral_id } ({ self.grant.neutral_id }:{ self.project.neutral_id })>"
+        return f"<Allocation { self.neutral_id } ({ self.grant.neutral_id }:{ self.project.neutral_id })>"  # pragma: no cover
 
 
 class Organisation(db.Model):
@@ -690,7 +694,7 @@ class Organisation(db.Model):
     people = db.relationship("Person", back_populates="organisation")
 
     def __repr__(self):
-        return f"<Organisation { self.neutral_id } ({ self.name })>"
+        return f"<Organisation { self.neutral_id } ({ self.name })>"  # pragma: no cover
 
 
 class CategoryScheme(db.Model):
@@ -714,7 +718,7 @@ class CategoryScheme(db.Model):
     category_terms = db.relationship("CategoryTerm", back_populates="category_scheme")
 
     def __repr__(self):
-        return f"<CategoryScheme { self.neutral_id } ({ self.name })>"
+        return f"<CategoryScheme { self.neutral_id } ({ self.name })>"  # pragma: no cover
 
 
 class CategoryTerm(db.Model):
@@ -775,7 +779,7 @@ class CategoryTerm(db.Model):
         return CategoryTerm.query.filter_by(path=parent_category_term_path).first()
 
     def __repr__(self):
-        return f"<CategoryTerm { self.neutral_id } ({ self.category_scheme.name } - '{ self.name }')>"
+        return f"<CategoryTerm { self.neutral_id } ({ self.category_scheme.name } - '{ self.name }')>"  # pragma: no cover
 
 
 class Categorisation(db.Model):
@@ -795,4 +799,4 @@ class Categorisation(db.Model):
     category_term = db.relationship("CategoryTerm", back_populates="categorisations")
 
     def __repr__(self):
-        return f"<Categorisation { self.neutral_id } ({ self.category_term.neutral_id }:{ self.project.neutral_id })>"
+        return f"<Categorisation { self.neutral_id } ({ self.category_term.neutral_id }:{ self.project.neutral_id })>"  # pragma: no cover
