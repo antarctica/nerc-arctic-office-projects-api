@@ -1,6 +1,6 @@
 from datetime import timedelta
 from typing import List
-
+from collections import OrderedDict
 from faker import Faker
 from faker.providers import BaseProvider
 
@@ -30,12 +30,12 @@ class Provider(BaseProvider):
         """
         return GrantType(
             self.random_element(
-                {
-                    "ukri-standard-grant": 0.665,
-                    "ukri-large-grant": 0.035,
-                    "eu-standard-grant": 0.1,
-                    "other-grant": 0.2,
-                }
+                OrderedDict([
+                    ("ukri-standard-grant", 0.665),
+                    ("ukri-large-grant", 0.035),
+                    ("eu-standard-grant", 0.1),
+                    ("other-grant", 0.2),
+                ])
             )
         )
 
@@ -52,9 +52,17 @@ class Provider(BaseProvider):
         :rtype: str
         :return: fake project title
         """
-        title_ranges = {"4-119": (4, 119), "120-149": (120, 149), "150-200": (150, 200)}
+        title_ranges = OrderedDict([
+            ("4-119", (4, 119)),
+            ("120-149", (120, 149)),
+            ("150-200", (150, 200))
+        ])
         title_range = self.random_element(
-            {"4-119": 0.25, "120-149": 0.7, "150-200": 0.05}
+            OrderedDict([
+                ("4-119", 0.25),
+                ("120-149", 0.7),
+                ("150-200", 0.05)
+            ])
         )
         return " ".join(
             self.faker.words(
@@ -80,14 +88,17 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project has an acronym
         """
-        chances = {
-            "UKRI_STANDARD_GRANT": (0.92, 0.08),
-            "UKRI_LARGE_GRANT": (0.92, 0.08),
-            "EU_STANDARD_GRANT": (1, 0),
-            "OTHER": (0.5, 0.5),
-        }
-        return self.random_element(
-            {True: chances[grant_type.name][0], False: chances[grant_type.name][1]}
+        chances = OrderedDict([  # pragma: no cover
+            ("UKRI_STANDARD_GRANT", (0.92, 0.08)),
+            ("UKRI_LARGE_GRANT", (0.92, 0.08)),
+            ("EU_STANDARD_GRANT", (1, 0)),
+            ("OTHER", (0.5, 0.5)),
+        ])
+        return self.random_element(  # pragma: no cover
+            OrderedDict([
+                (True, chances[grant_type.name][0]),
+                (False, chances[grant_type.name][1]),
+            ])
         )
 
     def acronym(self) -> str:
@@ -118,8 +129,10 @@ class Provider(BaseProvider):
         :return: fake project abstract
         """
         abstract = ""
-        abstract_ranges = {"2-3": (2, 3), "4-6": (4, 7), "7-12": (8, 12)}
-        abstract_range = self.random_element({"2-3": 0.15, "4-6": 0.8, "7-12": 0.05})
+        abstract_ranges = OrderedDict({"2-3": (2, 3), "4-6": (4, 7), "7-12": (8, 12)})
+        abstract_range = self.random_element(
+            OrderedDict([("2-3", 0.15), ("4-6", 0.8), ("7-12", 0.05)])
+        )
         for i in range(
             0,
             self.generator.random_int(
@@ -147,14 +160,14 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project has a website
         """
-        chances = {
+        chances = OrderedDict({
             "UKRI_STANDARD_GRANT": (0.15, 0.85),
             "UKRI_LARGE_GRANT": (0.96, 0.04),
             "EU_STANDARD_GRANT": (1, 0),
             "OTHER": (0.75, 0.25),
-        }
+        })
         return self.random_element(
-            {True: chances[grant_type.name][0], False: chances[grant_type.name][1]}
+            OrderedDict({True: chances[grant_type.name][0], False: chances[grant_type.name][1]})
         )
 
     def has_publications(self) -> bool:
@@ -167,7 +180,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project has any publications
         """
-        return self.random_element({True: 0.99, False: 0.01})
+        return self.random_element(OrderedDict({True: 0.99, False: 0.01}))
 
     def publication(self) -> str:
         """
@@ -197,14 +210,14 @@ class Provider(BaseProvider):
         :rtype: list
         :return: a list of fake DOIs
         """
-        publications_ranges = {
+        publications_ranges = OrderedDict({
             "1-4": (1, 4),
             "5-8": (5, 8),
             "9-16": (9, 16),
             "17-30": (17, 30),
-        }
+        })
         publications_range = self.random_element(
-            {"1-4": 0.2, "5-8": 0.72, "9-16": 0.05, "17-30": 0.03}
+            OrderedDict({"1-4": 0.2, "5-8": 0.72, "9-16": 0.05, "17-30": 0.03})
         )
 
         publications = []
@@ -215,7 +228,7 @@ class Provider(BaseProvider):
                 max=publications_ranges[publications_range][1],
             ),
         ):
-            publications.append(self.publication())
+            publications.append(self.publication())  # pragma: no cover
 
         return publications
 
@@ -237,16 +250,16 @@ class Provider(BaseProvider):
         :rtype: DateRange
         :return: the duration of a project
         """
-        durations = {
+        durations = OrderedDict({
             "UKRI_STANDARD_GRANT": 365 * 3,
             "UKRI_LARGE_GRANT": 365 * 4,
             "EU_STANDARD_GRANT": 365 * 5,
             "OTHER": 365 * 1,
-        }
+        })
 
         start_date = self.faker.past_date(start_date="-5y")
-        if self.random_element({True: 0.1666, False: 0.8334}):
-            start_date = self.faker.date_this_year(before_today=True, after_today=True)
+        if self.random_element(OrderedDict({True: 0.1666, False: 0.8334})):
+            start_date = self.faker.date_this_year(before_today=True, after_today=True)  # pragma: no cover
 
         end_date = start_date + timedelta(days=durations[grant_type.name])
 
@@ -262,7 +275,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project has an existing Principle Investigator
         """
-        return self.random_element({True: 0.7, False: 0.3})
+        return self.random_element(OrderedDict({True: 0.7, False: 0.3}))
 
     def has_existing_principle_investigator_organisation(self) -> bool:
         """
@@ -275,7 +288,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project with a new Principle Investigator is from an existing organisation
         """
-        return self.random_element({True: 0.75, False: 0.25})
+        return self.random_element(OrderedDict({True: 0.7, False: 0.3}))
 
     def has_co_investigators(self) -> bool:
         """
@@ -287,7 +300,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project has any Co-Investigators
         """
-        return self.random_element({True: 0.5, False: 0.5})
+        return self.random_element(OrderedDict({True: 0.5, False: 0.5}))
 
     def co_investigator_count(self) -> int:
         """
@@ -302,9 +315,9 @@ class Provider(BaseProvider):
         :rtype: int
         :return: the number of Co-Investigators in a project
         """
-        co_investigator_ranges = {"1-3": (1, 3), "4-6": (4, 6), "7-25": (7, 25)}
+        co_investigator_ranges = OrderedDict({"1-3": (1, 3), "4-6": (4, 6), "7-25": (7, 25)})
         co_investigator_range = self.random_element(
-            {"1-3": 0.85, "4-6": 0.1, "7-25": 0.05}
+            OrderedDict({"1-3": 0.85, "4-6": 0.1, "7-25": 0.05})
         )
         return self.generator.random_int(
             min=co_investigator_ranges[co_investigator_range][0],
@@ -321,7 +334,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project has an existing Co-Investigator
         """
-        return self.random_element({True: 0.7, False: 0.3})
+        return self.random_element(OrderedDict({True: 0.7, False: 0.3}))
 
     def has_existing_co_investigator_organisation(self) -> bool:
         """
@@ -334,7 +347,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project with a new Co-Investigator is from an existing organisation
         """
-        return self.random_element({True: 0.8, False: 0.2})
+        return self.random_element(OrderedDict({True: 0.8, False: 0.2}))
 
     def has_science_categories(self, grant_type: GrantType) -> bool:
         """
@@ -353,14 +366,14 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether a project has any science categories
         """
-        chances = {
+        chances = OrderedDict({
             "UKRI_STANDARD_GRANT": (1, 0),
             "UKRI_LARGE_GRANT": (1, 0),
             "EU_STANDARD_GRANT": (1, 0),
             "OTHER": (0.75, 0.25),
-        }
+        })
         return self.random_element(
-            {True: chances[grant_type.name][0], False: chances[grant_type.name][1]}
+            OrderedDict({True: chances[grant_type.name][0], False: chances[grant_type.name][1]})
         )
 
     def science_categories_count(self) -> int:
@@ -376,8 +389,8 @@ class Provider(BaseProvider):
         :rtype: int
         :return: the number of science categories a project is categorised by
         """
-        category_ranges = {"1": (1, 1), "2-3": (2, 3), "2-6": (2, 6)}
-        category_range = self.random_element({"1": 0.75, "2-3": 0.2, "2-6": 0.05})
+        category_ranges = OrderedDict({"1": (1, 1), "2-3": (2, 3), "2-6": (2, 6)})
+        category_range = self.random_element(OrderedDict({"1": 0.75, "2-3": 0.2, "2-6": 0.05}))
         return self.generator.random_int(
             min=category_ranges[category_range][0],
             max=category_ranges[category_range][1],

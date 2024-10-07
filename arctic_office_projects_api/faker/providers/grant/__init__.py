@@ -4,6 +4,8 @@ from datetime import date
 from enum import Enum
 from typing import Optional
 
+from collections import OrderedDict
+
 from faker import Faker
 from faker.providers import BaseProvider
 
@@ -56,7 +58,9 @@ class GrantStatus(Enum):
     Approved = {"title": "approved"}
     Authorised = {"title": "active"}
     Closed = {"title": "closed"}
-
+    Completed = {"title": "completed"}
+    Terminated = {"title": "terminated"}
+    Pending = {"title": "pending"}
 
 class Provider(BaseProvider):
     faker = Faker()
@@ -80,21 +84,25 @@ class Provider(BaseProvider):
         :rtype: GrantCurrency
         :return: member of the GrantCurrency enumerated class, representing the currency of the funds for a grant
         """
-        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
+        if (
+            grant_type is GrantType.UKRI_LARGE_GRANT
+            or grant_type is GrantType.UKRI_STANDARD_GRANT
+        ):
             return GrantCurrency.GBP
         if grant_type is GrantType.EU_STANDARD_GRANT:
             return GrantCurrency.EUR
 
-        return GrantCurrency(
-            self.random_element(
-                {
-                    GrantCurrency.GBP: 0.875,
-                    GrantCurrency.EUR: 0.10,
-                    GrantCurrency.NOK: 0.02,
-                    GrantCurrency.CAD: 0.005,
-                }
-            )
+        # Use OrderedDict for weighted elements
+        currency_weights = OrderedDict(
+            {
+                GrantCurrency.GBP: 0.875,
+                GrantCurrency.EUR: 0.10,
+                GrantCurrency.NOK: 0.02,
+                GrantCurrency.CAD: 0.005,
+            }
         )
+
+        return GrantCurrency(self.random_element(currency_weights))
 
     def grant_reference(
         self, grant_type: GrantType, ukri_council: Optional[UKRICouncil]
@@ -114,13 +122,15 @@ class Provider(BaseProvider):
         if (grant_type is GrantType.UKRI_LARGE_GRANT and ukri_council is not None) or (
             grant_type is GrantType.UKRI_STANDARD_GRANT and ukri_council is not None
         ):
-            version = self.random_element({1: 0.98, 2: 0.016, 3: 0.004})
+            version = self.random_element(
+                OrderedDict([(1, 0.98), (2, 0.016), (3, 0.004)])
+            )
             return (
                 f"{ UKRICouncil(ukri_council).value['prefix'] }/{ self.faker.random_uppercase_letter() }"
                 f"{ str(self.generator.random_int(min=1, max=999999)).zfill(5) }/{ version }"
             )
         elif grant_type is GrantType.EU_STANDARD_GRANT:
-            return str(self.generator.random_int(min=1, max=9999999)).zfill(6)
+            return str(self.generator.random_int(min=1, max=999999)).zfill(6)
 
         return self.faker.pystr(max_chars=20)
 
@@ -174,51 +184,31 @@ class Provider(BaseProvider):
         return GrantStatus.Closed
 
     def grant_funder(self, grant_type: GrantType) -> Optional[str]:
-        """
-        Determines the funder of a grant of project based on it's grant type (e.g. UKRI standard grant, EU grant, etc.)
-
-        Currently assumes:
-         * UKRI large and standard grants are funded:
-            * 3.4% by AHRC
-            * 1.9% by BBSRC
-            * 1.7% by EPSRC
-            * 1.7% by ESRC
-            * 0% by MRC
-            * 91% by NERC
-            * 0.3% by STFC
-         * EU grants are funded 100% by the EU
-         * 'other' grants:
-            * 90% by an existing random funder
-            * 10% by a new random funder
-
-        :type grant_type: GrantType
-        :param grant_type: member of the GrantType enumerated class
-
-        :example: 'NERC'
-        :rtype: str
-        :return: An identifier. For UKRI large/standard grants, an identifier for a UKRI council, for EU grants, an
-        identifier for the EU, for 'other' grants, any non-None value indicates an existing funder should be used.
-        """
-        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
+        if (
+            grant_type is GrantType.UKRI_LARGE_GRANT
+            or grant_type is GrantType.UKRI_STANDARD_GRANT
+        ):
             return UKRICouncil(
                 self.random_element(
-                    {
-                        UKRICouncil.AHRC: 3.4,
-                        UKRICouncil.BBSRC: 1.9,
-                        UKRICouncil.EPSRC: 1.7,
-                        UKRICouncil.ESRC: 1.7,
-                        UKRICouncil.MRC: 0,
-                        UKRICouncil.NERC: 91,
-                        UKRICouncil.STFC: 0.3,
-                    }
+                    OrderedDict(
+                        [
+                            (UKRICouncil.AHRC, 3.4),
+                            (UKRICouncil.BBSRC, 1.9),
+                            (UKRICouncil.EPSRC, 1.7),
+                            (UKRICouncil.ESRC, 1.7),
+                            (UKRICouncil.MRC, 0),
+                            (UKRICouncil.NERC, 91),
+                            (UKRICouncil.STFC, 0.3),
+                        ]
+                    )
                 )
             ).name
         elif grant_type is GrantType.EU_STANDARD_GRANT:
             return "EU"
         elif grant_type is GrantType.OTHER:
-            return self.random_element({True: 0.8, None: 0.2})
+            return self.random_element(OrderedDict([(True, 0.8), (None, 0.2)]))
 
-        return None
+        return None  # pragma: no cover
 
     def grant_website(self, grant_type: GrantType, grant_reference: str) -> str:
         """
@@ -235,11 +225,14 @@ class Provider(BaseProvider):
         :rtype: str
         :return: fake grant website
         """
-        if grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT:
+        if (
+            grant_type is GrantType.UKRI_LARGE_GRANT
+            or grant_type is GrantType.UKRI_STANDARD_GRANT
+        ):
             return f"https://gtr.ukri.org/projects?ref={ quote_plus(grant_reference) }"
         elif grant_type is GrantType.EU_STANDARD_GRANT:
             return (
                 f"https://cordis.europa.eu/project/rcn/{ quote_plus(grant_reference) }"
             )
 
-        return self.faker.uri()
+        return self.faker.uri()  # pragma: no cover

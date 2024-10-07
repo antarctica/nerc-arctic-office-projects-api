@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from faker.providers import BaseProvider
 
 localized = False
@@ -15,7 +16,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether an individual has an Orcid ID
         """
-        return self.random_element({True: 0.8, False: 0.2})
+        return self.random_element(OrderedDict({True: 0.8, False: 0.2}))
 
     def orcid_id(self) -> str:
         """
@@ -46,7 +47,7 @@ class Provider(BaseProvider):
         :rtype: bool
         :return: whether an individual has an avatar
         """
-        return self.random_element({True: 0.07, False: 0.93})
+        return self.random_element(OrderedDict({True: 0.07, False: 0.93}))
 
     def avatar(self) -> str:
         """
