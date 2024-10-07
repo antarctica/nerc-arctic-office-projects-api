@@ -90,11 +90,7 @@ test-app:
   before_script:
     - "poetry install"
   script:
-    - "poetry run flask test --test-runner junit"
-  artifacts:
-    paths:
-    reports:
-      junit: test-results.xml
+    - "poetry run pytest --cov-report=html --cov=arctic_office_projects_api tests"
 
 dependencies-app:
   stage: test

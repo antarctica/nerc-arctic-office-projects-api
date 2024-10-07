@@ -505,6 +505,8 @@ For example:
 
 ```shell
 $ flask import organisations resources/funder-organisations.json
+$ flask import organisations resources/people-organisations.json
+
 ```
 
 **Note:** The structure of the import file will be validated against the `resources/organisations-schema.json` JSON 
@@ -1299,50 +1301,15 @@ Tests are automatically ran on each commit through [Continuous Integration](#con
 
 It may be necesssary to create a test database in the app-db container called `app_test`
 
-To run tests manually:
-
-```shell
-$ docker-compose run -e FLASK_ENV=testing app flask test
 ```
 
-or
-```shell
-$ docker-compose run -e FLASK_ENV=testing app flask test --test-runner junit
-```
-
-or - shell into the Docker container and run:
-```shell
-FLASK_ENV=testing flask test --test-runner junit
-```
+### Pytest testing
+- `poetry run pytest tests`
 
 
-To run tests using PyCharm:
-
-* *Run* -> *Edit Configurations*
-* *Add New Configuration* -> *Python Tests* -> *Unittests*
-
-In *Configuration* tab:
-
-* Script path: `[absolute path to project]/tests`
-* Python interpreter: *Project interpreter* (*app* service in project Docker Compose)
-* Working directory: `[absolute path to project]`
-* Path mappings: `[absolute path to project]=/usr/src/app`
-
-**Note:** This configuration can be also be used to debug tests (by choosing *debug* instead of *run*).
-
-#### JUnit support
-
-To run integration tests to produce a JUnit compatible file, `test-results.xml`:
-
-```
-$ docker-compose run -e FLASK_ENV=testing app flask test --test-runner junit
-```
-
-#### Integration testing - databases
-
-Where the application database is needed, a separate test database (`app_test`) will be used to prevent touching 
-development data. [Database migrations](#database-migrations) and [Database seeding](#database-seeding) will be ran on
-each test to setup, populate and tear down the database for each test.
+For Coverage reports:
+- `poetry run pytest --cov-report=html --cov=arctic_office_projects_api tests`
+- Reports are generated in the htmlcov directory
 
 #### Integration testing - auth
 
