@@ -3,10 +3,8 @@ from flask import Flask
 from unittest.mock import patch
 
 # Import your CLI groups and commands
-from arctic_office_projects_api.commands import (
-    seeding_cli_group,
-    importing_cli_group
-)
+from arctic_office_projects_api.commands import seeding_cli_group, importing_cli_group
+
 
 # Create a test app factory
 @pytest.fixture
@@ -48,7 +46,9 @@ def test_seed_random_mock_projects(mock_seed_random, app):
 
 
 # Test import_categories_from_file
-@patch("arctic_office_projects_api.commands.import_category_terms_from_file_interactively")
+@patch(
+    "arctic_office_projects_api.commands.import_category_terms_from_file_interactively"
+)
 def test_import_categories_from_file(mock_import_categories, app):
     runner = app.test_cli_runner()  # Use app's CLI runner
     with app.app_context():  # Push the app context
@@ -61,14 +61,18 @@ def test_import_categories_from_file(mock_import_categories, app):
             result = runner.invoke(args=["import", "categories", "categories.json"])
 
             # Check if the import_category_terms_from_file_interactively function was called
-            mock_import_categories.assert_called_once_with(categories_file_path="categories.json")
+            mock_import_categories.assert_called_once_with(
+                categories_file_path="categories.json"
+            )
 
             # Check the CLI output
             assert result.exit_code == 0
 
 
 # Test import_organisations_from_file
-@patch("arctic_office_projects_api.commands.import_organisations_from_file_interactively")
+@patch(
+    "arctic_office_projects_api.commands.import_organisations_from_file_interactively"
+)
 def test_import_organisations_from_file(mock_import_organisations, app):
     runner = app.test_cli_runner()  # Use app's CLI runner
     with app.app_context():  # Push the app context
@@ -78,17 +82,23 @@ def test_import_organisations_from_file(mock_import_organisations, app):
             with open("organisations.json", "w") as f:
                 f.write("[]")
 
-            result = runner.invoke(args=["import", "organisations", "organisations.json"])
+            result = runner.invoke(
+                args=["import", "organisations", "organisations.json"]
+            )
 
             # Check if the import_organisations_from_file_interactively function was called
-            mock_import_organisations.assert_called_once_with(organisations_file_path="organisations.json")
+            mock_import_organisations.assert_called_once_with(
+                organisations_file_path="organisations.json"
+            )
 
             # Check the CLI output
             assert result.exit_code == 0
 
 
 # Test import_grant_from_provider
-@patch("arctic_office_projects_api.commands.import_gateway_to_research_grant_interactively")
+@patch(
+    "arctic_office_projects_api.commands.import_gateway_to_research_grant_interactively"
+)
 def test_import_grant_from_provider(mock_import_grant, app):
     runner = app.test_cli_runner()  # Use app's CLI runner
     with app.app_context():  # Push the app context

@@ -10,7 +10,10 @@ from marshmallow import post_dump
 
 # noinspection PyPackageRequirements
 from marshmallow.fields import Field
-from marshmallow_jsonapi.flask import Schema as _Schema, Relationship as _Relationship
+from marshmallow_jsonapi.flask import (
+    Schema as _Schema,
+    Relationship as _Relationship
+)
 
 # noinspection PyPackageRequirements
 from psycopg2.extras import DateRange
@@ -18,7 +21,8 @@ from psycopg2.extras import DateRange
 
 class Schema(_Schema):
     """
-    Custom base Marshmallow schema class, based on marshmallow_jsonapi default 'flask' class
+    Custom base Marshmallow schema class, based on marshmallow_jsonapi
+    default 'flask' class
 
     All schemas in this application should inherit from this class.
 
@@ -30,7 +34,8 @@ class Schema(_Schema):
 
     def __init__(self, *args, **kwargs):
         """
-        Overloaded implementation of the marshmallow_jsonapi default 'schema' class
+        Overloaded implementation of the marshmallow_jsonapi
+        default 'schema' class
 
         Differences include:
         - pagination support implemented as a schema option

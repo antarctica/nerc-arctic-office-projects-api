@@ -1,5 +1,3 @@
-import re
-import pytest
 from psycopg2.extras import DateRange
 from datetime import date, timedelta
 from faker import Faker
@@ -8,7 +6,7 @@ from arctic_office_projects_api.faker.providers.grant import (
     GrantType,
     GrantCurrency,
     GrantStatus,
-    UKRICouncil
+    UKRICouncil,
 )
 
 # Initialize Faker and Provider
@@ -27,13 +25,20 @@ def test_grant_currency_eu_standard_grant():
 
 def test_grant_currency_other_grant():
     currency = provider.grant_currency(GrantType.OTHER)
-    assert currency in [GrantCurrency.GBP, GrantCurrency.EUR, GrantCurrency.NOK, GrantCurrency.CAD]
+    assert currency in [
+        GrantCurrency.GBP,
+        GrantCurrency.EUR,
+        GrantCurrency.NOK,
+        GrantCurrency.CAD,
+    ]
 
 
 # Tests for grant_reference method
 def test_grant_reference_ukri_standard_grant():
-    reference = provider.grant_reference(GrantType.UKRI_STANDARD_GRANT, UKRICouncil.NERC)
-    assert reference.startswith('NE/')
+    reference = provider.grant_reference(
+        GrantType.UKRI_STANDARD_GRANT, UKRICouncil.NERC
+    )
+    assert reference.startswith("NE/")
 
 
 def test_grant_reference_eu_standard_grant():
@@ -74,12 +79,16 @@ def test_grant_status_active_with_no_end_date():
 
 
 def test_grant_status_active_with_future_end_date():
-    duration = DateRange(date.today() - timedelta(days=10), date.today() + timedelta(days=10))
+    duration = DateRange(
+        date.today() - timedelta(days=10), date.today() + timedelta(days=10)
+    )
     assert provider.grant_status(duration) == GrantStatus.Active
 
 
 def test_grant_status_closed():
-    duration = DateRange(date.today() - timedelta(days=365), date.today() - timedelta(days=10))
+    duration = DateRange(
+        date.today() - timedelta(days=365), date.today() - timedelta(days=10)
+    )
     assert provider.grant_status(duration) == GrantStatus.Closed
 
 
@@ -102,7 +111,7 @@ def test_grant_funder_other_grant():
 def test_grant_website_ukri_grant():
     reference = "ST/F006446/1"
     website = provider.grant_website(GrantType.UKRI_STANDARD_GRANT, reference)
-    assert website == f"https://gtr.ukri.org/projects?ref=ST%2FF006446%2F1"
+    assert website == "https://gtr.ukri.org/projects?ref=ST%2FF006446%2F1"
 
 
 def test_grant_website_eu_grant():

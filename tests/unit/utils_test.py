@@ -1,13 +1,10 @@
 from enum import Enum
-from iso3166 import countries as iso_countries
-import pytest
-from unittest.mock import patch, MagicMock
 from arctic_office_projects_api.utils import (
     conditional_decorator,
     generate_neutral_id,
-    generate_countries_enum,
-    healthcheck_db
+    generate_countries_enum
 )
+
 
 # Test for conditional_decorator
 def test_conditional_decorator():
@@ -25,6 +22,7 @@ def test_conditional_decorator():
 
     assert test_function_decorated() == "decorated"
 
+
 # Test for generate_neutral_id
 def test_generate_neutral_id():
     # Call the function
@@ -34,11 +32,14 @@ def test_generate_neutral_id():
     assert isinstance(neutral_id, str)
     assert len(neutral_id) == 26  # Length of a ULID
 
+
 def test_generate_countries_enum():
     countries_enum = generate_countries_enum(name="TestCountries")
 
     # Ensure countries_enum is indeed of type Enum
-    assert isinstance(countries_enum, type) and issubclass(countries_enum, Enum), "countries_enum is not a valid Enum class"
+    assert isinstance(countries_enum, type) and issubclass(
+        countries_enum, Enum
+    ), "countries_enum is not a valid Enum class"
 
     # Debug: print out the values in the generated enum
     print("Generated Countries Enum:")
@@ -56,5 +57,7 @@ def test_generate_countries_enum():
     assert countries_enum.CAN.value["iso_3166_alpha3-code"] == "CAN"
 
     assert hasattr(countries_enum, "GBR"), "Enum does not have GBR"
-    assert countries_enum.GBR.value["name"] == "United Kingdom of Great Britain and Northern Ireland"
+    assert (
+        countries_enum.GBR.value["name"] == "United Kingdom of Great Britain and Northern Ireland"
+    )
     assert countries_enum.GBR.value["iso_3166_alpha3-code"] == "GBR"
