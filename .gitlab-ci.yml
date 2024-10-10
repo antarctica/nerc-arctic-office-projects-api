@@ -81,7 +81,7 @@ image:
 test-app:
   stage: test
   services:
-  - name: postgres:11.1-alpine
+  - name: postgres:12.12-alpine
     alias: postgres
   variables:
     POSTGRES_DB: runner_db
