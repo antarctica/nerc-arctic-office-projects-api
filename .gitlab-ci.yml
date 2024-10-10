@@ -28,15 +28,6 @@
 
 # == Global settings ==
 
-services:
-  - name: postgres:11.1-alpine
-    alias: app-db
-    variables:
-      POSTGRES_DB: app_test
-      POSTGRES_USER: app
-      POSTGRES_PASSWORD: password
-      POSTGRES_HOST_AUTH_METHOD: trust
-
 stages:
   - build-base
   - test
@@ -89,15 +80,28 @@ image:
 
 test-app:
   stage: test
+  services:
+  - name: postgres:11.1-alpine
+    alias: postgres
   variables:
-    FLASK_ENV: development
-    SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app_test
+    POSTGRES_DB: app_test
+    POSTGRES_USER: app
+    POSTGRES_PASSWORD: password
+    POSTGRES_HOST_AUTH_METHOD: trust
   before_script:
-    - "apk add --no-cache postgresql-client"
-    - "poetry install"
-    - "psql -h app-db -U app -d app_test -f /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/docker/init.sql"
+    - export FLASK_APP=manage.py
+    - export FLASK_ENV=development
+    - export SQLALCHEMY_DATABASE_URI=postgresql://runner:password@postgres:5432/runner_db
+    - apk add --no-cache postgresql-client
+    - psql -h postgres -U runner -d runner_db -c "ALTER SYSTEM SET listen_addresses TO '*';"
+    - psql -h postgres -U runner -d runner_db -c "SELECT pg_reload_conf();"
+    - psql -h postgres -U runner -d runner_db < docker/init.sql
   script:
-    - "poetry run pytest --cov-report=html --cov=arctic_office_projects_api tests"
+    - poetry install --no-interaction --no-ansi
+    - poetry run flask db upgrade
+    - poetry run pytest --cov-report=html --cov=arctic_office_projects_api tests
+  only:
+    - master
 
 dependencies-app:
   stage: test
