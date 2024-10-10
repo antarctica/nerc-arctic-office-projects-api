@@ -62,6 +62,34 @@
       "ror-identifier": "https://api.ror.org/organizations?query=019w4f821",
       "acronym": "EU",
       "website": "https://europa.eu"
+    },
+    {
+      "name": "Fund for International Collaboration",
+      "grid-identifier": "",
+      "ror-identifier": "https://api.ror.org/organizations?query=001",
+      "acronym": "FIC",
+      "website": "https://www.ukri.org/what-we-do/browse-our-areas-of-investment-and-support/fund-for-international-collaboration/"
+    },
+    {
+      "name": "International Science and Partnerships Fund",
+      "grid-identifier": "",
+      "ror-identifier": "https://api.ror.org/organizations?query=002",
+      "acronym": "ISPF",
+      "website": "https://www.ukri.org/what-we-do/browse-our-areas-of-investment-and-support/international-science-partnerships-fund/"
+    },
+    {
+      "name": "Department for Science, Innovation and Technology",
+      "grid-identifier": "",
+      "ror-identifier": "https://api.ror.org/organizations?query=003",
+      "acronym": "DSIT",
+      "website": "https://www.gov.uk/government/organisations/department-for-science-innovation-and-technology"
+    },
+    {
+      "name": "Foreign Commonwealth Development Office",
+      "grid-identifier": "",
+      "ror-identifier": "https://api.ror.org/organizations?query=004",
+      "acronym": "FCDO",
+      "website": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office"
     }
   ]
 }

@@ -3,7 +3,7 @@ Agri-environmental science|gcmd.earthdata.nasa.gov/kms/concept/a956d045-3b12-441
 Animal Diseases|none
 Animal Science|none
 Archaeology|gcmd.earthdata.nasa.gov/kms/concept/bf703f22-9775-460d-86bd-149aaef1acde
-Area Studies|none
+Area Studies|gcmd.earthdata.nasa.gov/kms/concept/bc642bd1-d923-47a4-89fa-b99494881768
 Atomic & molecular physics|none
 Biomolecules & biochemistry|none
 Biomolecules & biochemistry|none
@@ -31,6 +31,7 @@ Instrument. sensor & detectors|none
 Law & legal studies|none
 Management & Business Studies|none
 Marine environments|gcmd.earthdata.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d
+Mathematics|gcmd.earthdata.nasa.gov/kms/concept/c94e9340-2fe5-4254-bcbd-8d8aaed45f6e
 Materials sciences|none
 Mathematical sciences|none
 Medical & health interface|gcmd.earthdata.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6
@@ -51,5 +52,5 @@ Statistics & Appl. Probability|none
 Terrest. & freshwater environ.|gcmd.earthdata.nasa.gov/kms/concept/91c64c46-d040-4daa-b26c-61952fdfaf50
 Tools, technologies & methods|gcmd.earthdata.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c
 Transport Ops & Management|none
-Visual arts|none
+Visual arts|gcmd.earthdata.nasa.gov/kms/concept/ae0ade63-4d8b-4908-9821-a2ec0bec85bc
 Wind Power|none
