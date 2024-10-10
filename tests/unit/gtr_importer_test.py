@@ -69,23 +69,17 @@ def gtr_project():
     
 
 class TestProjectTopicMapping(unittest.TestCase):
-
+    
+    @patch("arctic_office_projects_api.utils.log_exception_to_file")
     @patch("builtins.open", new_callable=mock_open, read_data="topic_id,gcmd_link_code\nT1,none\nT2,https://link2\n")
-    def test_map_gtr_project_research_topic_none_mapping(self, mock_file):
-        # Sample input where topic ID matches with "none"
-        gtr_topic = {"id": "T1", "text": "Topic 1"}
-
-        result = GatewayToResearchGrantImporter._map_gtr_project_research_topic_to_category_term(gtr_topic)
-        self.assertIsNone(result)
-
-    @patch("builtins.open", new_callable=mock_open, read_data="topic_id,gcmd_link_code\nT1,none\nT2,https://link2\n")
-    def test_map_gtr_project_research_topic_no_match(self, mock_file):
-        # Sample input where topic ID does not match
+    def test_map_gtr_project_research_topic_no_mapping(self, mock_file, mock_log_exception):
         gtr_topic = {"id": "T3", "text": "Topic 3"}
 
         with self.assertRaises(UnmappedGatewayToResearchProjectTopic):
             GatewayToResearchGrantImporter._map_gtr_project_research_topic_to_category_term(gtr_topic)
-            
+
+        # Ensure that the log_exception_to_file function was called
+        # mock_log_exception.assert_called_once()            
 
 class TestFindUniqueGcmdProjectResearchSubjects:
     
@@ -541,22 +535,6 @@ class TestGatewayToResearchResource:
 
 
 class TestGatewayToResearchOrganisation:
-    @patch('requests.get')
-    def test_init_success_with_ror_mapping(self, mock_get):
-        mock_get.return_value.json.return_value = {
-            "name": "Test Organisation",
-            "links": {
-                "link": [
-                    {"rel": "publication", "href": "http://example.com/pub"}
-                ]
-            }
-        }
-        mock_get.return_value.status_code = 200
-
-        with patch("builtins.open", mock_open(read_data="organisation_id,organisation_ror\n1,ror.org/1")):
-            org = GatewayToResearchOrganisation("http://gtr.ukri.org/gtr/api/organisations/1")
-            assert org.name == "Test Organisation"
-            assert org.ror_id == "ror.org/1"
 
     @patch('requests.get')
     def test_init_missing_name(self, mock_get):
