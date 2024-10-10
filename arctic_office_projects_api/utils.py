@@ -63,3 +63,7 @@ def healthcheck_db() -> bool:
         return False  # pragma: no cover
 
     return True
+
+def log_exception_to_file(exception_info):
+    with open("arctic_office_projects_api/bulk_importer/exception_log.txt", "a") as f:
+        f.write(exception_info + "\n")
