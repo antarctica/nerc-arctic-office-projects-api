@@ -39,8 +39,8 @@ class Config(object):
 
     APP_PAGE_SIZE = int(os.getenv('APP_PAGE_SIZE') or 10)
 
-    ENTRA_AUTH_CLIENT_ID=os.getenv('ENTRA_AUTH_CLIENT_ID') or None
-    ENTRA_AUTH_OIDC_ENDPOINT=os.getenv('ENTRA_AUTH_OIDC_ENDPOINT') or None
+    ENTRA_AUTH_CLIENT_ID = os.getenv('ENTRA_AUTH_CLIENT_ID') or None
+    ENTRA_AUTH_OIDC_ENDPOINT = os.getenv('ENTRA_AUTH_OIDC_ENDPOINT') or None
 
     SENTRY_CONFIG = {
         'integrations': [FlaskIntegration()],
