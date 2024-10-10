@@ -87,9 +87,10 @@ test-app:
   variables:
     FLASK_ENV: development
     SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app_test
-      - "apk add --no-cache postgresql-client"
-      - "poetry install"
-      - "psql -h app-db -U app -d app_test -f /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/docker/init.sql"
+  before_script:
+    - "apk add --no-cache postgresql-client"
+    - "poetry install"
+    - "psql -h app-db -U app -d app_test -f /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/docker/init.sql"
   script:
     - "poetry run pytest --cov-report=html --cov=arctic_office_projects_api tests"
 
