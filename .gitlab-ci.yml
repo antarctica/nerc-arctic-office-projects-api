@@ -31,6 +31,11 @@
 services:
   - name: postgres:11.1-alpine
     alias: app-db
+    variables:
+      POSTGRES_DB: app_test
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
 
 stages:
   - build-base
