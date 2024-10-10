@@ -1,5 +1,6 @@
 import requests
 import csv
+import traceback
 
 from datetime import date, datetime, timezone
 from typing import Dict, Optional, List
@@ -16,7 +17,7 @@ from sqlalchemy_utils import Ltree
 
 from arctic_office_projects_api.errors import AppException
 from arctic_office_projects_api.extensions import db
-from arctic_office_projects_api.utils import generate_neutral_id
+from arctic_office_projects_api.utils import generate_neutral_id, log_exception_to_file
 from arctic_office_projects_api.models import (
     Categorisation,
     CategoryScheme,
@@ -199,6 +200,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         try:
             with open(csv_file, "r", newline="") as csvfile:
                 reader = csv.DictReader(csvfile)
+                next(reader, None)  # skip the headers
                 for row in reader:
                     _ror_dict = {
                         "organisation_uri": gtr_path + row["organisation_id"],
@@ -903,9 +905,10 @@ class GatewayToResearchGrantImporter:
                 research_subject_to_update.category_scheme = CategoryScheme.query.filter_by(
                     namespace="https://gtr.ukri.org/resources/classificationlists.html"
                 ).one()
-                print("GTR research_subject updated")
+                print("GTR research_subject updated", research_subject_to_update.name, research_subject_to_update.scheme_identifier)
             # Otherwise add them
             else:
+                print("Add new category term:", term["text"], term["id"])
                 category_term_resource = CategoryTerm(
                     neutral_id=generate_neutral_id(),
                     scheme_identifier=term["id"],
@@ -915,14 +918,16 @@ class GatewayToResearchGrantImporter:
                         namespace="https://gtr.ukri.org/resources/classificationlists.html"
                     ).one(),
                 )
-                print("GTR research_subject added")
+                print("GTR research_subject added", category_term_resource.name, category_term_resource.neutral_id)
                 db.session.add(category_term_resource)
+                db.session.commit()
 
         for term in project.research_topics:
             # If the topics exist - update them
             if db.session.query(
                 exists().where(CategoryTerm.scheme_identifier == term["id"])
             ).scalar():
+                
                 research_topic_to_update = CategoryTerm.query.filter_by(
                     scheme_identifier=term["id"]
                 ).one()
@@ -933,7 +938,7 @@ class GatewayToResearchGrantImporter:
                 research_topic_to_update.category_scheme = CategoryScheme.query.filter_by(
                     namespace="https://gtr.ukri.org/resources/classificationlists.html"
                 ).one()
-                print("GTR research_topic updated")
+                # print("GTR research_topic updated", research_topic_to_update.name, research_subject_to_update.scheme_identifier)
             # Otherwise add them
             else:
                 category_term_resource = CategoryTerm(
@@ -945,8 +950,9 @@ class GatewayToResearchGrantImporter:
                         namespace="https://gtr.ukri.org/resources/classificationlists.html"
                     ).one(),
                 )
-                print("GTR research_topic added")
+                print("GTR research_topic added", category_term_resource.name, category_term_resource.neutral_id)
                 db.session.add(category_term_resource)
+                db.session.commit()
 
     def _link_gtr_category_terms(self, project):
 
@@ -991,24 +997,28 @@ class GatewayToResearchGrantImporter:
         # Get the project
         project = Project.query.filter_by(id=allocation.project_id).first()
 
+        # print("project id: ", project_id)
+
         project_category_terms = Categorisation.query.filter_by(
             project_id=project_id
         ).all()
 
         # If terms exist in the database see if they need altering
-        # create two lists. 1. exsisting terms. 2. incoming terms.
+        # create two lists. 1: exsisting terms. 2: incoming terms.
         if project_category_terms:
 
             existing_terms = []
             incoming_terms = []
 
             for project_category_term in project_category_terms:
+
                 category_term = CategoryTerm.query.filter_by(
                     id=project_category_term.category_term_id
                 ).one()
                 existing_terms.append(category_term.scheme_identifier)
 
             for category_term_scheme_identifier in category_term_scheme_identifiers:
+
                 incoming_terms.append(category_term_scheme_identifier)
 
             # Compare the lists for adding
@@ -1029,7 +1039,7 @@ class GatewayToResearchGrantImporter:
                 print("linking topic/subject", category_term_scheme_identifier)
 
             # Compare the lists for removing
-            # incoming_terms.pop() # Pop off an incoming record to test if this works.
+            # incoming_terms.pop() # Debug: pop off an incoming record to test if this works.
             incoming = set(incoming_terms)
             missing_in_incoming_remove = [
                 x for x in existing_terms if x not in incoming
@@ -1046,23 +1056,29 @@ class GatewayToResearchGrantImporter:
                 ).delete()
                 print("unlinking topic/subject", category_term_scheme_identifier)
 
-        # Otherwise this is a new grant import so link the categories
+        # Otherwise this is a new grant import, so link the categories
         else:
             for category_term_scheme_identifier in category_term_scheme_identifiers:
-                # Save to category terms link table - links projects to cat terms
-                if category_term_scheme_identifier != "none":
-                    db.session.add(
-                        Categorisation(
-                            neutral_id=generate_neutral_id(),
-                            project=project,
-                            category_term=CategoryTerm.query.filter_by(
-                                scheme_identifier=category_term_scheme_identifier
-                            ).one(),
+
+                # For edge cases where URLs are added instead of category terms
+                URL_check = category_term_scheme_identifier.split("/")
+
+                # Save to category terms link table - links projects to category terms
+                if (category_term_scheme_identifier != "none"):
+                    if (URL_check[0] != "https:"):
+                        db.session.add(
+                            Categorisation(
+                                neutral_id=generate_neutral_id(),
+                                project=project,
+                                category_term=CategoryTerm.query.filter_by(
+                                    scheme_identifier=category_term_scheme_identifier
+                                ).one(),
+                            )
                         )
-                    )
-                    print(
-                        "GTR topic/subject link added", category_term_scheme_identifier
-                    )
+                        
+                        print(
+                            "GTR topic/subject link added:", category_term_scheme_identifier
+                        )
 
     def _find_gtr_project_identifier(self, identifiers: Dict[str, List[str]]) -> str:
         """
@@ -1201,6 +1217,7 @@ class GatewayToResearchGrantImporter:
         """
         category_term_scheme_identifiers = []
         for category in gtr_research_items:
+            # print("GTR_item_term", category)
             category_term_scheme_identifier = category["id"]
             if category_term_scheme_identifier is not None:
                 if (
@@ -1293,10 +1310,12 @@ class GatewayToResearchGrantImporter:
         try:
             with open(csv_file, "r", newline="") as csvfile:
                 reader = csv.DictReader(csvfile)
+                next(reader, None)  # skip the headers
                 for row in reader:
                     key = row["topic_id"]
-                    if row["gcmd_link_code"] != "none":
-                        value = protocol + row["gcmd_link_code"]
+                    gcmd_code = row["gcmd_link_code"]
+                    if gcmd_code and gcmd_code != "none":
+                        value = protocol + gcmd_code
                     else:
                         value = "none"
                     topics_list.append({key: value})
@@ -1432,12 +1451,12 @@ def import_gateway_to_research_grant_interactively(
             )
             return False
         app.logger.info(
-            f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+            f"found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
             f"Importing"
         )
         echo(
             style(
-                f"... found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+                f"found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
                 f"Importing"
             )
         )
@@ -1453,45 +1472,37 @@ def import_gateway_to_research_grant_interactively(
             )
         )
     except UnmappedGatewayToResearchOrganisation as e:
-        app.logger.error(
-            f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]"
-        )
-        echo(
-            style(
-                f"Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]",
-                fg="red",
-            )
-        )
+        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]"
+        app.logger.error(error_msg)
+        echo(style(error_msg, fg="red"))
+        
+        # Log exception details to a file
+        log_exception_to_file(error_msg)
+
     except UnmappedGatewayToResearchPerson as e:
-        app.logger.error(
-            f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]"
-        )
-        echo(
-            style(
-                f"Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]",
-                fg="red",
-            )
-        )
+        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]"
+        app.logger.error(error_msg)
+        echo(style(error_msg, fg="red"))
+
+        # Log exception details to a file
+        log_exception_to_file(error_msg)
+
     except UnmappedGatewayToResearchProjectTopic as e:
-        app.logger.error(
-            f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]"
-        )
-        echo(
-            style(
-                f"Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]",
-                fg="red",
-            )
-        )
+        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]"
+        app.logger.error(error_msg)
+        echo(style(error_msg, fg="red"))
+
+        # Log exception details to a file
+        log_exception_to_file(error_msg)
+
     except UnmappedGatewayToResearchProjectSubject as e:
-        app.logger.error(
-            f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]"
-        )
-        echo(
-            style(
-                f"Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]",
-                fg="red",
-            )
-        )
+        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]"
+        app.logger.error(error_msg)
+        echo(style(error_msg, fg="red"))
+
+        # Log exception details to a file
+        log_exception_to_file(error_msg)
+
     except Exception as e:
         db.session.rollback()
         # Remove any added, but non-committed, entities
