@@ -89,7 +89,6 @@ test-app:
     SQLALCHEMY_DATABASE_URI: postgresql://app:password@app-db:5432/app_test
   before_script:
     - "poetry install"
-    - "until pg_isready -h db -p 5432; do sleep 1; done"
     - "apt-get update && apt-get install -y postgresql-client"
     - "psql -h db -U user -d mydb -f /builds/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/docker/init.sql"
   script:
