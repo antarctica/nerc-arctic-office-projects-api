@@ -62,6 +62,7 @@ class GrantStatus(Enum):
     Terminated = {"title": "terminated"}
     Pending = {"title": "pending"}
 
+
 class Provider(BaseProvider):
     faker = Faker()
 
@@ -85,8 +86,7 @@ class Provider(BaseProvider):
         :return: member of the GrantCurrency enumerated class, representing the currency of the funds for a grant
         """
         if (
-            grant_type is GrantType.UKRI_LARGE_GRANT
-            or grant_type is GrantType.UKRI_STANDARD_GRANT
+            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
         ):
             return GrantCurrency.GBP
         if grant_type is GrantType.EU_STANDARD_GRANT:
@@ -185,8 +185,7 @@ class Provider(BaseProvider):
 
     def grant_funder(self, grant_type: GrantType) -> Optional[str]:
         if (
-            grant_type is GrantType.UKRI_LARGE_GRANT
-            or grant_type is GrantType.UKRI_STANDARD_GRANT
+            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
         ):
             return UKRICouncil(
                 self.random_element(
@@ -226,8 +225,7 @@ class Provider(BaseProvider):
         :return: fake grant website
         """
         if (
-            grant_type is GrantType.UKRI_LARGE_GRANT
-            or grant_type is GrantType.UKRI_STANDARD_GRANT
+            grant_type is GrantType.UKRI_LARGE_GRANT or grant_type is GrantType.UKRI_STANDARD_GRANT
         ):
             return f"https://gtr.ukri.org/projects?ref={ quote_plus(grant_reference) }"
         elif grant_type is GrantType.EU_STANDARD_GRANT:

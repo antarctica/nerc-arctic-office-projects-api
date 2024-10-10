@@ -1,6 +1,5 @@
 import requests
 import csv
-import traceback
 
 from datetime import date, datetime, timezone
 from typing import Dict, Optional, List
@@ -157,8 +156,7 @@ class GatewayToResearchResource:
 
             link_base_url = link["href"].split(":")
             if (
-                link_base_url[1]
-                == "//internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com"
+                link_base_url[1] == "//internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com"
             ):
                 link_href = link["href"].replace(
                     "http://internal-gtr-tomcat-alb-611010599.eu-west-2.elb.amazonaws.com:8080",
@@ -243,6 +241,7 @@ class GatewayToResearchFunder(GatewayToResearchOrganisation):
 
     All logic for this resource is defined in it's parent class.
     """
+
     pass
 
 
@@ -686,7 +685,9 @@ class GatewayToResearchGrantImporter:
         """
         self.grant_reference = gtr_grant_reference
         self.gtr_project_id = gtr_project_id
-        self.lead_project = int(lead_project) if lead_project is not None else 0  # Handle NoneType safely
+        self.lead_project = (
+            int(lead_project) if lead_project is not None else 0
+        )  # Handle NoneType safely
         self.grant_exists = False
 
     def exists(self) -> bool:
@@ -905,7 +906,11 @@ class GatewayToResearchGrantImporter:
                 research_subject_to_update.category_scheme = CategoryScheme.query.filter_by(
                     namespace="https://gtr.ukri.org/resources/classificationlists.html"
                 ).one()
-                print("GTR research_subject updated", research_subject_to_update.name, research_subject_to_update.scheme_identifier)
+                print(
+                    "GTR research_subject updated",
+                    research_subject_to_update.name,
+                    research_subject_to_update.scheme_identifier,
+                )
             # Otherwise add them
             else:
                 print("Add new category term:", term["text"], term["id"])
@@ -918,7 +923,11 @@ class GatewayToResearchGrantImporter:
                         namespace="https://gtr.ukri.org/resources/classificationlists.html"
                     ).one(),
                 )
-                print("GTR research_subject added", category_term_resource.name, category_term_resource.neutral_id)
+                print(
+                    "GTR research_subject added",
+                    category_term_resource.name,
+                    category_term_resource.neutral_id,
+                )
                 db.session.add(category_term_resource)
                 db.session.commit()
 
@@ -927,7 +936,7 @@ class GatewayToResearchGrantImporter:
             if db.session.query(
                 exists().where(CategoryTerm.scheme_identifier == term["id"])
             ).scalar():
-                
+
                 research_topic_to_update = CategoryTerm.query.filter_by(
                     scheme_identifier=term["id"]
                 ).one()
@@ -950,7 +959,11 @@ class GatewayToResearchGrantImporter:
                         namespace="https://gtr.ukri.org/resources/classificationlists.html"
                     ).one(),
                 )
-                print("GTR research_topic added", category_term_resource.name, category_term_resource.neutral_id)
+                print(
+                    "GTR research_topic added",
+                    category_term_resource.name,
+                    category_term_resource.neutral_id,
+                )
                 db.session.add(category_term_resource)
                 db.session.commit()
 
@@ -1064,8 +1077,8 @@ class GatewayToResearchGrantImporter:
                 URL_check = category_term_scheme_identifier.split("/")
 
                 # Save to category terms link table - links projects to category terms
-                if (category_term_scheme_identifier != "none"):
-                    if (URL_check[0] != "https:"):
+                if category_term_scheme_identifier != "none":
+                    if URL_check[0] != "https:":
                         db.session.add(
                             Categorisation(
                                 neutral_id=generate_neutral_id(),
@@ -1075,9 +1088,10 @@ class GatewayToResearchGrantImporter:
                                 ).one(),
                             )
                         )
-                        
+
                         print(
-                            "GTR topic/subject link added:", category_term_scheme_identifier
+                            "GTR topic/subject link added:",
+                            category_term_scheme_identifier,
                         )
 
     def _find_gtr_project_identifier(self, identifiers: Dict[str, List[str]]) -> str:
@@ -1386,14 +1400,14 @@ class GatewayToResearchGrantImporter:
                 if gtr_research_subject["text"] == key:
                     # print(value)
                     return value
-                # raise UnmappedGatewayToResearchProjectSubject(
-                #     meta={
-                #         "gtr_research_subject": {
-                #             "id": gtr_research_subject["id"],
-                #             "name": gtr_research_subject["text"],
-                #         }
-                #     }
-                # )
+                raise UnmappedGatewayToResearchProjectSubject(
+                    meta={
+                        "gtr_research_subject": {
+                            "id": gtr_research_subject["id"],
+                            "name": gtr_research_subject["text"],
+                        }
+                    }
+                )
 
 
 def import_gateway_to_research_grant_interactively(
@@ -1475,7 +1489,7 @@ def import_gateway_to_research_grant_interactively(
         error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]"
         app.logger.error(error_msg)
         echo(style(error_msg, fg="red"))
-        
+
         # Log exception details to a file
         log_exception_to_file(error_msg)
 

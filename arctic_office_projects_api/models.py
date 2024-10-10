@@ -718,7 +718,9 @@ class CategoryScheme(db.Model):
     category_terms = db.relationship("CategoryTerm", back_populates="category_scheme")
 
     def __repr__(self):
-        return f"<CategoryScheme { self.neutral_id } ({ self.name })>"  # pragma: no cover
+        return (
+            f"<CategoryScheme { self.neutral_id } ({ self.name })>"  # pragma: no cover
+        )
 
 
 class CategoryTerm(db.Model):

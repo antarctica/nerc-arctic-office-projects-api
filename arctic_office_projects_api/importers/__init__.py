@@ -34,7 +34,7 @@ def import_category_terms_from_file_interactively(categories_file_path: str):
         with open(categories_file_path, "r") as categories_file, open(
             Path("resources/categories-schema.json"), "r"
         ) as categories_schema_file:
-            
+
             categories_schema = json.load(categories_schema_file)
             categories_data = json.load(categories_file)
             validate(instance=categories_data, schema=categories_schema)
@@ -62,13 +62,21 @@ def import_category_terms_from_file_interactively(categories_file_path: str):
                     root_concepts=scheme["root-concepts"],
                 )
                 if "acronym" in scheme and scheme["acronym"] is not None:
-                    category_scheme_resource.acronym = scheme["acronym"]  # pragma: no cover
+                    category_scheme_resource.acronym = scheme[
+                        "acronym"
+                    ]  # pragma: no cover
                 if "description" in scheme and scheme["description"] is not None:
-                    category_scheme_resource.description = scheme["description"]  # pragma: no cover
+                    category_scheme_resource.description = scheme[
+                        "description"
+                    ]  # pragma: no cover
                 if "version" in scheme and scheme["version"] is not None:
-                    category_scheme_resource.version = scheme["version"]  # pragma: no cover
+                    category_scheme_resource.version = scheme[
+                        "version"
+                    ]  # pragma: no cover
                 if "revision" in scheme and scheme["revision"] is not None:
-                    category_scheme_resource.revision = scheme["revision"]  # pragma: no cover
+                    category_scheme_resource.revision = scheme[
+                        "revision"
+                    ]  # pragma: no cover
                 db.session.add(category_scheme_resource)
                 imported_schemes += 1
 
@@ -99,17 +107,27 @@ def import_category_terms_from_file_interactively(categories_file_path: str):
                     ).one(),
                 )
                 if "notation" in term and term["notation"] is not None:
-                    category_term_resource.scheme_notation = term["notation"]  # pragma: no cover
+                    category_term_resource.scheme_notation = term[
+                        "notation"
+                    ]  # pragma: no cover
                 if "alt-labels" in term and len(term["alt-labels"]) > 0:
-                    category_term_resource.aliases = term["alt-labels"]  # pragma: no cover
+                    category_term_resource.aliases = term[
+                        "alt-labels"
+                    ]  # pragma: no cover
                 if "definitions" in term and len(term["definitions"]) > 0:
-                    category_term_resource.definitions = term["definitions"]  # pragma: no cover
+                    category_term_resource.definitions = term[
+                        "definitions"
+                    ]  # pragma: no cover
                 if "examples" in term and len(term["examples"]) > 0:
-                    category_term_resource.examples = term["examples"]  # pragma: no cover
+                    category_term_resource.examples = term[
+                        "examples"
+                    ]  # pragma: no cover
                 if "notes" in term and len(term["notes"]) > 0:
                     category_term_resource.notes = term["notes"]  # pragma: no cover
                 if "scope-notes" in term and len(term["scope-notes"]) > 0:
-                    category_term_resource.scope_notes = term["scope-notes"]  # pragma: no cover
+                    category_term_resource.scope_notes = term[
+                        "scope-notes"
+                    ]  # pragma: no cover
 
                 db.session.add(category_term_resource)
                 imported_categories += 1
@@ -146,7 +164,7 @@ def import_organisations_from_file_interactively(organisations_file_path: str):
         with open(organisations_file_path, "r") as organisations_file, open(
             Path("resources/organisations-schema.json"), "r"
         ) as organisations_schema_file:
-            
+
             print(f"organisations_schema_file: {organisations_schema_file}")
 
             organisations_schema = json.load(organisations_schema_file)
@@ -182,7 +200,7 @@ def import_organisations_from_file_interactively(organisations_file_path: str):
                     organisation_resource.website = organisation["website"]
                 if "logo-url" in organisation and organisation["version"] is not None:
                     organisation_resource.logo_url = organisation["logo-url"]
-                    
+
                 db.session.add(organisation_resource)
                 imported_organisations += 1
 

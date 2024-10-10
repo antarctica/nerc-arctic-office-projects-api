@@ -198,22 +198,34 @@ class Schema(_Schema):
                     "A resource linkage can't be returned for multiple resources"
                 )
 
-            if self.resource_linkage in response["data"]["relationships"]:  # pragma: no cover
-                return response["data"]["relationships"][self.resource_linkage]  # pragma: no cover
+            if (
+                self.resource_linkage in response["data"]["relationships"]
+            ):  # pragma: no cover
+                return response["data"]["relationships"][
+                    self.resource_linkage
+                ]  # pragma: no cover
 
-            raise KeyError(f"No relationship found for '{ self.resource_linkage }'")  # pragma: no cover
+            raise KeyError(
+                f"No relationship found for '{ self.resource_linkage }'"
+            )  # pragma: no cover
 
         if self.related_resource is not None:
             # Inflect related resource so it can be found in pre-generated output
-            related_resource = self.related_resource.replace("_", "-")  # pragma: no cover
+            related_resource = self.related_resource.replace(
+                "_", "-"
+            )  # pragma: no cover
 
             if many:  # pragma: no cover
                 raise RuntimeError(  # pragma: no cover
                     "A related resource response can't be returned for multiple resources"
                 )
 
-            if related_resource in response["data"]["relationships"]:  # pragma: no cover
-                if "links" in response["data"]["relationships"][related_resource]:  # pragma: no cover
+            if (
+                related_resource in response["data"]["relationships"]
+            ):  # pragma: no cover
+                if (
+                    "links" in response["data"]["relationships"][related_resource]
+                ):  # pragma: no cover
                     if (  # pragma: no cover
                         "related"
                         in response["data"]["relationships"][related_resource]["links"]
@@ -232,14 +244,20 @@ class Schema(_Schema):
                         if "included" in response:  # pragma: no cover
                             _response["data"] = response["included"]  # pragma: no cover
                             if not self.many_related:  # pragma: no cover
-                                _response["data"] = _response["data"][0]  # pragma: no cover
+                                _response["data"] = _response["data"][
+                                    0
+                                ]  # pragma: no cover
 
                         return _response  # pragma: no cover
                     raise KeyError(  # pragma: no cover
                         f"No related resource link found for '{related_resource}' relationship"
                     )
-                raise KeyError(f"No links found for '{related_resource}' relationship")  # pragma: no cover
-            raise KeyError(f"No relationship found for '{related_resource}'")  # pragma: no cover
+                raise KeyError(
+                    f"No links found for '{related_resource}' relationship"
+                )  # pragma: no cover
+            raise KeyError(
+                f"No relationship found for '{related_resource}'"
+            )  # pragma: no cover
 
         return response
 
@@ -525,10 +543,12 @@ class CurrencyField(Field):
         :return: a numeric value is combined with currency unit
         """
         if value is None:
-            return None
+            return None  # pragma: no cover
 
         if "currency" not in self.metadata:
-            raise KeyError("Missing currency unit in field metadata")  # pragma: no cover
+            raise KeyError(
+                "Missing currency unit in field metadata"
+            )  # pragma: no cover
         currency = getattr(obj, self.metadata["currency"])
 
         if currency is None:
