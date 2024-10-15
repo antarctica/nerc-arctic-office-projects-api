@@ -1286,6 +1286,7 @@ class GatewayToResearchGrantImporter:
         """
         category_term_scheme_identifiers = []
         for category in gtr_research_subjects:
+            # print("GTR Category:", category)
             category_term_scheme_identifier = (
                 self._map_gtr_project_research_subject_to_category_term(category)
             )
@@ -1348,7 +1349,7 @@ class GatewayToResearchGrantImporter:
                         return None
                     else:
                         return value
-
+        # raise first after for loop
         raise UnmappedGatewayToResearchProjectTopic(
             meta={
                 "gtr_research_topic": {
@@ -1397,17 +1398,19 @@ class GatewayToResearchGrantImporter:
 
         for subject in subjects_list:
             for key, value in subject.items():
+                # print("From file:", key)
+                # print("Passed in:", gtr_research_subject["text"])
                 if gtr_research_subject["text"] == key:
-                    # print(value)
                     return value
-                raise UnmappedGatewayToResearchProjectSubject(
-                    meta={
-                        "gtr_research_subject": {
-                            "id": gtr_research_subject["id"],
-                            "name": gtr_research_subject["text"],
-                        }
-                    }
-                )
+        # raise after first for loop
+        raise UnmappedGatewayToResearchProjectSubject(
+            meta={
+                "gtr_research_subject": {
+                    "id": gtr_research_subject["id"],
+                    "name": gtr_research_subject["text"],
+                }
+            }
+        )
 
 
 def import_gateway_to_research_grant_interactively(
@@ -1516,6 +1519,7 @@ def import_gateway_to_research_grant_interactively(
 
         # Log exception details to a file
         log_exception_to_file(error_msg)
+        print(e.meta['gtr_research_subject']['name'])
 
     except Exception as e:
         db.session.rollback()
