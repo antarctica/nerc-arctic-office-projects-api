@@ -61,7 +61,7 @@ class TestConfig(Config):
 
     LOGGING_LEVEL = logging.DEBUG
 
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_TEST_DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
 
     PREFERRED_URL_SCHEME = os.getenv('PREFERRED_URL_SCHEME') or 'http'
 
