@@ -1,56 +1,65 @@
 subject_text|gcmd_link_code
+Accelerator R&D|none
 Agri-environmental science|gcmd.earthdata.nasa.gov/kms/concept/a956d045-3b12-441c-8a18-fac7d33b2b4e
-Animal Diseases|none
-Animal Science|none
+Animal Diseases|gcmd.earthdata.nasa.gov/kms/concept/e749bafe-9a0a-42cc-bed8-9b42e3e088c8
+Animal Science|gcmd.earthdata.nasa.gov/kms/concept/b41894fa-2e3e-475b-b8f0-b6ffdd2d6e9c
+Animal science|gcmd.earthdata.nasa.gov/kms/concept/b41894fa-2e3e-475b-b8f0-b6ffdd2d6e9c
 Archaeology|gcmd.earthdata.nasa.gov/kms/concept/bf703f22-9775-460d-86bd-149aaef1acde
 Area Studies|gcmd.earthdata.nasa.gov/kms/concept/bc642bd1-d923-47a4-89fa-b99494881768
-Atomic & molecular physics|none
-Biomolecules & biochemistry|none
-Biomolecules & biochemistry|none
-Chemical measurement|none
-Civil eng. & built environment|none
+Atomic & molecular physics|gcmd.earthdata.nasa.gov/kms/concept/
+Atmospheric phys. & chemistry|gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a
+Bioengineering|gcmd.earthdata.nasa.gov/kms/concept/fbf35f5b-c57b-49c9-bdd6-1db3dfec8a08
+Biomolecules & biochemistry|a4be9662-1407-4b13-bfc8-345550658641
+Chemical measurement|gcmd.earthdata.nasa.gov/kms/concept/3720d245-2e89-4780-9a45-c57ec1fd4d24
+Civil eng. & built environment|gcmd.earthdata.nasa.gov/kms/concept/d99890cc-fd13-412d-aca9-2411513ff9a7
 Climate and climate change|gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a
 Climate & Climate Change|gcmd.earthdata.nasa.gov/kms/concept/c47f6052-634e-40ef-a5ac-13f69f6f4c2a
-Construction Ops & Management|none
-Cultural & museum studies|none
-Cultural and Anthrop Geography|none
-Development studies|none
+Construction Ops & Management|gcmd.earthdata.nasa.gov/kms/concept/82151dba-70d2-4ccd-b07b-6b436578079c
+Cultural & museum studies|gcmd.earthdata.nasa.gov/kms/concept/24b7bc59-3f10-4a0b-b9c1-92ae10feb007
+Cultural and Anthrop Geography|gcmd.earthdata.nasa.gov/kms/concept/57d05ad5-78be-4b86-b6e6-9d880cce3028
+Development studies|gcmd.earthdata.nasa.gov/kms/concept/74762d82-f315-470c-845d-9a8978870b8e
+Earth Surface Processes|gcmd.earthdata.nasa.gov/kms/concept/e9f67a66-e9fc-435c-b720-ae32a2c3d8f5
 Ecol, biodivers. & systematics|gcmd.earthdata.nasa.gov/kms/concept/f1a25060-330c-4f84-9633-ed59ae8c64bf
-Energy|none
-Energy Storage|none
-Environmental Engineering|none
-Environmental planning|none
+Energy|gcmd.earthdata.nasa.gov/kms/concept/b73cee46-8e2c-4df9-b1ed-7f0aa98a04ac
+Energy Storage|gcmd.earthdata.nasa.gov/kms/concept/b73cee46-8e2c-4df9-b1ed-7f0aa98a04ac
+Environmental Engineering|gcmd.earthdata.nasa.gov/kms/concept/d81b77be-0177-4e26-942c-aa911239482d
+Environmental engineering|gcmd.earthdata.nasa.gov/kms/concept/d81b77be-0177-4e26-942c-aa911239482d
+Environmental Planning|gcmd.earthdata.nasa.gov/kms/concept/d81b77be-0177-4e26-942c-aa911239482d
+Environmental planning|gcmd.earthdata.nasa.gov/kms/concept/d81b77be-0177-4e26-942c-aa911239482d
 Facility Development|none
-Food science & nutrition|none
-Genetics & development|none
+Food science & nutrition|gcmd.earthdata.nasa.gov/kms/concept/b98f3a77-397d-41d7-9507-e7a3e47210b1
+Genetics & development|gcmd.earthdata.nasa.gov/kms/concept/f1672e84-97e0-44e5-b425-8921696775ad
 Geosciences|gcmd.earthdata.nasa.gov/kms/concept/2b9ad978-d986-4d63-b477-0f5efc8ace72
-History|none
+Glacial & Cryospheric Systems|gcmd.earthdata.nasa.gov/kms/concept/76b8c21c-c221-4724-86ef-c07222cb152b
+History|gcmd.earthdata.nasa.gov/kms/concept/2a5f2203-e881-42e8-b6b0-86ab0f6b7616
 Human Geography|gcmd.earthdata.nasa.gov/kms/concept/fb93d937-c17c-45d0-a9e3-ca5c8a800ca8
 Info. & commun. Technol.|gcmd.earthdata.nasa.gov/kms/concept/d4313915-2d24-424c-a171-30ee9a6f4bb5
-Instrument. sensor & detectors|none
-Law & legal studies|none
-Management & Business Studies|none
+Instrument. sensor & detectors|gcmd.earthdata.nasa.gov/kms/concept/b2140059-b3ca-415c-b0a7-3e142783ffe8
+Law & legal studies|gcmd.earthdata.nasa.gov/kms/concept/22282ac4-97a1-4c21-a096-d813b7a6bc02
+Management & Business Studies|gcmd.earthdata.nasa.gov/kms/concept/fbf13798-2bcd-4ae7-99f9-a4b69dd425c1
 Marine environments|gcmd.earthdata.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d
 Mathematics|gcmd.earthdata.nasa.gov/kms/concept/c94e9340-2fe5-4254-bcbd-8d8aaed45f6e
-Materials sciences|none
-Mathematical sciences|none
+Materials sciences|gcmd.earthdata.nasa.gov/kms/concept/
+Mathematical sciences|gcmd.earthdata.nasa.gov/kms/concept/
 Medical & health interface|gcmd.earthdata.nasa.gov/kms/concept/da2c70fd-d92b-45be-b159-b2c10cb387c6
 Microbial sciences|gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5
+Ocean Circulation|gcmd.earthdata.nasa.gov/kms/concept/5273c8c2-d30b-4666-b2d5-0388ce2741d0
 Omic sciences & technologies|none
-Operations Management|none
-Planetary science|none
+Operations Management|gcmd.earthdata.nasa.gov/kms/concept/82151dba-70d2-4ccd-b07b-6b436578079c
+Optics, photonics & lasers|gcmd.earthdata.nasa.gov/kms/concept/8143e95e-a438-4a2a-82b2-6d7ae079fba7
+Planetary science|gcmd.earthdata.nasa.gov/kms/concept/e9f67a66-e9fc-435c-b720-ae32a2c3d8f5
 Plant & crop science|gcmd.earthdata.nasa.gov/kms/concept/f1c35c74-0b10-46de-9c06-efeda92d383a
-Pollution, waste & resources|none
-Science-Based Archaeology|none
-Social Anthropology|none
-Social Geography|none
-Social Policy|none
-Sociology|none
-Solar & terrestrial physics|none
-Solar Technology|none
-Statistics & Appl. Probability|none
+Pollution, waste & resources|gcmd.earthdata.nasa.gov/kms/concept/d81b77be-0177-4e26-942c-aa911239482d
+Science-Based Archaeology|gcmd.earthdata.nasa.gov/kms/concept/c342953a-dd24-491e-8278-5d68c0de7442
+Social Anthropology|gcmd.earthdata.nasa.gov/kms/concept/312e97cb-7e7d-4287-8856-c337c3da9c01
+Social Geography|gcmd.earthdata.nasa.gov/kms/concept/bc7020fb-6bed-46a3-bf0f-1dc60a2afc0b
+Social Policy|gcmd.earthdata.nasa.gov/kms/concept/92ce7852-4bb1-4a37-9b31-9982ba1d0e44
+Sociology|gcmd.earthdata.nasa.gov/kms/concept/1f908362-333d-4485-a8e6-cf40bcc57ed9
+Solar & terrestrial physics|gcmd.earthdata.nasa.gov/kms/concept/d06090e8-3dbb-401a-b8df-b2409fdcc4ec
+Solar Technology|gcmd.earthdata.nasa.gov/kms/concept/8b4f34c1-7aed-4833-811a-401382abd17c
+Statistics & Appl. Probability|gcmd.earthdata.nasa.gov/kms/concept/263dd649-c2ae-492d-bb7b-614d9736e11e
 Terrest. & freshwater environ.|gcmd.earthdata.nasa.gov/kms/concept/91c64c46-d040-4daa-b26c-61952fdfaf50
 Tools, technologies & methods|gcmd.earthdata.nasa.gov/kms/concept/83150c54-5da8-4ee8-9579-19b95a8dc10c
-Transport Ops & Management|none
+Transport Ops & Management|gcmd.earthdata.nasa.gov/kms/concept/37a6c8e2-f2ac-48a4-a4fa-d80f700f68db
 Visual arts|gcmd.earthdata.nasa.gov/kms/concept/ae0ade63-4d8b-4908-9821-a2ec0bec85bc
-Wind Power|none
+Wind Power|gcmd.earthdata.nasa.gov/kms/concept/b3a95e10-1c1d-41cf-8802-8bb1d3a41353
