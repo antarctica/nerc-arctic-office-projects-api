@@ -70,5 +70,5 @@ def import_grants(csv_file):
             )
 
 
-csv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/all-projects-2024-10-07.csv"
+csv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/all-projects-2024-10-17.csv"
 import_grants(csv_file)
