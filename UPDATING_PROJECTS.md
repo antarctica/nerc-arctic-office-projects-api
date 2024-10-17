@@ -37,7 +37,9 @@ $ python arctic_office_projects_api/bulk_importer/import_grants.py
 
 - Projects without a reference - from: id 99  to: id 142
 
-## Heroku toolbelt
+## Heroku toolbelt commands
 
 - heroku run -a bas-arctic-projects-api-prod ls /usr/src/app/
 - heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_subjects.psv
+- heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/exception_log.txt
+- heroku run -a bas-arctic-projects-api-prod poetry shell && python arctic_office_projects_api/bulk_importer/import_grants.py
