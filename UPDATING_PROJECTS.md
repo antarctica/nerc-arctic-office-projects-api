@@ -10,7 +10,7 @@ $ poetry install && poetry run flask import grant <grant_type> <grant_ref> <lead
 
 - example:
 ```shell
-$ poetry install && poetry run flask import grant gtr NE/K000179/1
+$ poetry install && poetry run flask import grant gtr NE/I029072/1
 ```
 
 ### Bulk project import:
@@ -41,5 +41,6 @@ $ python arctic_office_projects_api/bulk_importer/import_grants.py
 
 - heroku run -a bas-arctic-projects-api-prod ls /usr/src/app/
 - heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_subjects.psv
+- heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_topics.csv
+- heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_organisations.csv
 - heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/exception_log.txt
-- heroku run -a bas-arctic-projects-api-prod poetry shell && python arctic_office_projects_api/bulk_importer/import_grants.py
