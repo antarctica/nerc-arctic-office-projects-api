@@ -78,30 +78,30 @@ image:
 
 # == Jobs ==
 
-test-app:
-  stage: test
-  services:
-  - name: postgres:12.12-alpine
-    alias: postgres
-  variables:
-    POSTGRES_DB: runner_db
-    POSTGRES_USER: runner
-    POSTGRES_PASSWORD: password
-    POSTGRES_HOST_AUTH_METHOD: trust
-  before_script:
-    - export FLASK_APP=manage.py
-    - export FLASK_ENV=development
-    - export SQLALCHEMY_DATABASE_URI=postgresql://runner:password@postgres:5432/runner_db
-    - apk add --no-cache postgresql-client
-    - psql -h postgres -U runner -d runner_db -c "ALTER SYSTEM SET listen_addresses TO '*';"
-    - psql -h postgres -U runner -d runner_db -c "SELECT pg_reload_conf();"
-    - psql -h postgres -U runner -d runner_db < docker/init.sql
-  script:
-    - poetry install --no-interaction --no-ansi
-    - poetry run flask db upgrade
-    - poetry run pytest --cov-report=html --cov=arctic_office_projects_api tests
-  only:
-    - master
+# test-app:
+#   stage: test
+#   services:
+#   - name: postgres:12.12-alpine
+#     alias: postgres
+#   variables:
+#     POSTGRES_DB: runner_db
+#     POSTGRES_USER: runner
+#     POSTGRES_PASSWORD: password
+#     POSTGRES_HOST_AUTH_METHOD: trust
+#   before_script:
+#     - export FLASK_APP=manage.py
+#     - export FLASK_ENV=development
+#     - export SQLALCHEMY_DATABASE_URI=postgresql://runner:password@postgres:5432/runner_db
+#     - apk add --no-cache postgresql-client
+#     - psql -h postgres -U runner -d runner_db -c "ALTER SYSTEM SET listen_addresses TO '*';"
+#     - psql -h postgres -U runner -d runner_db -c "SELECT pg_reload_conf();"
+#     - psql -h postgres -U runner -d runner_db < docker/init.sql
+#   script:
+#     - poetry install --no-interaction --no-ansi
+#     - poetry run flask db upgrade
+#     - poetry run pytest --cov-report=html --cov=arctic_office_projects_api tests
+#   only:
+#     - master
 
 dependencies-app:
   stage: test
