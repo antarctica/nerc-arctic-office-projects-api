@@ -10,7 +10,7 @@ $ poetry install && poetry run flask import grant <grant_type> <grant_ref> <lead
 
 - example:
 ```shell
-$ poetry install && poetry run flask import grant gtr NE/I029072/1
+$ poetry install && poetry run flask import grant gtr NE/N016092/2
 ```
 
 ### Bulk project import:

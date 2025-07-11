@@ -573,7 +573,9 @@ class GatewayToResearchProject(GatewayToResearchResource):
                     for gtr_research_topic in self.resource["researchTopics"][
                         "researchTopic"
                     ]:
+
                         if "id" in gtr_research_topic:
+                            # print("topic", gtr_research_topic)
                             gtr_project_topics.append(gtr_research_topic)
 
         return gtr_project_topics
@@ -596,6 +598,7 @@ class GatewayToResearchProject(GatewayToResearchResource):
                         "researchSubject"
                     ]:
                         if "id" in gtr_research_subject:
+                            # print("subject", gtr_research_subject)
                             gtr_project_subjects.append(gtr_research_subject)
 
         return gtr_project_subjects
@@ -1217,6 +1220,7 @@ class GatewayToResearchGrantImporter:
             "Status element value in GTR project not mapped to a member of the GrantStatus enumeration"
         )
 
+    # May need to be a tuple or dict with a 'topic' or 'suject' tag
     def _find_unique_gtr_project_research_items(self, gtr_research_items: list) -> list:
         """
         For a series of GTR project research items, return a distinct list
@@ -1243,9 +1247,7 @@ class GatewayToResearchGrantImporter:
                     )
         return category_term_scheme_identifiers
 
-    def _find_unique_gcmd_project_research_topics(
-        self, gtr_research_topics: list
-    ) -> list:
+    def _find_unique_gcmd_project_research_topics(self, gtr_research_topics: list) -> list:
         """
         For a series of GTR project research topics, return a distinct list
 
@@ -1305,6 +1307,8 @@ class GatewayToResearchGrantImporter:
         gtr_research_topic: dict,
     ) -> Optional[str]:
         """
+        Topic uses a csv file
+
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
         a corresponding Category based on its GTR research topic ID.
@@ -1364,6 +1368,8 @@ class GatewayToResearchGrantImporter:
         gtr_research_subject: dict,
     ) -> Optional[str]:
         """
+        Subject uses a psv file (pipe)
+
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
         a corresponding Category based on its GTR research subject name.
