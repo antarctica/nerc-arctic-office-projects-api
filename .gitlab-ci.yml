@@ -11,6 +11,7 @@
 
 stages:
   - build
+  - test
   - lint
   - build
   - deploy
