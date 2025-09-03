@@ -78,7 +78,7 @@ class DevelopmentConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
 
-    SERVER_NAME = os.getenv('SERVER_NAME') or 'localhost:9001'
+    SERVER_NAME = os.getenv('SERVER_NAME') or 'localhost:5000'
     PREFERRED_URL_SCHEME = os.getenv('PREFERRED_URL_SCHEME') or 'http'
 
 

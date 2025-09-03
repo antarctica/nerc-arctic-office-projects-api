@@ -1184,8 +1184,8 @@ For example, a Person resource may be related to one or more Participant resourc
     }
   ],
   "links": {
-    "related": "http://localhost:9001/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants",
-    "self": "http://localhost:9001/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
+    "related": "http://localhost:5000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/participants",
+    "self": "http://localhost:5000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
   }
 }
 ```
@@ -1234,7 +1234,7 @@ For example, a Person resource may be related to one or more Participant resourc
       },
       "id": "01D5T4N25RV2062NVVQKZ9NBYX",
       "links": {
-        "self": "http://localhost:9001/participants/01D5T4N25RV2062NVVQKZ9NBYX"
+        "self": "http://localhost:5000/participants/01D5T4N25RV2062NVVQKZ9NBYX"
       },
       "relationships": {
         "person": {
@@ -1243,8 +1243,8 @@ For example, a Person resource may be related to one or more Participant resourc
             "type": "people"
            },
            "links": {
-             "related": "http://localhost:9001/participants/01D5T4N25RV2062NVVQKZ9NBYX/people",
-             "self": "http://localhost:9001/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people"
+             "related": "http://localhost:5000/participants/01D5T4N25RV2062NVVQKZ9NBYX/people",
+             "self": "http://localhost:5000/participants/01D5T4N25RV2062NVVQKZ9NBYX/relationships/people"
           }
         }
       },
@@ -1252,7 +1252,7 @@ For example, a Person resource may be related to one or more Participant resourc
     }
   ],
     "links": {
-      "self": "http://localhost:9001/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
+      "self": "http://localhost:5000/people/01D5MHQN3ZPH47YVSVQEVB0DAE/relationships/participants"
   }
 }
 ```

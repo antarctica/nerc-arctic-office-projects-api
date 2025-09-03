@@ -1,35 +1,16 @@
 ---
 
-# == Notes ==
-
-# - GitLab automatically passes artifacts from previous stages by default
-# - This project requires runners with specific tags to execute specific jobs
-# - This project includes variables specific to using 'Docker In Docker'
-# - This project uses additional services ran alongside the job images
-# - Set required secret variables at: https://gitlab.data.bas.ac.uk/web-apps/arctic-office-projects-api/settings/ci_cd
-
 # = Secret variables
 # - Variables are grouped by section in KEY: "value" format (e.g. FOO: "bar")
 #   Sensitive values are represented by "[Sensitive]"
+##
+# > SENTRY_AUTH_TOKEN: "[Sensitive]"
+# > SENTRY_DSN: "[Sensitive]"
 #
-# - AWS IAM id/secret keys for 'bas-gitlab-arctic-office-projects-api' user
-# > AWS_ACCESS_KEY_ID: "[Sensetive]"
-# > AWS_SECRET_ACCESS_KEY: "[Sensetive]"
-#
-# - Heroku
-# > HEROKU_API_KEY: "[Sensitive]"
-#
-# - Sentry
-# > SENTRY_AUTH_TOKEN: "[Sensetive]"
-# > SENTRY_DSN: "[Sensetive]"
-#
-# - BAS API Documentation
-# > API_DOCS_PIPELINE_TOKEN: "[Sensitive]"
-
-# == Global settings ==
+# > SNYK_TOKEN: "[Sensitive]"
 
 stages:
-  - build-base
+  - build
   - test
   - lint
   - build
@@ -40,23 +21,19 @@ variables:
   DOCKER_CERT_PATH: /certs/client
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_VERIFY: 1
+  POSTGRES_HOST_AUTH_METHOD: trust
   GITLAB_REGISTRY: docker-registry.data.bas.ac.uk
   POSTGRES_DB: app_test
   POSTGRES_USER: app
   POSTGRES_PASSWORD: "password"
   APP_NAME: arctic-office-projects-api
-  HEROKU_APP_STAGE_NAME: bas-arctic-projects-api-stage
-  HEROKU_APP_PROD_NAME: bas-arctic-projects-api-prod
   SENTRY_ORG: antarctica
   SENTRY_PROJECT: arctic-office-projects-api
   SNYK_ORG: antarctica
   SNYK_PROJECT: arctic-office-projects-api
-  API_DOCS_PROJECT: arctic-office-projects
-  API_DOCS_STAGE_BUCKET: bas-api-docs-content-testing
-  API_DOCS_PROD_BUCKET: bas-api-docs-content
 
-build-base:
-  stage: build-base
+build:
+  stage: build
   tags:
     - dnd
   services:
@@ -68,13 +45,9 @@ build-base:
     - docker push $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest
   only:
     - master
-  cache:
-    paths:
-      - .venv
 
 image:
-  name: docker-registry.data.bas.ac.uk/web-apps/arctic-office-projects-api/arctic-office-projects-api:latest
-  entrypoint: [""]
+  name: $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest
 
 # == Jobs ==
 
@@ -115,12 +88,14 @@ dependencies-app:
   only:
     - master
 
-pep8-app:
+lint:
   stage: lint
   before_script:
     - "poetry install"
   script:
     - "poetry run flake8 . --ignore=E501 --exclude migrations,.venv"
+  only:
+    - master
 
 bandit-app:
   stage: lint
@@ -128,119 +103,29 @@ bandit-app:
     - "poetry install"
   script:
     - "poetry run bandit -r arctic_office_project_api"
-
-build-heroku-stage:
-  stage: build
-  tags:
-    - dnd
-  services:
-    - docker:dind
-  image:
-    name: docker:19.03-dind
-    entrypoint: [""]
-  script:
-    - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY"
-    - "docker login -u _ -p $HEROKU_API_KEY registry.heroku.com"
-    - "docker build -t registry.heroku.com/$HEROKU_APP_STAGE_NAME/web -f Dockerfile.heroku --build-arg APP_RELEASE=$CI_COMMIT_SHA --build-arg APP_ENV=staging ."
-    - "docker build -t registry.heroku.com/$HEROKU_APP_STAGE_NAME/release -f Dockerfile.heroku-release ."
-    - "docker push registry.heroku.com/$HEROKU_APP_STAGE_NAME/web"
-    - "docker push registry.heroku.com/$HEROKU_APP_STAGE_NAME/release"
   only:
     - master
 
-build-heroku-prod:
-  stage: build
-  tags:
-    - dnd
-  services:
-    - docker:dind
-  image:
-    name: docker:19.03-dind
-    entrypoint: [""]
-  script:
-    - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY"
-    - "docker login -u _ -p $HEROKU_API_KEY registry.heroku.com"
-    - "docker build -t registry.heroku.com/$HEROKU_APP_PROD_NAME/web -f Dockerfile.heroku --build-arg APP_RELEASE=$CI_COMMIT_SHA --build-arg APP_ENV=production ."
-    - "docker build -t registry.heroku.com/$HEROKU_APP_PROD_NAME/release -f Dockerfile.heroku-release ."
-    - "docker push registry.heroku.com/$HEROKU_APP_PROD_NAME/web"
-    - "docker push registry.heroku.com/$HEROKU_APP_PROD_NAME/release"
-  only:
-    - tags
+# sentry:
+#   stage: test
+#   image:
+#     name: getsentry/sentry-cli
+#     entrypoint: [""]
+#   script:
+#     - sentry-cli releases new --finalize $CI_COMMIT_SHA
+#     - sentry-cli releases deploys $CI_COMMIT_SHA new -e production
+#   only:
+#     - tags
 
-deploy-heroku-stage:
+package:
   stage: deploy
-  image:
-    name: wingrunr21/alpine-heroku-cli
-    entrypoint: [""]
+  before_script:
+    - poetry install --no-interaction --no-ansi
+    - poetry config repositories.gitlab $CI_SERVER_URL/api/v4/projects/$CI_PROJECT_ID/packages/pypi
+    - poetry config http-basic.gitlab gitlab-ci-token $CI_JOB_TOKEN --local
+    - sed -i "s/^version = .*/version = \"$CI_COMMIT_TAG\"/" pyproject.toml
   script:
-    - "heroku container:release web release --app $HEROKU_APP_STAGE_NAME"
-  only:
-    - master
-  environment:
-    name: Staging
-    url: https://api.bas.ac.uk/arctic-office-projects/testing/
-
-deploy-heroku-prod:
-  stage: deploy
-  image:
-    name: wingrunr21/alpine-heroku-cli
-    entrypoint: [""]
-  script:
-    - "heroku container:release web release --app $HEROKU_APP_PROD_NAME"
-  only:
-    - tags
-  environment:
-    name: Production
-    url: https://api.bas.ac.uk/arctic-office-projects/v1/
-
-deploy-docs-stage:
-  stage: deploy
-  image:
-    name: governmentpaas/awscli:latest
-    entrypoint: [""]
-  script:
-    - "aws s3 cp docs/usage.md s3://$API_DOCS_STAGE_BUCKET/services/$API_DOCS_PROJECT/testing/usage/usage.md"
-    - "aws s3 cp openapi.yml s3://$API_DOCS_STAGE_BUCKET/services/$API_DOCS_PROJECT/testing/openapi.yml"
-    - "curl -X POST -F token=$API_DOCS_PIPELINE_TOKEN -F ref=master https://gitlab.data.bas.ac.uk/api/v4/projects/530/trigger/pipeline"
-  only:
-    - master
-  environment:
-    name: Staging - Documentation
-    url: https://docs-testing.api.bas.ac.uk/arctic-office-projects
-
-deploy-docs-prod:
-  stage: deploy
-  image:
-    name: governmentpaas/awscli:latest
-    entrypoint: [""]
-  script:
-    - "aws s3 cp docs/usage.md s3://$API_DOCS_PROD_BUCKET/services/$API_DOCS_PROJECT/$CI_COMMIT_TAG/usage/usage.md"
-    - "aws s3 cp openapi.yml s3://$API_DOCS_PROD_BUCKET/services/$API_DOCS_PROJECT/$CI_COMMIT_TAG/openapi.yml"
-    - "curl -X POST -F token=$API_DOCS_PIPELINE_TOKEN -F ref=master https://gitlab.data.bas.ac.uk/api/v4/projects/530/trigger/pipeline"
-  only:
-    - tags
-  environment:
-    name: Production - Documentation
-    url: https://docs.api.bas.ac.uk/arctic-office-projects
-
-sentry-stage:
-  stage: deploy
-  image:
-    name: getsentry/sentry-cli
-    entrypoint: [""]
-  script:
-    - "sentry-cli releases new --finalize $CI_COMMIT_SHA"
-    - "sentry-cli releases deploys $CI_COMMIT_SHA new -e staging"
-  only:
-    - master
-
-sentry-prod:
-  stage: deploy
-  image:
-    name: getsentry/sentry-cli
-    entrypoint: [""]
-  script:
-    - "sentry-cli releases new --finalize $CI_COMMIT_SHA"
-    - "sentry-cli releases deploys $CI_COMMIT_SHA new -e production"
+    - poetry build
+    - poetry publish --no-interaction --repository gitlab
   only:
     - tags
