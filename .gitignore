@@ -4,8 +4,7 @@ __pycache__
 /.idea
 *.log
 /_dev
-
+dist
 htmlcov
-
 test-results.xml
 projects.json

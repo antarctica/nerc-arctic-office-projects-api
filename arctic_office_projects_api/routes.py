@@ -1,29 +1,24 @@
 from http import HTTPStatus
-from flask import jsonify
+from importlib.metadata import version
+
 from arctic_office_projects_api.utils import healthcheck_db
+
+app_version = version("arctic_office_projects_api")
 
 
 def index_route():
     """
     Returns a simple welcome message
     """
-    payload = {
-        "meta": {
-            "summary": "This API is used to record details of projects related to the NERC Arctic Office - "
-            "https://www.arctic.ac.uk"
-        }
-    }
-
-    return jsonify(payload)
+    return {"value": "This API is used to record details of projects related to the NERC Arctic Office - "
+            "https://www.arctic.ac.uk"}
 
 
 def healthcheck_route():
-    """
-    Returns whether this service is healthy
-    """
+    """healthcheck"""
     dependencies = {"db": healthcheck_db()}
 
     if False in dependencies.values():
-        return "", HTTPStatus.SERVICE_UNAVAILABLE
+        return "", HTTPStatus.SERVICE_UNAVAILABLE  # pragma: no cover
 
-    return {"value": "ok - arctic office api"}
+    return {"value": f"ok - bas people api - {app_version}"}

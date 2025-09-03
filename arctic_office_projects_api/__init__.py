@@ -1,15 +1,12 @@
 import os
+import logging
 import sentry_sdk
 from functools import wraps
 from flask import Flask, jsonify, request
 from flask.logging import default_handler
-from werkzeug.middleware.proxy_fix import ProxyFix
 
 import jwt
 from jwt import PyJWKClient
-
-# from flask_reverse_proxy_fix.middleware import ReverseProxyPrefixFix
-from flask_request_id_header.middleware import RequestID
 
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
@@ -21,8 +18,8 @@ from werkzeug.exceptions import (
     UnprocessableEntity,
 )
 
-from config import config
-from arctic_office_projects_api.logging import RequestFormatter
+# from config import config
+from arctic_office_projects_api.utils import RequestFormatter
 from arctic_office_projects_api.extensions import db
 from arctic_office_projects_api.errors import (
     error_handler_generic_bad_request,
@@ -30,7 +27,10 @@ from arctic_office_projects_api.errors import (
     error_handler_generic_internal_server_error,
     error_handler_generic_unprocessable_entity,
 )
-from arctic_office_projects_api.commands import seeding_cli_group, importing_cli_group
+from arctic_office_projects_api.commands import (
+    seeding_cli_group,
+    importing_cli_group,
+)
 from arctic_office_projects_api.routes import index_route, healthcheck_route
 
 from arctic_office_projects_api.schemas import ProjectSchema
@@ -51,8 +51,6 @@ from arctic_office_projects_api.schemas import AllocationSchema
 from arctic_office_projects_api.models import Allocation
 from arctic_office_projects_api.schemas import CategorisationSchema
 from arctic_office_projects_api.models import Categorisation
-
-# from arctic_office_projects_api.utils import conditional_decorator
 
 
 def validate_token(token):
@@ -98,31 +96,19 @@ def auth_required():
 def create_app(config_name):
     app = Flask(__name__)
 
-    # Config
-    app.config.from_object(config[config_name])
-    config[config_name].init_app(app)
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI") or None
+    app.config["APP_PAGE_SIZE"] = int(os.getenv('APP_PAGE_SIZE') or 10)
 
     db.init_app(app)
     app.auth = auth_required
-
-    # # Middleware / Wrappers
-    if app.config["APP_ENABLE_PROXY_FIX"]:
-        app.wsgi_app = ProxyFix(
-            app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1
-        )
-        # ReverseProxyPrefixFix(app)
-    if app.config["APP_ENABLE_REQUEST_ID"]:
-        RequestID(app)
-    if app.config["APP_ENABLE_SENTRY"]:
-        sentry_sdk.init(**app.config["SENTRY_CONFIG"])  # pragma: no cover
 
     # Logging
     formatter = RequestFormatter(
         "[%(asctime)s] [%(levelname)s] [%(request_id)s] [%(url)s]: %(message)s"
     )
     default_handler.setFormatter(formatter)
-    default_handler.setLevel(app.config["LOGGING_LEVEL"])
+    level = os.getenv('LOGGING_LEVEL', 'INFO')
+    default_handler.setLevel(getattr(logging, level, logging.INFO))
 
     # Error handlers
     app.register_error_handler(BadRequest, error_handler_generic_bad_request)
@@ -140,11 +126,12 @@ def create_app(config_name):
 
     # Routes
     app.add_url_rule("/", "index", index_route, methods=["get", "options"])
+
     app.add_url_rule(
-        "/meta/health/canary",
-        "canary_health_check",
+        "/healthcheck",
+        "healthcheck",
         healthcheck_route,
-        methods=["get", "options"],
+        methods=["get", "options"]
     )
 
     # is_testing = app.config.get("TESTING")

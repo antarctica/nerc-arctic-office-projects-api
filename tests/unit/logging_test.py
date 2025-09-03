@@ -1,7 +1,7 @@
 import logging
 from flask import request
 
-from arctic_office_projects_api.logging import RequestFormatter
+from arctic_office_projects_api.utils import RequestFormatter
 
 
 # def test_formatter_with_request_id(client, app):
