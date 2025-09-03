@@ -1,6 +1,6 @@
 import os
 import logging
-import sentry_sdk
+# import sentry_sdk
 from functools import wraps
 from flask import Flask, jsonify, request
 from flask.logging import default_handler
