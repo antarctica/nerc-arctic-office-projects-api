@@ -11,10 +11,9 @@
 
 stages:
   - build
-  - test
   - lint
   - build
-  - package
+  - deploy
 
 variables:
   DOCKER_HOST: tcp://docker:2376
@@ -118,7 +117,7 @@ bandit-app:
 #     - tags
 
 package:
-  stage: package
+  stage: deploy
   before_script:
     - poetry install --no-interaction --no-ansi
     - poetry config repositories.gitlab $CI_SERVER_URL/api/v4/projects/$CI_PROJECT_ID/packages/pypi
