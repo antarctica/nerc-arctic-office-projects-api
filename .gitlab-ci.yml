@@ -14,7 +14,7 @@ stages:
   - test
   - lint
   - build
-  - deploy
+  - package
 
 variables:
   DOCKER_HOST: tcp://docker:2376
