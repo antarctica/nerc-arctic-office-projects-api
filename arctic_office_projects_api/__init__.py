@@ -101,7 +101,7 @@ def create_app(config_name):
 
     db.init_app(app)
     migrate.init_app(app, db)
-    
+
     app.auth = auth_required
 
     # Logging
