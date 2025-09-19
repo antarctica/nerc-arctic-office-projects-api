@@ -7,7 +7,6 @@ readme = "README.md"
 packages = [
     { include = "arctic_office_projects_api" },
     { include = "migrations" },
-    { include = "resources" },
 ]
 
 [tool.poetry.dependencies]
