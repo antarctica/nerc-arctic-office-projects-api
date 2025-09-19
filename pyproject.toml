@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "arctic-office-projects-api"
-version = "0.6.3"
+version = "0.6.4"
 description = "API for exposing data about Arctic Office projects"
 authors = ["BAS Web & Apps team <webapps@bas.ac.uk>"]
 readme = "README.md"
