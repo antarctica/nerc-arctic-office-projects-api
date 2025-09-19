@@ -21,4 +21,4 @@ def healthcheck_route():
     if False in dependencies.values():
         return "", HTTPStatus.SERVICE_UNAVAILABLE  # pragma: no cover
 
-    return {"value": f"ok - bas people api - {app_version}"}
+    return {"value": f"ok - arctic office projects database api - {app_version}"}
