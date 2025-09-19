@@ -20,7 +20,7 @@ from werkzeug.exceptions import (
 
 # from config import config
 from arctic_office_projects_api.utils import RequestFormatter
-from arctic_office_projects_api.extensions import db
+from arctic_office_projects_api.extensions import db, migrate
 from arctic_office_projects_api.errors import (
     error_handler_generic_bad_request,
     error_handler_generic_not_found,
@@ -100,6 +100,8 @@ def create_app(config_name):
     app.config["APP_PAGE_SIZE"] = int(os.getenv('APP_PAGE_SIZE') or 10)
 
     db.init_app(app)
+    migrate.init_app(app, db)
+    
     app.auth = auth_required
 
     # Logging
