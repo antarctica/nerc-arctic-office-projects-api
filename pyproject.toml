@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "arctic-office-projects-api"
-version = "0.6.6"
+version = "0.6.7"
 description = "API for exposing data about Arctic Office projects"
 authors = ["BAS Web & Apps team <webapps@bas.ac.uk>"]
 readme = "README.md"
 packages = [
     { include = "arctic_office_projects_api" },
     { include = "migrations" },
+    { include = "resources" },
 ]
 
 [tool.poetry.dependencies]
