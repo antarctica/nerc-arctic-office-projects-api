@@ -36,7 +36,9 @@ def import_category_terms_from_file_interactively(categories_file_path: str):
         ) as categories_schema_file:
 
             categories_schema = json.load(categories_schema_file)
+            
             categories_data = json.load(categories_file)
+            
             validate(instance=categories_data, schema=categories_schema)
             print("* categories data valid and ready for import")
             print(
@@ -101,7 +103,7 @@ def import_category_terms_from_file_interactively(categories_file_path: str):
                     neutral_id=generate_neutral_id(),
                     scheme_identifier=term["subject"],
                     name=term["pref-label"],
-                    path=_generate_category_term_ltree_path(term["path"]),
+                    path=generate_category_term_ltree_path(term["path"]),
                     category_scheme=CategoryScheme.query.filter_by(
                         namespace=term["scheme"]
                     ).one(),
@@ -218,7 +220,7 @@ def import_organisations_from_file_interactively(organisations_file_path: str):
         raise e
 
 
-def _generate_category_term_ltree_path(path_elements: Dict[str, str]) -> Ltree:
+def generate_category_term_ltree_path(path_elements: Dict[str, str]) -> Ltree:
     """
     Converts a series of parent Category Terms into an ltree column compatible value
 
