@@ -1,5 +1,53 @@
 # Updating projects
 
+## API
+There are a number of Post routes for adding data into the database.
+
+### Postman collections
+Import json collections into Postman from here:  
+`postman_collections`  
+Auth variables will need to be added. Most likely from Azure: `portal.azure.com`
+
+### Set up
+To initialise the database or update categories and organisations
+- `/post-categories` - send with json payload: `arctic_office_projects_api/resources/science-categories.json`
+- `/post-organisations` 
+    - funders - send with json payload: `arctic_office_projects_api/resources/funder-organisations.json`
+    - people - send with json payload: `arctic_office_projects_api/resources/people-organisations.json`
+
+### Import single record:
+- `/post-gtr-grant-single` - send with json payload:
+
+```
+{
+    "lead-project": 0,
+    "grant-reference": "NE/K000217/1"
+}
+```
+
+### Import mulitple records:
+
+- `/post-gtr-grant-bulk` - send with json payload:
+
+```
+[
+ {
+   "grant-reference": "NE/P006183/1",
+   "lead-project": 0
+ },
+ {
+   "grant-reference": "NE/P00590X/1",
+   "lead-project": 0
+ },
+ {
+   "grant-reference": "NE/P005985/1",
+   "lead-project": 0
+ }
+]
+```
+
+## CLI
+
 ### Single project import:
 
 - see the README.md section about importing individual projects
@@ -37,10 +85,4 @@ $ python arctic_office_projects_api/bulk_importer/import_grants.py
 
 - Projects without a reference - from: id 99  to: id 142
 
-## Heroku toolbelt commands
-
-- heroku run -a bas-arctic-projects-api-prod ls /usr/src/app/
-- heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_subjects.psv
-- heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_topics.csv
-- heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_organisations.csv
-- heroku run -a bas-arctic-projects-api-prod vi /usr/src/app/arctic_office_projects_api/bulk_importer/exception_log.txt
+###

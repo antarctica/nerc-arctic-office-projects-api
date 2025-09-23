@@ -476,6 +476,9 @@ $ flask import [resource] [command]
 
 #### Importing science categories
 
+Import using a post request:
+- Use the funder-organisation.json as the JSON body in a post request to : /post-categories
+
 To import [categories and category schemes](#science-categories) from a file:
 
 ```shell
@@ -494,6 +497,10 @@ before import.
 **Note:** Previously imported categories, identified by their *namespace* or *subject*, will be skipped if imported again. Their properties will not be updated.
 
 #### Importing organisations
+
+Import using a post request:
+- Use the funder-organisation.json as the JSON body in a post request to : /post-organisations
+- Use the people-organisation.json as the JSON body in a post request to : /post-organisations
 
 To import [organisations](#organisations) from a file:
 
@@ -516,6 +523,8 @@ Schema before import.
 Their properties will not be updated.
 
 #### Importing grants
+
+See: `UPDATING_PROJECTS.md`
 
 To import a grant from Gateway to Research (GTR):
 
