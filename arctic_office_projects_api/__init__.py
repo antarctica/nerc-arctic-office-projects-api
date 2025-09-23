@@ -1,13 +1,18 @@
 import os
 import logging
+import time
+from pathlib import Path
 # import sentry_sdk
 from functools import wraps
-from flask import Flask, jsonify, request
+from flask import Flask, Response, jsonify, request
 from flask.logging import default_handler
 
 import jwt
 from jwt import PyJWKClient
 
+# noinspection PyPackageRequirements
+from sqlalchemy import exists
+from sqlalchemy_utils import Ltree
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 # noinspection PyPackageRequirements
@@ -18,8 +23,10 @@ from werkzeug.exceptions import (
     UnprocessableEntity,
 )
 
-# from config import config
-from arctic_office_projects_api.utils import RequestFormatter
+from jsonschema import validate, ValidationError
+import simplejson as json
+
+from arctic_office_projects_api.utils import RequestFormatter, generate_neutral_id
 from arctic_office_projects_api.extensions import db, migrate
 from arctic_office_projects_api.errors import (
     error_handler_generic_bad_request,
@@ -31,7 +38,11 @@ from arctic_office_projects_api.commands import (
     seeding_cli_group,
     importing_cli_group,
 )
+
+from arctic_office_projects_api.importers import generate_category_term_ltree_path
 from arctic_office_projects_api.routes import index_route, healthcheck_route
+
+from arctic_office_projects_api.importers.gtr import import_gateway_to_research_grant_interactively
 
 from arctic_office_projects_api.schemas import ProjectSchema
 from arctic_office_projects_api.models import Project
@@ -136,7 +147,240 @@ def create_app(config_name):
         methods=["get", "options"]
     )
 
-    # is_testing = app.config.get("TESTING")
+    #####
+    # Post data routes - to update data in the database
+    #####
+    @app.route("/post-gtr-grant-single", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_gtr_grant_single():
+        """
+        Post json data containing a grant reference with a
+        `lead-project` flag to import a single GtR grant
+        """
+        if request.method == "POST":
+            data = request.get_json()
+            if not data:
+                return jsonify({"error": "No JSON body provided"}), 400
+
+        import_gateway_to_research_grant_interactively(
+            data["grant-reference"],
+            data["lead-project"]
+        )
+
+        return jsonify({
+            "message": "Grant posted successfully",
+            "data": data
+        }), 201
+
+    @app.route("/post-gtr-grant-bulk", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_gtr_grant_bulk():
+        """
+        Post json data containing several grant reference `lead-project`
+        records to import a GtR grants in bulk
+        """
+        if request.method == "POST":
+            data = request.get_json()
+            if not data:
+                return jsonify({"error": "No JSON body provided"}), 400
+
+        for grant_data in data:
+
+            # time.sleep(1)
+            import_gateway_to_research_grant_interactively(
+                grant_data["grant-reference"],
+                grant_data["lead-project"]
+            )
+
+            # return jsonify({
+            #     "message": "Grant posted successfully",
+            #     "data": data
+            # }), 201
+
+        return jsonify({
+            "message": "All grants attempted",
+            "data": data
+        }), 201 
+
+    @app.route("/post-organisations", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_organisations():
+        """
+        Post funder-organisations.json to set up the database
+        Post people-organisations.json to set up the database
+
+        Import Research Organisations
+            - `arctic_office_projects_api/resources/funder-organisations.json`
+            - `arctic_office_projects_api/resources/people-organisations.json`
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        organisations_data = data
+
+        # Load schema from file
+        schema_path = Path(os.getenv("ORGANISATIONS_SCHEMA_FILE_PATH"))
+        try:
+            with schema_path.open("r") as f:
+                organisations_schema = json.load(f)
+        except FileNotFoundError:
+            return jsonify({"error": f"Schema file not found: {schema_path}"}), 500
+        except json.JSONDecodeError as e:
+            return jsonify({"error": "Schema file is not valid JSON", "detail": str(e)}), 500
+
+        # Validate instance against schema
+        try:
+            validate(instance=organisations_data, schema=organisations_schema)
+        except ValidationError as e:
+            # return useful info for debugging
+            return jsonify({
+                "error": "Validation failed",
+                "message": e.message,
+                "path": list(e.path),           # where in the instance the error occurred
+                "schema_path": list(e.schema_path)  # where in the schema the rule is
+            }), 400
+
+        for organisation in organisations_data["organisations"]:
+            if db.session.query(
+                exists().where(
+                    Organisation.ror_identifier == organisation["ror-identifier"]
+                )
+            ).scalar():
+                continue  # pragma: no cover
+
+            organisation_resource = Organisation(
+                neutral_id=generate_neutral_id(),
+                ror_identifier=organisation["ror-identifier"],
+                name=organisation["name"],
+            )
+            if "acronym" in organisation and organisation["acronym"] is not None:
+                organisation_resource.acronym = organisation["acronym"]
+            if "website" in organisation and organisation["website"] is not None:
+                organisation_resource.website = organisation["website"]
+            if "logo-url" in organisation and organisation["version"] is not None:
+                organisation_resource.logo_url = organisation["logo-url"]
+
+            db.session.add(organisation_resource)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Organisations posted successfully",
+        }), 201
+
+    # Post data routes - to update data in the database
+    @app.route("/post-categories", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_categories():
+        """
+        Post categories.json to set up the database
+
+        Import Research Categories - `arctic_office_projects_api/resources/science-categories.json`
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        categories_data = data
+
+        # Load schema from file
+        schema_path = Path(os.getenv("CATEGORIES_SCHEMA_FILE_PATH"))
+        try:
+            with schema_path.open("r") as f:
+                categories_schema = json.load(f)
+        except FileNotFoundError:
+            return jsonify({"error": f"Schema file not found: {schema_path}"}), 500
+        except json.JSONDecodeError as e:
+            return jsonify({"error": "Schema file is not valid JSON", "detail": str(e)}), 500
+
+        # Validate instance against schema
+        try:
+            validate(instance=categories_data, schema=categories_schema)
+        except ValidationError as e:
+            # return useful info for debugging
+            return jsonify({
+                "error": "Validation failed",
+                "message": e.message,
+                "path": list(e.path),           # where in the instance the error occurred
+                "schema_path": list(e.schema_path)  # where in the schema the rule is
+            }), 400
+
+        for scheme in categories_data["schemes"]:
+            if db.session.query(
+                exists().where(CategoryScheme.namespace == scheme["namespace"])
+            ).scalar():
+                continue  # pragma: no cover
+
+            category_scheme_resource = CategoryScheme(
+                neutral_id=generate_neutral_id(),
+                namespace=scheme["namespace"],
+                name=scheme["title"],
+                root_concepts=scheme["root-concepts"],
+            )
+            if "acronym" in scheme and scheme["acronym"] is not None:
+                category_scheme_resource.acronym = scheme[
+                    "acronym"
+                ]  # pragma: no cover
+            if "description" in scheme and scheme["description"] is not None:
+                category_scheme_resource.description = scheme[
+                    "description"
+                ]  # pragma: no cover
+            if "version" in scheme and scheme["version"] is not None:
+                category_scheme_resource.version = scheme[
+                    "version"
+                ]  # pragma: no cover
+            if "revision" in scheme and scheme["revision"] is not None:
+                category_scheme_resource.revision = scheme[
+                    "revision"
+                ]  # pragma: no cover
+            db.session.add(category_scheme_resource)
+
+        for term in categories_data["terms"]:
+            if db.session.query(
+                exists().where(CategoryTerm.scheme_identifier == term["subject"])
+            ).scalar():
+                continue  # pragma: no cover
+
+            category_term_resource = CategoryTerm(
+                neutral_id=generate_neutral_id(),
+                scheme_identifier=term["subject"],
+                name=term["pref-label"],
+                path=generate_category_term_ltree_path(term["path"]),
+                category_scheme=CategoryScheme.query.filter_by(
+                    namespace=term["scheme"]
+                ).one(),
+            )
+            if "notation" in term and term["notation"] is not None:
+                category_term_resource.scheme_notation = term[
+                    "notation"
+                ]  # pragma: no cover
+            if "alt-labels" in term and len(term["alt-labels"]) > 0:
+                category_term_resource.aliases = term[
+                    "alt-labels"
+                ]  # pragma: no cover
+            if "definitions" in term and len(term["definitions"]) > 0:
+                category_term_resource.definitions = term[
+                    "definitions"
+                ]  # pragma: no cover
+            if "examples" in term and len(term["examples"]) > 0:
+                category_term_resource.examples = term[
+                    "examples"
+                ]  # pragma: no cover
+            if "notes" in term and len(term["notes"]) > 0:
+                category_term_resource.notes = term["notes"]  # pragma: no cover
+            if "scope-notes" in term and len(term["scope-notes"]) > 0:
+                category_term_resource.scope_notes = term[
+                    "scope-notes"
+                ]  # pragma: no cover
+
+            db.session.add(category_term_resource)
+            db.session.commit()
+
+        return jsonify({
+            "message": "Categories posted successfully",
+        }), 201
 
     # Resources
     @app.route("/projects")
@@ -1354,6 +1598,24 @@ def create_app(config_name):
             raise NotFound()
         except MultipleResultsFound:  # pragma: no cover
             raise UnprocessableEntity()  # pragma: no cover
+
+    # Show import exception_log.txt
+    @app.route("/exception-log")
+    @app.auth()
+    def exception_log():
+        """
+        Returns the contents of the exception_log.txt file
+        """
+        log_file = os.getenv("IMPORT_EXCEPTION_LOG")
+
+        if not os.path.exists(log_file):
+            return Response("Log file not found", status=404, mimetype="text/plain")
+
+        with open(log_file, "r") as f:
+            contents = f.read()
+
+        # Return as plain text
+        return Response(contents, mimetype="text/plain")
 
     # Return create_app()
     return app
