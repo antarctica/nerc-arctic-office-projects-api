@@ -1,5 +1,7 @@
 import requests
 import csv
+import os
+import time
 
 from datetime import date, datetime, timezone
 from typing import Dict, Optional, List
@@ -89,6 +91,7 @@ class GatewayToResearchResource:
         :rtype dict
         :return GTR API response body - typically a resource
         """
+        time.sleep(2)
         try:
             gtr_resource_response = requests.get(
                 url=gtr_resource_uri,
@@ -190,7 +193,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
     def _ror_dict(resource_uri) -> str:
 
-        csv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_organisations.csv"
+        csv_file = os.getenv("PROJECTS_ORGANISATIONS_CSV")
 
         gtr_path = "http://gtr.ukri.org/gtr/api/organisations/"
         _ror_list = []
@@ -424,7 +427,7 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         :return for a given GTR resource URI, a corresponding ORCID iD as a URL
         """
 
-        csv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_people.csv"
+        csv_file = os.getenv("PROJECTS_PEOPLE_CSV")
         gtr_person_url = "https://gtr.ukri.org:443/gtr/api/"
         gtr_people_orcid_id_mappings = {}
 
@@ -772,7 +775,9 @@ class GatewayToResearchGrantImporter:
                 raise KeyError("Project element not in GTR response")
             if len(gtr_project_data["project"]) != 1:
                 raise ValueError(
-                    "Multiple project elements found in GTR response, only expected one"
+                    f"Expected exactly one project, got {len(gtr_project_data['project'])}. "
+                    f"Grant reference: {self.grant_reference}. "
+                    f"IDs returned: {[p.get('id') for p in gtr_project_data['project']]}"
                 )
 
             self.gtr_project_id = gtr_project_data["project"][0]["id"]
@@ -1322,13 +1327,13 @@ class GatewayToResearchGrantImporter:
         :rtype str or None
         :return a Category scheme identifier corresponding to a GTR research topic ID, or None if unclassified
         """
-        csv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_topics.csv"
+        psv_file = os.getenv("PROJECTS_TOPICS_PSV")
         topics_list = []
         protocol = "https://"
 
         try:
-            with open(csv_file, "r", newline="") as csvfile:
-                reader = csv.DictReader(csvfile)
+            with open(psv_file, "r", newline="") as psv_file:
+                reader = csv.DictReader(psv_file, delimiter="|")
                 next(reader, None)  # skip the headers
                 for row in reader:
                     key = row["topic_id"]
@@ -1340,7 +1345,7 @@ class GatewayToResearchGrantImporter:
                     topics_list.append({key: value})
 
         except FileNotFoundError:
-            print(f"File not found: {csv_file}")
+            print(f"File not found: {psv_file}")
         except Exception as e:
             print(f"An error occurred with topics mapping: {e}")
 
@@ -1383,7 +1388,7 @@ class GatewayToResearchGrantImporter:
         :rtype str
         :return a Category scheme identifier corresponding to a GTR research subject name
         """
-        psv_file = "/usr/src/app/arctic_office_projects_api/bulk_importer/csvs/project_subjects.psv"
+        psv_file = os.getenv("PROJECTS_SUBJECTS_PSV")
         subjects_list = []
         protocol = "https://"
         try:
@@ -1434,11 +1439,11 @@ def import_gateway_to_research_grant_interactively(
     """
     try:
         app.logger.info(
-            f"Importing/Updating Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"
+            f"Importing/Updating Gateway to Research (GTR) project with grant reference {gtr_grant_reference}"
         )
         echo(
             style(
-                f"Importing/Updating Gateway to Research (GTR) project with grant reference ({gtr_grant_reference})"
+                f"Importing/Updating Gateway to Research (GTR) project with grant reference {gtr_grant_reference}"
             )
         )
         importer = GatewayToResearchGrantImporter(
@@ -1450,11 +1455,11 @@ def import_gateway_to_research_grant_interactively(
         if importer.exists():
             importer.update(gtr_project_id)
             app.logger.info(
-                f"Finished importing/updating GTR project with grant reference ({gtr_grant_reference}"
+                f"Finished importing/updating GTR project with grant reference {gtr_grant_reference}"
             )
             echo(
                 style(
-                    f"Finished importing/Updating GTR project with grant reference ({gtr_grant_reference})",
+                    f"Finished importing/Updating GTR project with grant reference {gtr_grant_reference}",
                     fg="green",
                 )
             )
@@ -1462,40 +1467,41 @@ def import_gateway_to_research_grant_interactively(
 
         if gtr_project_id is None:
             app.logger.error(
-                f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
+                f"Failed importing GTR project with grant reference {gtr_grant_reference} - No or "
                 f"multiple GTR projects found"
             )
             echo(
                 style(
-                    f"Failed importing GTR project with grant reference ({gtr_grant_reference}) - No or "
+                    f"Failed importing GTR project with grant reference {gtr_grant_reference} - No or "
                     f"multiple GTR projects found",
                     fg="red",
                 )
             )
             return False
         app.logger.info(
-            f"found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+            f"found GTR project for grant reference {gtr_grant_reference} - [{gtr_project_id}] - "
             f"Importing"
         )
         echo(
             style(
-                f"found GTR project for grant reference ({gtr_grant_reference}) - [{gtr_project_id}] - "
+                f"found GTR project for grant reference {gtr_grant_reference} - [{gtr_project_id}] - "
                 f"Importing"
             )
         )
 
         importer.fetch()
         app.logger.info(
-            f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported"
+            f"Finished importing GTR project with grant reference {gtr_grant_reference}, imported"
         )
         echo(
             style(
-                f"Finished importing GTR project with grant reference ({gtr_grant_reference}), imported",
+                f"Finished importing GTR project with grant reference {gtr_grant_reference}, imported",
                 fg="green",
             )
         )
     except UnmappedGatewayToResearchOrganisation as e:
-        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]"
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        error_msg = f"[{timestamp}], Failed import - Grant ref: {gtr_grant_reference} - Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]"
         app.logger.error(error_msg)
         echo(style(error_msg, fg="red"))
 
@@ -1503,7 +1509,8 @@ def import_gateway_to_research_grant_interactively(
         log_exception_to_file(error_msg)
 
     except UnmappedGatewayToResearchPerson as e:
-        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]"
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        error_msg = f"[{timestamp}], Failed import - Grant ref: {gtr_grant_reference} - Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]"
         app.logger.error(error_msg)
         echo(style(error_msg, fg="red"))
 
@@ -1511,7 +1518,8 @@ def import_gateway_to_research_grant_interactively(
         log_exception_to_file(error_msg)
 
     except UnmappedGatewayToResearchProjectTopic as e:
-        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]"
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        error_msg = f"[{timestamp}], Failed import - Grant ref: {gtr_grant_reference} - Unmapped GTR Topic [{e.meta['gtr_research_topic']['id']}, {e.meta['gtr_research_topic']['name']}]"
         app.logger.error(error_msg)
         echo(style(error_msg, fg="red"))
 
@@ -1519,13 +1527,13 @@ def import_gateway_to_research_grant_interactively(
         log_exception_to_file(error_msg)
 
     except UnmappedGatewayToResearchProjectSubject as e:
-        error_msg = f"Grant ref: {gtr_grant_reference} - Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]"
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        error_msg = f"[{timestamp}], Failed import - Grant ref: {gtr_grant_reference} - Unmapped GTR Subject [{e.meta['gtr_research_subject']['id']}, {e.meta['gtr_research_subject']['name']}]"
         app.logger.error(error_msg)
         echo(style(error_msg, fg="red"))
 
         # Log exception details to a file
         log_exception_to_file(error_msg)
-        print(e.meta['gtr_research_subject']['name'])
 
     except Exception as e:
         db.session.rollback()
