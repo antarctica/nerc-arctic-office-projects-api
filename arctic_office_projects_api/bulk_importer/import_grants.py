@@ -41,8 +41,6 @@ def import_grants(csv_file):
     data = projects_json
     lead_project = "0"
 
-    subprocess.run(["poetry", "install"])  # nosec
-
     for project in data["data"]:
         try:
             lead_project_bool = project["lead-project"]
@@ -57,8 +55,6 @@ def import_grants(csv_file):
         if grant_reference_valid(project["grant-reference"]):  # nosec
             subprocess.run(  # nosec
                 [
-                    "poetry",
-                    "run",
                     "flask",
                     "import",
                     "grant",
