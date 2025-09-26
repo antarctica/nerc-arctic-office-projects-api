@@ -81,8 +81,12 @@ $ python arctic_office_projects_api/bulk_importer/import_grants.py
 ```
 
 
-###
+## Import issues
 
 - Projects without a reference - from: id 99  to: id 142
+- Project not found: In silico and Experimental Screening Platform for Characterising Environmental Impact of Impact of Industry Development in the Arctic (EXPECT), 2605032
 
 ###
+
+## Missing funder orgs?
+- Horizon Europe Guarantee
