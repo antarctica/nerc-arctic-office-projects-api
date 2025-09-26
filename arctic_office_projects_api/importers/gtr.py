@@ -32,6 +32,10 @@ from arctic_office_projects_api.models import (
     Person,
     Participant,
     ParticipantRole,
+    Project_Organisations,
+    Project_People,
+    Project_Subjects,
+    Project_Topics
 )
 
 
@@ -193,38 +197,28 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
     def _ror_dict(resource_uri) -> str:
 
-        csv_file = os.getenv("PROJECTS_ORGANISATIONS_CSV")
-
         gtr_path = "http://gtr.ukri.org/gtr/api/organisations/"
         _ror_list = []
 
-        try:
-            with open(csv_file, "r", newline="") as csvfile:
-                reader = csv.DictReader(csvfile)
-                next(reader, None)  # skip the headers
-                for row in reader:
-                    _ror_dict = {
-                        "organisation_uri": gtr_path + row["organisation_id"],
-                        "ror_uri": row["organisation_ror"],
-                    }
-                    _ror_list.append(_ror_dict)
-
-        except FileNotFoundError:
-            print(f"File not found: {csv_file}")
-        except KeyError as e:
-            print(f"Missing expected column: {e}")
-        except Exception as e:
-            print(f"An error occurred: {e}")
+        project_organisations = Project_Organisations.query.all()
+        for organisation in project_organisations:
+            org_ror_dict = {
+                "organisation_uri": gtr_path + organisation.organisation_id,
+                "ror_uri": organisation.organisation_ror,
+            }
+            _ror_list.append(org_ror_dict)
 
         for ror_item in _ror_list:
             if resource_uri == ror_item["organisation_uri"]:
                 return ror_item["ror_uri"]
+            else:
+                return "None"
 
     def _map_to_ror(self) -> str:
         """
         Organisations in this project are identified by ROR IDs (https://ror.org)
 
-        These mappings are defined in the _ror_dict method.
+        These mappings are defined in the Project_Organisations database table.
 
         :rtype str
         :return for a given GTR resource URI, a corresponding ROR ID as a URI
@@ -385,6 +379,9 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         if "orcidId" in self.resource:
             if self.resource["orcidId"] is not None:
                 self.orcid_id = f"https://orcid.org/{self.resource['orcidId']}"
+        else:
+            print("Person orcid_id not found in GtR. Using manual entries instead.")
+            self._map_id_to_orcid_ids()
 
     def _find_gtr_employer_link(self):
         """
@@ -423,34 +420,35 @@ class GatewayToResearchPerson(GatewayToResearchResource):
         These mappings are currently defined using a simple if statement, but in future a more scalable solution will
         be needed.
 
-        :rtype str
+        :rtype srt - initialise: self.orcid_id
         :return for a given GTR resource URI, a corresponding ORCID iD as a URL
         """
-
-        csv_file = os.getenv("PROJECTS_PEOPLE_CSV")
-        gtr_person_url = "https://gtr.ukri.org:443/gtr/api/"
+        # Extract the UUID from the current person's resource URI
+        gtr_person_uuid = self.resource_uri.split('/')[-1]
         gtr_people_orcid_id_mappings = {}
 
-        try:
-            with open(csv_file, "r", newline="") as csv_file:
-                reader = csv.DictReader(csv_file)
-                for row in reader:
-                    key = gtr_person_url + row["gtr_person"]
-                    value = row["orcid"]
-                    gtr_people_orcid_id_mappings[key] = value
-                    gtr_people_orcid_id_mappings.append({key: value})
+        project_people = Project_People.query.all()
+        for person in project_people:
+            row_uuid = person.gtr_person.split('/')[-1] if person.gtr_person else None
+            orcid = person.orcid
+            gtr_people_orcid_id_mappings[row_uuid] = orcid
 
-        except FileNotFoundError:
-            print(f"File not found: {csv_file}")
-        except Exception as e:
-            print(f"An error occurred with persons mapping: {e}")
+        # Check if the current person exists in the mapping
+        if gtr_person_uuid not in gtr_people_orcid_id_mappings:
+            raise UnmappedGatewayToResearchPerson(meta={
+                'gtr_person': {
+                    'resource_uri': self.resource_uri,
+                    'name': f"{self.first_name} {self.surname}"
+                }
+            })
 
-        if self.resource_uri not in gtr_people_orcid_id_mappings.keys():
-            raise UnmappedGatewayToResearchPerson(
-                meta={"gtr_person": {"resource_uri": self.resource_uri}}
-            )
-
-        self.orcid_id = gtr_people_orcid_id_mappings[self.resource_uri]
+        # Assign ORCID ID if the person exists in the mapping
+        if gtr_person_uuid in gtr_people_orcid_id_mappings:
+            self.orcid_id = gtr_people_orcid_id_mappings[gtr_person_uuid]
+        else:
+            # Optional: handle missing mapping gracefully
+            self.orcid_id = None
+            print(f"No ORCID found for {self.resource_uri}")
 
 
 class GatewayToResearchPublication(GatewayToResearchResource):
@@ -1312,8 +1310,6 @@ class GatewayToResearchGrantImporter:
         gtr_research_topic: dict,
     ) -> Optional[str]:
         """
-        Topic uses a csv file
-
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
         a corresponding Category based on its GTR research topic ID.
@@ -1327,27 +1323,14 @@ class GatewayToResearchGrantImporter:
         :rtype str or None
         :return a Category scheme identifier corresponding to a GTR research topic ID, or None if unclassified
         """
-        psv_file = os.getenv("PROJECTS_TOPICS_PSV")
         topics_list = []
         protocol = "https://"
 
-        try:
-            with open(psv_file, "r", newline="") as psv_file:
-                reader = csv.DictReader(psv_file, delimiter="|")
-                next(reader, None)  # skip the headers
-                for row in reader:
-                    key = row["topic_id"]
-                    gcmd_code = row["gcmd_link_code"]
-                    if gcmd_code and gcmd_code != "none":
-                        value = protocol + gcmd_code
-                    else:
-                        value = "none"
-                    topics_list.append({key: value})
-
-        except FileNotFoundError:
-            print(f"File not found: {psv_file}")
-        except Exception as e:
-            print(f"An error occurred with topics mapping: {e}")
+        project_subjects = Project_Topics.query.all()
+        for subject in project_subjects:
+            key = subject.topic_id
+            value = protocol + subject.gcmd_code if subject.gcmd_code and subject.gcmd_code != "none" else "none"
+            topics_list.append({key: value})
 
         for topic in topics_list:
             for key, value in topic.items():
@@ -1373,8 +1356,6 @@ class GatewayToResearchGrantImporter:
         gtr_research_subject: dict,
     ) -> Optional[str]:
         """
-        Subject uses a psv file (pipe)
-
         Categories in this project are identified by scheme identifiers (defined by each scheme), however GTR does not
         use a category scheme supported by this project and no other identifier is available to automatically determine
         a corresponding Category based on its GTR research subject name.
@@ -1388,24 +1369,14 @@ class GatewayToResearchGrantImporter:
         :rtype str
         :return a Category scheme identifier corresponding to a GTR research subject name
         """
-        psv_file = os.getenv("PROJECTS_SUBJECTS_PSV")
         subjects_list = []
         protocol = "https://"
-        try:
-            with open(psv_file, "r", newline="") as psv_file:
-                reader = csv.DictReader(psv_file, delimiter="|")
-                for row in reader:
-                    key = row["subject_text"]
-                    if row["gcmd_link_code"] != "none":
-                        value = protocol + row["gcmd_link_code"]
-                    else:
-                        value = "none"
-                    subjects_list.append({key: value})
 
-        except FileNotFoundError:
-            print(f"File not found: {psv_file}")
-        except Exception as e:
-            print(f"An error occurred with subjects mapping: {e}")
+        project_subjects = Project_Subjects.query.all()
+        for subject in project_subjects:
+            key = subject.subject_text
+            value = protocol + subject.gcmd_code if subject.gcmd_code and subject.gcmd_code != "none" else "none"
+            subjects_list.append({key: value})
 
         for subject in subjects_list:
             for key, value in subject.items():
@@ -1510,7 +1481,7 @@ def import_gateway_to_research_grant_interactively(
 
     except UnmappedGatewayToResearchPerson as e:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        error_msg = f"[{timestamp}], Failed import - Grant ref: {gtr_grant_reference} - Unmapped GTR Person [{e.meta['gtr_person']['resource_uri']}]"
+        error_msg = f"[{timestamp}], Successful import but unmapped GTR Person - Grant ref: {gtr_grant_reference} - Person: [{e.meta['gtr_person']['resource_uri']}]"
         app.logger.error(error_msg)
         echo(style(error_msg, fg="red"))
 
