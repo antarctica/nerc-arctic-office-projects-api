@@ -1,6 +1,5 @@
 import os
 import logging
-import time
 from pathlib import Path
 # import sentry_sdk
 from functools import wraps
@@ -12,7 +11,6 @@ from jwt import PyJWKClient
 
 # noinspection PyPackageRequirements
 from sqlalchemy import exists
-from sqlalchemy_utils import Ltree
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 # noinspection PyPackageRequirements
@@ -200,7 +198,7 @@ def create_app(config_name):
         return jsonify({
             "message": "All grants attempted",
             "data": data
-        }), 201 
+        }), 201
 
     @app.route("/post-organisations", methods=["POST", "OPTIONS"])
     @app.auth()

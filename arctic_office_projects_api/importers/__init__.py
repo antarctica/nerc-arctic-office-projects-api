@@ -36,9 +36,9 @@ def import_category_terms_from_file_interactively(categories_file_path: str):
         ) as categories_schema_file:
 
             categories_schema = json.load(categories_schema_file)
-            
+
             categories_data = json.load(categories_file)
-            
+
             validate(instance=categories_data, schema=categories_schema)
             print("* categories data valid and ready for import")
             print(

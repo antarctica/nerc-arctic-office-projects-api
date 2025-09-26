@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from arctic_office_projects_api.importers import (
     import_category_terms_from_file_interactively,
     import_organisations_from_file_interactively,
-    _generate_category_term_ltree_path,
+    generate_category_term_ltree_path,
 )
 from jsonschema import ValidationError
 
@@ -218,13 +218,13 @@ def test_generate_category_term_ltree_path():
     path_elements = {"0": "http://example.com/12", "1": "http://example.com/1"}
     expected_ltree = "http_example_com_12.http_example_com_1"
 
-    result = _generate_category_term_ltree_path(path_elements)
+    result = generate_category_term_ltree_path(path_elements)
     assert str(result) == expected_ltree
 
 
 def test_generate_category_term_ltree_path_empty():
-    """Test handling empty path elements in _generate_category_term_ltree_path."""
+    """Test handling empty path elements in generate_category_term_ltree_path."""
     path_elements = {}
 
     with pytest.raises(ValueError, match="Path for category cannot be empty"):
-        _generate_category_term_ltree_path(path_elements)
+        generate_category_term_ltree_path(path_elements)
