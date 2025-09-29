@@ -1420,3 +1420,17 @@ You may obtain a copy of the Open Government Licence at http://www.nationalarchi
 ###
 
 Add `import sqlalchemy_utils` to the migration file E.g: `migrations/versions/83da90ee9d2c_.py`
+
+### Database - add auto-increment sequence to id column - Alembic will not detect this so an SQL query is required.
+
+```
+ALTER TABLE project_organisations
+ALTER COLUMN id SET DEFAULT nextval('project_organisations_id_seq');
+```
+
+```
+SELECT setval(
+    'project_organisations_id_seq',
+    (SELECT COALESCE(MAX(id), 1) FROM project_organisations)
+);
+```

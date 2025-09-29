@@ -809,7 +809,7 @@ class Project_Organisations(db.Model):
     Mapping between GtR organisation codes and RoR.org organisation URLs
     """
     __tablename__ = "project_organisations"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     organisation_id = db.Column(db.Text())
     organisation_name = db.Column(db.Text())
     organisation_ror = db.Column(db.Text())
@@ -821,7 +821,7 @@ class Project_People(db.Model):
     This is in case GtR does not have a record of a person's Orcid
     """
     __tablename__ = "project_people"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text())
     gtr_person = db.Column(db.Text())
     orcid = db.Column(db.Text())
@@ -832,7 +832,7 @@ class Project_Subjects(db.Model):
     Mapping between GtR Subjects and GCMD codes
     """
     __tablename__ = "project_subjects"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     subject_text = db.Column(db.Text())
     gcmd_link_code = db.Column(db.Text())
 
@@ -842,7 +842,7 @@ class Project_Topics(db.Model):
     Mapping between GtR Topics and GCMD codes
     """
     __tablename__ = "project_topics"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     topic_id = db.Column(db.Text())
     topic_name = db.Column(db.Text())
     gcmd_link_name = db.Column(db.Text())
