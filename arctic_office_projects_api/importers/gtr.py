@@ -1327,7 +1327,7 @@ class GatewayToResearchGrantImporter:
         project_subjects = Project_Topics.query.all()
         for subject in project_subjects:
             key = subject.topic_id
-            value = protocol + subject.gcmd_code if subject.gcmd_code and subject.gcmd_code != "none" else "none"
+            value = protocol + subject.gcmd_link_code if subject.gcmd_link_code and subject.gcmd_link_code != "none" else "none"
             topics_list.append({key: value})
 
         for topic in topics_list:
