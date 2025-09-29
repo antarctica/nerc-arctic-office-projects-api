@@ -60,6 +60,10 @@ from arctic_office_projects_api.schemas import AllocationSchema
 from arctic_office_projects_api.models import Allocation
 from arctic_office_projects_api.schemas import CategorisationSchema
 from arctic_office_projects_api.models import Categorisation
+from arctic_office_projects_api.models import Project_Organisations
+from arctic_office_projects_api.models import Project_People
+from arctic_office_projects_api.models import Project_Topics
+from arctic_office_projects_api.models import Project_Subjects
 
 
 def validate_token(token):
@@ -184,16 +188,10 @@ def create_app(config_name):
 
         for grant_data in data:
 
-            # time.sleep(1)
             import_gateway_to_research_grant_interactively(
                 grant_data["grant-reference"],
                 grant_data["lead-project"]
             )
-
-            # return jsonify({
-            #     "message": "Grant posted successfully",
-            #     "data": data
-            # }), 201
 
         return jsonify({
             "message": "All grants attempted",
@@ -378,6 +376,111 @@ def create_app(config_name):
 
         return jsonify({
             "message": "Categories posted successfully",
+        }), 201
+
+    @app.route("/post-organisation-data", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_organisation_data():
+        """
+        Post data for an organisation to add to the project_organisations table
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        organisation_data = data
+
+        organisation_resource = Project_Organisations(
+            organisation_id=organisation_data["organisation_id"],
+            organisation_name=organisation_data["organisation_name"],
+            organisation_ror=organisation_data["organisation_ror"]
+        )
+
+        db.session.add(organisation_resource)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Organisation added",
+        }), 201
+
+    @app.route("/post-person-data", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_person_data():
+        """
+        Post data for a person to add to the project_people table
+        This is in case GtR does not have a record of a person's Orcid
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        person_data = data
+
+        person_resource = Project_People(
+            name=person_data["name"],
+            gtr_person=person_data["gtr_person"],
+            orcid=person_data["orcid"]
+        )
+
+        db.session.add(person_resource)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Person added",
+        }), 201
+
+    @app.route("/post-subject-data", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_subject_data():
+        """
+        Post data for a subject to add to the project_subject table
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        subject_data = data
+
+        subject_resource = Project_Subjects(
+            subject_text=subject_data["subject_text"],
+            gcmd_link_code=subject_data["gcmd_link_code"]
+        )
+
+        db.session.add(subject_resource)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Subject added",
+        }), 201
+
+    @app.route("/post-topic-data", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_topic_data():
+        """
+        Post data for a subject to add to the project_topic table
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        topic_data = data
+
+        topic_resource = Project_Topics(
+            topic_id=topic_data["topic_id"],
+            topic_name=topic_data["topic_name"],
+            gcmd_link_name=topic_data["gcmd_link_name"],
+            gcmd_link_code=topic_data["gcmd_link_code"],
+        )
+
+        db.session.add(topic_resource)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Topic added",
         }), 201
 
     # Resources
