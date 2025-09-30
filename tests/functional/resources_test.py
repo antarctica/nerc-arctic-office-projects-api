@@ -17,14 +17,14 @@ from arctic_office_projects_api.models import (
 
 @pytest.mark.usefixtures("db_create")
 def test_projects(client, app):
-    response = client.get("/projects")
+    response = client.get("/projects", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/projects/123")
+    response = client.get("/projects/123", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 404
 
-    response = client.get("/projects/01DB2ECBP24NHYV5KZQG2N3FS2")
+    response = client.get("/projects/01DB2ECBP24NHYV5KZQG2N3FS2", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
 
     with open("tests/responses/project.json", "r") as f:
@@ -47,32 +47,44 @@ def test_projects_relationships_success(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/participants"
+            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/participants",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/allocations"
+            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/allocations",
+            headers={"Authorization": "Bearer fake_token"}
         )
-        assert response.status_code == 200
-        assert response.json == {"data": "expected_payload"}
-
-        response = client.get("/projects/01DB2ECBP24NHYV5KZQG2N3FS2/participants")
-        assert response.status_code == 200
-        assert response.json == {"data": "expected_payload"}
-
-        response = client.get("/projects/01DB2ECBP24NHYV5KZQG2N3FS2/allocations")
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations"
+            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/participants",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations")
+        response = client.get(
+            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/allocations",
+            headers={"Authorization": "Bearer fake_token"}
+        )
+        assert response.status_code == 200
+        assert response.json == {"data": "expected_payload"}
+
+        response = client.get(
+            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/relationships/categorisations",
+            headers={"Authorization": "Bearer fake_token"}
+        )
+        assert response.status_code == 200
+        assert response.json == {"data": "expected_payload"}
+
+        response = client.get(
+            "/projects/01DB2ECBP24NHYV5KZQG2N3FS2/categorisations",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -82,35 +94,53 @@ def test_projects_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/projects/unknown-id/relationships/participants")
+    response = client.get(
+        "/projects/unknown-id/relationships/participants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/projects/unknown-id/relationships/allocations")
+    response = client.get(
+        "/projects/unknown-id/relationships/allocations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/projects/unknown-id/participants")
+    response = client.get(
+        "/projects/unknown-id/participants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/projects/unknown-id/allocations")
+    response = client.get(
+        "/projects/unknown-id/allocations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/projects/unknown-id/relationships/categorisations")
+    response = client.get(
+        "/projects/unknown-id/relationships/categorisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/projects/unknown-id/categorisations")
+    response = client.get(
+        "/projects/unknown-id/categorisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_grants(client):
-    response = client.get("/grants")
+    response = client.get("/grants", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/grants/123")
+    response = client.get("/grants/123", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 404
 
-    response = client.get("/grants/01DB2ECBP3XQ4B8Z5DW7W963YD")
+    response = client.get("/grants/01DB2ECBP3XQ4B8Z5DW7W963YD", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
 
     with open("tests/responses/grant.json", "r") as f:
@@ -133,22 +163,30 @@ def test_grants_relationships_success(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/allocations"
+            "/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/allocations",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/organisations"
+            "/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/relationships/organisations",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/allocations")
+        response = client.get(
+            "/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/allocations",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/organisations")
+        response = client.get(
+            "/grants/01DB2ECBP3XQ4B8Z5DW7W963YD/organisations",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -158,29 +196,44 @@ def test_grants_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/grants/unknown-id/relationships/allocations")
+    response = client.get(
+        "/grants/unknown-id/relationships/allocations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/grants/unknown-id/relationships/organisations")
+    response = client.get(
+        "/grants/unknown-id/relationships/organisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/grants/unknown-id/allocations")
+    response = client.get(
+        "/grants/unknown-id/allocations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/grants/unknown-id/organisations")
+    response = client.get(
+        "/grants/unknown-id/organisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_people(client):
-    response = client.get("/people")
+    response = client.get("/people", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/people/123")
+    response = client.get("/people/123", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 404
 
-    response = client.get("/people/01DB2ECBP2MFB0DH3EF3PH74R0")
+    response = client.get(
+        "/people/01DB2ECBP2MFB0DH3EF3PH74R0",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
 
     with open("tests/responses/person.json", "r") as f:
@@ -203,22 +256,30 @@ def test_people_relationships_success(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/people/01DB2ECBP2MFB0DH3EF3PH74R0/relationships/participants"
+            "/people/01DB2ECBP2MFB0DH3EF3PH74R0/relationships/participants",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/people/01DB2ECBP2MFB0DH3EF3PH74R0/relationships/organisations"
+            "/people/01DB2ECBP2MFB0DH3EF3PH74R0/relationships/organisations",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/people/01DB2ECBP2MFB0DH3EF3PH74R0/participants")
+        response = client.get(
+            "/people/01DB2ECBP2MFB0DH3EF3PH74R0/participants",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/people/01DB2ECBP2MFB0DH3EF3PH74R0/organisations")
+        response = client.get(
+            "/people/01DB2ECBP2MFB0DH3EF3PH74R0/organisations",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -228,29 +289,44 @@ def test_people_relationships_participants_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/people/unknown-id/relationships/participants")
+    response = client.get(
+        "/people/unknown-id/relationships/participants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/people/unknown-id/relationships/organisations")
+    response = client.get(
+        "/people/unknown-id/relationships/organisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/people/unknown-id/participants")
+    response = client.get(
+        "/people/unknown-id/participants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/people/unknown-id/organisations")
+    response = client.get(
+        "/people/unknown-id/organisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_participants(client):
-    response = client.get("/participants")
+    response = client.get("/participants", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/participants/123")
+    response = client.get("/participants/123", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 404
 
-    response = client.get("/participants/01DB2ECBP3622SPB5PS3J8W4XF")
+    response = client.get(
+        "/participants/01DB2ECBP3622SPB5PS3J8W4XF",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
 
     with open("tests/responses/participant.json", "r") as f:
@@ -275,22 +351,30 @@ def test_participants_relationships_projects(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/participants/01DB2ECBP3622SPB5PS3J8W4XF/relationships/projects"
+            "/participants/01DB2ECBP3622SPB5PS3J8W4XF/relationships/projects",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/participants/01DB2ECBP3622SPB5PS3J8W4XF/relationships/people"
+            "/participants/01DB2ECBP3622SPB5PS3J8W4XF/relationships/people",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/participants/01DB2ECBP3622SPB5PS3J8W4XF/projects")
+        response = client.get(
+            "/participants/01DB2ECBP3622SPB5PS3J8W4XF/projects",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/participants/01DB2ECBP3622SPB5PS3J8W4XF/people")
+        response = client.get(
+            "/participants/01DB2ECBP3622SPB5PS3J8W4XF/people",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -300,29 +384,47 @@ def test_participants_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/participants/unknown-id/relationships/projects")
+    response = client.get(
+        "/participants/unknown-id/relationships/projects",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/participants/unknown-id/relationships/people")
+    response = client.get(
+        "/participants/unknown-id/relationships/people",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/participants/unknown-id/projects")
+    response = client.get(
+        "/participants/unknown-id/projects",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/participants/unknown-id/people")
+    response = client.get(
+        "/participants/unknown-id/people",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_organisations(client):
-    response = client.get("/organisations")
+    response = client.get("/organisations", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/organisations/123")
+    response = client.get(
+        "/organisations/123",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404
 
-    response = client.get("/organisations/01DB2ECBP3WZDP4PES64XKXJ1A")
+    response = client.get(
+        "/organisations/01DB2ECBP3WZDP4PES64XKXJ1A",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
 
     with open("tests/responses/organisation.json", "r") as f:
@@ -347,22 +449,30 @@ def test_organisations_relationships_success(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/relationships/people"
+            "/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/relationships/people",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/relationships/grants"
+            "/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/relationships/grants",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/people")
+        response = client.get(
+            "/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/people",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/grants")
+        response = client.get(
+            "/organisations/01DB2ECBP3WZDP4PES64XKXJ1A/grants",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -372,29 +482,44 @@ def test_organisations_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/organisations/unknown-id/relationships/people")
+    response = client.get(
+        "/organisations/unknown-id/relationships/people",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/organisations/unknown-id/relationships/grants")
+    response = client.get(
+        "/organisations/unknown-id/relationships/grants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/organisations/unknown-id/people")
+    response = client.get(
+        "/organisations/unknown-id/people",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/organisations/unknown-id/grants")
+    response = client.get(
+        "/organisations/unknown-id/grants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_allocations(client):
-    response = client.get("/allocations")
+    response = client.get("/allocations", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/allocations/123")
+    response = client.get("/allocations/123", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 404
 
-    response = client.get("/allocations/01DB2ECBP35AT5WBG092J5GDQ9")
+    response = client.get(
+        "/allocations/01DB2ECBP35AT5WBG092J5GDQ9",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
 
     with open("tests/responses/allocation.json", "r") as f:
@@ -417,22 +542,30 @@ def test_allocations_relationships_success(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/allocations/01DB2ECBP35AT5WBG092J5GDQ9/relationships/projects"
+            "/allocations/01DB2ECBP35AT5WBG092J5GDQ9/relationships/projects",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/allocations/01DB2ECBP35AT5WBG092J5GDQ9/relationships/grants"
+            "/allocations/01DB2ECBP35AT5WBG092J5GDQ9/relationships/grants",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/allocations/01DB2ECBP35AT5WBG092J5GDQ9/projects")
+        response = client.get(
+            "/allocations/01DB2ECBP35AT5WBG092J5GDQ9/projects",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/allocations/01DB2ECBP35AT5WBG092J5GDQ9/grants")
+        response = client.get(
+            "/allocations/01DB2ECBP35AT5WBG092J5GDQ9/grants",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -442,29 +575,50 @@ def test_allocations_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/allocations/unknown-id/relationships/projects")
+    response = client.get(
+        "/allocations/unknown-id/relationships/projects",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/allocations/unknown-id/relationships/grants")
+    response = client.get(
+        "/allocations/unknown-id/relationships/grants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/allocations/unknown-id/projects")
+    response = client.get(
+        "/allocations/unknown-id/projects",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/allocations/unknown-id/grants")
+    response = client.get(
+        "/allocations/unknown-id/grants",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_categorisations(client):
-    response = client.get("/categorisations")
+    response = client.get(
+        "/categorisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/categorisations/123")
+    response = client.get(
+        "/categorisations/123",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404
 
-    response = client.get("/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG")
+    response = client.get(
+        "/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
 
     with open("tests/responses/categorisation.json", "r") as f:
@@ -489,22 +643,30 @@ def test_categorisations_relationships_success(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects"
+            "/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/projects",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         response = client.get(
-            "/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories"
+            "/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/relationships/categories",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects")
+        response = client.get(
+            "/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/projects",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories")
+        response = client.get(
+            "/categorisations/01DC6HYAKYAXE7MZMD08QV5JWG/categories",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -514,29 +676,50 @@ def test_categorisations_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/categorisations/unknown-id/relationships/projects")
+    response = client.get(
+        "/categorisations/unknown-id/relationships/projects",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categorisations/unknown-id/relationships/categories")
+    response = client.get(
+        "/categorisations/unknown-id/relationships/categories",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categorisations/unknown-id/projects")
+    response = client.get(
+        "/categorisations/unknown-id/projects",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categorisations/unknown-id/categories")
+    response = client.get(
+        "/categorisations/unknown-id/categories",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_category_schemes(client):
-    response = client.get("/category-schemes")
+    response = client.get(
+        "/category-schemes",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/category-schemes/123")
+    response = client.get(
+        "/category-schemes/123",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404
 
-    response = client.get("/category-schemes/01DC6HYAKXG8FCN63D7DH06W84")
+    response = client.get(
+        "/category-schemes/01DC6HYAKXG8FCN63D7DH06W84",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
 
     with open("tests/responses/category_scheme.json", "r") as f:
@@ -561,12 +744,16 @@ def test_categoryschemes_relationships_categories(mock_filter_by, client):
         mock_dump.return_value = {"data": "expected_payload"}
 
         response = client.get(
-            "/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories"
+            "/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/relationships/categories",
+            headers={"Authorization": "Bearer fake_token"}
         )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
-        response = client.get("/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories")
+        response = client.get(
+            "/category-schemes/01DC6HYAKXG8FCN63D7DH06W84/categories",
+            headers={"Authorization": "Bearer fake_token"}
+        )
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
@@ -576,23 +763,32 @@ def test_categoryschemes_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/category-schemes/unknown-id/relationships/categories")
+    response = client.get(
+        "/category-schemes/unknown-id/relationships/categories",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/category-schemes/unknown-id/categories")
+    response = client.get(
+        "/category-schemes/unknown-id/categories",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
 
 @pytest.mark.usefixtures("db_create")
 def test_category_terms(client):
-    response = client.get("/categories")
+    response = client.get("/categories", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 200
     assert response.get_json() is not None
 
-    response = client.get("/categories/123")
+    response = client.get("/categories/123", headers={"Authorization": "Bearer fake_token"})
     assert response.status_code == 404
 
-    response = client.get("/categories/01DC6HYAKX993ZK6YHCVWAE169")
+    response = client.get(
+        "/categories/01DC6HYAKX993ZK6YHCVWAE169",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 200
 
     with open("tests/responses/category_term.json", "r") as f:
@@ -616,7 +812,8 @@ def test_categoryterms_relationships_parent_categories(mock_filter_by, client):
     ) as mock_dump:
         mock_dump.return_value = {"data": "expected_payload"}
         response = client.get(
-            "/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories"
+            "/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/parent-categories",
+            headers={"Authorization": "Bearer fake_token"}
         )
 
         assert response.status_code == 200
@@ -624,7 +821,8 @@ def test_categoryterms_relationships_parent_categories(mock_filter_by, client):
 
         mock_dump.return_value = {"data": "expected_payload"}
         response = client.get(
-            "/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes"
+            "/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/category-schemes",
+            headers={"Authorization": "Bearer fake_token"}
         )
 
         assert response.status_code == 200
@@ -632,7 +830,8 @@ def test_categoryterms_relationships_parent_categories(mock_filter_by, client):
 
         mock_dump.return_value = {"data": "expected_payload"}
         response = client.get(
-            "/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/categorisations"
+            "/categories/01DC6HYAKX993ZK6YHCVWAE169/relationships/categorisations",
+            headers={"Authorization": "Bearer fake_token"}
         )
 
         assert response.status_code == 200
@@ -640,20 +839,27 @@ def test_categoryterms_relationships_parent_categories(mock_filter_by, client):
 
         mock_dump.return_value = {"data": "expected_payload"}
         response = client.get(
-            "/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories"
+            "/categories/01DC6HYAKX993ZK6YHCVWAE169/parent-categories",
+            headers={"Authorization": "Bearer fake_token"}
         )
 
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         mock_dump.return_value = {"data": "expected_payload"}
-        response = client.get("/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes")
+        response = client.get(
+            "/categories/01DC6HYAKX993ZK6YHCVWAE169/category-schemes",
+            headers={"Authorization": "Bearer fake_token"}
+        )
 
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
 
         mock_dump.return_value = {"data": "expected_payload"}
-        response = client.get("/categories/01DC6HYAKX993ZK6YHCVWAE169/categorisations")
+        response = client.get(
+            "/categories/01DC6HYAKX993ZK6YHCVWAE169/categorisations",
+            headers={"Authorization": "Bearer fake_token"}
+        )
 
         assert response.status_code == 200
         assert response.json == {"data": "expected_payload"}
@@ -664,20 +870,38 @@ def test_categories_not_found(mock_filter_by, client):
     # Mock NoResultFound being raised
     mock_filter_by.return_value.one.side_effect = NoResultFound
 
-    response = client.get("/categories/unknown-id/relationships/parent-categories")
+    response = client.get(
+        "/categories/unknown-id/relationships/parent-categories",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categories/unknown-id/relationships/category-schemes")
+    response = client.get(
+        "/categories/unknown-id/relationships/category-schemes",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categories/unknown-id/relationships/categorisations")
+    response = client.get(
+        "/categories/unknown-id/relationships/categorisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categories/unknown-id/parent-categories")
+    response = client.get(
+        "/categories/unknown-id/parent-categories",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categories/unknown-id/category-schemes")
+    response = client.get(
+        "/categories/unknown-id/category-schemes",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound
 
-    response = client.get("/categories/unknown-id/categorisations")
+    response = client.get(
+        "/categories/unknown-id/categorisations",
+        headers={"Authorization": "Bearer fake_token"}
+    )
     assert response.status_code == 404  # NotFound

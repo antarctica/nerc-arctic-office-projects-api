@@ -19,10 +19,10 @@ class SampleEnum(Enum):
     OPTION2 = "option2"
 
 
-class TestSchema(Schema):
+class ExampleSchema(Schema):
     field1 = EnumField()
     field2 = DateRangeField()
-    currency = CurrencyField(currency="currency_type")
+    currency = CurrencyField(metadata={"currency": "currency_type"})
 
 
 class MyEnum(Enum):
@@ -35,21 +35,21 @@ class MySchema(Schema):
         type_ = "test"
 
     id = fields.String(dump_only=True, required=True)
-    field1 = EnumStrField(enum=MyEnum, dump_only=True, required=True)
+    field1 = EnumStrField(metadata={"enum": MyEnum}, dump_only=True, required=True)
     cost_currency = fields.String(required=True)  # Include the currency field
-    cost = CurrencyField(currency="currency", required=True)  # Initialize CurrencyField
+    cost = CurrencyField(metadata={"currency": "currency_type"}, required=True)  # Initialize CurrencyField
 
 
 @pytest.fixture
 def sample_schema():
-    class TestSchema(Schema):
+    class ExampleSchema(Schema):
         class Meta(Schema.Meta):
             type_ = "test"
 
         id = fields.String(dump_only=True, required=True)
         name = fields.String(dump_only=True)
 
-    return TestSchema()
+    return ExampleSchema()
 
 
 def test_schema_initialization(sample_schema):

@@ -38,3 +38,14 @@ def db_create(app):
         yield db
         db.session.remove()
         # db.drop_all()  # Clean up after the test
+
+
+@pytest.fixture(autouse=True)
+def mock_validate_token(monkeypatch):
+    import arctic_office_projects_api  # validate_token is in __init__.py
+
+    def fake_validate_token(token):
+        return {"sub": "test-user", "roles": ["tester"]}
+
+    # Monkeypatch directly on the module
+    monkeypatch.setattr(arctic_office_projects_api, "validate_token", fake_validate_token)
