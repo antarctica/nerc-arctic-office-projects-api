@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.10] 2025-10-01
+
+### Added
+
+* Post routes to mirror & use instead of the cli commands for adding and updating data in the database
+* New models for database tables to contain data that used to be held in csv files
+* New tests to cover the above and the revised MSAL auth
+
 ## [0.6.2] 2025-09-03
 
 ### Changed
