@@ -26,7 +26,7 @@ class RequestFormatter(logging.Formatter):
         record.url = "NA"
         record.request_id = "NA"
 
-        if has_request_context():
+        if has_request_context():  # pragma: no cover
             record.url = request.url
             if APP_ENABLE_REQUEST_ID:
                 record.request_id = request.environ.get("HTTP_X_REQUEST_ID")
