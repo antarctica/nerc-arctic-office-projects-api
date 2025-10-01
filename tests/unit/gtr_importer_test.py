@@ -3,6 +3,8 @@ import pytest
 from unittest.mock import patch, mock_open, MagicMock, Mock
 from requests import HTTPError
 
+from arctic_office_projects_api import create_app
+
 from arctic_office_projects_api.models import (
     GrantCurrency,
     GrantStatus,
@@ -52,7 +54,17 @@ def gtr_project():
         return project
 
 
-class TestProjectTopicMapping(unittest.TestCase):
+class FlaskTestCase(unittest.TestCase):
+    def setUp(self):
+        self.app = create_app({"TESTING": True})
+        self.ctx = self.app.app_context()
+        self.ctx.push()
+
+    def tearDown(self):
+        self.ctx.pop()
+
+
+class TestProjectTopicMapping(FlaskTestCase):
 
     @patch("arctic_office_projects_api.utils.log_exception_to_file")
     @patch(
@@ -69,9 +81,6 @@ class TestProjectTopicMapping(unittest.TestCase):
             GatewayToResearchGrantImporter._map_gtr_project_research_topic_to_category_term(
                 gtr_topic
             )
-
-        # Ensure that the log_exception_to_file function was called
-        # mock_log_exception.assert_called_once()
 
 
 class TestFindUniqueGcmdProjectResearchSubjects:
@@ -419,7 +428,7 @@ class TestGatewayToResearchGrantImporter:
 
         with pytest.raises(
             ValueError,
-            match="Multiple project elements found in GTR response, only expected one",
+            match=r"Expected exactly one project, got \d+"
         ):
             importer.search()
 
@@ -604,7 +613,7 @@ class TestGatewayToResearchResource:
             GatewayToResearchResource("http://example.com/resource")
 
 
-class TestGatewayToResearchOrganisation:
+class TestGatewayToResearchOrganisation(FlaskTestCase):
 
     @patch("requests.get")
     def test_init_missing_name(self, mock_get):
@@ -614,22 +623,22 @@ class TestGatewayToResearchOrganisation:
         with pytest.raises(KeyError):
             GatewayToResearchOrganisation("http://gtr.ukri.org/gtr/api/organisations/1")
 
-    @patch("requests.get")
-    def test_map_to_ror_unmapped_organisation(self, mock_get):
-        mock_get.return_value.json.return_value = {
-            "name": "Test Organisation",
-            "links": {"link": []},
-        }
-        mock_get.return_value.status_code = 200
+    def test_map_to_ror_unmapped_organisation(app_context):
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.json.return_value = {
+                "name": "Test Organisation",
+                "links": {"link": []},
+            }
+            mock_get.return_value.status_code = 200
 
-        with patch(
-            "builtins.open",
-            mock_open(read_data="organisation_id,organisation_ror\n1,ror.org/1"),
-        ):
-            with pytest.raises(UnmappedGatewayToResearchOrganisation):
-                GatewayToResearchOrganisation(
-                    "http://gtr.ukri.org/gtr/api/organisations/unknown"
-                )
+            with patch(
+                "builtins.open",
+                mock_open(read_data="organisation_id,organisation_ror\n1,ror.org/1"),
+            ):
+                with pytest.raises(UnmappedGatewayToResearchOrganisation):
+                    GatewayToResearchOrganisation(
+                        "http://gtr.ukri.org/gtr/api/organisations/unknown"
+                    )
 
 
 if __name__ == "__main__":

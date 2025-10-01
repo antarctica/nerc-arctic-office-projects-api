@@ -46,6 +46,56 @@ To initialise the database or update categories and organisations
 ]
 ```
 
+### Update project_organisations:
+
+- `/post-organisation-data` - send with json payload:
+```
+{
+    "organisation_id": "C7FB1D09-3E85-4CFF-922E-65AD67C8F51B",
+    "organisation_name": "THE JAMES HUTTON INSTITUTE",
+    "organisation_ror": "https://ror.org/03rzp5127"
+}
+```
+
+### Update project_person:
+
+- `/post-person-data` - send with json payload:
+```
+{
+    "name": "Steven Profile (Researcher)",
+    "gtr_person": "E51FDDE8-EE5C-4B85-80FF-C03FB9B00D2U",
+    "orcid": "http://orcid.org/0000-0000-0000-0000"
+}
+```
+
+### Update project_topic:
+
+- `/post-topic-data` - send with json payload:
+```
+{
+    "topic_id": "71A8EA33-09DF-4E02-85BA-A9545564F72D",
+    "topic_name": "Water+Quality",
+    "gcmd_link_name": "WATER QUALITY",
+    "gcmd_link_code": "gcmd.earthdata.nasa.gov/kms/concept/1ee8a323-f0ba-4a21-b597-50890c527c8e"
+}
+
+### Update project_subject:
+
+- `/post-subject-data`  - send with json payload:
+```
+{
+    "subject_text": "Wind Power",
+    "gcmd_link_code": "gcmd.earthdata.nasa.gov/kms/concept/b3a95e10-1c1d-41cf-8802-8bb1d3a41353"
+}
+
+### Import errors
+
+- `/exception-log` - shows the contents of this file where errors are logged: 
+- Docker: `arctic_office_projects_api/bulk_importer/exception_log.txt`
+- BAS server: `/var/www/arctic-office-projects-api/exception_log.txt`
+- Defined by this env var: IMPORT_EXCEPTION_LOG
+
+
 ## CLI
 
 ### Single project import:
@@ -74,11 +124,6 @@ $ poetry run flask import grant gtr NE/N016092/2
 - for institutions: https://ror.org/search
 
 - make sure the correct json file is referenced in import_grants.py - approx line number 48
-
-- in the Heroku dashboard, run a console & enter
-```shell
-$ python arctic_office_projects_api/bulk_importer/import_grants.py
-```
 
 
 ## Import issues
