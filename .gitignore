@@ -6,5 +6,6 @@ __pycache__
 /_dev
 dist
 htmlcov
+.coverage
 test-results.xml
 projects.json
