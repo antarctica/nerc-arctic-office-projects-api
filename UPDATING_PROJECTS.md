@@ -5,7 +5,7 @@ There are a number of Post routes for adding data into the database.
 
 ### Postman collections
 Import json collections into Postman from here:  
-`postman_collections`  
+`postman_collections/Arctic Office API - local testing.postman_collection.json`  
 Auth variables will need to be added. Most likely from Azure: `portal.azure.com`
 
 ### Set up

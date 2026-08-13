@@ -1,9 +1,8 @@
 from http import HTTPStatus
-from importlib.metadata import version
-
+from arctic_office_projects_api.version import __version__
 from arctic_office_projects_api.utils import healthcheck_db
 
-app_version = version("arctic_office_projects_api")
+app_version = __version__
 
 
 def index_route():
