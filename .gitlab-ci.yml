@@ -86,7 +86,7 @@ dependencies-app:
     - apk add --update nodejs npm
     - npm install snyk -g
   script:
-    - uv export --locked --format requirements.txt --output-file requirements.txt
+    - uv export --format requirements.txt --output-file requirements.txt
     - snyk test --file=requirements.txt
     - snyk monitor --file=requirements.txt --project-name="$SNYK_PROJECT" --org="$SNYK_ORG"
   only:
