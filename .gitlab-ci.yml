@@ -11,9 +11,8 @@
 
 stages:
   - build
-  - test
   - lint
-  - build
+  - test
   - deploy
 
 variables:
@@ -41,7 +40,7 @@ build:
   image: docker:latest
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_REGISTRY
-    - docker build -t $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest -f Dockerfile-ci .
+    - docker build -t $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest -f Dockerfile .
     - docker push $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest
   only:
     - master
@@ -50,6 +49,24 @@ image:
   name: $CI_REGISTRY_IMAGE/arctic-office-projects-api:latest
 
 # == Jobs ==
+
+lint:
+  stage: lint
+  before_script:
+    - "poetry install"
+  script:
+    - "poetry run flake8 . --ignore=E501 --exclude migrations, faker, .venv"
+  only:
+    - master
+
+bandit-app:
+  stage: lint
+  before_script:
+    - "poetry install"
+  script:
+    - "poetry run bandit -r arctic_office_projects_api"
+  only:
+    - master
 
 test-app:
   stage: test
@@ -87,35 +104,6 @@ dependencies-app:
     - "poetry run snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG"
   only:
     - master
-
-lint:
-  stage: lint
-  before_script:
-    - "poetry install"
-  script:
-    - "poetry run flake8 . --ignore=E501 --exclude migrations,.venv"
-  only:
-    - master
-
-bandit-app:
-  stage: lint
-  before_script:
-    - "poetry install"
-  script:
-    - "poetry run bandit -r arctic_office_project_api"
-  only:
-    - master
-
-# sentry:
-#   stage: test
-#   image:
-#     name: getsentry/sentry-cli
-#     entrypoint: [""]
-#   script:
-#     - sentry-cli releases new --finalize $CI_COMMIT_SHA
-#     - sentry-cli releases deploys $CI_COMMIT_SHA new -e production
-#   only:
-#     - tags
 
 package:
   stage: deploy
