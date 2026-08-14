@@ -85,10 +85,10 @@ dependencies-app:
   before_script:
     - apk add --update nodejs npm
     - npm install snyk -g
-    - uv sync --locked
   script:
-    - uv run snyk test
-    - uv run snyk monitor --project-name=$SNYK_PROJECT --org=$SNYK_ORG
+    - uv export --locked --format requirements.txt --output-file requirements.txt
+    - snyk test --file=requirements.txt
+    - snyk monitor --file=requirements.txt --project-name="$SNYK_PROJECT" --org="$SNYK_ORG"
   only:
     - master
 
