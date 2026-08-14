@@ -55,7 +55,7 @@ lint:
   before_script:
     - "poetry install"
   script:
-    - "poetry run flake8 . --ignore=E501 --exclude migrations, faker, .venv"
+    - "poetry run flake8 . --ignore=E501 --exclude migrations,faker,.venv"
   only:
     - master
 
