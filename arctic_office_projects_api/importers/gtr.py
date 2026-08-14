@@ -193,7 +193,7 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
 
         self.ror_id = self._map_to_ror()
 
-    def _ror_dict(resource_uri) -> str:
+    def _ror_dict(resource_uri) -> str | None:
 
         gtr_path = "http://gtr.ukri.org/gtr/api/organisations/"
         _ror_list = []
@@ -209,8 +209,8 @@ class GatewayToResearchOrganisation(GatewayToResearchResource):
         for ror_item in _ror_list:
             if resource_uri == ror_item["organisation_uri"]:
                 return ror_item["ror_uri"]
-            else:
-                return "None"
+
+        return "None"
 
     def _map_to_ror(self) -> str:
         """
@@ -1373,7 +1373,7 @@ class GatewayToResearchGrantImporter:
         project_subjects = Project_Subjects.query.all()
         for subject in project_subjects:
             key = subject.subject_text
-            value = protocol + subject.gcmd_code if subject.gcmd_code and subject.gcmd_code != "none" else "none"
+            value = protocol + subject.gcmd_link_code if subject.gcmd_link_code and subject.gcmd_link_code != "none" else "none"
             subjects_list.append({key: value})
 
         for subject in subjects_list:
@@ -1424,11 +1424,11 @@ def import_gateway_to_research_grant_interactively(
         if importer.exists():
             importer.update(gtr_project_id)
             app.logger.info(
-                f"Finished importing/updating GTR project with grant reference {gtr_grant_reference}"
+                f"Finished updating GTR project with grant reference {gtr_grant_reference}"
             )
             echo(
                 style(
-                    f"Finished importing/Updating GTR project with grant reference {gtr_grant_reference}",
+                    f"Finished updating GTR project with grant reference {gtr_grant_reference}",
                     fg="green",
                 )
             )
@@ -1447,6 +1447,7 @@ def import_gateway_to_research_grant_interactively(
                 )
             )
             return False
+
         app.logger.info(
             f"found GTR project for grant reference {gtr_grant_reference} - [{gtr_project_id}] - "
             f"Importing"
@@ -1459,6 +1460,7 @@ def import_gateway_to_research_grant_interactively(
         )
 
         importer.fetch()
+
         app.logger.info(
             f"Finished importing GTR project with grant reference {gtr_grant_reference}, imported"
         )
@@ -1468,6 +1470,7 @@ def import_gateway_to_research_grant_interactively(
                 fg="green",
             )
         )
+
     except UnmappedGatewayToResearchOrganisation as e:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         error_msg = f"[{timestamp}], Failed import - Grant ref: {gtr_grant_reference} - Unmapped GTR Organisation [{e.meta['gtr_organisation']['resource_uri']}]"

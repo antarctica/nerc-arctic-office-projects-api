@@ -325,24 +325,6 @@
       "website": "https://www.gla.ac.uk"
     },
     {
-      "name": "AHRC",
-      "grid-identifier": "https://www.grid.ac/institutes/grid.426413.6",
-      "ror-identifier": "https://api.ror.org/organizations?query=0505m1554",
-      "website": "https://ahrc.ukri.org"
-    },
-    {
-      "name": "EPSRC",
-      "grid-identifier": "https://www.grid.ac/institutes/grid.421091.f",
-      "ror-identifier": "https://api.ror.org/organizations?query=0439y7842",
-      "website": "https://epsrc.ukri.org"
-    },
-    {
-      "name": "ESRC",
-      "grid-identifier": "https://www.grid.ac/institutes/grid.434257.3",
-      "ror-identifier": "https://api.ror.org/organizations?query=03n0ht308",
-      "website": "https://esrc.ukri.org"
-    },
-    {
       "name": "Innovate Uk",
       "grid-identifier": "https://www.grid.ac/institutes/grid.423443.6",
       "ror-identifier": "https://api.ror.org/organizations?query=05ar5fy68",

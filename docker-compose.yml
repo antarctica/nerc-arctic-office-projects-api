@@ -21,6 +21,19 @@ services:
     ports:
       - 5432:5432
 
+  test_database:
+    image: postgres:18.4-alpine
+    volumes:
+      - postgres_volume:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=app
+      - PGPORT=5433
+    ports:
+      - 5433:5433
+
+
 volumes:
   postgres_volume:
-
+  postgres_test_volume:

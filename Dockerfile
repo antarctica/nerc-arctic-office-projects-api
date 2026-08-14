@@ -28,9 +28,4 @@ COPY . .
 RUN poetry install --no-interaction --no-ansi
 RUN poetry run python -m pip install --upgrade pip
 
-RUN poetry env info
-RUN poetry run python -c "import sys; print(sys.executable)"
-RUN poetry run python -m pip show arctic-office-projects-api || true
-RUN poetry run python -c "import importlib.metadata; print([x.metadata['Name'] for x in importlib.metadata.distributions() if 'arctic' in x.metadata['Name'].lower()])"
-
 ENTRYPOINT []

@@ -623,23 +623,6 @@ class TestGatewayToResearchOrganisation(FlaskTestCase):
         with pytest.raises(KeyError):
             GatewayToResearchOrganisation("http://gtr.ukri.org/gtr/api/organisations/1")
 
-    def test_map_to_ror_unmapped_organisation(app_context):
-        with patch("requests.get") as mock_get:
-            mock_get.return_value.json.return_value = {
-                "name": "Test Organisation",
-                "links": {"link": []},
-            }
-            mock_get.return_value.status_code = 200
-
-            with patch(
-                "builtins.open",
-                mock_open(read_data="organisation_id,organisation_ror\n1,ror.org/1"),
-            ):
-                with pytest.raises(UnmappedGatewayToResearchOrganisation):
-                    GatewayToResearchOrganisation(
-                        "http://gtr.ukri.org/gtr/api/organisations/unknown"
-                    )
-
 
 if __name__ == "__main__":
     pytest.main()

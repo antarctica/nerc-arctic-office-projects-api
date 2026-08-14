@@ -170,7 +170,7 @@ def create_app(config_name):
         )
 
         return jsonify({
-            "message": "Grant posted successfully",
+            "message": "Grant post attempted - check import-error log for issues",
             "data": data
         }), 201
 
@@ -187,14 +187,13 @@ def create_app(config_name):
                 return jsonify({"error": "No JSON body provided"}), 400
 
         for grant_data in data:
-
             import_gateway_to_research_grant_interactively(
                 grant_data["grant-reference"],
                 grant_data["lead-project"]
             )
 
         return jsonify({
-            "message": "All grants attempted",
+            "message": "All grants attempted - check import-error log for issues",
             "data": data
         }), 201
 
@@ -256,7 +255,7 @@ def create_app(config_name):
         db.session.commit()
 
         return jsonify({
-            "message": "Organisations posted successfully",
+            "message": "Bulk organisations post attempted - check import-error log for issues",
         }), 201
 
     # Post data routes - to update data in the database
@@ -369,7 +368,7 @@ def create_app(config_name):
             db.session.commit()
 
         return jsonify({
-            "message": "Categories posted successfully",
+            "message": "Categories post attempted - check import-error log for issues",
         }), 201
 
     @app.route("/post-organisation-data", methods=["POST", "OPTIONS"])
@@ -385,6 +384,16 @@ def create_app(config_name):
 
         organisation_data = data
 
+        # Check whether this organisation already exists
+        existing_organisation = Project_Organisations.query.filter_by(
+            organisation_id=organisation_data["organisation_id"]
+        ).first()
+
+        if existing_organisation:
+            return jsonify({
+                "message": f"Organisation already imported: {organisation_data['organisation_name']}"
+            }), 200
+
         organisation_resource = Project_Organisations(
             organisation_id=organisation_data["organisation_id"],
             organisation_name=organisation_data["organisation_name"],
@@ -395,22 +404,74 @@ def create_app(config_name):
         db.session.commit()
 
         return jsonify({
-            "message": "Organisation added",
+            "message": "Organisation post attempted - check import-error log for issues",
         }), 201
 
-    @app.route("/post-person-data", methods=["POST", "OPTIONS"])
+    @app.route("/post-organisation-data-bulk", methods=["POST", "OPTIONS"])
     @app.auth()
-    def post_person_data():
+    def post_organisation_data_bulk():
         """
-        Post data for a person to add to the project_people table
-        This is in case GtR does not have a record of a person's Orcid
+        Post bulk data for organisations to initialise the project_organisations table
         """
         if request.method == "POST":
             data = request.get_json()
         if not data:
             return jsonify({"error": "No JSON body provided"}), 400
 
+        added = 0
+        skipped = 0
+
+        for organisation_data in data:
+
+            # Check whether this organisation_data already exists
+            existing_organisation = Project_Organisations.query.filter_by(
+                organisation_id=organisation_data["organisation_id"]
+            ).first()
+
+            if existing_organisation:
+                skipped += 1
+                continue
+
+            organisation_resource = Project_Organisations(
+                organisation_id=organisation_data["organisation_id"],
+                organisation_name=organisation_data["organisation_name"],
+                organisation_ror=organisation_data["organisation_ror"]
+            )
+
+            db.session.add(organisation_resource)
+            added += 1
+
+        db.session.commit()
+
+        return jsonify({
+            "message": "Organisation posts attempted - check import-error log for issues",
+            "added": added,
+            "skipped": skipped
+        }), 201
+
+    @app.route("/post-person-data", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_person_data():
+        """
+        Post data for a person to add to the project_people table.
+        This is in case GtR does not have a record of a person's Orcid.
+        """
+        data = request.get_json()
+
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
         person_data = data
+
+        # Check whether this person already exists
+        existing_person = Project_People.query.filter_by(
+            gtr_person=person_data["gtr_person"]
+        ).first()
+
+        if existing_person:
+            return jsonify({
+                "message": f"Person already imported: {person_data['name']}"
+            }), 200
 
         person_resource = Project_People(
             name=person_data["name"],
@@ -422,7 +483,52 @@ def create_app(config_name):
         db.session.commit()
 
         return jsonify({
-            "message": "Person added",
+            "message": "Person post attempted - check import-error log for issues",
+        }), 201
+
+    @app.route("/post-person-data-bulk", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_person_data_bulk():
+        """
+        Post bulk data for people to add to the project_people table.
+        """
+        data = request.get_json()
+
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        if not isinstance(data, list):
+            return jsonify({"error": "JSON body must be a list of people"}), 400
+
+        added = 0
+        skipped = 0
+
+        for person_data in data:
+
+            # Check whether this person already exists
+            existing_person = Project_People.query.filter_by(
+                gtr_person=person_data["gtr_person"]
+            ).first()
+
+            if existing_person:
+                skipped += 1
+                continue
+
+            person_resource = Project_People(
+                name=person_data["name"],
+                gtr_person=person_data["gtr_person"],
+                orcid=person_data["orcid"]
+            )
+
+            db.session.add(person_resource)
+            added += 1
+
+        db.session.commit()
+
+        return jsonify({
+            "message": "Person posts attempted - check import-error log for issues",
+            "added": added,
+            "skipped": skipped
         }), 201
 
     @app.route("/post-subject-data", methods=["POST", "OPTIONS"])
@@ -438,6 +544,16 @@ def create_app(config_name):
 
         subject_data = data
 
+        # Check whether this subject already exists
+        existing_subject = Project_Subjects.query.filter_by(
+            gcmd_link_code=subject_data["gcmd_link_code"]
+        ).first()
+
+        if existing_subject:
+            return jsonify({
+                "message": f"Subject already imported: {subject_data['gcmd_link_code']}"
+            }), 200
+
         subject_resource = Project_Subjects(
             subject_text=subject_data["subject_text"],
             gcmd_link_code=subject_data["gcmd_link_code"]
@@ -447,7 +563,48 @@ def create_app(config_name):
         db.session.commit()
 
         return jsonify({
-            "message": "Subject added",
+            "message": "Subject post attempted - check import-error log for issues",
+        }), 201
+
+    @app.route("/post-subject-data-bulk", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_subject_data_bulk():
+        """
+        Post bulk data for subjects to initialise the project_subject table
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        added = 0
+        skipped = 0
+
+        for subject_data in data:
+
+            # Check whether this subject already exists
+            existing_subject = Project_Subjects.query.filter_by(
+                gcmd_link_code=subject_data["gcmd_link_code"]
+            ).first()
+
+            if existing_subject:
+                skipped += 1
+                continue
+
+            subject_resource = Project_Subjects(
+                subject_text=subject_data["subject_text"],
+                gcmd_link_code=subject_data["gcmd_link_code"]
+            )
+
+            db.session.add(subject_resource)
+            added += 1
+
+        db.session.commit()
+
+        return jsonify({
+            "message": "Subject posts attempted - check import-error log for issues",
+            "added": added,
+            "skipped": skipped
         }), 201
 
     @app.route("/post-topic-data", methods=["POST", "OPTIONS"])
@@ -463,6 +620,16 @@ def create_app(config_name):
 
         topic_data = data
 
+        # Check whether this topic already exists
+        existing_topic = Project_Topics.query.filter_by(
+            topic_id=topic_data["topic_id"]
+        ).first()
+
+        if existing_topic:
+            return jsonify({
+                "message": f"Topic already imported: {topic_data['topic_id']}"
+            }), 200
+
         topic_resource = Project_Topics(
             topic_id=topic_data["topic_id"],
             topic_name=topic_data["topic_name"],
@@ -474,7 +641,50 @@ def create_app(config_name):
         db.session.commit()
 
         return jsonify({
-            "message": "Topic added",
+            "message": "Topic post attempted - check import-error log for issues",
+        }), 201
+
+    @app.route("/post-topic-data-bulk", methods=["POST", "OPTIONS"])
+    @app.auth()
+    def post_topic_data_bulk():
+        """
+        Post data for a subject to add to the project_topic table
+        """
+        if request.method == "POST":
+            data = request.get_json()
+        if not data:
+            return jsonify({"error": "No JSON body provided"}), 400
+
+        added = 0
+        skipped = 0
+
+        for topic_data in data:
+
+            # Check whether this topic already exists
+            existing_topic = Project_Topics.query.filter_by(
+                topic_id=topic_data["topic_id"]
+            ).first()
+
+            if existing_topic:
+                skipped += 1
+                continue
+
+            topic_resource = Project_Topics(
+                topic_id=topic_data["topic_id"],
+                topic_name=topic_data["topic_name"],
+                gcmd_link_name=topic_data["gcmd_link_name"],
+                gcmd_link_code=topic_data["gcmd_link_code"],
+            )
+
+            db.session.add(topic_resource)
+            added += 1
+
+        db.session.commit()
+
+        return jsonify({
+            "message": "Topic posts attempted - check import-error log for issues",
+            "added": added,
+            "skipped": skipped
         }), 201
 
     # Resources

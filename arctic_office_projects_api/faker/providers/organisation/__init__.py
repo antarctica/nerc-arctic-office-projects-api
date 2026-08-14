@@ -36,11 +36,12 @@ class Provider(BaseProvider):
             ("4", (1000, 9999)),
             ("5", (10000, 99999)),
         ]
+        # Randomness is only used to generate non-security-sensitive fake data.
         identifier_length = random.choices(
             population=[x[0] for x in identifier_lengths],  # Select "3", "4", or "5"
             weights=[0.33, 0.34, 0.33],  # Probabilities for each
             k=1,  # Number of selections (1)
-        )[0]
+        )[0] # nosec B311
 
         # Find the corresponding range
         identifier_range = next(

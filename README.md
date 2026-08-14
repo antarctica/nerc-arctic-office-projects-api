@@ -279,11 +279,9 @@ releases. Tagged commits create new *production* releases.
 Endpoints are available to allow the health of this API to be monitored. This can be used by load balancers to avoid
 unhealthy instances or monitoring reporting tools to prompt repairs by operators.
 
-#### [GET|OPTIONS] `/meta/health/canary`
+#### [GET|OPTIONS] `/healthcheck`
 
-Reports on the overall health of this service as a boolean *healthy/unhealthy* status.
-
-Returns a `204 - NO CONTENT` response when healthy. Any other response should be considered unhealthy.
+Returns a strinf with the app version number
 
 ### Request IDs
 
@@ -335,7 +333,7 @@ and assign permissions.
 | ----------------- | ---------------- |
 | Local Development | NERC BAS WebApps |
 | Staging           | NERC BAS WebApps |
-| Production        | NERC             |
+| Production        | NERC BAS WebApps |
 
 #### Available scopes
 
@@ -392,6 +390,8 @@ To run flask CLI commands in a local development environment:
 1. run `docker-compose up` to start the application and database containers
 2. in another terminal window, run `docker-compose exec app ash` to launch a shell within the application container
 3. in this shell, run `flask [command]` to perform a command
+
+
 
 To run flask CLI commands in a staging and production environment:
 

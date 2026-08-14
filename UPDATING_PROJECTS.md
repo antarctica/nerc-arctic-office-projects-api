@@ -1,5 +1,40 @@
 # Updating projects
 
+## CLI
+
+The CLI tool is needed to initialise the app database if it is being installed afresh.
+
+### Single project import:
+
+- see the README.md section about importing individual projects
+```shell
+$ poetry run flask import grant <grant_type> <grant_ref> <0 or 1> (for lead_project - optional, default will be 0)
+```
+
+- example:
+```shell
+$ poetry run flask import grant gtr NE/N016092/2
+```
+
+---
+
+
+### Bulk project import:
+
+- In the JSON file, only the project reference & lead_project data are needed. The other fields are not required.
+- get csv from gtr website
+- check for project duplicates
+- convert csv to json - link to repo for this
+- set the lead-projects
+- run the project locally - with docker
+- run the bulk import script
+- check the output to see whether or not any institions or topics need to be added.
+- for institutions: https://ror.org/search
+
+- make sure the correct json file is referenced in import_grants.py - approx line number 48
+
+---
+
 ## API
 There are a number of Post routes for adding data into the database.
 
@@ -96,42 +131,12 @@ To initialise the database or update categories and organisations
 - Defined by this env var: IMPORT_EXCEPTION_LOG
 
 
-## CLI
-
-### Single project import:
-
-- see the README.md section about importing individual projects
-```shell
-$ poetry run flask import grant <grant_type> <grant_ref> <lead_project - 0 or 1 - optional>
-```
-
-
-- example:
-```shell
-$ poetry run flask import grant gtr NE/N016092/2
-```
-
-### Bulk project import:
-
-- In the JSON file, only the project reference & lead_project data are needed. The other fields are not required.
-- get csv from gtr website
-- check for project duplicates
-- convert csv to json - link to repo for this
-- set the lead-projects
-- run the project locally - with docker
-- run the bulk import script
-- check the output to see whether or not any institions or topics need to be added.
-- for institutions: https://ror.org/search
-
-- make sure the correct json file is referenced in import_grants.py - approx line number 48
-
-
-## Import issues
+## Issues
 
 - Projects without a reference - from: id 99  to: id 142
 - Project not found: In silico and Experimental Screening Platform for Characterising Environmental Impact of Impact of Industry Development in the Arctic (EXPECT), 2605032
 
-###
+---
 
 ## Missing funder orgs?
 - Horizon Europe Guarantee

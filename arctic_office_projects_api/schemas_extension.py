@@ -211,7 +211,7 @@ class Schema(_Schema):
                 ]  # pragma: no cover
 
             raise KeyError(
-                f"No relationship found for '{ self.resource_linkage }'"
+                f"No relationship found for '{self.resource_linkage}'"
             )  # pragma: no cover
 
         if self.related_resource is not None:
@@ -356,7 +356,7 @@ class DateRangeField(Field):
             interval_end = instant_end
 
         return {
-            "interval": f"{ interval_start }/{ interval_end }",
+            "interval": f"{interval_start}/{interval_end}",
             "start-instant": instant_start,
             "end-instant": instant_end,
         }
@@ -376,12 +376,12 @@ class DateRangeField(Field):
         :return: a DateRange instance
         """
         if "interval" not in value.keys():
-            raise KeyError(f"No 'interval' property in { attr } to cover date range")
+            raise KeyError(f"No 'interval' property in {attr} to cover date range")
 
         interval = value["interval"].split("/")
         if len(interval) != 2:
             raise ValueError(
-                f"Interval '{ value['interval'] }' is not in the form [start date]/[end date]"
+                f"Interval '{value['interval']}' is not in the form [start date]/[end date]"
             )
 
         try:
@@ -392,7 +392,7 @@ class DateRangeField(Field):
             return interval
         except ValueError:  # pragma: no cover
             raise ValueError(  # pragma: no cover
-                f"Invalid '{ value['interval'] }' is not in the form [YYYY-MM-DD]/[YYYY-MM-DD]"
+                f"Invalid '{value['interval']}' is not in the form [YYYY-MM-DD]/[YYYY-MM-DD]"
             )
 
 

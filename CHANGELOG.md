@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Update version of Postgres to 18 - match the production database version
 - Update version of Poetry to 2.4.1
+- Update dependencies
 
 ## [0.6.10] 2025-10-01
 
