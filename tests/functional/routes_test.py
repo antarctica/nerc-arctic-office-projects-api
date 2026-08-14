@@ -1022,7 +1022,7 @@ def test_post_person_data_bulk_existing_person(
             "gtr_person": "8B101538-BE28-41A2-AF8A-FFFFFFFFFFF4",
             "orcid": "https://orcid.org/0000-0002-0143-4444"
         },
-                {
+        {
             "name": "test-person-003",
             "gtr_person": "8B101538-BE28-41A2-AF8A-FFFFFFFFFFF5",
             "orcid": "https://orcid.org/0000-0002-0143-5555"

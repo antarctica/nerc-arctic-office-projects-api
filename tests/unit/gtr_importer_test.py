@@ -13,7 +13,6 @@ from arctic_office_projects_api.models import (
 from arctic_office_projects_api.importers.gtr import (
     GatewayToResearchResource,
     GatewayToResearchOrganisation,
-    UnmappedGatewayToResearchOrganisation,
     GatewayToResearchFund,
     GatewayToResearchProject,
     GatewayToResearchGrantImporter,
