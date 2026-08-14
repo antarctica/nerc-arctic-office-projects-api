@@ -76,7 +76,7 @@ test-app:
   script:
     - uv sync --locked
     - uv run flask db upgrade
-    - uv run pytest --cov-report=html --cov=arctic_office_projects_api tests
+    - uv run pytest --cov=arctic_office_projects_api --cov-report=html --cov-report=term tests
   only:
     - master
 
