@@ -1,31 +1,29 @@
 FROM python:3.12-alpine AS base
 
-LABEL maintainer = "BAS Web Apps <webapps@bas.ac.uk>"
+LABEL maintainer="BAS Web Apps <webapps@bas.ac.uk>"
 
 RUN apk add --no-cache \
     libxslt-dev \
     libffi-dev \
     openssl-dev \
     libxml2-utils \
-    postgresql-dev
+    postgresql-dev \
+    build-base \
+    cargo
 
-FROM base AS poetry
-
-RUN apk add --no-cache build-base cargo
-RUN python3 -m pip install pipx
-RUN python3 -m pipx install poetry==2.4.1
-
-FROM poetry AS run
+FROM base AS run
 
 WORKDIR /usr/src/app
 
-ENV POETRY_VIRTUALENVS_PATH=/venv
-ENV PATH="/venv/bin:/root/.local/bin:$PATH"
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml poetry.lock ./
+ENV UV_PROJECT_ENVIRONMENT=/venv
+ENV PATH="/venv/bin:$PATH"
+
+COPY pyproject.toml uv.lock README.md ./
+
+RUN uv sync --locked --no-dev
+
 COPY . .
-
-RUN poetry install --no-interaction --no-ansi
-RUN poetry run python -m pip install --upgrade pip
 
 ENTRYPOINT []
