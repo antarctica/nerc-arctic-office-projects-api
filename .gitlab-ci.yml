@@ -85,9 +85,11 @@ dependencies-app:
   before_script:
     - apk add --update nodejs npm
     - npm install snyk -g
+    - uv sync --locked
   script:
-    - uv export --locked --format requirements.txt --no-emit-project --no-dev --output-file requirements.txt
-    - cat requirements.txt
+    - uv export --locked --format requirements.txt --no-emit-project --no-dev --no-hashes --output-file requirements.txt
+    - sed -i '/^[[:space:]]*#/d' requirements.txt
+    - sed -i '/^[[:space:]]*$/d' requirements.txt
     - snyk test --file=requirements.txt
     - snyk monitor --file=requirements.txt --project-name="$SNYK_PROJECT" --org="$SNYK_ORG"
   only:
