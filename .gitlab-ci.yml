@@ -16,6 +16,9 @@ variables:
   POSTGRES_USER: app
   POSTGRES_PASSWORD: "password"
   POSTGRES_HOST_AUTH_METHOD: trust
+  ## - Testing paths
+  CATEGORIES_SCHEMA_FILE_PATH: /usr/src/app/arctic_office_projects_api/resources/categories-schema.json
+  ORGANISATIONS_SCHEMA_FILE_PATH: /usr/src/app/arctic_office_projects_api/resources/organisations-schema.json
 
 build:
   stage: build
