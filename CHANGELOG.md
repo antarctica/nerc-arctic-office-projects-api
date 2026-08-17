@@ -5,18 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.6.11] Unreleased
+## [0.6.11] 2026-08-17
+
+### Added
+- Bulk import routes for adding:
+  - Project_Organisations
+  - Project_People
+  - Project_Topics
+  - Project_Subjects
 
 ### Changed
-- Update version of Postgres to 18 - match the production database version
-- Update version of Poetry to 2.4.1
+- Version of Postgres to 18 - match the production database version
+- Replace Poetry with UV
+- Update tests
 - Update dependencies
 
 ## [0.6.10] 2025-10-01
 
 ### Added
 
-* Post routes to mirror & use instead of the cli commands for adding and updating data in the database
+* Post routes to use instead of the cli commands for adding and updating data in the database
 * New models for database tables to contain data that used to be held in csv files
 * New tests to cover the above and the revised MSAL auth
 
