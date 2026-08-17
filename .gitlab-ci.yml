@@ -9,16 +9,13 @@ variables:
   DOCKER_CERT_PATH: /certs/client
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_VERIFY: 1
-  POSTGRES_HOST_AUTH_METHOD: trust
+  APP_NAME: arctic-office-projects-api
   GITLAB_REGISTRY: docker-registry.data.bas.ac.uk
+  # Testing database
   POSTGRES_DB: app_test
   POSTGRES_USER: app
   POSTGRES_PASSWORD: "password"
-  APP_NAME: arctic-office-projects-api
-  SENTRY_ORG: antarctica
-  SENTRY_PROJECT: arctic-office-projects-api
-  SNYK_ORG: antarctica
-  SNYK_PROJECT: arctic-office-projects-api
+  POSTGRES_HOST_AUTH_METHOD: trust
 
 build:
   stage: build
@@ -83,15 +80,10 @@ test-app:
 dependencies-app:
   stage: test
   before_script:
-    - apk add --update nodejs npm
-    - npm install snyk -g
-    - uv sync --locked
+    - apk add --no-cache osv-scanner
   script:
-    - uv export --locked --format requirements.txt --no-emit-project --no-dev --no-hashes --output-file requirements.txt
-    - sed -i '/^[[:space:]]*#/d' requirements.txt
-    - sed -i '/^[[:space:]]*$/d' requirements.txt
-    - snyk test --file=requirements.txt
-    - snyk monitor --file=requirements.txt --project-name="$SNYK_PROJECT" --org="$SNYK_ORG"
+    - uv lock --check
+    - osv-scanner scan source --lockfile=uv.lock
   only:
     - master
 
