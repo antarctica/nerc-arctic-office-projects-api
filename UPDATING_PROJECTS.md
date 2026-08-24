@@ -1,20 +1,43 @@
 # Updating projects
 
+## Not importing
+- NE/K000276/1 - not found?
+- NE/K000268/1 - not found?
+- NE/P012019/1 - not found?
+- BB/V001647/1 - not found?
+- 2605032 - not found?
+
+
+
 ## CLI
 
-The CLI tool is needed to initialise the app database if it is being installed afresh.
+The CLI tool is needed to initialise the app database if it is being initialised.  
+The CLI can be used to import GTR projects, either in bulk or individually.
 
-### Single project import:
+### CLI Docker - local
 
-- see the README.md section about importing individual projects
-```shell
-$ poetry run flask import grant <grant_type> <grant_ref> <0 or 1> (for lead_project - optional, default will be 0)
-```
+In the app container run:
+- `uv run flask import grant gtr NE/R012520/1 1`
 
-- example:
-```shell
-$ poetry run flask import grant gtr NE/N016092/2
-```
+
+### CLI Flask Servers
+
+On the Flask servers use these commands to import projects - once all supporting data has been added to the database.
+
+Log in as the web-flask user:
+- dev: `web-flask@bsl-flask-dev-s1.nerc-bas.ac.uk`
+- production: `web-flask@bsl-flask-s1.nerc-bas.ac.uk`
+
+#### Single project import:
+- `cd /var/www/arctic-office-projects-api`
+- `/var/opt/wsgi/.virtualenvs/arctic-office-projects-api/bin/flask import grant gtr <grant_ref> <lead_project>`
+- E.g. `/var/opt/wsgi/.virtualenvs/arctic-office-projects-api/bin/flask import grant gtr NE/X002497/1 0`
+
+#### Bulk projects import:
+- may need to copy this script: `arctic_office_projects_api/bulk_importer/import_grants.py` here: `/var/www/arctic-office-projects-api`
+- update the csv file here: `/var/opt/wsgi/.virtualenvs/arctic-office-projects-api/lib/python3.12/site-packages/arctic_office_projects_api/bulk_importer/csvs/all-projects-2024-10-17.csv`
+- cd `/var/www/arctic-office-projects-api`
+- run: `/var/opt/wsgi/.virtualenvs/arctic-office-projects-api/bin/python import_gtr_grants.py`
 
 ---
 
@@ -24,14 +47,12 @@ $ poetry run flask import grant gtr NE/N016092/2
 - In the JSON file, only the project reference & lead_project data are needed. The other fields are not required.
 - get csv from gtr website
 - check for project duplicates
-- convert csv to json - link to repo for this
 - set the lead-projects
 - run the project locally - with docker
 - run the bulk import script
-- check the output to see whether or not any institions or topics need to be added.
-- for institutions: https://ror.org/search
+- check the output to see whether or not any institions or topics need to be added - for institutions: https://ror.org/search
 
-- make sure the correct json file is referenced in import_grants.py - approx line number 48
+- make sure the correct csv file is referenced in import_grants.py - approx line 84
 
 ---
 
