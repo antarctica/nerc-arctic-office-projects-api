@@ -1,6 +1,6 @@
 import csv
 import re
-import subprocess
+import subprocess  # nosec B404 - subprocess usage reviewed
 
 
 FLASK = (
@@ -78,7 +78,7 @@ def import_grants(csv_file):
             cwd=APP_DIR,
             check=True,
             shell=False,
-        )
+        )  # nosec B603 - arguments validated, shell=False
 
 
 csv_file = (
